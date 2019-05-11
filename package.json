@@ -1,0 +1,53 @@
+{
+  "name": "vue-easy-form",
+  "version": "1.1.0",
+  "private": false,
+  "description": "",
+  "homepage": "",
+  "author": {
+    "name": "peter.chen",
+    "email": "",
+    "url": ""
+  },
+  "main": "dist/es-form.umd.min.js",
+  "scripts": {
+    "mock": "vue-cli-service serve --mode mock",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "release": "vue-cli-service build --target lib --name es-form ./src/package/index.js",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "lint": "vue-cli-service lint",
+    "test:unit": "vue-cli-service test:unit"
+  },
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "esay-form",
+    "es-form",
+    "vue-esay-form"
+  ],
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "dependencies": {
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.1",
+    "@vue/cli-plugin-eslint": "^3.0.1",
+    "@vue/cli-plugin-unit-mocha": "^3.0.1",
+    "@vue/cli-service": "^3.0.1",
+    "@vue/eslint-config-prettier": "^3.0.1",
+    "@vue/test-utils": "^1.0.0-beta.20",
+    "chai": "^4.1.2",
+    "element-ui": "^2.4.6",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.1",
+    "vue-template-compiler": "^2.6.10",
+    "vuepress": "^0.14.11",
+    "webpack-api-mocker": "^1.5.15"
+  }
+}

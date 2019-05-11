@@ -1,0 +1,165 @@
+
+@import "mixins.scss";
+
+
+button, input, select, textarea {
+	font-family: inherit;
+	font-size: inherit;
+	line-height: inherit;
+	color: inherit;
+}
+
+ol, li {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+html, body  {
+	/*font-family: "Microsoft YaHei", "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","\5FAE\8F6F\96C5\9ED1",Arial,sans-serif;*/
+	/*font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,SimSun,sans-serif;*/
+	font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","微软雅黑",Arial,sans-serif;
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	// overflow: hidden;
+	background: #fff;
+	min-width: 900px;
+	color: #333;
+}
+
+.g-full-height {
+	height: 100%;
+}
+
+.g-center {
+	@include display-center;
+}
+
+.g-custom-loading .el-loading-spinner {
+	width: 100px;
+	height: 100px;
+	margin-top: -40px;
+	margin-left: -40px;
+	top: 50%;
+	left: 50%;
+	border-radius: 4px;
+	background: rgba(0, 0, 0, 0.3);
+	@include display-center;
+	@include direction-v;
+
+}
+
+.g-hidden-box {
+	width: 0;
+	height: 0;
+	overflow: hidden;
+}
+
+.g-header {
+	margin: 0;
+	padding: 0;
+	display: block;
+	/*height: 60px;*/
+	background-color: rgb(64, 158, 255);
+	color: #fff;
+	overflow: hidden;
+	position: relative;
+}
+
+.g-title {
+	margin: 0;
+	padding: 0 0 0 10px;
+	line-height: 60px;
+	text-align: left;
+	font-size: 25px;
+}
+
+
+.g-nav-aside {
+	margin: 0;
+	padding: 0;
+	display: block;
+	background-color: #fff;
+	text-align: left;
+	/*width: $g_navAsideWidth;*/
+	@include border-box;
+	border-right: 1px solid #e6e6e6;
+}
+
+.g-full-main {
+	margin: 0;
+	padding: 0;
+}
+
+.g-main-container {
+	height: 100%;
+	overflow: hidden;
+}
+
+
+.g-main-box {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	overflow: auto;
+	text-align: left;
+}
+
+.g-form-box {
+	padding-top: 30px;
+	max-width: 700px;
+	margin-right: auto;
+}
+
+.g-main-box .g-body-box {
+	margin: 0;
+	padding: 0px $g_bodyPaddingLeft 0px $g_bodyPaddingLeft;
+}
+
+.g-single {
+	white-space: nowrap;
+	line-height: 20px;
+}
+
+.g-interval-row {
+	background-color: #fcfcfc;
+
+	&:hover {
+		background-color: #eff2f7;
+	}
+}
+
+.g-footer-page-wrap {
+	padding-top: 10px;
+}
+
+.g-footer-btn-wrap {
+	padding-top: 10px;
+}
+
+.g-main-table {
+	width: 100%;
+	height: 100%;
+}
+
+.g-table-header {
+	background-color: #f5f7fa !important;
+}
+
+.g-table-header th {
+	padding-top: 8px !important;
+	padding-bottom: 8px !important;
+	background: #f5f7fa;
+}
+
+.g-table-cell {
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+}
+
+.g-edit-dialog .el-dialog {
+	max-width: 800px;
+	min-width: 600px;
+}
+

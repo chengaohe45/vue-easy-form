@@ -1,0 +1,124 @@
+
+
+
+@mixin display-flex {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+@mixin direction-h {
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+}
+
+@mixin direction-v {
+	-webkit-box-orient: vertical;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: column;
+	flex-direction: column;
+}
+
+@mixin display-center {
+	@include display-flex;
+	align-items:center;
+	justify-content: center;
+}
+
+@mixin flex-fixed {
+	flex-grow: 0;
+	flex-shrink: 0;
+	flex-basis: auto;
+}
+
+@mixin flex-full {
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	-ms-flex-preferred-size: auto;
+	flex-basis: auto;
+}
+
+@mixin border-box {
+	-wekit-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+@mixin clear {
+	&:before,
+	&:after{ content: '.'; display: block; overflow: hidden; visibility: hidden; font-size: 0; line-height: 0; width: 0; height: 0;}
+	&:after{ clear: both; }
+}
+
+@mixin triangle($borderColor, $borderWidth, $direction, $test: 1) {
+	margin: 0;
+  padding: 0;
+  width: 0;
+  height: 0;
+  font-size: 0;
+	border-style: solid;
+	@if $direction == "top" {
+		border-width: 0 $borderWidth $borderWidth $borderWidth;
+    border-color: transparent transparent $borderColor transparent;
+	} @else if $direction == "right" {
+		border-width: $borderWidth 0 $borderWidth $borderWidth;
+    border-color: transparent transparent transparent $borderColor;
+	} @else if $direction == "bottom" {
+		border-width: $borderWidth $borderWidth 0 $borderWidth;
+    border-color: $borderColor transparent transparent transparent;
+	} @else {	/* left */
+		border-width: $borderWidth $borderWidth $borderWidth 0;
+    border-color: transparent $borderColor transparent transparent;
+	}
+}
+
+@mixin arrow($borderColor, $borderWidth, $direction, $bgColor) {
+	@include triangle($borderColor, $borderWidth, $direction);
+	position: relative;
+	&:before {
+		content: "";
+    display: block;
+    @include triangle($bgColor, $borderWidth, $direction);
+    margin: 0;
+    // padding: 0;
+    position: absolute;
+    @if $direction == "top" {
+      top: 1px;
+      left: -$borderWidth;
+    } @else if $direction == "right" {
+      top: -$borderWidth;
+      left: -$borderWidth - 1;
+    } @else if $direction == "bottom" {
+      top: -$borderWidth - 1;
+      left: -$borderWidth;
+    } @else {	/* left */
+      top: -$borderWidth;
+      left: 1px;
+    }
+	}
+}
+
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}
+
+$g_borderColor: #dcdfe6;
+$g_bgColor: #f5f7fa;
+$g_bgColor2: #d6d7da;
+$g_borderRadius: 4px;
+$g_errorColor: #f64a4a;
