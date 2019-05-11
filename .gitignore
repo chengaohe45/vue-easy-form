@@ -3,6 +3,7 @@ node_modules
 # /dist
 docs/.vuepress/dist
 docs/.vuepress/demo
+docs/.vuepress/.gitignore
 
 # local env files
 .env.local
