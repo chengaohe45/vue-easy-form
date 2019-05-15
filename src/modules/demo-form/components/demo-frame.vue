@@ -13,7 +13,7 @@
         <div>
           schema具体配置见<a
             target="_blank"
-            href="../"
+            href="/vue-easy-form-docs/dist/base/settings.html"
             >配置文档</a
           >
         </div>
