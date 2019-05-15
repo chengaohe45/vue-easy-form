@@ -17,7 +17,8 @@ module.exports = {
             'base/install',
             'base/settings',
             'base/schema',
-            'base/es'
+            'base/es',
+            'base/event'
           ]
         },
         {

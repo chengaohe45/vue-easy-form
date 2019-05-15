@@ -40,7 +40,7 @@ data() {
               placeholder: "请输入广告名称"
             },
             // text: "新建",  // 一般用于文本显示：如<el-button>新建</el-button>
-            // ref: "testRef",   // 索引值，可以通过 form.getRefs('testRef')取出
+            // ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
             // size: "auto",      // 这个一般用于分组
             // actions: []         // 见下面
           },
@@ -73,7 +73,7 @@ actions: function(value){...}
 actions: [标准写法或简写组成的数组]
 ```
 
-- `this`： handler函数的this指针指向表单，这样可以方便取出其它组件(如`this.getRefs("xxxx")`)，从而做联动等功能
+- `this`： handler函数的this指针指向表单，这样可以方便取出其它组件(如`this.getRef("xxxx")`)，从而做联动等功能
 
 
 ### 事件示例
@@ -93,7 +93,7 @@ data() {
               trigger: "change",
               handler: function(value) {
                 console.log("this对象: ", this);
-                console.log('this.getRefs("desc")值: ', this.getRefs("desc"));
+                console.log('this.getRef("desc")值: ', this.getRef("desc"));
                 console.log("value值", value);
                 console.log("\n");
               }

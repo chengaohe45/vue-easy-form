@@ -49,7 +49,7 @@ export default {
                 trigger: "change changed",
                 handler: function(value, key, event) {
                   console.log("this对象: ", this);
-                  console.log('this.getRefs("desc")值: ', this.getRefs("desc"));
+                  console.log('this.getRef("desc")值: ', this.getRef("desc"));
                   console.log("value值", value);
                   console.log("key值", key);
                   console.log("event值", event);

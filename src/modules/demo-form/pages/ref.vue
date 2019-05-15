@@ -2,7 +2,7 @@
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
       <div>
-        在component对象中添加ref属性，应用时再用form.getRefs('testRef')取出；这个方法是返回一个数组
+        在component对象中添加ref属性，应用时再用form.getRef('testRef')取出
       </div>
       <div></div>
       <div>
