@@ -1,6 +1,6 @@
 {
   "name": "vue-easy-form",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": false,
   "description": "",
   "homepage": "",
@@ -23,9 +23,9 @@
   "license": "MIT",
   "keywords": [
     "vue",
-    "esay-form",
+    "easy-form",
     "es-form",
-    "vue-esay-form"
+    "vue-easy-form"
   ],
   "files": [
     "dist",
