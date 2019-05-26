@@ -24,25 +24,40 @@
       <!-- 非数组 -->
       <template v-if="!schema.array">
         <!-- 叶子节点: 说明：有生成表单时,预判断schema过程中，schema.component和schema.properties只能存在一个，不会同时存在，也就是说要能是叶子节点，要么不是 -->
-        <div class="es-form-component" v-if="schema.component">
-          <es-base
-            :ref="schema.component.ref"
+        <div
+          :class="[
+            'es-form-component',
+            'es-form-component-' + schema.component.align
+          ]"
+          v-if="schema.component"
+        >
+          <div
             :class="[
+              'es-form-component-wrap',
               schema.component.size
-                ? 'es-form-component-' + schema.component.size
+                ? 'es-form-wrap-' + schema.component.size
                 : ''
             ]"
-            :config="schema.component"
-            :form-data="formData"
-            :global="global"
-            :idx-chain="schema.__idxChain"
-            :index="schema.__index"
-            v-model="schema.value"
-            :emitEvents="schema.component.__emitEvents"
-            :nativeEvents="schema.component.__nativeEvents"
-            @trigger="triggerHandler"
           >
-          </es-base>
+            <es-base
+              :ref="schema.component.ref"
+              :class="[
+                schema.component.size
+                  ? 'es-form-component-' + schema.component.size
+                  : ''
+              ]"
+              :config="schema.component"
+              :form-data="formData"
+              :global="global"
+              :idx-chain="schema.__idxChain"
+              :index="schema.__index"
+              v-model="schema.value"
+              :emitEvents="schema.component.__emitEvents"
+              :nativeEvents="schema.component.__nativeEvents"
+              @trigger="triggerHandler"
+            >
+            </es-base>
+          </div>
           <div v-if="schema.unit && !schema.__inGroups" class="es-form-unit">
             {{ schema.unit }}
           </div>
@@ -386,6 +401,18 @@
     align-items: center;
   }
 
+  .es-form-component-left {
+    justify-content: flex-start;
+  }
+
+  .es-form-component-center {
+    justify-content: center;
+  }
+
+  .es-form-component-right {
+    justify-content: flex-end;
+  }
+
   .es-form-component-auto {
     @include flex-full;
     width: auto;
@@ -394,6 +421,26 @@
   }
 
   .es-form-component-fixed {
+    @include flex-fixed;
+    width: auto;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .es-form-component-wrap {
+    @include flex-full;
+    overflow: hidden;
+  }
+
+  .es-form-component-wrap.es-form-wrap-auto {
+    @include display-flex;
+    @include flex-full;
+    width: auto;
+    // text-align: center;
+    white-space: nowrap;
+  }
+
+  .es-form-component-wrap.es-form-wrap-fixed {
     @include flex-fixed;
     width: auto;
     text-align: center;

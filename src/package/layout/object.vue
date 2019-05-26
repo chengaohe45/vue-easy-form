@@ -130,13 +130,17 @@
               ? [
                   {
                     height: fieldSchema.rowHeight + 'px',
-                    lineHeight: fieldSchema.rowHeight + 'px'
+                    lineHeight: fieldSchema.rowHeight + 'px',
+                    textAlign: fieldSchema.label.align
                   },
                   fieldSchema.label.size
-                    ? ''
-                    : { width: fieldSchema.labelWidth + 'px' }
+                    ? { textAlign: fieldSchema.label.align }
+                    : {
+                        width: fieldSchema.labelWidth + 'px',
+                        textAlign: fieldSchema.label.align
+                      }
                 ]
-              : ''
+              : { textAlign: fieldSchema.label.align }
           "
         >
           <span
@@ -237,6 +241,8 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     width: auto;
     height: 26px;
     line-height: 26px;
+    padding-left: 4px;
+    padding-right: 4px;
     // padding-top: 6px;
     // padding-bottom: 6px;
   }

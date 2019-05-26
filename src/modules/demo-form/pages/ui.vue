@@ -136,7 +136,10 @@ export default {
           },
 
           minSourceId: {
-            label: "关联数据源ID",
+            label: {
+              text: "关联数据源ID",
+              align: "center"
+            },
             direction: "v",
             col: 6,
             offsetRight: 5,

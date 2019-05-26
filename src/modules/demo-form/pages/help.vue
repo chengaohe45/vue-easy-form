@@ -50,15 +50,21 @@ export default {
             }
           },
           pv: {
-            label: "pv",
+            label: {
+              text: "pv",
+              align: "center"
+            },
+            direction: "v",
             component: {
               name: "el-input-number",
               props: {
                 // placeholder: "请输入作者的名字"
-              }
+              },
+              align: "right",
+              size: "fixed"
             },
             value: 0,
-            col: 12,
+            col: 18,
             help: {
               name: "g-help",
               props: {

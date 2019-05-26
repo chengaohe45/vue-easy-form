@@ -1536,7 +1536,8 @@ let formUtils = {
 
   /* 解析组件 */
   __parseComponent: function(component, myPathKey) {
-    var tmpComponent;
+    var tmpComponent,
+      defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
       tmpComponent = utils.deepCopy(component);
       tmpComponent.name = tmpComponent.name
@@ -1552,16 +1553,22 @@ let formUtils = {
       if (!tmpComponent.ref) {
         delete tmpComponent.ref;
       }
+      tmpComponent.align = this.__parseAlign(tmpComponent.align, defaultAlign);
     } else if (utils.isStr(component)) {
-      tmpComponent = { name: component, actions: [] };
+      tmpComponent = { name: component, actions: [], align: defaultAlign };
     } else {
-      tmpComponent = { name: global.defaultCom, actions: [] };
+      tmpComponent = {
+        name: global.defaultCom,
+        actions: [],
+        align: defaultAlign
+      };
     }
 
-    var sizeValues = ["fixed", "auto"];
-    if (!sizeValues.includes(tmpComponent.size)) {
-      tmpComponent.size = false;
-    }
+    // var sizeValues = ["fixed", "auto"];
+    // if (!sizeValues.includes(tmpComponent.size)) {
+    //   tmpComponent.size = false;
+    // }
+    tmpComponent.size = this.__parseSize(tmpComponent.size);
 
     return tmpComponent;
   },
@@ -1679,25 +1686,59 @@ let formUtils = {
 
   /* 解析Label */
   __parseLabel: function(value) {
-    var newValue;
+    var newValue,
+      defaultAlign = false;
     if (utils.isObj(value)) {
       newValue = {};
       newValue.__rawText = utils.isStr(value.text) ? value.text : false;
       newValue.text = newValue.__rawText;
 
-      var sizeValues = ["fixed", "auto"];
-      if (sizeValues.includes(value.size)) {
-        newValue.size = value.size;
-      } else {
-        newValue.size = false;
-      }
+      // var sizeValues = ["fixed", "auto"];
+      // if (sizeValues.includes(value.size)) {
+      //   newValue.size = value.size;
+      // } else {
+      //   newValue.size = false;
+      // }
+      newValue.size = this.__parseSize(value.size);
+
+      newValue.align = this.__parseAlign(value.align, defaultAlign);
     } else if (utils.isStr(value)) {
-      newValue = { text: value, __rawText: value, size: false };
+      newValue = {
+        text: value,
+        __rawText: value,
+        size: false,
+        align: defaultAlign
+      };
     } else {
-      newValue = { text: false, __rawText: false, size: false };
+      newValue = {
+        text: false,
+        __rawText: false,
+        size: false,
+        align: defaultAlign
+      };
+    }
+
+    if (newValue.__rawText === false) {
+      delete newValue.align; // 不用起作用，删了它
     }
 
     return newValue;
+  },
+
+  __parseSize(size) {
+    var sizes = ["fixed", "auto"];
+    if (sizes.includes(size)) {
+      return size;
+    }
+    return false;
+  },
+
+  __parseAlign(align, defaultVal = "left") {
+    var aligns = ["left", "center", "right"];
+    if (aligns.includes(align)) {
+      return align;
+    }
+    return defaultVal;
   },
 
   /* 解析title */
