@@ -29,12 +29,19 @@
               headerSchema.label.text
                 ? headerSchema.label.text
                 : headerFieldName + ""
-            }}<span v-if="headerSchema.help" class="es-form-help"
-              ><es-base
+            }}<span v-if="headerSchema.help" class="es-form-help">
+              <!-- <es-base
                 :config="headerSchema.help"
                 :open-smart="false"
-              ></es-base
-            ></span>
+              ></es-base> -->
+              <es-base
+                :config="headerSchema.help"
+                :form-data="formData"
+                :global="global"
+                :idx-chain="headerSchema.__idxChain"
+                :index="headerSchema.__index"
+              ></es-base>
+            </span>
           </div>
         </th>
         <th

@@ -90,7 +90,14 @@
             : schema.rowHeight + 'px'
       }"
     >
-      <es-base :config="schema.help" :open-smart="false"> </es-base>
+      <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
+      <es-base
+        :config="schema.help"
+        :form-data="formData"
+        :global="global"
+        :idx-chain="schema.__idxChain"
+        :index="schema.__index"
+      ></es-base>
     </div>
   </div>
 </template>

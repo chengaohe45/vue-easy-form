@@ -13,7 +13,14 @@
         {{ schema.title.showBody ? "隐藏" : "打开" }}
       </div>
       <div v-if="schema.help" class="es-form-help">
-        <es-base :config="schema.help" :open-smart="false"></es-base>
+        <!-- <es-base :config="schema.help" :open-smart="false"></es-base> -->
+        <es-base
+          :config="schema.help"
+          :form-data="formData"
+          :global="global"
+          :idx-chain="schema.__idxChain"
+          :index="schema.__index"
+        ></es-base>
       </div>
     </div>
     <div
@@ -65,7 +72,13 @@
             v-if="schema.help && !schema.__inGroups && showHelpInBody"
             class="es-form-help"
           >
-            <es-base :config="schema.help" :open-smart="false"> </es-base>
+            <es-base
+              :config="schema.help"
+              :form-data="formData"
+              :global="global"
+              :idx-chain="schema.__idxChain"
+              :index="schema.__index"
+            ></es-base>
           </div>
         </div>
 

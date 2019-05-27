@@ -68,7 +68,7 @@ export default {
             help: {
               name: "g-help",
               props: {
-                content: "这个是自定义的help",
+                content: "es: '这个是自定义的help: ' + {{$root}}.pv",
                 href: "http://www.qq.com"
               }
             }
