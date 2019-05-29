@@ -1,8 +1,9 @@
 let constant = {
-  HELP_NAME: "es-help", //注册时用的全局名字
+  // HELP_NAME: "es-help", //注册时用的全局名字
   UI_MAX_COL: 24, //整修个布局分为多少列，这个值不要随便改， 要跟object.vue的UI_MAX_COL对应
-  ARRAY_TABLE: "array-table",
+  ARRAY_TABLE: "array-table", // 只支持properities（非叶子）
   ARRAY_TABS: "array-tabs",
+  ARRAY_LEGEND: "array-legend",
   ARRAY_ROW: "array",
   ARRAY_CARD: "array-card", // 只支持组件（叶子）
 

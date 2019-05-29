@@ -267,6 +267,11 @@ $popBgColor: #303133;
     font-family: "Times New Roman", Times, Georgia, Serif;
     user-select: none;
     outline: none;
+
+    &:hover {
+      // color: #409eff;
+      background: #409eff;
+    }
   }
 
   .help-btn {
@@ -275,9 +280,10 @@ $popBgColor: #303133;
     text-decoration: none;
   }
 
-  .help-btn:hover .es-help-icon {
-    color: #409eff;
-  }
+  // .help-btn:hover .es-help-icon {
+  //   // color: #409eff;
+  //   background: #409eff;
+  // }
 }
 
 .es-help-tip-box {

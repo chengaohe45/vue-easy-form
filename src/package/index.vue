@@ -207,6 +207,46 @@ $btnDisableColor: #d5d7dc;
   background: #fab6b6;
 }
 
+.es-normal-plus {
+  margin: 0 auto;
+  padding: 0;
+  width: $addBtnLineWidth;
+  height: $addBtnLineWidth;
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 3px;
+    top: ($addBtnLineWidth - $addBtnLineHeight)/2;
+    left: ($addBtnLineWidth - $addBtnLineWidth)/2;
+    width: $addBtnLineWidth;
+    height: $addBtnLineHeight;
+    background: $addBtnColor;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    border-radius: 3px;
+    top: ($addBtnLineWidth - $addBtnLineWidth)/2;
+    left: ($addBtnLineWidth - $addBtnLineHeight)/2;
+    width: $addBtnLineHeight;
+    height: $addBtnLineWidth;
+    background: $addBtnColor;
+  }
+}
+
+.es-btn.disabled .es-normal-plus::before {
+  background: $btnDisableColor;
+}
+
+.es-btn.disabled .es-normal-plus::after {
+  background: $btnDisableColor;
+}
+
 .es-triangle-border-up.es-left {
   transform: rotate(-90deg);
   -webkit-transform: rotate(-90deg); /* Safari 和 Chrome */
@@ -261,7 +301,7 @@ $btnDisableColor: #d5d7dc;
     border-radius: 4px;
     border: 1px solid $g_borderColor;
     padding: 10px 10px 10px 10px;
-    max-width: 120px;
+    max-width: 160px;
     color: #606266;
     line-height: 1.4;
     text-align: justify;

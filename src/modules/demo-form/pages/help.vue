@@ -3,8 +3,8 @@
     <div slot="details">
       字段help:
       <div>
-        1. 可直接写成string, 提示的内容，支持html;
-        当设置为string时，会调用系统的帮助组件es-help
+        1. 可直接写成string;
+        当设置为string时，会调用系统的help组件
       </div>
       <div>2. 写成一个对象, 跟写组件一样</div>
     </div>
@@ -40,7 +40,7 @@ export default {
             value: "",
             col: 24,
             help: {
-              name: "es-help",
+              // name: "不写将使用系统的",
               props: {
                 content: "点击查看我的主页",
                 maxWidth: 200,

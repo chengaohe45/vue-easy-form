@@ -107,9 +107,9 @@ schema就是一个json对象
     },
     more2: {
       title: ...
-      // widget值有"array" or "array-table";有此值说明是一个动态数组，可添加、删除、排序
-      // widget: "array",  // 简写
-      widget: {
+      // array值有"array" or "array-table", "array-legend", "array-card", "array-tabs";有此值说明是一个动态数组，可添加、删除、排序
+      // array: "array",  // 简写
+      array: {
         name: "array",
         hasSort: true,  //是否有排序按钮，默认为true
         hasDelete: true,  //是否有删除按钮，默认为true

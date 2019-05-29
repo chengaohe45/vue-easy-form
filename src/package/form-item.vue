@@ -66,7 +66,18 @@
             </es-base>
           </div>
           <div v-if="schema.unit && !schema.__inGroups" class="es-form-unit">
-            {{ schema.unit }}
+            <!-- {{ schema.unit }} -->
+            <es-base
+              v-if="schema.unit.name"
+              :config="schema.unit"
+              :form-data="formData"
+              :global="global"
+              :idx-chain="schema.__idxChain"
+              :index="schema.__index"
+            ></es-base>
+            <template v-else>
+              {{ schema.unit.text }}
+            </template>
           </div>
           <div
             v-if="schema.help && !schema.__inGroups && showHelpInBody"
@@ -174,6 +185,53 @@
               v-for="key in 1"
               :key="key"
               ref="__refArrarRow__"
+              :schema="props.schema"
+              @formChange="formChange"
+              :form-data="formData"
+              :global="global"
+              :isInited="isInited"
+            ></form-item>
+          </div>
+        </component>
+
+        <!-- array-legend 类型：可接受非叶子或叶子，此节点(非叶子)的子节点是tabs也无问题 -->
+        <component
+          v-if="schema.array.name == 'array-legend'"
+          :is="'array-legend'"
+          :schema="schema"
+          :form-data="formData"
+          @input="formArrayInput"
+          @formClick="formClick"
+        >
+          <!-- 数组-非叶子(若有) -->
+          <template
+            v-for="(fieldSchema, fieldName) in schema.properties"
+            :slot="fieldName"
+            slot-scope="props"
+          >
+            <form-item
+              ref="__refArrarLegend__"
+              :schema="props.schema"
+              :key="fieldName"
+              @formChange="formChange"
+              @formClick="formClick"
+              :form-data="formData"
+              :global="global"
+              :isInited="isInited"
+            ></form-item>
+          </template>
+
+          <!-- 数组-叶子(若有) -->
+          <div
+            v-if="schema.component"
+            class="es-form-component"
+            slot-scope="props"
+          >
+            <!-- 必须是v-for,要不然ref取不出数组 -->
+            <form-item
+              v-for="key in 1"
+              :key="key"
+              ref="__refArrarLegend__"
               :schema="props.schema"
               @formChange="formChange"
               :form-data="formData"
@@ -297,8 +355,18 @@
       </div>
 
       <!-- 描述信息，可以html -->
-      <div v-if="schema.desc" class="es-form-desc" v-html="schema.desc">
-        <!-- {{schema.desc}} -->
+      <div v-if="schema.desc" class="es-form-desc">
+        <es-base
+          v-if="schema.desc.name"
+          :config="schema.desc"
+          :form-data="formData"
+          :global="global"
+          :idx-chain="schema.__idxChain"
+          :index="schema.__index"
+        ></es-base>
+        <template v-else>
+          {{ schema.desc.text }}
+        </template>
       </div>
     </div>
   </div>
@@ -500,6 +568,7 @@
 <script>
 import esObject from "./layout/object";
 import arrayRow from "./layout/array-row";
+import arrayLegend from "./layout/array-legend";
 import arrayCard from "./layout/array-card";
 import arrayTable from "./layout/array-table";
 import arrayTabs from "./layout/array-tabs";
@@ -531,6 +600,7 @@ export default {
     arrayTable,
     arrayTabs,
     arrayCard,
+    arrayLegend,
     tabs
   },
 
@@ -664,6 +734,7 @@ export default {
         __tabsRef__,
         "__refArrarCard__",
         "__refArrarRow__",
+        "__refArrarLegend__",
         "__refArrarTable__",
         "__refArrarTabs__"
       ];
@@ -718,6 +789,7 @@ export default {
         this.__getTargetRefs("__refTabs__", name) ||
         this.__getTargetRefs("__refArrarCard__", name) ||
         this.__getTargetRefs("__refArrarRow__", name) ||
+        this.__getTargetRefs("__refArrarLegend__", name) ||
         this.__getTargetRefs("__refArrarTable__", name) ||
         this.__getTargetRefs("__refArrarTabs__", name)
       );

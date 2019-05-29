@@ -70,7 +70,18 @@
                 { height: schema.properties[fieldKeyName].rowHeight + 'px' }
               ]"
             >
-              {{ schema.properties[fieldKeyName].unit }}
+              <!-- {{ schema.properties[fieldKeyName].unit }} -->
+              <es-base
+                v-if="schema.properties[fieldKeyName].unit.name"
+                :config="schema.properties[fieldKeyName].unit"
+                :form-data="formData"
+                :global="global"
+                :idx-chain="schema.properties[fieldKeyName].__idxChain"
+                :index="schema.properties[fieldKeyName].__index"
+              ></es-base>
+              <template v-else>
+                {{ schema.properties[fieldKeyName].unit.text }}
+              </template>
             </div>
             <div
               v-show="!schema.properties[fieldKeyName].hidden"

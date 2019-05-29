@@ -20,41 +20,11 @@ export default {
 
   methods: {
     addItem() {
-      var insertInfo = false;
-      var insertValue = this.schema.array.insertValue;
-      if (!utils.isUndef(insertValue)) {
-        if (utils.isFunc(insertValue)) {
-          // 是一个函数，过滤
-          var oldValue = formUtils.getValue(this.schema);
-          var insertIndex = this.schema.__propSchemaList.length;
-          var thisFrom = formUtils.getThisForm(this);
-          // console.log("thisFrom", thisFrom);
-          var defaultValue = insertValue.call(thisFrom, oldValue, insertIndex);
-          insertInfo = { value: defaultValue };
-        } else {
-          insertInfo = { value: utils.deepCopy(insertValue) }; // 固定的值
-        }
-      }
-      formUtils.addArrayItem(this.schema, insertInfo);
-      formUtils.resetIndexArr(
-        this.schema,
-        this.schema.__idxChain,
-        this.schema.__pathKey
-      );
-      var newValue = formUtils.getValue(this.schema);
-      var curIndex = this.schema.__propSchemaList.length - 1;
-      var eventData = {
-        type: "add",
-        index: curIndex,
-        data: utils.deepCopy(newValue[curIndex])
-      };
-      this.$emit(
-        "input",
-        this.schema.__pathKey,
-        this.getHandlers(),
-        newValue,
-        eventData
-      ); //同步更新的
+      this.__addItem();
+    },
+
+    copyItem(index) {
+      this.__addItem(index);
     },
 
     delItem(index) {
@@ -162,6 +132,68 @@ export default {
       } else {
         return null;
       }
+    },
+
+    __addItem(index) {
+      var insertInfo = false,
+        oldValue;
+
+      var isIndex = utils.isNum(index);
+      if (isIndex) {
+        // 拷贝某一项
+        oldValue = formUtils.getValue(this.schema);
+        insertInfo = {
+          value: utils.deepCopy(oldValue[index]),
+          position: index + 1
+        }; // 固定的值
+      } else {
+        // 加入最后
+        var insertValue = this.schema.array.insertValue;
+        if (!utils.isUndef(insertValue)) {
+          if (utils.isFunc(insertValue)) {
+            // 是一个函数，过滤
+            oldValue = formUtils.getValue(this.schema);
+            var insertIndex = this.schema.__propSchemaList.length;
+            var thisFrom = formUtils.getThisForm(this);
+            // console.log("thisFrom", thisFrom);
+            var defaultValue = insertValue.call(
+              thisFrom,
+              oldValue,
+              insertIndex
+            );
+            insertInfo = {
+              value: defaultValue,
+              position: this.schema.__propSchemaList.length
+            };
+          } else {
+            insertInfo = {
+              value: utils.deepCopy(insertValue),
+              position: this.schema.__propSchemaList.length
+            }; // 固定的值
+          }
+        }
+      }
+
+      formUtils.addArrayItem(this.schema, insertInfo);
+      formUtils.resetIndexArr(
+        this.schema,
+        this.schema.__idxChain,
+        this.schema.__pathKey
+      );
+      var newValue = formUtils.getValue(this.schema);
+      var curIndex = isIndex ? index : this.schema.__propSchemaList.length - 1;
+      var eventData = {
+        type: isIndex ? "copy" : "add",
+        index: curIndex,
+        data: utils.deepCopy(newValue[curIndex])
+      };
+      this.$emit(
+        "input",
+        this.schema.__pathKey,
+        this.getHandlers(),
+        newValue,
+        eventData
+      ); //同步更新的
     }
   }
 };

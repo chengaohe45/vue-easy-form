@@ -146,8 +146,15 @@ let formUtils = {
 
     if (insertInfo) {
       formUtils.__setValue(newItem, insertInfo.value);
+      if (schema.__propSchemaList.length <= insertInfo.position) {
+        schema.__propSchemaList.push(newItem);
+      } else {
+        // 插入中间某个位置
+        schema.__propSchemaList.splice(insertInfo.position, 0, newItem);
+      }
+    } else {
+      schema.__propSchemaList.push(newItem);
     }
-    schema.__propSchemaList.push(newItem);
   },
 
   /**
@@ -1534,8 +1541,8 @@ let formUtils = {
     }
   },
 
-  /* 解析组件 */
-  __parseComponent: function(component, myPathKey) {
+  /* 解析右栏组件 */
+  __parseMainComponent: function(component, myPathKey) {
     var tmpComponent,
       defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
@@ -1799,6 +1806,45 @@ let formUtils = {
     }
   },
 
+  /* 解析一般组件 */
+  __parsePropComponent: function(value) {
+    var newCom;
+    if (utils.isObj(value) && Object.keys(value).length > 0) {
+      newCom = {};
+      var name =
+        utils.isStr(value.name) && value.name.trim() ? value.name.trim() : name;
+      if (name) {
+        newCom.name = name;
+        newCom.props = utils.isObj(value.props) ? value.props : {};
+      }
+
+      var text =
+        utils.isStr(value.text) && value.text.trim()
+          ? value.text.trim()
+          : false;
+      newCom.text = text;
+
+      if (!name && !text) {
+        // 说明为空
+        return false;
+      }
+      if (!name) {
+        newCom.__rawText = text;
+      }
+      return newCom;
+    } else if (utils.isStr(value)) {
+      value = value.trim();
+      if (value) {
+        newCom = { text: value, __rawText: value };
+      } else {
+        newCom = false;
+      }
+      return newCom;
+    } else {
+      return false;
+    }
+  },
+
   /* 解析规则 */
   __parsePropRules: function(rules) {
     if (utils.isObj(rules)) {
@@ -1922,7 +1968,8 @@ let formUtils = {
       var newArray = {};
       var hasSort = false; //是否有排序按钮，默认为false
       var hasDelete = true; //是否有删除按钮，默认为true
-      var hasAdd = true; //是否有添加按钮，默认为true
+      var hasAdd = true; //是否有添加按钮(下边的添加按钮)，默认为true
+      var hasCopy = false; // //是否有拷贝添加按钮，默认为false
       var max = 0; //不写或小于等于0代表不限制
       var min = 0; //不写或小于等于0代表0
       var fixed = 0; //不写或小于等于0代表0
@@ -1949,6 +1996,7 @@ let formUtils = {
         hasDelete =
           utils.isUndef(array.hasDelete) || array.hasDelete ? true : false;
         hasAdd = utils.isUndef(array.hasAdd) || array.hasAdd ? true : false;
+        hasCopy = array.hasCopy ? true : false;
         min =
           utils.isUndef(array.min) || array.min <= 0 || !utils.isNum(array.min)
             ? 0
@@ -2018,12 +2066,14 @@ let formUtils = {
         newArray.name == constant.ARRAY_ROW ||
         newArray.name == constant.ARRAY_TABLE ||
         newArray.name == constant.ARRAY_TABS ||
-        newArray.name == constant.ARRAY_CARD
+        newArray.name == constant.ARRAY_CARD ||
+        newArray.name == constant.ARRAY_LEGEND
       ) {
         newArray.hasSort = hasSort;
         newArray.hasDelete = hasDelete;
         newArray.hasDelWarn = hasDelWarn;
         newArray.hasAdd = hasAdd;
+        newArray.hasCopy = hasCopy;
         newArray.min = min;
         newArray.max = max;
         newArray.fixed = fixed;
@@ -2038,6 +2088,8 @@ let formUtils = {
           newArray.tabsName = tabsName;
           newArray.type = type;
           newArray.hasBorder = hasBorder;
+        } else if (newArray.name == constant.ARRAY_LEGEND) {
+          newArray.tabsName = tabsName;
         }
 
         if (!utils.isUndef(insertValue)) {
@@ -2117,6 +2169,15 @@ let formUtils = {
         newPropItem[key] = formUtils.__parsePropHelp(propItem[key]);
         return true;
       }
+      if (key == "desc") {
+        newPropItem[key] = formUtils.__parsePropComponent(propItem[key]);
+        return true;
+      }
+
+      if (key == "unit") {
+        newPropItem[key] = formUtils.__parsePropComponent(propItem[key]);
+        return true;
+      }
 
       if (key == "array") {
         newPropItem[key] = formUtils.__parsePropArray(
@@ -2133,7 +2194,10 @@ let formUtils = {
       }
 
       if (key == "component") {
-        newPropItem[key] = formUtils.__parseComponent(propItem[key], myPathKey);
+        newPropItem[key] = formUtils.__parseMainComponent(
+          propItem[key],
+          myPathKey
+        );
         return true;
       }
 
@@ -2391,6 +2455,22 @@ let formUtils = {
         }
       }
 
+      if (propItem.desc && !propItem.desc.name && propItem.desc.__rawText) {
+        // false或为空都不用执行 propItem.desc
+        text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
+        if (propItem.desc.text != text) {
+          propItem.desc.text = text;
+        }
+      }
+
+      if (propItem.unit && !propItem.unit.name && propItem.unit.__rawText) {
+        // false或为空都不用执行 propItem.unit
+        text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
+        if (propItem.unit.text != text) {
+          propItem.unit.text = text;
+        }
+      }
+
       if (propItem.array) {
         // 数组
         schemaList = propItem.__propSchemaList;
@@ -2450,6 +2530,22 @@ let formUtils = {
         text = parse.smartEsValue(propItem.label.__rawText, parseSources);
         if (propItem.label.text != text) {
           propItem.label.text = text;
+        }
+      }
+
+      if (propItem.desc && !propItem.desc.name && propItem.desc.__rawText) {
+        // false或为空都不用执行 propItem.desc
+        text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
+        if (propItem.desc.text != text) {
+          propItem.desc.text = text;
+        }
+      }
+
+      if (propItem.unit && !propItem.unit.name && propItem.unit.__rawText) {
+        // false或为空都不用执行 propItem.unit
+        text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
+        if (propItem.unit.text != text) {
+          propItem.unit.text = text;
         }
       }
 

@@ -18,6 +18,7 @@ import propertiesForm from "../modules/demo-form/pages/properties";
 import propertiesTabsForm from "../modules/demo-form/pages/properties-tabs";
 import logicForm from "../modules/demo-form/pages/logic";
 import rowArrForm from "../modules/demo-form/pages/row-array";
+import legendArrForm from "../modules/demo-form/pages/legend-array";
 import tabArrForm from "../modules/demo-form/pages/table-array";
 import tabsArrForm from "../modules/demo-form/pages/tabs-array";
 import valueForm from "../modules/demo-form/pages/value";
@@ -178,6 +179,13 @@ let navList = [
         link: "/form-row-array",
         path: "/form-row-array",
         component: rowArrForm
+      },
+      {
+        icon: "",
+        name: "legend数组",
+        link: "/form-legend-array",
+        path: "/form-legend-array",
+        component: legendArrForm
       },
       {
         icon: "",

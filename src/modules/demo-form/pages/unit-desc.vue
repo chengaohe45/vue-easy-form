@@ -2,7 +2,7 @@
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
       <div>字段unit: 对组件进行补充，一般用于单位</div>
-      <div>字段desc: 对每一项进行补充；支持html</div>
+      <div>字段desc: 对每一项进行补充</div>
     </div>
   </demo-frame>
 </template>
@@ -24,16 +24,32 @@ export default {
             component: "el-input",
             value: "首页位置",
             // col: 12,
-            desc: "1. 广告名称就是要好听<br />2. 广告名称就是要好看"
+            desc:
+              "es: {{$root}}.name.length > 4 ? '大于4个字，试试减少' : '小于4个字，试试添加'"
           },
-          // pholder: {
-          //   layout: "space",
-          //   col: 12
-          // },
+          summary: {
+            label: "广告摘要",
+            component: "el-input",
+            value: "广告摘要文字",
+            // col: 12,
+            desc: {
+              name: "span",
+              props: {},
+              text:
+                "es: {{$root}}.summary.length > 4 ? '我是一个组件引入: 大于4个字，试试减少' : '我是一个组件引入: 小于4个字，试试添加'"
+            }
+          },
+          unitType: {
+            label: "单位测试",
+            component: "el-slider",
+            value: 10,
+            // col: 12,
+            unit: "es: '单位' + {{$root.unitType}}"
+          },
           startAge: {
             label: "适合人群",
             group: "date",
-            col: 8,
+            col: 12,
             component: {
               name: "el-input-number",
               size: "auto"
@@ -55,7 +71,7 @@ export default {
               size: "fixed"
             },
             group: "date",
-            col: 8,
+            col: 12,
             component: {
               name: "el-input-number",
               size: "auto"

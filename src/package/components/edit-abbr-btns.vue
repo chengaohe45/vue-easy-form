@@ -29,6 +29,9 @@
             >
               <div class="es-circle-delete"></div>
             </es-btn>
+            <es-btn :disabled="!canAdd" @click="copyItem" v-if="hasAdd">
+              <div class="es-normal-plus"></div>
+            </es-btn>
             <es-btn
               :disabled="isFirst || index <= fixed"
               @click="upItem"
@@ -123,6 +126,16 @@ export default {
       type: Number,
       required: true,
       default: 0
+    },
+    canAdd: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    hasAdd: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
@@ -139,6 +152,12 @@ export default {
         this.$emit("upItem", this.index);
         this.cancelDocListen();
       }
+    },
+
+    copyItem() {
+      this.$data.showPop = false;
+      this.$emit("copyItem", this.index);
+      this.cancelDocListen();
     },
 
     downItem() {

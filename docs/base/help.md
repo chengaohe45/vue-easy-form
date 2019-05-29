@@ -4,7 +4,7 @@
 可全局设置
 
 值：
-- `string`： 提示的内容，会直接调用系统默认的"es-help"组件
+- `string`： 提示的内容，会直接调用系统默认的help组件
 - `object`： 就是组件的写法，不过没有actions事件
 
 ## 实例
@@ -45,7 +45,7 @@ data() {
           component: "el-input",
           value: "首页位置"
         },
-        help: "提示的内容"      // 提示的内容，会直接调用系统默认的"es-help"组件
+        help: "提示的内容"      // 提示的内容，会直接调用系统默认的help组件
       },
     };
   },
@@ -66,7 +66,7 @@ data() {
           value: "首页位置"
         },
         help: {
-          name: "es-help",
+          // name: "xxxx",   // 不可写这个，系统会自动采用默认的help
           props: {
             content: "提示的内容",
             maxWidth: 200,

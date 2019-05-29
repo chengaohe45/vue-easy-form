@@ -19,7 +19,11 @@
         }"
       >
         <div
-          v-if="schema.array.hasDelete || schema.array.hasSort"
+          v-if="
+            schema.array.hasDelete ||
+              schema.array.hasSort ||
+              schema.array.hasCopy
+          "
           class="es-btn-box"
         >
           <div
@@ -27,7 +31,8 @@
             v-if="
               schema.array.hasOrder ||
                 schema.array.hasDelete ||
-                schema.array.hasSort
+                schema.array.hasSort ||
+                schema.array.hasCopy
             "
           >
             <span class="order-txt" v-if="schema.array.hasOrder"
@@ -44,6 +49,12 @@
                 :is-last="index == schema.__propSchemaList.length - 1"
                 :index="index"
                 :has-del-warn="schema.array.hasDelWarn"
+                :can-add="
+                  schema.array.max <= 0 ||
+                    schema.__propSchemaList.length < schema.array.max
+                "
+                :has-add="schema.array.hasCopy"
+                @copyItem="copyItem"
                 @delItem="delItem"
                 @upItem="upItem"
                 @downItem="downItem"

@@ -38,5 +38,5 @@ Vue.use(esForm, {isDomain: ()=>{}}, { boxRowSpace: 10 });
 | direction | "h" | 竖排还是横排
 | defaultCom | "input" | 当配置时，不写component.name时用这个
 | defaultVal | "" | 对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；<br />`注：此值对其它组件不补充`
-| help | { name: "es-help", props: {} } | 设置默认的帮助组件
+| help | { name: "help组件", props: {} } | 设置默认的帮助组件
 | trimEvent | "change" | 当组件的值是字符串时，要去掉两边的空格：触发这个事件去掉（因为有些地方可能是changed）

@@ -49,23 +49,24 @@ data() {
 | format | 数值转换 [写法](./format.md) | array/object | -- | -- | 组件内有效
 | component | 配置组件 [写法](./component.md) | string/object | -- | 全局 |
 | group | 项与项进行分组 | string | -- | -- | 设置为分组，是`相邻`的
-| unit | 对项进行补充 | string | -- | -- | 如：px
-| desc | 对项进行描述 | string | -- | 全局 | 支持html
+| unit | 对项进行补充 | string | -- | -- | 如：px；支持es或组件化
+| desc | 对项进行描述 | string | -- | 全局 | 支持es或组件化
 | help | 对项设置帮助 [写法](./help.md) | string/object | -- | -- |
-| array | properties是数组，[写法]见下边 | string/object | -- | -- | 
+| array | properties或组件是数组，[写法]见下边 | string/object | -- | -- | 
 | isTmp | 临时值 | boolean | -- | false | 表单不输出此项值,但可作为表单内部使用
 | layout | 布局 | object/string | "space" "tabs" or Object | false | `区分大小写`<br />`space`: 是一个占位符<br />`tabs`:下一级为tabs布局[写法](./layout.md)
 
-## widget属性
+## array属性
 
-当widget设置时
+当array设置时
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
-| name | 哪种分组 | string/object | "array"、"array-table"、"array-tabs" | "array" | 
+| name | 哪种分组 | string/object | "array"、"array-table"、"array-tabs"、"array-legend"、"array-card"、"array-tabs" | "array" | 
 | hasSort | 是否有排序按钮 | boolean | -- | false | 
 | hasDelete | 是否有删除按钮 | boolean | -- | true |
 | hasAdd | 是否有添加按钮 | boolean | -- | true | 
+| hasCopy | 是否有复制按钮 | boolean | -- | false | 
 | fixed | 固定数量 | number | >=0 | 0 | 前几条是固定的，不可移动，也不可删除
 | min | 最少多少条 | number | >=0 | 0 | 0 代表无限制
 | max | 最多多少条 | number | >=0 | 0 | 0 代表无限制

@@ -94,11 +94,11 @@ export default {
     );
   },
   props: {
-    openSmart: {
-      type: Boolean,
-      required: false,
-      default: true
-    },
+    // openSmart: {
+    //   type: Boolean,
+    //   required: false,
+    //   default: true
+    // },
 
     config: {
       type: Object,
@@ -181,18 +181,18 @@ export default {
 
   methods: {
     initUi() {
-      if (this.openSmart) {
-        if (this.needWatch()) {
-          this.setWatch(); //监听formData，当其值必变时，则props也要重新执行一遍
-        } else {
-          this.cancelWatch();
-        }
-        this.parseData();
-        this.createOn();
+      // if (this.openSmart) {
+      if (this.needWatch()) {
+        this.setWatch(); //监听formData，当其值必变时，则props也要重新执行一遍
       } else {
         this.cancelWatch();
-        this.$data.dataProps = utils.deepCopy(this.config.props);
       }
+      this.parseData();
+      this.createOn();
+      // } else {
+      //   this.cancelWatch();
+      //   this.$data.dataProps = utils.deepCopy(this.config.props);
+      // }
     },
 
     //判断组件的props是否存在es语句

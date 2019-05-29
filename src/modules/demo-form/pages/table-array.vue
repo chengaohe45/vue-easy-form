@@ -39,6 +39,7 @@ export default {
               // hasDelete: true,
               // hasSort: true,
               hasAdd: true,
+              // hasCopy: true,
               hasDelWarn: true,
               // hasAdd: false,
               fixed: 1,
