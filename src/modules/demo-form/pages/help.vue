@@ -3,8 +3,7 @@
     <div slot="details">
       字段help:
       <div>
-        1. 可直接写成string;
-        当设置为string时，会调用系统的help组件
+        1. 可直接写成string; 当设置为string时，会调用系统的help组件
       </div>
       <div>2. 写成一个对象, 跟写组件一样</div>
     </div>
