@@ -25,7 +25,7 @@
           <div class="es-array-fieldset-box">
             <div class="es-array-fieldset">
               <div class="es-legend">
-                {{ itemSchema.tabsName ? itemSchema.tabsName : index + 1 + "" }}
+                {{ itemSchema.subLabel ? itemSchema.subLabel : index + 1 + "" }}
               </div>
               <template v-if="itemSchema.properties">
                 <component

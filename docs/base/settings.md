@@ -76,9 +76,6 @@ data() {
 | header | 头部类型 | string | `line`,`border`,`bg` | '' | 
 | border | body边框 | number | >=0 | 0 |
 | body | body内边距 | number | >=0 | 0 | 
-| tabsName | tabs头部名称 | number | >=0 | 0 | `array-tabs`时为效，其余情况无效; 支持es语法
-| tabsHeader | tabs头部类型 | string | `underline`,`card`,`border-card` | `underline` | 
-| tabsBorder | tabs框里body边框 | number | >=0 | 0 | 0
-| tabsBody | tabs框里body内边距 | number | >=0 | 0 | 0
+| subLabel | tabs头部名称 | number | >=0 | 0 | `array-tabs` or `array-legend`时为效，其余情况无效; 支持es语法
 
 [schema的具体写法](./schema.md)

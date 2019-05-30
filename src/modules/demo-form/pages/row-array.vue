@@ -73,7 +73,7 @@ export default {
             // col: 15,
             array: {
               name: "array",
-              tabsName: "es: '投放目标' + ({{$index}} + 1)",
+              subLabel: "es: '投放目标' + ({{$index}} + 1)",
               hasOrder: false,
               hasDelete: true,
               hasSort: true,

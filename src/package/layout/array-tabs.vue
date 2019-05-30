@@ -12,7 +12,7 @@
       <template v-for="(itemSchema, index) in schema.__propSchemaList">
         <es-tabs-nav-item
           :key="index"
-          :tabsName="itemSchema.tabsName ? itemSchema.tabsName : index + 1 + ''"
+          :tabsName="itemSchema.subLabel ? itemSchema.subLabel : index + 1 + ''"
           :is-active="index === schema.__tabsIndex"
           :has-error="itemSchema.__hasError"
           :has-delete="schema.array.hasDelete"

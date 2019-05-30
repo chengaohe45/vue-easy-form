@@ -128,9 +128,9 @@ let formUtils = {
       }
     }
 
-    if (!utils.isUndef(schema.array.tabsName)) {
-      newItem.tabsName = schema.array.tabsName;
-      newItem.__tabsName = schema.array.tabsName;
+    if (!utils.isUndef(schema.array.subLabel)) {
+      newItem.subLabel = schema.array.subLabel;
+      newItem.__subLabel = schema.array.subLabel;
       newItem.__invalidMsg = false;
     }
 
@@ -1976,7 +1976,7 @@ let formUtils = {
       var hasOrder = true; //是否有序号，默认为true
       var headRequired = false; //此值当name为constant.ARRAY_TABLE有效，当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示，默认为true;注意：当为true时，required的值不能受properties里面的属性影响
       var hasDelWarn = true; // 删除是否有警告
-      var tabsName = false;
+      var subLabel = false;
       var rules = false;
       var actions = false;
       var value = [];
@@ -2017,7 +2017,7 @@ let formUtils = {
           array.name == constant.ARRAY_TABLE && array.headRequired
             ? true
             : false;
-        tabsName = utils.isStr(array.tabsName) ? array.tabsName : false;
+        subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
         hasDelWarn =
           utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
 
@@ -2085,11 +2085,11 @@ let formUtils = {
         newArray.rowSpace = rowSpace;
 
         if (newArray.name == constant.ARRAY_TABS) {
-          newArray.tabsName = tabsName;
+          newArray.subLabel = subLabel;
           newArray.type = type;
           newArray.hasBorder = hasBorder;
         } else if (newArray.name == constant.ARRAY_LEGEND) {
-          newArray.tabsName = tabsName;
+          newArray.subLabel = subLabel;
         }
 
         if (!utils.isUndef(insertValue)) {
@@ -2431,7 +2431,7 @@ let formUtils = {
    */
   analyzeUiProps(propItem, baseParseSources) {
     var sum = 0;
-    var isHidden, isRequired, text, tabsName, listLen, schemaList, i;
+    var isHidden, isRequired, text, subLabel, listLen, schemaList, i;
 
     var parseSources = Object.assign({}, baseParseSources);
     parseSources.index = propItem.__index;
@@ -2549,11 +2549,11 @@ let formUtils = {
         }
       }
 
-      if (propItem.__tabsName) {
-        // console.log("propItem.__tabsName", propItem.__tabsName);
-        tabsName = parse.smartEsValue(propItem.__tabsName, parseSources);
-        if (propItem.tabsName != tabsName) {
-          propItem.tabsName = tabsName;
+      if (propItem.__subLabel) {
+        // console.log("propItem.__subLabel", propItem.__subLabel);
+        subLabel = parse.smartEsValue(propItem.__subLabel, parseSources);
+        if (propItem.subLabel != subLabel) {
+          propItem.subLabel = subLabel;
         }
       }
 

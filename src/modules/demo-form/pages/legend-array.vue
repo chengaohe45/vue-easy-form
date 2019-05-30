@@ -26,7 +26,7 @@ export default {
             label: "名称",
             array: {
               name: "array-legend",
-              tabsName: "学科",
+              subLabel: "学科",
               hasOrder: true,
               hasDelete: true,
               hasSort: true,
@@ -141,7 +141,7 @@ export default {
             // col: 15,
             array: {
               name: "array-legend",
-              tabsName: "es: '投放目标' + ({{$index}} + 1)",
+              subLabel: "es: '投放目标' + ({{$index}} + 1)",
               hasOrder: false,
               hasDelete: true,
               hasSort: true,
