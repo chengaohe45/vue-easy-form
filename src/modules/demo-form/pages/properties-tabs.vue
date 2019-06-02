@@ -153,7 +153,10 @@ export default {
               },
 
               bak: {
-                label: "备用",
+                label: {
+                  name: "div",
+                  text: "备用"
+                },
                 rules: {
                   required: "es: {{$hidden(test.base)}}"
                 },

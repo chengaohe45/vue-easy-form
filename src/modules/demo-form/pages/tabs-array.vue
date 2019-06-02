@@ -62,8 +62,11 @@ export default {
               name: "array-tabs",
               type: "bg",
               hasBorder: false,
-              subLabel:
-                "es: ({{$root}}.courses[{{$index}}].name) ? ( ({{$root}}.courses[{{$index}}].name.length <=5 ? {{$root}}.courses[{{$index}}].name : {{$root}}.courses[{{$index}}].name.substr(0, 5) + '...') ) : '[未命名]'",
+              subLabel: {
+                name: "div",
+                text:
+                  "es: ({{$root}}.courses[{{$index}}].name) ? ( ({{$root}}.courses[{{$index}}].name.length <=5 ? {{$root}}.courses[{{$index}}].name : {{$root}}.courses[{{$index}}].name.substr(0, 5) + '...') ) : '[未命名]'"
+              },
               // hasOrder: false,
               // hasDelete: true,
               hasSort: true,

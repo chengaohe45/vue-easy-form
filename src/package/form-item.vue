@@ -34,7 +34,9 @@
         <div
           :class="[
             'es-form-component',
-            'es-form-component-' + schema.component.align
+            schema.component.align
+              ? 'es-form-component-' + schema.component.align
+              : ''
           ]"
           v-if="schema.component"
         >
@@ -177,7 +179,7 @@
           <!-- 数组-叶子(若有) -->
           <div
             v-if="schema.component"
-            class="es-form-component"
+            class="es-form-component-list"
             slot-scope="props"
           >
             <!-- 必须是v-for,要不然ref取不出数组 -->
@@ -224,7 +226,7 @@
           <!-- 数组-叶子(若有) -->
           <div
             v-if="schema.component"
-            class="es-form-component"
+            class="es-form-component-list"
             slot-scope="props"
           >
             <!-- 必须是v-for,要不然ref取不出数组 -->
@@ -254,7 +256,7 @@
           <!-- 数组-叶子(若有) -->
           <div
             v-if="schema.component"
-            class="es-form-component"
+            class="es-form-component-list"
             slot-scope="props"
           >
             <!-- 必须是v-for,要不然ref取不出数组 -->
@@ -331,7 +333,7 @@
           <!-- 数组-叶子(若有) -->
           <div
             v-if="schema.component"
-            class="es-form-component"
+            class="es-form-component-list"
             slot-scope="props"
           >
             <!-- 必须是v-for,要不然ref取不出数组 -->
@@ -475,6 +477,13 @@
     }
   }
 
+  .es-form-component-list {
+    @include display-flex;
+    @include direction-h;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
   .es-form-component {
     @include display-flex;
     @include direction-h;
@@ -483,15 +492,20 @@
   }
 
   .es-form-component-left {
-    justify-content: flex-start;
+    justify-content: flex-start !important;
   }
 
   .es-form-component-center {
-    justify-content: center;
+    justify-content: center !important;
   }
 
   .es-form-component-right {
-    justify-content: flex-end;
+    justify-content: flex-end !important;
+  }
+
+  .es-form-label-box {
+    @include flex-fixed;
+    @include inline-center;
   }
 
   .es-form-component-auto {

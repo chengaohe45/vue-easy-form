@@ -15,7 +15,14 @@
           :class="['es-col-' + headerSchema.col]"
           :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
         >
-          <div class="es-form-table-head">
+          <div
+            :class="[
+              'es-form-table-head',
+              headerSchema.label.align
+                ? 'es-form-component-' + headerSchema.label.align
+                : ''
+            ]"
+          >
             <span
               v-if="
                 schema.array.headRequired &&
@@ -25,11 +32,23 @@
               class="es-required"
               >*</span
             >
-            {{
-              headerSchema.label.text
-                ? headerSchema.label.text
-                : headerFieldName + ""
-            }}<span v-if="headerSchema.help" class="es-form-help">
+            <template v-if="!headerSchema.label.name">
+              {{
+                headerSchema.label.text
+                  ? headerSchema.label.text
+                  : headerFieldName + ""
+              }}
+            </template>
+            <span v-else class="es-form-label-box">
+              <es-base
+                :config="headerSchema.label"
+                :form-data="formData"
+                :global="global"
+                :idx-chain="headerSchema.__idxChain"
+                :index="headerSchema.__index"
+              ></es-base>
+            </span>
+            <span v-if="headerSchema.help" class="es-form-help">
               <!-- <es-base
                 :config="headerSchema.help"
                 :open-smart="false"
@@ -70,7 +89,10 @@
           <td
             v-for="(fieldSchema, fieldName) in itemSchema.properties"
             :key="fieldName"
-            :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
+            :style="{
+              padding: schema.boxRowSpace / 2 + 'px',
+              textAlign: fieldSchema.label.align
+            }"
           >
             <es-object-table
               :schema="fieldSchema"

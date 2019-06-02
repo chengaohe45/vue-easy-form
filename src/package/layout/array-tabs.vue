@@ -27,7 +27,24 @@
           @upItem="upItem"
           @downItem="downItem"
           @clickActive="clickActiveHandler"
-        ></es-tabs-nav-item>
+        >
+          <template v-if="!itemSchema.subLabel.name"
+            ><span>{{
+              itemSchema.subLabel.text
+                ? itemSchema.subLabel.text
+                : index + 1 + ""
+            }}</span></template
+          >
+          <span v-else class="es-form-label-box">
+            <es-base
+              :config="itemSchema.subLabel"
+              :form-data="formData"
+              :global="global"
+              :idx-chain="itemSchema.__idxChain"
+              :index="itemSchema.__index"
+            ></es-base>
+          </span>
+        </es-tabs-nav-item>
       </template>
 
       <div

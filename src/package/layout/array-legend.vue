@@ -25,7 +25,23 @@
           <div class="es-array-fieldset-box">
             <div class="es-array-fieldset">
               <div class="es-legend">
-                {{ itemSchema.subLabel ? itemSchema.subLabel : index + 1 + "" }}
+                <!-- {{ itemSchema.subLabel ? itemSchema.subLabel : index + 1 + "" }} -->
+                <template v-if="!itemSchema.subLabel.name"
+                  ><span>{{
+                    itemSchema.subLabel.text
+                      ? itemSchema.subLabel.text
+                      : index + 1 + ""
+                  }}</span></template
+                >
+                <span v-else class="es-form-label-box">
+                  <es-base
+                    :config="itemSchema.subLabel"
+                    :form-data="formData"
+                    :global="global"
+                    :idx-chain="itemSchema.__idxChain"
+                    :index="itemSchema.__index"
+                  ></es-base>
+                </span>
               </div>
               <template v-if="itemSchema.properties">
                 <component

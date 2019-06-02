@@ -44,6 +44,7 @@ $btnDisableColor: #d5d7dc;
   .es-required {
     color: $g_errorColor;
     vertical-align: middle;
+    margin-right: 3px;
   }
 
   .es-form-unit {
