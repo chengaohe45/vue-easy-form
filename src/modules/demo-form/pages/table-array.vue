@@ -28,9 +28,11 @@ export default {
           },
           courses: {
             layout: "tabs",
-            title: {
-              text: "我的课程",
+            ui: {
               showBody: true
+            },
+            title: {
+              text: "我的课程"
             },
             label: false,
             array: {

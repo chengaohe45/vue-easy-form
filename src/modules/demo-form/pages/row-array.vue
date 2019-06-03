@@ -63,11 +63,11 @@ export default {
             help: "帮助就是这样子"
           },
           target: {
-            title: {
-              text: "投放目标",
-              type: "bg-border",
+            ui: {
+              type: "bg-block",
               showBody: true
             },
+            title: "投放目标",
             label: "",
             boxRowSpace: 15,
             // col: 15,
@@ -79,9 +79,33 @@ export default {
               hasSort: true,
               hasAdd: true,
               fixed: 1,
-              max: 5,
+              max: 20,
               rowSpace: 30,
-              value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
+              value: [
+                { name: "语文", code: "001", applyNum: 155 },
+                { name: "数学", code: "003" },
+                // { name: "语文", code: 123 },
+                // { name: "数学", code: 123 },
+                // { name: "语文", code: 123 },
+                { name: "英语", code: "005", applyNum: 888 }
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
+              ],
               actions: {
                 trigger: "change",
                 handler: function(value, key, event) {
@@ -149,16 +173,16 @@ export default {
                 }
               }
             },
-            desc: "提示： 最多只能添加5条数据",
-            help: "help： 最多只能添加5条数据"
+            desc: "提示： 最多只能添加20条数据",
+            help: "help： 最多只能添加20条数据"
           },
           courses: {
             layout: "tabs",
-            title: {
-              text: "我的课程",
+            ui: {
               type: "bg-border",
               showBody: true
             },
+            title: "我的课程",
             label: "",
             // col: 15,
             array: {

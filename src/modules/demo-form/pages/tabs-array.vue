@@ -50,10 +50,14 @@ export default {
               type: "line",
               hasBorder: false
             },
-            title: {
-              text: "我的课程",
+
+            ui: {
               type: "bg-border",
               showBody: true
+            },
+
+            title: {
+              text: "我的课程"
             },
             label: "",
             // col: 15,

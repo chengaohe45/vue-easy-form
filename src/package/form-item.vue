@@ -1,19 +1,31 @@
 <template>
   <div class="es-form-item">
     <div v-if="hasTitle" :class="titleClass">
-      <div v-if="schema.title.text" class="es-title-txt">
-        {{ schema.title.text }}
+      <div v-if="schema.title" class="es-title-txt">
+        <!-- {{ schema.title.text }} -->
+        <template v-if="!schema.title.name">
+          {{ schema.title.text }}
+        </template>
+        <!-- <span v-else class="es-form-label-box"> -->
+        <es-base
+          v-else
+          :config="schema.title"
+          :form-data="formData"
+          :global="global"
+          :idx-chain="schema.__idxChain"
+          :index="schema.__index"
+        ></es-base>
+        <!-- </span> -->
       </div>
       <div v-else class="es-title-txt es-title-empty">&nbsp;</div>
       <div
-        v-if="schema.title.__hasToggle"
+        v-if="schema.ui && schema.ui.__hasToggle"
         class="es-more-btn"
         @click="toggleBody"
       >
-        {{ schema.title.showBody ? "隐藏" : "打开" }}
+        {{ schema.ui.showBody ? "隐藏" : "打开" }}
       </div>
       <div v-if="schema.help" class="es-form-help">
-        <!-- <es-base :config="schema.help" :open-smart="false"></es-base> -->
         <es-base
           :config="schema.help"
           :form-data="formData"
@@ -25,7 +37,7 @@
     </div>
     <div
       class="es-form-body"
-      v-show="!hasTitle || schema.title.showBody"
+      v-show="!schema.ui || schema.ui.showBody"
       :style="bodyStyle"
     >
       <!-- 非数组 -->
@@ -624,25 +636,26 @@ export default {
 
   computed: {
     hasTitle() {
-      return (
-        this.schema.properties &&
-        (this.schema.title.text !== false || this.schema.help)
-      ); // 是否有头部
+      return this.schema.properties &&
+        (this.schema.title ||
+          (this.schema.ui && this.schema.ui.__hasToggle) ||
+          this.schema.help)
+        ? true
+        : false; // 是否有头部
     },
 
     bodyStyle() {
       var style = null;
       if (
         this.schema.properties &&
-        (this.schema.title.text !== false || this.schema.help)
+        (this.schema.title ||
+          (this.schema.ui && this.schema.ui.__hasToggle) ||
+          this.schema.help)
       ) {
         // 是否有头部
         //是properties且有头部
-        // style = {};
-        if (
-          this.schema.title.type == "bg-border" ||
-          this.schema.title.type == "bg-block-border"
-        ) {
+        var type = this.schema.ui ? this.schema.ui.type : "";
+        if (type == "bg-border" || type == "bg-block-border") {
           style = {
             padding: Math.floor((this.schema.boxRowSpace * 2) / 3) + "px"
           }; //有边框时的样式
@@ -658,14 +671,20 @@ export default {
     },
     titleClass() {
       var tClass;
-      if (this.schema.properties && (this.schema.title || this.schema.help)) {
+      if (
+        this.schema.properties &&
+        (this.schema.title ||
+          (this.schema.ui && this.schema.ui.__hasToggle) ||
+          this.schema.help)
+      ) {
+        var type = this.schema.ui ? this.schema.ui.type : "";
         //是properties且有头部
         tClass = [
           "es-title-box",
           "es-title",
           "es-title-l" + this.schema.title.__level
         ];
-        switch (this.schema.title.type) {
+        switch (type) {
           case "bg":
             tClass.push("es-title-bg");
             break;
@@ -692,15 +711,15 @@ export default {
   },
 
   methods: {
-    getRefs(name) {
-      var target = this.$refs[name];
-      if (!target) {
-        target = this.__getAllRefs(name);
-      } else {
-        target = target.$refs.__comTarget__; // 取出base组件内的目标组件
-      }
-      return target;
-    },
+    // getRefs(name) {
+    //   var target = this.$refs[name];
+    //   if (!target) {
+    //     target = this.__getAllRefs(name);
+    //   } else {
+    //     target = target.$refs.__comTarget__; // 取出base组件内的目标组件
+    //   }
+    //   return target;
+    // },
 
     getRef(name) {
       var target;
@@ -719,14 +738,6 @@ export default {
     },
 
     __initUi() {
-      // if (
-      //   this.schema.properties &&
-      //   this.schema.title &&
-      //   this.schema.title.hasToggle
-      // ) {
-      //   this.$data.showBody =
-      //     this.schema.title.showBody === false ? false : true;
-      // }
       //不是所有的form-item都需要监听，只有有value值的才需求参加
       if (this.needWatch()) {
         this.setWatch();
@@ -797,41 +808,41 @@ export default {
       return newTarget;
     },
 
-    __getAllRefs(name) {
-      return (
-        this.__getTargetRefs("__refObject__", name) ||
-        this.__getTargetRefs("__refTabs__", name) ||
-        this.__getTargetRefs("__refArrarCard__", name) ||
-        this.__getTargetRefs("__refArrarRow__", name) ||
-        this.__getTargetRefs("__refArrarLegend__", name) ||
-        this.__getTargetRefs("__refArrarTable__", name) ||
-        this.__getTargetRefs("__refArrarTabs__", name)
-      );
-    },
+    // __getAllRefs(name) {
+    //   return (
+    //     this.__getTargetRefs("__refObject__", name) ||
+    //     this.__getTargetRefs("__refTabs__", name) ||
+    //     this.__getTargetRefs("__refArrarCard__", name) ||
+    //     this.__getTargetRefs("__refArrarRow__", name) ||
+    //     this.__getTargetRefs("__refArrarLegend__", name) ||
+    //     this.__getTargetRefs("__refArrarTable__", name) ||
+    //     this.__getTargetRefs("__refArrarTabs__", name)
+    //   );
+    // },
 
-    __getTargetRefs(targetName, name) {
-      // console.log("targetName: ", targetName);
-      var curRef,
-        nextTarget,
-        newTarget = null;
-      curRef = this.$refs[targetName];
-      // console.log("curRef: ", curRef);
-      if (curRef) {
-        curRef.forEach(item => {
-          nextTarget = item.getRefs(name);
-          if (nextTarget) {
-            // console.log("nextTarget", nextTarget);
-            newTarget = newTarget ? newTarget : [];
-            if (utils.isArr(nextTarget)) {
-              newTarget = newTarget.concat(nextTarget);
-            } else {
-              newTarget.push(nextTarget);
-            }
-          }
-        });
-      }
-      return newTarget;
-    },
+    // __getTargetRefs(targetName, name) {
+    //   // console.log("targetName: ", targetName);
+    //   var curRef,
+    //     nextTarget,
+    //     newTarget = null;
+    //   curRef = this.$refs[targetName];
+    //   // console.log("curRef: ", curRef);
+    //   if (curRef) {
+    //     curRef.forEach(item => {
+    //       nextTarget = item.getRefs(name);
+    //       if (nextTarget) {
+    //         // console.log("nextTarget", nextTarget);
+    //         newTarget = newTarget ? newTarget : [];
+    //         if (utils.isArr(nextTarget)) {
+    //           newTarget = newTarget.concat(nextTarget);
+    //         } else {
+    //           newTarget.push(nextTarget);
+    //         }
+    //       }
+    //     });
+    //   }
+    //   return newTarget;
+    // },
 
     needWatch() {
       //这个逻辑就是html的逻辑

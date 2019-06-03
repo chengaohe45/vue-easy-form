@@ -28,9 +28,11 @@ export default {
             col: 12
           },
           courses: {
-            title: {
-              text: "我的课程",
+            ui: {
               showBody: true
+            },
+            title: {
+              text: "我的课程"
             },
             label: false,
             value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],

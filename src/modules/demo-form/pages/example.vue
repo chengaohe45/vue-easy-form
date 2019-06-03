@@ -201,10 +201,12 @@ export default {
           },
 
           staffs: {
-            title: {
-              text: "参与人员",
+            ui: {
               type: "bg-border",
               showBody: true
+            },
+            title: {
+              text: "参与人员"
             },
             // label: "",
             rowSpace: 15,
