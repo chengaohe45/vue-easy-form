@@ -169,8 +169,17 @@ let formUtils = {
     currentIndex = -1,
     fromArray = false // 来自propItem.__propSchemaList循环
   ) {
+    // console.log(":", pathKey, ":", pathKey);
     if (propItem.array) {
       // 因为__propSchemaList里面的item不会含array
+
+      if (propItem.__idxChain != idxChain) {
+        propItem.__idxChain = idxChain;
+      }
+      if (propItem.__pathKey != pathKey) {
+        propItem.__pathKey = pathKey;
+      }
+
       var schemaList = propItem.__propSchemaList;
       for (var i = 0; i < schemaList.length; i++) {
         var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
@@ -2275,7 +2284,7 @@ let formUtils = {
             item.__groups = groups;
             item.__hiddenGroup = false;
             // item.col = constant.UI_MAX_COL;
-            colSum += item.col;
+            colSum = item.col;
             gFirstItem.__groupCol =
               colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
           }
@@ -2287,7 +2296,7 @@ let formUtils = {
           item.__groups = groups;
           item.__hiddenGroup = false;
           // item.col = constant.UI_MAX_COL;
-          colSum += item.col;
+          colSum = item.col;
           gFirstItem.__groupCol =
             colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
         }

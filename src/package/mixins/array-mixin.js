@@ -174,6 +174,11 @@ export default {
         }
       }
 
+      // console.log(
+      //   "this.schema.__idxChain, this.schema.__pathKey",
+      //   this.schema.__idxChain,
+      //   this.schema.__pathKey
+      // );
       formUtils.addArrayItem(this.schema, insertInfo);
       formUtils.resetIndexArr(
         this.schema,

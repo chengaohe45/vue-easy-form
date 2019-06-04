@@ -21,7 +21,8 @@
               :style="[
                 {
                   height: schema.properties[fieldKeyName].rowHeight + 'px',
-                  lineHeight: schema.properties[fieldKeyName].rowHeight + 'px'
+                  lineHeight: schema.properties[fieldKeyName].rowHeight + 'px',
+                  marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px'
                 },
                 schema.properties[fieldKeyName].label.size
                   ? ''
@@ -53,7 +54,15 @@
               class="es-form-comp-content"
               :key="'content-' + fieldKeyName"
               :style="[
-                { minHeight: schema.properties[fieldKeyName].rowHeight + 'px' }
+                {
+                  minHeight: schema.properties[fieldKeyName].rowHeight + 'px',
+                  marginLeft:
+                    schema.properties[fieldKeyName].label.text === false
+                      ? schema.properties[fieldKeyName].offsetLeft + 'px'
+                      : false,
+                  marginRight:
+                    schema.properties[fieldKeyName].offsetRight + 'px'
+                }
               ]"
             >
               <slot

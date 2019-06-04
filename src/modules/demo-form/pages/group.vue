@@ -31,7 +31,7 @@ export default {
         startTime: {
           label: "有效年份",
           group: "date",
-          col: 12,
+          col: 6,
           // offsetLeft: 30,
           // offsetRight: 30,
           component: {
@@ -51,7 +51,49 @@ export default {
             size: "fixed"
           },
           group: "date",
-          col: 12,
+          col: 6,
+          offsetLeft: 10,
+          offsetRight: 10,
+          component: {
+            name: "el-date-picker",
+            props: {
+              type: "year",
+              valueFormat: "yyyy"
+            },
+            size: "auto"
+          },
+          rules: {
+            required: true
+          },
+          unit: "年",
+          value: "",
+          help: "最好选择00后"
+        },
+
+        startTime2: {
+          label: "有效年份",
+          group: "date2",
+          col: 6,
+          offsetLeft: 30,
+          offsetRight: 30,
+          component: {
+            name: "el-date-picker",
+            props: {
+              type: "year",
+              valueFormat: "yyyy"
+            },
+            size: "auto"
+          },
+          unit: "年",
+          value: ""
+        },
+        endTime2: {
+          label: {
+            text: "到",
+            size: "fixed"
+          },
+          group: "date2",
+          col: 6,
           // offsetLeft: 10,
           // offsetRight: 10,
           component: {
@@ -69,6 +111,7 @@ export default {
           value: "",
           help: "最好选择00后"
         },
+
         author: {
           label: "作者名称",
           component: {
