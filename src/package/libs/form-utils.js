@@ -129,8 +129,7 @@ let formUtils = {
     }
 
     if (!utils.isUndef(schema.array.subLabel)) {
-      newItem.subLabel = schema.array.subLabel;
-      newItem.__subLabel = schema.array.subLabel;
+      newItem.subLabel = utils.deepCopy(schema.array.subLabel);
       newItem.__invalidMsg = false;
     }
 
@@ -272,8 +271,8 @@ let formUtils = {
   togglePropBody: function(schema, pathKey) {
     var targetSchema = this.__getSchemaByKey(schema, pathKey);
     if (targetSchema) {
-      if (targetSchema.title) {
-        targetSchema.title.showBody = !targetSchema.title.showBody;
+      if (targetSchema.ui) {
+        targetSchema.ui.showBody = !targetSchema.ui.showBody;
       }
     } else {
       // 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
@@ -1249,6 +1248,7 @@ let formUtils = {
         break;
       case "properties":
         propKeys = [
+          "ui",
           "title",
           "label",
           "rowHeight",
@@ -1580,10 +1580,6 @@ let formUtils = {
       };
     }
 
-    // var sizeValues = ["fixed", "auto"];
-    // if (!sizeValues.includes(tmpComponent.size)) {
-    //   tmpComponent.size = false;
-    // }
     tmpComponent.size = this.__parseSize(tmpComponent.size);
 
     return tmpComponent;
@@ -1704,27 +1700,12 @@ let formUtils = {
   __parseLabel: function(value) {
     var newValue,
       defaultAlign = false;
-    if (utils.isObj(value)) {
-      newValue = {};
-      newValue.__rawText = utils.isStr(value.text) ? value.text : false;
-      newValue.text = newValue.__rawText;
+    newValue = this.__parsePropComponent(value, true);
 
-      // var sizeValues = ["fixed", "auto"];
-      // if (sizeValues.includes(value.size)) {
-      //   newValue.size = value.size;
-      // } else {
-      //   newValue.size = false;
-      // }
+    // 因为label有点特殊，所以不能为false
+    if (newValue) {
       newValue.size = this.__parseSize(value.size);
-
       newValue.align = this.__parseAlign(value.align, defaultAlign);
-    } else if (utils.isStr(value)) {
-      newValue = {
-        text: value,
-        __rawText: value,
-        size: false,
-        align: defaultAlign
-      };
     } else {
       newValue = {
         text: false,
@@ -1732,10 +1713,6 @@ let formUtils = {
         size: false,
         align: defaultAlign
       };
-    }
-
-    if (newValue.__rawText === false) {
-      delete newValue.align; // 不用起作用，删了它
     }
 
     return newValue;
@@ -1759,35 +1736,32 @@ let formUtils = {
 
   /* 解析title */
   __parseTitle: function(value) {
-    var newValue;
-    if (utils.isObj(value)) {
-      newValue = {};
-      newValue.__rawText = utils.isStr(value.text) ? value.text : false;
-      newValue.text = newValue.__rawText;
+    var newValue = this.__parsePropComponent(value);
+    return newValue;
+  },
 
-      if (newValue.text !== false && utils.isBool(value.showBody)) {
+  /* 解析boxUi, 只支持properites */
+  __parseBoxUi: function(value) {
+    var newValue;
+    if (utils.isObj(value) && Object.keys(value).length > 0) {
+      newValue = {};
+      if (utils.isBool(value.showBody)) {
         newValue.__hasToggle = true; // 有切换按钮
         newValue.showBody = value.showBody;
       } else {
         newValue.__hasToggle = false; // 无切换按钮
         newValue.showBody = true;
       }
-
-      newValue.type = utils.isStr(value.type) ? value.type : "";
+      newValue.type = utils.isStr(value.type) ? value.type.trim() : "";
     } else if (utils.isStr(value)) {
       newValue = {
-        text: value,
-        __rawText: value,
         __hasToggle: false,
-        showBody: true
+        showBody: true,
+        type: value.trim()
       };
     } else {
-      newValue = {
-        text: false,
-        __rawText: false,
-        __hasToggle: false,
-        showBody: true
-      };
+      // 为false
+      newValue = false;
     }
 
     return newValue;
@@ -1816,7 +1790,7 @@ let formUtils = {
   },
 
   /* 解析一般组件 */
-  __parsePropComponent: function(value) {
+  __parsePropComponent: function(value, canEmpty = false) {
     var newCom;
     if (utils.isObj(value) && Object.keys(value).length > 0) {
       newCom = {};
@@ -1830,6 +1804,8 @@ let formUtils = {
       var text =
         utils.isStr(value.text) && value.text.trim()
           ? value.text.trim()
+          : canEmpty
+          ? ""
           : false;
       newCom.text = text;
 
@@ -1843,7 +1819,7 @@ let formUtils = {
       return newCom;
     } else if (utils.isStr(value)) {
       value = value.trim();
-      if (value) {
+      if (value || canEmpty) {
         newCom = { text: value, __rawText: value };
       } else {
         newCom = false;
@@ -2026,7 +2002,18 @@ let formUtils = {
           array.name == constant.ARRAY_TABLE && array.headRequired
             ? true
             : false;
-        subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
+        // subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
+
+        subLabel = this.__parsePropComponent(array.subLabel);
+        if (!subLabel) {
+          subLabel = {
+            text: false,
+            __rawText: false
+            // size: false,
+            // align: defaultAlign
+          };
+        }
+
         hasDelWarn =
           utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
 
@@ -2161,6 +2148,11 @@ let formUtils = {
 
       if (key == "title") {
         newPropItem[key] = formUtils.__parseTitle(propItem[key]);
+        return true;
+      }
+
+      if (key == "ui") {
+        newPropItem[key] = formUtils.__parseBoxUi(propItem[key]);
         return true;
       }
 
@@ -2440,7 +2432,7 @@ let formUtils = {
    */
   analyzeUiProps(propItem, baseParseSources) {
     var sum = 0;
-    var isHidden, isRequired, text, subLabel, listLen, schemaList, i;
+    var isHidden, isRequired, text, listLen, schemaList, i;
 
     var parseSources = Object.assign({}, baseParseSources);
     parseSources.index = propItem.__index;
@@ -2456,7 +2448,7 @@ let formUtils = {
         }
       }
 
-      if (propItem.label && propItem.label.__rawText) {
+      if (propItem.label && !propItem.label.name && propItem.label.__rawText) {
         // false或为空都不用执行 properies array下propItem.label
         text = parse.smartEsValue(propItem.label.__rawText, parseSources);
         if (propItem.label.text != text) {
@@ -2534,7 +2526,7 @@ let formUtils = {
         }
       }
 
-      if (propItem.label && propItem.label.__rawText) {
+      if (propItem.label && !propItem.label.name && propItem.label.__rawText) {
         // false或为空都不用执行 properies array下propItem.label
         text = parse.smartEsValue(propItem.label.__rawText, parseSources);
         if (propItem.label.text != text) {
@@ -2558,11 +2550,14 @@ let formUtils = {
         }
       }
 
-      if (propItem.__subLabel) {
-        // console.log("propItem.__subLabel", propItem.__subLabel);
-        subLabel = parse.smartEsValue(propItem.__subLabel, parseSources);
-        if (propItem.subLabel != subLabel) {
-          propItem.subLabel = subLabel;
+      if (
+        propItem.subLabel &&
+        !propItem.subLabel.name &&
+        propItem.subLabel.__rawText
+      ) {
+        text = parse.smartEsValue(propItem.subLabel.__rawText, parseSources);
+        if (propItem.subLabel.text != text) {
+          propItem.subLabel.text = text;
         }
       }
 

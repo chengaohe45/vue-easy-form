@@ -10,7 +10,8 @@
       :class="{ 'es-tabs-nav-item-cnt': true, 'es-error': hasError }"
       @click="clickCntHandler"
     >
-      <span v-if="required" class="es-required">*</span>{{ tabsName }}
+      <span v-if="required" class="es-required">*</span>
+      <slot></slot>
       <div class="es-tabs-close-box" v-if="hasDelete">
         <es-tabs-btn
           ref="delBtn"
@@ -97,11 +98,11 @@ export default {
     };
   },
   props: {
-    tabsName: {
-      type: String,
-      required: true,
-      default: "???"
-    },
+    // tabsName: {
+    //   type: String,
+    //   required: true,
+    //   default: "???"
+    // },
     isActive: {
       type: Boolean,
       required: true,

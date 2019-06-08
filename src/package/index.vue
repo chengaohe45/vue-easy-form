@@ -44,6 +44,7 @@ $btnDisableColor: #d5d7dc;
   .es-required {
     color: $g_errorColor;
     vertical-align: middle;
+    margin-right: 3px;
   }
 
   .es-form-unit {
@@ -515,9 +516,9 @@ export default {
             isValid = !isValid ? isValid : validResult;
           }
 
-          if (!isValid && schema.title && !schema.title.showBody) {
+          if (!isValid && schema.ui && !schema.ui.showBody) {
             // 有错 schema.title为null, 可能是ARRAY_TABS的item
-            schema.title.showBody = true;
+            schema.ui.showBody = true;
           }
         } else {
           isTabs =

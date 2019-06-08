@@ -67,10 +67,12 @@ export default {
           value: 1
         },
         targets: {
-          title: {
-            text: "目标人员",
+          ui: {
             type: "bg-border",
             showBody: true
+          },
+          title: {
+            text: "目标人员"
           },
           // label: "",
           rowSpace: 15,

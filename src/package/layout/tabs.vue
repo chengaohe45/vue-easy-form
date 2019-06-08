@@ -6,15 +6,27 @@
         <es-tabs-nav-item
           v-if="!itemSchema.hidden"
           :key="fieldName"
-          :tabsName="
-            itemSchema.label.text ? itemSchema.label.text : fieldName + ''
-          "
           :required="itemSchema.rules && itemSchema.rules.required"
           :is-active="fieldName === schema.__tabsIndex"
           :has-error="itemSchema.__hasError"
           @clickActive="clickActiveHandler"
           :index="fieldName"
-        ></es-tabs-nav-item>
+        >
+          <template v-if="!itemSchema.label.name"
+            ><span>{{
+              itemSchema.label.text ? itemSchema.label.text : fieldName + ""
+            }}</span></template
+          >
+          <span v-else class="es-form-label-box">
+            <es-base
+              :config="itemSchema.label"
+              :form-data="formData"
+              :global="global"
+              :idx-chain="itemSchema.__idxChain"
+              :index="itemSchema.__index"
+            ></es-base>
+          </span>
+        </es-tabs-nav-item>
       </template>
     </es-tabs-nav>
     <ul
@@ -68,12 +80,14 @@ $styleColor: #e4e7ed;
 import itemMixin from "../mixins/item-mixin";
 import esTabsNav from "../components/tabs-nav";
 import esTabsNavItem from "../components/tabs-nav-item";
+import esBase from "../base";
 
 export default {
   mixins: [itemMixin],
   components: {
     esTabsNav,
-    esTabsNavItem
+    esTabsNavItem,
+    esBase
   },
 
   data() {

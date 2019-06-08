@@ -25,9 +25,11 @@ export default {
           },
 
           base: {
-            title: {
-              text: "基本信息",
+            ui: {
               showBody: true
+            },
+            title: {
+              text: "基本信息"
             },
             label: false,
             properties: {
@@ -66,9 +68,11 @@ export default {
           },
 
           target: {
-            title: {
-              text: "投放目标",
+            ui: {
               type: "bg-border"
+            },
+            title: {
+              text: "投放目标"
             },
             label: false,
             properties: {
@@ -84,7 +88,10 @@ export default {
                 label: {
                   text: "体重"
                 },
-                component: "el-input-number",
+                component: {
+                  name: "el-input-number",
+                  size: "fixed"
+                },
                 unit: "公斤",
                 value: 100
               }
@@ -92,9 +99,11 @@ export default {
           },
 
           district: {
-            title: {
-              text: "投放地区",
+            ui: {
               type: "bg-block-border"
+            },
+            title: {
+              text: "投放地区"
             },
             label: false,
             properties: {
@@ -109,10 +118,12 @@ export default {
           },
 
           more: {
-            title: {
-              text: "更多设置",
+            ui: {
               type: "bg-block",
               showBody: false
+            },
+            title: {
+              text: "更多设置"
             },
             label: false,
             properties: {

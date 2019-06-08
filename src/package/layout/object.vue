@@ -22,7 +22,8 @@
                 {
                   height: schema.properties[fieldKeyName].rowHeight + 'px',
                   lineHeight: schema.properties[fieldKeyName].rowHeight + 'px',
-                  marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px'
+                  marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px',
+                  textAlign: schema.properties[fieldKeyName].label.align
                 },
                 schema.properties[fieldKeyName].label.size
                   ? ''
@@ -46,7 +47,19 @@
                 class="es-required"
                 >*</span
               >
-              {{ schema.properties[fieldKeyName].label.text }}
+              <!-- {{ schema.properties[fieldKeyName].label.text }} -->
+              <template v-if="!schema.properties[fieldKeyName].label.name">
+                <span>{{ schema.properties[fieldKeyName].label.text }}</span>
+              </template>
+              <span v-else class="es-form-label-box">
+                <es-base
+                  :config="schema.properties[fieldKeyName].label"
+                  :form-data="formData"
+                  :global="global"
+                  :idx-chain="schema.properties[fieldKeyName].__idxChain"
+                  :index="schema.properties[fieldKeyName].__index"
+                ></es-base>
+              </span>
               <span v-if="schema.properties[fieldKeyName].colon">:</span>
             </label>
             <div
@@ -175,7 +188,19 @@
             class="es-required"
             >*</span
           >
-          {{ fieldSchema.label.text }}
+          <!-- {{ fieldSchema.label.text }} -->
+          <template v-if="!fieldSchema.label.name"
+            ><span>{{ fieldSchema.label.text }}</span></template
+          >
+          <span v-else class="es-form-label-box">
+            <es-base
+              :config="fieldSchema.label"
+              :form-data="formData"
+              :global="global"
+              :idx-chain="fieldSchema.__idxChain"
+              :index="fieldSchema.__index"
+            ></es-base>
+          </span>
           <span v-if="fieldSchema.colon">:</span>
         </label>
         <div

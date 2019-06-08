@@ -29,7 +29,10 @@ export default {
         },
 
         startTime: {
-          label: "有效年份",
+          label: {
+            name: "div",
+            text: "有效年份"
+          },
           group: "date",
           col: 6,
           // offsetLeft: 30,
@@ -42,11 +45,13 @@ export default {
             },
             size: "auto"
           },
+          rules: true,
           unit: "年",
           value: ""
         },
         endTime: {
           label: {
+            // name: "span",
             text: "到",
             size: "fixed"
           },
@@ -120,7 +125,8 @@ export default {
               placeholder: "请输入作者的名字"
             }
           },
-          value: ""
+          value: "",
+          rules: true
         }
       }
     };

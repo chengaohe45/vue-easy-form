@@ -11,6 +11,7 @@ export default {
     // console.log(this.config.props);
     // console.log("end ..........................");
     if (!this.config.name) {
+      console.error("错误的config: ", this.config);
       throw "es-base config.name必须存在";
     }
     return createElement(

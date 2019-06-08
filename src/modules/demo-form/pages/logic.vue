@@ -36,9 +36,11 @@ export default {
           },
 
           target: {
-            title: {
-              text: "投放目标",
+            ui: {
               type: "bg-border"
+            },
+            title: {
+              text: "投放目标"
             },
             label: false,
             properties: {
@@ -60,7 +62,10 @@ export default {
                 label: {
                   text: "体重"
                 },
-                component: "el-input-number",
+                component: {
+                  name: "el-input-number",
+                  size: "fixed"
+                },
                 unit: "公斤",
                 value: 100
               }
@@ -68,9 +73,12 @@ export default {
           },
 
           district: {
+            ui: {
+              type: "bg-block-border",
+              showBody: true
+            },
             title: {
-              text: "投放地区",
-              type: "bg-block-border"
+              text: "投放地区"
             },
             hidden: "es: {{$root}}.delivery",
             hdValue: null,

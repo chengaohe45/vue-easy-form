@@ -33,10 +33,11 @@ export default {
             properties: {
               base: {
                 // isTmp: true,
-                title: {
-                  text: "基本信息",
+                ui: {
                   showBody: true
-                  // type: "block"
+                },
+                title: {
+                  text: "基本信息"
                 },
                 hidden: "es: !{{$root}}.isOpen",
                 label: "基本信息",
@@ -86,9 +87,11 @@ export default {
               target: {
                 // hidden: "es: !{{$root}}.isOpen",
                 hdValue: null,
-                title: {
-                  text: "投放目标",
+                ui: {
                   type: "bg-border"
+                },
+                title: {
+                  text: "投放目标"
                 },
                 label: "es: {{$root}}.isOpen ? '投放目标' : false",
                 properties: {
@@ -107,7 +110,10 @@ export default {
                     label: {
                       text: "体重"
                     },
-                    component: "el-input-number",
+                    component: {
+                      name: "el-input-number",
+                      size: "fixed"
+                    },
                     unit: "公斤",
                     value: 100
                   }
@@ -116,9 +122,11 @@ export default {
 
               district: {
                 hidden: "es: {{$hidden(test.base)}}",
-                title: {
-                  text: "投放地区",
+                ui: {
                   type: "bg-block-border"
+                },
+                title: {
+                  text: "投放地区"
                 },
                 label: "投放地区",
                 properties: {
@@ -135,10 +143,12 @@ export default {
               more: {
                 hidden: "es: {{$hidden(test.district)}}",
                 hdValue: null,
-                title: {
-                  text: "更多设置",
+                ui: {
                   type: "bg-block",
                   showBody: false
+                },
+                title: {
+                  text: "更多设置"
                 },
                 label: "更多设置",
                 properties: {
@@ -153,7 +163,10 @@ export default {
               },
 
               bak: {
-                label: "备用",
+                label: {
+                  name: "div",
+                  text: "备用"
+                },
                 rules: {
                   required: "es: {{$hidden(test.base)}}"
                 },

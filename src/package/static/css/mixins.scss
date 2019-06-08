@@ -7,6 +7,12 @@
 	display: flex;
 }
 
+@mixin inline-flex {
+	display: -webkit-inline-box;
+	display: -ms-inline-flexbox;
+	display: inline-flex;
+}
+
 @mixin direction-h {
 	-webkit-box-orient: horizontal;
 	-webkit-box-direction: normal;
@@ -26,6 +32,13 @@
 	align-items:center;
 	justify-content: center;
 }
+
+@mixin inline-center {
+	@include inline-flex;
+	align-items:center;
+	justify-content: center;
+}
+
 
 @mixin flex-fixed {
 	flex-grow: 0;

@@ -96,9 +96,13 @@ export default {
           },
 
           more: {
+            ui: {
+              type: "bg-border",
+              showBody: false
+            },
             title: {
-              text: "更多设置",
-              type: "bg-border"
+              name: "div",
+              text: "更多设置"
             },
             label: false,
             boxRowSpace: 20,

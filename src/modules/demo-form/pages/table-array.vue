@@ -28,9 +28,11 @@ export default {
           },
           courses: {
             layout: "tabs",
-            title: {
-              text: "我的课程",
+            ui: {
               showBody: true
+            },
+            title: {
+              text: "我的课程"
             },
             label: false,
             array: {
@@ -53,8 +55,12 @@ export default {
               name: {
                 value: "默认名",
                 direction: "h",
-                col: 12,
-                label: "学科名",
+                col: 16,
+                label: {
+                  name: "div",
+                  text: "学科名",
+                  align: "left"
+                },
                 component: {
                   name: "el-input",
                   props: {
@@ -66,12 +72,13 @@ export default {
                 rules: {
                   required: true,
                   emptyMsg: "请输入学科名"
-                }
+                },
+                help: "帮帮"
               },
               code: {
                 value: "100",
                 // direction: "v",
-                col: 12,
+                col: 8,
                 label: {
                   text: "代号"
                 },
