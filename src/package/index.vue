@@ -422,7 +422,8 @@ export default {
     },
 
     getRootSchema() {
-      return utils.deepCopy(this.$data.formSchema);
+      // return utils.deepCopy(this.$data.formSchema);
+      return this.$data.formSchema;
     },
 
     //检查整个表单
