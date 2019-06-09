@@ -632,6 +632,7 @@ export default {
 
   created() {
     this.__initUi();
+    window.ha = this;
   },
 
   computed: {
@@ -711,15 +712,11 @@ export default {
   },
 
   methods: {
-    // getRefs(name) {
-    //   var target = this.$refs[name];
-    //   if (!target) {
-    //     target = this.__getAllRefs(name);
-    //   } else {
-    //     target = target.$refs.__comTarget__; // 取出base组件内的目标组件
-    //   }
-    //   return target;
-    // },
+
+    /* 对外，是否数组 */
+    isArray() {
+      return this.schema.array ? true : false;
+    },
 
     getRef(name) {
       var target;
@@ -768,7 +765,7 @@ export default {
       for (var key in this.$refs) {
         // 这样扫描是为了按顺序正确取出
         if (sysRefIds.includes(key)) {
-          var tmpTargets = this.__getTargetsIncludeRef(key, name);
+          var tmpTargets = this.__getTargetRefs(key, name);
           if (tmpTargets) {
             refTargets = tmpTargets; // 后面的代替前面的，跟原生vue ref保持一致
           }
@@ -779,7 +776,7 @@ export default {
       return refTargets;
     },
 
-    __getTargetsIncludeRef(refName, name) {
+    __getTargetRefs(refName, name) {
       var __objectRef__ = "__refObject__";
       var __tabsRef__ = "__refTabs__";
       var curRefObj,
@@ -807,42 +804,6 @@ export default {
       }
       return newTarget;
     },
-
-    // __getAllRefs(name) {
-    //   return (
-    //     this.__getTargetRefs("__refObject__", name) ||
-    //     this.__getTargetRefs("__refTabs__", name) ||
-    //     this.__getTargetRefs("__refArrarCard__", name) ||
-    //     this.__getTargetRefs("__refArrarRow__", name) ||
-    //     this.__getTargetRefs("__refArrarLegend__", name) ||
-    //     this.__getTargetRefs("__refArrarTable__", name) ||
-    //     this.__getTargetRefs("__refArrarTabs__", name)
-    //   );
-    // },
-
-    // __getTargetRefs(targetName, name) {
-    //   // console.log("targetName: ", targetName);
-    //   var curRef,
-    //     nextTarget,
-    //     newTarget = null;
-    //   curRef = this.$refs[targetName];
-    //   // console.log("curRef: ", curRef);
-    //   if (curRef) {
-    //     curRef.forEach(item => {
-    //       nextTarget = item.getRefs(name);
-    //       if (nextTarget) {
-    //         // console.log("nextTarget", nextTarget);
-    //         newTarget = newTarget ? newTarget : [];
-    //         if (utils.isArr(nextTarget)) {
-    //           newTarget = newTarget.concat(nextTarget);
-    //         } else {
-    //           newTarget.push(nextTarget);
-    //         }
-    //       }
-    //     });
-    //   }
-    //   return newTarget;
-    // },
 
     needWatch() {
       //这个逻辑就是html的逻辑
@@ -898,7 +859,7 @@ export default {
               ? handlers.concat(inputHandlers)
               : inputHandlers;
           }
-          // if (handlers) {
+
           this.$emit(
             "formChange",
             this.schema.__pathKey,
@@ -906,15 +867,7 @@ export default {
             utils.deepCopy(tmpValue),
             eventData
           ); // 等到系统数据同步了再执行
-          // } else {
-          //   this.$emit(
-          //     "formChange",
-          //     this.schema.__pathKey,
-          //     null,
-          //     null,
-          //     null
-          //   );
-          // }
+          
           return true; //退出，由formdata触发检查
         }
       }

@@ -20,7 +20,9 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() {
+    window.testVm = this;
+  },
 
   methods: {
     testSubmit($event) {

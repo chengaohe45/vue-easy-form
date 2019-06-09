@@ -151,7 +151,7 @@ let utils = {
                 console.warn(
                   "mergeGlobal: key(" +
                     key +
-                    ")的值不是数值且大于等于0，将不重设"
+                    ")的值不是数值且大于等于0；此默认值将不重设"
                 );
               }
               break;
@@ -160,7 +160,7 @@ let utils = {
                 global[key] = value;
               } else {
                 console.warn(
-                  "mergeGlobal: key(" + key + ")的值不是true/false，将不重设"
+                  "mergeGlobal: key(" + key + ")的值不是true/false；此默认值将不重设"
                 );
               }
               break;
@@ -171,26 +171,70 @@ let utils = {
                 console.warn(
                   "mergeGlobal: key(" +
                     key +
-                    ')的值不是数组["v", "h"]，将不重设'
+                    ')的值不是数组["v", "h"]；此默认值将不重设'
                 );
               }
               break;
             case "defaultCom":
-            case "trimEvent":
-              if (
-                value &&
-                utils.isStr(value) &&
-                value != constant.INPUT_EVENT
-              ) {
-                global[key] = value;
+              if (value && utils.isStr(value) && value.trim()) {
+                global[key] = value.trim();
               } else {
                 console.warn(
                   "mergeGlobal: key(" +
                     key +
-                    ")的值有误(1. 不能为空; 2. 是字符串; 3. 不能是" +
-                    constant.INPUT_EVENT +
-                    ")，将不重设"
+                    ")的值有误(1. 不能为空; 2. 是字符串)；此默认值将不重设"
                 );
+              }
+              break;
+
+            case "trimEvent":
+              // if (
+              //   value &&
+              //   utils.isStr(value) &&
+              //   value != constant.INPUT_EVENT
+              // ) {
+              //   global[key] = value;
+              // } else {
+              //   console.warn(
+              //     "mergeGlobal: key(" +
+              //       key +
+              //       ")的值有误(1. 不能为空; 2. 是字符串; 3. 不能是" +
+              //       constant.INPUT_EVENT +
+              //       ")；此默认值将不重设"
+              //   );
+              // }
+              console.warn("trimEvent已经移走了，请关注trimDoms");
+              break;
+        
+            case "trimDoms":
+            var tmpValue;
+              if (utils.isStr(value)) {
+                tmpValue = [value.trim()];
+              } else if (utils.isArr(value)) {
+                tmpValue = value.map(item => {
+                  if (utils.isStr(item)) {
+                    return item.trim();
+                  } else {
+                    return item;
+                  }
+                });
+              } else {
+                console.warn(
+                  "mergeGlobal: key(" +
+                    key +
+                    ")的值有误, 必须是一个组件名或一个组件；此默认值将不重设"
+                );
+              }
+
+              if (tmpValue) {
+                tmpValue = tmpValue.filter(item => {
+                  return item ? true : false;
+                });
+                if (tmpValue.length <= 0) {
+                  console.log("trimDoms的长度为0")
+                }
+                console.log("tmpValue", tmpValue);
+                global[key] = tmpValue;
               }
               break;
             case "help":
@@ -200,7 +244,7 @@ let utils = {
                 console.warn(
                   "mergeGlobal: key(" +
                     key +
-                    ')的不是一个对象{name: "xxx"}，将不重设'
+                    ')的不是一个对象{name: "xxx"}；此默认值将不重设'
                 );
               }
               break;
@@ -209,7 +253,7 @@ let utils = {
                 global[key] = value;
               } else {
                 console.warn(
-                  "mergeGlobal: key(" + key + ")不能设置为undefined，将不重设"
+                  "mergeGlobal: key(" + key + ")不能设置为undefined；此默认值将不重设"
                 );
               }
               break;

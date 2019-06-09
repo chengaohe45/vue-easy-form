@@ -14,7 +14,7 @@
         <tabsItem :tabsName="'tabs3'" :is-active="false"></tabsItem>
       </tabsNav>
     </div> -->
-    <el-input v-model="gameName" placeholder="游戏名称" class="w120"></el-input>
+    <el-input v-model="gameName"  @change.native="testChangeNative" @change="testChange" @input="testInput" placeholder="游戏名称" class="w120"></el-input>
     <native @keyup.native="testSubmit"></native>
   </div>
 </template>
@@ -39,6 +39,15 @@ export default {
   methods: {
     testSubmit($event) {
       console.log("$event2: ", $event); // 测试证明：只要是组件，.native都成功；
+    },
+    testChangeNative() {
+      console.log("testChangeNative...");
+    },
+    testChange() {
+      console.log("testChange...");
+    },
+    testInput() {
+      console.log("testInput...");
     }
   },
   components: {

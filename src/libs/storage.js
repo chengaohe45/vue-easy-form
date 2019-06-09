@@ -11,7 +11,7 @@ for (var key in localStorage) {
     try {
       v = window.JSON.parse(v);
     } catch (e) {
-      console.warn(v);
+      // console.warn(v);
     }
     if (
       Object.prototype.toString
