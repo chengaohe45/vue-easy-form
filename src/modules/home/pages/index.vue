@@ -14,7 +14,14 @@
         <tabsItem :tabsName="'tabs3'" :is-active="false"></tabsItem>
       </tabsNav>
     </div> -->
-    <el-input v-model="gameName"  @change.native="testChangeNative" @change="testChange" @input="testInput" placeholder="游戏名称" class="w120"></el-input>
+    <el-input
+      v-model="gameName"
+      @change.native="testChangeNative"
+      @change="testChange"
+      @input="testInput"
+      placeholder="游戏名称"
+      class="w120"
+    ></el-input>
     <native @keyup.native="testSubmit"></native>
   </div>
 </template>

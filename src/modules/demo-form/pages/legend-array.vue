@@ -148,7 +148,7 @@ export default {
               hasAdd: true,
               hasCopy: true,
               fixed: 1,
-              max: 5,
+              max: 15,
               rowSpace: 8,
               value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
               actions: {

@@ -3,9 +3,7 @@
     <form-item
       ref="formFrame"
       :schema="formSchema"
-      @formChange="__formChange"
       @formClick="__formClick"
-      :form-data="formData"
       :global="formGlobal"
       :isInited="isInited"
     ></form-item>
@@ -404,7 +402,7 @@ export default {
       formSchema: {}, // $data有这个值说明是es-form
       isInited: false,
 
-      formData: {},
+      // formData: {},
       formGlobal: {},
       resultValue: {},
       originalValue: {} // 最初的值
@@ -414,16 +412,21 @@ export default {
   /* ====================== 事件处理 ====================== */
 
   methods: {
-    // getRefs(name) {
-    //   return this.$refs.formFrame.getRefs(name);
-    // },
-
     getRef(name) {
       return this.$refs.formFrame.getRef(name);
     },
 
     getRootSchema() {
-      // return utils.deepCopy(this.$data.formSchema);
+      return this.$data.formSchema;
+    },
+
+    /* 下划线一杠代表对内使用 */
+    _getType() {
+      return constant.UI_FORM;
+    },
+
+    /* 下划线一杠代表对内使用 */
+    _getSchema() {
       return this.$data.formSchema;
     },
 
@@ -431,7 +434,7 @@ export default {
     checkAll() {
       var isValid = this.__checkProp(
         this.$data.formSchema,
-        this.getRootSchema()
+        this.$data.formSchema
       );
       return isValid;
     },
@@ -443,7 +446,7 @@ export default {
       //进行初始化
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
-      this.$data.originalValue = utils.deepCopy(this.$data.formData);
+      this.$data.originalValue = utils.deepCopy(this.formData);
     },
 
     __checkProp(schema, rootSchema) {
@@ -705,33 +708,82 @@ export default {
       }
     },
 
-    __formChange(sourcePathKey, handlers, targetValue, eventData, onlyAction) {
-      // console.log("targetValue: ", targetValue);
-      var tmpResultValue = false;
-      if (!onlyAction) {
-        this.__syncValue(sourcePathKey);
-        tmpResultValue = utils.deepCopy(this.$data.resultValue);
+    _syncUi(checkSchema, eventNames, targetValue, eventData) {
+      //  console.log("over...: ", checkSchema, eventNames, targetValue, eventData);
+      // return this.$data.formSchema;
+      // var tmpResultValue = false;
+      var sourcePathKey = checkSchema[0].__pathKey; // checkSchema必有值
+      if (eventNames.includes(constant.INPUT_EVENT)) {
+        // 需要同步
+        this.__syncValue(sourcePathKey); // 第一个就是触发源
+        // tmpResultValue =this.$data.resultValue;
       }
 
-      // console.log("__formChange: ", this.isInited);
-      if (this.isInited && (handlers || tmpResultValue)) {
-        var vm = this;
-        vm.$nextTick(() => {
-          // 这用可以记录是什么导致表单改变
-          if (handlers) {
-            handlers.forEach(handler => {
-              handler.call(vm, targetValue, sourcePathKey, eventData);
-            });
-          }
+      // if (this.isInited && (handlers || tmpResultValue)) {
+      if (this.isInited) {
+        var inputSchema = checkSchema[0];
+        // 验证当前的输入框
+        var parseSources = {
+          global: this.$data.formGlobal,
+          rootData: this.formData,
+          index: inputSchema.__index,
+          idxChain: inputSchema.__idxChain,
+          rootSchema: this.$data.formSchema
+        };
+        // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
+        var checkedResult = formUtils.checkRules(
+          inputSchema.array ? inputSchema.array.rules : inputSchema.rules,
+          targetValue,
+          eventNames,
+          parseSources
+        );
+        if (checkedResult === true) {
+          inputSchema.__invalidMsg = false;
+        } else if (checkedResult !== false) {
+          // 字符串，错误
+          inputSchema.__invalidMsg = checkedResult;
+        } else {
+          // 为false, 不是目标事件，不用理会
+        }
 
-          if (tmpResultValue) {
-            this.$emit("change", tmpResultValue, sourcePathKey);
-          }
+        // 取出所有需要执行的事件
+        var handlers = [];
+        var actions = inputSchema.array
+          ? inputSchema.array.actions
+          : inputSchema.component.actions;
+        if (actions) {
+          actions.forEach(action => {
+            if (utils.isInter(action.trigger, eventNames)) {
+              handlers.push(action.handler);
+            }
+          });
+        }
 
-          eventData = null;
-          handlers = undefined;
-          targetValue = undefined;
-        });
+        if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
+          var vm = this;
+          vm.$nextTick(() => {
+            // 这用可以记录是什么导致表单改变
+            if (handlers.length > 0) {
+              handlers.forEach(handler => {
+                handler.call(vm, targetValue, sourcePathKey, eventData);
+              });
+            }
+
+            if (eventNames.includes(constant.INPUT_EVENT)) {
+              this.$emit(
+                "change",
+                utils.deepCopy(this.$data.resultValue),
+                sourcePathKey
+              );
+            }
+
+            checkSchema = null;
+            eventNames = undefined;
+            targetValue = undefined;
+            eventData = undefined;
+            handlers = null;
+          });
+        }
       }
     },
 
@@ -760,12 +812,12 @@ export default {
     __syncValue(sourcePathKey) {
       // 不单只是执行actions
       var formData = formUtils.getValue(this.$data.formSchema);
-      this.$data.formData = formData;
+      this.formData = formData;
 
       var baseParseSources = {
         global: this.$data.formGlobal,
-        rootData: this.$data.formData,
-        rootSchema: this.getRootSchema()
+        rootData: this.formData,
+        rootSchema: this.$data.formSchema
       };
 
       formUtils.analyzeUiProps(this.$data.formSchema, baseParseSources);
@@ -774,9 +826,13 @@ export default {
         baseParseSources
       );
 
-      this.$data.resultValue = utils.deepCopy(resultValue);
+      this.$data.resultValue = resultValue;
 
-      this.$emit("input", resultValue, sourcePathKey ? sourcePathKey : false);
+      this.$emit(
+        "input",
+        utils.deepCopy(resultValue),
+        sourcePathKey ? sourcePathKey : false
+      );
     }
   },
 
@@ -803,7 +859,7 @@ export default {
           this.__setValue(this.$data.formSchema, newVal);
           this.__syncValue();
         } else {
-          // console.log("==", this.$data.formData);
+          // console.log("==", this.formData);
         }
       },
       deep: false

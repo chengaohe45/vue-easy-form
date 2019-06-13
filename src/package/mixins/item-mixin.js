@@ -14,9 +14,9 @@ export default {
       }
     },
 
-    formData: {
-      type: Object
-    },
+    // formData: {
+    //   type: Object
+    // },
     //组成形式（索引,索引,索引）如：0、0,1、 1,12；“索引”用逗号隔开 通俗讲：因为array的值必须是一个数组，array里面包含array(不一定是孩子，也可能是孙子等)，每一个“索引”代表对应array的哪一项
     // 用于记录在数组中的索引
     // idxChain: {

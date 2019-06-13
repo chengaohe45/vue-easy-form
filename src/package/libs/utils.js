@@ -1,4 +1,4 @@
-import constant from "./constant";
+// import constant from "./constant";
 
 let utils = {
   /**
@@ -136,6 +136,16 @@ let utils = {
     return newArr;
   },
 
+  /* 两个数组是否有交集 */
+  isInter(arr1, arr2) {
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr2.includes(arr1[i])) {
+        return true;
+      }
+    }
+    return false;
+  },
+
   mergeGlobal(global, extra) {
     if (utils.isObj(extra)) {
       for (var key in extra) {
@@ -160,7 +170,9 @@ let utils = {
                 global[key] = value;
               } else {
                 console.warn(
-                  "mergeGlobal: key(" + key + ")的值不是true/false；此默认值将不重设"
+                  "mergeGlobal: key(" +
+                    key +
+                    ")的值不是true/false；此默认值将不重设"
                 );
               }
               break;
@@ -205,9 +217,9 @@ let utils = {
               // }
               console.warn("trimEvent已经移走了，请关注trimDoms");
               break;
-        
+
             case "trimDoms":
-            var tmpValue;
+              var tmpValue;
               if (utils.isStr(value)) {
                 tmpValue = [value.trim()];
               } else if (utils.isArr(value)) {
@@ -231,7 +243,7 @@ let utils = {
                   return item ? true : false;
                 });
                 if (tmpValue.length <= 0) {
-                  console.log("trimDoms的长度为0")
+                  console.log("trimDoms的长度为0");
                 }
                 console.log("tmpValue", tmpValue);
                 global[key] = tmpValue;
@@ -253,7 +265,9 @@ let utils = {
                 global[key] = value;
               } else {
                 console.warn(
-                  "mergeGlobal: key(" + key + ")不能设置为undefined；此默认值将不重设"
+                  "mergeGlobal: key(" +
+                    key +
+                    ")不能设置为undefined；此默认值将不重设"
                 );
               }
               break;

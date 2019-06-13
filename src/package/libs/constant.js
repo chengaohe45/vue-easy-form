@@ -23,7 +23,11 @@ let constant = {
 
   // TYPE_TMP: "tmp", // 表单的临时值，跟组件没有什么区别；只是不会取出；使用场景：快速做标题或编辑时，某些项需要显示但又不需要提交给后台
   LAYOUT_SPACE: "space", // 占位符; space不可以乱改，因为其它地方(.vue)有用到
-  LAYOUT_TABS: "tabs" // properties的子属性是tabs布局; space不可以乱改，因为其它地方(.vue)有用到
+  LAYOUT_TABS: "tabs", // properties的子属性是tabs布局; space不可以乱改，因为其它地方(.vue)有用到
+
+  UI_FORM: "_es_form_qwerty_", // 说明界面属于哪种类型
+  UI_ITEM: "_es_item_qwerrf_",
+  UI_ARRAY: "_es_array_aadfsd_"
 };
 
 export default constant;

@@ -1162,7 +1162,11 @@ let formUtils = {
       }
     }
 
-    if (propItem.isTrim || (utils.isUndef(propItem.isTrim) && global.trimDoms.includes(propItem.component.name)) ) {
+    if (
+      propItem.isTrim ||
+      (utils.isUndef(propItem.isTrim) &&
+        global.trimDoms.includes(propItem.component.name))
+    ) {
       propItem.isTrim = true;
       // 要去掉左右两边的空格，添此触发事件
       nativeName = this.__getNativeName(global.trimEvent);
@@ -1335,7 +1339,7 @@ let formUtils = {
       {
         key: "isTrim",
         enums: [true, false],
-        defaultValue: undefined   // undefined代表是否删除空格取自于全局设置
+        defaultValue: undefined // undefined代表是否删除空格取自于全局设置
       },
       {
         key: "unit",

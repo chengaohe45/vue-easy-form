@@ -1,7 +1,7 @@
-import parse from "./libs/parse.js";
+// import parse from "./libs/parse.js";
 import utils from "./libs/utils.js";
 import constant from "./libs/constant.js";
-import formUtils from "./libs/form-utils";
+// import formUtils from "./libs/form-utils";
 
 ("use strict");
 
@@ -183,12 +183,12 @@ export default {
   methods: {
     initUi() {
       // if (this.openSmart) {
-      if (this.needWatch()) {
-        this.setWatch(); //监听formData，当其值必变时，则props也要重新执行一遍
-      } else {
-        this.cancelWatch();
-      }
-      this.parseData();
+      // if (this.needWatch()) {
+      //   this.setWatch(); //监听formData，当其值必变时，则props也要重新执行一遍
+      // } else {
+      //   this.cancelWatch();
+      // }
+      // this.parseData();
       this.createOn();
       // } else {
       //   this.cancelWatch();
@@ -198,21 +198,21 @@ export default {
 
     //判断组件的props是否存在es语句
     needWatch() {
-      var hasEsScript = false;
-      for (var key in this.config.props) {
-        if (key != "value") {
-          //过滤掉value,要不然会换掉this.value
-          var scriptTxt = this.config.props[key];
-          if (parse.isEsScript(scriptTxt)) {
-            hasEsScript = true;
-            break;
-          }
-        }
-      }
-      if (parse.isEsScript(this.config.text)) {
-        hasEsScript = true;
-      }
-      return hasEsScript;
+      // var hasEsScript = false;
+      // for (var key in this.config.props) {
+      //   if (key != "value") {
+      //     //过滤掉value,要不然会换掉this.value
+      //     var scriptTxt = this.config.props[key];
+      //     if (parse.isEsScript(scriptTxt)) {
+      //       hasEsScript = true;
+      //       break;
+      //     }
+      //   }
+      // }
+      // if (parse.isEsScript(this.config.text)) {
+      //   hasEsScript = true;
+      // }
+      // return hasEsScript;
     },
 
     eventHandler(eventName, eventData) {
@@ -275,82 +275,82 @@ export default {
       } else {
         this.$data.nativeOn = null;
       }
-    },
-
-    parseData() {
-      this.$data.dataProps = this.analyzeVal();
-      var parseSources = {
-        global: this.global,
-        rootData: this.formData,
-        index: this.index,
-        idxChain: this.idxChain,
-        rootSchema: formUtils.getRootSchema(this)
-      };
-      var dataText = parse.smartEsValue(this.config.text, parseSources);
-      if (typeof dataText == "string") {
-        this.$data.dataText = dataText;
-      } else {
-        this.$data.dataText = null;
-      }
-      // console.log("this.dataText", this.dataText);
-    },
-
-    analyzeVal() {
-      var dataProps = {};
-      for (var key in this.config.props) {
-        if (key != "value") {
-          //过滤掉value,要不然会换掉this.value
-          var scriptTxt = this.config.props[key];
-          var parseSources = {
-            global: this.global,
-            rootData: this.formData,
-            index: this.index,
-            idxChain: this.idxChain,
-            rootSchema: formUtils.getRootSchema(this)
-          };
-
-          dataProps[key] = parse.smartEsValue(scriptTxt, parseSources);
-        }
-      }
-      return dataProps;
-    },
-    setWatch() {
-      if (!this.$data.unGlobalWatch) {
-        this.$data.unGlobalWatch = this.$watch(
-          "global",
-          () => {
-            // this.$data.dataProps = this.analyzeVal();
-            this.parseData();
-          },
-          {
-            deep: false
-          }
-        );
-      }
-
-      if (!this.$data.unFormDataWatch) {
-        this.$data.unFormDataWatch = this.$watch(
-          "formData",
-          () => {
-            this.parseData();
-          },
-          {
-            deep: false
-          }
-        );
-      }
-    },
-
-    cancelWatch() {
-      if (this.$data.unGlobalWatch) {
-        this.$data.unGlobalWatch();
-        this.$data.unGlobalWatch = false;
-      }
-      if (this.$data.unFormDataWatch) {
-        this.$data.unFormDataWatch();
-        this.$data.unFormDataWatch = false;
-      }
     }
+
+    // parseData() {
+    //   this.$data.dataProps = this.analyzeVal();
+    //   var parseSources = {
+    //     global: this.global,
+    //     rootData: this.formData,
+    //     index: this.index,
+    //     idxChain: this.idxChain,
+    //     rootSchema: formUtils.getRootSchema(this)
+    //   };
+    //   var dataText = parse.smartEsValue(this.config.text, parseSources);
+    //   if (typeof dataText == "string") {
+    //     this.$data.dataText = dataText;
+    //   } else {
+    //     this.$data.dataText = null;
+    //   }
+    //   // console.log("this.dataText", this.dataText);
+    // },
+
+    // analyzeVal() {
+    //   var dataProps = {};
+    //   for (var key in this.config.props) {
+    //     if (key != "value") {
+    //       //过滤掉value,要不然会换掉this.value
+    //       var scriptTxt = this.config.props[key];
+    //       var parseSources = {
+    //         global: this.global,
+    //         rootData: this.formData,
+    //         index: this.index,
+    //         idxChain: this.idxChain,
+    //         rootSchema: formUtils.getRootSchema(this)
+    //       };
+
+    //       dataProps[key] = parse.smartEsValue(scriptTxt, parseSources);
+    //     }
+    //   }
+    //   return dataProps;
+    // },
+    // setWatch() {
+    // if (!this.$data.unGlobalWatch) {
+    //   this.$data.unGlobalWatch = this.$watch(
+    //     "global",
+    //     () => {
+    //       // this.$data.dataProps = this.analyzeVal();
+    //       this.parseData();
+    //     },
+    //     {
+    //       deep: false
+    //     }
+    //   );
+    // }
+
+    // if (!this.$data.unFormDataWatch) {
+    //   this.$data.unFormDataWatch = this.$watch(
+    //     "formData",
+    //     () => {
+    //       this.parseData();
+    //     },
+    //     {
+    //       deep: false
+    //     }
+    //   );
+    // }
+    // },
+
+    // cancelWatch() {
+    // if (this.$data.unGlobalWatch) {
+    //   this.$data.unGlobalWatch();
+    //   this.$data.unGlobalWatch = false;
+    // }
+    // if (this.$data.unFormDataWatch) {
+    //   this.$data.unFormDataWatch();
+    //   this.$data.unFormDataWatch = false;
+    // }
+    // }
   },
 
   destroyed() {},

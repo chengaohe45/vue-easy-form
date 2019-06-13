@@ -10,7 +10,6 @@
         <es-base
           v-else
           :config="schema.title"
-          :form-data="formData"
           :global="global"
           :idx-chain="schema.__idxChain"
           :index="schema.__index"
@@ -28,7 +27,6 @@
       <div v-if="schema.help" class="es-form-help">
         <es-base
           :config="schema.help"
-          :form-data="formData"
           :global="global"
           :idx-chain="schema.__idxChain"
           :index="schema.__index"
@@ -68,7 +66,6 @@
                   : ''
               ]"
               :config="schema.component"
-              :form-data="formData"
               :global="global"
               :idx-chain="schema.__idxChain"
               :index="schema.__index"
@@ -84,7 +81,6 @@
             <es-base
               v-if="schema.unit.name"
               :config="schema.unit"
-              :form-data="formData"
               :global="global"
               :idx-chain="schema.__idxChain"
               :index="schema.__index"
@@ -99,7 +95,6 @@
           >
             <es-base
               :config="schema.help"
-              :form-data="formData"
               :global="global"
               :idx-chain="schema.__idxChain"
               :index="schema.__index"
@@ -114,7 +109,6 @@
           "
           :is="'tabs'"
           :schema="schema"
-          :form-data="formData"
           @formClick="formClick"
         >
           <template
@@ -125,9 +119,7 @@
               ref="__refTabs__"
               :schema="fieldSchema"
               :key="fieldName"
-              @formChange="formChange"
               @formClick="formClick"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -139,7 +131,6 @@
           v-else-if="schema.properties"
           :is="'es-object'"
           :schema="schema"
-          :form-data="formData"
         >
           <template
             v-for="(fieldSchema, fieldName) in schema.properties"
@@ -149,9 +140,7 @@
               ref="__refObject__"
               :schema="fieldSchema"
               :key="fieldName"
-              @formChange="formChange"
               @formClick="formClick"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -166,7 +155,6 @@
           v-if="schema.array.name == 'array'"
           :is="'array-row'"
           :schema="schema"
-          :form-data="formData"
           @input="formArrayInput"
           @formClick="formClick"
         >
@@ -180,9 +168,7 @@
               ref="__refArrarRow__"
               :schema="props.schema"
               :key="fieldName"
-              @formChange="formChange"
               @formClick="formClick"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -200,8 +186,6 @@
               :key="key"
               ref="__refArrarRow__"
               :schema="props.schema"
-              @formChange="formChange"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -213,7 +197,6 @@
           v-if="schema.array.name == 'array-legend'"
           :is="'array-legend'"
           :schema="schema"
-          :form-data="formData"
           @input="formArrayInput"
           @formClick="formClick"
         >
@@ -227,9 +210,7 @@
               ref="__refArrarLegend__"
               :schema="props.schema"
               :key="fieldName"
-              @formChange="formChange"
               @formClick="formClick"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -247,8 +228,6 @@
               :key="key"
               ref="__refArrarLegend__"
               :schema="props.schema"
-              @formChange="formChange"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -260,7 +239,6 @@
           v-if="schema.array.name == 'array-card'"
           :is="'array-card'"
           :schema="schema"
-          :form-data="formData"
           @input="formArrayInput"
         >
           <!-- 数组-非叶子(不会有，已经过滤掉了) -->
@@ -277,8 +255,6 @@
               :key="key"
               ref="__refArrarCard__"
               :schema="props.schema"
-              @formChange="formChange"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -290,7 +266,6 @@
           v-else-if="schema.array.name == 'array-table'"
           :is="'array-table'"
           :schema="schema"
-          :form-data="formData"
           @input="formArrayInput"
         >
           <!-- 数组-非叶子(若有) -->
@@ -303,9 +278,7 @@
               ref="__refArrarTable__"
               :schema="props.schema"
               :key="fieldName"
-              @formChange="formChange"
               @formClick="formClick"
-              :form-data="formData"
               :showHelpInBody="false"
               :global="global"
               :isInited="isInited"
@@ -320,7 +293,6 @@
           v-else-if="schema.array && schema.array.name == 'array-tabs'"
           :is="'array-tabs'"
           :schema="schema"
-          :form-data="formData"
           @input="formArrayInput"
           @formClick="formClick"
         >
@@ -334,9 +306,7 @@
               ref="__refArrarTabs__"
               :schema="props.schema"
               :key="fieldName"
-              @formChange="formChange"
               @formClick="formClick"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -354,8 +324,6 @@
               :key="key"
               ref="__refArrarTabs__"
               :schema="props.schema"
-              @formChange="formChange"
-              :form-data="formData"
               :global="global"
               :isInited="isInited"
             ></form-item>
@@ -373,7 +341,6 @@
         <es-base
           v-if="schema.desc.name"
           :config="schema.desc"
-          :form-data="formData"
           :global="global"
           :idx-chain="schema.__idxChain"
           :index="schema.__index"
@@ -601,7 +568,7 @@ import arrayTabs from "./layout/array-tabs";
 import tabs from "./layout/tabs";
 import itemMixin from "./mixins/item-mixin";
 import utils from "./libs/utils";
-import formUtils from "./libs/form-utils";
+// import formUtils from "./libs/form-utils";
 import constant from "./libs/constant";
 import global from "./libs/global";
 import esBase from "./base";
@@ -630,10 +597,7 @@ export default {
     tabs
   },
 
-  created() {
-    this.__initUi();
-    window.ha = this;
-  },
+  created() {},
 
   computed: {
     hasTitle() {
@@ -712,10 +676,14 @@ export default {
   },
 
   methods: {
+    /* 下划线一杠代表对内使用 */
+    _getType() {
+      return this.schema.array ? constant.UI_ARRAY : constant.UI_ITEM;
+    },
 
-    /* 对外，是否数组 */
-    isArray() {
-      return this.schema.array ? true : false;
+    /* 下划线一杠代表对内使用 */
+    _getSchema() {
+      return this.schema;
     },
 
     getRef(name) {
@@ -734,18 +702,7 @@ export default {
       return target;
     },
 
-    __initUi() {
-      //不是所有的form-item都需要监听，只有有value值的才需求参加
-      if (this.needWatch()) {
-        this.setWatch();
-      } else {
-        // console.log('123456unwatch');
-        if (this.$data.unwatch) {
-          this.$data.unwatch();
-          this.$data.unwatch = false;
-        }
-      }
-    },
+    __initUi() {},
 
     /* 取出最后的，跟vue ref保持一致；也就是后面的会代表前面的 */
     __getLastRefs(name) {
@@ -805,180 +762,44 @@ export default {
       return newTarget;
     },
 
-    needWatch() {
-      //这个逻辑就是html的逻辑
-      if (this.schema.array) {
-        // 这个东西只要是检查rules, 没有rules时就不用监听了
-        if (this.schema.array && this.schema.array.rules) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        if (this.schema.component && this.schema.rules) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    },
-
     toggleBody() {
       // this.showBody = !this.showBody;
       this.$emit("formClick", "toggle", { key: this.schema.__pathKey });
     },
 
+    // 只有组件会触发
     triggerHandler(eventName, eventData) {
-      var value = this.schema.value;
-      var handlers = formUtils.getHandlers(
-        eventName,
-        this.schema.component.actions
-      );
-      var tmpValue = value;
+      var checkSchema = [this.schema];
+      var eventNames = [eventName];
+      var targetValue = this.schema.value;
+
       if (
         eventName == global.trimEvent &&
         this.schema.isTrim &&
-        utils.isStr(value)
+        utils.isStr(targetValue)
       ) {
         // global.trimEvent暂不会是constant.INPUT_EVENT事件，因为初始化时就不给设置为此值
-        tmpValue = tmpValue.trim();
-        if (tmpValue !== value) {
+        var tmpValue = targetValue.trim();
+        if (tmpValue !== targetValue) {
           this.schema.value = tmpValue;
-          if (this.needWatch()) {
-            this.$data.isChanged = true;
-            this.$data.triggerList.push(eventName);
-          }
-
-          //值改变了，要发出input事件
-          var inputHandlers = formUtils.getHandlers(
-            constant.INPUT_EVENT,
-            this.schema.component.actions
-          );
-          if (inputHandlers) {
-            handlers = handlers
-              ? handlers.concat(inputHandlers)
-              : inputHandlers;
-          }
-
-          this.$emit(
-            "formChange",
-            this.schema.__pathKey,
-            handlers,
-            utils.deepCopy(tmpValue),
-            eventData
-          ); // 等到系统数据同步了再执行
-          
-          return true; //退出，由formdata触发检查
+          targetValue = tmpValue;
+          eventNames.push(constant.INPUT_EVENT); // 值有所改变，同时input一下
         }
       }
 
-      if (eventName == constant.INPUT_EVENT) {
-        if (this.needWatch()) {
-          this.$data.isChanged = true;
-          this.$data.triggerList.push(eventName);
-        }
-        if (handlers) {
-          // console.log("tmpValue: ", tmpValue);
-          // sourcePathKey, handlers, targetValue, eventData, onlyAction
-          this.$emit(
-            "formChange",
-            this.schema.__pathKey,
-            handlers,
-            utils.deepCopy(tmpValue),
-            eventData
-          ); // 等到系统数据同步了再执行
+      var formItem = this.$parent;
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+        if (type == constant.UI_FORM) {
+          formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return true; // 到达表单层
+        } else if (type == constant.UI_ARRAY) {
+          checkSchema.push(formItem._getSchema());
         } else {
-          this.$emit(
-            "formChange",
-            this.schema.__pathKey,
-            null,
-            null,
-            eventData
-          );
+          // ... 往上派
         }
-      } else {
-        if (this.needWatch()) {
-          if (this.$data.isChanged) {
-            this.$data.isChanged = true;
-            this.$data.triggerList.push(eventName); //放入队列中，等formData改变
-          } else {
-            this.checkValue(tmpValue, eventName);
-          }
-        }
-
-        if (handlers) {
-          this.$emit(
-            "formChange",
-            this.schema.__pathKey,
-            handlers,
-            utils.deepCopy(tmpValue),
-            eventData,
-            true
-          ); // 等到系统数据同步了再执行
-        }
+        formItem = formItem.$parent;
       }
-    },
-
-    checkValue(value, triggerMode) {
-      // console.log("this.isInited", this.isInited);
-      if (this.isInited) {
-        var parseSources = {
-          global: this.global,
-          rootData: this.formData,
-          index: this.schema.__index,
-          idxChain: this.schema.__idxChain,
-          rootSchema: formUtils.getRootSchema(this)
-        };
-
-        // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-        var checkedResult = formUtils.checkRules(
-          this.schema.array ? this.schema.array.rules : this.schema.rules,
-          value,
-          triggerMode,
-          parseSources
-        );
-        if (checkedResult === true) {
-          this.schema.__invalidMsg = false;
-        } else if (checkedResult !== false) {
-          // 字符串，错误
-          this.schema.__invalidMsg = checkedResult;
-        } else {
-          // 为false, 不是目标事件，不用理会
-        }
-      }
-    },
-
-    /**
-     * sourcePathKey 是哪个组件触发的
-     * eventData 事件本身的参数；如keyup事件携带的参数
-     * onlyAction 是否仅单单执行actions
-     */
-    formChange(sourcePathKey, handlers, targetValue, eventData, onlyAction) {
-      if (!onlyAction && this.schema.array) {
-        if (this.schema.array.rules) {
-          this.$data.isChanged = true;
-          this.$data.triggerList = [constant.INPUT_EVENT];
-        }
-        if (this.schema.array.actions) {
-          var arrayHandlers = formUtils.getHandlers(
-            constant.INPUT_EVENT,
-            this.schema.array.actions
-          );
-          if (arrayHandlers) {
-            handlers = handlers
-              ? handlers.concat(arrayHandlers)
-              : arrayHandlers; // 合并，放在最后一起执行
-          }
-        }
-      }
-      this.$emit(
-        "formChange",
-        sourcePathKey,
-        handlers,
-        targetValue,
-        eventData,
-        onlyAction
-      );
     },
 
     /**
@@ -988,19 +809,22 @@ export default {
      * eventData 事件本身的参数；具体看array-mixin.js
      */
     formArrayInput(sourcePathKey, handlers, targetValue, eventData) {
-      // console.log("sourcePathKey, handlers, eventData", sourcePathKey, handlers, eventData);
-      /* 因为数组改变，根据传统要发送input和change事件：为什么直接写成一个，因为数组内的组件input也算是input事件（也会作实时检查和actions） */
-      this.$data.isChanged = true;
-      this.$data.triggerList = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
+      var checkSchema = [this.schema];
+      var eventNames = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
 
-      this.$emit(
-        "formChange",
-        sourcePathKey,
-        handlers,
-        targetValue,
-        eventData,
-        false
-      );
+      var formItem = this.$parent;
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+        if (type == constant.UI_FORM) {
+          formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return true; // 到达表单层
+        } else if (type == constant.UI_ARRAY) {
+          checkSchema.push(formItem._getSchema());
+        } else {
+          // ... 往上派
+        }
+        formItem = formItem.$parent;
+      }
     },
 
     /**
@@ -1010,47 +834,22 @@ export default {
     formClick(type, data) {
       // console.log("formClick: ", type, data);
       this.$emit("formClick", type, data); // 往上派发
-    },
-
-    setWatch() {
-      if (!this.$data.unwatch) {
-        this.$data.unwatch = this.$watch(
-          "formData",
-          () => {
-            // console.log("formData: ", this.schema);
-            if (this.$data.isChanged) {
-              this.$data.isChanged = false;
-              this.$data.triggerList.forEach(triggerMode => {
-                var value = this.schema.value;
-                if (this.schema.array) {
-                  value = formUtils.getValue(this.schema);
-                }
-                this.checkValue(value, triggerMode);
-              });
-              this.$data.triggerList = [];
-            }
-          },
-          {
-            deep: false
-          }
-        );
-      }
     }
   },
 
   watch: {
-    schema: {
-      handler(newVal) {
-        if (utils.isObj(newVal) && Object.keys(newVal).length > 0) {
-          // console.log("form-item.schema here...", this.schema);
-          // 更新了UI，暂不用初始化
-          this.$data.isChanged = false;
-          this.$data.triggerList = [];
-          this.__initUi();
-        }
-      },
-      deep: false
-    }
+    // schema: {
+    //   handler(newVal) {
+    //     if (utils.isObj(newVal) && Object.keys(newVal).length > 0) {
+    //       // console.log("form-item.schema here...", this.schema);
+    //       // 更新了UI，暂不用初始化
+    //       this.$data.isChanged = false;
+    //       this.$data.triggerList = [];
+    //       this.__initUi();
+    //     }
+    //   },
+    //   deep: false
+    // }
   }
 };
 </script>
