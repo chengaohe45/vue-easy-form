@@ -37,8 +37,7 @@
 </template>
 
 <script>
-// import itemMixin from "../mixins/item-mixin";
-// import arrayMixins from "../mixins/array-mixin.js";
+
 import esTabsNavItem from "./tabs-nav-item";
 import esTabsBtn from "./tabs-btn.vue";
 

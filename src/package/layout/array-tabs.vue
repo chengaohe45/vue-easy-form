@@ -38,10 +38,6 @@
           <span v-else class="es-form-label-box">
             <es-base
               :config="itemSchema.subLabel"
-              :form-data="formData"
-              :global="global"
-              :idx-chain="itemSchema.__idxChain"
-              :index="itemSchema.__index"
             ></es-base>
           </span>
         </es-tabs-nav-item>
@@ -55,10 +51,6 @@
         <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
         <es-base
           :config="schema.help"
-          :form-data="formData"
-          :global="global"
-          :idx-chain="schema.__idxChain"
-          :index="schema.__index"
         ></es-base>
       </div>
     </es-tabs-nav>
@@ -83,8 +75,6 @@
           "
           :is="'tabs'"
           :schema="itemSchema"
-          :form-data="formData"
-          @formClick="formClick"
         >
           <template
             v-for="(fieldSchema, fieldName) in itemSchema.properties"
@@ -95,7 +85,6 @@
         </component>
         <es-object
           :schema="itemSchema"
-          :form-data="formData"
           v-else-if="itemSchema.properties"
         >
           <template
@@ -155,6 +144,7 @@ import arrayMixins from "../mixins/array-mixin.js";
 import esTabsNav from "../components/tabs-nav";
 import esTabsNavItem from "../components/tabs-nav-item";
 import esBase from "../base";
+import constant from "../libs/constant";
 
 export default {
   mixins: [itemMixin, arrayMixins],
@@ -171,7 +161,8 @@ export default {
   },
   methods: {
     clickActiveHandler(index) {
-      this.$emit("formClick", "tabs", {
+      var form = this.__getForm();
+      form._toggleUi("tabs", {
         key: this.schema.__pathKey,
         index: index
       });
@@ -186,7 +177,8 @@ export default {
       // console.log("newIndex: ", newIndex, index, this.schema.__tabsIndex);
       this.delItem(index); // 这里会对this.schema.__propSchemaList进行减少
       if (newIndex !== false) {
-        this.$emit("formClick", "tabs", {
+        var form = this.__getForm();
+        form._toggleUi("tabs", {
           key: this.schema.__pathKey,
           index: newIndex
         });
@@ -194,16 +186,15 @@ export default {
     },
 
     addItemHandler() {
+      
       this.addItem(); // 这里会对this.schema.__propSchemaList进行添加
-      this.$emit("formClick", "tabs", {
+
+      var form = this.__getForm();
+      form._toggleUi("tabs", {
         key: this.schema.__pathKey,
         index: this.schema.__propSchemaList.length - 1
       });
-    },
 
-    formClick(type, data) {
-      // console.log("formClick: ", sourcePathKey, index);
-      this.$emit("formClick", type, data); // 往上派发
     }
   },
 

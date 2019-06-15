@@ -10,9 +10,6 @@
         <es-base
           v-else
           :config="schema.title"
-          :global="global"
-          :idx-chain="schema.__idxChain"
-          :index="schema.__index"
         ></es-base>
         <!-- </span> -->
       </div>
@@ -27,9 +24,6 @@
       <div v-if="schema.help" class="es-form-help">
         <es-base
           :config="schema.help"
-          :global="global"
-          :idx-chain="schema.__idxChain"
-          :index="schema.__index"
         ></es-base>
       </div>
     </div>
@@ -66,9 +60,6 @@
                   : ''
               ]"
               :config="schema.component"
-              :global="global"
-              :idx-chain="schema.__idxChain"
-              :index="schema.__index"
               v-model="schema.value"
               :emitEvents="schema.component.__emitEvents"
               :nativeEvents="schema.component.__nativeEvents"
@@ -81,9 +72,6 @@
             <es-base
               v-if="schema.unit.name"
               :config="schema.unit"
-              :global="global"
-              :idx-chain="schema.__idxChain"
-              :index="schema.__index"
             ></es-base>
             <template v-else>
               {{ schema.unit.text }}
@@ -95,9 +83,6 @@
           >
             <es-base
               :config="schema.help"
-              :global="global"
-              :idx-chain="schema.__idxChain"
-              :index="schema.__index"
             ></es-base>
           </div>
         </div>
@@ -109,7 +94,6 @@
           "
           :is="'tabs'"
           :schema="schema"
-          @formClick="formClick"
         >
           <template
             v-for="(fieldSchema, fieldName) in schema.properties"
@@ -119,9 +103,6 @@
               ref="__refTabs__"
               :schema="fieldSchema"
               :key="fieldName"
-              @formClick="formClick"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </template>
         </component>
@@ -140,9 +121,6 @@
               ref="__refObject__"
               :schema="fieldSchema"
               :key="fieldName"
-              @formClick="formClick"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </template>
         </component>
@@ -156,7 +134,6 @@
           :is="'array-row'"
           :schema="schema"
           @input="formArrayInput"
-          @formClick="formClick"
         >
           <!-- 数组-非叶子(若有) -->
           <template
@@ -168,9 +145,6 @@
               ref="__refArrarRow__"
               :schema="props.schema"
               :key="fieldName"
-              @formClick="formClick"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </template>
 
@@ -186,8 +160,6 @@
               :key="key"
               ref="__refArrarRow__"
               :schema="props.schema"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </div>
         </component>
@@ -198,7 +170,6 @@
           :is="'array-legend'"
           :schema="schema"
           @input="formArrayInput"
-          @formClick="formClick"
         >
           <!-- 数组-非叶子(若有) -->
           <template
@@ -210,9 +181,6 @@
               ref="__refArrarLegend__"
               :schema="props.schema"
               :key="fieldName"
-              @formClick="formClick"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </template>
 
@@ -228,8 +196,6 @@
               :key="key"
               ref="__refArrarLegend__"
               :schema="props.schema"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </div>
         </component>
@@ -255,8 +221,6 @@
               :key="key"
               ref="__refArrarCard__"
               :schema="props.schema"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </div>
         </component>
@@ -278,10 +242,7 @@
               ref="__refArrarTable__"
               :schema="props.schema"
               :key="fieldName"
-              @formClick="formClick"
               :showHelpInBody="false"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </template>
 
@@ -294,7 +255,6 @@
           :is="'array-tabs'"
           :schema="schema"
           @input="formArrayInput"
-          @formClick="formClick"
         >
           <!-- 数组-非叶子(若有) -->
           <template
@@ -306,9 +266,6 @@
               ref="__refArrarTabs__"
               :schema="props.schema"
               :key="fieldName"
-              @formClick="formClick"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </template>
 
@@ -324,8 +281,6 @@
               :key="key"
               ref="__refArrarTabs__"
               :schema="props.schema"
-              :global="global"
-              :isInited="isInited"
             ></form-item>
           </div>
         </component>
@@ -341,9 +296,6 @@
         <es-base
           v-if="schema.desc.name"
           :config="schema.desc"
-          :global="global"
-          :idx-chain="schema.__idxChain"
-          :index="schema.__index"
         ></es-base>
         <template v-else>
           {{ schema.desc.text }}
@@ -568,7 +520,6 @@ import arrayTabs from "./layout/array-tabs";
 import tabs from "./layout/tabs";
 import itemMixin from "./mixins/item-mixin";
 import utils from "./libs/utils";
-// import formUtils from "./libs/form-utils";
 import constant from "./libs/constant";
 import global from "./libs/global";
 import esBase from "./base";
@@ -763,8 +714,8 @@ export default {
     },
 
     toggleBody() {
-      // this.showBody = !this.showBody;
-      this.$emit("formClick", "toggle", { key: this.schema.__pathKey });
+      var form = this.__getForm();
+      form._toggleUi("toggle", { key: this.schema.__pathKey });
     },
 
     // 只有组件会触发
@@ -787,53 +738,37 @@ export default {
         }
       }
 
-      var formItem = this.$parent;
-      while (formItem) {
-        var type = formItem._getType ? formItem._getType() : "";
-        if (type == constant.UI_FORM) {
-          formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
-          return true; // 到达表单层
-        } else if (type == constant.UI_ARRAY) {
-          checkSchema.push(formItem._getSchema());
-        } else {
-          // ... 往上派
-        }
-        formItem = formItem.$parent;
-      }
+      var form = this.__getForm();
+      form._syncUi(checkSchema, eventNames, targetValue, eventData);
     },
 
     /**
      * 数组改变：添加、删除、移动
-     * sourcePathKey 是哪个组件触发的
      * handlers 需要处理的input and change actions
      * eventData 事件本身的参数；具体看array-mixin.js
      */
-    formArrayInput(sourcePathKey, handlers, targetValue, eventData) {
+    formArrayInput(targetValue, eventData) {
       var checkSchema = [this.schema];
       var eventNames = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
+      
+      var form = this.__getForm();
+      form._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+    },
 
+    __getForm() {
       var formItem = this.$parent;
       while (formItem) {
         var type = formItem._getType ? formItem._getType() : "";
         if (type == constant.UI_FORM) {
-          formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
-          return true; // 到达表单层
+          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
         } else if (type == constant.UI_ARRAY) {
-          checkSchema.push(formItem._getSchema());
+          // checkSchema.push(formItem._getSchema());
         } else {
           // ... 往上派
         }
         formItem = formItem.$parent;
       }
-    },
-
-    /**
-     * sourcePathKey 是哪个tab容器触发
-     * index 触发哪个
-     */
-    formClick(type, data) {
-      // console.log("formClick: ", type, data);
-      this.$emit("formClick", type, data); // 往上派发
     }
   },
 

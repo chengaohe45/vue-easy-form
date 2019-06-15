@@ -54,10 +54,6 @@
               <span v-else class="es-form-label-box">
                 <es-base
                   :config="schema.properties[fieldKeyName].label"
-                  :form-data="formData"
-                  :global="global"
-                  :idx-chain="schema.properties[fieldKeyName].__idxChain"
-                  :index="schema.properties[fieldKeyName].__index"
                 ></es-base>
               </span>
               <span v-if="schema.properties[fieldKeyName].colon">:</span>
@@ -96,10 +92,6 @@
               <es-base
                 v-if="schema.properties[fieldKeyName].unit.name"
                 :config="schema.properties[fieldKeyName].unit"
-                :form-data="formData"
-                :global="global"
-                :idx-chain="schema.properties[fieldKeyName].__idxChain"
-                :index="schema.properties[fieldKeyName].__index"
               ></es-base>
               <template v-else>
                 {{ schema.properties[fieldKeyName].unit.text }}
@@ -120,10 +112,6 @@
               ></es-base> -->
               <es-base
                 :config="schema.properties[fieldKeyName].help"
-                :form-data="formData"
-                :global="global"
-                :idx-chain="schema.properties[fieldKeyName].__idxChain"
-                :index="schema.properties[fieldKeyName].__index"
               ></es-base>
             </div>
           </template>
@@ -195,10 +183,6 @@
           <span v-else class="es-form-label-box">
             <es-base
               :config="fieldSchema.label"
-              :form-data="formData"
-              :global="global"
-              :idx-chain="fieldSchema.__idxChain"
-              :index="fieldSchema.__index"
             ></es-base>
           </span>
           <span v-if="fieldSchema.colon">:</span>

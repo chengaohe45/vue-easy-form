@@ -104,10 +104,6 @@
       <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
       <es-base
         :config="schema.help"
-        :form-data="formData"
-        :global="global"
-        :idx-chain="schema.__idxChain"
-        :index="schema.__index"
       ></es-base>
     </div>
   </div>
@@ -231,14 +227,6 @@ export default {
   },
 
   methods: {
-    /**
-     * sourcePathKey 是哪个tab容器触发
-     * index 触发哪个
-     */
-    formClick(type, data) {
-      // console.log("formClick: ", sourcePathKey, index);
-      this.$emit("formClick", type, data); // 往上派发
-    }
   }
 };
 </script>

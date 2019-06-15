@@ -23,6 +23,7 @@ export default {
         title: "表单名称",
         colon: true,
         properties: {
+          test: null,
           name: {
             label: {
               text: "广告名称"

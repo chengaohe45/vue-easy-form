@@ -5,15 +5,6 @@ import constant from "../libs/constant";
 export default {
   created() {},
 
-  // props: {
-  //   schema: {
-  //     type: Object,
-  //     default() {
-  //       return {};
-  //     }
-  //   }
-  // },
-
   data() {
     return {};
   },
@@ -44,8 +35,6 @@ export default {
         var newValue = formUtils.getValue(this.schema);
         this.$emit(
           "input",
-          this.schema.__pathKey,
-          this.getHandlers(),
           newValue,
           eventData
         );
@@ -60,8 +49,6 @@ export default {
         var newValue = formUtils.getValue(this.schema);
         this.$emit(
           "input",
-          this.schema.__pathKey,
-          this.getHandlers(),
           newValue,
           eventData
         );
@@ -84,8 +71,6 @@ export default {
         var newValue = formUtils.getValue(this.schema);
         this.$emit(
           "input",
-          this.schema.__pathKey,
-          this.getHandlers(),
           newValue,
           eventData
         );
@@ -108,29 +93,9 @@ export default {
         var newValue = formUtils.getValue(this.schema);
         this.$emit(
           "input",
-          this.schema.__pathKey,
-          this.getHandlers(),
           newValue,
           eventData
         );
-      }
-    },
-
-    getHandlers() {
-      var inputHandlers = formUtils.getHandlers(
-        constant.INPUT_EVENT,
-        this.schema.array.actions
-      );
-      var changeHandlers = formUtils.getHandlers(
-        constant.CHANGE_EVENT,
-        this.schema.array.actions
-      );
-      if (inputHandlers || changeHandlers) {
-        inputHandlers = inputHandlers ? inputHandlers : [];
-        changeHandlers = changeHandlers ? changeHandlers : [];
-        return inputHandlers.concat(changeHandlers); // input先执行，change后执行
-      } else {
-        return null;
       }
     },
 
@@ -154,7 +119,7 @@ export default {
             // 是一个函数，过滤
             oldValue = formUtils.getValue(this.schema);
             var insertIndex = this.schema.__propSchemaList.length;
-            var thisFrom = formUtils.getThisForm(this);
+            var thisFrom = this.__getForm();
             // console.log("thisFrom", thisFrom);
             var defaultValue = insertValue.call(
               thisFrom,
@@ -194,11 +159,25 @@ export default {
       };
       this.$emit(
         "input",
-        this.schema.__pathKey,
-        this.getHandlers(),
         newValue,
         eventData
       ); //同步更新的
+    },
+
+    __getForm() {
+      var formItem = this.$parent;
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+        if (type == constant.UI_FORM) {
+          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
+        } else if (type == constant.UI_ARRAY) {
+          // checkSchema.push(formItem._getSchema());
+        } else {
+          // ... 往上派
+        }
+        formItem = formItem.$parent;
+      }
     }
   }
 };

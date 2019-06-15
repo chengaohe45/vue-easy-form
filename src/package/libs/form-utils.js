@@ -875,11 +875,7 @@ let formUtils = {
       var newProperties = {};
       for (var key in propItem.properties) {
         var nextRawPropItem = propItem.properties[key];
-        if (
-          utils.isNull(nextRawPropItem) ||
-          utils.isUndef(nextRawPropItem) ||
-          nextRawPropItem === false
-        ) {
+        if (this.__isIngnoreItem(nextRawPropItem)) {
           console.log("属性" + key + "为null/undefined/false时，将不设置");
         } else {
           var isSpaceItem = this.__isSpaceItem(nextRawPropItem);
@@ -1560,21 +1556,40 @@ let formUtils = {
     var tmpComponent,
       defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
-      tmpComponent = utils.deepCopy(component);
-      tmpComponent.name = tmpComponent.name
-        ? tmpComponent.name
+      // tmpComponent = utils.deepCopy(component);
+      tmpComponent = {};
+      tmpComponent.name = component.name
+        ? component.name
         : global.defaultCom;
       tmpComponent.actions = this.__parseActions(
-        tmpComponent.actions,
+        component.actions,
         myPathKey
       );
-      tmpComponent.ref = utils.isStr(tmpComponent.ref)
-        ? tmpComponent.ref.trim()
+      var ref = utils.isStr(component.ref)
+        ? component.ref.trim()
         : null;
-      if (!tmpComponent.ref) {
-        delete tmpComponent.ref;
+      if (!ref) {
+        tmpComponent.ref = ref;
       }
-      tmpComponent.align = this.__parseAlign(tmpComponent.align, defaultAlign);
+
+      if (utils.isObj(component.props)) {
+        if (this.__hasEsInObj(component.props)) {
+          tmpComponent.props = this.__newEmptyObj(component.props);  // 后面(analyzeUiProps)有解析的
+          tmpComponent.__rawProps = utils.deepCopy(component.props);
+        } else {
+          tmpComponent.props = utils.deepCopy(component.props); // 可直接使用
+        }
+      } else {
+        tmpComponent.props = {};
+      }
+
+      if (utils.isStr(component.text)) {
+        tmpComponent.text = component.text;
+        if (parse.isEsScript(component.text)) {
+          tmpComponent.__rawText = component.text;
+        }
+      }
+      tmpComponent.align = this.__parseAlign(component.align, defaultAlign);
     } else if (utils.isStr(component)) {
       tmpComponent = { name: component, actions: [], align: defaultAlign };
     } else {
@@ -1588,6 +1603,25 @@ let formUtils = {
     tmpComponent.size = this.__parseSize(tmpComponent.size);
 
     return tmpComponent;
+  },
+
+  __newEmptyObj(obj) {
+    var newObj = {};
+    for (var key in obj) {
+      newObj[key] = null;
+    }
+    return newObj;
+  },
+
+  __hasEsInObj(obj) {
+    var isRight = false;
+    for (var key in obj) {
+      if (parse.isEsScript(obj[key])) {
+        isRight = true;
+        break;
+      }
+    }
+    return isRight;
   },
 
   /**
@@ -1803,7 +1837,16 @@ let formUtils = {
         utils.isStr(value.name) && value.name.trim() ? value.name.trim() : name;
       if (name) {
         newCom.name = name;
-        newCom.props = utils.isObj(value.props) ? value.props : {};
+        if (utils.isObj(value.props)) {
+          if (this.__hasEsInObj(value.props)) {
+            newCom.props = this.__newEmptyObj(value.props);  // 后面(analyzeUiProps)有解析的
+            newCom.__rawProps = utils.deepCopy(value.props);
+          } else {
+            newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
+          }
+        } else {
+          newCom.props = {};
+        }
       }
 
       var text =
@@ -1818,9 +1861,7 @@ let formUtils = {
         // 说明为空
         return false;
       }
-      if (!name) {
-        newCom.__rawText = text;
-      }
+      newCom.__rawText = text;
       return newCom;
     } else if (utils.isStr(value)) {
       value = value.trim();
@@ -1885,8 +1926,13 @@ let formUtils = {
   __existEntityItem(rawPropItem) {
     if (this.__isPropItem(rawPropItem)) {
       for (var key in rawPropItem.properties) {
-        var nextRowProp = rawPropItem.properties[key];
-        if (!this.__isSpaceItem(nextRowProp)) {
+
+        var nextRawProp = rawPropItem.properties[key];
+        if (this.__isIngnoreItem(nextRawProp)) {
+          continue;
+        }
+
+        if (!this.__isSpaceItem(nextRawProp)) {
           return true; // 有一个即可以了
         }
       }
@@ -1894,14 +1940,20 @@ let formUtils = {
     return false;
   },
 
+  __isIngnoreItem(rawPropItem) {
+    if (utils.isNull(rawPropItem) || utils.isUndef(rawPropItem) || rawPropItem === false) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
   /**
    * 是否为space item
    * @param {*} subitem
    */
   __isSpaceItem(rawItem) {
-    if (
-      rawItem.layout === constant.LAYOUT_SPACE ||
-      (rawItem.layout && rawItem.layout.name === constant.LAYOUT_SPACE)
+    if (utils.isObj(rawItem) && (rawItem.layout === constant.LAYOUT_SPACE || (rawItem.layout && rawItem.layout.name === constant.LAYOUT_SPACE) )
     ) {
       return true;
     }
@@ -2200,10 +2252,15 @@ let formUtils = {
       }
 
       if (key == "component") {
-        newPropItem[key] = formUtils.__parseMainComponent(
+        var mainComponent = formUtils.__parseMainComponent(
           propItem[key],
           myPathKey
         );
+        // var esBakComponent = formUtils.__fetchComponentEs(mainComponent);
+        // if (esBakComponent) {
+        //   newPropItem["_component"] = esBakComponent;
+        // }
+        newPropItem[key] = mainComponent;
         return true;
       }
 
@@ -2453,27 +2510,42 @@ let formUtils = {
         }
       }
 
-      if (propItem.label && !propItem.label.name && propItem.label.__rawText) {
-        // false或为空都不用执行 properies array下propItem.label
-        text = parse.smartEsValue(propItem.label.__rawText, parseSources);
-        if (propItem.label.text != text) {
-          propItem.label.text = text;
+      if (propItem.label) {
+        if (!propItem.label.name && propItem.label.__rawText) {
+          // false或为空都不用执行 properies array下propItem.label
+          text = parse.smartEsValue(propItem.label.__rawText, parseSources);
+          if (propItem.label.text != text) {
+            propItem.label.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.label, parseSources);
         }
       }
 
-      if (propItem.desc && !propItem.desc.name && propItem.desc.__rawText) {
-        // false或为空都不用执行 propItem.desc
-        text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
-        if (propItem.desc.text != text) {
-          propItem.desc.text = text;
+      if (propItem.desc) {
+        if (!propItem.desc.name && propItem.desc.__rawText) {
+          // false或为空都不用执行 propItem.desc
+          text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
+          if (propItem.desc.text != text) {
+            propItem.desc.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.desc, parseSources);
         }
       }
 
-      if (propItem.unit && !propItem.unit.name && propItem.unit.__rawText) {
-        // false或为空都不用执行 propItem.unit
-        text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
-        if (propItem.unit.text != text) {
-          propItem.unit.text = text;
+      if (propItem.unit) {
+        if (!propItem.unit.name && propItem.unit.__rawText) {
+          // false或为空都不用执行 propItem.unit
+          text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
+          if (propItem.unit.text != text) {
+            propItem.unit.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.unit, parseSources);
         }
       }
 
@@ -2507,16 +2579,21 @@ let formUtils = {
             }
           }
         }
-      } else if (propItem.rules && propItem.rules.__rawRequired) {
-        // 一般组件
-        // false或为空都不用执行
-        isRequired = parse.smartEsValue(
-          propItem.rules.__rawRequired,
-          parseSources
-        );
-        if (propItem.rules.required != isRequired) {
-          propItem.rules.required = isRequired;
+      } else {
+        /* 一般组件 */
+        if (propItem.rules && propItem.rules.__rawRequired) {
+          // false或为空都不用执行
+          isRequired = parse.smartEsValue(
+            propItem.rules.__rawRequired,
+            parseSources
+          );
+          if (propItem.rules.required != isRequired) {
+            propItem.rules.required = isRequired;
+          }
         }
+
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.component, parseSources);
       }
     } else if (propItem.properties) {
       if (propItem.__rawHidden) {
@@ -2531,38 +2608,56 @@ let formUtils = {
         }
       }
 
-      if (propItem.label && !propItem.label.name && propItem.label.__rawText) {
-        // false或为空都不用执行 properies array下propItem.label
-        text = parse.smartEsValue(propItem.label.__rawText, parseSources);
-        if (propItem.label.text != text) {
-          propItem.label.text = text;
+      if (propItem.label) {
+        if (!propItem.label.name && propItem.label.__rawText) {
+          // false或为空都不用执行 properies array下propItem.label
+          text = parse.smartEsValue(propItem.label.__rawText, parseSources);
+          if (propItem.label.text != text) {
+            propItem.label.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.label, parseSources);
         }
       }
 
-      if (propItem.desc && !propItem.desc.name && propItem.desc.__rawText) {
-        // false或为空都不用执行 propItem.desc
-        text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
-        if (propItem.desc.text != text) {
-          propItem.desc.text = text;
+      if (propItem.desc) {
+        if (!propItem.desc.name && propItem.desc.__rawText) {
+          // false或为空都不用执行 propItem.desc
+          text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
+          if (propItem.desc.text != text) {
+            propItem.desc.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.desc, parseSources);
         }
       }
 
-      if (propItem.unit && !propItem.unit.name && propItem.unit.__rawText) {
-        // false或为空都不用执行 propItem.unit
-        text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
-        if (propItem.unit.text != text) {
-          propItem.unit.text = text;
+      if (propItem.unit) {
+        if (!propItem.unit.name && propItem.unit.__rawText) {
+          // false或为空都不用执行 propItem.unit
+          text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
+          if (propItem.unit.text != text) {
+            propItem.unit.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.unit, parseSources);
         }
       }
 
-      if (
-        propItem.subLabel &&
-        !propItem.subLabel.name &&
-        propItem.subLabel.__rawText
-      ) {
-        text = parse.smartEsValue(propItem.subLabel.__rawText, parseSources);
-        if (propItem.subLabel.text != text) {
-          propItem.subLabel.text = text;
+      if (propItem.subLabel) {
+        if (!propItem.subLabel.name &&
+          propItem.subLabel.__rawText
+        ) {
+          text = parse.smartEsValue(propItem.subLabel.__rawText, parseSources);
+          if (propItem.subLabel.text != text) {
+            propItem.subLabel.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.subLabel, parseSources);
         }
       }
 
@@ -2719,6 +2814,50 @@ let formUtils = {
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
         }
+      }
+    }
+  },
+
+  __esParseComponent(component, parseSources) {
+    // console.log(1);
+    // return true;
+    // var test = 1;
+    // if (true) {
+    //   for (var i = 0; i < 1000; i++) {
+    //     test = i;
+    //   }
+    // }
+    // return test;
+
+    var text;
+
+    if (component.__rawProps) {
+      var curProps = component.props;
+      var rawProps = component.__rawProps;
+      for (var key in rawProps) {
+        // if (parse.isEsScript(rawProps[key])) {
+          text = parse.smartEsValue(
+            rawProps[key],
+            parseSources
+          );
+        // } else {
+        //   text = rawProps[key];
+        // }
+        if (curProps[key] !== text) {
+          curProps[key] = text;
+        }
+      }
+    }
+
+    // console.log("component.__rawText：", component.__rawText);
+    if (component.__rawText) {
+      // console.log(123);
+      text = parse.smartEsValue(
+        component.__rawText,
+        parseSources
+      );
+      if (text !== component.text) {
+        component.text = text;
       }
     }
   },
@@ -2892,46 +3031,8 @@ let formUtils = {
     } else {
       return value;
     }
-  },
-
-  getHandlers(eventName, actions) {
-    var handlers = [];
-    if (actions) {
-      actions.forEach(actionItem => {
-        if (actionItem.trigger.includes(eventName)) {
-          handlers.push(actionItem.handler);
-        }
-      });
-    }
-    if (handlers.length > 0) {
-      return handlers;
-    } else {
-      return null;
-    }
-  },
-
-  getThisForm($currentVue) {
-    var $form = $currentVue;
-    while ($form) {
-      $form = $form.$parent;
-      if (
-        !utils.isUndef($form.$data.formSchema) &&
-        !utils.isUndef($form.$data.isInited)
-      ) {
-        break;
-      }
-    }
-    return $form ? $form : null;
-  },
-
-  getRootSchema($currentVue) {
-    var $form = this.getThisForm($currentVue);
-    if ($form) {
-      return $form.getRootSchema();
-    } else {
-      throw "无法取出表单";
-    }
   }
+  
 };
 
 export default formUtils;

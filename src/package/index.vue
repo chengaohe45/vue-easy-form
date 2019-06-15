@@ -3,9 +3,6 @@
     <form-item
       ref="formFrame"
       :schema="formSchema"
-      @formClick="__formClick"
-      :global="formGlobal"
-      :isInited="isInited"
     ></form-item>
   </div>
 </template>
@@ -352,15 +349,12 @@ import constant from "./libs/constant.js";
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
-    if (utils.isObj(this.global)) {
-      this.$data.formGlobal = utils.deepCopy(this.global); // 为什么要重新复制，因为form-item为是深度监听
-    }
 
     this.__initUi(this.schema);
 
     this.$nextTick(() => {
       this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-      this.$emit("inited", utils.deepCopy(this.$data.resultValue));
+      this.$emit("inited", utils.deepCopy(this._esResultValue));
     });
     return;
   },
@@ -402,10 +396,11 @@ export default {
       formSchema: {}, // $data有这个值说明是es-form
       isInited: false,
 
+      // formGlobal: {},
+
       // formData: {},
-      formGlobal: {},
-      resultValue: {},
-      originalValue: {} // 最初的值
+      // resultValue: {},
+      // originalValue: {} // 最初的值
     };
   },
 
@@ -414,10 +409,6 @@ export default {
   methods: {
     getRef(name) {
       return this.$refs.formFrame.getRef(name);
-    },
-
-    getRootSchema() {
-      return this.$data.formSchema;
     },
 
     /* 下划线一杠代表对内使用 */
@@ -446,7 +437,7 @@ export default {
       //进行初始化
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
-      this.$data.originalValue = utils.deepCopy(this.formData);
+      this._esOriginalValue = utils.deepCopy(this._esFormData);
     },
 
     __checkProp(schema, rootSchema) {
@@ -455,8 +446,8 @@ export default {
       var isValid = true;
 
       var parseSources = {
-        global: this.$data.formGlobal,
-        rootData: this.formData,
+        global: this.global,
+        rootData: this._esFormData,
         index: schema.__index,
         idxChain: schema.__idxChain,
         rootSchema: rootSchema
@@ -624,7 +615,7 @@ export default {
     __submit() {
       this.$nextTick(() => {
         if (this.$data.isInited) {
-          this.$emit("submit", utils.deepCopy(this.$data.resultValue));
+          this.$emit("submit", utils.deepCopy(this._esResultValue));
         } else {
           console.warn("表单还未初始化完成，无法派发submit事件");
         }
@@ -640,7 +631,7 @@ export default {
      * 对外调用，取值
      */
     getValue() {
-      return utils.deepCopy(this.$data.resultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+      return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
     },
 
     /**
@@ -676,8 +667,8 @@ export default {
      * 对外调用，重置值
      */
     reset() {
-      // console.log(this.$data.originalValue);
-      this.setValue(this.$data.originalValue);
+      // console.log(this._esOriginalValue);
+      this.setValue(this._esOriginalValue);
       //去年所有的错误提示
       formUtils.clearErrorMsg(this.$data.formSchema);
     },
@@ -716,16 +707,15 @@ export default {
       if (eventNames.includes(constant.INPUT_EVENT)) {
         // 需要同步
         this.__syncValue(sourcePathKey); // 第一个就是触发源
-        // tmpResultValue =this.$data.resultValue;
+        // tmpResultValue =this._esResultValue;
       }
 
-      // if (this.isInited && (handlers || tmpResultValue)) {
       if (this.isInited) {
         var inputSchema = checkSchema[0];
         // 验证当前的输入框
         var parseSources = {
-          global: this.$data.formGlobal,
-          rootData: this.formData,
+          global: this.global,
+          rootData: this._esFormData,
           index: inputSchema.__index,
           idxChain: inputSchema.__idxChain,
           rootSchema: this.$data.formSchema
@@ -772,7 +762,7 @@ export default {
             if (eventNames.includes(constant.INPUT_EVENT)) {
               this.$emit(
                 "change",
-                utils.deepCopy(this.$data.resultValue),
+                utils.deepCopy(this._esResultValue),
                 sourcePathKey
               );
             }
@@ -787,12 +777,7 @@ export default {
       }
     },
 
-    /**
-     * type: string 触发类型
-     * data 携带的数据 具体看各类型 {key: 指出出处，...}
-     */
-    __formClick(type, data) {
-      // console.log("type - data: ", type, data);
+    _toggleUi(type, data) {
       switch (type) {
         case "tabs": // tabs头部触发 data: {key, index}
           formUtils.setTabsIndex(this.$data.formSchema, data.key, data.index); // 更改目标的tabs的索引
@@ -803,20 +788,16 @@ export default {
         default:
           break;
       }
-
-      // this.$nextTick(() => {
-      //   this.$emit("formClick", sourcePathKey, index); // 往上派发
-      // });
     },
 
     __syncValue(sourcePathKey) {
       // 不单只是执行actions
       var formData = formUtils.getValue(this.$data.formSchema);
-      this.formData = formData;
+      this._esFormData = formData;
 
       var baseParseSources = {
-        global: this.$data.formGlobal,
-        rootData: this.formData,
+        global: this.global,
+        rootData: this._esFormData,
         rootSchema: this.$data.formSchema
       };
 
@@ -826,7 +807,7 @@ export default {
         baseParseSources
       );
 
-      this.$data.resultValue = resultValue;
+      this._esResultValue = resultValue;
 
       this.$emit(
         "input",
@@ -841,7 +822,6 @@ export default {
     schema: {
       handler(newVal) {
         if (utils.isObj(newVal) && Object.keys(newVal).length > 0) {
-          // console.log("es-form index.vue: schema here...", this.value);
           this.__initUi(newVal);
         }
       },
@@ -851,30 +831,24 @@ export default {
     //watch是异步监听的，而$emit("input"...)是同步的
     value: {
       handler(newVal) {
-        // console.log(
-        //   "value: ",
-        //   JSON.stringify(newVal) === JSON.stringify(this.$data.resultValue)
-        // );
-        if (JSON.stringify(newVal) !== JSON.stringify(this.$data.resultValue)) {
+        if (JSON.stringify(newVal) !== JSON.stringify(this._esResultValue)) {
           this.__setValue(this.$data.formSchema, newVal);
           this.__syncValue();
         } else {
-          // console.log("==", this.formData);
         }
       },
       deep: false
     },
 
     global: {
-      handler(newVal) {
-        // console.log("global: ", newVal);
-        if (
-          utils.isObj(newVal) &&
-          JSON.stringify(newVal) !== JSON.stringify(this.$data.formGlobal)
-        ) {
-          this.$data.formGlobal = JSON.parse(JSON.stringify(newVal)); // 为什么要重新复制，因为form-item为是深度监听
+      handler(newVal, oldVal) {
+        // if (
+        //   utils.isObj(newVal) &&
+        //   JSON.stringify(newVal) !== JSON.stringify(oldVal)
+        // ) {
+          // this.$data.formGlobal = JSON.parse(JSON.stringify(newVal)); // 为什么要重新复制，因为form-item为是深度监听
           this.__syncValue();
-        }
+        // }
       },
       deep: true
     }

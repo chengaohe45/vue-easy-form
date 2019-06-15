@@ -20,10 +20,6 @@
           <span v-else class="es-form-label-box">
             <es-base
               :config="itemSchema.label"
-              :form-data="formData"
-              :global="global"
-              :idx-chain="itemSchema.__idxChain"
-              :index="itemSchema.__index"
             ></es-base>
           </span>
         </es-tabs-nav-item>
@@ -81,6 +77,7 @@ import itemMixin from "../mixins/item-mixin";
 import esTabsNav from "../components/tabs-nav";
 import esTabsNavItem from "../components/tabs-nav-item";
 import esBase from "../base";
+import constant from "../libs/constant";
 
 export default {
   mixins: [itemMixin],
@@ -95,10 +92,27 @@ export default {
   },
   methods: {
     clickActiveHandler(index) {
-      this.$emit("formClick", "tabs", {
+      var form = this.__getForm();
+      form._toggleUi("tabs", {
         key: this.schema.__pathKey,
         index: index
       });
+    },
+
+    __getForm() {
+      var formItem = this.$parent;
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+        if (type == constant.UI_FORM) {
+          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
+        } else if (type == constant.UI_ARRAY) {
+          // checkSchema.push(formItem._getSchema());
+        } else {
+          // ... 往上派
+        }
+        formItem = formItem.$parent;
+      }
     }
   },
 

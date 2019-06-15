@@ -42,10 +42,6 @@
             <span v-else class="es-form-label-box">
               <es-base
                 :config="headerSchema.label"
-                :form-data="formData"
-                :global="global"
-                :idx-chain="headerSchema.__idxChain"
-                :index="headerSchema.__index"
               ></es-base>
             </span>
             <span v-if="headerSchema.help" class="es-form-help">
@@ -55,10 +51,6 @@
               ></es-base> -->
               <es-base
                 :config="headerSchema.help"
-                :form-data="formData"
-                :global="global"
-                :idx-chain="headerSchema.__idxChain"
-                :index="headerSchema.__index"
               ></es-base>
             </span>
           </div>
@@ -96,7 +88,6 @@
           >
             <es-object-table
               :schema="fieldSchema"
-              :form-data="formData"
               :has-required="!schema.array.headRequired"
             >
               <slot
