@@ -18,9 +18,7 @@
             }}</span></template
           >
           <span v-else class="es-form-label-box">
-            <es-base
-              :config="itemSchema.label"
-            ></es-base>
+            <es-base :config="itemSchema.label"></es-base>
           </span>
         </es-tabs-nav-item>
       </template>

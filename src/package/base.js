@@ -36,10 +36,10 @@ export default {
         // 所以不再支持如 "v-on:keyup.enter" 修饰语
         // 需要手动匹配 KeyCode
         on: this.$data.emitOn,
-        
+
         // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
         nativeOn: this.$data.nativeOn,
-        
+
         // 自定义指令。注意事项：不能对绑定的旧值设值
         // Vue 会为您持续追踪
         directives: [
@@ -72,7 +72,6 @@ export default {
   },
   // inheritAttrs: false,
   props: {
-
     config: {
       type: Object,
       required: true,
@@ -183,7 +182,6 @@ export default {
         this.$data.nativeOn = null;
       }
     }
-
   },
 
   destroyed() {},

@@ -40,18 +40,14 @@
               }}
             </template>
             <span v-else class="es-form-label-box">
-              <es-base
-                :config="headerSchema.label"
-              ></es-base>
+              <es-base :config="headerSchema.label"></es-base>
             </span>
             <span v-if="headerSchema.help" class="es-form-help">
               <!-- <es-base
                 :config="headerSchema.help"
                 :open-smart="false"
               ></es-base> -->
-              <es-base
-                :config="headerSchema.help"
-              ></es-base>
+              <es-base :config="headerSchema.help"></es-base>
             </span>
           </div>
         </th>

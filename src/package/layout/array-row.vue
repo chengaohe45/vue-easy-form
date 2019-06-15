@@ -39,10 +39,7 @@
                 <slot :name="fieldName" :schema="fieldSchema"></slot>
               </template>
             </component>
-            <es-object
-              :schema="itemSchema"
-              v-else-if="itemSchema.properties"
-            >
+            <es-object :schema="itemSchema" v-else-if="itemSchema.properties">
               <template
                 v-for="(fieldSchema, fieldName) in itemSchema.properties"
                 :slot="fieldName"
@@ -134,9 +131,7 @@
       }"
     >
       <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
-      <es-base
-        :config="schema.help"
-      ></es-base>
+      <es-base :config="schema.help"></es-base>
     </div>
   </div>
 </template>
@@ -209,7 +204,6 @@ export default {
     esBase
   },
 
-  methods: {
-  }
+  methods: {}
 };
 </script>

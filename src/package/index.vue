@@ -1,9 +1,6 @@
 <template>
   <div class="es-form">
-    <form-item
-      ref="formFrame"
-      :schema="formSchema"
-    ></form-item>
+    <form-item ref="formFrame" :schema="formSchema"></form-item>
   </div>
 </template>
 
@@ -349,7 +346,6 @@ import constant from "./libs/constant.js";
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
-
     this.__initUi(this.schema);
 
     this.$nextTick(() => {
@@ -394,7 +390,7 @@ export default {
   data() {
     return {
       formSchema: {}, // $data有这个值说明是es-form
-      isInited: false,
+      isInited: false
 
       // formGlobal: {},
 
@@ -835,6 +831,7 @@ export default {
           this.__setValue(this.$data.formSchema, newVal);
           this.__syncValue();
         } else {
+          // ...
         }
       },
       deep: false
@@ -842,13 +839,13 @@ export default {
 
     global: {
       handler(newVal, oldVal) {
-        // if (
-        //   utils.isObj(newVal) &&
-        //   JSON.stringify(newVal) !== JSON.stringify(oldVal)
-        // ) {
+        if (
+          utils.isObj(newVal) &&
+          JSON.stringify(newVal) !== JSON.stringify(oldVal)
+        ) {
           // this.$data.formGlobal = JSON.parse(JSON.stringify(newVal)); // 为什么要重新复制，因为form-item为是深度监听
           this.__syncValue();
-        // }
+        }
       },
       deep: true
     }

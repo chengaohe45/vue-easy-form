@@ -37,7 +37,6 @@
 </template>
 
 <script>
-
 import esTabsNavItem from "./tabs-nav-item";
 import esTabsBtn from "./tabs-btn.vue";
 

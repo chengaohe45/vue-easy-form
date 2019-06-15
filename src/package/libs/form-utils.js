@@ -4,6 +4,7 @@ import global from "./global";
 import constant from "./constant";
 import utils from "./utils";
 import schemaRules from "./schema-rules";
+import esHelp from "../components/help.vue";
 
 import { enterSubmit, onlySubmit } from "./submit";
 
@@ -1558,23 +1559,16 @@ let formUtils = {
     if (utils.isObj(component) && Object.keys(component).length > 0) {
       // tmpComponent = utils.deepCopy(component);
       tmpComponent = {};
-      tmpComponent.name = component.name
-        ? component.name
-        : global.defaultCom;
-      tmpComponent.actions = this.__parseActions(
-        component.actions,
-        myPathKey
-      );
-      var ref = utils.isStr(component.ref)
-        ? component.ref.trim()
-        : null;
+      tmpComponent.name = component.name ? component.name : global.defaultCom;
+      tmpComponent.actions = this.__parseActions(component.actions, myPathKey);
+      var ref = utils.isStr(component.ref) ? component.ref.trim() : null;
       if (!ref) {
         tmpComponent.ref = ref;
       }
 
       if (utils.isObj(component.props)) {
         if (this.__hasEsInObj(component.props)) {
-          tmpComponent.props = this.__newEmptyObj(component.props);  // 后面(analyzeUiProps)有解析的
+          tmpComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
           tmpComponent.__rawProps = utils.deepCopy(component.props);
         } else {
           tmpComponent.props = utils.deepCopy(component.props); // 可直接使用
@@ -1808,24 +1802,23 @@ let formUtils = {
 
   /* 解析帮助 */
   __parsePropHelp: function(help) {
-    var gHelp, props;
+    // console.log("help: ", help);
+    var gHelp = false;
     if (utils.isObj(help) && Object.keys(help).length > 0) {
-      gHelp = utils.deepCopy(global.help);
-      props = utils.isObj(gHelp.props) ? gHelp.props : {};
-      Object.assign(props, utils.isObj(help.props) ? help.props : {});
-      gHelp.name = help.name ? help.name : gHelp.name;
-      gHelp.props = props;
-      return gHelp;
+      gHelp = {};
+      Object.assign(gHelp, help);
+      if (!gHelp.name) {
+        gHelp.name = esHelp;
+      }
+      gHelp = this.__parsePropComponent(gHelp);
     } else if (utils.isStr(help)) {
-      //
-      gHelp = utils.deepCopy(global.help);
-      props = utils.isObj(gHelp.props) ? gHelp.props : {};
-      props.content = help;
-      gHelp.props = props;
-      return gHelp;
+      gHelp = { name: esHelp, props: { content: help } };
+      gHelp = this.__parsePropComponent(gHelp);
     } else {
-      return false;
+      gHelp = false;
     }
+    // console.log("gHelp: ", gHelp);
+    return gHelp;
   },
 
   /* 解析一般组件 */
@@ -1834,12 +1827,14 @@ let formUtils = {
     if (utils.isObj(value) && Object.keys(value).length > 0) {
       newCom = {};
       var name =
-        utils.isStr(value.name) && value.name.trim() ? value.name.trim() : name;
+        utils.isStr(value.name) && value.name.trim()
+          ? value.name.trim()
+          : value.name;
       if (name) {
         newCom.name = name;
         if (utils.isObj(value.props)) {
           if (this.__hasEsInObj(value.props)) {
-            newCom.props = this.__newEmptyObj(value.props);  // 后面(analyzeUiProps)有解析的
+            newCom.props = this.__newEmptyObj(value.props); // 后面(analyzeUiProps)有解析的
             newCom.__rawProps = utils.deepCopy(value.props);
           } else {
             newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
@@ -1926,7 +1921,6 @@ let formUtils = {
   __existEntityItem(rawPropItem) {
     if (this.__isPropItem(rawPropItem)) {
       for (var key in rawPropItem.properties) {
-
         var nextRawProp = rawPropItem.properties[key];
         if (this.__isIngnoreItem(nextRawProp)) {
           continue;
@@ -1941,7 +1935,11 @@ let formUtils = {
   },
 
   __isIngnoreItem(rawPropItem) {
-    if (utils.isNull(rawPropItem) || utils.isUndef(rawPropItem) || rawPropItem === false) {
+    if (
+      utils.isNull(rawPropItem) ||
+      utils.isUndef(rawPropItem) ||
+      rawPropItem === false
+    ) {
       return true;
     } else {
       return false;
@@ -1953,7 +1951,10 @@ let formUtils = {
    * @param {*} subitem
    */
   __isSpaceItem(rawItem) {
-    if (utils.isObj(rawItem) && (rawItem.layout === constant.LAYOUT_SPACE || (rawItem.layout && rawItem.layout.name === constant.LAYOUT_SPACE) )
+    if (
+      utils.isObj(rawItem) &&
+      (rawItem.layout === constant.LAYOUT_SPACE ||
+        (rawItem.layout && rawItem.layout.name === constant.LAYOUT_SPACE))
     ) {
       return true;
     }
@@ -2549,6 +2550,11 @@ let formUtils = {
         }
       }
 
+      if (propItem.help) {
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.help, parseSources);
+      }
+
       if (propItem.array) {
         // 数组
         schemaList = propItem.__propSchemaList;
@@ -2647,10 +2653,13 @@ let formUtils = {
         }
       }
 
+      if (propItem.help) {
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.help, parseSources);
+      }
+
       if (propItem.subLabel) {
-        if (!propItem.subLabel.name &&
-          propItem.subLabel.__rawText
-        ) {
+        if (!propItem.subLabel.name && propItem.subLabel.__rawText) {
           text = parse.smartEsValue(propItem.subLabel.__rawText, parseSources);
           if (propItem.subLabel.text != text) {
             propItem.subLabel.text = text;
@@ -2836,10 +2845,7 @@ let formUtils = {
       var rawProps = component.__rawProps;
       for (var key in rawProps) {
         // if (parse.isEsScript(rawProps[key])) {
-          text = parse.smartEsValue(
-            rawProps[key],
-            parseSources
-          );
+        text = parse.smartEsValue(rawProps[key], parseSources);
         // } else {
         //   text = rawProps[key];
         // }
@@ -2852,10 +2858,7 @@ let formUtils = {
     // console.log("component.__rawText：", component.__rawText);
     if (component.__rawText) {
       // console.log(123);
-      text = parse.smartEsValue(
-        component.__rawText,
-        parseSources
-      );
+      text = parse.smartEsValue(component.__rawText, parseSources);
       if (text !== component.text) {
         component.text = text;
       }
@@ -3032,7 +3035,6 @@ let formUtils = {
       return value;
     }
   }
-  
 };
 
 export default formUtils;

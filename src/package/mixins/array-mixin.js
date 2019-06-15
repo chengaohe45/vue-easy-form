@@ -33,11 +33,7 @@ export default {
           data: utils.deepCopy(oldValue[index])
         };
         var newValue = formUtils.getValue(this.schema);
-        this.$emit(
-          "input",
-          newValue,
-          eventData
-        );
+        this.$emit("input", newValue, eventData);
       }
     },
 
@@ -47,11 +43,7 @@ export default {
         this.schema.__propSchemaList = [];
         var eventData = { type: "deleteAll", index: -1, data: oldValue };
         var newValue = formUtils.getValue(this.schema);
-        this.$emit(
-          "input",
-          newValue,
-          eventData
-        );
+        this.$emit("input", newValue, eventData);
       }
     },
 
@@ -69,11 +61,7 @@ export default {
         );
         var eventData = { type: "up", index: index };
         var newValue = formUtils.getValue(this.schema);
-        this.$emit(
-          "input",
-          newValue,
-          eventData
-        );
+        this.$emit("input", newValue, eventData);
       }
     },
 
@@ -91,11 +79,7 @@ export default {
         );
         var eventData = { type: "down", index: index };
         var newValue = formUtils.getValue(this.schema);
-        this.$emit(
-          "input",
-          newValue,
-          eventData
-        );
+        this.$emit("input", newValue, eventData);
       }
     },
 
@@ -157,11 +141,7 @@ export default {
         index: curIndex,
         data: utils.deepCopy(newValue[curIndex])
       };
-      this.$emit(
-        "input",
-        newValue,
-        eventData
-      ); //同步更新的
+      this.$emit("input", newValue, eventData); //同步更新的
     },
 
     __getForm() {

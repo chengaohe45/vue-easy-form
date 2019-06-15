@@ -36,9 +36,7 @@
             }}</span></template
           >
           <span v-else class="es-form-label-box">
-            <es-base
-              :config="itemSchema.subLabel"
-            ></es-base>
+            <es-base :config="itemSchema.subLabel"></es-base>
           </span>
         </es-tabs-nav-item>
       </template>
@@ -49,9 +47,7 @@
         slot="help"
       >
         <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
-        <es-base
-          :config="schema.help"
-        ></es-base>
+        <es-base :config="schema.help"></es-base>
       </div>
     </es-tabs-nav>
     <ul
@@ -83,10 +79,7 @@
             <slot :name="fieldName" :schema="fieldSchema"></slot>
           </template>
         </component>
-        <es-object
-          :schema="itemSchema"
-          v-else-if="itemSchema.properties"
-        >
+        <es-object :schema="itemSchema" v-else-if="itemSchema.properties">
           <template
             v-for="(fieldSchema, fieldName) in itemSchema.properties"
             :slot="fieldName"
@@ -144,7 +137,7 @@ import arrayMixins from "../mixins/array-mixin.js";
 import esTabsNav from "../components/tabs-nav";
 import esTabsNavItem from "../components/tabs-nav-item";
 import esBase from "../base";
-import constant from "../libs/constant";
+// import constant from "../libs/constant";
 
 export default {
   mixins: [itemMixin, arrayMixins],
@@ -186,7 +179,6 @@ export default {
     },
 
     addItemHandler() {
-      
       this.addItem(); // 这里会对this.schema.__propSchemaList进行添加
 
       var form = this.__getForm();
@@ -194,7 +186,6 @@ export default {
         key: this.schema.__pathKey,
         index: this.schema.__propSchemaList.length - 1
       });
-
     }
   },
 

@@ -102,9 +102,7 @@
       }"
     >
       <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
-      <es-base
-        :config="schema.help"
-      ></es-base>
+      <es-base :config="schema.help"></es-base>
     </div>
   </div>
 </template>
@@ -226,7 +224,6 @@ export default {
     esBtn
   },
 
-  methods: {
-  }
+  methods: {}
 };
 </script>

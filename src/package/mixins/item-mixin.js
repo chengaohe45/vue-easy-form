@@ -13,6 +13,5 @@ export default {
       required: false,
       default: true
     }
-    
   }
 };

@@ -7,10 +7,7 @@
           {{ schema.title.text }}
         </template>
         <!-- <span v-else class="es-form-label-box"> -->
-        <es-base
-          v-else
-          :config="schema.title"
-        ></es-base>
+        <es-base v-else :config="schema.title"></es-base>
         <!-- </span> -->
       </div>
       <div v-else class="es-title-txt es-title-empty">&nbsp;</div>
@@ -22,9 +19,7 @@
         {{ schema.ui.showBody ? "隐藏" : "打开" }}
       </div>
       <div v-if="schema.help" class="es-form-help">
-        <es-base
-          :config="schema.help"
-        ></es-base>
+        <es-base :config="schema.help"></es-base>
       </div>
     </div>
     <div
@@ -69,10 +64,7 @@
           </div>
           <div v-if="schema.unit && !schema.__inGroups" class="es-form-unit">
             <!-- {{ schema.unit }} -->
-            <es-base
-              v-if="schema.unit.name"
-              :config="schema.unit"
-            ></es-base>
+            <es-base v-if="schema.unit.name" :config="schema.unit"></es-base>
             <template v-else>
               {{ schema.unit.text }}
             </template>
@@ -81,9 +73,7 @@
             v-if="schema.help && !schema.__inGroups && showHelpInBody"
             class="es-form-help"
           >
-            <es-base
-              :config="schema.help"
-            ></es-base>
+            <es-base :config="schema.help"></es-base>
           </div>
         </div>
 
@@ -293,10 +283,7 @@
 
       <!-- 描述信息，可以html -->
       <div v-if="schema.desc" class="es-form-desc">
-        <es-base
-          v-if="schema.desc.name"
-          :config="schema.desc"
-        ></es-base>
+        <es-base v-if="schema.desc.name" :config="schema.desc"></es-base>
         <template v-else>
           {{ schema.desc.text }}
         </template>
@@ -750,7 +737,7 @@ export default {
     formArrayInput(targetValue, eventData) {
       var checkSchema = [this.schema];
       var eventNames = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
-      
+
       var form = this.__getForm();
       form._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
     },

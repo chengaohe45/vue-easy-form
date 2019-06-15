@@ -34,9 +34,7 @@
                   }}</span></template
                 >
                 <span v-else class="es-form-label-box">
-                  <es-base
-                    :config="itemSchema.subLabel"
-                  ></es-base>
+                  <es-base :config="itemSchema.subLabel"></es-base>
                 </span>
               </div>
               <template v-if="itemSchema.properties">
@@ -193,9 +191,7 @@
       }"
     >
       <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
-      <es-base
-        :config="schema.help"
-      ></es-base>
+      <es-base :config="schema.help"></es-base>
     </div>
   </div>
 </template>
@@ -309,7 +305,6 @@ export default {
     esBase
   },
 
-  methods: {
-  }
+  methods: {}
 };
 </script>

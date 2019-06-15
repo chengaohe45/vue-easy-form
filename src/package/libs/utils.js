@@ -249,17 +249,17 @@ let utils = {
                 global[key] = tmpValue;
               }
               break;
-            case "help":
-              if (utils.isObj(value) && value.name) {
-                global[key] = value;
-              } else {
-                console.warn(
-                  "mergeGlobal: key(" +
-                    key +
-                    ')的不是一个对象{name: "xxx"}；此默认值将不重设'
-                );
-              }
-              break;
+            // case "help":
+            //   if (utils.isObj(value) && value.name) {
+            //     global[key] = value;
+            //   } else {
+            //     console.warn(
+            //       "mergeGlobal: key(" +
+            //         key +
+            //         ')的不是一个对象{name: "xxx"}；此默认值将不重设'
+            //     );
+            //   }
+            //   break;
             case "defaultVal":
               if (!utils.isUndef(value)) {
                 global[key] = value;

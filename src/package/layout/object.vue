@@ -110,9 +110,7 @@
                 :config="schema.properties[fieldKeyName].help"
                 :open-smart="false"
               ></es-base> -->
-              <es-base
-                :config="schema.properties[fieldKeyName].help"
-              ></es-base>
+              <es-base :config="schema.properties[fieldKeyName].help"></es-base>
             </div>
           </template>
           <div
@@ -181,9 +179,7 @@
             ><span>{{ fieldSchema.label.text }}</span></template
           >
           <span v-else class="es-form-label-box">
-            <es-base
-              :config="fieldSchema.label"
-            ></es-base>
+            <es-base :config="fieldSchema.label"></es-base>
           </span>
           <span v-if="fieldSchema.colon">:</span>
         </label>

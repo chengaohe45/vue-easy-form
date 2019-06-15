@@ -1,5 +1,5 @@
 // import constant from "./constant";
-import esHelp from "../components/help.vue";
+// import esHelp from "../components/help.vue";
 
 let global = {
   boxRowHeight: 40,
@@ -9,7 +9,7 @@ let global = {
   direction: "h",
   defaultCom: "input",
   defaultVal: "", // 这个是对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；注：此值对其它组件不补充
-  help: { name: esHelp, props: {} },
+  // help: { name: esHelp, props: {} },
   trimDoms: ["input", "textarea", "el-input"],
   // 经测试：在el-input里，change比change.native先触发
   trimEvent:
