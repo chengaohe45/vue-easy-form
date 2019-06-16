@@ -84,7 +84,7 @@ export default {
                 value: "kyle.lo"
               },
               weight: {
-                col: 12,
+                col: 18,
                 label: {
                   text: "体重"
                 },
@@ -93,7 +93,14 @@ export default {
                   size: "auto"
                 },
                 unit: "公斤",
-                value: 100
+                value: 100,
+                rules: {
+                  check: {
+                    name: "es: {{$root.target.weight}}>=100",
+                    trigger: "input"
+                  },
+                  errMsg: "体重不能小于100."
+                }
               }
             }
           },

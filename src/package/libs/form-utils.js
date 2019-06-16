@@ -2374,14 +2374,14 @@ let formUtils = {
    *
    * @param {*} rules
    * @param {*} value
-   * @param {*} trigger 当trigger没有时，说明rules的规则无论是什么条件触发都要判断一遍
+   * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
    * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
    * @returns Boolean or string
    * true 是需要检查的，并且正确
    * false 不需要检查
    * string 是需要检查的，但不正确
    */
-  checkRules: function(rules, value, trigger, parseSources) {
+  checkRules: function(rules, value, triggers, parseSources) {
     if (!rules) {
       //没有规则
       return true;
@@ -2409,9 +2409,8 @@ let formUtils = {
       for (var i = 0; i < checkList.length; i++) {
         var checkItem = checkList[i];
         if (checkItem.name) {
-          var checkTrigger = checkItem.trigger; //检查时机，默认为实时
-          // console.log("checkTrigger == trigger", checkTrigger, trigger)
-          if (!trigger || checkTrigger.includes(trigger)) {
+          var checkTriggers = checkItem.trigger; //检查时机，默认为实时
+          if (!triggers || utils.isInter(checkTriggers, triggers)) {
             hadChecked = true;
             var result = true;
             if (utils.isStr(checkItem.name)) {

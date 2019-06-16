@@ -514,10 +514,10 @@ export default {
 
   data() {
     return {
-      unwatch: false,
+      // unwatch: false,
       // showBody: true,
-      isChanged: false,
-      triggerList: []
+      // isChanged: false,
+      // triggerList: []
     };
   },
 
