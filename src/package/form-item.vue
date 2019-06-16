@@ -2,13 +2,10 @@
   <div class="es-form-item">
     <div v-if="hasTitle" :class="titleClass">
       <div v-if="schema.title" class="es-title-txt">
-        <!-- {{ schema.title.text }} -->
         <template v-if="!schema.title.name">
           {{ schema.title.text }}
         </template>
-        <!-- <span v-else class="es-form-label-box"> -->
         <es-base v-else :config="schema.title"></es-base>
-        <!-- </span> -->
       </div>
       <div v-else class="es-title-txt es-title-empty">&nbsp;</div>
       <div

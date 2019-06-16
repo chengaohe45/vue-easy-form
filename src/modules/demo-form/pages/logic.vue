@@ -58,13 +58,13 @@ export default {
               weight: {
                 hidden: "es: {{$root}}.delivery",
                 hdValue: 0,
-                col: 12,
+                col: 18,
                 label: {
                   text: "体重"
                 },
                 component: {
                   name: "el-input-number",
-                  size: "fixed"
+                  size: "auto"
                 },
                 unit: "公斤",
                 value: 100

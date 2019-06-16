@@ -29,7 +29,12 @@
           @clickActive="clickActiveHandler"
         >
           <template v-if="!itemSchema.subLabel.name">
-            <span>{{itemSchema.subLabel.text? itemSchema.subLabel.text: index + 1 + ""}}</span></template>
+            <span>{{
+              itemSchema.subLabel.text
+                ? itemSchema.subLabel.text
+                : index + 1 + ""
+            }}</span></template
+          >
           <span v-else class="es-form-label-box">
             <es-base :config="itemSchema.subLabel"></es-base>
           </span>

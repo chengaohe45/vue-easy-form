@@ -1584,17 +1584,22 @@ let formUtils = {
         }
       }
       tmpComponent.align = this.__parseAlign(component.align, defaultAlign);
+      tmpComponent.size = this.__parseSize(component.size);
     } else if (utils.isStr(component)) {
-      tmpComponent = { name: component, actions: [], align: defaultAlign };
+      tmpComponent = {
+        name: component,
+        actions: [],
+        align: defaultAlign,
+        size: false
+      };
     } else {
       tmpComponent = {
         name: global.defaultCom,
         actions: [],
-        align: defaultAlign
+        align: defaultAlign,
+        size: false
       };
     }
-
-    tmpComponent.size = this.__parseSize(tmpComponent.size);
 
     return tmpComponent;
   },
@@ -2626,7 +2631,6 @@ let formUtils = {
           this.__esParseComponent(propItem.title, parseSources);
         }
       }
-
 
       if (propItem.label) {
         if (!propItem.label.name && propItem.label.__rawText) {

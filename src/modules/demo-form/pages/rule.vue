@@ -79,7 +79,7 @@ export default {
           },
           age: {
             label: "年龄",
-            col: 12,
+            col: 18,
             component: "el-input-number",
             value: 10,
             rules: {
