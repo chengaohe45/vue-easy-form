@@ -102,7 +102,7 @@ export default {
             },
             title: {
               name: "div",
-              text: "更多设置"
+              text: "es: {{$root}}.status ? '更多设置' : '很多设置'"
             },
             label: false,
             boxRowSpace: 20,

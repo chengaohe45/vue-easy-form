@@ -2614,6 +2614,20 @@ let formUtils = {
         }
       }
 
+      if (propItem.title) {
+        if (!propItem.title.name && propItem.title.__rawText) {
+          // false或为空都不用执行 properies array下propItem.title
+          text = parse.smartEsValue(propItem.title.__rawText, parseSources);
+          if (propItem.title.text != text) {
+            propItem.title.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.title, parseSources);
+        }
+      }
+
+
       if (propItem.label) {
         if (!propItem.label.name && propItem.label.__rawText) {
           // false或为空都不用执行 properies array下propItem.label

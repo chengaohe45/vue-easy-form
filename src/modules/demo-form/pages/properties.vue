@@ -90,7 +90,7 @@ export default {
                 },
                 component: {
                   name: "el-input-number",
-                  size: "fixed"
+                  size: "auto"
                 },
                 unit: "公斤",
                 value: 100
