@@ -957,7 +957,8 @@ export default {
           this.schema.array ? this.schema.array.rules : this.schema.rules,
           value,
           triggerMode,
-          parseSources
+          parseSources,
+          this.schema.__pathKey
         );
         if (checkedResult === true) {
           this.schema.__invalidMsg = false;

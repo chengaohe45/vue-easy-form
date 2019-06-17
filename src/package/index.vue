@@ -480,7 +480,8 @@ export default {
               schema.array.rules,
               arrayValue,
               "",
-              parseSources
+              parseSources,
+              schema.__pathKey
             );
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -560,7 +561,8 @@ export default {
             schema.rules,
             schema.value,
             "",
-            parseSources
+            parseSources,
+            schema.__pathKey
           );
           if (checkedResult === true) {
             schema.__invalidMsg = false;
@@ -576,7 +578,8 @@ export default {
               schema.array.rules,
               arrayValue,
               "",
-              parseSources
+              parseSources,
+              schema.__pathKey
             );
             if (checkedResult === true) {
               schema.__invalidMsg = false;

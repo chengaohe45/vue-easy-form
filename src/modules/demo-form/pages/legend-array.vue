@@ -197,6 +197,14 @@ export default {
                     handler: function(value, key, event) {
                       console.log("test array input:", value, key, event);
                     }
+                  },
+                  // insertValue: { applyNum: "1234", code: 123 }
+                  insertValue: function(arrayValues, position, type) {
+                    console.log(arrayValues, position, type);
+                    if (type == "copy") {
+                      arrayValues[position - 1].applyNum = "";
+                      return arrayValues[position - 1];
+                    }
                   }
                 },
                 properties: {

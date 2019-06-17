@@ -5,15 +5,6 @@ import constant from "../libs/constant";
 export default {
   created() {},
 
-  // props: {
-  //   schema: {
-  //     type: Object,
-  //     default() {
-  //       return {};
-  //     }
-  //   }
-  // },
-
   data() {
     return {};
   },
@@ -136,49 +127,52 @@ export default {
 
     __addItem(index) {
       var insertInfo = false,
-        oldValue;
+        oldValue,
+        position;
 
+      oldValue = formUtils.getValue(this.schema);
       var isIndex = utils.isNum(index);
-      if (isIndex) {
-        // 拷贝某一项
-        oldValue = formUtils.getValue(this.schema);
-        insertInfo = {
-          value: utils.deepCopy(oldValue[index]),
-          position: index + 1
-        }; // 固定的值
-      } else {
-        // 加入最后
-        var insertValue = this.schema.array.insertValue;
-        if (!utils.isUndef(insertValue)) {
-          if (utils.isFunc(insertValue)) {
-            // 是一个函数，过滤
-            oldValue = formUtils.getValue(this.schema);
-            var insertIndex = this.schema.__propSchemaList.length;
-            var thisFrom = formUtils.getThisForm(this);
-            // console.log("thisFrom", thisFrom);
-            var defaultValue = insertValue.call(
-              thisFrom,
-              oldValue,
-              insertIndex
-            );
-            insertInfo = {
-              value: defaultValue,
-              position: this.schema.__propSchemaList.length
-            };
+      position = isIndex ? index + 1 : this.schema.__propSchemaList.length;
+      var insertValue = this.schema.array.insertValue;
+      if (!utils.isUndef(insertValue)) {
+        if (utils.isFunc(insertValue)) {
+          // 是一个函数，过滤
+          var thisFrom = formUtils.getThisForm(this);
+          var rawDefaultValue = utils.deepCopy(oldValue[index]);
+          var newDefaultValue = insertValue.call(
+            thisFrom,
+            oldValue,
+            position,
+            isIndex ? "copy" : "add"
+          );
+          if (utils.isUndef(newDefaultValue)) {
+            if (isIndex) {
+              insertInfo = {
+                value: rawDefaultValue, // 没有默认值，那就取拷贝的那行
+                position: position
+              };
+            } else {
+              insertInfo = false; // 没有返回值，那就不设置
+            }
           } else {
             insertInfo = {
-              value: utils.deepCopy(insertValue),
-              position: this.schema.__propSchemaList.length
-            }; // 固定的值
+              value: newDefaultValue,
+              position: position
+            };
           }
+        } else {
+          insertInfo = {
+            value: utils.deepCopy(insertValue),
+            position: position
+          }; // 固定的值
         }
+      } else if (isIndex) {
+        insertInfo = {
+          value: utils.deepCopy(oldValue[index]),
+          position: position
+        }; // 固定的值
       }
 
-      // console.log(
-      //   "this.schema.__idxChain, this.schema.__pathKey",
-      //   this.schema.__idxChain,
-      //   this.schema.__pathKey
-      // );
       formUtils.addArrayItem(this.schema, insertInfo);
       formUtils.resetIndexArr(
         this.schema,
