@@ -2376,12 +2376,13 @@ let formUtils = {
    * @param {*} value
    * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
    * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
+   * @param {*} pathKey 哪个组件触发
    * @returns Boolean or string
    * true 是需要检查的，并且正确
    * false 不需要检查
    * string 是需要检查的，但不正确
    */
-  checkRules: function(rules, value, triggers, parseSources) {
+  checkRules: function(rules, value, triggers, parseSources, pathKey) {
     if (!rules) {
       //没有规则
       return true;
@@ -2432,6 +2433,7 @@ let formUtils = {
               //是一个函数
               checkFun = checkItem.name;
               params = checkItem.params ? utils.deepCopy(checkItem.params) : [];
+              params.unshift(pathKey);
               params.unshift(utils.deepCopy(parseSources.rootData));
               params.unshift(value);
               result = checkFun.apply(null, params);
