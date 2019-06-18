@@ -1557,12 +1557,12 @@ let formUtils = {
     var tmpComponent,
       defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
-      // tmpComponent = utils.deepCopy(component);
+      // console.log("ref: ", component.ref);
       tmpComponent = {};
       tmpComponent.name = component.name ? component.name : global.defaultCom;
       tmpComponent.actions = this.__parseActions(component.actions, myPathKey);
       var ref = utils.isStr(component.ref) ? component.ref.trim() : null;
-      if (!ref) {
+      if (ref) {
         tmpComponent.ref = ref;
       }
 
