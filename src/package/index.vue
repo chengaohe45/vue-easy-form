@@ -724,7 +724,8 @@ export default {
           inputSchema.array ? inputSchema.array.rules : inputSchema.rules,
           targetValue,
           eventNames,
-          parseSources
+          parseSources,
+          inputSchema.__pathKey
         );
         // console.log("inputSchema.rules: ", targetValue, this._esFormData);
         if (checkedResult === true) {
