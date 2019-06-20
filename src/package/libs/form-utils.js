@@ -2769,6 +2769,7 @@ let formUtils = {
           }
         } else {
           sum = 0;
+          var newRowSpace;
           for (key in propItem.properties) {
             nextPropItem = propItem.properties[key];
             if (nextPropItem.__groups) {
@@ -2780,15 +2781,19 @@ let formUtils = {
               );
               if (!isHidden) {
                 //组不隐藏
-                if (sum <= 0) {
-                  //这个组就是第一行
-                  sum = constant.UI_MAX_COL;
-                  if (nextPropItem.rowSpace != 0) {
-                    nextPropItem.rowSpace = 0;
-                  }
+
+                sum += nextPropItem.__groupCol;
+                if (sum <= constant.UI_MAX_COL) {
+                  //还在第一行
+                  newRowSpace = 0;
                 } else {
-                  sum += constant.UI_MAX_COL;
+                  newRowSpace = nextPropItem.__rawRowSpace;
                 }
+                if (nextPropItem.rowSpace != newRowSpace) {
+                  //还原
+                  nextPropItem.rowSpace = newRowSpace;
+                }
+
                 if (nextPropItem.__hiddenGroup != isHidden) {
                   nextPropItem.__hiddenGroup = isHidden;
                 }
@@ -2813,7 +2818,6 @@ let formUtils = {
               // console.log(nextPropItem.col, isHidden);
               if (!isHidden) {
                 sum += nextPropItem.col;
-                var newRowSpace;
                 if (sum <= constant.UI_MAX_COL) {
                   //还在第一行
                   newRowSpace = 0;
