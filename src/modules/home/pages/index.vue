@@ -1,6 +1,6 @@
 <template>
   <div class="home-box">
-    <!-- Hello world -->
+    欢迎来到esform
     <!-- <div style="width: 90%;">
       <tabsNav>
         <tabsItem :tabsName="'tabs1'" :is-active="false"></tabsItem>
@@ -14,7 +14,7 @@
         <tabsItem :tabsName="'tabs3'" :is-active="false"></tabsItem>
       </tabsNav>
     </div> -->
-    <el-input
+    <!-- <el-input
       v-model="gameName"
       @change.native="testChangeNative"
       @change="testChange"
@@ -22,7 +22,7 @@
       placeholder="游戏名称"
       class="w120"
     ></el-input>
-    <native @keyup.native="testSubmit"></native>
+    <native @keyup.native="testSubmit"></native> -->
   </div>
 </template>
 
@@ -69,7 +69,7 @@ export default {
 @import "@/static/css/mixins.scss";
 .home-box {
   @include display-center;
-  // font-size: 50px;
+  font-size: 50px;
   height: 100%;
 }
 </style>

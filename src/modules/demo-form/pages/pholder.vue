@@ -37,7 +37,7 @@ export default {
               name: "div",
               text: "es: {{$root}}.author"
             },
-            value: "我不需要提交",
+            value: "我不需要提交(我前面有一个占位空间，所以我掉下来)",
             col: 12
           },
           status: {

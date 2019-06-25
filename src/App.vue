@@ -71,7 +71,7 @@ export default {
     @include border-box;
     margin: 0;
     padding: 0;
-    background-color: #fff;
+    background-color: #324157;
     text-align: left;
     /*width: $g_navAsideWidth;*/
     border-right: 1px solid #e6e6e6;

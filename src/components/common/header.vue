@@ -43,7 +43,7 @@ export default {
   margin: 0;
   padding: 0;
   display: block;
-  background-color: rgb(64, 158, 255);
+  background-color: rgba(64, 158, 255, 0.2);
   color: #fff;
   overflow: hidden;
 

@@ -3,6 +3,8 @@
     :default-active="$route.path"
     :router="true"
     class="nav-box"
+    background-color="#324157"
+    text-color="#fff"
     active-text-color="#409eff"
   >
     <template v-for="(item, index) in navList">
@@ -74,6 +76,7 @@ export default {
 <style lang="scss">
 .nav-box {
   border-right: 0 !important;
+  padding-bottom: 10px;
 }
 
 /*.fullHeight {
