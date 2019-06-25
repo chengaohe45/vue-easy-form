@@ -1,0 +1,87 @@
+<template>
+  <demo-frame :title="title" :formSchema="formSchema">
+    <div slot="details">
+      <div>字段unit: 对组件进行补充，一般用于单位</div>
+      <div>字段desc: 对每一项进行补充</div>
+    </div>
+  </demo-frame>
+</template>
+
+<script>
+import demoFrame from "../components/demo-frame.vue";
+import desc from "../components/desc";
+export default {
+  data() {
+    return {
+      title: "单位与描述设置",
+
+      details: "字段unit, desc; desc支持html",
+
+      formSchema: {
+        colon: true,
+        properties: {
+          name: {
+            label: "广告名称",
+            component: "el-input",
+            value: "首页位置",
+            // col: 12,
+            desc: "一般的描述方法"
+          },
+          isJson: {
+            label: "传输格式",
+            component: {
+              name: "el-switch",
+              props: {
+                activeText: "JSON格式",
+                inactiveText: "XML格式"
+              }
+            },
+            value: true
+          },
+          data: {
+            label: "传输数据",
+            component: {
+              name: "el-input",
+              props: {
+                placeholder: "改变‘传输格式’试试"
+              }
+            },
+            value: "",
+            desc: "es: {{$root}}.isJson ? 'JSON格式' : 'XML格式'"
+          },
+
+          note: {
+            label: "备注",
+            component: {
+              name: "el-input",
+              props: {
+                placeholder: ""
+              }
+            },
+            value: "",
+            desc: {
+              name: desc
+            }
+          }
+
+        }
+      }
+    };
+  },
+
+  created() {
+    // console.log("dynamicTags", dynamicTags);
+  },
+
+  computed: {},
+
+  mounted() {},
+
+  methods: {},
+  components: {
+    demoFrame
+  }
+};
+</script>
+
+<style lang="scss"></style>

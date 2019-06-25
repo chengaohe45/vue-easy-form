@@ -14,6 +14,8 @@ import ruleForm from "../modules/demo-form/pages/rule";
 
 import unitDescForm from "../modules/demo-form/pages/unit-desc";
 import comUnitForm from "../modules/demo-form/pages/com-unit";
+import comDescForm from "../modules/demo-form/pages/com-desc";
+import comHelpForm from "../modules/demo-form/pages/com-help";
 
 import helpForm from "../modules/demo-form/pages/help";
 import propertiesForm from "../modules/demo-form/pages/properties";
@@ -309,16 +311,16 @@ let navList = [
       {
         icon: "",
         name: "描述",
-        link: "/form-com-desc",
-        path: "/form-com-desc",
-        component: unitDescForm
+        link: "/com-desc",
+        path: "/com-desc",
+        component: comDescForm
       },
       {
         icon: "",
         name: "帮助",
-        link: "/form-com-help",
-        path: "/form-com-help",
-        component: helpForm
+        link: "/com-help",
+        path: "/com-help",
+        component: comHelpForm
       },
       {
         icon: "",
