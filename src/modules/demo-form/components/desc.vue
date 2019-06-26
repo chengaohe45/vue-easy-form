@@ -8,23 +8,18 @@
 <script>
 export default {
   data() {
-    return {
-    };
+    return {};
   },
 
-  props: {
-  },
+  props: {},
 
-  created() {
-  },
+  created() {},
 
   computed: {},
 
   mounted() {},
 
-  methods: {
-    
-  },
+  methods: {},
   components: {}
 };
 </script>
@@ -39,11 +34,11 @@ export default {
   font-size: 12px;
   line-height: 16px;
   .star {
-    color: #67C23A;
+    color: #67c23a;
   }
 
   .txt {
-    color: #E6A23C;
+    color: #e6a23c;
   }
 }
 </style>

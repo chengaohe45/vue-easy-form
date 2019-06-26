@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>
         在component对象中添加ref属性，应用时再用form.getRef('testRef')取出
@@ -12,7 +17,6 @@
       <div>
         2. 主要作用用于取出相关的标（对象或节点），从而操作目标里面的对外方法
       </div>
-      <strong style="color: red;">（应用见“行为/事件”）</strong>
     </div>
   </demo-frame>
 </template>
@@ -24,6 +28,8 @@ export default {
   data() {
     return {
       title: "引用",
+      docsTitle: "所有表单事件/方法",
+      docsHref: "/vue-easy-form-docs/dist/base/event.html",
 
       formSchema: {
         direction: "h",

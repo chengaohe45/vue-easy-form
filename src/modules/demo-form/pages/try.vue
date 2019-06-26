@@ -9,7 +9,12 @@
             v-model="formValue"
           ></es-form>
         </div>
-        <div class="note">注：灰色背景就是表单的内容区域</div>
+        <div class="note">
+          注：灰色背景就是表单的内容区域.
+          <br />
+          (可以拷例子过来，注意例子不要有<span class="em">自定义组件或函数</span
+          >哦, 因为配置stringify没有把这两个东西格式化)
+        </div>
         <div class="demo-try-value-box">
           <div>
             表单值(formValue):
@@ -216,6 +221,11 @@ export default {
     text-align: left;
     font-size: 12px;
     color: #aaa;
+    line-height: 16px;
+
+    .em {
+      color: #f56c6c;
+    }
   }
 
   .demo-try-body {

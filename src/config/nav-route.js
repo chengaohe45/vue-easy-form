@@ -2,7 +2,8 @@
 
 import home from "../modules/home/pages/index";
 
-import baseForm from "../modules/demo-form/pages/base";
+import labelForm from "../modules/demo-form/pages/label";
+import componentForm from "../modules/demo-form/pages/component";
 import simpleForm from "../modules/demo-form/pages/simple";
 import standardForm from "../modules/demo-form/pages/standard";
 import uiForm from "../modules/demo-form/pages/ui";
@@ -10,14 +11,14 @@ import colForm from "../modules/demo-form/pages/col";
 import pholderForm from "../modules/demo-form/pages/pholder";
 import groupForm from "../modules/demo-form/pages/group";
 import directionForm from "../modules/demo-form/pages/direction";
-import ruleForm from "../modules/demo-form/pages/rule";
+import rulesForm from "../modules/demo-form/pages/rules";
 
-import unitDescForm from "../modules/demo-form/pages/unit-desc";
-import comUnitForm from "../modules/demo-form/pages/com-unit";
-import comDescForm from "../modules/demo-form/pages/com-desc";
-import comHelpForm from "../modules/demo-form/pages/com-help";
+// import unitDescForm from "../modules/demo-form/pages/unit-desc";
+import comUnitForm from "../modules/demo-form/pages/unit";
+import comDescForm from "../modules/demo-form/pages/desc";
+import comHelpForm from "../modules/demo-form/pages/help";
 
-import helpForm from "../modules/demo-form/pages/help";
+// import helpForm from "../modules/demo-form/pages/help";
 import propertiesForm from "../modules/demo-form/pages/properties";
 import propertiesTabsForm from "../modules/demo-form/pages/properties-tabs";
 import logicForm from "../modules/demo-form/pages/logic";
@@ -28,8 +29,8 @@ import tabsArrForm from "../modules/demo-form/pages/tabs-array";
 import valueForm from "../modules/demo-form/pages/value";
 import formatForm from "../modules/demo-form/pages/format";
 import refForm from "../modules/demo-form/pages/ref";
-import actionForm from "../modules/demo-form/pages/action";
-import eventForm from "../modules/demo-form/pages/event";
+import actionsForm from "../modules/demo-form/pages/actions";
+// import eventForm from "../modules/demo-form/pages/event";
 import exampleForm from "../modules/demo-form/pages/example";
 import tryForm from "../modules/demo-form/pages/try";
 
@@ -81,55 +82,90 @@ let navList = [
     children: [
       {
         icon: "",
-        name: "入门/配置",
-        link: "/form-base",
-        path: "/form-base",
-        component: baseForm
-      },
-      {
-        icon: "",
         name: "简单写法",
-        link: "/form-simple",
-        path: "/form-simple",
+        link: "/",
+        path: "/",
+        alias: "/simple",
         component: simpleForm
       },
       {
         icon: "",
         name: "标准写法",
-        link: "/form-standard",
-        path: "/form-standard",
+        link: "/standard",
+        path: "/standard",
         component: standardForm
       },
       {
         icon: "",
-        name: "单位与描述设置",
-        link: "/form-unit-desc",
-        path: "/form-unit-desc",
-        component: unitDescForm
+        name: "项标签",
+        link: "/label",
+        path: "/label",
+        component: labelForm
       },
       {
         icon: "",
-        name: "帮助设置",
-        link: "/form-help",
-        path: "/form-help",
-        component: helpForm
+        name: "项组件",
+        link: "/component",
+        path: "/component",
+        component: componentForm
       },
-      
+      {
+        icon: "",
+        name: "项组件事件",
+        link: "/actions",
+        path: "/actions",
+        component: actionsForm
+      },
+      {
+        icon: "",
+        name: "项组件验证",
+        link: "/rules",
+        path: "/rules",
+        component: rulesForm
+      },
+      {
+        icon: "",
+        name: "项组件值转换",
+        link: "/form-format",
+        path: "/form-format",
+        component: formatForm
+      },
+      {
+        icon: "",
+        name: "单位",
+        link: "/unit",
+        path: "/unit",
+        component: comUnitForm
+      },
+      {
+        icon: "",
+        name: "描述",
+        link: "/desc",
+        path: "/desc",
+        component: comDescForm
+      },
+      {
+        icon: "",
+        name: "帮助",
+        link: "/help",
+        path: "/help",
+        component: comHelpForm
+      },
       {
         icon: "",
         name: "es逻辑控制",
         link: "/form-logic",
         path: "/form-logic",
         component: logicForm
-      },
-      {
-        icon: "",
-        name: "取值/赋值",
-        link: "/form-value",
-        path: "/form-value",
-        component: valueForm
-      },
-      
+      }
+      // {
+      //   icon: "",
+      //   name: "取值/赋值",
+      //   link: "/form-value",
+      //   path: "/form-value",
+      //   component: valueForm
+      // },
+
       // {
       //   icon: "",
       //   name: "引用",
@@ -137,19 +173,12 @@ let navList = [
       //   path: "/form-ref",
       //   component: refForm
       // },
-      {
-        icon: "",
-        name: "表单事件",
-        link: "/form-event",
-        path: "/form-event",
-        component: eventForm
-      },
       // {
       //   icon: "",
-      //   name: "详细例子",
-      //   link: "/form-example",
-      //   path: "/form-example",
-      //   component: exampleForm
+      //   name: "表单事件",
+      //   link: "/form-event",
+      //   path: "/form-event",
+      //   component: eventForm
       // },
       // {
       //   icon: "",
@@ -162,61 +191,13 @@ let navList = [
   },
   {
     icon: "el-icon-menu",
-    name: "表单标签/组件",
-    children: [
-      {
-        icon: "",
-        name: "表单标签",
-        link: "/form-com-label",
-        path: "/form-com-label",
-        component: unitDescForm
-      },
-      {
-        icon: "",
-        name: "表单组件",
-        link: "/form-com-unit",
-        path: "/form-com-unit",
-        component: unitDescForm
-      },
-      {
-        icon: "",
-        name: "组件值转换",
-        link: "/form-format",
-        path: "/form-format",
-        component: formatForm
-      },
-      {
-        icon: "",
-        name: "表单组件验证",
-        link: "/form-rule",
-        path: "/form-rule",
-        component: ruleForm
-      },
-      {
-        icon: "",
-        name: "表单组件事件",
-        link: "/form-action",
-        path: "/form-action",
-        component: actionForm
-      },
-      {
-        icon: "",
-        name: "组件引用",
-        link: "/form-ref",
-        path: "/form-ref",
-        component: refForm
-      }
-    ]
-  },
-  {
-    icon: "el-icon-menu",
     name: "表单布局",
     children: [
       {
         icon: "",
         name: "项排列设置",
-        link: "/form-direction",
-        path: "/form-direction",
+        link: "/direction",
+        path: "/direction",
         component: directionForm
       },
       {
@@ -242,9 +223,9 @@ let navList = [
       },
       {
         icon: "",
-        name: "类型设置",
-        link: "/form-pholder",
-        path: "/form-pholder",
+        name: "占位空间",
+        link: "/pholder",
+        path: "/pholder",
         component: pholderForm
       },
       {
@@ -260,7 +241,7 @@ let navList = [
         link: "/form-prop-tabs",
         path: "/form-prop-tabs",
         component: propertiesTabsForm
-      },
+      }
     ]
   },
   {
@@ -299,37 +280,61 @@ let navList = [
   },
   {
     icon: "el-icon-menu",
-    name: "可组件化属性",
+    name: "表单事件/方法",
     children: [
+      // {
+      //   icon: "",
+      //   name: "表单事件",
+      //   link: "/form-com-unit",
+      //   path: "/form-com-unit",
+      //   component: rulesForm
+      // },
+      // {
+      //   icon: "",
+      //   name: "表单方法",
+      //   link: "/form-ref",
+      //   path: "/form-ref",
+      //   component: refForm
+      // },
       {
         icon: "",
-        name: "单位",
-        link: "/com-unit",
-        path: "/com-unit",
-        component: comUnitForm
+        name: "取值/赋值",
+        link: "/value",
+        path: "/value",
+        component: valueForm
       },
+
       {
         icon: "",
-        name: "描述",
-        link: "/com-desc",
-        path: "/com-desc",
-        component: comDescForm
+        name: "引用",
+        link: "/ref",
+        path: "/ref",
+        component: refForm
       },
+
       {
         icon: "",
-        name: "帮助",
-        link: "/com-help",
-        path: "/com-help",
-        component: comHelpForm
-      },
-      {
-        icon: "",
-        name: "标题",
-        link: "/form-com-title",
-        path: "/form-com-title",
-        component: ruleForm
+        name: "详细例子",
+        link: "/example",
+        path: "/example",
+        component: exampleForm
       }
+      // {
+      //   icon: "",
+      //   name: "表单事件",
+      //   link: "/form-event",
+      //   path: "/form-event",
+      //   component: eventForm
+      // }
     ]
+  },
+  {
+    icon: "el-icon-edit",
+    name: "试一试",
+    link:
+      "/try" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
+    path: "/try" /* 用于路由, 要跟link保持一致 */,
+    component: tryForm /* 对应的模块 */
   }
   // <!-- Don"t touch me - modules-->
 ];
@@ -405,7 +410,7 @@ let navRoute = {
     let newNavList = [];
 
     //put in home page
-    newNavList.push(fetch(homeItem, navKeys3));
+    // newNavList.push(fetch(homeItem, navKeys3));
 
     navList.forEach(item => {
       if (item.path) {
@@ -430,7 +435,7 @@ let navRoute = {
   /* 取出页面注册 */
   getPages() {
     let newPageList = [];
-    newPageList.push(fetch(homeItem, pathKeys));
+    // newPageList.push(fetch(homeItem, pathKeys));
     //导航菜单，可能存在多级
     newPageList.push(...scan(navList));
     //其它页面

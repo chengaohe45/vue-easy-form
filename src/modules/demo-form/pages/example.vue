@@ -211,17 +211,18 @@ export default {
             // label: "",
             rowSpace: 15,
             // col: 15,
-            value: [
-              { name: "小明", code: "T123" },
-              { name: "小花", code: "A623" }
-            ],
+
             array: {
               name: "array",
               hasOrder: true,
               hasDelete: true,
               hasSort: true,
               hasAdd: true,
-              max: 5
+              max: 5,
+              value: [
+                { name: "小明", code: "T123" },
+                { name: "小花", code: "A623" }
+              ]
             },
             boxRowHeight: 32,
             boxRowSpace: 15,
@@ -236,7 +237,8 @@ export default {
                   props: {
                     size: "small"
                   }
-                }
+                },
+                rules: true
               },
               code: {
                 value: "100",

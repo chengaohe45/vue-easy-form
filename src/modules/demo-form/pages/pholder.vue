@@ -3,7 +3,7 @@
     <div slot="details">
       写法跟写一个平常组件一样：<br />
       layout有两个值："space", "tabs"; 区分大小写；其余的认为是false<br />
-      当layout为'space'时,说明这个是占位符，此值不会取出，label也不会显示（有效值只有col,hidden,
+      当layout为'space'时,说明这个是占位空间，此值不会取出，label也不会显示（有效值只有col,hidden,
       group;其余的失效）
     </div>
   </demo-frame>
@@ -15,7 +15,7 @@ import title from "@/components/units/title";
 export default {
   data() {
     return {
-      title: "占位符",
+      title: "占位空间",
 
       formSchema: {
         colon: true,
@@ -37,7 +37,7 @@ export default {
               name: "div",
               text: "es: {{$root}}.author"
             },
-            value: "我不需要提交(我前面有一个占位空间，所以我掉下来)",
+            value: "我不需要提交(前面有一个占位空间，所以掉下来)",
             col: 12
           },
           status: {

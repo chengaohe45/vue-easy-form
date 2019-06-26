@@ -1,40 +1,10 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      <div class="rules-details">
-        <div>
-          <pre>
-字段rules: {
-            required: true,   //是否允许为空
-            emptyMsg: "代号不能为空", //当requred为true时有用
-            check: "isMobile",
-            errMsg: "代号不能大于10"  //当check中的函数返回的值不是字符串（为false）时有效
-          }
-          </pre>
-        </div>
-        <div>
-          <pre>
-            check写法：
-            check: "isMobile", //写法一: 直接写成一个字符串，会调用系统这个函数来检查：那么参数的值为：(value)
-            check: {  //写法二: 标准写法，其中name可以是一个字符串或一个函数(形式如下)，那么参数的值为：(value, 1, 2)
-              name: "isMobile", 
-              params: [1, 2], // 需要给函数加的参数
-              trigger: "change" // 需要给函数加的参数，默认为input; 场景：验证电话时就是光标离开时再检查;
-            }, 
-            check: value => { // 写法三：直接写成一个函数，系统会插入表单的值给用户进行个性化判断; 参数的值为：(value, formData, ..params),
-                if (value.length > 10) {
-                  // return "姓名不能大于10个字";
-                  return false;
-                } else {
-                  return true;
-                }
-              }
-            check: "<span v-pre>es: {{$root.age}}>10</span>", //写法四，es语句; 也可以直接写在name上
-            check: ["isMobile", function(value, formData, ...)], //写法五，多个判断：也可以是标准写法组成的数组
-          </pre>
-        </div>
+      <div>
+        字段rules: 函数会返回三个参数：value, formData, key
       </div>
-      <div>提交时判断表单是否合法：form.checkAll()</div>
+      <div>提交时判断表单是否合法则用：form.checkAll()</div>
     </div>
   </demo-frame>
 </template>
@@ -49,8 +19,8 @@ export default {
 
       formSchema: {
         properties: {
-          name: {
-            label: "姓名",
+          name1: {
+            label: "姓名1",
             component: "el-input",
             value: "首页位置",
             col: 18,
@@ -59,6 +29,38 @@ export default {
               emptyMsg: "名称不能为空"
             }
           },
+          name2: {
+            label: "姓名2",
+            component: "el-input",
+            value: "首页位置",
+            col: 18,
+            rules: true,
+            desc: "简写：rules=true"
+          },
+
+          isOpen: {
+            label: "开关",
+            component: "el-switch",
+            value: true
+          },
+
+          name3: {
+            label: "姓名3",
+            component: {
+              name: "el-input",
+              props: {
+                placeholder: "切换开关试试"
+              }
+            },
+            value: "",
+            col: 18,
+            rules: {
+              required: "es: {{$root}}.isOpen",
+              emptyMsg: "名称不能为空"
+            },
+            desc: "required支持es语法"
+          },
+
           mobile: {
             label: "手机号码",
             component: {
@@ -71,7 +73,13 @@ export default {
             col: 18,
             rules: {
               check: {
-                name: "isMobile",
+                name: function(value, formData, key) {
+                  // console.log("value: ", value);
+                  // console.log("formData: ", formData);
+                  // console.log("key: ", key);
+                  var reg = /^1\d{10}$/;
+                  return reg.test(value);
+                },
                 trigger: "change"
               },
               errMsg: "手机号码为11位"
@@ -88,7 +96,8 @@ export default {
                 trigger: "change"
               },
               errMsg: "年龄不能小于10"
-            }
+            },
+            desc: "check.name支持es(这里不能小于10)"
           },
           desc: {
             label: "广告描述",
@@ -97,21 +106,22 @@ export default {
               props: {
                 type: "textarea",
                 autosize: { minRows: 3, maxRows: 5 },
-                placeholder: "广告描述"
+                placeholder: "大于10个字试试"
               }
             },
             value: "",
             rules: {
-              check: (value, formData) => {
+              check: (value, formData, key) => {
                 // console.log(value, "----", typeof formData);
-                if (value && value.length > formData.age) {
-                  return "广告描述字数不能多于年龄值(" + formData.age + ")";
+                if (value && value.length > 10) {
+                  return "广告描述字数不能多于10";
                 } else {
                   return true;
                 }
               },
-              errMsg: "广告描述字数不能多于年龄"
-            }
+              errMsg: "广告描述输入有误"
+            },
+            desc: "rules.check内返回字符串，也即是错误信息"
           }
         }
       }

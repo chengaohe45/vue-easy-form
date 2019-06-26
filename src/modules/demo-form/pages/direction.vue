@@ -8,7 +8,7 @@
 
 <script>
 import demoFrame from "../components/demo-frame.vue";
-// import dynamicTags from "@/components/dynamicTags/index";
+import alignDesc from "../components/align-desc";
 export default {
   data() {
     return {
@@ -18,46 +18,47 @@ export default {
         direction: "v",
         colon: true,
         properties: {
-          startTime: {
-            label: {
-              text: "有效日期",
-              size: "fixed"
-            },
-            group: "date",
-            col: 12,
-            component: {
-              name: "el-date-picker",
-              props: {
-                type: "datetime",
-                valueFormat: "yyyy-MM-dd hh:mm:ss"
-              },
-              size: "auto"
-            },
-            value: "",
-            direction: "v"
-          },
-          endTime: {
-            label: {
-              text: "到",
-              size: "fixed"
-            },
-            group: "date",
-            col: 12,
-            component: {
-              name: "el-date-picker",
-              props: {
-                type: "datetime",
-                valueFormat: "yyyy-MM-dd hh:mm:ss"
-              },
-              size: "auto"
-            },
-            colon: false,
-            value: "",
-            direction: "v"
-          },
+          // startTime: {
+          //   label: {
+          //     text: "有效日期",
+          //     size: "fixed"
+          //   },
+          //   group: "date",
+          //   col: 12,
+          //   component: {
+          //     name: "el-date-picker",
+          //     props: {
+          //       type: "datetime",
+          //       valueFormat: "yyyy-MM-dd hh:mm:ss"
+          //     },
+          //     size: "auto"
+          //   },
+          //   value: "",
+          //   direction: "v"
+          // },
+          // endTime: {
+          //   label: {
+          //     text: "到",
+          //     size: "fixed"
+          //   },
+          //   group: "date",
+          //   col: 12,
+          //   component: {
+          //     name: "el-date-picker",
+          //     props: {
+          //       type: "datetime",
+          //       valueFormat: "yyyy-MM-dd hh:mm:ss"
+          //     },
+          //     size: "auto"
+          //   },
+          //   colon: false,
+          //   value: "",
+          //   direction: "v"
+          // },
 
           name: {
             label: "作者",
+            direction: "h",
             component: "el-input",
             value: "首页位置",
             col: 24
@@ -104,6 +105,27 @@ export default {
             unit: "px",
             // help: "高应怎么样?",
             direction: "v"
+          },
+          color: {
+            label: {
+              text: "颜色",
+              align: "center"
+            },
+            direction: "v",
+            // col: 12,
+            component: {
+              name: "el-color-picker",
+              size: "fixed",
+              align: "center"
+            },
+            value: "#67C23A",
+            desc: {
+              name: alignDesc,
+              props: {
+                align: "center",
+                txt: "设置了size=fixed是为了组件的宽度自动变化"
+              }
+            }
           }
         }
       }

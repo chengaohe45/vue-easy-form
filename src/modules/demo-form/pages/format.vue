@@ -1,7 +1,8 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      属性format
+      属性format >>
+      场景：当接口所需要的是1/0,而"开关组件"则是true/false,此时就需要转换
     </div>
   </demo-frame>
 </template>
@@ -12,7 +13,7 @@ import demoFrame from "../components/demo-frame.vue";
 export default {
   data() {
     return {
-      title: "占位符",
+      title: "数据转换",
 
       formSchema: {
         name: {

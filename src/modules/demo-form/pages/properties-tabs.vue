@@ -20,7 +20,7 @@ export default {
           isOpen: {
             label: "是否打开",
             component: "el-switch",
-            value: false
+            value: true
           },
           test: {
             layout: {

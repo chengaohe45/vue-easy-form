@@ -1,8 +1,7 @@
 <template>
-  <span class="com-unit">
-    <span class="txt">单位{{ num }}</span
-    ><i class="el-icon-star-on star"></i>
-  </span>
+  <div class="align-desc" :style="{ textAlign: align }">
+    {{ txt }}
+  </div>
 </template>
 
 <script>
@@ -12,10 +11,15 @@ export default {
   },
 
   props: {
-    num: {
-      type: Number,
+    align: {
+      type: String,
       required: false,
-      default: 10
+      default: "left"
+    },
+    txt: {
+      type: String,
+      required: false,
+      default: "..."
     }
   },
 
@@ -33,14 +37,6 @@ export default {
 <style lang="scss">
 @import "@/static/css/mixins.scss";
 
-.com-unit {
-  white-space: nowrap;
-  .star {
-    color: #67c23a;
-  }
-
-  .txt {
-    color: #e6a23c;
-  }
+.align-desc {
 }
 </style>

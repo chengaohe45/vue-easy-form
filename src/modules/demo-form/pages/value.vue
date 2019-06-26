@@ -1,5 +1,11 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema" :has-value="true">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :has-value="true"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>form.getValue(): 取值</div>
       <div>form.setValue(Object): 设值</div>
@@ -17,6 +23,8 @@ export default {
   data() {
     return {
       title: "取值/赋值",
+      docsTitle: "所有表单事件/方法",
+      docsHref: "/vue-easy-form-docs/dist/base/event.html",
 
       formSchema: {
         direction: "v",
@@ -35,7 +43,7 @@ export default {
               text: "我的课程"
             },
             label: false,
-            value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
+
             array: {
               name: "array-table",
               hasOrder: true,
@@ -43,7 +51,8 @@ export default {
               hasSort: false,
               hasAdd: true,
               max: 5,
-              headRequired: true
+              headRequired: true,
+              value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }]
             },
             boxRowHeight: 32,
             properties: {

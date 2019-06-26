@@ -1,8 +1,5 @@
 <template>
-  <span class="com-unit">
-    <span class="txt">单位{{ num }}</span
-    ><i class="el-icon-star-on star"></i>
-  </span>
+  <span class="com-label"> 组件写法<i class="el-icon-star-on star"></i> </span>
 </template>
 
 <script>
@@ -11,13 +8,7 @@ export default {
     return {};
   },
 
-  props: {
-    num: {
-      type: Number,
-      required: false,
-      default: 10
-    }
-  },
+  props: {},
 
   created() {},
 
@@ -33,7 +24,7 @@ export default {
 <style lang="scss">
 @import "@/static/css/mixins.scss";
 
-.com-unit {
+.com-label {
   white-space: nowrap;
   .star {
     color: #67c23a;

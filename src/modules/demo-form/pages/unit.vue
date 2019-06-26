@@ -2,7 +2,6 @@
   <demo-frame class="demo-frame" :title="title" :formSchema="formSchema">
     <div slot="details">
       <div>字段unit: 对组件进行补充，一般用于单位</div>
-      <div>字段desc: 对每一项进行补充</div>
     </div>
   </demo-frame>
 </template>
@@ -13,13 +12,12 @@ import unit from "../components/unit";
 export default {
   data() {
     return {
-      title: "单位与描述设置",
+      title: "单位",
 
       details: "字段unit, desc; desc支持html",
 
       formSchema: {
         properties: {
-          
           startAge: {
             label: "适合人群",
             group: "date",
@@ -72,10 +70,10 @@ export default {
             unit: {
               name: unit,
               props: {
-                num : "es: {{$root.comType}}"
+                num: "es: {{$root.comType}}"
               }
             }
-          },
+          }
         }
       }
     };

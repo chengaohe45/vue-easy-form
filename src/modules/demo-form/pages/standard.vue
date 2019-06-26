@@ -17,7 +17,7 @@ import dynamicTags from "@/components/dynamicTags/index";
 export default {
   data() {
     return {
-      title: "基础写法",
+      title: "标准写法",
 
       formSchema: {
         title: "表单名称",

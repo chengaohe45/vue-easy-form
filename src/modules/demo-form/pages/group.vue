@@ -57,8 +57,8 @@ export default {
           },
           group: "date",
           col: 10,
-          offsetLeft: 10,
-          offsetRight: 10,
+          // offsetLeft: 10,
+          // offsetRight: 10,
           component: {
             name: "el-date-picker",
             props: {

@@ -11,9 +11,10 @@
           v-model="formValue"&gt;&lt;/es-form&gt;
         </div>
         <div>
-          schema具体配置见<a
+          <span class="docs-title">{{ docsTitle }}</span
+          >的具体配置见<a
             target="_blank"
-            href="/vue-easy-form-docs/dist/base/settings.html"
+            :href="'https://chengaohe45.github.io' + docsHref"
             >配置文档</a
           >
         </div>
@@ -134,26 +135,6 @@ export default {
       rawFormValue: "",
       checkResult: null,
       errorMsg: ""
-
-      // formSchema: {
-      //   name: {
-      //     label: "广告名称",
-      //     component: "el-input",
-      //     value: "首页位置"
-      //   },
-      //   clickTotal: {
-      //     label: {
-      //       text: "点击量"
-      //     },
-      //     component: {
-      //       name: "el-input-number",
-      //       props: {
-      //         step: 2
-      //       }
-      //     },
-      //     value: 255
-      //   }
-      // },
     };
   },
 
@@ -178,6 +159,18 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+
+    docsTitle: {
+      type: String,
+      required: false,
+      default: "schema"
+    },
+
+    docsHref: {
+      type: String,
+      required: false,
+      default: "/vue-easy-form-docs/dist/base/settings.html"
     }
   },
 
@@ -192,6 +185,13 @@ export default {
   methods: {
     getFormValue() {
       this.$data.formValue2 = this.$refs.form.getValue();
+
+      this.$data.rawFormValue = JSON.stringify(this.$data.formValue2, null, 2);
+
+      this.$message({
+        message: "值也填进赋值框里，可以修改试试",
+        type: "success"
+      });
     },
 
     checkFormValue() {
@@ -248,8 +248,12 @@ export default {
         console.log("\n");
       }
     },
-    formSubmit(value) {
-      console.log("formSubmit: ", value);
+    formSubmit(/*value*/) {
+      // console.log("formSubmit: ", value);
+      this.$message({
+        message: "触发了表单的提交事件",
+        type: "success"
+      });
     }
   },
   components: {}
@@ -299,6 +303,10 @@ export default {
     .details {
       margin-top: 10px;
     }
+  }
+
+  .docs-title {
+    color: #67c23a;
   }
 
   .demo-form-body {

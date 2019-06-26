@@ -76,6 +76,7 @@ export default {
   .help-icon {
     outline: none;
     user-select: none;
+    font-size: 18px;
   }
 }
 

@@ -1,7 +1,6 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      <div>字段unit: 对组件进行补充，一般用于单位</div>
       <div>字段desc: 对每一项进行补充</div>
     </div>
   </demo-frame>
@@ -13,7 +12,7 @@ import desc from "../components/desc";
 export default {
   data() {
     return {
-      title: "单位与描述设置",
+      title: "描述",
 
       details: "字段unit, desc; desc支持html",
 
@@ -63,7 +62,6 @@ export default {
               name: desc
             }
           }
-
         }
       }
     };
