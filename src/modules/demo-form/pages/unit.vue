@@ -24,7 +24,7 @@ export default {
             col: 12,
             component: {
               name: "el-input-number",
-              size: "auto"
+              flex: "full"
             },
             value: "15",
             unit: "岁"
@@ -32,13 +32,13 @@ export default {
           endAge: {
             label: {
               text: "到",
-              size: "fixed"
+              flex: "self"
             },
             group: "date",
             col: 12,
             component: {
               name: "el-input-number",
-              size: "auto"
+              flex: "full"
             },
             value: 20,
             unit: "岁"

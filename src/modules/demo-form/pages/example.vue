@@ -125,7 +125,7 @@ export default {
                 type: "date",
                 valueFormat: "yyyy-MM-dd"
               },
-              size: "auto"
+              flex: "full"
             }
           },
           endTime: {
@@ -134,7 +134,7 @@ export default {
             value: "",
             label: {
               text: "-",
-              size: "fixed"
+              flex: "self"
             },
             component: {
               name: "el-date-picker",
@@ -142,7 +142,7 @@ export default {
                 type: "date",
                 valueFormat: "yyyy-MM-dd"
               },
-              size: "auto"
+              flex: "full"
             }
           },
 

@@ -39,16 +39,16 @@
           <div
             :class="[
               'es-form-component-wrap',
-              schema.component.size
-                ? 'es-form-wrap-' + schema.component.size
+              schema.component.flex
+                ? 'es-form-wrap-' + schema.component.flex
                 : ''
             ]"
           >
             <es-base
               :ref="schema.component.ref"
               :class="[
-                schema.component.size
-                  ? 'es-form-component-' + schema.component.size
+                schema.component.flex
+                  ? 'es-form-component-' + schema.component.flex
                   : ''
               ]"
               :config="schema.component"
@@ -423,14 +423,14 @@
     @include inline-center;
   }
 
-  .es-form-component-auto {
+  .es-form-component-full {
     @include flex-full;
     width: auto;
     // text-align: center;
     white-space: nowrap;
   }
 
-  .es-form-component-fixed {
+  .es-form-component-self {
     @include flex-fixed;
     width: auto;
     text-align: center;
@@ -442,7 +442,7 @@
     overflow: hidden;
   }
 
-  .es-form-component-wrap.es-form-wrap-auto {
+  .es-form-component-wrap.es-form-wrap-full {
     @include display-flex;
     @include flex-full;
     width: auto;
@@ -450,7 +450,7 @@
     white-space: nowrap;
   }
 
-  .es-form-component-wrap.es-form-wrap-fixed {
+  .es-form-component-wrap.es-form-wrap-self {
     @include flex-fixed;
     width: auto;
     text-align: center;

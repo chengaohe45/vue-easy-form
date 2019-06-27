@@ -1584,20 +1584,20 @@ let formUtils = {
         }
       }
       tmpComponent.align = this.__parseAlign(component.align, defaultAlign);
-      tmpComponent.size = this.__parseSize(component.size);
+      tmpComponent.flex = this.__parseFlex(component.flex, component.size);
     } else if (utils.isStr(component)) {
       tmpComponent = {
         name: component,
         actions: [],
         align: defaultAlign,
-        size: false
+        flex: false
       };
     } else {
       tmpComponent = {
         name: global.defaultCom,
         actions: [],
         align: defaultAlign,
-        size: false
+        flex: false
       };
     }
 
@@ -1742,13 +1742,13 @@ let formUtils = {
 
     // 因为label有点特殊，所以不能为false
     if (newValue) {
-      newValue.size = this.__parseSize(value.size);
+      newValue.flex = this.__parseFlex(value.flex, value.size);
       newValue.align = this.__parseAlign(value.align, defaultAlign);
     } else {
       newValue = {
         text: false,
         __rawText: false,
-        size: false,
+        flex: false,
         align: defaultAlign
       };
     }
@@ -1756,11 +1756,30 @@ let formUtils = {
     return newValue;
   },
 
-  __parseSize(size) {
-    var sizes = ["fixed", "auto"];
-    if (sizes.includes(size)) {
-      return size;
+  // __parseSize(size) {
+  //   var sizes = ["fixed", "auto"];
+  //   if (sizes.includes(size)) {
+  //     return size;
+  //   }
+  //   return false;
+  // },
+
+  __parseFlex(flex, size) {
+    var flexs = ["self", "full"];
+    if (flexs.includes(flex)) {
+      return flex;
     }
+
+    // 兼容一下之前的东西
+    var sizes = ["fixed", "auto"];
+    var sizeIndex = sizes.indexOf(size);
+    if (sizeIndex >= 0) {
+      console.warn(
+        'label.size and component.size ["fixed", "auto"]已经舍弃了，请使用flex ["self", "full"]'
+      );
+      return flexs[sizeIndex];
+    }
+
     return false;
   },
 
@@ -1849,18 +1868,36 @@ let formUtils = {
         }
       }
 
-      var text =
-        utils.isStr(value.text) && value.text.trim()
-          ? value.text.trim()
-          : canEmpty
-          ? ""
-          : false;
+      var text;
+      if (utils.isStr(value.text)) {
+        text = value.text.trim();
+        text = text || canEmpty ? text : false;
+        newCom.text = text;
+      } else {
+        if (!name) {
+          // 不符合要求，说明为空
+          // 说明为空
+          return false;
+        }
+        text = false;
+      }
       newCom.text = text;
 
-      if (!name && !text) {
-        // 说明为空
-        return false;
-      }
+      // var text =
+      //   utils.isStr(value.text) && value.text.trim()
+      //     ? value.text.trim()
+      //     : (canEmpty
+      //     ? ""
+      //     : false);
+      // newCom.text = text;
+
+      // if (!utils.isStr(text) || !canEmpty) {
+      //   if (!name && !text) {
+      //     // 说明为空
+      //     return false;
+      //   }
+      // }
+
       newCom.__rawText = text;
       return newCom;
     } else if (utils.isStr(value)) {

@@ -16,18 +16,18 @@ export default {
 
       formSchema: {
         properties: {
-          name: {
-            label: "名称",
+          students: {
+            label: "学生",
             array: {
               name: "array-tabs",
-              // type: "bg",
+              type: "card",
               hasOrder: true,
               hasDelete: true,
               hasSort: true,
               hasAdd: true,
               // fixed: 1,
               // max: 5,
-              value: ["名称1", "名称2"],
+              value: ["陈同学", "李同学"],
               rules: true,
               actions: {
                 trigger: "change",
@@ -40,8 +40,38 @@ export default {
             // col: 15,
             value: "小明",
             rules: true,
-            unit: "px",
+            unit: "人",
             desc: "名称就是这样子",
+            help: "帮助就是这样子"
+          },
+          teachers: {
+            label: "老师",
+            array: {
+              name: "array-tabs",
+              type: "line",
+              hasBorder: false,
+              hasOrder: true,
+              // subLabel: "老师",
+              hasDelete: true,
+              hasSort: true,
+              hasAdd: true,
+              // fixed: 1,
+              // max: 5,
+              value: ["陈老师", "高专家"],
+              rules: true,
+              actions: {
+                trigger: "change",
+                handler: function(value, key, event) {
+                  console.log("input change: ", value, key, event);
+                }
+              }
+            },
+            component: "el-input",
+            // col: 15,
+            value: "默认老师",
+            rules: true,
+            unit: "人",
+            // desc: "名称就是这样子",
             help: "帮助就是这样子"
           },
           courses: {

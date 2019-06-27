@@ -25,15 +25,15 @@
                   marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px',
                   textAlign: schema.properties[fieldKeyName].label.align
                 },
-                schema.properties[fieldKeyName].label.size
+                schema.properties[fieldKeyName].label.flex
                   ? ''
                   : { width: schema.properties[fieldKeyName].labelWidth + 'px' }
               ]"
               :class="[
                 'es-form-label',
-                schema.properties[fieldKeyName].label.size
+                schema.properties[fieldKeyName].label.flex
                   ? 'es-form-label-' +
-                    schema.properties[fieldKeyName].label.size
+                    schema.properties[fieldKeyName].label.flex
                   : ''
               ]"
               :key="'label-' + fieldKeyName"
@@ -93,9 +93,9 @@
                 v-if="schema.properties[fieldKeyName].unit.name"
                 :config="schema.properties[fieldKeyName].unit"
               ></es-base>
-              <template v-else>
-                {{ schema.properties[fieldKeyName].unit.text }}
-              </template>
+              <template v-else>{{
+                schema.properties[fieldKeyName].unit.text
+              }}</template>
             </div>
             <div
               v-show="!schema.properties[fieldKeyName].hidden"
@@ -109,7 +109,7 @@
               <!-- <es-base
                 :config="schema.properties[fieldKeyName].help"
                 :open-smart="false"
-              ></es-base> -->
+              ></es-base>-->
               <es-base :config="schema.properties[fieldKeyName].help"></es-base>
             </div>
           </template>
@@ -147,8 +147,8 @@
           v-if="fieldSchema.label.text !== false"
           :class="[
             'es-form-label',
-            fieldSchema.label.size
-              ? 'es-form-label-' + fieldSchema.label.size
+            fieldSchema.label.flex
+              ? 'es-form-label-' + fieldSchema.label.flex
               : ''
           ]"
           :style="
@@ -159,7 +159,7 @@
                     lineHeight: fieldSchema.rowHeight + 'px',
                     textAlign: fieldSchema.label.align
                   },
-                  fieldSchema.label.size
+                  fieldSchema.label.flex
                     ? { textAlign: fieldSchema.label.align }
                     : {
                         width: fieldSchema.labelWidth + 'px',
@@ -175,9 +175,13 @@
             >*</span
           >
           <!-- {{ fieldSchema.label.text }} -->
-          <template v-if="!fieldSchema.label.name"
-            ><span>{{ fieldSchema.label.text }}</span></template
-          >
+          <template v-if="!fieldSchema.label.name">
+            <span>{{
+              fieldSchema.direction != "v" || fieldSchema.label.text
+                ? fieldSchema.label.text
+                : "&nbsp;"
+            }}</span>
+          </template>
           <span v-else class="es-form-label-box">
             <es-base :config="fieldSchema.label"></es-base>
           </span>
@@ -271,15 +275,15 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
   .es-form-v > .es-form-label {
     text-align: left;
     width: auto;
-    height: 26px;
-    line-height: 26px;
-    padding-left: 4px;
-    padding-right: 4px;
+    // height: 26px;
+    line-height: 20px;
+    padding: 4px 3px;
+    // padding-right: 4px;
     // padding-top: 6px;
     // padding-bottom: 6px;
   }
 
-  .es-form-label-auto {
+  .es-form-label-full {
     @include flex-full;
     width: auto;
     padding: 0 10px;
@@ -287,7 +291,7 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     white-space: nowrap;
   }
 
-  .es-form-label-fixed {
+  .es-form-label-self {
     @include flex-fixed;
     width: auto;
     padding: 0 10px;

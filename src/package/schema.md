@@ -59,7 +59,7 @@
       //label: '姓名', //值false或字符串或对象，默认为false,空值代表占空间，label区域保留
       label: {  // 支持es语法; 标准写法
         text: "姓名",
-        size: "fixed" or "auto", //auto 自动，空间有多少占多少	//fixed 固定，看内容的长度是多少就多少 默认两都都没有直接取labelWidth, 当有些值时，labelWidth失效
+        flex: "self" or "full", //full 自动，空间有多少占多少	//self 固定，看内容的长度是多少就多少 默认两都都没有直接取labelWidth, 当有些值时，labelWidth失效
       },
       rules: { 有value的地方可设置rules, 比如component和含有array的properties
         required: true, //支持es语法; 
@@ -96,7 +96,7 @@
       //component: "el-input" //字符串，也就是组件名
       component: {  //标准写法
         name: "el-input",
-        size: "fixed" or "auto", //auto 自动，空间有多少占多少	//fixed 固定，看内容的长度是多少就多少
+        flex: "self" or "full", //full 自动，空间有多少占多少	//self 固定，看内容的长度是多少就多少
         props: {  //组件需要的属性配置 全部属性(如type)支持es语法; 
           type: "password",
           placeholder: "请输入代号"

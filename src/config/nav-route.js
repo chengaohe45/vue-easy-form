@@ -126,8 +126,8 @@ let navList = [
       {
         icon: "",
         name: "项组件值转换",
-        link: "/form-format",
-        path: "/form-format",
+        link: "/format",
+        path: "/format",
         component: formatForm
       },
       {
@@ -154,37 +154,37 @@ let navList = [
       {
         icon: "",
         name: "es逻辑控制",
-        link: "/form-logic",
-        path: "/form-logic",
+        link: "/es",
+        path: "/es",
         component: logicForm
       }
       // {
       //   icon: "",
       //   name: "取值/赋值",
-      //   link: "/form-value",
-      //   path: "/form-value",
+      //   link: "/value",
+      //   path: "/value",
       //   component: valueForm
       // },
 
       // {
       //   icon: "",
       //   name: "引用",
-      //   link: "/form-ref",
-      //   path: "/form-ref",
+      //   link: "/ref",
+      //   path: "/ref",
       //   component: refForm
       // },
       // {
       //   icon: "",
       //   name: "表单事件",
-      //   link: "/form-event",
-      //   path: "/form-event",
+      //   link: "/event",
+      //   path: "/event",
       //   component: eventForm
       // },
       // {
       //   icon: "",
       //   name: "试一试",
-      //   link: "/form-try",
-      //   path: "/form-try",
+      //   link: "/try",
+      //   path: "/try",
       //   component: tryForm
       // }
     ]
@@ -203,22 +203,22 @@ let navList = [
       {
         icon: "",
         name: "项长度设置",
-        link: "/form-col",
-        path: "/form-col",
+        link: "/col",
+        path: "/col",
         component: colForm
       },
       {
         icon: "",
         name: "界面调整设置",
-        link: "/form-ui",
-        path: "/form-ui",
+        link: "/ui",
+        path: "/ui",
         component: uiForm
       },
       {
         icon: "",
         name: "分组设置",
-        link: "/form-group",
-        path: "/form-group",
+        link: "/group",
+        path: "/group",
         component: groupForm
       },
       {
@@ -231,15 +231,15 @@ let navList = [
       {
         icon: "",
         name: "子属性(块布局)",
-        link: "/form-prop",
-        path: "/form-prop",
+        link: "/properies",
+        path: "/properies",
         component: propertiesForm
       },
       {
         icon: "",
         name: "子属性(tabs布局)",
-        link: "/form-prop-tabs",
-        path: "/form-prop-tabs",
+        link: "/prop-tabs",
+        path: "/prop-tabs",
         component: propertiesTabsForm
       }
     ]
@@ -251,29 +251,29 @@ let navList = [
       {
         icon: "",
         name: "行数组",
-        link: "/form-row-array",
-        path: "/form-row-array",
+        link: "/row-array",
+        path: "/row-array",
         component: rowArrForm
       },
       {
         icon: "",
         name: "legend数组",
-        link: "/form-legend-array",
-        path: "/form-legend-array",
+        link: "/legend-array",
+        path: "/legend-array",
         component: legendArrForm
       },
       {
         icon: "",
         name: "表格数组",
-        link: "/form-table-array",
-        path: "/form-table-array",
+        link: "/table-array",
+        path: "/table-array",
         component: tabArrForm
       },
       {
         icon: "",
         name: "tabs数组",
-        link: "/form-tabs-array",
-        path: "/form-tabs-array",
+        link: "/tabs-array",
+        path: "/tabs-array",
         component: tabsArrForm
       }
     ]
@@ -285,15 +285,15 @@ let navList = [
       // {
       //   icon: "",
       //   name: "表单事件",
-      //   link: "/form-com-unit",
-      //   path: "/form-com-unit",
+      //   link: "/com-unit",
+      //   path: "/com-unit",
       //   component: rulesForm
       // },
       // {
       //   icon: "",
       //   name: "表单方法",
-      //   link: "/form-ref",
-      //   path: "/form-ref",
+      //   link: "/ref",
+      //   path: "/ref",
       //   component: refForm
       // },
       {
@@ -322,8 +322,8 @@ let navList = [
       // {
       //   icon: "",
       //   name: "表单事件",
-      //   link: "/form-event",
-      //   path: "/form-event",
+      //   link: "/event",
+      //   path: "/event",
       //   component: eventForm
       // }
     ]

@@ -4,7 +4,7 @@
   <div class="sys-win-body">
     <transition name="nav-slide">
       <div class="sys-nav-slide" style="width: 210px;">
-        <sys-header></sys-header>
+        <!-- <sys-header></sys-header> -->
         <sys-nav></sys-nav>
       </div>
     </transition>

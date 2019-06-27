@@ -56,7 +56,7 @@ export default {
               props: {
                 // placeholder: "请输入作者的名字"
               },
-              size: "fixed"
+              flex: "self"
             },
             value: 0,
             col: 18,

@@ -43,14 +43,14 @@ export default {
                     type: "datetime",
                     valueFormat: "yyyy-MM-dd hh:mm:ss"
                   },
-                  size: "auto"
+                  flex: "full"
                 },
                 value: ""
               },
               endTime: {
                 label: {
                   text: "到",
-                  size: "fixed"
+                  flex: "self"
                 },
                 group: "date",
                 col: 10,
@@ -60,7 +60,7 @@ export default {
                     type: "datetime",
                     valueFormat: "yyyy-MM-dd hh:mm:ss"
                   },
-                  size: "auto"
+                  flex: "full"
                 },
                 value: ""
               }
@@ -90,7 +90,7 @@ export default {
                 },
                 component: {
                   name: "el-input-number",
-                  size: "auto"
+                  flex: "full"
                 },
                 unit: "公斤",
                 value: 100,

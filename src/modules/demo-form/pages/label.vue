@@ -140,7 +140,7 @@ export default {
           component: {
             name: "el-input",
             props: {
-              placeholder: "label没有设置size=fixed; 说明占labelWidth宽"
+              placeholder: "label没有设置flex=self; 说明占labelWidth宽"
             }
           },
           value: ""
@@ -148,14 +148,14 @@ export default {
         end: {
           label: {
             text: "到",
-            size: "fixed"
+            flex: "self"
           },
           group: "date",
           col: 12,
           component: {
             name: "el-input",
             props: {
-              placeholder: "label设置size=fixed; 说明文字是多宽就多宽"
+              placeholder: "label设置flex=self; 说明文字是多宽就多宽"
             }
           },
           value: ""

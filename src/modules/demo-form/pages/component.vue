@@ -50,7 +50,7 @@ export default {
           // col: 12,
           component: {
             name: "el-color-picker",
-            size: "fixed",
+            // flex: "self",
             align: "center"
           },
           value: "#67C23A",
@@ -58,7 +58,7 @@ export default {
             name: alignDesc,
             props: {
               align: "center",
-              txt: "设置了size=fixed是为了组件的宽度自动变化"
+              txt: "设置了flex=self是为了组件的宽度自动变化"
             }
           }
         },
@@ -72,7 +72,7 @@ export default {
           desc: {
             name: alignDesc,
             props: {
-              txt: "因为el-input会自动占100%,所以不设置size=fixed"
+              txt: "因为el-input会自动占100%,所以不设置flex=self"
             }
           }
         },
@@ -81,7 +81,7 @@ export default {
           label: "单位/帮助2",
           component: {
             name: "el-input-number",
-            size: "fixed"
+            flex: "self"
           },
           value: "5",
           unit: "天",
@@ -89,7 +89,7 @@ export default {
           desc: {
             name: alignDesc,
             props: {
-              txt: "设置了size=fixed是为了组件的宽度自动变化"
+              txt: "设置了flex=self是为了组件的宽度自动变化"
             }
           }
         }

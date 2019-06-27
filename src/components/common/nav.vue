@@ -6,6 +6,7 @@
     background-color="#324157"
     text-color="#fff"
     active-text-color="#409eff"
+    :unique-opened="true"
   >
     <template v-for="(item, index) in navList">
       <el-submenu v-if="!item.link" :key="index" :index="index + ''">
@@ -77,6 +78,16 @@ export default {
 .nav-box {
   border-right: 0 !important;
   padding-bottom: 10px;
+
+  .el-submenu.is-active {
+    .el-submenu__title {
+      color: rgb(64, 158, 255) !important;
+    }
+
+    .el-icon-menu {
+      color: rgb(64, 158, 255);
+    }
+  }
 }
 
 /*.fullHeight {

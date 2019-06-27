@@ -22,13 +22,9 @@ export default {
             component: "el-switch",
             value: true
           },
-          test: {
-            layout: {
-              name: "tabs"
-              // type: "bg",
-              // hasBorder: false
-            },
-            title: "数据",
+          test1: {
+            layout: "tabs",
+            title: "tabs类型(card)",
             label: "",
             properties: {
               base: {
@@ -41,7 +37,14 @@ export default {
                 },
                 hidden: "es: !{{$root}}.isOpen",
                 label: "基本信息",
-                array: {},
+                array: {
+                  value: [
+                    {
+                      startTime: "2019-06-11 12:00:00",
+                      endTime: "2019-06-21 12:00:00"
+                    }
+                  ]
+                },
                 rules: {
                   required: true
                 },
@@ -56,7 +59,7 @@ export default {
                         type: "datetime",
                         valueFormat: "yyyy-MM-dd hh:mm:ss"
                       },
-                      size: "auto",
+                      flex: "full",
                       ref: "test"
                     },
                     rules: {
@@ -67,7 +70,7 @@ export default {
                   endTime: {
                     label: {
                       text: "到",
-                      size: "fixed"
+                      flex: "self"
                     },
                     group: "date",
                     col: 12,
@@ -77,7 +80,7 @@ export default {
                         type: "datetime",
                         valueFormat: "yyyy-MM-dd hh:mm:ss"
                       },
-                      size: "auto"
+                      flex: "full"
                     },
                     value: ""
                   }
@@ -112,7 +115,7 @@ export default {
                     },
                     component: {
                       name: "el-input-number",
-                      size: "fixed"
+                      flex: "self"
                     },
                     unit: "公斤",
                     value: 100
@@ -121,7 +124,7 @@ export default {
               },
 
               district: {
-                hidden: "es: {{$hidden(test.base)}}",
+                hidden: "es: {{$hidden(test1.base)}}",
                 ui: {
                   type: "bg-block-border"
                 },
@@ -141,11 +144,11 @@ export default {
               },
 
               more: {
-                hidden: "es: {{$hidden(test.district)}}",
+                hidden: "es: {{$hidden(test1.district)}}",
                 hdValue: null,
                 ui: {
                   type: "bg-block",
-                  showBody: false
+                  showBody: true
                 },
                 title: {
                   text: "更多设置"
@@ -168,10 +171,172 @@ export default {
                   text: "备用"
                 },
                 rules: {
-                  required: "es: {{$hidden(test.base)}}"
+                  required: "es: {{$hidden(test1.base)}}"
                 },
-                desc: "最多36个文字",
-                help: "I know"
+                desc: "描述",
+                help: "知道了"
+              }
+            }
+          },
+
+          test2: {
+            layout: {
+              name: "tabs",
+              type: "bg"
+              // hasBorder: false
+            },
+            title: "tabs类型(bg)",
+            rowSpace: 30,
+            label: "",
+            properties: {
+              base: {
+                label: "基本信息",
+                properties: {
+                  startTime: {
+                    label: "上线时间",
+                    group: "date",
+                    // col: 12,
+                    component: {
+                      name: "el-date-picker",
+                      props: {
+                        type: "datetime",
+                        valueFormat: "yyyy-MM-dd hh:mm:ss"
+                      },
+                      flex: "full",
+                      ref: "test"
+                    },
+                    rules: {
+                      required: true
+                    },
+                    value: ""
+                  },
+                  endTime: {
+                    label: {
+                      text: "到",
+                      flex: "self"
+                    },
+                    group: "date",
+                    col: 12,
+                    component: {
+                      name: "el-date-picker",
+                      props: {
+                        type: "datetime",
+                        valueFormat: "yyyy-MM-dd hh:mm:ss"
+                      },
+                      flex: "full"
+                    },
+                    value: ""
+                  }
+                }
+              },
+
+              target: {
+                label: "投放目标",
+                properties: {
+                  name: {
+                    label: "姓名",
+                    component: {
+                      name: "el-input"
+                    },
+                    rules: {
+                      required: true
+                    },
+                    value: "kyle.lo"
+                  },
+                  weight: {
+                    col: 12,
+                    label: {
+                      text: "体重"
+                    },
+                    component: {
+                      name: "el-input-number",
+                      flex: "self"
+                    },
+                    unit: "公斤",
+                    value: 100
+                  }
+                }
+              }
+            }
+          },
+
+          test3: {
+            layout: {
+              name: "tabs",
+              type: "line",
+              hasBorder: false
+            },
+            title: "tabs类型(line)",
+            rowSpace: 30,
+            label: "",
+            properties: {
+              base: {
+                label: "基本信息",
+                properties: {
+                  startTime: {
+                    label: "上线时间",
+                    group: "date",
+                    // col: 12,
+                    component: {
+                      name: "el-date-picker",
+                      props: {
+                        type: "datetime",
+                        valueFormat: "yyyy-MM-dd hh:mm:ss"
+                      },
+                      flex: "full",
+                      ref: "test"
+                    },
+                    rules: {
+                      required: true
+                    },
+                    value: ""
+                  },
+                  endTime: {
+                    label: {
+                      text: "到",
+                      flex: "self"
+                    },
+                    group: "date",
+                    col: 12,
+                    component: {
+                      name: "el-date-picker",
+                      props: {
+                        type: "datetime",
+                        valueFormat: "yyyy-MM-dd hh:mm:ss"
+                      },
+                      flex: "full"
+                    },
+                    value: ""
+                  }
+                }
+              },
+
+              target: {
+                label: "投放目标",
+                properties: {
+                  name: {
+                    label: "姓名",
+                    component: {
+                      name: "el-input"
+                    },
+                    rules: {
+                      required: true
+                    },
+                    value: "kyle.lo"
+                  },
+                  weight: {
+                    col: 12,
+                    label: {
+                      text: "体重"
+                    },
+                    component: {
+                      name: "el-input-number",
+                      flex: "self"
+                    },
+                    unit: "公斤",
+                    value: 100
+                  }
+                }
               }
             }
           }

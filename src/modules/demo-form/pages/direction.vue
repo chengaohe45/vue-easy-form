@@ -18,44 +18,6 @@ export default {
         direction: "v",
         colon: true,
         properties: {
-          // startTime: {
-          //   label: {
-          //     text: "有效日期",
-          //     size: "fixed"
-          //   },
-          //   group: "date",
-          //   col: 12,
-          //   component: {
-          //     name: "el-date-picker",
-          //     props: {
-          //       type: "datetime",
-          //       valueFormat: "yyyy-MM-dd hh:mm:ss"
-          //     },
-          //     size: "auto"
-          //   },
-          //   value: "",
-          //   direction: "v"
-          // },
-          // endTime: {
-          //   label: {
-          //     text: "到",
-          //     size: "fixed"
-          //   },
-          //   group: "date",
-          //   col: 12,
-          //   component: {
-          //     name: "el-date-picker",
-          //     props: {
-          //       type: "datetime",
-          //       valueFormat: "yyyy-MM-dd hh:mm:ss"
-          //     },
-          //     size: "auto"
-          //   },
-          //   colon: false,
-          //   value: "",
-          //   direction: "v"
-          // },
-
           name: {
             label: "作者",
             direction: "h",
@@ -63,17 +25,6 @@ export default {
             value: "首页位置",
             col: 24
           },
-          // author: {
-          //   label: "作者名称",
-          //   component: {
-          //     name: "el-input",
-          //     props: {
-          //       placeholder: "请输入作者的名字"
-          //     }
-          //   },
-          //   value: "",
-          //   col: 12
-          // },
 
           width: {
             label: "宽",
@@ -115,7 +66,7 @@ export default {
             // col: 12,
             component: {
               name: "el-color-picker",
-              size: "fixed",
+              flex: "self",
               align: "center"
             },
             value: "#67C23A",
@@ -123,7 +74,7 @@ export default {
               name: alignDesc,
               props: {
                 align: "center",
-                txt: "设置了size=fixed是为了组件的宽度自动变化"
+                txt: "设置了flex=self是为了组件的宽度自动变化"
               }
             }
           }

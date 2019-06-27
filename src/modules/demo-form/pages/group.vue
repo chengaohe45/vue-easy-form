@@ -43,7 +43,7 @@ export default {
               type: "year",
               valueFormat: "yyyy"
             },
-            size: "auto"
+            flex: "full"
           },
           rules: true,
           unit: "年",
@@ -53,7 +53,7 @@ export default {
           label: {
             // name: "span",
             text: "到",
-            size: "fixed"
+            flex: "self"
           },
           group: "date",
           col: 10,
@@ -65,7 +65,7 @@ export default {
               type: "year",
               valueFormat: "yyyy"
             },
-            size: "auto"
+            flex: "full"
           },
           rules: {
             required: true
