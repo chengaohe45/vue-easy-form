@@ -50,7 +50,7 @@ export default {
           // col: 12,
           component: {
             name: "el-color-picker",
-            // flex: "self",
+            flex: "self",
             align: "center"
           },
           value: "#67C23A",
