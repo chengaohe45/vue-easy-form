@@ -73,7 +73,7 @@ export default {
             col: 18,
             rules: {
               check: {
-                name: function(value, formData, key) {
+                name: function(value /*, formData, key*/) {
                   // console.log("value: ", value);
                   // console.log("formData: ", formData);
                   // console.log("key: ", key);
@@ -111,7 +111,7 @@ export default {
             },
             value: "",
             rules: {
-              check: (value, formData, key) => {
+              check: (value /*, formData, key*/) => {
                 // console.log(value, "----", typeof formData);
                 if (value && value.length > 10) {
                   return "广告描述字数不能多于10";

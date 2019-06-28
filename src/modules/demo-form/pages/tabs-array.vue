@@ -50,7 +50,7 @@ export default {
               name: "array-tabs",
               type: "line",
               hasBorder: false,
-              hasOrder: true,
+              hasOrder: false,
               // subLabel: "老师",
               hasDelete: true,
               hasSort: true,
@@ -101,7 +101,7 @@ export default {
                 text:
                   "es: ({{$root}}.courses[{{$index}}].name) ? ( ({{$root}}.courses[{{$index}}].name.length <=5 ? {{$root}}.courses[{{$index}}].name : {{$root}}.courses[{{$index}}].name.substr(0, 5) + '...') ) : '[未命名]'"
               },
-              // hasOrder: false,
+              hasOrder: false,
               // hasDelete: true,
               hasSort: true,
               // hasAdd: true

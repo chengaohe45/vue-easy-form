@@ -955,6 +955,12 @@ let formUtils = {
       }
       newPropItem.properties = newProperties;
 
+      // 当是列表数组时，重新计算列宽，使其点100%
+      if (newPropItem.array && newPropItem.array.name == constant.ARRAY_TABLE) {
+        //整理一下ref, 同一级别的只留最后一下
+        formUtils.__updateTableCol(newPropItem);
+      }
+
       //整理一下ref, 同一级别的只留最后一下
       formUtils.__uniqueRef(newPropItem);
 
@@ -1059,6 +1065,33 @@ let formUtils = {
     newPropItem.__rawHidden = newPropItem.hidden;
 
     return newPropItem;
+  },
+
+  __updateTableCol(newSchema) {
+    if (newSchema.properties) {
+      var curProp = newSchema.properties;
+      var nextPropItem, key, newCol;
+      var total = 0;
+      for (key in curProp) {
+        nextPropItem = curProp[key];
+        total += nextPropItem.col;
+      }
+
+      var newTotal = 0;
+      if (total !== constant.UI_MAX_COL) {
+        for (key in curProp) {
+          nextPropItem = curProp[key];
+          newCol = Math.round((nextPropItem.col * constant.UI_MAX_COL) / total);
+          nextPropItem.col = newCol;
+          newTotal += newCol;
+        }
+      }
+
+      if (newTotal < constant.UI_MAX_COL) {
+        // 不够100%， 补给后面的
+        curProp[key].col = curProp[key].col + (constant.UI_MAX_COL - newTotal);
+      }
+    }
   },
 
   /**

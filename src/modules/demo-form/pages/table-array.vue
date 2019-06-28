@@ -55,7 +55,7 @@ export default {
               name: {
                 value: "默认名",
                 direction: "h",
-                col: 16,
+                col: 8,
                 label: {
                   name: "div",
                   text: "学科名",

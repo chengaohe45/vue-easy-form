@@ -28,13 +28,20 @@
           @downItem="downItem"
           @clickActive="clickActiveHandler"
         >
-          <template v-if="!itemSchema.subLabel.name">
-            <span>{{
-              itemSchema.subLabel.text
-                ? itemSchema.subLabel.text
-                : index + 1 + ""
-            }}</span></template
+          <span class="order-txt" v-if="schema.array.hasOrder"
+            >{{ index + 1 }}.</span
           >
+          <template v-if="!itemSchema.subLabel.name">
+            <span v-if="!(schema.array.hasOrder && !itemSchema.subLabel.text)">
+              {{
+                itemSchema.subLabel.text
+                  ? itemSchema.subLabel.text
+                  : schema.array.hasOrder
+                  ? ""
+                  : index + 1 + ""
+              }}
+            </span>
+          </template>
           <span v-else class="es-form-label-box">
             <es-base :config="itemSchema.subLabel"></es-base>
           </span>

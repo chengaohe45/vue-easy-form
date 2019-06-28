@@ -23,7 +23,7 @@ export default {
               text: "是否好人",
               actions: {
                 trigger: "change",
-                handler: function(value, key, event) {
+                handler: function(value /*key, event*/) {
                   // console.log("this对象: ", this);
                   // console.log('this.getRef("desc")值: ', this.getRef("desc"));
                   // console.log("value值", value);
