@@ -407,6 +407,14 @@ export default {
       return this.$refs.formFrame.getRef(name);
     },
 
+    isHidden(pathKey) {
+      this._isHidden(pathKey);
+    },
+
+    _isHidden(pathKey) {
+      return false;
+    },
+
     /* 下划线一杠代表对内使用 */
     _getType() {
       return constant.UI_FORM;

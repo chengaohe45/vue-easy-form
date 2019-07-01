@@ -27,7 +27,10 @@ let constant = {
 
   UI_FORM: "_es_form_qwerty_", // 说明界面属于哪种类型
   UI_ITEM: "_es_item_qwerrf_",
-  UI_ARRAY: "_es_array_aadfsd_"
+  UI_ARRAY: "_es_array_aadfsd_",
+
+  ES_FUNC_NAME: "__E0S1_2F3U4NC_N4AM5E__",
+  ES_OPTIONS: "__es__Options__" // 此值要是正规的命名
 };
 
 export default constant;

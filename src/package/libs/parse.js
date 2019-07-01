@@ -1,5 +1,6 @@
 import formUtils from "./form-utils";
 import utils from "./utils";
+import constant from "./constant";
 
 let parse = {
   isEsScript(scriptTxt, expPrefix = "es:") {
@@ -41,12 +42,6 @@ let parse = {
       rootSchema = {}
     } = {}
   ) {
-    // console.log("scriptTxt:", scriptTxt);
-    // console.log("global:", global);
-    // console.log("rootData:", rootData);
-    // console.log("index:", index);
-    // console.log("idxChain:", idxChain);
-    // console.log("rootSchema:", rootSchema);
     if (Object.keys(rootData).length <= 0) {
       throw "rootData = {}";
     }
@@ -54,24 +49,38 @@ let parse = {
       throw "rootSchema = {}";
     }
 
-    return parse.__smartAnalyze(scriptTxt, {
-      sources: [
-        {
-          symbol: "$global",
-          value: global
-        },
-        {
-          symbol: "$root",
-          value: rootData
-        },
-        {
-          symbol: "$index",
-          value: index
-        }
-      ],
-      idxChain,
-      rootSchema
-    });
+    if (utils.isFunc(scriptTxt)) {
+      var options = {
+        global: global,
+        rootData: rootData,
+        idxChains: idxChain ? idxChain.split(",") : [],
+        index: index,
+        rootSchema: rootSchema,
+        isHidden: parse.__isHidden
+      };
+      // console.log("options: ", options);
+
+      return scriptTxt(options);
+    } else {
+      return parse.__smartAnalyze(scriptTxt, {
+        sources: [
+          {
+            symbol: "$global",
+            value: global
+          },
+          {
+            symbol: "$root",
+            value: rootData
+          },
+          {
+            symbol: "$index",
+            value: index
+          }
+        ],
+        idxChain,
+        rootSchema
+      });
+    }
   },
 
   /**
@@ -260,6 +269,161 @@ let parse = {
         return parse.__smartAnalyze(targetSchema.__rawHidden, data, execTotal);
       } else {
         return targetSchema.__rawHidden ? true : false;
+      }
+    } else {
+      console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
+      return false;
+    }
+  },
+
+  /* 将es转换成为Function */
+  newEsFuncion(scriptTxt, expPrefix = "es:") {
+    let result;
+
+    if (parse.isEsScript(scriptTxt)) {
+      var options = [
+        {
+          symbol: "$global",
+          paramKey: "global"
+        },
+        {
+          symbol: "$root",
+          paramKey: "rootData"
+        },
+        {
+          symbol: "$index",
+          paramKey: "index"
+        }
+
+        /* other paramKey */
+        // isHidden
+        // rootSchema
+        // idxChains
+      ];
+
+      scriptTxt = scriptTxt.substring(expPrefix.length);
+      scriptTxt = scriptTxt.trim(); // 与isEsScript判断一致
+
+      // 解析$hidden
+      let hiddenPatt = /\{{(\s*\$hidden\()(.+?)(\)\s*}})/gi;
+      let hiddenResult = null;
+      let hiddenTargetPiece = "";
+      let hiddenPathKey = "";
+      let hiddenFunTxt = "";
+      let newScriptTxt = "";
+      let curSliceIndex = 0;
+      let hasHiddenFun = false;
+      hiddenResult = hiddenPatt.exec(scriptTxt);
+      while (hiddenResult) {
+        hasHiddenFun = true; // 有隐藏函数
+
+        //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
+        hiddenTargetPiece = hiddenResult[0];
+        hiddenPathKey = hiddenResult[2];
+        // 去掉单双引号和$root若存在
+        hiddenPathKey = hiddenPathKey.trim();
+        hiddenPathKey = hiddenPathKey.replace(/^('|")|('|")$/g, "");
+        hiddenPathKey = hiddenPathKey.trim();
+        //去掉$root;若存在
+        hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
+        let chainPieces = hiddenPathKey.split("[i]");
+        let chainPiecesLen = chainPieces.length;
+        let chainPiecesTempVal = "";
+        chainPieces.forEach((piece, index) => {
+          if (index < chainPiecesLen - 1) {
+            chainPiecesTempVal +=
+              piece + `[(${constant.ES_OPTIONS}.idxChains[` + index + "])]";
+          } else {
+            chainPiecesTempVal += piece;
+          }
+        });
+        hiddenPathKey = chainPiecesTempVal;
+
+        hiddenFunTxt =
+          `${constant.ES_OPTIONS}` +
+          ".isHidden('" +
+          hiddenPathKey +
+          `', ${constant.ES_OPTIONS})`; // 后面会进行解析替换
+
+        newScriptTxt +=
+          scriptTxt.slice(
+            curSliceIndex,
+            hiddenPatt.lastIndex - hiddenTargetPiece.length
+          ) + hiddenFunTxt;
+        curSliceIndex = hiddenPatt.lastIndex;
+        hiddenResult = hiddenPatt.exec(scriptTxt);
+      }
+      newScriptTxt += scriptTxt.slice(curSliceIndex); // 最后的片段
+
+      // 假设val为：dx: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
+      const matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
+      matchs.forEach(mItem => {
+        // mItem值："{{$root.persons[i].age}}"
+        let tempVal = "";
+        //找出[i],按顺序说明出处
+        let pieces = mItem.split("[i]");
+        let piecesLen = pieces.length;
+        pieces.forEach((piece, index) => {
+          if (index < piecesLen - 1) {
+            tempVal +=
+              piece + `[(${constant.ES_OPTIONS}.idxChains[` + index + "])]";
+          } else {
+            tempVal += piece;
+          }
+        });
+        //替换数据源
+        options.forEach(item => {
+          tempVal = tempVal.replace(
+            new RegExp(`\\{{\\s*\\${item.symbol}(\\.?.*)}}`),
+            `${constant.ES_OPTIONS}['${item.paramKey}']$1`
+          );
+        });
+        newScriptTxt = newScriptTxt.replace(mItem, tempVal);
+      });
+      newScriptTxt = "return (" + newScriptTxt + ");";
+
+      if (!hasHiddenFun) {
+        result = new Function(constant.ES_OPTIONS, newScriptTxt);
+        // result.name = constant.ES_FUNC_NAME;
+      } else {
+        result = new Function(constant.ES_OPTIONS, newScriptTxt);
+        // result.name = constant.ES_FUNC_NAME;
+      }
+    } else {
+      result = scriptTxt;
+    }
+
+    // console.log("result: ", result);
+
+    return result;
+  },
+
+  __isHidden(pathKey, options) {
+    console.log("options: ", options);
+    var targetSchema = formUtils.getSchemaByKey(options.rootSchema, pathKey);
+    if (targetSchema) {
+      var rawHidden = targetSchema.__rawHidden;
+      if (utils.isFunc(rawHidden)) {
+        var newOptions = {};
+        newOptions = Object.assign(newOptions, options);
+        newOptions.index = targetSchema.__index;
+        if (utils.isNum(newOptions.execTotal) && newOptions.execTotal >= 0) {
+          newOptions.execTotal = newOptions.execTotal + 1;
+
+          const MAX_TOTAL = 30;
+          if (newOptions.execTotal > MAX_TOTAL) {
+            throw "解析$hidden出错，系统递规超过" +
+              MAX_TOTAL +
+              "次，可能造成死循环";
+          }
+          return false;
+        } else {
+          newOptions.execTotal = 1;
+        }
+        newOptions.idxChains = targetSchema.__idxChain.split(",");
+        return rawHidden(newOptions);
+      } else {
+        return rawHidden ? true : false;
       }
     } else {
       console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");

@@ -1602,7 +1602,7 @@ let formUtils = {
       if (utils.isObj(component.props)) {
         if (this.__hasEsInObj(component.props)) {
           tmpComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
-          tmpComponent.__rawProps = utils.deepCopy(component.props);
+          tmpComponent.__rawProps = this.__newEsFunction(component.props);
         } else {
           tmpComponent.props = utils.deepCopy(component.props); // 可直接使用
         }
@@ -1613,7 +1613,7 @@ let formUtils = {
       if (utils.isStr(component.text)) {
         tmpComponent.text = component.text;
         if (parse.isEsScript(component.text)) {
-          tmpComponent.__rawText = component.text;
+          tmpComponent.__rawText = parse.newEsFuncion(component.text);
         }
       }
       tmpComponent.align = this.__parseAlign(component.align, defaultAlign);
@@ -1641,6 +1641,16 @@ let formUtils = {
     var newObj = {};
     for (var key in obj) {
       newObj[key] = null;
+    }
+    return newObj;
+  },
+
+  __newEsFunction(obj) {
+    var newObj = {};
+    for (var key in obj) {
+      newObj[key] = parse.isEsScript(obj[key])
+        ? parse.newEsFuncion(obj[key])
+        : utils.deepCopy(obj[key]);
     }
     return newObj;
   },
@@ -1892,7 +1902,7 @@ let formUtils = {
         if (utils.isObj(value.props)) {
           if (this.__hasEsInObj(value.props)) {
             newCom.props = this.__newEmptyObj(value.props); // 后面(analyzeUiProps)有解析的
-            newCom.__rawProps = utils.deepCopy(value.props);
+            newCom.__rawProps = this.__newEsFunction(value.props);
           } else {
             newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
           }
@@ -1916,27 +1926,12 @@ let formUtils = {
       }
       newCom.text = text;
 
-      // var text =
-      //   utils.isStr(value.text) && value.text.trim()
-      //     ? value.text.trim()
-      //     : (canEmpty
-      //     ? ""
-      //     : false);
-      // newCom.text = text;
-
-      // if (!utils.isStr(text) || !canEmpty) {
-      //   if (!name && !text) {
-      //     // 说明为空
-      //     return false;
-      //   }
-      // }
-
-      newCom.__rawText = text;
+      newCom.__rawText = parse.newEsFuncion(text);
       return newCom;
     } else if (utils.isStr(value)) {
       value = value.trim();
       if (value || canEmpty) {
-        newCom = { text: value, __rawText: value };
+        newCom = { text: value, __rawText: parse.newEsFuncion(value) };
       } else {
         newCom = false;
       }
