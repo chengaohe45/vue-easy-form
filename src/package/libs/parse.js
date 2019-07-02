@@ -50,18 +50,32 @@ let parse = {
     }
 
     if (utils.isFunc(scriptTxt)) {
-      var options = {
-        global: global,
-        rootData: rootData,
-        idxChains: idxChain ? idxChain.split(",") : [],
-        index: index,
-        rootSchema: rootSchema,
-        isHidden: parse.__isHidden
-      };
-      // console.log("options: ", options);
+      var options;
+      if (scriptTxt.__esFuncName === constant.ES_FUNC_NAME) {
+        // es: 转过来的函数
+        options = {
+          global: global,
+          rootData: rootData,
+          idxChains: idxChain ? idxChain.split(",") : [],
+          index: index,
+          rootSchema: rootSchema,
+          isHidden: parse.__isHidden // 不要写execTotal
+        };
+      } else {
+        // 自定义函数
+        options = {
+          global: global,
+          rootData: rootData,
+          idxChains: idxChain ? idxChain.split(",") : [],
+          index: index
+        };
+      }
 
       return scriptTxt(options);
+    } else if (!parse.isEsScript(scriptTxt)) {
+      return scriptTxt;
     } else {
+      console.log("es: parse ....", scriptTxt);
       return parse.__smartAnalyze(scriptTxt, {
         sources: [
           {
@@ -95,7 +109,7 @@ let parse = {
    * 规则：
    * 1. 普通值直接返回
    * 2. 函数类型返回执行后的值
-   * 3. 字符串且以dx:开头的，则会进行处理成可执行的脚本并执行返回结果
+   * 3. 字符串且以es:开头的，则会进行处理成可执行的脚本并执行返回结果
    *    支持的规则：$root.age / $root.person[0].age / $root.person[i].age (i表示取某数组中的某一项，由idxChain来指定具体项) / $root.person[e].age (e表示取该数组的每一项，返回是个数组值。注意：当使用e时，只能使用一次，并且不能与i搭配)
    */
   __smartAnalyze(
@@ -312,10 +326,10 @@ let parse = {
       let hiddenFunTxt = "";
       let newScriptTxt = "";
       let curSliceIndex = 0;
-      let hasHiddenFun = false;
+      // let hasHiddenFun = false;
       hiddenResult = hiddenPatt.exec(scriptTxt);
       while (hiddenResult) {
-        hasHiddenFun = true; // 有隐藏函数
+        // hasHiddenFun = true; // 有隐藏函数
 
         //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
         hiddenTargetPiece = hiddenResult[0];
@@ -382,53 +396,94 @@ let parse = {
       });
       newScriptTxt = "return (" + newScriptTxt + ");";
 
-      if (!hasHiddenFun) {
-        result = new Function(constant.ES_OPTIONS, newScriptTxt);
-        // result.name = constant.ES_FUNC_NAME;
-      } else {
-        result = new Function(constant.ES_OPTIONS, newScriptTxt);
-        // result.name = constant.ES_FUNC_NAME;
-      }
+      result = new Function(constant.ES_OPTIONS, newScriptTxt);
+      result.__esFuncName = constant.ES_FUNC_NAME;
     } else {
       result = scriptTxt;
     }
 
-    // console.log("result: ", result);
-
     return result;
   },
 
+  /**
+   * 判断某人schema是否隐藏；当父类是隐藏时，子类也会判断为隐藏
+   * @param {*} schema
+   * @param {*} pathKey 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
+   */
   __isHidden(pathKey, options) {
-    console.log("options: ", options);
-    var targetSchema = formUtils.getSchemaByKey(options.rootSchema, pathKey);
-    if (targetSchema) {
-      var rawHidden = targetSchema.__rawHidden;
-      if (utils.isFunc(rawHidden)) {
-        var newOptions = {};
-        newOptions = Object.assign(newOptions, options);
-        newOptions.index = targetSchema.__index;
-        if (utils.isNum(newOptions.execTotal) && newOptions.execTotal >= 0) {
-          newOptions.execTotal = newOptions.execTotal + 1;
-
-          const MAX_TOTAL = 30;
-          if (newOptions.execTotal > MAX_TOTAL) {
-            throw "解析$hidden出错，系统递规超过" +
-              MAX_TOTAL +
-              "次，可能造成死循环";
-          }
-          return false;
-        } else {
-          newOptions.execTotal = 1;
-        }
-        newOptions.idxChains = targetSchema.__idxChain.split(",");
-        return rawHidden(newOptions);
-      } else {
-        return rawHidden ? true : false;
-      }
-    } else {
+    var targetSchema = formUtils.getSchemaByKey(options.rootSchema, pathKey); // 看看最后一个是否存在
+    if (!targetSchema) {
       console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
       return false;
     }
+
+    var seperator = ".";
+    var keys = pathKey.split(seperator);
+    var parentPathKey = "",
+      tmpParentPathKey;
+    var reg = /\[\d+\]$/;
+    var arraySymbol = "[";
+    var key;
+    var len = keys.length - 1;
+    for (var i = 0; i <= len; i++) {
+      key = keys[i];
+      if (key.indexOf(arraySymbol) >= 0) {
+        key = key.replace(reg, "");
+      }
+
+      tmpParentPathKey = parentPathKey ? parentPathKey + seperator + key : key;
+      parentPathKey = parentPathKey
+        ? parentPathKey + seperator + keys[i]
+        : keys[i];
+
+      // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
+      var itemSchema =
+        tmpParentPathKey == pathKey
+          ? targetSchema
+          : formUtils.getSchemaByKey(options.rootSchema, tmpParentPathKey);
+      if (itemSchema) {
+        var rawHidden = itemSchema.__rawHidden;
+        if (utils.isFunc(rawHidden)) {
+          var newOptions = {};
+          newOptions = Object.assign(newOptions, options);
+          newOptions.index = itemSchema.__index;
+          if (utils.isNum(newOptions.execTotal) && newOptions.execTotal >= 0) {
+            newOptions.execTotal = newOptions.execTotal + 1;
+
+            const MAX_TOTAL = 30;
+            if (newOptions.execTotal > MAX_TOTAL) {
+              throw "解析$hidden:[" +
+                pathKey +
+                "]出错，系统执行$hidden超过" +
+                MAX_TOTAL +
+                "次，可能为死循环";
+            }
+          } else {
+            newOptions.execTotal = 1;
+          }
+          newOptions.idxChains = itemSchema.__idxChain.split(",");
+          if (rawHidden(newOptions)) {
+            return true;
+          } else {
+            // console.log("3 tmpParentPathKey: ", tmpParentPathKey);
+          }
+        } else {
+          if (rawHidden) {
+            return true;
+          } else {
+            // console.log("next: ", tmpParentPathKey);
+          }
+        }
+      } else {
+        console.warn(
+          "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
+        );
+        return false;
+      }
+    }
+
+    // 全部都没有隐藏
+    return false;
   }
 };
 

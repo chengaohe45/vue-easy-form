@@ -191,6 +191,7 @@ export default {
             properties: {
               base: {
                 label: "基本信息",
+                hidden: "es: {{$hidden(test1.district)}}",
                 properties: {
                   startTime: {
                     label: "上线时间",

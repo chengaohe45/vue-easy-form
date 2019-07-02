@@ -875,6 +875,9 @@ let formUtils = {
       //递归，取出下一级的数据
       var newProperties = {};
       for (var key in propItem.properties) {
+        if (!this.__isRightKey(key)) {
+          console.warn("属性" + key + "存在危险字符，会导致程序出错");
+        }
         var nextRawPropItem = propItem.properties[key];
         if (this.__isIngnoreItem(nextRawPropItem)) {
           console.log("属性" + key + "为null/undefined/false时，将不设置");
@@ -926,7 +929,6 @@ let formUtils = {
               newPropItem.array.name == constant.ARRAY_TABLE)
           ) {
             if (nextPropItem.label.text === false) {
-              // nextPropItem.label = { text: "", __rawText: "" };
               console.warn(
                 "当属性(" +
                   parentKey +
@@ -1062,7 +1064,7 @@ let formUtils = {
       }
     }
 
-    newPropItem.__rawHidden = newPropItem.hidden;
+    newPropItem.__rawHidden = parse.newEsFuncion(newPropItem.hidden);
 
     return newPropItem;
   },
@@ -1162,6 +1164,16 @@ let formUtils = {
       tmpTriggers = null;
     }
     return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
+  },
+
+  __isRightKey(key) {
+    var illChars = ["[", "]", "."];
+    for (var i = 0; i < illChars.length; i++) {
+      if (key.indexOf(illChars[i]) >= 0) {
+        throw "属性不能出现以下的危险字符：" + illChars.join(" ");
+      }
+    }
+    return true;
   },
 
   /* 整理出组件需要监听的外部事件 */
@@ -1600,7 +1612,7 @@ let formUtils = {
       }
 
       if (utils.isObj(component.props)) {
-        if (this.__hasEsInObj(component.props)) {
+        if (this.__needParseInObj(component.props)) {
           tmpComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
           tmpComponent.__rawProps = this.__newEsFunction(component.props);
         } else {
@@ -1655,10 +1667,14 @@ let formUtils = {
     return newObj;
   },
 
-  __hasEsInObj(obj) {
+  __needParseInObj(obj) {
     var isRight = false;
     for (var key in obj) {
-      if (parse.isEsScript(obj[key])) {
+      var value = obj[key];
+      if (utils.isFunc(value)) {
+        isRight = true;
+        break;
+      } else if (parse.isEsScript(value)) {
         isRight = true;
         break;
       }
@@ -1799,14 +1815,6 @@ let formUtils = {
     return newValue;
   },
 
-  // __parseSize(size) {
-  //   var sizes = ["fixed", "auto"];
-  //   if (sizes.includes(size)) {
-  //     return size;
-  //   }
-  //   return false;
-  // },
-
   __parseFlex(flex, size) {
     var flexs = ["self", "full"];
     if (flexs.includes(flex)) {
@@ -1900,7 +1908,7 @@ let formUtils = {
       if (name) {
         newCom.name = name;
         if (utils.isObj(value.props)) {
-          if (this.__hasEsInObj(value.props)) {
+          if (this.__needParseInObj(value.props)) {
             newCom.props = this.__newEmptyObj(value.props); // 后面(analyzeUiProps)有解析的
             newCom.__rawProps = this.__newEsFunction(value.props);
           } else {
@@ -1956,7 +1964,7 @@ let formUtils = {
       });
       rules.check = tmpCheckList;
       rules.required = rules.required ? rules.required : false;
-      rules.__rawRequired = rules.required;
+      rules.__rawRequired = parse.newEsFuncion(rules.required);
       if (rules.required || (rules.check && rules.check.length > 0)) {
         // 合法的写法
         return rules;
@@ -1965,7 +1973,10 @@ let formUtils = {
       }
     } else if (utils.isBool(rules) || utils.isStr(rules)) {
       var rawRequired = rules;
-      rules = { required: rawRequired, __rawRequired: rawRequired };
+      rules = {
+        required: rawRequired,
+        __rawRequired: parse.newEsFuncion(rawRequired)
+      };
       return rules;
     } else {
       return false;
@@ -2230,7 +2241,6 @@ let formUtils = {
   },
 
   __perfectCheckItem: function(item) {
-    // console.log("item = ", item);
     if (utils.isStr(item) || utils.isFunc(item)) {
       return { name: item, trigger: [constant.INPUT_EVENT] };
     } else if (
