@@ -23,8 +23,9 @@ export default {
               text: "是否好人",
               actions: {
                 trigger: "change",
-                handler: function(value /*key, event*/) {
-                  // console.log("this对象: ", this);
+                handler: function(options) {
+                  console.log("this对象: ", this);
+                  console.log("options对象: ", options);
                   // console.log('this.getRef("desc")值: ', this.getRef("desc"));
                   // console.log("value值", value);
                   // console.log("key值", key);
@@ -32,7 +33,7 @@ export default {
                   // console.log("\n");
                   // this.submit();
                   this.$message({
-                    message: "切换为: " + value,
+                    message: "切换为: " + options.value,
                     type: "success"
                   });
                 }

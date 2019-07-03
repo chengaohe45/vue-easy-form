@@ -703,7 +703,7 @@ export default {
     },
 
     // 只有组件会触发
-    triggerHandler(eventName, eventData) {
+    triggerHandler(eventName, eventData, target) {
       var checkSchema = [this.schema];
       var eventNames = [eventName];
       var targetValue = this.schema.value;
@@ -722,8 +722,10 @@ export default {
         }
       }
 
+      var options = {value: targetValue, event: eventData, pathKey: this.schema.__pathKey, idxChain: this.schema.__idxChain, target: target};
+
       var form = this.__getForm();
-      form._syncUi(checkSchema, eventNames, targetValue, eventData);
+      form._syncUi(checkSchema, eventNames, options);
     },
 
     /**
@@ -735,8 +737,10 @@ export default {
       var checkSchema = [this.schema];
       var eventNames = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
 
+      var options = {value: targetValue, event: eventData, pathKey: this.schema.__pathKey, idxChain: this.schema.__idxChain, target: null};
+
       var form = this.__getForm();
-      form._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+      form._syncUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
     },
 
     __getForm() {
@@ -744,7 +748,6 @@ export default {
       while (formItem) {
         var type = formItem._getType ? formItem._getType() : "";
         if (type == constant.UI_FORM) {
-          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
           return formItem; // 到达表单层
         } else if (type == constant.UI_ARRAY) {
           // checkSchema.push(formItem._getSchema());

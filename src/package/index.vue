@@ -706,11 +706,9 @@ export default {
       }
     },
 
-    _syncUi(checkSchema, eventNames, targetValue, eventData) {
-      //  console.log("over...: ", checkSchema, eventNames, targetValue, eventData);
-      // return this.$data.formSchema;
-      // var tmpResultValue = false;
-      var sourcePathKey = checkSchema[0].__pathKey; // checkSchema必有值
+    _syncUi(checkSchemas, eventNames, options) {
+
+      var sourcePathKey = checkSchemas[0].__pathKey; // checkSchemas必有值
       if (eventNames.includes(constant.INPUT_EVENT)) {
         // 需要同步
         this.__syncValue(sourcePathKey); // 第一个就是触发源
@@ -718,7 +716,7 @@ export default {
       }
 
       if (this.isInited) {
-        var inputSchema = checkSchema[0];
+        var inputSchema = checkSchemas[0];
         // 验证当前的输入框
         var parseSources = {
           global: this.global,
@@ -730,12 +728,12 @@ export default {
         // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
         var checkedResult = formUtils.checkRules(
           inputSchema.array ? inputSchema.array.rules : inputSchema.rules,
-          targetValue,
+          options.value,
           eventNames,
           parseSources,
           inputSchema.__pathKey
         );
-        // console.log("inputSchema.rules: ", targetValue, this._esFormData);
+
         if (checkedResult === true) {
           inputSchema.__invalidMsg = false;
         } else if (checkedResult !== false) {
@@ -764,7 +762,7 @@ export default {
             // 这用可以记录是什么导致表单改变
             if (handlers.length > 0) {
               handlers.forEach(handler => {
-                handler.call(vm, targetValue, sourcePathKey, eventData);
+                handler.call(vm, options);
               });
             }
 
@@ -776,10 +774,12 @@ export default {
               );
             }
 
-            checkSchema = null;
+            /* 释放内存 */
+            checkSchemas = null;
             eventNames = undefined;
-            targetValue = undefined;
-            eventData = undefined;
+            // targetValue = undefined;
+            // eventData = undefined;
+            options = null;
             handlers = null;
           });
         }

@@ -122,7 +122,7 @@ export default {
     },
 
     eventHandler(eventName, eventData) {
-      this.$emit("trigger", eventName, eventData);
+      this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
     },
 
     /**

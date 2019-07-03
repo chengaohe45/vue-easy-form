@@ -39,8 +39,8 @@ export default {
               value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
               actions: {
                 trigger: "change",
-                handler: function(value, key, event) {
-                  console.log("test array input:", value, key, event);
+                handler: function(options) {
+                  console.log("test array input:", options);
                 }
               }
             },
@@ -80,8 +80,8 @@ export default {
                   ],
                   actions: {
                     trigger: "change",
-                    handler: function(value, key, event) {
-                      console.log("test array input:", value, key, event);
+                    handler: function(options) {
+                      console.log("test array input:", options);
                     }
                   },
                   // insertValue: { applyNum: "1234", code: 123 }

@@ -42,8 +42,8 @@ export default {
               rules: true,
               actions: {
                 trigger: "input",
-                handler: function(value, key, event) {
-                  console.log("test array input2:", value, key, event);
+                handler: function(options) {
+                  console.log("test array input2:", options);
                 }
               },
               rowSpace: 20
@@ -108,8 +108,8 @@ export default {
               ],
               actions: {
                 trigger: "change",
-                handler: function(value, key, event) {
-                  console.log("test array input:", value, key, event);
+                handler: function(options) {
+                  console.log("test array input:", options);
                 }
               }
             },
@@ -198,8 +198,8 @@ export default {
               value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
               actions: {
                 trigger: "change",
-                handler: function(value, key, event) {
-                  console.log("test array input:", value, key, event);
+                handler: function(options) {
+                  console.log("test array input:", options);
                 }
               }
             },
