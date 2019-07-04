@@ -85,11 +85,13 @@ export default {
                     }
                   },
                   // insertValue: { applyNum: "1234", code: 123 }
-                  insertValue: function(arrayValues, position, type) {
-                    console.log(arrayValues, position, type);
-                    if (type == "copy") {
-                      arrayValues[position - 1].applyNum = "";
-                      return arrayValues[position - 1];
+                  // options 为 {oldValues, position, type}
+                  insertValue: function(options) {
+                    if (options.type == "copy") {
+                      var oldValues = options.oldValues;
+                      oldValues[options.position - 1].applyNum =
+                        "" + options.position;
+                      return oldValues[options.position - 1];
                     }
                   }
                 },

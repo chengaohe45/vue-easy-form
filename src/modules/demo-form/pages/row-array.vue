@@ -35,8 +35,8 @@ export default {
               fixed: 1,
               max: 5,
               value: ["名称1", "名称2", "名称3"],
-              insertValue: function(arrayValue, index) {
-                console.log(this.getValue(), arrayValue, index);
+              insertValue: function(options) {
+                console.log(this.getValue(), options);
                 return "1";
               },
               rules: true,

@@ -20,7 +20,7 @@ export default {
 
     delItem(index) {
       if (index >= 0 && index < this.schema.__propSchemaList.length) {
-        var oldValue = formUtils.getValue(this.schema);
+        var oldValues = formUtils.getValue(this.schema);
         this.schema.__propSchemaList.splice(index, 1);
         formUtils.resetIndexArr(
           this.schema,
@@ -30,7 +30,7 @@ export default {
         var eventData = {
           type: "delete",
           index: index,
-          data: utils.deepCopy(oldValue[index])
+          data: utils.deepCopy(oldValues[index])
         };
         var newValue = formUtils.getValue(this.schema);
         this.$emit("input", newValue, eventData);
@@ -39,9 +39,9 @@ export default {
 
     delAllItems() {
       if (this.schema.__propSchemaList.length > 0) {
-        var oldValue = formUtils.getValue(this.schema);
+        var oldValues = formUtils.getValue(this.schema);
         this.schema.__propSchemaList = [];
-        var eventData = { type: "deleteAll", index: -1, data: oldValue };
+        var eventData = { type: "deleteAll", index: -1, data: oldValues };
         var newValue = formUtils.getValue(this.schema);
         this.$emit("input", newValue, eventData);
       }
@@ -85,10 +85,10 @@ export default {
 
     __addItem(index) {
       var insertInfo = false,
-        oldValue,
+        oldValues,
         position;
 
-      oldValue = formUtils.getValue(this.schema);
+      oldValues = formUtils.getValue(this.schema);
       var isIndex = utils.isNum(index);
       position = isIndex ? index + 1 : this.schema.__propSchemaList.length;
       var insertValue = this.schema.array.insertValue;
@@ -96,13 +96,16 @@ export default {
         if (utils.isFunc(insertValue)) {
           // 是一个函数，过滤
           var thisFrom = this.__getForm();
-          var rawDefaultValue = utils.deepCopy(oldValue[index]);
-          var newDefaultValue = insertValue.call(
-            thisFrom,
-            oldValue,
-            position,
-            isIndex ? "copy" : "add"
-          );
+          var rawDefaultValue = utils.deepCopy(oldValues[index]);
+
+          var options = {
+            oldValues: oldValues,
+            position: position,
+            type: isIndex ? "copy" : "add"
+          };
+          var newDefaultValue = insertValue.call(thisFrom, options);
+          options = null;
+
           if (utils.isUndef(newDefaultValue)) {
             if (isIndex) {
               insertInfo = {
@@ -126,7 +129,7 @@ export default {
         }
       } else if (isIndex) {
         insertInfo = {
-          value: utils.deepCopy(oldValue[index]),
+          value: utils.deepCopy(oldValues[index]),
           position: position
         }; // 固定的值
       }

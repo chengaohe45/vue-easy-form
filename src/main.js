@@ -16,7 +16,7 @@ import gComponent from "@/components/register.js";
 // 注册全局组件
 gComponent.register();
 Vue.use(elementUI);
-Vue.use(esForm, {}, { boxRowSpace: 10, defaultCom: "el-input" });
+Vue.use(esForm, { boxRowSpace: 10, defaultCom: "el-input" });
 
 Vue.config.productionTip = false;
 

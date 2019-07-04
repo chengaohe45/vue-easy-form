@@ -722,7 +722,14 @@ export default {
         }
       }
 
-      var options = {value: targetValue, event: eventData, pathKey: this.schema.__pathKey, idxChain: this.schema.__idxChain, target: target};
+      var options = {
+        value: targetValue,
+        event: eventData,
+        pathKey: this.schema.__pathKey,
+        index: this.schema.__index,
+        idxChain: this.schema.__idxChain,
+        target: target
+      };
 
       var form = this.__getForm();
       form._syncUi(checkSchema, eventNames, options);
@@ -737,7 +744,14 @@ export default {
       var checkSchema = [this.schema];
       var eventNames = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
 
-      var options = {value: targetValue, event: eventData, pathKey: this.schema.__pathKey, idxChain: this.schema.__idxChain, target: null};
+      var options = {
+        value: targetValue,
+        event: eventData,
+        pathKey: this.schema.__pathKey,
+        index: this.schema.__index,
+        idxChain: this.schema.__idxChain,
+        target: null
+      };
 
       var form = this.__getForm();
       form._syncUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位

@@ -72,13 +72,13 @@ export default {
             value: "",
             col: 18,
             rules: {
-              check: {
-                name: function(value /*, formData, key*/) {
-                  // console.log("value: ", value);
+              checks: {
+                handler: function(options /*, formData, key*/) {
+                  console.log("options: ", options);
                   // console.log("formData: ", formData);
                   // console.log("key: ", key);
                   var reg = /^1\d{10}$/;
-                  return reg.test(value);
+                  return reg.test(options.value);
                 },
                 trigger: "change"
               },
@@ -91,13 +91,13 @@ export default {
             component: "el-input-number",
             value: 10,
             rules: {
-              check: {
-                name: "es: {{$root.age}}>=10",
+              checks: {
+                handler: "es: {{$root.age}}>=10",
                 trigger: "change"
               },
               errMsg: "年龄不能小于10"
             },
-            desc: "check.name支持es(这里不能小于10)"
+            desc: "checks.handler支持es(这里不能小于10)"
           },
           desc: {
             label: "广告描述",
@@ -111,7 +111,7 @@ export default {
             },
             value: "",
             rules: {
-              check: (value /*, formData, key*/) => {
+              checks: (value /*, formData, key*/) => {
                 // console.log(value, "----", typeof formData);
                 if (value && value.length > 10) {
                   return "广告描述字数不能多于10";

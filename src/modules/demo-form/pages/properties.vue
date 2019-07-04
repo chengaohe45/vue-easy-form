@@ -95,8 +95,8 @@ export default {
                 unit: "公斤",
                 value: 100,
                 rules: {
-                  check: {
-                    name: "es: {{$root.target.weight}}>=100",
+                  checks: {
+                    handler: "es: {{$root.target.weight}}>=100",
                     trigger: "input"
                   },
                   errMsg: "体重不能小于100."

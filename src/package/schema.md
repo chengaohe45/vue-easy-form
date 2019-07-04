@@ -69,21 +69,21 @@
          注意：
          当是一个string的时候, 公共或扩展的function,传入的值第一个参数将是本身的值，后面的为自己添加的参数，没有传入formData
          当是一个function的时候，传入的值第一个参数将是本身的值，第二个为会根formData值，后面的为自己添加的参数，这样做是为了个性化检验自由度更高 
-        // check: "isMobile", //写法一
-        // check: ["isMobile", "isEmail"], //写法二
-        // check: ["isMobile", "isEmail", function(value, formData, ...)], //写法三
-        // check: { //写法四
-        //  name: "isTest", //字符串
+        // checks: "isMobile", //写法一
+        // checks: ["isMobile", "isEmail"], //写法二
+        // checks: ["isMobile", "isEmail", function(value, formData, ...)], //写法三
+        // checks: { //写法四
+        //  handler: "isTest", //字符串
         //  trigger: "change", //非必填；检查的时机，比如电话号码不能实时检查，再光标离开时再检人木日
         //  params: [1, 2]  //自定义需要传入的参数，数组，不然就会当做一个参数传入 这个将会变成这样：isTest(value, 1, 2)
         //}, 
-        // check: { //写法五
-        //  name: function(){}, //直接一个函数；注意：当是一个function的时候，传入的值第一个参数将是本身的值，第二个为会根formData值，后面的为自己添加的参数，这样做是为了个性化检验自由度更高
+        // checks: { //写法五
+        //  handler: function(){}, //直接一个函数；注意：当是一个function的时候，传入的值第一个参数将是本身的值，第二个为会根formData值，后面的为自己添加的参数，这样做是为了个性化检验自由度更高
         //  params: [1, 2]  //自定义需要传入的参数 这个将会变成这样：function(value, formData, 1, 2)
         //}, 
-        // check: ["isMobile", "es: {{$root.age}}>10"], //写法六
+        // checks: ["isMobile", "es: {{$root.age}}>10"], //写法六
         */
-        check: value => {
+        checks: value => {
           if (value.length > 10) {
             // return "姓名不能大于10个字";
             return false;

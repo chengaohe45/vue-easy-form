@@ -1,4 +1,4 @@
-import sysExtRules from "./rules";
+// import sysExtRules from "./rules";
 import parse from "./parse";
 import global from "./global";
 import constant from "./constant";
@@ -1186,7 +1186,7 @@ let formUtils = {
     if (propItem.rules) {
       var rules = propItem.rules;
 
-      var checkList = rules.check;
+      var checkList = rules.checks;
       if (checkList) {
         checkList.forEach(checkItem => {
           // 有检查
@@ -1951,33 +1951,78 @@ let formUtils = {
 
   /* 解析规则 */
   __parsePropRules: function(rules) {
+    var newRules;
     if (utils.isObj(rules)) {
-      var checkList = rules.check;
-      var tmpCheckList;
-      if (!checkList) {
-        checkList = [];
-      } else if (!utils.isArr(checkList)) {
-        checkList = [checkList];
+      if (rules.check) {
+        console.warn("rules.check已经舍弃了，请使用rules.checks");
       }
-      tmpCheckList = checkList.map(item => {
-        return formUtils.__perfectCheckItem(item);
+
+      newRules = {};
+
+      var rawCheckList = rules.checks ? rules.checks : rules.check;
+      var tmpCheckList = [];
+      if (!rawCheckList) {
+        rawCheckList = [];
+      } else if (!utils.isArr(rawCheckList)) {
+        rawCheckList = [rawCheckList];
+      }
+      rawCheckList.forEach(item => {
+        var newItem = formUtils.__perfectCheckItem(item);
+        if (newItem) {
+          // 正确
+          tmpCheckList.push(newItem);
+        }
       });
-      rules.check = tmpCheckList;
-      rules.required = rules.required ? rules.required : false;
-      rules.__rawRequired = parse.newEsFuncion(rules.required);
-      if (rules.required || (rules.check && rules.check.length > 0)) {
-        // 合法的写法
-        return rules;
-      } else {
-        return false;
+      if (tmpCheckList.length > 0) {
+        newRules.checks = tmpCheckList;
       }
-    } else if (utils.isBool(rules) || utils.isStr(rules)) {
-      var rawRequired = rules;
-      rules = {
-        required: rawRequired,
-        __rawRequired: parse.newEsFuncion(rawRequired)
+      if (parse.isEsScript(rules.required)) {
+        newRules.required = false; // 让以后解析
+        newRules.__rawRequired = parse.newEsFuncion(rules.required);
+      } else if (utils.isBool(rules.required)) {
+        newRules.required = rules.required;
+        newRules.__rawRequired = rules.required;
+      } else {
+        newRules.required = false;
+        newRules.__rawRequired = false;
+      }
+    } else if (utils.isBool(rules)) {
+      newRules = {
+        required: rules,
+        __rawRequired: rules
       };
-      return rules;
+    } else if (parse.isEsScript(rules)) {
+      newRules = {
+        required: false,
+        __rawRequired: parse.newEsFuncion(rules)
+      };
+    } else {
+      return false;
+    }
+
+    if (
+      newRules.__rawRequired ||
+      (newRules.checks && newRules.checks.length > 0)
+    ) {
+      var emptyMsg, errMsg;
+
+      if (newRules.__rawRequired) {
+        // 有为空检查
+        if (utils.isStr(rules.emptyMsg)) {
+          emptyMsg = rules.emptyMsg.trim();
+        }
+        newRules.emptyMsg = emptyMsg ? emptyMsg : "不能为空";
+      }
+
+      if (newRules.checks && newRules.checks.length > 0) {
+        // 有非空检查
+        if (utils.isStr(rules.errMsg)) {
+          errMsg = rules.errMsg.trim();
+        }
+        newRules.errMsg = errMsg ? errMsg : "格式不对";
+      }
+
+      return newRules;
     } else {
       return false;
     }
@@ -2241,38 +2286,56 @@ let formUtils = {
   },
 
   __perfectCheckItem: function(item) {
-    if (utils.isStr(item) || utils.isFunc(item)) {
-      return { name: item, trigger: [constant.INPUT_EVENT] };
+    if (utils.isFunc(item)) {
+      return { handler: item, trigger: [constant.INPUT_EVENT] };
+    } else if (parse.isEsScript(item)) {
+      return {
+        handler: parse.newEsFuncion(item),
+        trigger: [constant.INPUT_EVENT]
+      };
     } else if (
       utils.isObj(item) &&
-      (utils.isStr(item.name) || utils.isFunc(item.name))
+      (parse.isEsScript(item.handler) ||
+        parse.isEsScript(item.name) ||
+        utils.isFunc(item.name) ||
+        utils.isFunc(item.handler))
     ) {
+      var handler;
+      if (parse.isEsScript(item.name)) {
+        console.warn("rules.check.name已经舍弃了，请使用rules.checks.handler");
+        handler = parse.newEsFuncion(item.name);
+      } else if (parse.isEsScript(item.handler)) {
+        handler = parse.newEsFuncion(item.handler);
+      }
+
       var newTrigger = this.__parseTrigger(item.trigger);
       newTrigger =
         newTrigger && newTrigger.length
           ? utils.unique(newTrigger)
           : [constant.INPUT_EVENT];
 
-      var newParams;
-      if (!utils.isUndef(item.params)) {
-        //有定义，没有定义就不理会
-        if (utils.isArr(item.params)) {
-          newParams = item.params;
-        } else {
-          newParams = [item.params];
-        }
-      }
+      // var newParams;
+      // if (!utils.isUndef(item.params)) {
+      //   //有定义，没有定义就不理会
+      //   if (utils.isArr(item.params)) {
+      //     newParams = item.params;
+      //   } else {
+      //     newParams = [item.params];
+      //   }
+      // }
 
       var newItem = {
-        name: item.name,
-        trigger: newTrigger,
-        params: newParams
+        handler: handler,
+        trigger: newTrigger
       };
 
       return newItem;
     } else {
-      throw "formUtils.__perfectCheckItem: rules设置不正确";
-      // return null;
+      console.warn(
+        "rules.checks设置不正确: 正确的格式如：[{trigger, handler}], 错误的item为",
+        item
+      );
+      return false;
     }
   },
 
@@ -2443,103 +2506,6 @@ let formUtils = {
         gFirstItem = null;
       }
     }
-  },
-
-  /**
-   *
-   * @param {*} rules
-   * @param {*} value
-   * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
-   * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
-   * @param {*} pathKey 哪个组件触发
-   * @returns Boolean or string
-   * true 是需要检查的，并且正确
-   * false 不需要检查
-   * string 是需要检查的，但不正确
-   */
-  checkRules: function(rules, value, triggers, parseSources, pathKey) {
-    if (!rules) {
-      //没有规则
-      return true;
-    }
-
-    var isRequired = parse.smartEsValue(rules.required, parseSources);
-    // console.log("isRequired: ", isRequired);
-    if (isRequired) {
-      //空要检查
-      if (formUtils.isEmpty(value)) {
-        return rules.emptyMsg && utils.isStr(rules.emptyMsg)
-          ? rules.emptyMsg
-          : "不能为空";
-      }
-    } else if (!isRequired && formUtils.isEmpty(value)) {
-      //空时不检查，场景：当埋写邮件地址时，要么不写要么写正确
-      return true;
-    }
-    //非空情况
-    var checkList = rules.check;
-    var errMsg = true;
-    var checkFun, params;
-    if (checkList && checkList.length > 0) {
-      var hadChecked = false;
-      for (var i = 0; i < checkList.length; i++) {
-        var checkItem = checkList[i];
-        if (checkItem.name) {
-          var checkTriggers = checkItem.trigger; //检查时机，默认为实时
-          if (!triggers || utils.isInter(checkTriggers, triggers)) {
-            hadChecked = true;
-            var result = true;
-            if (utils.isStr(checkItem.name)) {
-              if (sysExtRules[checkItem.name]) {
-                //系统或扩展的验证函数
-                checkFun = sysExtRules[checkItem.name];
-                params = checkItem.params
-                  ? utils.deepCopy(checkItem.params)
-                  : [];
-                params.unshift(value);
-                // console.log("parmas: ", params);
-                result = checkFun.apply(null, params);
-              } else if (parse.isEsScript(checkItem.name)) {
-                result = parse.smartEsValue(checkItem.name, parseSources);
-              } else {
-                //找不到，不理会，认为无问题
-              }
-            } else if (utils.isFunc(checkItem.name)) {
-              //是一个函数
-              checkFun = checkItem.name;
-              params = checkItem.params ? utils.deepCopy(checkItem.params) : [];
-              params.unshift(pathKey);
-              params.unshift(utils.deepCopy(parseSources.rootData));
-              params.unshift(value);
-              result = checkFun.apply(null, params);
-            }
-            // console.log("result2 = ", result);
-            if (result !== true) {
-              if (utils.isStr(result)) {
-                //直接返回错误信息
-                errMsg = result;
-              } else {
-                //用统一的错误信息
-                errMsg =
-                  rules.errMsg && utils.isStr(rules.errMsg)
-                    ? rules.errMsg
-                    : "格式不对";
-              }
-              break;
-            }
-          }
-        }
-      }
-
-      if (!hadChecked) {
-        // 都没有进入验证，说明这个事件是目标事件，返回false
-        errMsg = false;
-      }
-    } else {
-      // 没有要验证的东西
-      errMsg = true;
-    }
-    return errMsg;
   },
 
   clearErrorMsg(propItem) {
@@ -2926,36 +2892,20 @@ let formUtils = {
   },
 
   __esParseComponent(component, parseSources) {
-    // console.log(1);
-    // return true;
-    // var test = 1;
-    // if (true) {
-    //   for (var i = 0; i < 1000; i++) {
-    //     test = i;
-    //   }
-    // }
-    // return test;
-
     var text;
 
     if (component.__rawProps) {
       var curProps = component.props;
       var rawProps = component.__rawProps;
       for (var key in rawProps) {
-        // if (parse.isEsScript(rawProps[key])) {
         text = parse.smartEsValue(rawProps[key], parseSources);
-        // } else {
-        //   text = rawProps[key];
-        // }
         if (curProps[key] !== text) {
           curProps[key] = text;
         }
       }
     }
 
-    // console.log("component.__rawText：", component.__rawText);
     if (component.__rawText) {
-      // console.log(123);
       text = parse.smartEsValue(component.__rawText, parseSources);
       if (text !== component.text) {
         component.text = text;

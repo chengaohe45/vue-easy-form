@@ -390,13 +390,8 @@ export default {
   data() {
     return {
       formSchema: {}, // $data有这个值说明是es-form
-      isInited: false
-
-      // formGlobal: {},
-
-      // formData: {},
-      // resultValue: {},
-      // originalValue: {} // 最初的值
+      isInited: false,
+      lockSubmit: false // 开始是false
     };
   },
 
@@ -407,13 +402,13 @@ export default {
       return this.$refs.formFrame.getRef(name);
     },
 
-    isHidden(pathKey) {
-      this._isHidden(pathKey);
-    },
+    // isHidden(pathKey) {
+    //   this._isHidden(pathKey);
+    // },
 
-    _isHidden(pathKey) {
-      return false;
-    },
+    // _isHidden(pathKey) {
+    //   return false;
+    // },
 
     /* 下划线一杠代表对内使用 */
     _getType() {
@@ -458,11 +453,11 @@ export default {
       };
 
       //是否隐藏，隐藏就不用检查有效性了
-      var isHidden = parse.smartEsValue(schema.hidden, parseSources);
+      var isHidden = schema.hidden; // 省资源，不做es转
       if (isHidden) {
         return isValid;
       }
-      // idxChain = idxChain ? idxChain : "";
+
       var validResult,
         checkedResult,
         isTabs,
@@ -475,12 +470,11 @@ export default {
         if (schema.array) {
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            checkedResult = formUtils.checkRules(
-              schema.array.rules,
+            checkedResult = this.__checkRules(
+              schema,
               arrayValue,
               "",
-              parseSources,
-              schema.__pathKey
+              parseSources
             );
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -556,12 +550,11 @@ export default {
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = formUtils.checkRules(
-            schema.rules,
+          checkedResult = this.__checkRules(
+            schema,
             schema.value,
             "",
-            parseSources,
-            schema.__pathKey
+            parseSources
           );
           if (checkedResult === true) {
             schema.__invalidMsg = false;
@@ -573,12 +566,11 @@ export default {
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            checkedResult = formUtils.checkRules(
-              schema.array.rules,
+            checkedResult = this.__checkRules(
+              schema,
               arrayValue,
               "",
-              parseSources,
-              schema.__pathKey
+              parseSources
             );
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -615,18 +607,23 @@ export default {
           }
         }
       }
+      parseSources = null;
       return isValid;
     },
 
     // 发出提交事件
     __submit() {
-      this.$nextTick(() => {
-        if (this.$data.isInited) {
-          this.$emit("submit", utils.deepCopy(this._esResultValue));
-        } else {
-          console.warn("表单还未初始化完成，无法派发submit事件");
-        }
-      });
+      if (!this.$data.lockSubmit) {
+        this.$data.lockSubmit = true; // 加锁，保存只触发一次
+        this.$nextTick(() => {
+          this.$data.lockSubmit = false;
+          if (this.$data.isInited) {
+            this.$emit("submit", utils.deepCopy(this._esResultValue));
+          } else {
+            console.warn("表单还未初始化完成，无法派发submit事件");
+          }
+        });
+      }
     },
 
     // 对外调用，发出提交事件
@@ -639,6 +636,20 @@ export default {
      */
     getValue() {
       return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getRootData() {
+      return utils.deepCopy(this._esFormData);
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getGlobal() {
+      return utils.deepCopy(this.global);
     },
 
     /**
@@ -707,7 +718,6 @@ export default {
     },
 
     _syncUi(checkSchemas, eventNames, options) {
-
       var sourcePathKey = checkSchemas[0].__pathKey; // checkSchemas必有值
       if (eventNames.includes(constant.INPUT_EVENT)) {
         // 需要同步
@@ -726,12 +736,11 @@ export default {
           rootSchema: this.$data.formSchema
         };
         // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-        var checkedResult = formUtils.checkRules(
-          inputSchema.array ? inputSchema.array.rules : inputSchema.rules,
+        var checkedResult = this.__checkRules(
+          inputSchema,
           options.value,
           eventNames,
-          parseSources,
-          inputSchema.__pathKey
+          parseSources
         );
 
         if (checkedResult === true) {
@@ -757,32 +766,30 @@ export default {
         }
 
         if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
-          var vm = this;
-          vm.$nextTick(() => {
-            // 这用可以记录是什么导致表单改变
-            if (handlers.length > 0) {
-              handlers.forEach(handler => {
-                handler.call(vm, options);
-              });
-            }
+          // var vm = this;
+          // vm.$nextTick(() => {
+          // 这用可以记录是什么导致表单改变
+          if (handlers.length > 0) {
+            handlers.forEach(handler => {
+              handler.call(this, options);
+            });
+          }
 
-            if (eventNames.includes(constant.INPUT_EVENT)) {
-              this.$emit(
-                "change",
-                utils.deepCopy(this._esResultValue),
-                sourcePathKey
-              );
-            }
+          if (eventNames.includes(constant.INPUT_EVENT)) {
+            this.$emit(
+              "change",
+              utils.deepCopy(this._esResultValue),
+              sourcePathKey
+            );
+          }
 
-            /* 释放内存 */
-            checkSchemas = null;
-            eventNames = undefined;
-            // targetValue = undefined;
-            // eventData = undefined;
-            options = null;
-            handlers = null;
-          });
         }
+
+        /* 释放内存 */
+        checkSchemas = null;
+        eventNames = undefined;
+        options = null;
+        handlers = null;
       }
     },
 
@@ -823,6 +830,96 @@ export default {
         utils.deepCopy(resultValue),
         sourcePathKey ? sourcePathKey : false
       );
+
+      baseParseSources = null;
+      resultValue = null;
+    },
+
+    /**
+     *
+     * @param {*} schema 这个东西已经是解析过了，不用重新解析
+     * @param {*} value
+     * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
+     * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
+     * @returns Boolean or string
+     * true 是需要检查的，并且正确
+     * false 不需要检查
+     * string 是需要检查的，但不正确
+     */
+    __checkRules: function(schema, value, triggers, parseSources) {
+      var rules =
+        schema.array && schema.array.rules ? schema.array.rules : schema.rules;
+      if (!rules) {
+        //没有规则
+        return true;
+      }
+
+      var isRequired = rules.required;
+      if (isRequired) {
+        //空要检查
+        if (formUtils.isEmpty(value)) {
+          return rules.emptyMsg;
+        }
+      } else if (!isRequired && formUtils.isEmpty(value)) {
+        //空时不检查，场景：当埋写邮件地址时，要么不写要么写正确
+        return true;
+      }
+      //非空情况
+      var checkList = rules.checks;
+      var errMsg = true;
+      var checkFun;
+      if (checkList && checkList.length > 0) {
+        var hadChecked = false;
+        for (var i = 0; i < checkList.length; i++) {
+          var checkItem = checkList[i];
+          // if (checkItem.handler) {
+          var checkTriggers = checkItem.trigger; //检查时机，默认为实时
+          // triggers为空时，就无条件检查(checkAll); 不为空时就条件触发
+          if (!triggers || utils.isInter(checkTriggers, triggers)) {
+            checkFun = checkItem.handler;
+
+            hadChecked = true;
+            var result = true;
+
+            var options = {};
+            options.value = value;
+            options.pathKey = schema.__pathKey;
+            options.idxChain = schema.__idxChain;
+            options.index = schema.__index;
+            // options.rootData = this._esFormData;
+            if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
+              result = parse.smartEsValue(checkFun, parseSources);
+            } else {
+              result = checkFun.call(this, options);
+            }
+            options = null;
+
+            if (result !== true) {
+              if (utils.isStr(result)) {
+                //直接返回错误信息
+                errMsg = result.trim();
+                if (!errMsg) {
+                  errMsg = rules.errMsg;
+                }
+              } else {
+                //用统一的错误信息
+                errMsg = rules.errMsg;
+              }
+              break;
+            }
+          }
+          // }
+        }
+
+        if (!hadChecked) {
+          // 都没有进入验证，说明这个事件是目标事件，返回false
+          errMsg = false;
+        }
+      } else {
+        // 没有要验证的东西
+        errMsg = true;
+      }
+      return errMsg;
     }
   },
 

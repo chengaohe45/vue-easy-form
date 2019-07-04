@@ -79,8 +79,8 @@ export default {
               }
             },
             rules: {
-              check: {
-                name: "es: {{$root.clickTotal}}>=255",
+              checks: {
+                handler: "es: {{$root.clickTotal}}>=255",
                 trigger: "input"
               },
               errMsg: "点击量不能小于255."
@@ -127,7 +127,7 @@ export default {
             // }
           },
           rules: {
-            // check: {
+            // checks: {
             //   name: "es: {{$root.clickTotal}}>=255",
             //   trigger: "input"
             // },
