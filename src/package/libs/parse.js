@@ -34,40 +34,39 @@ let parse = {
    */
   smartEsValue(
     scriptTxt,
-    {
-      global = {},
-      rootData = {},
-      index = -1,
-      idxChain = "",
-      rootSchema = {}
-    } = {}
+    // {
+    //   global = {},
+    //   rootData = {},
+    //   index = -1,
+    //   idxChain = "",
+    //   pathKey = "",
+    //   rootSchema = {},
+    //   isHidden
+    // } = {}
+    parseSources
   ) {
-    if (Object.keys(rootData).length <= 0) {
-      throw "rootData = {}";
-    }
-    if (Object.keys(rootSchema).length <= 0) {
-      throw "rootSchema = {}";
-    }
 
     if (utils.isFunc(scriptTxt)) {
       var options;
       if (scriptTxt.__esFuncName === constant.ES_FUNC_NAME) {
         // es: 转过来的函数
         options = {
-          global: global,
-          rootData: rootData,
-          idxChains: idxChain ? idxChain.split(",") : [],
-          index: index,
-          rootSchema: rootSchema,
-          isHidden: parse.__isHidden // 不要写execTotal
+          global: parseSources.global,
+          rootData: parseSources.rootData,
+          idxChains: parseSources.idxChain ? parseSources.idxChain.split(",") : [],
+          index: parseSources.index,
+          rootSchema: parseSources.rootSchema,
+          isHidden: parseSources.isHidden
         };
       } else {
         // 自定义函数
         options = {
-          global: global,
-          rootData: rootData,
-          idxChains: idxChain ? idxChain.split(",") : [],
-          index: index
+          global: parseSources.global,
+          rootData: parseSources.rootData,
+          idxChains: parseSources.idxChain,
+          index: parseSources.index,
+          pathKey: parseSources.pathKey,
+          $hidden: parseSources.isHidden
         };
       }
 
@@ -199,81 +198,81 @@ let parse = {
    * @param {*} pathKey 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
    * @param {*} options
    */
-  __isHidden(pathKey, options) {
-    var targetSchema = formUtils.getSchemaByKey(options.rootSchema, pathKey); // 看看最后一个是否存在
-    if (!targetSchema) {
-      console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
-      return false;
-    }
+  // __isHidden(pathKey, options) {
+  //   var targetSchema = formUtils.getSchemaByKey(options.rootSchema, pathKey); // 看看最后一个是否存在
+  //   if (!targetSchema) {
+  //     console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
+  //     return false;
+  //   }
 
-    var seperator = ".";
-    var keys = pathKey.split(seperator);
-    var parentPathKey = "",
-      tmpParentPathKey;
-    var reg = /\[\d+\]$/;
-    var arraySymbol = "[";
-    var key;
-    var len = keys.length - 1;
-    for (var i = 0; i <= len; i++) {
-      key = keys[i];
-      if (key.indexOf(arraySymbol) >= 0) {
-        key = key.replace(reg, "");
-      }
+  //   var seperator = ".";
+  //   var keys = pathKey.split(seperator);
+  //   var parentPathKey = "",
+  //     tmpParentPathKey;
+  //   var reg = /\[\d+\]$/;
+  //   var arraySymbol = "[";
+  //   var key;
+  //   var len = keys.length - 1;
+  //   for (var i = 0; i <= len; i++) {
+  //     key = keys[i];
+  //     if (key.indexOf(arraySymbol) >= 0) {
+  //       key = key.replace(reg, "");
+  //     }
 
-      tmpParentPathKey = parentPathKey ? parentPathKey + seperator + key : key;
-      parentPathKey = parentPathKey
-        ? parentPathKey + seperator + keys[i]
-        : keys[i];
+  //     tmpParentPathKey = parentPathKey ? parentPathKey + seperator + key : key;
+  //     parentPathKey = parentPathKey
+  //       ? parentPathKey + seperator + keys[i]
+  //       : keys[i];
 
-      // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
-      var itemSchema =
-        tmpParentPathKey == pathKey
-          ? targetSchema
-          : formUtils.getSchemaByKey(options.rootSchema, tmpParentPathKey);
-      if (itemSchema) {
-        var rawHidden = itemSchema.__rawHidden;
-        if (utils.isFunc(rawHidden)) {
-          var newOptions = {};
-          newOptions = Object.assign(newOptions, options);
-          newOptions.index = itemSchema.__index;
-          if (utils.isNum(newOptions.execTotal) && newOptions.execTotal >= 0) {
-            newOptions.execTotal = newOptions.execTotal + 1;
+  //     // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
+  //     var itemSchema =
+  //       tmpParentPathKey == pathKey
+  //         ? targetSchema
+  //         : formUtils.getSchemaByKey(options.rootSchema, tmpParentPathKey);
+  //     if (itemSchema) {
+  //       var rawHidden = itemSchema.__rawHidden;
+  //       if (utils.isFunc(rawHidden)) {
+  //         var newOptions = {};
+  //         newOptions = Object.assign(newOptions, options);
+  //         newOptions.index = itemSchema.__index;
+  //         if (utils.isNum(newOptions.execTotal) && newOptions.execTotal >= 0) {
+  //           newOptions.execTotal = newOptions.execTotal + 1;
 
-            const MAX_TOTAL = 30;
-            if (newOptions.execTotal > MAX_TOTAL) {
-              throw "解析$hidden:[" +
-                pathKey +
-                "]出错，系统执行$hidden超过" +
-                MAX_TOTAL +
-                "次，可能为死循环";
-            }
-          } else {
-            newOptions.execTotal = 1;
-          }
-          newOptions.idxChains = itemSchema.__idxChain.split(",");
-          if (rawHidden(newOptions)) {
-            return true;
-          } else {
-            // console.log("3 tmpParentPathKey: ", tmpParentPathKey);
-          }
-        } else {
-          if (rawHidden) {
-            return true;
-          } else {
-            // console.log("next: ", tmpParentPathKey);
-          }
-        }
-      } else {
-        console.warn(
-          "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
-        );
-        return false;
-      }
-    }
+  //           const MAX_TOTAL = 30;
+  //           if (newOptions.execTotal > MAX_TOTAL) {
+  //             throw "解析$hidden:[" +
+  //               pathKey +
+  //               "]出错，系统执行$hidden超过" +
+  //               MAX_TOTAL +
+  //               "次，可能为死循环";
+  //           }
+  //         } else {
+  //           newOptions.execTotal = 1;
+  //         }
+  //         newOptions.idxChains = itemSchema.__idxChain.split(",");
+  //         if (rawHidden(newOptions)) {
+  //           return true;
+  //         } else {
+  //           // console.log("3 tmpParentPathKey: ", tmpParentPathKey);
+  //         }
+  //       } else {
+  //         if (rawHidden) {
+  //           return true;
+  //         } else {
+  //           // console.log("next: ", tmpParentPathKey);
+  //         }
+  //       }
+  //     } else {
+  //       console.warn(
+  //         "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
+  //       );
+  //       return false;
+  //     }
+  //   }
 
-    // 全部都没有隐藏
-    return false;
-  }
+  //   // 全部都没有隐藏
+  //   return false;
+  // }
 };
 
 export default parse;

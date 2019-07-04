@@ -63,7 +63,6 @@ let formUtils = {
         }
         // console.log(120);
         if (hasChanged && !hasIdxChainChanged) {
-          // console.log("propItem.__idxChain = ", propItem.__idxChain, propItem.__pathKey);
           formUtils.resetIndexArr(
             propItem,
             propItem.__idxChain,
@@ -543,6 +542,7 @@ let formUtils = {
     var parseSources = Object.assign({}, baseParseSources);
     parseSources.index = propItem.__index;
     parseSources.idxChain = propItem.__idxChain;
+    parseSources.pathKey = propItem.__pathKey;
 
     var formData = baseParseSources.rootData;
 
@@ -552,7 +552,6 @@ let formUtils = {
       (isParentHidden || parse.smartEsValue(propItem.hidden, parseSources))
         ? true
         : false;
-    // idxChain = idxChain ? idxChain : "";
 
     var newValue, keyValue, newArr, i, schemaList;
 
@@ -588,7 +587,6 @@ let formUtils = {
         newArr = [];
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
-          // var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
           newValue = formUtils.__getValue(
             schemaList[i],
             baseParseSources,
@@ -637,7 +635,6 @@ let formUtils = {
         newArr = [];
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
-          // var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
           newValue = formUtils.__getValue(
             schemaList[i],
             baseParseSources,
@@ -2536,7 +2533,7 @@ let formUtils = {
   /**
    * 根据formData, 分析界面的情况。现主要是解析第一行的情况和hidden, required
    * @param {*} schema
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
+   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema, isHidden: }
    * @param {*} formData
    * @param {*} rootSchema
    */
@@ -2547,6 +2544,7 @@ let formUtils = {
     var parseSources = Object.assign({}, baseParseSources);
     parseSources.index = propItem.__index;
     parseSources.idxChain = propItem.__idxChain;
+    parseSources.pathKey = propItem.__pathKey;
 
     if (propItem.component) {
       if (propItem.__rawHidden) {
@@ -2851,6 +2849,7 @@ let formUtils = {
               var nextParseSources = Object.assign({}, baseParseSources);
               nextParseSources.index = nextPropItem.__index;
               nextParseSources.idxChain = nextPropItem.__idxChain;
+              nextParseSources.pathKey = nextPropItem.__pathKey;
 
               isHidden = parse.smartEsValue(
                 nextPropItem.__rawHidden,
@@ -2931,6 +2930,7 @@ let formUtils = {
         var parseSources = Object.assign({}, baseParseSources);
         parseSources.index = propSchema.__index;
         parseSources.idxChain = propSchema.__idxChain;
+        parseSources.pathKey = propSchema.__pathKey;
 
         result = parse.smartEsValue(propSchema.__rawHidden, parseSources);
       } else {

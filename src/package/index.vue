@@ -346,6 +346,10 @@ import constant from "./libs/constant.js";
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
+
+    var hiddenFunc = this.isHidden;
+    this._esHiddenFunc = hiddenFunc.bind(this); // 用于作隐藏解析
+
     this.__initUi(this.schema);
 
     this.$nextTick(() => {
@@ -398,13 +402,70 @@ export default {
   /* ====================== 事件处理 ====================== */
 
   methods: {
+
     getRef(name) {
       return this.$refs.formFrame.getRef(name);
     },
 
-    // isHidden(pathKey) {
-    //   this._isHidden(pathKey);
-    // },
+    isHidden(pathKey) {
+      var rootSchema = this.$data.formSchema;
+      var targetSchema = formUtils.getSchemaByKey(rootSchema, pathKey); // 看看最后一个是否存在
+      if (!targetSchema) {
+        console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
+        return false;
+      }
+
+      var seperator = ".";
+      var keys = pathKey.split(seperator);
+      var parentPathKey = "",
+        tmpParentPathKey;
+      var reg = /\[\d+\]$/;
+      var arraySymbol = "[";
+      var key;
+      var len = keys.length - 1;
+      for (var i = 0; i <= len; i++) {
+        key = keys[i];
+        if (key.indexOf(arraySymbol) >= 0) {
+          key = key.replace(reg, "");
+        }
+
+        tmpParentPathKey = parentPathKey ? parentPathKey + seperator + key : key;
+        parentPathKey = parentPathKey
+          ? parentPathKey + seperator + keys[i]
+          : keys[i];
+
+        // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
+        var itemSchema =
+          tmpParentPathKey == pathKey
+            ? targetSchema
+            : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
+        if (itemSchema) {
+          var parseSources = {
+            global: this.global,
+            rootData: this._esFormData,
+            index: itemSchema.__index,
+            idxChain: itemSchema.__idxChain,
+            pathKey: itemSchema.__pathKey,
+            rootSchema: rootSchema,
+            isHidden: this._esHiddenFunc
+          };
+
+          if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
+            return true;
+          } else {
+            // console.log("3 tmpParentPathKey: ", tmpParentPathKey);
+          }
+        } else {
+          console.warn(
+            "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
+          );
+          return false;
+        }
+      }
+
+      // 全部都没有隐藏
+      return false;
+    },
 
     // _isHidden(pathKey) {
     //   return false;
@@ -449,7 +510,9 @@ export default {
         rootData: this._esFormData,
         index: schema.__index,
         idxChain: schema.__idxChain,
-        rootSchema: rootSchema
+        pathKey: schema.__pathKey,
+        rootSchema: rootSchema,
+        isHidden: this._esHiddenFunc
       };
 
       //是否隐藏，隐藏就不用检查有效性了
@@ -733,7 +796,9 @@ export default {
           rootData: this._esFormData,
           index: inputSchema.__index,
           idxChain: inputSchema.__idxChain,
-          rootSchema: this.$data.formSchema
+          pathKey: inputSchema.__pathKey,
+          rootSchema: this.$data.formSchema,
+          isHidden: this._esHiddenFunc
         };
         // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
         var checkedResult = this.__checkRules(
@@ -814,7 +879,8 @@ export default {
       var baseParseSources = {
         global: this.global,
         rootData: this._esFormData,
-        rootSchema: this.$data.formSchema
+        rootSchema: this.$data.formSchema,
+        isHidden: this._esHiddenFunc
       };
 
       formUtils.analyzeUiProps(this.$data.formSchema, baseParseSources);
@@ -959,6 +1025,13 @@ export default {
       },
       deep: true
     }
+  },
+
+  beforeDestroy() {
+    this._esOriginalValue = null;
+    this._esHiddenFunc = null;
+    this._esResultValue = null;
+    this._esFormData = null;
   }
 };
 </script>
