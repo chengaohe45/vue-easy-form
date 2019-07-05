@@ -51,7 +51,7 @@ data() {
   },
 ```
 
-上面的写法其实就是
+完整的系统帮助组件
 
 ```js
 data() {
@@ -66,12 +66,12 @@ data() {
           value: "首页位置"
         },
         help: {
-          // name: "xxxx",   // 不可写这个，系统会自动采用默认的help
+          // name: "",   // 不用写这个，系统会自动采用默认的help
           props: {
-            content: "提示的内容",
-            maxWidth: 200,
-            // href: "http://www.qq.com",
-            placement: "top"
+            content: "提示的内容",  // 提示的内容
+            maxWidth: 200,        // mouseover pop提示框的宽度
+            href: "http://www.qq.com",  // 配置这个就个跳转
+            placement: "top"      // pop的方向
           }
         }
       },

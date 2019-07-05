@@ -346,6 +346,8 @@ import constant from "./libs/constant.js";
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
+    this._esHiddenLevel = 0; // 层级设置为0
+    this._esLockSubmit = false;
 
     var hiddenFunc = this.isHidden;
     this._esHiddenFunc = hiddenFunc.bind(this); // 用于作隐藏解析
@@ -362,6 +364,21 @@ export default {
   mounted() {},
 
   destroyed() {},
+
+  data() {
+    return {
+      /* _es这些属性都不涉及页面的控制，所以不设置为data
+      _esHiddenLevel: 0,
+      _esOriginalValue: null,
+      _esHiddenFunc: null,
+      _esResultValue: null,
+      _esFormData: null,
+      _esLockSubmit: false // 开始是false
+      */
+      formSchema: {}, // $data有这个值说明是es-form
+      isInited: false
+    };
+  },
 
   /* ====================== 引用组件 ====================== */
 
@@ -391,28 +408,36 @@ export default {
     }
   },
 
-  data() {
-    return {
-      formSchema: {}, // $data有这个值说明是es-form
-      isInited: false,
-      lockSubmit: false // 开始是false
-    };
-  },
-
   /* ====================== 事件处理 ====================== */
 
   methods: {
-
     getRef(name) {
       return this.$refs.formFrame.getRef(name);
     },
 
+    /* 
+    判断某项是否处于隐藏 
+    注：此函数有容灾处理，一定要执行到最后，不能中途退出
+    */
     isHidden(pathKey) {
+      this._esHiddenLevel++;
+      const MAX_TOTAL = 50;
+      if (this._esHiddenLevel > MAX_TOTAL) {
+        // 实际上不会这么深的(虽然理论上存在)
+        throw "解析$hidden:[" +
+          pathKey +
+          "]出错，系统执行$hidden超过" +
+          MAX_TOTAL +
+          "次，可能为死循环";
+      }
+
+      var curHiddenValue = false;
+
       var rootSchema = this.$data.formSchema;
       var targetSchema = formUtils.getSchemaByKey(rootSchema, pathKey); // 看看最后一个是否存在
       if (!targetSchema) {
         console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
-        return false;
+        curHiddenValue = false;
       }
 
       var seperator = ".";
@@ -429,7 +454,9 @@ export default {
           key = key.replace(reg, "");
         }
 
-        tmpParentPathKey = parentPathKey ? parentPathKey + seperator + key : key;
+        tmpParentPathKey = parentPathKey
+          ? parentPathKey + seperator + key
+          : key;
         parentPathKey = parentPathKey
           ? parentPathKey + seperator + keys[i]
           : keys[i];
@@ -451,20 +478,25 @@ export default {
           };
 
           if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
-            return true;
+            curHiddenValue = true;
+            break;
           } else {
-            // console.log("3 tmpParentPathKey: ", tmpParentPathKey);
+            // 父节点是显示的，继续
           }
         } else {
           console.warn(
             "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
           );
-          return false;
+          curHiddenValue = false;
+          break;
         }
       }
 
+      this._esHiddenLevel--;
+      // console.log("this._esHiddenLevel: ", this._esHiddenLevel);
+
       // 全部都没有隐藏
-      return false;
+      return curHiddenValue;
     },
 
     // _isHidden(pathKey) {
@@ -676,10 +708,10 @@ export default {
 
     // 发出提交事件
     __submit() {
-      if (!this.$data.lockSubmit) {
-        this.$data.lockSubmit = true; // 加锁，保存只触发一次
+      if (!this.$data._esLockSubmit) {
+        this.$data._esLockSubmit = true; // 加锁，保存只触发一次
         this.$nextTick(() => {
-          this.$data.lockSubmit = false;
+          this.$data._esLockSubmit = false;
           if (this.$data.isInited) {
             this.$emit("submit", utils.deepCopy(this._esResultValue));
           } else {
@@ -831,8 +863,6 @@ export default {
         }
 
         if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
-          // var vm = this;
-          // vm.$nextTick(() => {
           // 这用可以记录是什么导致表单改变
           if (handlers.length > 0) {
             handlers.forEach(handler => {
@@ -847,7 +877,6 @@ export default {
               sourcePathKey
             );
           }
-
         }
 
         /* 释放内存 */
@@ -934,11 +963,11 @@ export default {
       var checkList = rules.checks;
       var errMsg = true;
       var checkFun;
+      var newParseSources, newOptions;
       if (checkList && checkList.length > 0) {
         var hadChecked = false;
         for (var i = 0; i < checkList.length; i++) {
           var checkItem = checkList[i];
-          // if (checkItem.handler) {
           var checkTriggers = checkItem.trigger; //检查时机，默认为实时
           // triggers为空时，就无条件检查(checkAll); 不为空时就条件触发
           if (!triggers || utils.isInter(checkTriggers, triggers)) {
@@ -947,18 +976,26 @@ export default {
             hadChecked = true;
             var result = true;
 
-            var options = {};
-            options.value = value;
-            options.pathKey = schema.__pathKey;
-            options.idxChain = schema.__idxChain;
-            options.index = schema.__index;
-            // options.rootData = this._esFormData;
             if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
-              result = parse.smartEsValue(checkFun, parseSources);
+              if (!newParseSources) {
+                newParseSources = {};
+                newParseSources = Object.assign(newParseSources, parseSources);
+                newParseSources.idxChains = parseSources.idxChain
+                  ? parseSources.idxChain.split(",")
+                  : [];
+                delete newParseSources.idxChain;
+              }
+              result = checkFun(newParseSources);
             } else {
-              result = checkFun.call(this, options);
+              if (!newOptions) {
+                newOptions = {};
+                newOptions.value = value;
+                newOptions.pathKey = schema.__pathKey;
+                newOptions.idxChain = schema.__idxChain;
+                newOptions.index = schema.__index;
+              }
+              result = checkFun.call(this, newOptions);
             }
-            options = null;
 
             if (result !== true) {
               if (utils.isStr(result)) {
@@ -974,7 +1011,6 @@ export default {
               break;
             }
           }
-          // }
         }
 
         if (!hadChecked) {
@@ -985,6 +1021,8 @@ export default {
         // 没有要验证的东西
         errMsg = true;
       }
+      newParseSources = null;
+      newOptions = null;
       return errMsg;
     }
   },

@@ -35,10 +35,13 @@ export default {
             props: {
               placeholder:
                 "es: {{$root}}.isOpen ? '提示：占位符' : '提示：厉害了'",
-              disabled: "es: {{$root}}.isOpen"
+              disabled: data => {
+                // console.log("data: ", data);
+                return data.rootData.isOpen;
+              }
             }
           },
-          value: "首页位置",
+          value: "",
           desc: "标准的写法：所有props子属性(不包括孙子和以下)都支持es"
         },
         color: {
@@ -83,7 +86,7 @@ export default {
             name: "el-input-number",
             flex: "self"
           },
-          value: "5",
+          value: 5,
           unit: "天",
           help: "天啊",
           desc: {

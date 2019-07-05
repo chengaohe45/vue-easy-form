@@ -18,12 +18,11 @@ import esForm from "vue-easy-form";
 ```js
 Vue.use(esForm);
 或
-Vue.use(esForm, {isDomain: ()=>{}}, { boxRowSpace: 10 });
+Vue.use(esForm, { boxRowSpace: 10 });
 ```
 参数(get)：
 
 - esForm: 必填 所引入的esForm组件
-- extendRule 非必填 扩展规则
 - options：非必填 全局设置
 
 ## 全局设置
@@ -38,5 +37,4 @@ Vue.use(esForm, {isDomain: ()=>{}}, { boxRowSpace: 10 });
 | direction | "h" | 竖排还是横排
 | defaultCom | "input" | 当配置时，不写component.name时用这个
 | defaultVal | "" | 对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；<br />`注：此值对其它组件不补充`
-| help | { name: "help组件", props: {} } | 设置默认的帮助组件
-| trimEvent | "change" | 当组件的值是字符串时，要去掉两边的空格：触发这个事件去掉（因为有些地方可能是changed）
+| trimDoms | "input", "textarea", "el-input" | 指出哪些表单元素需要去掉左右两边空格

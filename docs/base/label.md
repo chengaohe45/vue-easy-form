@@ -44,7 +44,7 @@ data() {
 ```
 
 
-## 标准写法
+## 标准(完整的)写法
 
 
 ```js
@@ -57,7 +57,12 @@ data() {
         name: {
           label: {
             text: "广告名称",
-            size: ""        // auto or fixed 默认为没有设置，则label的长度将会是labelWidth
+            // flex: "self",       // self or full 默认为没有设置，则label的长度将会是labelWidth
+            // align: "left",      // left, center, right
+            // name: "span",       // 引入自定义组件
+            // props: {
+            //   // name的属性
+            // }
           },
           component: "el-input",
           value: "首页位置"
@@ -69,7 +74,7 @@ data() {
 
 ### size值
 - `''`： 默认为没有设置，则label的长度将会是labelWidth
-- `auto`： 项中有多少点多少。此值一般用于component
-- `fixed`： label的文本占多宽就多宽。此值一般用于label
+- `full`： 项中有多少点多少。此值一般用于component
+- `self`： label的文本占多宽就多宽。此值一般用于label
 
 

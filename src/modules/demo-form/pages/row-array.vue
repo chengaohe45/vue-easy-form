@@ -51,7 +51,11 @@ export default {
             component: {
               name: "el-input",
               props: {
-                clearable: true
+                clearable: true,
+                disabled: data => {
+                  // console.log("data: ", data);
+                  return data.index % 2 ? true : false;
+                }
               },
               ref: "testRef"
             },

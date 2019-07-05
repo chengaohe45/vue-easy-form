@@ -113,9 +113,8 @@ export default {
                       },
                       actions: {
                         trigger: "input",
-                        handler: function(value, pathkey) {
-                          console.log("value: ", value);
-                          console.log("pathkey: ", pathkey);
+                        handler: function(data) {
+                          console.log("data: ", data);
                         }
                       }
                     }

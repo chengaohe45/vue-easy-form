@@ -1164,7 +1164,7 @@ let formUtils = {
   },
 
   __isRightKey(key) {
-    var illChars = ["[", "]", "."];
+    var illChars = ["[", "]", ".", "{", "}"];
     for (var i = 0; i < illChars.length; i++) {
       if (key.indexOf(illChars[i]) >= 0) {
         throw "属性不能出现以下的危险字符：" + illChars.join(" ");
@@ -2303,6 +2303,8 @@ let formUtils = {
         handler = parse.newEsFuncion(item.name);
       } else if (parse.isEsScript(item.handler)) {
         handler = parse.newEsFuncion(item.handler);
+      } else {
+        handler = item.handler;
       }
 
       var newTrigger = this.__parseTrigger(item.trigger);
@@ -2310,16 +2312,6 @@ let formUtils = {
         newTrigger && newTrigger.length
           ? utils.unique(newTrigger)
           : [constant.INPUT_EVENT];
-
-      // var newParams;
-      // if (!utils.isUndef(item.params)) {
-      //   //有定义，没有定义就不理会
-      //   if (utils.isArr(item.params)) {
-      //     newParams = item.params;
-      //   } else {
-      //     newParams = [item.params];
-      //   }
-      // }
 
       var newItem = {
         handler: handler,

@@ -21,7 +21,7 @@ data() {
   }
 ```
 
-## 标准写法
+## 标准(完整的)写法
 
 component字段
 
@@ -40,8 +40,9 @@ data() {
               placeholder: "请输入广告名称"
             },
             // text: "新建",  // 一般用于文本显示：如<el-button>新建</el-button>
+            // align: "left",      // left, center, right
             // ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
-            // size: "auto",      // 这个一般用于分组
+            // flex: "full",      // 这个一般用于分组
             // actions: []         // 见下面
           },
           value: "首页位置"
@@ -52,8 +53,8 @@ data() {
 ```
 ### size值
 - `''`： 默认为没有设置，component的长度根据自身情况自动取值
-- `auto`： 项中有多少点多少。此值一般用于component
-- `fixed`： label的文本占多宽就多宽。此值一般用于label
+- `full`： 项中有多少点多少。此值一般用于component
+- `self`： label的文本占多宽就多宽。此值一般用于label
 
 ## 组件事件
 
