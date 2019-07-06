@@ -1,4 +1,4 @@
-# component
+# 项组件/component
 
 ## 简写
 
@@ -21,7 +21,7 @@ data() {
   }
 ```
 
-## 标准(完整的)写法
+## 标准(组件化)写法
 
 component字段
 
@@ -51,7 +51,7 @@ data() {
     };
   }
 ```
-### size值
+### flex值
 - `''`： 默认为没有设置，component的长度根据自身情况自动取值
 - `full`： 项中有多少点多少。此值一般用于component
 - `self`： label的文本占多宽就多宽。此值一般用于label
@@ -64,11 +64,12 @@ component.actions字段描述
 actions: {
   // 默认为click, 多个事件写法: ["change", "input"]或"change input"
   trigger: "change",
-  handler: function(value){...}
+  // options => {value, event, pathKey, index, idxChain,target}
+  handler: function(options){...}
 }
 
 简写 （直接写成一个函数），trigger默认为click
-actions: function(value){...}
+actions: function(options){...}
 
 多个事件
 actions: [标准写法或简写组成的数组]
@@ -92,11 +93,10 @@ data() {
             text: "是否好人",
             actions: {
               trigger: "change",
-              handler: function(value) {
+              // options => {value, event, pathKey, index, idxChain,target}
+              handler: function(options) {
                 console.log("this对象: ", this);
-                console.log('this.getRef("desc")值: ', this.getRef("desc"));
-                console.log("value值", value);
-                console.log("\n");
+                console.log('options: ', options);
               }
             }
           },

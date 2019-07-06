@@ -18,7 +18,9 @@ module.exports = {
             'base/settings',
             'base/schema',
             'base/es',
-            'base/event'
+            'base/event',
+            'base/format',
+            'base/com-standard'
           ]
         },
         {
@@ -26,11 +28,12 @@ module.exports = {
           collapsable: false,
           children: [
             'base/label',
-            'base/format',
             'base/component',
             'base/title',
             'base/rules',
-            'base/help'
+            'base/help',
+            'base/unit',
+            'base/desc'
           ]
         }
       ]

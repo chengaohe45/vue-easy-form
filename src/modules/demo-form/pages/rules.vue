@@ -111,8 +111,7 @@ export default {
             },
             value: "",
             rules: {
-              checks: (value /*, formData, key*/) => {
-                // console.log(value, "----", typeof formData);
+              checks: ({value}) => {
                 if (value && value.length > 10) {
                   return "广告描述字数不能多于10";
                 } else {
@@ -121,7 +120,7 @@ export default {
               },
               errMsg: "广告描述输入有误"
             },
-            desc: "rules.check内返回字符串，也即是错误信息"
+            desc: "rules.checks内返回字符串，也即是错误信息"
           }
         }
       }
