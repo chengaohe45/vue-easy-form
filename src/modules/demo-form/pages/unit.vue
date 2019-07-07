@@ -26,7 +26,7 @@ export default {
               name: "el-input-number",
               flex: "full"
             },
-            value: 15,
+            value: 15
             // unit: "es: {{$root}}.startAge > 15 ? '岁' : ''"
           },
           endAge: {

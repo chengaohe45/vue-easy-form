@@ -111,7 +111,7 @@ export default {
             },
             value: "",
             rules: {
-              checks: ({value}) => {
+              checks: ({ value }) => {
                 if (value && value.length > 10) {
                   return "广告描述字数不能多于10";
                 } else {

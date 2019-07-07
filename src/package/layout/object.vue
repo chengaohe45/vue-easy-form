@@ -89,17 +89,23 @@
                   { height: schema.properties[fieldKeyName].rowHeight + 'px' }
                 ]"
               >
-                <es-base :config="schema.properties[fieldKeyName].unit"
+                <es-base
+                  :config="schema.properties[fieldKeyName].unit"
                 ></es-base>
               </div>
-              <div v-else 
-                v-show="!schema.properties[fieldKeyName].hidden && schema.properties[fieldKeyName].unit.text"
+              <div
+                v-else
+                v-show="
+                  !schema.properties[fieldKeyName].hidden &&
+                    schema.properties[fieldKeyName].unit.text
+                "
                 :key="'unit-' + fieldKeyName"
                 class="es-form-unit"
                 :style="[
                   { height: schema.properties[fieldKeyName].rowHeight + 'px' }
-                ]">
-                {{schema.properties[fieldKeyName].unit.text}}
+                ]"
+              >
+                {{ schema.properties[fieldKeyName].unit.text }}
               </div>
             </template>
             <div
