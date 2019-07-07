@@ -59,13 +59,14 @@
             >
             </es-base>
           </div>
-          <div v-if="schema.unit && !schema.__inGroups" class="es-form-unit">
-            <!-- {{ schema.unit }} -->
-            <es-base v-if="schema.unit.name" :config="schema.unit"></es-base>
-            <template v-else>
+          <template v-if="schema.unit && !schema.__inGroups">
+            <div v-if="schema.unit.name" class="es-form-unit">
+              <es-base :config="schema.unit"></es-base>
+            </div>
+            <div v-else class="es-form-unit" v-show="schema.unit.text">
               {{ schema.unit.text }}
-            </template>
-          </div>
+            </div>
+          </template>
           <div
             v-if="schema.help && !schema.__inGroups && showHelpInBody"
             class="es-form-help"

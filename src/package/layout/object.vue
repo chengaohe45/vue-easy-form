@@ -79,24 +79,29 @@
                 :name="fieldKeyName"
               ></slot>
             </div>
-            <div
-              v-show="!schema.properties[fieldKeyName].hidden"
-              :key="'unit-' + fieldKeyName"
-              v-if="schema.properties[fieldKeyName].unit"
-              class="es-form-unit"
-              :style="[
-                { height: schema.properties[fieldKeyName].rowHeight + 'px' }
-              ]"
-            >
-              <!-- {{ schema.properties[fieldKeyName].unit }} -->
-              <es-base
+            <template v-if="schema.properties[fieldKeyName].unit">
+              <div
                 v-if="schema.properties[fieldKeyName].unit.name"
-                :config="schema.properties[fieldKeyName].unit"
-              ></es-base>
-              <template v-else>{{
-                schema.properties[fieldKeyName].unit.text
-              }}</template>
-            </div>
+                v-show="!schema.properties[fieldKeyName].hidden"
+                :key="'unit-' + fieldKeyName"
+                class="es-form-unit"
+                :style="[
+                  { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                ]"
+              >
+                <es-base :config="schema.properties[fieldKeyName].unit"
+                ></es-base>
+              </div>
+              <div v-else 
+                v-show="!schema.properties[fieldKeyName].hidden && schema.properties[fieldKeyName].unit.text"
+                :key="'unit-' + fieldKeyName"
+                class="es-form-unit"
+                :style="[
+                  { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                ]">
+                {{schema.properties[fieldKeyName].unit.text}}
+              </div>
+            </template>
             <div
               v-show="!schema.properties[fieldKeyName].hidden"
               :key="'help-' + fieldKeyName"
@@ -106,10 +111,6 @@
                 { height: schema.properties[fieldKeyName].rowHeight + 'px' }
               ]"
             >
-              <!-- <es-base
-                :config="schema.properties[fieldKeyName].help"
-                :open-smart="false"
-              ></es-base>-->
               <es-base :config="schema.properties[fieldKeyName].help"></es-base>
             </div>
           </template>
