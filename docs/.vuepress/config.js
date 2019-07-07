@@ -16,15 +16,16 @@ module.exports = {
             '',
             'base/install',
             'base/settings',
-            'base/schema',
             'base/es',
-            'base/event',
-            'base/format',
-            'base/com-standard'
+            'base/form-event',
+            'base/form-value',
+            'base/array',
+            'base/com-standard',
+            'base/schema'
           ]
         },
         {
-          title: '详解',
+          title: '可组件化属性详解',
           collapsable: false,
           children: [
             'base/label',

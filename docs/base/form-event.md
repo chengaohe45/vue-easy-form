@@ -22,7 +22,10 @@
 | getRef | 取元素或组件 | (name) | 类似于ref
 | checkAll | 检查表单是否有错 | 空 | true/false
 | submit | 触发submit事件 | 空 | --
-| getValue | 取表单值 | 空 | 实时取值
+| isHidden | 判断某项是否隐藏 | 字符串 | --
+| getRootData | 取表单根值 | 空 | 实时取值，表单存在的值，包括隐藏的或临时的
+| getGlobal | 取表单的全局数据 | 空 | 应用表单传入来的global
+| getValue | 取表单值 | 空 | 实时取值，用户所需要的值
 | setValue | 设置表单值 | (key, value) | 当key是Object时，值自动匹配设置；当key为字符串时，则是设置某个值
 | getTabsIndex | 取某一个tabs的索引 | (key) | 返回当前tabs的索引，不是tabs返回false；（支持普通或数组tabs）
 | setTabsIndex | 设某一个tabs的索引 | key, index |  设置当前tabs的索引；（支持普通或数组tabs）
