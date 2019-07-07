@@ -1124,7 +1124,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".es-col-1{width:4.16667%}.es-col-2{width:8.33333%}.es-col-3{width:12.5%}.es-col-4{width:16.66667%}.es-col-5{width:20.83333%}.es-col-6{width:25%}.es-col-7{width:29.16667%}.es-col-8{width:33.33333%}.es-col-9{width:37.5%}.es-col-10{width:41.66667%}.es-col-11{width:45.83333%}.es-col-12{width:50%}.es-col-13{width:54.16667%}.es-col-14{width:58.33333%}.es-col-15{width:62.5%}.es-col-16{width:66.66667%}.es-col-17{width:70.83333%}.es-col-18{width:75%}.es-col-19{width:79.16667%}.es-col-20{width:83.33333%}.es-col-21{width:87.5%}.es-col-22{width:91.66667%}.es-col-23{width:95.83333%}.es-col-24{width:100%}.es-form-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-ms-flex-wrap:wrap;flex-wrap:wrap}.es-form-container:after,.es-form-container:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-form-container:after{clear:both}.es-form-container .es-form-placeholder{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-object,.es-form-container .es-form-placeholder{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-flex:0;-webkit-box-pack:start;justify-content:flex-start}.es-form-container .es-form-object{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:0}.es-form-container .es-form-none{display:none}.es-form-container .es-form-v{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.es-form-container .es-form-label{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;width:115px;padding:0 10px 0 4px;text-align:right;line-height:1.2;white-space:nowrap}.es-form-container .es-form-v>.es-form-label{text-align:left;width:auto;height:26px;line-height:26px;padding-left:4px;padding-right:4px}.es-form-container .es-form-label-auto{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-label-fixed{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-comp-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-comp-content,.es-form-container .es-form-props-content{-webkit-box-flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-pack:start;justify-content:flex-start;overflow:hidden}.es-form-container .es-form-props-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.es-form-container .es-form-placeholder-txt{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}", ""]);
+exports.push([module.i, ".es-col-1{width:4.16667%}.es-col-2{width:8.33333%}.es-col-3{width:12.5%}.es-col-4{width:16.66667%}.es-col-5{width:20.83333%}.es-col-6{width:25%}.es-col-7{width:29.16667%}.es-col-8{width:33.33333%}.es-col-9{width:37.5%}.es-col-10{width:41.66667%}.es-col-11{width:45.83333%}.es-col-12{width:50%}.es-col-13{width:54.16667%}.es-col-14{width:58.33333%}.es-col-15{width:62.5%}.es-col-16{width:66.66667%}.es-col-17{width:70.83333%}.es-col-18{width:75%}.es-col-19{width:79.16667%}.es-col-20{width:83.33333%}.es-col-21{width:87.5%}.es-col-22{width:91.66667%}.es-col-23{width:95.83333%}.es-col-24{width:100%}.es-form-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-ms-flex-wrap:wrap;flex-wrap:wrap}.es-form-container:after,.es-form-container:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-form-container:after{clear:both}.es-form-container .es-form-placeholder{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-object,.es-form-container .es-form-placeholder{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-flex:0;-webkit-box-pack:start;justify-content:flex-start}.es-form-container .es-form-object{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:0}.es-form-container .es-form-none{display:none}.es-form-container .es-form-v{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.es-form-container .es-form-label{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;width:115px;padding:0 10px 0 4px;text-align:right;line-height:1.2;white-space:nowrap}.es-form-container .es-form-v>.es-form-label{text-align:left;width:auto;line-height:20px;padding:4px 3px}.es-form-container .es-form-label-full{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-label-self{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-comp-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-comp-content,.es-form-container .es-form-props-content{-webkit-box-flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-pack:start;justify-content:flex-start;overflow:hidden}.es-form-container .es-form-props-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.es-form-container .es-form-placeholder-txt{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}", ""]);
 
 // exports
 
@@ -3044,13 +3044,6 @@ module.exports = function (exec, skipClosing) {
 
 /***/ }),
 
-/***/ "5d58":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("d8d6");
-
-/***/ }),
-
 /***/ "5d6b":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3269,13 +3262,6 @@ __webpack_require__("9c6c")('includes');
 
 /***/ }),
 
-/***/ "67bb":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("f921");
-
-/***/ }),
-
 /***/ "6821":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -3296,14 +3282,6 @@ var hasOwnProperty = {}.hasOwnProperty;
 module.exports = function (it, key) {
   return hasOwnProperty.call(it, key);
 };
-
-
-/***/ }),
-
-/***/ "69d3":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("6718")('asyncIterator');
 
 
 /***/ }),
@@ -3541,14 +3519,6 @@ exports = module.exports = __webpack_require__("2350")(false);
 exports.push([module.i, ".es-form-array-box{display:-webkit-box;display:-ms-flexbox;display:flex}.es-form-array-box:after,.es-form-array-box:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-form-array-box:after{clear:both}.es-form-array-box .es-form-array-wrap{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}.es-form-array-box .es-order-list-box{margin:0 0 0 0;padding:0;list-style:none}.es-form-array-box .list-item{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;margin:20px 0 0 0;padding:0}.es-form-array-box .es-order-box{width:40px;text-align:center;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}.es-form-array-box .es-array-row-body{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}.es-form-array-box .es-btn-box{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;margin-left:5px}.es-form-array-box .es-btn-footer{text-align:center;margin-top:20px}", ""]);
 
 // exports
-
-
-/***/ }),
-
-/***/ "765d":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("6718")('observable');
 
 
 /***/ }),
@@ -4887,13 +4857,6 @@ exports.push([module.i, ".es-form-layout-tabs{overflow:hidden}.es-form-layout-ta
 
 /***/ }),
 
-/***/ "c207":
-/***/ (function(module, exports) {
-
-
-
-/***/ }),
-
 /***/ "c366":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -5302,16 +5265,6 @@ module.exports = function (fn, that, length) {
 
 /***/ }),
 
-/***/ "d8d6":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("1654");
-__webpack_require__("6c1c");
-module.exports = __webpack_require__("ccb9").f('iterator');
-
-
-/***/ }),
-
 /***/ "d8e8":
 /***/ (function(module, exports) {
 
@@ -5388,7 +5341,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".es-form{overflow:hidden;line-height:normal}.es-form .es-required{color:#f64a4a;vertical-align:middle}.es-form .es-form-unit{margin:0 2px 0 5px;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;color:#606266;font-size:95%}.es-form .es-fade-enter-active,.es-form .es-fade-leave-active{-webkit-transition:opacity .1s ease;transition:opacity .1s ease}.es-form .es-fade-enter,.es-form .es-fade-leave-to{opacity:0}.es-btn-group{margin:0 auto;display:block;font-size:0}.es-btn,.es-btn-group{position:relative;white-space:nowrap}.es-btn{display:inline-block;line-height:1;cursor:pointer;background:#fff;border:1px solid #dcdfe6;border-color:#dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:0 10px;font-size:13px;border-radius:4px;height:30px;z-index:1}.es-btn:not(.disabled):hover{border-color:#c6e2ff;background:#ecf5ff;z-index:2;color:#409eff}.es-btn.disabled{color:#c0c4cc;cursor:not-allowed;background-image:none;background-color:#fff;border-color:#ebeef5;z-index:0}.es-btn-group .es-btn:not(:first-child):not(:last-child){border-radius:0}.es-btn-group .es-btn:not(:last-child){margin-right:-1px}.es-btn-group .es-btn:first-child:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.es-btn-group .es-btn:last-child:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.es-plus-btn{margin:0 auto;padding:0;font-size:14px;width:18px;height:18px;line-height:16px;border:1px solid #dcdfe6;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:3px;text-align:center;cursor:pointer}.es-plus-btn:before{top:7px;left:3px;width:10px;height:2px}.es-plus-btn:after,.es-plus-btn:before{content:\"\";display:block;position:absolute;border-radius:3px;background:#7b808c}.es-plus-btn:after{top:3px;left:7px;width:2px;height:10px}.es-plus-btn.disabled:after,.es-plus-btn.disabled:before{background:#d5d7dc}.es-circle-delete{margin:0 auto;padding:0;width:14px;height:14px;border-radius:50%;background:#f56c6c;position:relative}.es-circle-delete:before{margin:0 auto;padding:0;content:\"\";display:block;width:8px;height:2px;position:absolute;top:6px;left:3px;background:#fff;border-radius:1px}.es-btn.disabled .es-circle-delete{background:#fab6b6}.es-normal-plus{margin:0 auto;padding:0;width:10px;height:10px;position:relative}.es-normal-plus:before{top:4px;left:0;width:10px;height:2px}.es-normal-plus:after,.es-normal-plus:before{content:\"\";display:block;position:absolute;border-radius:3px;background:#7b808c}.es-normal-plus:after{top:0;left:4px;width:2px;height:10px}.es-btn.disabled .es-normal-plus:after,.es-btn.disabled .es-normal-plus:before{background:#d5d7dc}.es-triangle-border-up.es-left{transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.es-triangle-border-up{border-color:transparent transparent #333 transparent;position:relative}.es-triangle-border-up,.es-triangle-border-up:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:0 6px 6px 6px}.es-triangle-border-up:before{content:\"\";display:block;border-color:transparent transparent #fff transparent;position:absolute;top:1px;left:-6px}.es-btn.disabled .es-triangle-border-up{border-bottom-color:#c0c4cc}.es-btn:not(.disabled):hover .es-triangle-border-up:before{border-bottom-color:#ecf5ff}.es-triangle-border-down{border-color:#333 transparent transparent transparent;position:relative}.es-triangle-border-down,.es-triangle-border-down:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 6px 0 6px}.es-triangle-border-down:before{content:\"\";display:block;border-color:#fff transparent transparent transparent;position:absolute;top:-7px;left:-6px}.es-triangle-border-down.es-right{transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.es-btn.disabled .es-triangle-border-down{border-top-color:#c0c4cc}.es-btn:not(.disabled):hover .es-triangle-border-down:before{border-top-color:#ecf5ff}.es-form-pop-box{display:block;min-height:16px;position:absolute;top:0;left:0;margin:auto auto;color:#fff;font-size:12px;line-height:16px;z-index:1999}.es-form-pop-box .es-form-pop-content{background:#fbfbfb;border-radius:4px;border:1px solid #dcdfe6;padding:10px 10px 10px 10px;max-width:160px;color:#606266;line-height:1.4;text-align:justify;font-size:14px;-webkit-box-shadow:0 2px 12px 0 rgba(0,0,0,.1);box-shadow:0 2px 12px 0 rgba(0,0,0,.1);font-size:13px;text-align:center}.es-form-pop-box .es-form-pop-content.es-thin{padding:5px 8px}.es-form-pop-box .es-btn-row{margin-top:5px;font-size:12px}.es-form-pop-box .es-pop-arrow-top{border-color:transparent transparent #d6d9de transparent;position:relative;position:absolute}.es-form-pop-box .es-pop-arrow-top,.es-form-pop-box .es-pop-arrow-top:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:0 6px 6px 6px}.es-form-pop-box .es-pop-arrow-top:before{content:\"\";display:block;border-color:transparent transparent #fbfbfb transparent;position:absolute;top:1px;left:-6px}.es-form-pop-box .es-pop-arrow-right{border-color:transparent transparent transparent #d6d9de;position:relative;position:absolute;left:auto}.es-form-pop-box .es-pop-arrow-right,.es-form-pop-box .es-pop-arrow-right:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 0 6px 6px}.es-form-pop-box .es-pop-arrow-right:before{content:\"\";display:block;border-color:transparent transparent transparent #fbfbfb;position:absolute;top:-6px;left:-7px}.es-form-pop-box .es-pop-arrow-bottom{border-color:#d6d9de transparent transparent transparent;position:relative;position:absolute}.es-form-pop-box .es-pop-arrow-bottom,.es-form-pop-box .es-pop-arrow-bottom:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 6px 0 6px}.es-form-pop-box .es-pop-arrow-bottom:before{content:\"\";display:block;border-color:#fbfbfb transparent transparent transparent;position:absolute;top:-7px;left:-6px}.es-form-pop-box .es-pop-arrow-left{border-color:transparent #d6d9de transparent transparent;position:relative;position:absolute}.es-form-pop-box .es-pop-arrow-left,.es-form-pop-box .es-pop-arrow-left:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 6px 6px 0}.es-form-pop-box .es-pop-arrow-left:before{content:\"\";display:block;border-color:transparent #fbfbfb transparent transparent;position:absolute;top:-6px;left:1px}", ""]);
+exports.push([module.i, ".es-form{overflow:hidden;line-height:normal}.es-form .es-required{color:#f64a4a;vertical-align:middle;margin-right:3px}.es-form .es-form-unit{margin:0 2px 0 5px;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;color:#606266;font-size:95%}.es-form .es-fade-enter-active,.es-form .es-fade-leave-active{-webkit-transition:opacity .1s ease;transition:opacity .1s ease}.es-form .es-fade-enter,.es-form .es-fade-leave-to{opacity:0}.es-btn-group{margin:0 auto;display:block;font-size:0}.es-btn,.es-btn-group{position:relative;white-space:nowrap}.es-btn{display:inline-block;line-height:1;cursor:pointer;background:#fff;border:1px solid #dcdfe6;border-color:#dcdfe6;color:#606266;-webkit-appearance:none;text-align:center;-webkit-box-sizing:border-box;box-sizing:border-box;outline:none;margin:0;-webkit-transition:.1s;transition:.1s;font-weight:500;-moz-user-select:none;-webkit-user-select:none;-ms-user-select:none;padding:0 10px;font-size:13px;border-radius:4px;height:30px;z-index:1}.es-btn:not(.disabled):hover{border-color:#c6e2ff;background:#ecf5ff;z-index:2;color:#409eff}.es-btn.disabled{color:#c0c4cc;cursor:not-allowed;background-image:none;background-color:#fff;border-color:#ebeef5;z-index:0}.es-btn-group .es-btn:not(:first-child):not(:last-child){border-radius:0}.es-btn-group .es-btn:not(:last-child){margin-right:-1px}.es-btn-group .es-btn:first-child:not(:last-child){border-top-right-radius:0;border-bottom-right-radius:0}.es-btn-group .es-btn:last-child:not(:first-child){border-top-left-radius:0;border-bottom-left-radius:0}.es-plus-btn{margin:0 auto;padding:0;font-size:14px;width:18px;height:18px;line-height:16px;border:1px solid #dcdfe6;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:3px;text-align:center;cursor:pointer}.es-plus-btn:before{top:7px;left:3px;width:10px;height:2px}.es-plus-btn:after,.es-plus-btn:before{content:\"\";display:block;position:absolute;border-radius:3px;background:#7b808c}.es-plus-btn:after{top:3px;left:7px;width:2px;height:10px}.es-plus-btn.disabled:after,.es-plus-btn.disabled:before{background:#d5d7dc}.es-circle-delete{margin:0 auto;padding:0;width:14px;height:14px;border-radius:50%;background:#f56c6c;position:relative}.es-circle-delete:before{margin:0 auto;padding:0;content:\"\";display:block;width:8px;height:2px;position:absolute;top:6px;left:3px;background:#fff;border-radius:1px}.es-btn.disabled .es-circle-delete{background:#fab6b6}.es-normal-plus{margin:0 auto;padding:0;width:10px;height:10px;position:relative}.es-normal-plus:before{top:4px;left:0;width:10px;height:2px}.es-normal-plus:after,.es-normal-plus:before{content:\"\";display:block;position:absolute;border-radius:3px;background:#7b808c}.es-normal-plus:after{top:0;left:4px;width:2px;height:10px}.es-btn.disabled .es-normal-plus:after,.es-btn.disabled .es-normal-plus:before{background:#d5d7dc}.es-triangle-border-up.es-left{transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.es-triangle-border-up{border-color:transparent transparent #333 transparent;position:relative}.es-triangle-border-up,.es-triangle-border-up:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:0 6px 6px 6px}.es-triangle-border-up:before{content:\"\";display:block;border-color:transparent transparent #fff transparent;position:absolute;top:1px;left:-6px}.es-btn.disabled .es-triangle-border-up{border-bottom-color:#c0c4cc}.es-btn:not(.disabled):hover .es-triangle-border-up:before{border-bottom-color:#ecf5ff}.es-triangle-border-down{border-color:#333 transparent transparent transparent;position:relative}.es-triangle-border-down,.es-triangle-border-down:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 6px 0 6px}.es-triangle-border-down:before{content:\"\";display:block;border-color:#fff transparent transparent transparent;position:absolute;top:-7px;left:-6px}.es-triangle-border-down.es-right{transform:rotate(-90deg);-webkit-transform:rotate(-90deg)}.es-btn.disabled .es-triangle-border-down{border-top-color:#c0c4cc}.es-btn:not(.disabled):hover .es-triangle-border-down:before{border-top-color:#ecf5ff}.es-form-pop-box{display:block;min-height:16px;position:absolute;top:0;left:0;margin:auto auto;color:#fff;font-size:12px;line-height:16px;z-index:1999}.es-form-pop-box .es-form-pop-content{background:#fbfbfb;border-radius:4px;border:1px solid #dcdfe6;padding:10px 10px 10px 10px;max-width:160px;color:#606266;line-height:1.4;text-align:justify;font-size:14px;-webkit-box-shadow:0 2px 12px 0 rgba(0,0,0,.1);box-shadow:0 2px 12px 0 rgba(0,0,0,.1);font-size:13px;text-align:center}.es-form-pop-box .es-form-pop-content.es-thin{padding:5px 8px}.es-form-pop-box .es-btn-row{margin-top:5px;font-size:12px}.es-form-pop-box .es-pop-arrow-top{border-color:transparent transparent #d6d9de transparent;position:relative;position:absolute}.es-form-pop-box .es-pop-arrow-top,.es-form-pop-box .es-pop-arrow-top:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:0 6px 6px 6px}.es-form-pop-box .es-pop-arrow-top:before{content:\"\";display:block;border-color:transparent transparent #fbfbfb transparent;position:absolute;top:1px;left:-6px}.es-form-pop-box .es-pop-arrow-right{border-color:transparent transparent transparent #d6d9de;position:relative;position:absolute;left:auto}.es-form-pop-box .es-pop-arrow-right,.es-form-pop-box .es-pop-arrow-right:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 0 6px 6px}.es-form-pop-box .es-pop-arrow-right:before{content:\"\";display:block;border-color:transparent transparent transparent #fbfbfb;position:absolute;top:-6px;left:-7px}.es-form-pop-box .es-pop-arrow-bottom{border-color:#d6d9de transparent transparent transparent;position:relative;position:absolute}.es-form-pop-box .es-pop-arrow-bottom,.es-form-pop-box .es-pop-arrow-bottom:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 6px 0 6px}.es-form-pop-box .es-pop-arrow-bottom:before{content:\"\";display:block;border-color:#fbfbfb transparent transparent transparent;position:absolute;top:-7px;left:-6px}.es-form-pop-box .es-pop-arrow-left{border-color:transparent #d6d9de transparent transparent;position:relative;position:absolute}.es-form-pop-box .es-pop-arrow-left,.es-form-pop-box .es-pop-arrow-left:before{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:6px 6px 6px 0}.es-form-pop-box .es-pop-arrow-left:before{content:\"\";display:block;border-color:transparent #fbfbfb transparent transparent;position:absolute;top:-6px;left:1px}", ""]);
 
 // exports
 
@@ -5473,7 +5426,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".es-form-item{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;overflow:hidden}.es-form-item .es-title,.es-form-item .es-title-box{margin:0 0 0 0;padding:3px 0 0 0;text-align:left;font-weight:400;font-size:16px;line-height:18px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-item .es-title-l1{margin:0 0 0 0;font-weight:400;font-size:24px;line-height:26px}.es-form-item .es-title-l2{margin:0 0 0 0;font-weight:400;font-size:22px;line-height:24px}.es-form-item .es-title-l3{margin:0 0 0 0;font-weight:400;font-size:20px;line-height:22px}.es-form-item .es-title.es-title-bg{background:#d6d7da;border-top-left-radius:4px;border-top-right-radius:4px;padding:5px 0 3px 10px}.es-form-item .es-title.es-title-block{padding:1px 0 1px 10px;border-left:4px solid #909399}.es-form-item .es-title.es-title-bg-block{background:#d6d7da;border-top-left-radius:4px;border-top-right-radius:4px;padding:5px 0 3px 10px;border-left:4px solid #909399}.es-form-item .es-title.es-body-border+.es-form-body{padding:20px 10px 10px 10px;border-left:1px solid #dcdfe6;border-right:1px solid #dcdfe6;border-bottom:1px solid #dcdfe6;border-bottom-left-radius:4px;border-bottom-right-radius:4px}.es-form-item .es-title-txt{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;text-align:left}.es-form-item .es-title-empty{min-height:32px}.es-form-item .es-more-btn{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;font-size:15px;line-height:18px;margin:0 10px 0 6px;cursor:pointer;text-decoration:underline;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.es-form-item .es-more-btn:hover{color:#409eff}.es-form-item .es-form-component{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-item .es-form-component,.es-form-item .es-form-component-left{-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start}.es-form-item .es-form-component-center{-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-form-item .es-form-component-right{-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end}.es-form-item .es-form-component-auto{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;white-space:nowrap}.es-form-item .es-form-component-fixed{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;text-align:center;white-space:nowrap}.es-form-item .es-form-component-wrap{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;overflow:hidden}.es-form-item .es-form-component-wrap.es-form-wrap-auto{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;white-space:nowrap}.es-form-item .es-form-component-wrap.es-form-wrap-fixed{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;text-align:center;white-space:nowrap}.es-form-item .es-form-error{margin:3px 0 0 5px;text-align:left;color:#f64a4a;font-size:13px}.es-form-item .es-form-desc{margin:5px 0 0 3px;text-align:left;color:#b3b5b9;font-size:13px}.es-form-item .es-form-help{margin:0 8px;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-form-item .es-form-help-icon{display:block;width:16px;height:16px;border-radius:50%;line-height:16px;background:#333;text-align:center;font-size:13px;color:#fff;font-style:italic;font-family:Times New Roman,Times;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}", ""]);
+exports.push([module.i, ".es-form-item{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;overflow:hidden}.es-form-item .es-title,.es-form-item .es-title-box{margin:0 0 0 0;padding:3px 0 0 0;text-align:left;font-weight:400;font-size:16px;line-height:18px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-item .es-title-l1{margin:0 0 0 0;font-weight:400;font-size:24px;line-height:26px}.es-form-item .es-title-l2{margin:0 0 0 0;font-weight:400;font-size:22px;line-height:24px}.es-form-item .es-title-l3{margin:0 0 0 0;font-weight:400;font-size:20px;line-height:22px}.es-form-item .es-title.es-title-bg{background:#d6d7da;border-top-left-radius:4px;border-top-right-radius:4px;padding:5px 0 3px 10px}.es-form-item .es-title.es-title-block{padding:1px 0 1px 10px;border-left:4px solid #909399}.es-form-item .es-title.es-title-bg-block{background:#d6d7da;border-top-left-radius:4px;border-top-right-radius:4px;padding:5px 0 3px 10px;border-left:4px solid #909399}.es-form-item .es-title.es-body-border+.es-form-body{padding:20px 10px 10px 10px;border-left:1px solid #dcdfe6;border-right:1px solid #dcdfe6;border-bottom:1px solid #dcdfe6;border-bottom-left-radius:4px;border-bottom-right-radius:4px}.es-form-item .es-title-txt{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;text-align:left}.es-form-item .es-title-empty{min-height:32px}.es-form-item .es-more-btn{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;font-size:15px;line-height:18px;margin:0 10px 0 6px;cursor:pointer;text-decoration:underline;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.es-form-item .es-more-btn:hover{color:#409eff}.es-form-item .es-form-component,.es-form-item .es-form-component-list{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-item .es-form-component-left{-webkit-box-pack:start!important;-ms-flex-pack:start!important;justify-content:flex-start!important}.es-form-item .es-form-component-center{-webkit-box-pack:center!important;-ms-flex-pack:center!important;justify-content:center!important}.es-form-item .es-form-component-right{-webkit-box-pack:end!important;-ms-flex-pack:end!important;justify-content:flex-end!important}.es-form-item .es-form-label-box{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-inline-box;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-form-item .es-form-component-full{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;white-space:nowrap}.es-form-item .es-form-component-self{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;text-align:center;white-space:nowrap}.es-form-item .es-form-component-wrap{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;overflow:hidden}.es-form-item .es-form-component-wrap.es-form-wrap-full{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;white-space:nowrap}.es-form-item .es-form-component-wrap.es-form-wrap-self{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;text-align:center;white-space:nowrap}.es-form-item .es-form-error{margin:3px 0 0 5px;text-align:left;color:#f64a4a;font-size:13px}.es-form-item .es-form-desc{margin:5px 0 0 3px;text-align:left;color:#b3b5b9;font-size:13px}.es-form-item .es-form-help{margin:0 8px;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-form-item .es-form-help-icon{display:block;width:16px;height:16px;border-radius:50%;line-height:16px;background:#333;text-align:center;font-size:13px;color:#fff;font-style:italic;font-family:Times New Roman,Times;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}", ""]);
 
 // exports
 
@@ -5729,18 +5682,6 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "f921":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("014b");
-__webpack_require__("c207");
-__webpack_require__("69d3");
-__webpack_require__("765d");
-module.exports = __webpack_require__("584a").Symbol;
-
-
-/***/ }),
-
 /***/ "fa00":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -5799,96 +5740,110 @@ if (typeof window !== 'undefined') {
 // Indicate to webpack that this file can be concatenated
 /* harmony default export */ var setPublicPath = (null);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("5176");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js
 var object_keys = __webpack_require__("a4bb");
 var keys_default = /*#__PURE__*/__webpack_require__.n(object_keys);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
-var es7_promise_finally = __webpack_require__("097d");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=eec76b22&
-var packagevue_type_template_id_eec76b22_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema,"form-data":_vm.formData,"global":_vm.formGlobal,"isInited":_vm.isInited},on:{"formChange":_vm.__formChange,"formClick":_vm.__formClick}})],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=280c8e56&
+var packagevue_type_template_id_280c8e56_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}})],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=eec76b22&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=280c8e56&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
 var stringify_default = /*#__PURE__*/__webpack_require__.n(stringify);
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+var object_assign = __webpack_require__("5176");
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
-var es6_function_name = __webpack_require__("7f7f");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=48faf494&
-var form_itemvue_type_template_id_48faf494_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.hasTitle)?_c('div',{class:_vm.titleClass},[(_vm.schema.title.text)?_c('div',{staticClass:"es-title-txt"},[_vm._v("\n      "+_vm._s(_vm.schema.title.text)+"\n    ")]):_c('div',{staticClass:"es-title-txt es-title-empty"},[_vm._v(" ")]),(_vm.schema.title.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.title.showBody ? "隐藏" : "打开")+"\n    ")]):_vm._e(),(_vm.schema.help)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.hasTitle || _vm.schema.title.showBody),expression:"!hasTitle || schema.title.showBody"}],staticClass:"es-form-body",style:(_vm.bodyStyle)},[(!_vm.schema.array)?[(_vm.schema.component)?_c('div',{class:[
-          'es-form-component',
-          'es-form-component-' + _vm.schema.component.align
-        ]},[_c('div',{class:[
-            'es-form-component-wrap',
-            _vm.schema.component.size
-              ? 'es-form-wrap-' + _vm.schema.component.size
-              : ''
-          ]},[_c('es-base',{ref:_vm.schema.component.ref,class:[
-              _vm.schema.component.size
-                ? 'es-form-component-' + _vm.schema.component.size
-                : ''
-            ],attrs:{"config":_vm.schema.component,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index,"emitEvents":_vm.schema.component.__emitEvents,"nativeEvents":_vm.schema.component.__nativeEvents},on:{"trigger":_vm.triggerHandler},model:{value:(_vm.schema.value),callback:function ($$v) {_vm.$set(_vm.schema, "value", $$v)},expression:"schema.value"}})],1),(_vm.schema.unit && !_vm.schema.__inGroups)?_c('div',{staticClass:"es-form-unit"},[(_vm.schema.unit.name)?_c('es-base',{attrs:{"config":_vm.schema.unit,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}}):[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")]],2):_vm._e(),(_vm.schema.help && !_vm.schema.__inGroups && _vm.showHelpInBody)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}})],1):_vm._e()]):(
-          _vm.schema.properties && _vm.schema.layout && _vm.schema.layout.name === 'tabs'
-        )?_c('tabs',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData},on:{"formClick":_vm.formClick}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:"__refTabs__",refInFor:true,attrs:{"schema":fieldSchema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange,"formClick":_vm.formClick}})],1)})],2):(_vm.schema.properties)?_c('es-object',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:"__refObject__",refInFor:true,attrs:{"schema":fieldSchema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange,"formClick":_vm.formClick}})],1)})],2):_vm._e()]:[(_vm.schema.array.name == 'array')?_c('array-row',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData},on:{"input":_vm.formArrayInput,"formClick":_vm.formClick},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange,"formClick":_vm.formClick}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-legend')?_c('array-legend',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData},on:{"input":_vm.formArrayInput,"formClick":_vm.formClick},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange,"formClick":_vm.formClick}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-card')?_c('array-card',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarCard__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange}})}),1):_vm._e()}}],null,true)}):(_vm.schema.array.name == 'array-table')?_c('array-table',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTable__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"showHelpInBody":false,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange,"formClick":_vm.formClick}})]}}})],null,true)}):(_vm.schema.array && _vm.schema.array.name == 'array-tabs')?_c('array-tabs',{tag:"component",attrs:{"schema":_vm.schema,"form-data":_vm.formData},on:{"input":_vm.formArrayInput,"formClick":_vm.formClick},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange,"formClick":_vm.formClick}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema,"form-data":_vm.formData,"global":_vm.global,"isInited":_vm.isInited},on:{"formChange":_vm.formChange}})}),1):_vm._e()}}],null,true)}):_vm._e()],_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error"},[_vm._v("\n      "+_vm._s(_vm.schema.__invalidMsg)+"\n    ")]),(_vm.schema.desc)?_c('div',{staticClass:"es-form-desc"},[(_vm.schema.desc.name)?_c('es-base',{attrs:{"config":_vm.schema.desc,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}}):[_vm._v("\n        "+_vm._s(_vm.schema.desc.text)+"\n      ")]],2):_vm._e()],2)])}
-var form_itemvue_type_template_id_48faf494_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=48faf494&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
 var es7_array_includes = __webpack_require__("6762");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=12ab3a91&
-var objectvue_type_template_id_12ab3a91_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
+var es6_string_includes = __webpack_require__("2fdb");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
+var es6_function_name = __webpack_require__("7f7f");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
+var es6_regexp_replace = __webpack_require__("a481");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=68b8a2a6&
+var form_itemvue_type_template_id_68b8a2a6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.hasTitle)?_c('div',{class:_vm.titleClass},[(_vm.schema.title)?_c('div',{staticClass:"es-title-txt"},[(!_vm.schema.title.name)?[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]:_c('es-base',{attrs:{"config":_vm.schema.title}})],2):_c('div',{staticClass:"es-title-txt es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody ? "隐藏" : "打开")+"\n    ")]):_vm._e(),(_vm.schema.help)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.ui || _vm.schema.ui.showBody),expression:"!schema.ui || schema.ui.showBody"}],staticClass:"es-form-body",style:(_vm.bodyStyle)},[(!_vm.schema.array)?[(_vm.schema.component)?_c('div',{class:[
+          'es-form-component',
+          _vm.schema.component.align
+            ? 'es-form-component-' + _vm.schema.component.align
+            : ''
+        ]},[_c('div',{class:[
+            'es-form-component-wrap',
+            _vm.schema.component.flex
+              ? 'es-form-wrap-' + _vm.schema.component.flex
+              : ''
+          ]},[_c('es-base',{ref:_vm.schema.component.ref,class:[
+              _vm.schema.component.flex
+                ? 'es-form-component-' + _vm.schema.component.flex
+                : ''
+            ],attrs:{"config":_vm.schema.component,"emitEvents":_vm.schema.component.__emitEvents,"nativeEvents":_vm.schema.component.__nativeEvents},on:{"trigger":_vm.triggerHandler},model:{value:(_vm.schema.value),callback:function ($$v) {_vm.$set(_vm.schema, "value", $$v)},expression:"schema.value"}})],1),(_vm.schema.unit && !_vm.schema.__inGroups)?[(_vm.schema.unit.name)?_c('div',{staticClass:"es-form-unit"},[_c('es-base',{attrs:{"config":_vm.schema.unit}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.unit.text),expression:"schema.unit.text"}],staticClass:"es-form-unit"},[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")])]:_vm._e(),(_vm.schema.help && !_vm.schema.__inGroups && _vm.showHelpInBody)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()],2):(
+          _vm.schema.properties && _vm.schema.layout && _vm.schema.layout.name === 'tabs'
+        )?_c('tabs',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:"__refTabs__",refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):(_vm.schema.properties)?_c('es-object',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:"__refObject__",refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):_vm._e()]:[(_vm.schema.array.name == 'array')?_c('array-row',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-legend')?_c('array-legend',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-card')?_c('array-card',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarCard__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):(_vm.schema.array.name == 'array-table')?_c('array-table',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTable__",refInFor:true,attrs:{"schema":props.schema,"showHelpInBody":false}})]}}})],null,true)}):(_vm.schema.array && _vm.schema.array.name == 'array-tabs')?_c('array-tabs',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e()],_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error"},[_vm._v("\n      "+_vm._s(_vm.schema.__invalidMsg)+"\n    ")]),(_vm.schema.desc)?_c('div',{staticClass:"es-form-desc"},[(_vm.schema.desc.name)?_c('es-base',{attrs:{"config":_vm.schema.desc}}):[_vm._v("\n        "+_vm._s(_vm.schema.desc.text)+"\n      ")]],2):_vm._e()],2)])}
+var form_itemvue_type_template_id_68b8a2a6_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=68b8a2a6&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=b0161c3e&
+var objectvue_type_template_id_b0161c3e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
         marginTop: fieldSchema.rowSpace + 'px',
         paddingLeft: fieldSchema.offsetLeft + 'px',
         paddingRight: fieldSchema.offsetRight + 'px'
       })},[_vm._l((fieldSchema.__groups),function(fieldKeyName){return [(_vm.schema.properties[fieldKeyName].component)?[(_vm.schema.properties[fieldKeyName].label.text !== false)?_c('label',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'label-' + fieldKeyName,class:[
               'es-form-label',
-              _vm.schema.properties[fieldKeyName].label.size
+              _vm.schema.properties[fieldKeyName].label.flex
                 ? 'es-form-label-' +
-                  _vm.schema.properties[fieldKeyName].label.size
+                  _vm.schema.properties[fieldKeyName].label.flex
                 : ''
             ],style:([
               {
                 height: _vm.schema.properties[fieldKeyName].rowHeight + 'px',
-                lineHeight: _vm.schema.properties[fieldKeyName].rowHeight + 'px'
+                lineHeight: _vm.schema.properties[fieldKeyName].rowHeight + 'px',
+                marginLeft: _vm.schema.properties[fieldKeyName].offsetLeft + 'px',
+                textAlign: _vm.schema.properties[fieldKeyName].label.align
               },
-              _vm.schema.properties[fieldKeyName].label.size
+              _vm.schema.properties[fieldKeyName].label.flex
                 ? ''
                 : { width: _vm.schema.properties[fieldKeyName].labelWidth + 'px' }
             ])},[(
                 _vm.schema.properties[fieldKeyName].rules &&
                   _vm.schema.properties[fieldKeyName].rules.required
-              )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),_vm._v("\n            "+_vm._s(_vm.schema.properties[fieldKeyName].label.text)+"\n            "),(_vm.schema.properties[fieldKeyName].colon)?_c('span',[_vm._v(":")]):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'content-' + fieldKeyName,staticClass:"es-form-comp-content",style:([
-              { minHeight: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
-            ])},[_vm._t(fieldKeyName,null,{"schema":_vm.schema.properties[fieldKeyName]})],2),(_vm.schema.properties[fieldKeyName].unit)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'unit-' + fieldKeyName,staticClass:"es-form-unit",style:([
+              )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!_vm.schema.properties[fieldKeyName].label.name)?[_c('span',[_vm._v(_vm._s(_vm.schema.properties[fieldKeyName].label.text))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].label}})],1),(_vm.schema.properties[fieldKeyName].colon)?_c('span',[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'content-' + fieldKeyName,staticClass:"es-form-comp-content",style:([
+              {
+                minHeight: _vm.schema.properties[fieldKeyName].rowHeight + 'px',
+                marginLeft:
+                  _vm.schema.properties[fieldKeyName].label.text === false
+                    ? _vm.schema.properties[fieldKeyName].offsetLeft + 'px'
+                    : false,
+                marginRight:
+                  _vm.schema.properties[fieldKeyName].offsetRight + 'px'
+              }
+            ])},[_vm._t(fieldKeyName,null,{"schema":_vm.schema.properties[fieldKeyName]})],2),(_vm.schema.properties[fieldKeyName].unit)?[(_vm.schema.properties[fieldKeyName].unit.name)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'unit-' + fieldKeyName,staticClass:"es-form-unit",style:([
+                { height: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
+              ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].unit}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(
+                !_vm.schema.properties[fieldKeyName].hidden &&
+                  _vm.schema.properties[fieldKeyName].unit.text
+              ),expression:"\n                !schema.properties[fieldKeyName].hidden &&\n                  schema.properties[fieldKeyName].unit.text\n              "}],key:'unit-' + fieldKeyName,staticClass:"es-form-unit",style:([
+                { height: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
+              ])},[_vm._v("\n              "+_vm._s(_vm.schema.properties[fieldKeyName].unit.text)+"\n            ")])]:_vm._e(),(_vm.schema.properties[fieldKeyName].help)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'help-' + fieldKeyName,staticClass:"es-form-help",style:([
               { height: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
-            ])},[(_vm.schema.properties[fieldKeyName].unit.name)?_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].unit,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.properties[fieldKeyName].__idxChain,"index":_vm.schema.properties[fieldKeyName].__index}}):[_vm._v("\n              "+_vm._s(_vm.schema.properties[fieldKeyName].unit.text)+"\n            ")]],2):_vm._e(),(_vm.schema.properties[fieldKeyName].help)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'help-' + fieldKeyName,staticClass:"es-form-help",style:([
-              { height: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
-            ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.properties[fieldKeyName].__idxChain,"index":_vm.schema.properties[fieldKeyName].__index}})],1):_vm._e()]:_c('div',{key:fieldKeyName,class:[
+            ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].help}})],1):_vm._e()]:_c('div',{key:fieldKeyName,class:[
             'es-form-placeholder',
             'es-col-' + _vm.schema.properties[fieldKeyName].col
           ]})]})],2):(
@@ -5904,8 +5859,8 @@ var objectvue_type_template_id_12ab3a91_render = function () {var _vm=this;var _
         paddingRight: fieldSchema.offsetRight + 'px'
       })},[(fieldSchema.label.text !== false)?_c('label',{class:[
           'es-form-label',
-          fieldSchema.label.size
-            ? 'es-form-label-' + fieldSchema.label.size
+          fieldSchema.label.flex
+            ? 'es-form-label-' + fieldSchema.label.flex
             : ''
         ],style:(fieldSchema.direction == 'h'
             ? [
@@ -5914,22 +5869,24 @@ var objectvue_type_template_id_12ab3a91_render = function () {var _vm=this;var _
                   lineHeight: fieldSchema.rowHeight + 'px',
                   textAlign: fieldSchema.label.align
                 },
-                fieldSchema.label.size
+                fieldSchema.label.flex
                   ? { textAlign: fieldSchema.label.align }
                   : {
                       width: fieldSchema.labelWidth + 'px',
                       textAlign: fieldSchema.label.align
                     }
               ]
-            : { textAlign: fieldSchema.label.align })},[(fieldSchema.rules && fieldSchema.rules.required)?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),_vm._v("\n        "+_vm._s(fieldSchema.label.text)+"\n        "),(fieldSchema.colon)?_c('span',[_vm._v(":")]):_vm._e()]):_vm._e(),_c('div',{class:fieldSchema.properties
+            : { textAlign: fieldSchema.label.align })},[(fieldSchema.rules && fieldSchema.rules.required)?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!fieldSchema.label.name)?[_c('span',[_vm._v(_vm._s(fieldSchema.direction != "v" || fieldSchema.label.text
+              ? fieldSchema.label.text
+              : " "))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":fieldSchema.label}})],1),(fieldSchema.colon)?_c('span',[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{class:fieldSchema.properties
             ? 'es-form-props-content'
             : 'es-form-comp-content',style:(fieldSchema.direction == 'h'
             ? [{ minHeight: fieldSchema.rowHeight + 'px' }]
             : '')},[_vm._t(fieldName)],2)]):(!fieldSchema.__inGroups && !fieldSchema.component)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.hidden),expression:"!fieldSchema.hidden"}],key:fieldName,class:['es-form-object', 'es-col-' + fieldSchema.col],style:({ marginTop: fieldSchema.rowSpace + 'px' })}):_vm._e()]})],2)}
-var objectvue_type_template_id_12ab3a91_staticRenderFns = []
+var objectvue_type_template_id_b0161c3e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=template&id=12ab3a91&
+// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=template&id=b0161c3e&
 
 // CONCATENATED MODULE: ./src/package/mixins/item-mixin.js
 /* harmony default export */ var item_mixin = ({
@@ -5940,37 +5897,14 @@ var objectvue_type_template_id_12ab3a91_staticRenderFns = []
         return {};
       }
     },
-    global: {
-      type: Object,
-      default: function _default() {
-        return {};
-      }
-    },
-    formData: {
-      type: Object
-    },
-    //组成形式（索引,索引,索引）如：0、0,1、 1,12；“索引”用逗号隔开 通俗讲：因为array的值必须是一个数组，array里面包含array(不一定是孩子，也可能是孙子等)，每一个“索引”代表对应array的哪一项
-    // 用于记录在数组中的索引
-    // idxChain: {
-    //   type: String,
-    //   default: ""
-    // },
     //是否在控件的后面显示help，这个主要用于array-table,因为array-table的help是放在头部的，此值会为false
     showHelpInBody: {
       type: Boolean,
       required: false,
       default: true
-    },
-    isInited: {
-      type: Boolean,
-      required: false,
-      default: false
     }
   }
 });
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
-var es6_string_includes = __webpack_require__("2fdb");
-
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
 
@@ -6026,300 +5960,303 @@ function _objectSpread(target) {
 
   return target;
 }
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
-var es6_regexp_constructor = __webpack_require__("3b2b");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
+var es6_regexp_to_string = __webpack_require__("6b54");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.replace.js
-var es6_regexp_replace = __webpack_require__("a481");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("cadf");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.match.js
-var es6_regexp_match = __webpack_require__("4917");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
-var es6_regexp_split = __webpack_require__("28a5");
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("f751");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/symbol/iterator.js
-var iterator = __webpack_require__("5d58");
-var iterator_default = /*#__PURE__*/__webpack_require__.n(iterator);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
+var es7_promise_finally = __webpack_require__("097d");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/symbol.js
-var symbol = __webpack_require__("67bb");
-var symbol_default = /*#__PURE__*/__webpack_require__.n(symbol);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/typeof.js
-
-
-
-function typeof_typeof2(obj) { if (typeof symbol_default.a === "function" && typeof iterator_default.a === "symbol") { typeof_typeof2 = function _typeof2(obj) { return typeof obj; }; } else { typeof_typeof2 = function _typeof2(obj) { return obj && typeof symbol_default.a === "function" && obj.constructor === symbol_default.a && obj !== symbol_default.a.prototype ? "symbol" : typeof obj; }; } return typeof_typeof2(obj); }
-
-function typeof_typeof(obj) {
-  if (typeof symbol_default.a === "function" && typeof_typeof2(iterator_default.a) === "symbol") {
-    typeof_typeof = function _typeof(obj) {
-      return typeof_typeof2(obj);
-    };
-  } else {
-    typeof_typeof = function _typeof(obj) {
-      return obj && typeof symbol_default.a === "function" && obj.constructor === symbol_default.a && obj !== symbol_default.a.prototype ? "symbol" : typeof_typeof2(obj);
-    };
-  }
-
-  return typeof_typeof(obj);
-}
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.fixed.js
-var es6_string_fixed = __webpack_require__("d263");
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
-var is_array = __webpack_require__("a745");
-var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
-
-function _arrayWithoutHoles(arr) {
-  if (is_array_default()(arr)) {
-    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
-      arr2[i] = arr[i];
-    }
-
-    return arr2;
-  }
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
-var from = __webpack_require__("774e");
-var from_default = /*#__PURE__*/__webpack_require__.n(from);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/is-iterable.js
-var is_iterable = __webpack_require__("c8bb");
-var is_iterable_default = /*#__PURE__*/__webpack_require__.n(is_iterable);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
-
-
-function _iterableToArray(iter) {
-  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance");
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
-
-
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
-}
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js
-var parse_int = __webpack_require__("e814");
-var parse_int_default = /*#__PURE__*/__webpack_require__.n(parse_int);
-
-// CONCATENATED MODULE: ./src/package/libs/rules.js
+// CONCATENATED MODULE: ./src/package/libs/utils.js
 
 
 
 
 
 
-var esRules = {
+
+
+
+
+// import constant from "./constant";
+var utils = {
   /**
-   * [isMobile 是否手机格式]
-   * @param  {[String]}  value [description]
-   * @return {Boolean}       [description]
+   * [trim 删除字符左右两的字符：默认为空格和换行符]
+   * @param  {[String]} value [description]
+   * @param  {[type]} reg   [description]
+   * @return {[type]}       [description]
    */
-  isMobile: function isMobile(value) {
-    // console.log("isMobile: ", arguments);
-    var reg = /^1[3-9]\d{9}$/;
-
-    if (!reg.test(value)) {
-      return false;
-    }
-
-    return true;
-  },
-
-  /**
-   * [isEmail 是否邮件格式]
-   * @param  {[String]}  value [description]
-   * @return {Boolean}       [description]
-   */
-  isEmail: function isEmail(value) {
-    var reg = /^([a-zA-Z0-9_.-])+@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-
-    if (!reg.test(value)) {
-      return false;
-    }
-
-    return true;
-  },
-
-  /**
-   * [isInt 是否是正数字]
-   * @param  {[Number or String]}  value [description]
-   * @param  {[Number]}  minNum [最小值，因为这个很常用, 不写就不比较]
-   * @return {Boolean}       [description]
-   */
-  isInt: function isInt(value, minNum) {
+  trim: function trim(value, reg) {
     var tmpValue = value + "";
-    var reg = /^(-)?\d+$/;
+    reg = reg ? reg : /^(\s|\r|\n|\t)+|(\s|\r|\n|\t)+$/g; //不传就直接删除前后的空格，换行； 若是只删空格就这样：/^\s+|\s+$/g
 
-    if (reg.test(tmpValue + "")) {
-      if (minNum == null) {
+    return tmpValue.replace(reg, "");
+  },
+  type: function type(obj) {
+    var toString = Object.prototype.toString;
+    var map = {
+      "[object Boolean]": "boolean",
+      "[object Number]": "number",
+      "[object String]": "string",
+      "[object Function]": "function",
+      "[object Array]": "array",
+      "[object Date]": "date",
+      "[object RegExp]": "regExp",
+      "[object Undefined]": "undefined",
+      "[object Null]": "null",
+      "[object Object]": "object"
+    };
+    var value = map[toString.call(obj)];
+
+    if (!value) {
+      //不是基本类型
+      if (obj instanceof Element) {
+        //dom节点，
+        return "element";
+      }
+    }
+
+    return value;
+  },
+  isBool: function isBool(value) {
+    return utils.type(value) === "boolean";
+  },
+  isNum: function isNum(value) {
+    return utils.type(value) === "number";
+  },
+  isStr: function isStr(value) {
+    return utils.type(value) === "string";
+  },
+  isFunc: function isFunc(value) {
+    return utils.type(value) === "function";
+  },
+  isArr: function isArr(value) {
+    return utils.type(value) === "array";
+  },
+  isDate: function isDate(value) {
+    return utils.type(value) === "date";
+  },
+  isReg: function isReg(value) {
+    return utils.type(value) === "regExp";
+  },
+  isUndef: function isUndef(value) {
+    return utils.type(value) === "undefined";
+  },
+  isNull: function isNull(value) {
+    return utils.type(value) === "null";
+  },
+  isObj: function isObj(value) {
+    return utils.type(value) === "object";
+  },
+  isVueObj: function isVueObj(value) {
+    if (this.isObj(value)) {
+      if (value.template || value.staticRenderFns && value.__file) {
         return true;
       } else {
-        tmpValue = parse_int_default()(tmpValue);
+        return false;
+      }
+    } else {
+      return false;
+    }
+  },
+  isRefVal: function isRefVal(value) {
+    return this.isObj(value) || this.isArr(value);
+  },
 
-        if (tmpValue >= minNum) {
-          return true;
-        } else {
-          return false;
-        }
+  /**
+   * [deepCopy 深拷贝, 深拷贝的数据是object和array]
+   * @param  {[type]} data [description]
+   * @return {[type]}   [description]
+   */
+  deepCopy: function deepCopy(data) {
+    var type = utils.type(data);
+    var newData;
+
+    if (type == "array") {
+      newData = [];
+
+      for (var i = 0; i < data.length; ++i) {
+        newData[i] = utils.deepCopy(data[i]);
+      }
+
+      return newData;
+    } else if (type === "object") {
+      newData = {};
+
+      for (var key in data) {
+        newData[key] = utils.deepCopy(data[key]);
+      }
+
+      return newData;
+    } else {
+      return data;
+    }
+  },
+
+  /**
+   * 数组去重
+   * @param {Array} arr
+   */
+  unique: function unique(arr) {
+    var newArr = [];
+
+    if (this.isArr(arr)) {
+      var tmpObj = {};
+      arr.forEach(function (item) {
+        tmpObj[item] = 1;
+      });
+      newArr = keys_default()(tmpObj);
+    }
+
+    return newArr;
+  },
+
+  /* 两个数组是否有交集 */
+  isInter: function isInter(arr1, arr2) {
+    for (var i = 0; i < arr1.length; i++) {
+      if (arr2.includes(arr1[i])) {
+        return true;
       }
     }
 
     return false;
   },
-  // /**
-  //  * [isFloat 是否是浮点数]
-  //  * @param  {[Number or String]}  value [description]
-  //  * @param  {[Number]}  minNum [最小值，因为这个很常用, 不写就不比较]
-  //  * @return {Boolean}       [description]
-  //  */
-  isFloat: function isFloat(value, minNum) {
-    var tmpValue = value + "";
+  mergeGlobal: function mergeGlobal(global, extra) {
+    if (utils.isObj(extra)) {
+      for (var key in extra) {
+        if (!utils.isUndef(global[key])) {
+          var value = extra[key];
 
-    if (!esRules.isInt(tmpValue, minNum)) {
-      var reg = /^-?(0|[1-9]\d*)\.\d+$/;
+          switch (key) {
+            case "boxRowHeight":
+            case "boxRowSpace":
+            case "boxLabelWidth":
+              if (utils.isNum(value) && value >= 0) {
+                global[key] = value;
+              } else {
+                console.warn("mergeGlobal: key(" + key + ")的值不是数值且大于等于0；此默认值将不重设");
+              }
 
-      if (reg.test(tmpValue)) {
-        if (minNum == null) {
-          return true;
-        } else {
-          tmpValue = parse_int_default()(tmpValue);
+              break;
 
-          if (tmpValue >= minNum) {
-            return true;
-          } else {
-            return false;
+            case "colon":
+              if (utils.isBool(value)) {
+                global[key] = value;
+              } else {
+                console.warn("mergeGlobal: key(" + key + ")的值不是true/false；此默认值将不重设");
+              }
+
+              break;
+
+            case "direction":
+              if (["v", "h"].includes(value)) {
+                global[key] = value;
+              } else {
+                console.warn("mergeGlobal: key(" + key + ')的值不是数组["v", "h"]；此默认值将不重设');
+              }
+
+              break;
+
+            case "defaultCom":
+              if (value && utils.isStr(value) && value.trim()) {
+                global[key] = value.trim();
+              } else {
+                console.warn("mergeGlobal: key(" + key + ")的值有误(1. 不能为空; 2. 是字符串)；此默认值将不重设");
+              }
+
+              break;
+
+            case "trimEvent":
+              // if (
+              //   value &&
+              //   utils.isStr(value) &&
+              //   value != constant.INPUT_EVENT
+              // ) {
+              //   global[key] = value;
+              // } else {
+              //   console.warn(
+              //     "mergeGlobal: key(" +
+              //       key +
+              //       ")的值有误(1. 不能为空; 2. 是字符串; 3. 不能是" +
+              //       constant.INPUT_EVENT +
+              //       ")；此默认值将不重设"
+              //   );
+              // }
+              console.warn("trimEvent已经移走了，请关注trimDoms");
+              break;
+
+            case "trimDoms":
+              var tmpValue;
+
+              if (utils.isStr(value)) {
+                tmpValue = [value.trim()];
+              } else if (utils.isArr(value)) {
+                tmpValue = value.map(function (item) {
+                  if (utils.isStr(item)) {
+                    return item.trim();
+                  } else {
+                    return item;
+                  }
+                });
+              } else {
+                console.warn("mergeGlobal: key(" + key + ")的值有误, 必须是一个组件名或一个组件；此默认值将不重设");
+              }
+
+              if (tmpValue) {
+                tmpValue = tmpValue.filter(function (item) {
+                  return item ? true : false;
+                });
+
+                if (tmpValue.length <= 0) {
+                  console.log("trimDoms的长度为0");
+                }
+
+                console.log("tmpValue", tmpValue);
+                global[key] = tmpValue;
+              }
+
+              break;
+            // case "help":
+            //   if (utils.isObj(value) && value.name) {
+            //     global[key] = value;
+            //   } else {
+            //     console.warn(
+            //       "mergeGlobal: key(" +
+            //         key +
+            //         ')的不是一个对象{name: "xxx"}；此默认值将不重设'
+            //     );
+            //   }
+            //   break;
+
+            case "defaultVal":
+              if (!utils.isUndef(value)) {
+                global[key] = value;
+              } else {
+                console.warn("mergeGlobal: key(" + key + ")不能设置为undefined；此默认值将不重设");
+              }
+
+              break;
+
+            default:
+              break;
           }
+        } else {
+          console.warn("mergeGlobal: key(" + key + ")不存在");
         }
-      } else {
-        return false;
       }
-    } else {
-      return true;
-    }
-  },
-
-  /**
-   * [isDateTime 是否是时间格式]
-   * @param  {[String]}  value [description]
-   * * @param  {[type]}  connector  [连接符，只接受 - or /; 不写时两都可以]
-   * @param  {[type]}  type  [data time 不写时就是整个标准的写法：如：2019/12/19 12:00:00]
-   * @return {Boolean}       [description]
-   */
-  isDateTime: function isDateTime(value, type, connector) {
-    if (value && typeof value === "string") {
-      var connectorTxt = "\\-|\\/";
-
-      if (connector == "-" || connector == "/") {
-        connectorTxt = "\\" + connector;
-      }
-
-      var dateRegStr = "\\d{4}(" + connectorTxt + ")(0?\\d|1[012])\\1(0?\\d|[12]\\d|3[01])";
-      var timeRegStr = "(0?\\d|1\\d|2[0123]):(0?\\d|[12345]\\d):(0?\\d|[12345]\\d)";
-      var reg;
-
-      if (type == "date") {
-        reg = RegExp(dateRegStr);
-      } else if (type == "time") {
-        reg = RegExp(timeRegStr);
-      } else {
-        reg = RegExp("^" + dateRegStr + "\\s+" + timeRegStr + "$");
-      } // var reg = /^20\d{2}(\-|\/)(0?\d|1[012])\1(0?\d|[12]\d|3[01])\s+(0?\d|1\d|2[0123]):(0?\d|[12345]\d):(0?\d|[12345]\d)$/;
-
-
-      if (reg.test(value)) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  },
-
-  /**
-   * [isUri 是否是一条网络地址]
-   * @param  {[String]}  value [description]
-   * @return {Boolean}       [description]
-   */
-  isUri: function isUri(value) {
-    var reg = /^(http|https|ftp)?:\/\/[\w\W]+$/;
-
-    if (typeof value == "string" && value && reg.test(value)) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-
-  /**
-   * 是否IP地址
-   * @param {*} value
-   * @param {*} type [v4, v6], 不写为两者中的一种类型就可
-   */
-  isIp: function isIp(value, type) {
-    var reg4 = /^((25[0-5]|2[0-4]\d|[01]?\d\d?)\.){3}(25[0-5]|2[0-4]\d|[01]?\d\d?)$/;
-    var reg6 = /^\s*((([0-9A-Fa-f]{1,4}:){7}([0-9A-Fa-f]{1,4}|:))|(([0-9A-Fa-f]{1,4}:){6}(:[0-9A-Fa-f]{1,4}|((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){5}(((:[0-9A-Fa-f]{1,4}){1,2})|:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3})|:))|(([0-9A-Fa-f]{1,4}:){4}(((:[0-9A-Fa-f]{1,4}){1,3})|((:[0-9A-Fa-f]{1,4})?:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){3}(((:[0-9A-Fa-f]{1,4}){1,4})|((:[0-9A-Fa-f]{1,4}){0,2}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){2}(((:[0-9A-Fa-f]{1,4}){1,5})|((:[0-9A-Fa-f]{1,4}){0,3}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(([0-9A-Fa-f]{1,4}:){1}(((:[0-9A-Fa-f]{1,4}){1,6})|((:[0-9A-Fa-f]{1,4}){0,4}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:))|(:(((:[0-9A-Fa-f]{1,4}){1,7})|((:[0-9A-Fa-f]{1,4}){0,5}:((25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}))|:)))(%.+)?\s*$/;
-
-    if (type == "v4") {
-      return reg4.test(value);
-    } else if (type == "v6") {
-      return reg6.test(value);
-    } else {
-      return reg4.test(value) || reg6.test(value);
-    }
-  },
-
-  /**
-   * [isUri 是否是mac地址]
-   * @param  {[String]}  value [description]
-   * @return {Boolean}       [description]
-   */
-  isMacAddr: function isMacAddr(value, connector) {
-    var connectorTxt = "\\-|\\:";
-
-    if (connector == "-" || connector == ":") {
-      connectorTxt = "\\" + connector;
-    }
-
-    var regStr = "^([A-Fa-f0-9]{2}(" + connectorTxt + ")){5}[A-Fa-f0-9]{2}$";
-    var reg = RegExp(regStr);
-
-    if (reg.test(value)) {
-      return true;
-    } else {
-      return false;
     }
   }
 };
-/* harmony default export */ var libs_rules = (esRules);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/help.vue?vue&type=template&id=289081a2&
-var helpvue_type_template_id_289081a2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-help-box"},[(_vm.href)?_c('a',{staticClass:"help-btn",attrs:{"href":_vm.href,"target":"_blank"}},[_c('i',{ref:"icon",staticClass:"es-help-icon",on:{"mouseenter":_vm.enter,"mouseleave":_vm.leave}},[_vm._v("i")])]):_c('i',{ref:"icon",staticClass:"es-help-icon",on:{"mouseenter":_vm.enter,"mouseleave":_vm.leave}},[_vm._v("i")]),_c('transition',{attrs:{"name":"es-help-fade","mode":"out-in","appear":""},on:{"after-leave":_vm.popAnimateLeave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPop && _vm.content),expression:"showPop && content"}],ref:"pop",staticClass:"es-help-tip-box",style:({
-        left: _vm.popPosition.left + 'px',
-        top: _vm.popPosition.top + 'px',
-        maxWidth: _vm.maxWidth + 'px',
-        zIndex: _vm.popPosition.zindex + ''
-      }),on:{"mouseenter":_vm.popEnter,"mouseleave":_vm.popLeave}},[_c('div',{staticClass:"es-content-box",domProps:{"innerHTML":_vm._s(_vm.content)}}),(_vm.popArrow.direction)?_c('div',{class:'help-arrow-' + _vm.popArrow.direction,style:({ left: _vm.popArrow.left + 'px', top: _vm.popArrow.top + 'px' })}):_vm._e()])])],1)}
-var helpvue_type_template_id_289081a2_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/package/components/help.vue?vue&type=template&id=289081a2&
-
+/* harmony default export */ var libs_utils = (utils);
 // CONCATENATED MODULE: ./src/package/libs/constant.js
-
-
-
-
 var constant = {
   // HELP_NAME: "es-help", //注册时用的全局名字
   UI_MAX_COL: 24,
@@ -6349,10 +6286,804 @@ var constant = {
   // TYPE_TMP: "tmp", // 表单的临时值，跟组件没有什么区别；只是不会取出；使用场景：快速做标题或编辑时，某些项需要显示但又不需要提交给后台
   LAYOUT_SPACE: "space",
   // 占位符; space不可以乱改，因为其它地方(.vue)有用到
-  LAYOUT_TABS: "tabs" // properties的子属性是tabs布局; space不可以乱改，因为其它地方(.vue)有用到
+  LAYOUT_TABS: "tabs",
+  // properties的子属性是tabs布局; space不可以乱改，因为其它地方(.vue)有用到
+  UI_FORM: "_es_form_qwerty_",
+  // 说明界面属于哪种类型
+  UI_ITEM: "_es_item_qwerrf_",
+  UI_ARRAY: "_es_array_aadfsd_",
+  ES_FUNC_NAME: "__E0S1_2F3U4NC_N4AM5E__",
+  ES_OPTIONS: "__es__Options__" // 此值要是正规的命名
 
 };
 /* harmony default export */ var libs_constant = (constant);
+// CONCATENATED MODULE: ./src/package/base.js
+
+
+
+
+
+
+
+// import parse from "./libs/parse.js";
+
+ // import formUtils from "./libs/form-utils";
+
+"use strict";
+
+/* harmony default export */ var base = ({
+  render: function render(createElement) {
+    // console.log("start ..........................");
+    // console.log(this.config.props);
+    // console.log("end ..........................");
+    if (!this.config.name) {
+      console.error("错误的config: ", this.config);
+      throw "es-base config.name必须存在";
+    }
+
+    return createElement(this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
+    {
+      attrs: this.config.props,
+      //attrs为原生属性
+      // DOM属性
+      domProps: {// innerHTML: "baz"
+        // value: this.config.value
+      },
+      // 组件props
+      props: _objectSpread({
+        // myProp: "bar",
+        value: libs_utils.isRefVal(this.value) ? libs_utils.deepCopy(this.value) : this.value
+      }, this.config.props),
+      // 事件监听基于 "on"
+      // 所以不再支持如 "v-on:keyup.enter" 修饰语
+      // 需要手动匹配 KeyCode
+      on: this.$data.emitOn,
+      // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
+      nativeOn: this.$data.nativeOn,
+      // 自定义指令。注意事项：不能对绑定的旧值设值
+      // Vue 会为您持续追踪
+      directives: [// {
+        // 	name: "my-custom-directive",
+        // 	value: "2",
+        // 	expression: "1 + 1",
+        // 	arg: "foo",
+        // 	modifiers: {
+        // 		bar: true
+        // 	}
+        // }
+      ],
+      // Scoped slots in the form of
+      // { name: props => VNode | Array<VNode> }
+      scopedSlots: {// default: props => createElement('span', props.text + "test3")
+      },
+      // 如果组件是其他组件的子组件，需为插槽指定名称
+      // slot: "name-of-slot",
+      // 其他特殊顶层属性
+      // key: "myKey",
+      ref: "__comTarget__"
+    }, // [createElement('span', "test")]
+    // ["test2"]
+    // "测试{{config.value}}" // 子组件中的阵列
+    this.config.text);
+  },
+  // inheritAttrs: false,
+  props: {
+    config: {
+      type: Object,
+      required: true,
+      default: function _default() {
+        return {
+          name: "",
+          //lg-element 组件 原生组件
+          // value: "",
+          // attrs: {},
+          // style: {},
+          // class: {},
+          props: {}
+        };
+      }
+    },
+    emitEvents: {
+      type: Array,
+      required: false,
+      default: null
+    },
+    nativeEvents: {
+      type: Array,
+      required: false,
+      default: null
+    },
+    value: {
+      type: [Object, String, Date, Array, Boolean, Number],
+      required: false
+    }
+  },
+  data: function data() {
+    return {
+      emitOn: null,
+      nativeOn: null
+    };
+  },
+  created: function created() {
+    this.initUi();
+  },
+  methods: {
+    initUi: function initUi() {
+      this.createOn();
+    },
+    eventHandler: function eventHandler(eventName, eventData) {
+      this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
+    },
+
+    /**
+     * 创建所需要监听的事件
+     */
+    createOn: function createOn() {
+      var _this = this;
+
+      var emitEvents;
+
+      if (this.emitEvents) {
+        emitEvents = libs_utils.deepCopy(this.emitEvents);
+
+        if (!emitEvents.includes(libs_constant.INPUT_EVENT)) {
+          emitEvents.push(libs_constant.INPUT_EVENT);
+        }
+      } else {
+        emitEvents = [libs_constant.INPUT_EVENT];
+      } // emit发出的事件
+
+
+      var emitOn = {};
+      emitEvents.forEach(function (eventName) {
+        if (eventName == libs_constant.INPUT_EVENT) {
+          emitOn[eventName] = function (eventData) {
+            var eventValue;
+
+            if (eventData && eventData.target && eventData.target.nodeName) {
+              eventValue = eventData.target.value;
+            } else {
+              eventValue = eventData;
+            }
+
+            if (_this.value !== eventValue) {
+              // console.log("eventValue: ", eventValue);
+              _this.$emit("input", eventValue);
+
+              _this.eventHandler(eventName, eventValue);
+            }
+          };
+        } else {
+          emitOn[eventName] = function (eventData) {
+            _this.eventHandler(eventName, eventData);
+          };
+        }
+      });
+      this.$data.emitOn = keys_default()(emitOn).length > 0 ? emitOn : null; //原生事件
+      // emit发出的事件
+
+      if (this.nativeEvents && this.nativeEvents.length > 0) {
+        var nativeOn = {};
+        var nativeEvents = libs_utils.deepCopy(this.nativeEvents);
+        nativeEvents.forEach(function (eventName) {
+          nativeOn[eventName] = function (eventData) {
+            _this.eventHandler(eventName + "." + libs_constant.ADJ_NATIVE, eventData);
+          };
+        });
+        this.$data.nativeOn = keys_default()(nativeOn).length > 0 ? nativeOn : null;
+      } else {
+        this.$data.nativeOn = null;
+      }
+    }
+  },
+  destroyed: function destroyed() {},
+  watch: {
+    config: {
+      handler: function handler()
+      /* newVal, oldVal */
+      {
+        // console.log("base.config here...");
+        this.initUi();
+      },
+      deep: false
+    }
+  }
+});
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ var objectvue_type_script_lang_js_ = ({
+  mixins: [item_mixin],
+  data: function data() {
+    return {};
+  },
+  components: {
+    esBase: base
+  },
+  methods: {}
+});
+// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=script&lang=js&
+ /* harmony default export */ var layout_objectvue_type_script_lang_js_ = (objectvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/package/layout/object.vue?vue&type=style&index=0&lang=scss&
+var objectvue_type_style_index_0_lang_scss_ = __webpack_require__("ac2a");
+
+// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
+/* globals __VUE_SSR_CONTEXT__ */
+
+// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
+// This module is a runtime utility for cleaner component module output and will
+// be included in the final webpack user bundle.
+
+function normalizeComponent (
+  scriptExports,
+  render,
+  staticRenderFns,
+  functionalTemplate,
+  injectStyles,
+  scopeId,
+  moduleIdentifier, /* server only */
+  shadowMode /* vue-cli only */
+) {
+  // Vue.extend constructor export interop
+  var options = typeof scriptExports === 'function'
+    ? scriptExports.options
+    : scriptExports
+
+  // render functions
+  if (render) {
+    options.render = render
+    options.staticRenderFns = staticRenderFns
+    options._compiled = true
+  }
+
+  // functional template
+  if (functionalTemplate) {
+    options.functional = true
+  }
+
+  // scopedId
+  if (scopeId) {
+    options._scopeId = 'data-v-' + scopeId
+  }
+
+  var hook
+  if (moduleIdentifier) { // server build
+    hook = function (context) {
+      // 2.3 injection
+      context =
+        context || // cached call
+        (this.$vnode && this.$vnode.ssrContext) || // stateful
+        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
+      // 2.2 with runInNewContext: true
+      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
+        context = __VUE_SSR_CONTEXT__
+      }
+      // inject component styles
+      if (injectStyles) {
+        injectStyles.call(this, context)
+      }
+      // register component module identifier for async chunk inferrence
+      if (context && context._registeredComponents) {
+        context._registeredComponents.add(moduleIdentifier)
+      }
+    }
+    // used by ssr in case component is cached and beforeCreate
+    // never gets called
+    options._ssrRegister = hook
+  } else if (injectStyles) {
+    hook = shadowMode
+      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
+      : injectStyles
+  }
+
+  if (hook) {
+    if (options.functional) {
+      // for template-only hot-reload because in that case the render fn doesn't
+      // go through the normalizer
+      options._injectStyles = hook
+      // register for functioal component in vue file
+      var originalRender = options.render
+      options.render = function renderWithStyleInjection (h, context) {
+        hook.call(context)
+        return originalRender(h, context)
+      }
+    } else {
+      // inject component registration as beforeCreate hook
+      var existing = options.beforeCreate
+      options.beforeCreate = existing
+        ? [].concat(existing, hook)
+        : [hook]
+    }
+  }
+
+  return {
+    exports: scriptExports,
+    options: options
+  }
+}
+
+// CONCATENATED MODULE: ./src/package/layout/object.vue
+
+
+
+
+
+
+/* normalize component */
+
+var object_component = normalizeComponent(
+  layout_objectvue_type_script_lang_js_,
+  objectvue_type_template_id_b0161c3e_render,
+  objectvue_type_template_id_b0161c3e_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var object = (object_component.exports);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-row.vue?vue&type=template&id=518768c2&
+var array_rowvue_type_template_id_518768c2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-box"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
+          marginTop: (index > 0 ? _vm.schema.array.rowSpace : 0) + 'px'
+        })},[(_vm.schema.array.hasOrder !== false)?_c('div',{staticClass:"es-order-box",style:({
+            height:
+              typeof _vm.schema.boxRowHeight == 'number'
+                ? _vm.schema.boxRowHeight + 'px'
+                : _vm.schema.rowHeight + 'px'
+          })},[_vm._v("\n          "+_vm._s(index + 1)+".\n        ")]):_vm._e(),_c('div',{staticClass:"es-array-row-body"},[(
+              itemSchema.properties &&
+                itemSchema.layout &&
+                itemSchema.layout.name === 'tabs'
+            )?_c('tabs',{tag:"component",attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):(itemSchema.properties)?_c('es-object',{attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):[_vm._t("default",null,{"schema":itemSchema})]],2),(
+            _vm.schema.array.hasDelete ||
+              _vm.schema.array.hasSort ||
+              _vm.schema.array.hasCopy
+          )?_c('div',{staticClass:"es-btn-box",style:({
+            height:
+              typeof _vm.schema.boxRowHeight == 'number'
+                ? _vm.schema.boxRowHeight + 'px'
+                : _vm.schema.rowHeight + 'px'
+          })},[_c('edit-btns',{attrs:{"has-delete":_vm.schema.array.hasDelete,"has-sort":_vm.schema.array.hasSort,"can-delete":_vm.schema.__propSchemaList.length > _vm.schema.array.min,"fixed":_vm.schema.array.fixed,"is-first":index == 0,"is-last":index == _vm.schema.__propSchemaList.length - 1,"index":index,"has-del-warn":_vm.schema.array.hasDelWarn,"can-add":_vm.schema.array.max <= 0 ||
+                _vm.schema.__propSchemaList.length < _vm.schema.array.max,"has-add":_vm.schema.array.hasCopy},on:{"copyItem":_vm.copyItem,"delItem":_vm.delItem,"upItem":_vm.upItem,"downItem":_vm.downItem}})],1):_vm._e()])}),0),(_vm.schema.array.hasDelete || _vm.schema.array.hasAdd)?_c('div',{staticClass:"es-btn-footer",style:({
+        marginTop:
+          _vm.schema.__propSchemaList.length > 0
+            ? _vm.schema.array.rowSpace + 'px'
+            : '0px'
+      })},[_c('edit-bottom-btns',{attrs:{"has-delete":_vm.schema.array.hasDelete &&
+            _vm.schema.array.min <= 0 &&
+            _vm.schema.array.fixed <= 0,"has-add":_vm.schema.array.hasAdd,"can-delete":_vm.schema.__propSchemaList.length > 0 &&
+            _vm.schema.array.fixed <= 0 &&
+            _vm.schema.array.min <= 0,"can-add":_vm.schema.array.max <= 0 ||
+            _vm.schema.__propSchemaList.length < _vm.schema.array.max,"index":-1,"has-del-warn":_vm.schema.array.hasDelWarn},on:{"delItem":_vm.delAllItems,"addItem":_vm.addItem}})],1):_vm._e()]),(_vm.schema.help && _vm.schema.component)?_c('div',{staticClass:"es-form-help",style:({
+      height:
+        typeof _vm.schema.boxRowHeight == 'number'
+          ? _vm.schema.boxRowHeight + 'px'
+          : _vm.schema.rowHeight + 'px'
+    })},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()])}
+var array_rowvue_type_template_id_518768c2_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/package/layout/array-row.vue?vue&type=template&id=518768c2&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/tabs.vue?vue&type=template&id=df751e26&
+var tabsvue_type_template_id_df751e26_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-layout-tabs"},[_c('es-tabs-nav',{attrs:{"type":_vm.schema.layout.type}},[_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return [(!itemSchema.hidden)?_c('es-tabs-nav-item',{key:fieldName,attrs:{"required":itemSchema.rules && itemSchema.rules.required,"is-active":fieldName === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"index":fieldName},on:{"clickActive":_vm.clickActiveHandler}},[(!itemSchema.label.name)?[_c('span',[_vm._v(_vm._s(itemSchema.label.text ? itemSchema.label.text : fieldName + ""))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.label}})],1)],2):_vm._e()]})],2),_c('ul',{staticClass:"es-tabs-body",style:({
+      padding: _vm.schema.boxRowSpace + 'px',
+      'border-width': _vm.schema.layout.hasBorder ? '1px' : '0px'
+    })},_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return _c('li',{directives:[{name:"show",rawName:"v-show",value:(fieldName === _vm.schema.__tabsIndex && !itemSchema.hidden),expression:"fieldName === schema.__tabsIndex && !itemSchema.hidden"}],key:fieldName},[_vm._t(fieldName)],2)}),0)],1)}
+var tabsvue_type_template_id_df751e26_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/package/layout/tabs.vue?vue&type=template&id=df751e26&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav.vue?vue&type=template&id=34141644&
+var tabs_navvue_type_template_id_34141644_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.boxClass},[_c('div',{ref:"scrollBox",staticClass:"es-tabs-scroll-box"},[_c('div',{class:['es-tabs-scroll-wrap', _vm.showToggle ? 'es-has-toggle' : ''],style:({ padding: _vm.showToggle ? '0 ' + _vm.toggleZoneWidth + 'px' : '0' })},[_c('div',{class:['es-tabs-nav-wrap', _vm.hasAdd ? 'es-has-add' : '']},[_c('div',{staticClass:"es-tabs-nav-scroll"},[_c('ul',{ref:"scrollWrap",staticClass:"es-tabs-nav",style:({ transform: 'translateX(' + _vm.navX + 'px)' })},[_vm._t("default")],2)]),(_vm.hasAdd)?_c('es-tabs-btn',{staticClass:"es-tabs-add es-btn",attrs:{"disabled":_vm.canAdd},on:{"click":_vm.addItemHandler}}):_vm._e()],1),_c('span',{staticClass:"es-tabs-prev-btn",on:{"click":_vm.clickPrevHandler}},[_c('span',{staticClass:"es-arrow"})]),_c('span',{staticClass:"es-tabs-next-btn",on:{"click":_vm.clickNextHandler}},[_c('span',{staticClass:"es-arrow"})])])]),_c('div',{staticClass:"help-box"},[_vm._t("help")],2)])}
+var tabs_navvue_type_template_id_34141644_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/package/components/tabs-nav.vue?vue&type=template&id=34141644&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.match.js
+var es6_regexp_match = __webpack_require__("4917");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav-item.vue?vue&type=template&id=bf58c136&
+var tabs_nav_itemvue_type_template_id_bf58c136_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{class:{
+    'is-active': _vm.isActive,
+    'has-close': _vm.hasDelete,
+    'has-pop': _vm.showPop
+  }},[_c('div',{class:{ 'es-tabs-nav-item-cnt': true, 'es-error': _vm.hasError },on:{"click":_vm.clickCntHandler}},[(_vm.required)?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),_vm._t("default"),(_vm.hasDelete)?_c('div',{staticClass:"es-tabs-close-box"},[_c('es-tabs-btn',{ref:"delBtn",staticClass:"es-tabs-close",attrs:{"disabled":_vm.index + 1 <= _vm.fixed || !_vm.canDelete},on:{"click":_vm.clickDeletBtn}}),(_vm.canPop)?_c('transition',{attrs:{"name":"es-fade","mode":"out-in","appear":""}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPop),expression:"showPop"}],ref:"pop",staticClass:"es-form-pop-box",style:({
+            left: _vm.popPosition.left + 'px',
+            top: _vm.popPosition.top + 'px',
+            zIndex: _vm.popPosition.zindex + ''
+          }),on:{"click":function($event){$event.preventDefault();$event.stopPropagation();}}},[_c('div',{staticClass:"es-form-pop-content"},[_c('div',[_vm._v("确定删除吗？")]),_c('div',{staticClass:"es-btn-row"},[_c('div',{staticClass:"es-btn-group"},[_c('es-btn',{staticClass:"es-btn",on:{"click":_vm.clickPopConfirm}},[_vm._v("\n                  确定\n                ")]),_c('es-btn',{staticClass:"es-btn",on:{"click":_vm.closePop}},[_vm._v("\n                  取消\n                ")])],1)])]),(_vm.popArrow.direction)?_c('div',{class:'es-pop-arrow-' + _vm.popArrow.direction,style:({ left: _vm.popArrow.left + 'px', top: _vm.popArrow.top + 'px' })}):_vm._e()])]):_vm._e()],1):_vm._e()],2),(_vm.hasSort)?_c('es-tabs-btn',{staticClass:"es-tabs-left-btn",attrs:{"disabled":_vm.isFirst || _vm.index <= _vm.fixed},on:{"click":_vm.upItem}},[_c('span',{staticClass:"es-arrow"})]):_vm._e(),(_vm.hasSort)?_c('es-tabs-btn',{staticClass:"es-tabs-right-btn",attrs:{"disabled":_vm.isLast || _vm.index < _vm.fixed},on:{"click":_vm.downItem}},[_c('span',{staticClass:"es-arrow"})]):_vm._e()],1)}
+var tabs_nav_itemvue_type_template_id_bf58c136_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/package/components/tabs-nav-item.vue?vue&type=template&id=bf58c136&
+
+// CONCATENATED MODULE: ./src/package/mixins/array-edit-item-mixin.js
+
+/* harmony default export */ var array_edit_item_mixin = ({
+  data: function data() {
+    return {};
+  },
+  props: {
+    canDelete: {
+      type: Boolean,
+      required: false,
+      default: true
+    },
+    hasSort: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    isFirst: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    isLast: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    fixed: {
+      // 固定行（前几）
+      type: Number,
+      required: false,
+      default: 0
+    }
+  },
+  methods: {
+    upItem: function upItem() {
+      if (!this.isFirst) {
+        this.$emit("upItem", this.index);
+      }
+    },
+    downItem: function downItem() {
+      if (!this.isLast) {
+        this.$emit("downItem", this.index);
+      }
+    }
+  }
+});
 // CONCATENATED MODULE: ./src/package/libs/pop-utils.js
 
 
@@ -6795,4456 +7526,6 @@ var popUtils = {
   }
 };
 /* harmony default export */ var pop_utils = (popUtils);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/help.vue?vue&type=script&lang=js&
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-/* harmony default export */ var helpvue_type_script_lang_js_ = ({
-  /* ====================== 生命周期 ====================== */
-  created: function created() {
-    var _this = this;
-
-    this.$data.scrollWinHandler = function () {
-      _this.adjustPop();
-    };
-  },
-
-  /* ====================== 数据绑定 ====================== */
-  data: function data() {
-    return {
-      showPop: false,
-      scrollWinHandler: null,
-      popDom: null,
-      popLeaveDelay: 200,
-      // pop延迟消失的时间（ms）
-      popTimerId: null,
-      popPosition: {
-        left: 0,
-        top: 0,
-        zindex: 1
-      },
-      popArrow: {
-        direction: "",
-        left: 0,
-        top: 0
-      },
-      popInfo: {
-        popBorderRadius: 4,
-        viewSpace: 2,
-        // 距离判断边预留的空间
-        popArrowWH: 6,
-        // 箭头的宽度和高度
-        betweenSpace: 3 // pop与icon的空间
-
-      }
-    };
-  },
-  props: {
-    maxWidth: {
-      type: Number,
-      required: false,
-      default: 300
-    },
-    content: {
-      // 内容区
-      type: String,
-      required: false,
-      default: ""
-    },
-    href: {
-      // 若有些值，说是图标是一条链接
-      type: String,
-      required: false,
-      default: ""
-    },
-    placement: {
-      // pop的位置，当设置这个时，会优先考虑这个方向
-      type: String,
-      required: false,
-      default: "" //value: top right bottom left
-
-    }
-  },
-  watch: {},
-
-  /* ====================== 事件处理 ====================== */
-  methods: {
-    enter: function enter() {
-      var _this2 = this;
-
-      if (this.content) {
-        if (!this.$data.showPop) {
-          // 正常进来
-          this.$data.showPop = true;
-          this.addPopDom();
-          this.setScrollListen();
-          this.$data.popPosition.zindex = pop_utils.getMaxZIndex() + 1;
-          this.$nextTick(function () {
-            _this2.adjustPop();
-          });
-        } else {
-          // 从pop进入来
-          this.cancelPopTimer();
-        }
-      }
-    },
-    leave: function leave() {
-      if (this.content) {
-        this.setCloseTimer();
-      }
-    },
-    popEnter: function popEnter() {
-      this.cancelPopTimer();
-    },
-    popLeave: function popLeave() {
-      this.setCloseTimer();
-    },
-    popAnimateLeave: function popAnimateLeave() {
-      // console.log("popAnimateLeave...");
-      this.cancelScrollListen();
-      this.$data.popPosition = {
-        //这样放在最左，可以保持其长度最大化
-        left: 0,
-        top: 0
-      };
-    },
-    addPopDom: function addPopDom() {
-      if (!this.$data.popDom) {
-        this.$data.popDom = this.$refs.pop;
-        document.body.appendChild(this.$data.popDom);
-      }
-    },
-    removePopDom: function removePopDom() {
-      if (this.$data.popDom) {
-        document.body.removeChild(this.$data.popDom);
-        this.$data.popDom = null;
-      }
-    },
-    setScrollListen: function setScrollListen() {
-      window.addEventListener("scroll", this.$data.scrollWinHandler, true);
-    },
-    cancelScrollListen: function cancelScrollListen() {
-      window.removeEventListener("scroll", this.$data.scrollWinHandler, true);
-    },
-    closePop: function closePop() {
-      this.cancelPopTimer();
-      this.$data.showPop = false;
-    },
-    setCloseTimer: function setCloseTimer() {
-      var _this3 = this;
-
-      this.$data.popTimerId = setTimeout(function () {
-        _this3.$data.popTimerId = null;
-
-        _this3.closePop();
-      }, this.$data.popLeaveDelay);
-    },
-    cancelPopTimer: function cancelPopTimer() {
-      if (this.$data.popTimerId !== null) {
-        clearTimeout(this.$data.popTimerId);
-        this.$data.popTimerId = null;
-      }
-    },
-    adjustPop: function adjustPop() {
-      var pop = this.$refs["pop"];
-      var icon = this.$refs["icon"];
-      var popRect = pop.getBoundingClientRect();
-      var iconRect = icon.getBoundingClientRect();
-      var uiInfo = pop_utils.getPopUiInfo(popRect, iconRect, this.$data.popInfo, this.placement);
-
-      if (uiInfo) {
-        this.$data.popPosition = {
-          left: uiInfo.popLeft,
-          top: uiInfo.popTop
-        };
-        this.$data.popArrow = {
-          direction: uiInfo.arrowDirection,
-          left: uiInfo.arrowLeft,
-          top: uiInfo.arrowTop
-        };
-      } else {
-        this.closePop();
-      }
-    }
-  },
-  destroyed: function destroyed() {
-    if (this.$data.scrollWinHandler) {
-      this.cancelScrollListen();
-    }
-
-    this.$data.scrollWinHandler = null;
-    this.removePopDom();
-  }
-});
-// CONCATENATED MODULE: ./src/package/components/help.vue?vue&type=script&lang=js&
- /* harmony default export */ var components_helpvue_type_script_lang_js_ = (helpvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/package/components/help.vue?vue&type=style&index=0&lang=scss&
-var helpvue_type_style_index_0_lang_scss_ = __webpack_require__("d0e9");
-
-// CONCATENATED MODULE: ./node_modules/vue-loader/lib/runtime/componentNormalizer.js
-/* globals __VUE_SSR_CONTEXT__ */
-
-// IMPORTANT: Do NOT use ES2015 features in this file (except for modules).
-// This module is a runtime utility for cleaner component module output and will
-// be included in the final webpack user bundle.
-
-function normalizeComponent (
-  scriptExports,
-  render,
-  staticRenderFns,
-  functionalTemplate,
-  injectStyles,
-  scopeId,
-  moduleIdentifier, /* server only */
-  shadowMode /* vue-cli only */
-) {
-  // Vue.extend constructor export interop
-  var options = typeof scriptExports === 'function'
-    ? scriptExports.options
-    : scriptExports
-
-  // render functions
-  if (render) {
-    options.render = render
-    options.staticRenderFns = staticRenderFns
-    options._compiled = true
-  }
-
-  // functional template
-  if (functionalTemplate) {
-    options.functional = true
-  }
-
-  // scopedId
-  if (scopeId) {
-    options._scopeId = 'data-v-' + scopeId
-  }
-
-  var hook
-  if (moduleIdentifier) { // server build
-    hook = function (context) {
-      // 2.3 injection
-      context =
-        context || // cached call
-        (this.$vnode && this.$vnode.ssrContext) || // stateful
-        (this.parent && this.parent.$vnode && this.parent.$vnode.ssrContext) // functional
-      // 2.2 with runInNewContext: true
-      if (!context && typeof __VUE_SSR_CONTEXT__ !== 'undefined') {
-        context = __VUE_SSR_CONTEXT__
-      }
-      // inject component styles
-      if (injectStyles) {
-        injectStyles.call(this, context)
-      }
-      // register component module identifier for async chunk inferrence
-      if (context && context._registeredComponents) {
-        context._registeredComponents.add(moduleIdentifier)
-      }
-    }
-    // used by ssr in case component is cached and beforeCreate
-    // never gets called
-    options._ssrRegister = hook
-  } else if (injectStyles) {
-    hook = shadowMode
-      ? function () { injectStyles.call(this, this.$root.$options.shadowRoot) }
-      : injectStyles
-  }
-
-  if (hook) {
-    if (options.functional) {
-      // for template-only hot-reload because in that case the render fn doesn't
-      // go through the normalizer
-      options._injectStyles = hook
-      // register for functioal component in vue file
-      var originalRender = options.render
-      options.render = function renderWithStyleInjection (h, context) {
-        hook.call(context)
-        return originalRender(h, context)
-      }
-    } else {
-      // inject component registration as beforeCreate hook
-      var existing = options.beforeCreate
-      options.beforeCreate = existing
-        ? [].concat(existing, hook)
-        : [hook]
-    }
-  }
-
-  return {
-    exports: scriptExports,
-    options: options
-  }
-}
-
-// CONCATENATED MODULE: ./src/package/components/help.vue
-
-
-
-
-
-
-/* normalize component */
-
-var help_component = normalizeComponent(
-  components_helpvue_type_script_lang_js_,
-  helpvue_type_template_id_289081a2_render,
-  helpvue_type_template_id_289081a2_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var components_help = (help_component.exports);
-// CONCATENATED MODULE: ./src/package/libs/global.js
-// import constant from "./constant";
-
-var global_global = {
-  boxRowHeight: 40,
-  boxRowSpace: 20,
-  boxLabelWidth: 100,
-  colon: false,
-  direction: "h",
-  defaultCom: "input",
-  defaultVal: "",
-  // 这个是对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；注：此值对其它组件不补充
-  help: {
-    name: components_help,
-    props: {}
-  },
-  trimEvent: "change"
-  /* 这个是form的表单项改变时，此事件触发后会去掉左右两边空格；一般都是change, 因为有些类库可以喜欢写changed */
-
-};
-/* harmony default export */ var libs_global = (global_global);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
-var es6_regexp_to_string = __webpack_require__("6b54");
-
-// CONCATENATED MODULE: ./src/package/libs/utils.js
-
-
-
-
-
-
-
-
-var utils = {
-  /**
-   * [trim 删除字符左右两的字符：默认为空格和换行符]
-   * @param  {[String]} value [description]
-   * @param  {[type]} reg   [description]
-   * @return {[type]}       [description]
-   */
-  trim: function trim(value, reg) {
-    var tmpValue = value + "";
-    reg = reg ? reg : /^(\s|\r|\n|\t)+|(\s|\r|\n|\t)+$/g; //不传就直接删除前后的空格，换行； 若是只删空格就这样：/^\s+|\s+$/g
-
-    return tmpValue.replace(reg, "");
-  },
-  type: function type(obj) {
-    var toString = Object.prototype.toString;
-    var map = {
-      "[object Boolean]": "boolean",
-      "[object Number]": "number",
-      "[object String]": "string",
-      "[object Function]": "function",
-      "[object Array]": "array",
-      "[object Date]": "date",
-      "[object RegExp]": "regExp",
-      "[object Undefined]": "undefined",
-      "[object Null]": "null",
-      "[object Object]": "object"
-    };
-    var value = map[toString.call(obj)];
-
-    if (!value) {
-      //不是基本类型
-      if (obj instanceof Element) {
-        //dom节点，
-        return "element";
-      }
-    }
-
-    return value;
-  },
-  isBool: function isBool(value) {
-    return utils.type(value) === "boolean";
-  },
-  isNum: function isNum(value) {
-    return utils.type(value) === "number";
-  },
-  isStr: function isStr(value) {
-    return utils.type(value) === "string";
-  },
-  isFunc: function isFunc(value) {
-    return utils.type(value) === "function";
-  },
-  isArr: function isArr(value) {
-    return utils.type(value) === "array";
-  },
-  isDate: function isDate(value) {
-    return utils.type(value) === "date";
-  },
-  isReg: function isReg(value) {
-    return utils.type(value) === "regExp";
-  },
-  isUndef: function isUndef(value) {
-    return utils.type(value) === "undefined";
-  },
-  isNull: function isNull(value) {
-    return utils.type(value) === "null";
-  },
-  isObj: function isObj(value) {
-    return utils.type(value) === "object";
-  },
-  isVueObj: function isVueObj(value) {
-    if (this.isObj(value)) {
-      if (value.template || value.staticRenderFns && value.__file) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  },
-  isRefVal: function isRefVal(value) {
-    return this.isObj(value) || this.isArr(value);
-  },
-
-  /**
-   * [deepCopy 深拷贝, 深拷贝的数据是object和array]
-   * @param  {[type]} data [description]
-   * @return {[type]}   [description]
-   */
-  deepCopy: function deepCopy(data) {
-    var type = utils.type(data);
-    var newData;
-
-    if (type == "array") {
-      newData = [];
-
-      for (var i = 0; i < data.length; ++i) {
-        newData[i] = utils.deepCopy(data[i]);
-      }
-
-      return newData;
-    } else if (type === "object") {
-      newData = {};
-
-      for (var key in data) {
-        newData[key] = utils.deepCopy(data[key]);
-      }
-
-      return newData;
-    } else {
-      return data;
-    }
-  },
-
-  /**
-   * 数组去重
-   * @param {Array} arr
-   */
-  unique: function unique(arr) {
-    var newArr = [];
-
-    if (this.isArr(arr)) {
-      var tmpObj = {};
-      arr.forEach(function (item) {
-        tmpObj[item] = 1;
-      });
-      newArr = keys_default()(tmpObj);
-    }
-
-    return newArr;
-  },
-  mergeGlobal: function mergeGlobal(global, extra) {
-    if (utils.isObj(extra)) {
-      for (var key in extra) {
-        if (!utils.isUndef(global[key])) {
-          var value = extra[key];
-
-          switch (key) {
-            case "boxRowHeight":
-            case "boxRowSpace":
-            case "boxLabelWidth":
-              if (utils.isNum(value) && value >= 0) {
-                global[key] = value;
-              } else {
-                console.warn("mergeGlobal: key(" + key + ")的值不是数值且大于等于0，将不重设");
-              }
-
-              break;
-
-            case "colon":
-              if (utils.isBool(value)) {
-                global[key] = value;
-              } else {
-                console.warn("mergeGlobal: key(" + key + ")的值不是true/false，将不重设");
-              }
-
-              break;
-
-            case "direction":
-              if (["v", "h"].includes(value)) {
-                global[key] = value;
-              } else {
-                console.warn("mergeGlobal: key(" + key + ')的值不是数组["v", "h"]，将不重设');
-              }
-
-              break;
-
-            case "defaultCom":
-            case "trimEvent":
-              if (value && utils.isStr(value) && value != libs_constant.INPUT_EVENT) {
-                global[key] = value;
-              } else {
-                console.warn("mergeGlobal: key(" + key + ")的值有误(1. 不能为空; 2. 是字符串; 3. 不能是" + libs_constant.INPUT_EVENT + ")，将不重设");
-              }
-
-              break;
-
-            case "help":
-              if (utils.isObj(value) && value.name) {
-                global[key] = value;
-              } else {
-                console.warn("mergeGlobal: key(" + key + ')的不是一个对象{name: "xxx"}，将不重设');
-              }
-
-              break;
-
-            case "defaultVal":
-              if (!utils.isUndef(value)) {
-                global[key] = value;
-              } else {
-                console.warn("mergeGlobal: key(" + key + ")不能设置为undefined，将不重设");
-              }
-
-              break;
-
-            default:
-              break;
-          }
-        } else {
-          console.warn("mergeGlobal: key(" + key + ")不存在");
-        }
-      }
-    }
-  }
-};
-/* harmony default export */ var libs_utils = (utils);
-// CONCATENATED MODULE: ./src/package/libs/schema-rules.js
-
-
-var schemaRules = {
-  isEs: function isEs(value) {
-    return libs_parse.isEsScript(value);
-  },
-  isStr: function isStr(value) {
-    return libs_utils.isStr(value);
-  },
-
-  /**
-   * [数值范围]
-   * @param  {[String]}  value [description]
-   * @return {Boolean}       [description]
-   */
-  // range: function(value, min, max, isInt) {
-  //   if (utils.isNum(value)) {
-  //     if (isInt) {
-  //       return schemaRules.isInt(value, min, max);
-  //     } else {
-  //       var tmpMin = min;
-  //       var tmpMax = max;
-  //       if (utils.isNum(min) && utils.isNum(min) && min > max) {
-  //         tmpMin = max;
-  //         tmpMax = min;
-  //       }
-  //       if (utils.isNum(tmpMin) && value < tmpMin) {
-  //         return false;
-  //       } else if (utils.isNum(tmpMax) && value > tmpMax) {
-  //         return false;
-  //       } else {
-  //         return true;
-  //       }
-  //     }
-  //   } else {
-  //     return false;
-  //   }
-  // },
-
-  /**
-   * [isInt 是否整数]
-   * @param  {[Number or String]}  value [description]
-   * @param  {[Number]}  min [最小值(包含此值)，因为这个很常用, 不写就不比较]
-   * @return {Boolean}       [description]
-   */
-  isInt: function isInt(value, min, max) {
-    var tmpMin = min;
-    var tmpMax = max;
-
-    if (libs_utils.isNum(min) && libs_utils.isNum(min) && min > max) {
-      tmpMin = max;
-      tmpMax = min;
-    }
-
-    if (libs_utils.isNum(value) && /^\d+$/.test(value + "")) {
-      if (libs_utils.isNum(tmpMin) && value < tmpMin) {
-        return false;
-      } else if (libs_utils.isNum(tmpMax) && value > tmpMax) {
-        return false;
-      } else {
-        return true;
-      }
-    } else {
-      return false;
-    }
-  }
-};
-/* harmony default export */ var schema_rules = (schemaRules);
-// CONCATENATED MODULE: ./src/package/libs/submit.js
-/* 应用于表单组件函数，不能作为其它用途：因为this代表的是表单 */
-var onlySubmit = function onlySubmit() {
-  this.submit();
-};
-/**
- * 应用于表单组件函数，不能作为其它用途：因为this代表的是表单, event代表的是keyup事件
- * 参数就是组件事件所对就的参数
- * @param {*} value 当前组件的值
- * @param {*} key 组件的源key
- * @param {*} event 事件所携带的事件
- */
-
-
-var enterSubmit = function enterSubmit(value, key, event) {
-  // console.log("value: ", value);
-  // console.log("key: ", key);
-  if (event && event.keyCode === 13) {
-    this.submit();
-  }
-};
-
-
-// CONCATENATED MODULE: ./src/package/libs/form-utils.js
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-var formUtils = {
-  /**
-   * 判断值是否为空, 以下几种情况都认为是空值
-   */
-  isEmpty: function isEmpty(value) {
-    if (libs_utils.isUndef(value) || libs_utils.isNull(value) || libs_utils.isStr(value) && !value || libs_utils.isObj(value) && keys_default()(value).length <= 0 || libs_utils.isArr(value) && value.length <= 0) {
-      return true;
-    }
-
-    return false;
-  },
-
-  /**
-   * 全局设置
-   * @param {*} propItem
-   * @param {*} value
-   */
-  setValue: function setValue(propItem, value) {
-    formUtils.__setValue(propItem, value);
-  },
-
-  /**
-   * 全局设置
-   * @param {*} propItem
-   * @param {*} value
-   * @param {*} hasIdxChainChanged //设置过程序是否idxChain做改变，因为父级改变，子级也做做出改变，所以子级就不用再重新设置，等值设置完后，再由父级改变idxChain
-   */
-  __setValue: function __setValue(propItem, value) {
-    var hasIdxChainChanged = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    if (propItem.array) {
-      if (libs_utils.isArr(value)) {
-        // console.log(propItem.__pathKey, "in...");
-        var hasChanged = false;
-        var schemaList = propItem.__propSchemaList;
-
-        if (schemaList.length > value.length) {
-          schemaList = schemaList.splice(0, value.length);
-          propItem.__propSchemaList = schemaList;
-        } else {
-          //不够，补上后面的；比如数组是3个，现在直接给了4个；
-          for (var i = schemaList.length; i < value.length; i++) {
-            formUtils.addArrayItem(propItem);
-          }
-
-          hasChanged = true;
-        }
-
-        var hasNextIdxChainChanged = hasChanged || hasIdxChainChanged ? true : false;
-
-        for (var j = 0; j < value.length; j++) {
-          formUtils.__setValue(schemaList[j], value[j], hasNextIdxChainChanged);
-        } // console.log(120);
-
-
-        if (hasChanged && !hasIdxChainChanged) {
-          // console.log("propItem.__idxChain = ", propItem.__idxChain, propItem.__pathKey);
-          formUtils.resetIndexArr(propItem, propItem.__idxChain, propItem.__pathKey);
-        }
-      } else {
-        // 值的格式不区配，不必理会
-        return true;
-      } // console.log("in-end...", propItem.__propSchemaList.length);
-
-
-      return true;
-    } // 不是数据组了
-
-
-    if (propItem.component) {
-      var tmpValue;
-
-      if (propItem.format) {
-        // 不是最终取值，或没有格式转换
-        tmpValue = this.__getFormatValue(propItem.format, value, true); // console.log(tmpValue, value);
-      } else {
-        tmpValue = value;
-      }
-
-      propItem.value = tmpValue;
-    } else if (propItem.properties) {
-      for (var key in propItem.properties) {
-        !libs_utils.isUndef(value[key]) && formUtils.__setValue(propItem.properties[key], value[key], hasIdxChainChanged);
-      }
-    } else {//可能是占位对象
-    }
-  },
-
-  /**
-   * 添加项，注：为什么写这个，统一过滤array, 避免无限循环
-   * @param {*} list 数组长列表, 会改变其结构
-   * @param {*} item 需要添加的项
-   * @param {*} insertInfo 需要添加的默认值；有值时是一个对象：格式如{value}
-   */
-  addArrayItem: function addArrayItem(schema, insertInfo) {
-    var newItem = {}; //排除一些可能排版重复的或不需要的
-
-    var excludeKeys = ["array", "__propSchemaList", "desc", "help", "hidden", "__rawHidden", "label", "title", "isTmp"];
-
-    for (var key in schema) {
-      if (!excludeKeys.includes(key)) {
-        newItem[key] = libs_utils.deepCopy(schema[key]);
-      }
-    }
-
-    if (!libs_utils.isUndef(schema.array.tabsName)) {
-      newItem.tabsName = schema.array.tabsName;
-      newItem.__tabsName = schema.array.tabsName;
-      newItem.__invalidMsg = false;
-    } // console.log("schema.layout.name == constant.LAYOUT_TABS：", schema.layout.name == constant.LAYOUT_TABS);
-
-
-    if (schema.layout && schema.layout.name == libs_constant.LAYOUT_TABS) {
-      newItem.__tabsIndex = false;
-    } // newItem.array不可有此值
-
-
-    if (newItem.array) {
-      newItem.array = false;
-    }
-
-    if (insertInfo) {
-      formUtils.__setValue(newItem, insertInfo.value);
-
-      if (schema.__propSchemaList.length <= insertInfo.position) {
-        schema.__propSchemaList.push(newItem);
-      } else {
-        // 插入中间某个位置
-        schema.__propSchemaList.splice(insertInfo.position, 0, newItem);
-      }
-    } else {
-      schema.__propSchemaList.push(newItem);
-    }
-  },
-
-  /**
-   * 全局设置
-   * @param {*} propItem
-   * @param {*} idxChain  //父级的idxChain
-   */
-  resetIndexArr: function resetIndexArr(propItem, idxChain, pathKey) // 来自propItem.__propSchemaList循环
-  {
-    var currentIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
-    var fromArray = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-
-    if (propItem.array) {
-      // 因为__propSchemaList里面的item不会含array
-      var schemaList = propItem.__propSchemaList;
-
-      for (var i = 0; i < schemaList.length; i++) {
-        var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
-        var nextPathKey = pathKey + "[" + i + "]";
-        formUtils.resetIndexArr(schemaList[i], nextIdxChain, nextPathKey, i, true);
-      }
-
-      return true;
-    } // 不是数组
-
-
-    if (propItem.component) {
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
-      }
-
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
-      }
-
-      if (propItem.__index != currentIndex) {
-        propItem.__index = currentIndex;
-      }
-    } else if (propItem.properties) {
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
-      }
-
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
-      }
-
-      if (propItem.__index != currentIndex) {
-        propItem.__index = currentIndex;
-      }
-
-      for (var key in propItem.properties) {
-        formUtils.resetIndexArr(propItem.properties[key], idxChain, pathKey + "." + key, fromArray ? currentIndex : -1, // 因为__propSchemaList的构成是[{properties: {}}]
-        false);
-      }
-    } else {//可能是占位对象
-    }
-  },
-
-  /**
-   * 获取某一个属性tabs的索引
-   * @param {*} schema
-   * @param {*} pathKey "age、more1[0].name"
-   * @param {*} index
-   */
-  getTabsIndex: function getTabsIndex(schema, pathKey) {
-    var targetSchema = this.__getSchemaByKey(schema, pathKey);
-
-    if (targetSchema) {
-      if (targetSchema.layout && targetSchema.layout.name === libs_constant.LAYOUT_TABS) {
-        // 一般tabs
-        return targetSchema.__tabsIndex;
-      } else if (targetSchema.array && targetSchema.array.name === libs_constant.ARRAY_TABS) {
-        // 数组tabs
-        return targetSchema.__tabsIndex;
-      } else {
-        // 不是tabs
-        return false;
-      }
-    } else {
-      return false; // 路径不对
-    }
-  },
-
-  /**
-   * 切换properies隐藏/打开
-   * @param {*} schema
-   * @param {*} pathKey "age、more1[0].name"
-   */
-  togglePropBody: function togglePropBody(schema, pathKey) {
-    var targetSchema = this.__getSchemaByKey(schema, pathKey);
-
-    if (targetSchema) {
-      if (targetSchema.title) {
-        targetSchema.title.showBody = !targetSchema.title.showBody;
-      }
-    } else {// 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
-    }
-  },
-
-  /**
-   * 指定某一个tabs的索引
-   * @param {*} schema
-   * @param {*} pathKey "age、more1[0].name"
-   * @param {*} index
-   */
-  setTabsIndex: function setTabsIndex(schema, pathKey, index) {
-    var targetSchema = this.__getSchemaByKey(schema, pathKey); // console.log("targetSchema, pathKey, index: ", targetSchema, pathKey, index);
-
-
-    if (targetSchema) {
-      if (this.__isRightTabsIndex(targetSchema, index)) {
-        // 一般tabs
-        targetSchema.__tabsIndex = index;
-
-        if (targetSchema.array && targetSchema.array.name === libs_constant.ARRAY_TABS) {
-          // 数组tabs
-          if (libs_utils.isNum(index)) {
-            if (targetSchema.__propSchemaList[index].__hasError) {
-              targetSchema.__propSchemaList[index].__hasError = false;
-            }
-          } else {// array tabs要是整数
-          }
-        } else if (targetSchema.layout && targetSchema.layout.name === libs_constant.LAYOUT_TABS) {
-          if (targetSchema.properties[index].__hasError) {
-            targetSchema.properties[index].__hasError = false;
-          }
-        }
-      } else {// 不是tabs, 不用理会
-      }
-    } else {// 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
-      }
-  },
-  __isRightTabsIndex: function __isRightTabsIndex(targetSchema, index) {
-    var nextSchema, key;
-
-    if (targetSchema.array && targetSchema.array.name === libs_constant.ARRAY_TABS) {
-      // 数组tabs
-      if (libs_utils.isNum(index)) {
-        var newIndex = Math.floor(index);
-
-        if (newIndex === index && newIndex >= 0 && newIndex < targetSchema.__propSchemaList.length) {
-          return true;
-        }
-      } else {// array tabs要是整数
-      }
-    } else if (targetSchema.layout && targetSchema.layout.name === libs_constant.LAYOUT_TABS) {
-      // 一般tabs
-      for (key in targetSchema.properties) {
-        nextSchema = targetSchema.properties[key];
-
-        if (key == index && !nextSchema.hidden) {
-          return true;
-        }
-      }
-    } else {// 不是tabs, 不用理会
-    }
-
-    return false;
-  },
-  getSchemaByKey: function getSchemaByKey(schema, keyStr) {
-    // 这个函数可能对外单独使用，所以不可以使用this
-    return formUtils.__getSchemaByKey(schema, keyStr);
-  },
-
-  /**
-   *
-   * @param {*} schema
-   * @param {*} keyStr 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
-   */
-  __getSchemaByKey: function __getSchemaByKey(schema, keyStr) {
-    if (libs_utils.isStr(keyStr)) {
-      if (!keyStr) {
-        return schema;
-      }
-
-      var seperator = ".";
-      var keys = keyStr.split(seperator);
-      var curPropItem = schema;
-      var curProperties;
-      var nextPropItem;
-      var reg = /([\s\S]+?)\[(\d+)\]$/;
-
-      for (var i = 0; i < keys.length; i++) {
-        if (!curPropItem) {
-          //没有这一级数据，直接退出
-          return false;
-        }
-
-        curProperties = curPropItem.properties;
-
-        if (curProperties && !curPropItem.array) {
-          var key = keys[i];
-          var arrayItemKeys = key.match(reg);
-          var isLastKey = i == keys.length - 1;
-          var realKey = key;
-
-          if (arrayItemKeys) {
-            realKey = arrayItemKeys[1];
-
-            var realIndex = parse_int_default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
-
-
-            curPropItem = curProperties[realKey]; //取出下级继续扫描
-
-            if (!curPropItem) {
-              //没有这个属性，退出
-              return false;
-            }
-
-            if (isLastKey) {
-              //最后一个key,表明是设置值
-              if (curPropItem.array) {
-                //设置array中的某一行（项）
-                if (curPropItem.__propSchemaList && curPropItem.__propSchemaList.length > realIndex) {
-                  nextPropItem = curPropItem.__propSchemaList[realIndex];
-                  return nextPropItem;
-                } else {
-                  return false; //超出索引，不符合要求,直接退出
-                }
-              } else {
-                return false; //不符合要求：key是array类型，而当前的curPropItem不是数组
-              }
-            } else {
-              if (curPropItem.array) {
-                //进入array中的某一行（项），对某个属性进行设置
-                if (curPropItem.__propSchemaList && curPropItem.__propSchemaList.length > realIndex) {
-                  //有效
-                  curPropItem = curPropItem.__propSchemaList[realIndex]; //继续下一级（上面已经建立了新的curPropItem）
-                } else {
-                  return false; //超出索引，不符合要求
-                }
-              } else {
-                return false; //不符合要求：key是array类型，而当前的curPropItem不是数组
-              }
-            }
-          } else {
-            curPropItem = curProperties[realKey]; //取出下级继续扫描
-
-            if (!curPropItem) {
-              //没有这个属性，不符合要求
-              return false;
-            }
-
-            if (isLastKey) {
-              //最后一个key,表明是设置值
-              return curPropItem; // 不管是不是数组，直接取出
-            } else {
-              if (curPropItem.array) {
-                // 不是最后一个key, 但curPropItem又是array(因为此形式严格来讲就是一个叶子)
-                return false; //不符合要求，退出
-              } else {//继续下一级（上面已经建立了新的curPropItem）
-                }
-            }
-          }
-        } else {
-          return false; //没有这一级，不符合要求，退出
-        }
-      }
-    } else {
-      return false; //keyStr不符合要求，退出
-    }
-  },
-
-  /**
-   * 指定某一个属性设置
-   * @param {*} schema
-   * @param {*} keyStr "age、more1[0].name"
-   * @param {*} value
-   */
-  setValueByKey: function setValueByKey(schema, keyStr, value) {
-    // console.log("schema, keyStr: ", schema, keyStr, value);
-    var targetSchema = this.__getSchemaByKey(schema, keyStr); // console.log("current schema: ", targetSchema);
-
-
-    if (targetSchema) {
-      if (targetSchema.component) {
-        if (targetSchema.array) {
-          //是组件数组
-          if (libs_utils.isArr(value) || libs_utils.isNull(value)) {
-            //直接设置array的值
-            formUtils.setValue(targetSchema, value ? value : []);
-          }
-        } else {
-          var tmpValue;
-
-          if (targetSchema.format) {
-            // 不是最终取值，或没有格式转换
-            tmpValue = this.__getFormatValue(targetSchema.format, value, true); // console.log(tmpValue, value);
-          } else {
-            tmpValue = value;
-          }
-
-          targetSchema.value = tmpValue;
-        }
-      } else if (targetSchema.properties) {
-        if (targetSchema.array) {
-          // 是数组赋值
-          if (libs_utils.isArr(value) || libs_utils.isNull(value)) {
-            //直接设置array的值
-            formUtils.setValue(targetSchema, value ? value : []);
-          }
-        } else {
-          // properties赋值
-          if (libs_utils.isObj(value)) {
-            formUtils.setValue(targetSchema, value);
-          }
-        }
-      }
-    } else {// 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
-    }
-  },
-
-  /**
-   * 表单内部的结果
-   */
-  getValue: function getValue(propItem) {
-    return formUtils.__getValue(propItem);
-  },
-
-  /**
-   * 表单的最终结果
-   * @param {*} schema  perfect后的schema
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
-   * @param {*} globalData 表单的全局数据
-   * @param {*} formData 表单的内部值
-   */
-  getResultValue: function getResultValue(schema, baseParseSources) {
-    if (libs_utils.isObj(baseParseSources.rootData)) {
-      var resultValue = formUtils.__getValue(schema, baseParseSources);
-
-      return this.__tileResultValue(schema, resultValue);
-    } else {
-      throw "getResultValue： formData 必须是一个对象";
-    }
-  },
-
-  /**
-   * 取值
-   * @param {*} propItem
-   * @param {*} baseParseSources {global: globalData, rootData: formData(此时这个值不一定有传，没有传时说明是取表单内部传, 有传就取最终结果), rootSchema: rootSchema}
-   * @param {*} isParentHidden
-   */
-  __getValue: function __getValue(propItem) {
-    var baseParseSources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    var isParentHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-    var parseSources = assign_default()({}, baseParseSources);
-
-    parseSources.index = propItem.__index;
-    parseSources.idxChain = propItem.__idxChain;
-    var formData = baseParseSources.rootData; // 当false没有值时，证明是表单的内容取值，后不的解析不用执行，提高效率
-
-    var isHidden = formData && (isParentHidden || libs_parse.smartEsValue(propItem.hidden, parseSources)) ? true : false; // idxChain = idxChain ? idxChain : "";
-
-    var newValue, keyValue, newArr, i, schemaList;
-
-    if (propItem.component) {
-      if (formData) {
-        // 有表单内部值，则取出是用户表单值
-        if (!propItem.isTmp) {
-          // 不是临时值
-          if (isHidden && !libs_utils.isNull(propItem.hdValue)) {
-            // return propItem.hdValue;
-            if (!libs_utils.isUndef(propItem.hdValue)) {
-              return propItem.hdValue;
-            } else {
-              // 特殊约定，hdValue为undefined, 说明不用取出此值
-              return undefined;
-            }
-          } else {// 需要往下解析
-          }
-        } else {
-          // 临时字段，不用取出
-          return undefined;
-        }
-      } else {} // form 内部取值
-      // return propItem.value;
-      // 需要往下解析
-      // 内部值，也不隐藏
-
-
-      if (propItem.array) {
-        // 是数组
-        newArr = [];
-        schemaList = propItem.__propSchemaList;
-
-        for (i = 0; i < schemaList.length; i++) {
-          // var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
-          newValue = formUtils.__getValue(schemaList[i], baseParseSources, isHidden);
-          newArr.push(newValue);
-        }
-
-        return newArr;
-      } else {
-        // 不是数组
-        if (formData) {
-          if (propItem.format) {
-            // 不是最终取值，或没有格式转换
-            return this.__getFormatValue(propItem.format, propItem.value, false);
-          } else {
-            return propItem.value;
-          }
-        } else {
-          // form 内部取值
-          return propItem.value;
-        }
-      }
-    } else if (propItem.properties) {
-      if (formData) {
-        // 有表单内部值，则取出是用户表单值
-        if (propItem.isTmp) {
-          // 临时字段，不用取出
-          return undefined;
-        } else if (isHidden && !libs_utils.isNull(propItem.hdValue)) {
-          if (!libs_utils.isUndef(propItem.hdValue)) {
-            return propItem.hdValue;
-          } else {
-            // 特殊约定，hdValue为undefined, 说明不用取出此值
-            return undefined;
-          }
-        } else {// 往下取出正常值
-        }
-      }
-
-      if (propItem.array) {
-        newArr = [];
-        schemaList = propItem.__propSchemaList;
-
-        for (i = 0; i < schemaList.length; i++) {
-          // var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
-          newValue = formUtils.__getValue(schemaList[i], baseParseSources, isHidden);
-          newArr.push(newValue);
-        }
-
-        return newArr;
-      } else {
-        newValue = {};
-
-        for (var key in propItem.properties) {
-          keyValue = formUtils.__getValue(propItem.properties[key], baseParseSources, isHidden);
-
-          if (!libs_utils.isUndef(keyValue)) {
-            newValue[key] = keyValue;
-          }
-        }
-
-        return newValue;
-      }
-    } else {
-      return undefined;
-    }
-  },
-
-  /**
-   * 数值转换
-   * @param {*} format
-   * @param {*} outerToInner
-   */
-  __getFormatValue: function __getFormatValue(format, curVal) {
-    var outerToInner = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-    if (format) {
-      if (outerToInner) {
-        // 表单外部的值转换为表单内部的值
-        var curEmum, i;
-
-        if (libs_utils.isArr(format)) {
-          // 数组，说明是枚举转换
-          for (i = 0; i < format.length; i++) {
-            curEmum = format[i];
-
-            if (curEmum.outer == curVal) {
-              return curEmum.inner;
-            }
-          }
-        } else if (libs_utils.isFunc(format.outer)) {
-          // 有外部转换函数
-          return format.outer(curVal);
-        }
-      } else {
-        // 表单内部的值转换为表单外部的值
-        if (libs_utils.isArr(format)) {
-          // 数组，说明是枚举转换
-          for (i = 0; i < format.length; i++) {
-            curEmum = format[i];
-
-            if (curEmum.inner == curVal) {
-              return curEmum.outer;
-            }
-          }
-        } else if (libs_utils.isFunc(format.inner)) {
-          // 有内部转换函数
-          return format.inner(curVal);
-        }
-      }
-    }
-
-    return curVal;
-  },
-
-  /**
-   * 把原始的schema转化为标准的schema
-   * 解析原则：
-   * 对于一个对象{}来说
-   * type === 'space'时，说明是占位空间，即使有component或properties, 也认为是占位空间，且解析时会把两个属性去掉
-   * else if ：判断是否有properties且合法，即使有component也会去掉此属性
-   * else: 是component，即使没有component也会用系统的默认值
-   * 结论 >> 最后的输出是：
-   * type === 'space'、component、properties只有一个会输出；也是就if (item.layout.name === 'space')、if (item.component)、if (item.properties)中，只有一个为真
-   */
-  completeSchema: function completeSchema(schema) {
-    // const constant.ARRAY_TABLE = "array-table";
-    var autoMatch;
-
-    if (libs_utils.isObj(schema)) {
-      var tmpSchema = libs_utils.deepCopy(schema);
-      var rootObj = tmpSchema;
-
-      if (!libs_utils.isObj(tmpSchema.properties)) {
-        rootObj = {};
-        rootObj.title = false;
-        rootObj.direction = libs_global.direction;
-        rootObj.array = false; // 顶级是不支持数组的
-
-        rootObj.layout = false;
-        rootObj.properties = tmpSchema; // 根节点有效的属性
-
-        autoMatch = false;
-      } else {
-        // console.log("rootObj.layout.name", rootObj.layout.name === constant.LAYOUT_TABS);
-        var newLayout = this.__parsePropLayout(rootObj.layout);
-
-        rootObj.array = false; // 顶级是不支持数组的
-
-        if (newLayout && newLayout.name === libs_constant.LAYOUT_TABS) {
-          rootObj.layout = false;
-        }
-
-        rootObj.direction = ["h", "v"].includes(rootObj.direction) ? rootObj.direction : libs_global.direction; // 根节点有效的属性
-
-        autoMatch = rootObj.autoMatch === true ? true : false;
-      }
-
-      rootObj.label = {
-        text: false,
-        __rawText: false
-      }; // 顶级是不支持label
-      //设置表单的一些默认值
-
-      rootObj.rowHeight = rootObj.rowHeight ? rootObj.rowHeight : libs_global.boxRowHeight;
-      rootObj.boxRowHeight = rootObj.boxRowHeight ? rootObj.boxRowHeight : libs_global.boxRowHeight;
-      rootObj.rowSpace = 0;
-      rootObj.boxRowSpace = rootObj.boxRowSpace ? rootObj.boxRowSpace : libs_global.boxRowSpace;
-      rootObj.labelWidth = rootObj.labelWidth ? rootObj.labelWidth : libs_global.boxLabelWidth;
-      rootObj.boxLabelWidth = rootObj.boxLabelWidth ? rootObj.boxLabelWidth : libs_global.boxLabelWidth;
-      rootObj = formUtils.__parseProp(rootObj, 1, "根", formUtils.__newInheritObj(rootObj), ""); //根节点有效的属性
-
-      rootObj.autoMatch = autoMatch;
-
-      this.__checkForTile(rootObj);
-
-      return rootObj;
-    } else {
-      throw "根schema是一个Object类型";
-    }
-  },
-  __parseProp: function __parseProp(propItem, curLevel, parentKey, inheritObj, myPathKey) {
-    if (libs_utils.isStr(propItem)) {
-      propItem = {
-        label: propItem
-      };
-    } else if (!libs_utils.isObj(propItem)) {
-      throw "第" + curLevel + "层的属性值(" + parentKey + ")必须是一个字符串或Object类型";
-    }
-
-    var newPropItem, propKeys, isArray, isNormalTabs;
-
-    if (this.__isSpaceItem(propItem)) {
-      // 占位空间 为什么用恒等，因为会严格判断是否是true/false, 同时也严格要求用户用true/false, 不要用1/0
-      propKeys = formUtils.__getPropKeys("none");
-      newPropItem = formUtils.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
-    } else if (this.__isPropItem(propItem)) {
-      if (!this.__existEntityItem(propItem)) {
-        throw "属性" + parentKey + "没有具体的子节点";
-      } // 是否数组(优先级最高)
-
-
-      isArray = this.__isArray(propItem.array);
-      propKeys = formUtils.__getPropKeys("properties");
-      newPropItem = formUtils.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
-
-      if (isArray) {
-        if (libs_utils.isUndef(newPropItem.array.rowSpace)) {
-          // 当没有设置时，则取上一级的rowSpace
-          newPropItem.array.rowSpace = newPropItem.rowSpace;
-        }
-      }
-
-      isNormalTabs = newPropItem.layout && newPropItem.layout.name === libs_constant.LAYOUT_TABS;
-
-      if (isArray && newPropItem.array.name == libs_constant.ARRAY_TABLE && isNormalTabs) {
-        // 数组是以table形式布局，子节点无法进行tabs布局
-        newPropItem.layout = false;
-        isNormalTabs = false; // 强制置为非tabs
-
-        console.warn("第" + curLevel + "层(" + parentKey + ")为table数组且子节点为tabs, 子节点为tabs将失效");
-      } //有下一级
-
-
-      if (propItem.component) {
-        //提示警告
-        parentKey = parentKey ? parentKey : "根";
-        parentKey += "节点";
-        console.warn("第" + curLevel + "层(" + parentKey + ")中同时存在properties和component, component将失效");
-      }
-
-      if (newPropItem.title) {
-        newPropItem.title.__level = curLevel; //用于字号
-      }
-
-      newPropItem.__pathKey = myPathKey;
-      newPropItem.__idxChain = "";
-      newPropItem.__index = -1;
-
-      if (isNormalTabs) {
-        newPropItem.__tabsIndex = false;
-      } //递归，取出下一级的数据
-
-
-      var newProperties = {};
-
-      for (var key in propItem.properties) {
-        var nextRawPropItem = propItem.properties[key];
-
-        if (libs_utils.isNull(nextRawPropItem) || libs_utils.isUndef(nextRawPropItem) || nextRawPropItem === false) {
-          console.log("属性" + key + "为null/undefined/false时，将不设置");
-        } else {
-          var isSpaceItem = this.__isSpaceItem(nextRawPropItem);
-
-          if (isSpaceItem && newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {
-            // 当父节点是table数组时，占位空间过滤掉
-            console.warn("属性" + key + "不符合" + libs_constant.ARRAY_TABLE + "布局的要求(properties存在占位空间), 将失效");
-            continue;
-          } else if (isSpaceItem && isNormalTabs) {
-            console.warn("属性" + key + "不符合" + libs_constant.LAYOUT_TABS + "布局的要求(properties存在占位空间), 将失效");
-            continue;
-          } else {// 符合要求了，进行下一步解析
-          }
-
-          var nextPropItem = formUtils.__parseProp(nextRawPropItem, curLevel + 1, key, formUtils.__newInheritObj(newPropItem), myPathKey ? myPathKey + "." + key : key);
-
-          if (isNormalTabs) {
-            // 是普通tabs
-            nextPropItem.__hasError = false;
-          }
-
-          if (isNormalTabs || newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {
-            if (nextPropItem.label.text === false) {
-              // nextPropItem.label = { text: "", __rawText: "" };
-              console.warn("当属性(" + parentKey + ")为" + libs_constant.LAYOUT_TABS + "或" + libs_constant.ARRAY_TABLE + "时，下一级的label必须存在, 否则用各自的key代表头部");
-            }
-          }
-
-          if (isNormalTabs || newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABS) {
-            newPropItem.__tabsIndex = false;
-            newPropItem.__hasError = false; // 用来做复制
-          }
-
-          newProperties[key] = nextPropItem;
-        }
-      }
-
-      if (keys_default()(newProperties).length <= 0) {
-        throw "properties不能为空，或其属性全部为空(null/undefined/false)";
-      }
-
-      newPropItem.properties = newProperties; //整理一下ref, 同一级别的只留最后一下
-
-      formUtils.__uniqueRef(newPropItem);
-
-      if (isNormalTabs || newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {//当是tabs or constant.ARRAY_TABLE时，若是分组失效
-        // continue; //是占位空间，去掉
-      } else {
-        //直接改变newPropItem的值，设置分组情况
-        formUtils.__reinitGroup(newPropItem);
-      }
-
-      if (newPropItem.array) {
-        //数组类型，可增删
-        //有值且合规范
-        if (!newPropItem.array.value) {
-          newPropItem.array.value = [];
-        } else if (!libs_utils.isArr(newPropItem.array.value)) {
-          throw "array的值必须是数组或不写";
-        }
-
-        newPropItem.__propSchemaList = []; // console.log("newPropItem.array.value", newPropItem.array.value);
-
-        formUtils.__setValue(newPropItem, newPropItem.array.value); // console.log("end ...");
-
-
-        delete newPropItem.array.value; //任务完成
-      }
-    } else {
-      // 是组件了
-      propKeys = formUtils.__getPropKeys("component");
-      newPropItem = formUtils.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
-
-      if (this.__isTabsItem(propItem)) {
-        newPropItem.layout = false;
-        console.warn("当属性(" + parentKey + ")为叶子节点时，" + libs_constant.LAYOUT_TABS + "将不起作用");
-      } else {
-        newPropItem.layout = false;
-      }
-
-      if (libs_utils.isUndef(newPropItem.value) && newPropItem.component.name === libs_global.defaultCom) {
-        // 设置默认值组件的默认值
-        newPropItem.value = libs_global.defaultVal;
-      }
-
-      if (newPropItem.format) {
-        newPropItem.value = this.__getFormatValue(newPropItem.format, newPropItem.value, true);
-      }
-
-      var eventOn = formUtils.__listEvent(newPropItem);
-
-      newPropItem.component.__emitEvents = eventOn.__emitEvents;
-      newPropItem.component.__nativeEvents = eventOn.__nativeEvents;
-      newPropItem.__pathKey = myPathKey;
-      newPropItem.__idxChain = "";
-      newPropItem.__index = -1; // 是否数组(优先级最高)
-
-      isArray = this.__isArray(propItem.array);
-
-      if (isArray) {
-        //数组类型，可增删
-        //有值且合规范
-        if (!newPropItem.array.value) {
-          newPropItem.array.value = [];
-        } else if (!libs_utils.isArr(newPropItem.array.value)) {
-          throw "array.value的值必须是数组或不写";
-        }
-
-        if (libs_utils.isUndef(newPropItem.array.rowSpace)) {
-          // 当没有设置时，则取上一级的rowSpace
-          newPropItem.array.rowSpace = newPropItem.rowSpace;
-        }
-
-        if (newPropItem.array.name == libs_constant.ARRAY_TABS) {
-          newPropItem.__tabsIndex = false;
-        }
-
-        newPropItem.__propSchemaList = [];
-
-        formUtils.__setValue(newPropItem, newPropItem.array.value);
-
-        delete newPropItem.array.value; //任务完成
-      }
-    }
-
-    newPropItem.__rawHidden = newPropItem.hidden;
-    return newPropItem;
-  },
-
-  /**
-   *
-   * @param {*} newSchema 已经整理好的schema
-   */
-  __uniqueRef: function __uniqueRef(newSchema) {
-    if (newSchema.properties) {
-      var curProp = newSchema.properties;
-      var lastPropItem = {};
-
-      for (var key in curProp) {
-        // console.log("key: ", key);
-        var nextPropItem = curProp[key];
-
-        if (nextPropItem.component && nextPropItem.component.ref) {
-          var nextRef = nextPropItem.component.ref;
-
-          if (lastPropItem[nextRef] && nextPropItem.component.ref === lastPropItem[nextRef].component.ref) {
-            // 存在上一个，删除上一个的ref
-            var curCom = lastPropItem[nextRef].component; // console.log(curCom.ref);
-
-            delete curCom.ref;
-          }
-
-          lastPropItem[nextRef] = nextPropItem; // 我变为上一个，以便下一个使用
-        }
-      }
-
-      lastPropItem = null;
-    }
-  },
-
-  /**
-   * 解析触发事件
-   * @param {*} trigger
-   * 1. 事件字件串或者以空格隔开的事件所组成的字符串，如"click" or "click change"
-   * 2. 事件组成的数组
-   * @returns 返回数据组，没有时返回一个null
-   */
-  __parseTrigger: function __parseTrigger(trigger) {
-    var tmpTriggers;
-
-    if (libs_utils.isArr(trigger) || libs_utils.isStr(trigger)) {
-      if (libs_utils.isStr(trigger)) {
-        trigger = trigger.trim();
-        tmpTriggers = trigger.split(/\s+/);
-      } else {
-        tmpTriggers = [];
-        trigger.forEach(function (item) {
-          if (libs_utils.isStr(item)) {
-            item = item.trim();
-            tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
-          }
-        });
-      }
-
-      tmpTriggers = tmpTriggers.map(function (item) {
-        if (!item) {
-          // 为空，直接写默认事件
-          return libs_constant.CLICK_EVENT;
-        } else if (item.indexOf(".") === 0) {
-          // 只有修改，前面加默认事件
-          return libs_constant.CLICK_EVENT + item;
-        } else {
-          // 合法
-          return item;
-        }
-      });
-    } else {
-      tmpTriggers = null;
-    }
-
-    return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
-  },
-
-  /* 整理出组件需要监听的外部事件 */
-  __listEvent: function __listEvent(propItem) {
-    var _this = this;
-
-    var emitEvents = [],
-        nativeEvents = [],
-        triggerList,
-        nativeName;
-
-    if (propItem.rules) {
-      var rules = propItem.rules;
-      var checkList = rules.check;
-
-      if (checkList) {
-        checkList.forEach(function (checkItem) {
-          // 有检查
-          triggerList = checkItem.trigger;
-          triggerList.forEach(function (triggerItem) {
-            nativeName = _this.__getNativeName(triggerItem);
-
-            if (nativeName) {
-              // .native监听
-              nativeEvents.push(nativeName);
-            } else {
-              emitEvents.push(triggerItem);
-            }
-          });
-        });
-      }
-    }
-
-    if (propItem.isTrim) {
-      // 要去掉左右两边的空格，添此触发事件
-      nativeName = this.__getNativeName(libs_global.trimEvent);
-
-      if (nativeName) {
-        // .native监听
-        nativeEvents.push(nativeName);
-      } else {
-        emitEvents.push(libs_global.trimEvent);
-      }
-    } // 自定义事件
-
-
-    if (propItem.component && propItem.component.actions) {
-      var actions = propItem.component.actions;
-      actions.forEach(function (actionItem) {
-        triggerList = actionItem.trigger;
-        triggerList.forEach(function (triggerItem) {
-          nativeName = _this.__getNativeName(triggerItem);
-
-          if (nativeName) {
-            // .native监听
-            nativeEvents.push(nativeName);
-          } else {
-            emitEvents.push(triggerItem);
-          }
-        });
-      });
-    }
-
-    return {
-      __emitEvents: emitEvents.length ? libs_utils.unique(emitEvents) : null,
-      __nativeEvents: nativeEvents.length ? libs_utils.unique(nativeEvents) : null
-    };
-  },
-  __getNativeName: function __getNativeName(eventName) {
-    var dotNative = "." + libs_constant.ADJ_NATIVE;
-    var lastIndex = eventName.lastIndexOf(dotNative);
-
-    if (lastIndex != -1 && eventName.substr(lastIndex) === dotNative) {
-      // .native监听
-      var nativeName = eventName.substr(0, lastIndex);
-
-      if (nativeName) {
-        return nativeName;
-      } else {
-        return false; //因为eventName是经过处理的,不会出现点在前面，所以不会进入这里
-      }
-    } else {
-      return false;
-    }
-  },
-
-  /**
-   * 根据不同的类型，取出不同的属性
-   * @param {*} type
-   */
-  __getPropKeys: function __getPropKeys(type) {
-    var propKeys = [];
-
-    switch (type) {
-      case "component":
-        propKeys = ["label", "rowHeight", "rowSpace", "labelWidth", "offsetLeft", "offsetRight", "hidden", "format", "hdValue", "colon", "group", "value", "isTrim", "help", "desc", "unit", "direction", "col", "rules", "component", "array", "layout", "isTmp"];
-        break;
-
-      case "properties":
-        propKeys = ["title", "label", "rowHeight", "boxRowHeight", "rowSpace", "boxRowSpace", "labelWidth", "boxLabelWidth", "offsetLeft", "offsetRight", "hidden", "hdValue", "colon", "help", "desc", // "unit",
-        "direction", "col", "array", "layout", "isTmp"];
-        break;
-
-      default:
-        //占位空间
-        propKeys = ["col", "group", "hidden", "layout"];
-        break;
-    }
-
-    return propKeys;
-  },
-  __getNormalInfo: function __getNormalInfo(key) {
-    var keyInfos = [{
-      key: "value",
-      enums: [],
-      defaultValue: undefined
-    }, {
-      key: "hidden",
-      enums: [true, false],
-      filters: ["isEs"],
-      // 取schema-rules规则过滤
-      defaultValue: false
-    }, {
-      key: "hdValue",
-      enums: [],
-      defaultValue: undefined
-    }, {
-      key: "colon",
-      enums: [true, false],
-      defaultValue: libs_global.colon
-    }, {
-      key: "group",
-      enums: [],
-      filters: ["isStr"],
-      defaultValue: false
-    }, {
-      key: "desc",
-      enums: [],
-      filters: ["isStr"],
-      defaultValue: false
-    }, {
-      key: "col",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [1, libs_constant.UI_MAX_COL]
-      }],
-      defaultValue: libs_constant.UI_MAX_COL
-    }, {
-      key: "direction",
-      enums: ["h", "v"],
-      defaultValue: libs_global.direction
-    }, {
-      key: "isTrim",
-      enums: [true, false],
-      defaultValue: true
-    }, {
-      key: "unit",
-      enums: [],
-      filters: ["isStr"],
-      defaultValue: false
-    }, {
-      key: "rowHeight",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: libs_global.boxRowHeight
-    }, {
-      key: "boxRowHeight",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: libs_global.boxRowHeight
-    }, {
-      key: "rowSpace",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: libs_global.boxRowSpace
-    }, {
-      key: "boxRowSpace",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: libs_global.boxRowSpace
-    }, {
-      key: "labelWidth",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: libs_global.boxLabelWidth
-    }, {
-      key: "boxLabelWidth",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: libs_global.boxLabelWidth
-    }, {
-      key: "offsetLeft",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: 0
-    }, {
-      key: "offsetRight",
-      enums: [],
-      filters: [{
-        name: "isInt",
-        params: [0]
-      }],
-      defaultValue: 0
-    }, {
-      key: "isTmp",
-      enums: [true, false],
-      defaultValue: false
-    }];
-
-    for (var i = 0; i < keyInfos.length; i++) {
-      if (keyInfos[i].key === key) {
-        return keyInfos[i];
-      }
-    }
-
-    return false;
-  },
-  __getSpecialInfo: function __getSpecialInfo(key) {
-    var keyInfos = [// {
-      //   key: "title",
-      //   defaultValue: false,
-      //   nameKey: "text"
-      // },
-      // {
-      //   key: "label",
-      //   defaultValue: false,
-      //   nameKey: "text"
-      // },
-      // {
-      //   key: "component",
-      //   defaultValue: false,
-      //   nameKey: "name"
-      // },
-      // {
-      //   key: "array",
-      //   defaultValue: false,
-      //   nameKey: "name"
-      // }
-    ];
-
-    for (var i = 0; i < keyInfos.length; i++) {
-      if (keyInfos[i].key === key) {
-        return keyInfos[i];
-      }
-    }
-
-    return false;
-  },
-  __parseNormalKey: function __parseNormalKey(propItem, keyInfo, inheritObj) {
-    var value = propItem[keyInfo.key];
-    var tmpDefaultValue = libs_utils.isUndef(inheritObj[keyInfo.key]) ? keyInfo.defaultValue : inheritObj[keyInfo.key];
-
-    if (libs_utils.isUndef(value)) {
-      return tmpDefaultValue;
-    } else if (keyInfo.enums && keyInfo.enums.length > 0 && keyInfo.enums.includes(value)) {
-      return value;
-    } else {
-      // 看过滤信息
-      if (keyInfo.filters && keyInfo.filters.length > 0) {
-        var isRight = true;
-        var funcName, funcParams, filterFunc;
-
-        for (var filterIndex = 0; filterIndex < keyInfo.filters.length; filterIndex++) {
-          var filterItem = keyInfo.filters[filterIndex];
-
-          if (libs_utils.isStr(filterItem)) {
-            funcName = filterItem;
-            funcParams = [];
-          } else {
-            funcName = filterItem.name;
-            funcParams = libs_utils.isArr(filterItem.params) ? filterItem.params : [];
-          }
-
-          filterFunc = schema_rules[funcName];
-
-          if (filterFunc) {
-            var newParams = [value].concat(_toConsumableArray(funcParams)); // console.log(newParams);
-
-            if (filterFunc.apply(null, newParams) !== true) {
-              isRight = false;
-              break;
-            }
-          } else {
-            console.warn(funcName + "不存在，请检查");
-          }
-        }
-
-        if (isRight) {
-          // 走了一圈，此值正确
-          return value;
-        } else {
-          return tmpDefaultValue;
-        }
-      } else {
-        // 没有条件，那么就是正确的
-        return value;
-      }
-    }
-  },
-  __parseSpecialKey: function __parseSpecialKey(propItem, keyInfo) {
-    var value = propItem[keyInfo.key];
-
-    if (libs_utils.isUndef(value)) {
-      return keyInfo.defaultValue;
-    } else if (libs_utils.isStr(value)) {
-      var newObj = {};
-      newObj[keyInfo.nameKey] = value;
-      return newObj;
-    } else if (libs_utils.isObj(value)) {
-      return value;
-    } else {
-      return keyInfo.defaultValue;
-    }
-  },
-
-  /* 解析右栏组件 */
-  __parseMainComponent: function __parseMainComponent(component, myPathKey) {
-    var tmpComponent,
-        defaultAlign = false;
-
-    if (libs_utils.isObj(component) && keys_default()(component).length > 0) {
-      tmpComponent = libs_utils.deepCopy(component);
-      tmpComponent.name = tmpComponent.name ? tmpComponent.name : libs_global.defaultCom;
-      tmpComponent.actions = this.__parseActions(tmpComponent.actions, myPathKey);
-      tmpComponent.ref = libs_utils.isStr(tmpComponent.ref) ? tmpComponent.ref.trim() : null;
-
-      if (!tmpComponent.ref) {
-        delete tmpComponent.ref;
-      }
-
-      tmpComponent.align = this.__parseAlign(tmpComponent.align, defaultAlign);
-    } else if (libs_utils.isStr(component)) {
-      tmpComponent = {
-        name: component,
-        actions: [],
-        align: defaultAlign
-      };
-    } else {
-      tmpComponent = {
-        name: libs_global.defaultCom,
-        actions: [],
-        align: defaultAlign
-      };
-    } // var sizeValues = ["fixed", "auto"];
-    // if (!sizeValues.includes(tmpComponent.size)) {
-    //   tmpComponent.size = false;
-    // }
-
-
-    tmpComponent.size = this.__parseSize(tmpComponent.size);
-    return tmpComponent;
-  },
-
-  /**
-   * 进出的值的格式转换
-   * @param {*} format
-   */
-  __parseFormat: function __parseFormat(format) {
-    var newFormat;
-
-    if (libs_utils.isArr(format)) {
-      // 是枚举
-      newFormat = [];
-      format.forEach(function (item) {
-        if (!libs_utils.isUndef(item.outer) && !libs_utils.isUndef(item.inner)) {
-          newFormat.push(item);
-        } else {
-          console.warn("format属性：outer和inner必须成对定义");
-        }
-      });
-      return newFormat.length > 0 ? newFormat : false;
-    } else if (libs_utils.isObj(format)) {
-      newFormat = {};
-
-      if (libs_utils.isFunc(format.outer)) {
-        newFormat.outer = format.outer;
-      } else {
-        newFormat.outer = false;
-      }
-
-      if (libs_utils.isFunc(format.inner)) {
-        newFormat.inner = format.inner;
-      } else {
-        newFormat.inner = false;
-      }
-
-      return newFormat.outer || newFormat.inner ? newFormat : false;
-    } else {
-      // 格式不合法
-      return false;
-    }
-  },
-  __parseActions: function __parseActions(actions, myPathKey) {
-    var _this2 = this;
-
-    // 解析是否为特殊写法
-    var newActions = [];
-
-    if (libs_utils.isObj(actions) && keys_default()(actions).length > 0 || libs_utils.isArr(actions) && actions.length > 0 || libs_utils.isFunc(actions) || libs_utils.isStr(actions)) {
-      var tmpActions;
-
-      if (libs_utils.isFunc(actions)) {
-        tmpActions = [{
-          trigger: libs_constant.CLICK_EVENT,
-          handler: actions
-        }];
-      } else if (libs_utils.isObj(actions)) {
-        tmpActions = [actions];
-      } else if (libs_utils.isStr(actions)) {
-        tmpActions = [actions];
-      } else {
-        // 就是数组了
-        tmpActions = actions;
-      }
-
-      tmpActions.forEach(function (tmpAction) {
-        var newTrigger, newAction;
-
-        if (libs_utils.isStr(tmpAction)) {
-          tmpAction = tmpAction.trim();
-
-          if (tmpAction == libs_constant.ENTER_SUBMIT) {
-            // keyup.native提交事件
-            newActions.push({
-              trigger: [libs_constant.KEYUP_NATIVE],
-              handler: enterSubmit
-            });
-          } else {
-            var actionInfos = tmpAction.split(/\s*=\s*/);
-
-            if (actionInfos && actionInfos.length == 2 && actionInfos[1] == libs_constant.ONLY_SUBMIT) {
-              // newActions.push({trigger: actionInfos[0], handler: onlySubmit});
-              newAction = {};
-              newTrigger = _this2.__parseTrigger(actionInfos[0]);
-              newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [libs_constant.CLICK_EVENT];
-              newAction.handler = onlySubmit;
-              newActions.push(newAction);
-            } else {
-              console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行.");
-            }
-          }
-        } else if (libs_utils.isFunc(tmpAction.handler)) {
-          newAction = {};
-          newTrigger = _this2.__parseTrigger(tmpAction.trigger);
-          newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [libs_constant.CLICK_EVENT];
-          newAction.handler = tmpAction.handler;
-          newActions.push(newAction);
-        } else {
-          // 非法写，不是函数，去掉它
-          console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行");
-        }
-      });
-    } else {// console.warn("key(" + myPathKey + ")component事件类型不合法.");
-    }
-
-    return newActions.length > 0 ? newActions : null;
-  },
-
-  /* 解析Label */
-  __parseLabel: function __parseLabel(value) {
-    var newValue,
-        defaultAlign = false;
-
-    if (libs_utils.isObj(value)) {
-      newValue = {};
-      newValue.__rawText = libs_utils.isStr(value.text) ? value.text : false;
-      newValue.text = newValue.__rawText; // var sizeValues = ["fixed", "auto"];
-      // if (sizeValues.includes(value.size)) {
-      //   newValue.size = value.size;
-      // } else {
-      //   newValue.size = false;
-      // }
-
-      newValue.size = this.__parseSize(value.size);
-      newValue.align = this.__parseAlign(value.align, defaultAlign);
-    } else if (libs_utils.isStr(value)) {
-      newValue = {
-        text: value,
-        __rawText: value,
-        size: false,
-        align: defaultAlign
-      };
-    } else {
-      newValue = {
-        text: false,
-        __rawText: false,
-        size: false,
-        align: defaultAlign
-      };
-    }
-
-    if (newValue.__rawText === false) {
-      delete newValue.align; // 不用起作用，删了它
-    }
-
-    return newValue;
-  },
-  __parseSize: function __parseSize(size) {
-    var sizes = ["fixed", "auto"];
-
-    if (sizes.includes(size)) {
-      return size;
-    }
-
-    return false;
-  },
-  __parseAlign: function __parseAlign(align) {
-    var defaultVal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "left";
-    var aligns = ["left", "center", "right"];
-
-    if (aligns.includes(align)) {
-      return align;
-    }
-
-    return defaultVal;
-  },
-
-  /* 解析title */
-  __parseTitle: function __parseTitle(value) {
-    var newValue;
-
-    if (libs_utils.isObj(value)) {
-      newValue = {};
-      newValue.__rawText = libs_utils.isStr(value.text) ? value.text : false;
-      newValue.text = newValue.__rawText;
-
-      if (newValue.text !== false && libs_utils.isBool(value.showBody)) {
-        newValue.__hasToggle = true; // 有切换按钮
-
-        newValue.showBody = value.showBody;
-      } else {
-        newValue.__hasToggle = false; // 无切换按钮
-
-        newValue.showBody = true;
-      }
-
-      newValue.type = libs_utils.isStr(value.type) ? value.type : "";
-    } else if (libs_utils.isStr(value)) {
-      newValue = {
-        text: value,
-        __rawText: value,
-        __hasToggle: false,
-        showBody: true
-      };
-    } else {
-      newValue = {
-        text: false,
-        __rawText: false,
-        __hasToggle: false,
-        showBody: true
-      };
-    }
-
-    return newValue;
-  },
-
-  /* 解析帮助 */
-  __parsePropHelp: function __parsePropHelp(help) {
-    var gHelp, props;
-
-    if (libs_utils.isObj(help) && keys_default()(help).length > 0) {
-      gHelp = libs_utils.deepCopy(libs_global.help);
-      props = libs_utils.isObj(gHelp.props) ? gHelp.props : {};
-
-      assign_default()(props, libs_utils.isObj(help.props) ? help.props : {});
-
-      gHelp.name = help.name ? help.name : gHelp.name;
-      gHelp.props = props;
-      return gHelp;
-    } else if (libs_utils.isStr(help)) {
-      //
-      gHelp = libs_utils.deepCopy(libs_global.help);
-      props = libs_utils.isObj(gHelp.props) ? gHelp.props : {};
-      props.content = help;
-      gHelp.props = props;
-      return gHelp;
-    } else {
-      return false;
-    }
-  },
-
-  /* 解析一般组件 */
-  __parsePropComponent: function __parsePropComponent(value) {
-    var newCom;
-
-    if (libs_utils.isObj(value) && keys_default()(value).length > 0) {
-      newCom = {};
-      var name = libs_utils.isStr(value.name) && value.name.trim() ? value.name.trim() : name;
-
-      if (name) {
-        newCom.name = name;
-        newCom.props = libs_utils.isObj(value.props) ? value.props : {};
-      }
-
-      var text = libs_utils.isStr(value.text) && value.text.trim() ? value.text.trim() : false;
-      newCom.text = text;
-
-      if (!name && !text) {
-        // 说明为空
-        return false;
-      }
-
-      if (!name) {
-        newCom.__rawText = text;
-      }
-
-      return newCom;
-    } else if (libs_utils.isStr(value)) {
-      value = value.trim();
-
-      if (value) {
-        newCom = {
-          text: value,
-          __rawText: value
-        };
-      } else {
-        newCom = false;
-      }
-
-      return newCom;
-    } else {
-      return false;
-    }
-  },
-
-  /* 解析规则 */
-  __parsePropRules: function __parsePropRules(rules) {
-    if (libs_utils.isObj(rules)) {
-      var checkList = rules.check;
-      var tmpCheckList;
-
-      if (!checkList) {
-        checkList = [];
-      } else if (!libs_utils.isArr(checkList)) {
-        checkList = [checkList];
-      }
-
-      tmpCheckList = checkList.map(function (item) {
-        return formUtils.__perfectCheckItem(item);
-      });
-      rules.check = tmpCheckList;
-      rules.required = rules.required ? rules.required : false;
-      rules.__rawRequired = rules.required;
-
-      if (rules.required || rules.check && rules.check.length > 0) {
-        // 合法的写法
-        return rules;
-      } else {
-        return false;
-      }
-    } else if (libs_utils.isBool(rules) || libs_utils.isStr(rules)) {
-      var rawRequired = rules;
-      rules = {
-        required: rawRequired,
-        __rawRequired: rawRequired
-      };
-      return rules;
-    } else {
-      return false;
-    }
-  },
-  __isArray: function __isArray(array) {
-    if (array) {
-      return true;
-    } else {
-      return false;
-    }
-  },
-  __isPropItem: function __isPropItem(rawItem) {
-    return !this.__isSpaceItem(rawItem) && libs_utils.isObj(rawItem.properties) && keys_default()(rawItem.properties).length > 0;
-  },
-  __existEntityItem: function __existEntityItem(rawPropItem) {
-    if (this.__isPropItem(rawPropItem)) {
-      for (var key in rawPropItem.properties) {
-        var nextRowProp = rawPropItem.properties[key];
-
-        if (!this.__isSpaceItem(nextRowProp)) {
-          return true; // 有一个即可以了
-        }
-      }
-    }
-
-    return false;
-  },
-
-  /**
-   * 是否为space item
-   * @param {*} subitem
-   */
-  __isSpaceItem: function __isSpaceItem(rawItem) {
-    if (rawItem.layout === libs_constant.LAYOUT_SPACE || rawItem.layout && rawItem.layout.name === libs_constant.LAYOUT_SPACE) {
-      return true;
-    }
-
-    return false;
-  },
-
-  /**
-   * 是否为tabs item
-   * @param {*} subitem
-   */
-  __isTabsItem: function __isTabsItem(rawItem) {
-    if (rawItem.layout === libs_constant.LAYOUT_TABS || rawItem.layout && rawItem.layout.name === libs_constant.LAYOUT_TABS) {
-      return true;
-    }
-
-    return false;
-  },
-  __parsePropLayout: function __parsePropLayout(layout) {
-    var newLayout = {
-      name: false
-    };
-    var layoutTypes = [libs_constant.LAYOUT_SPACE, libs_constant.LAYOUT_TABS];
-
-    if (libs_utils.isStr(layout)) {
-      if (layoutTypes.includes(layout)) {
-        newLayout.name = layout;
-        layout = {};
-      }
-    } else if (libs_utils.isObj(layout)) {
-      if (layoutTypes.includes(layout.name)) {
-        newLayout.name = layout.name;
-      }
-    } else {// nothing
-    }
-
-    if (newLayout.name === false) {
-      // 没有布局
-      return false;
-    } else if (newLayout.name === libs_constant.LAYOUT_TABS) {
-      // 是子节点布局是tabs时所需要的一些参数
-      // var types = ["bg", "card", "line"];
-      newLayout.type = layout.type;
-      newLayout.hasBorder = libs_utils.isBool(layout.hasBorder) ? layout.hasBorder : true;
-    }
-
-    return newLayout;
-  },
-  __parsePropArray: function __parsePropArray(array, rawItem, myPathKey) {
-    if (this.__isArray(array)) {
-      var newArray = {};
-      var hasSort = false; //是否有排序按钮，默认为false
-
-      var hasDelete = true; //是否有删除按钮，默认为true
-
-      var hasAdd = true; //是否有添加按钮(下边的添加按钮)，默认为true
-
-      var hasCopy = false; // //是否有拷贝添加按钮，默认为false
-
-      var max = 0; //不写或小于等于0代表不限制
-
-      var min = 0; //不写或小于等于0代表0
-
-      var fixed = 0; //不写或小于等于0代表0
-
-      var hasOrder = true; //是否有序号，默认为true
-
-      var headRequired = false; //此值当name为constant.ARRAY_TABLE有效，当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示，默认为true;注意：当为true时，required的值不能受properties里面的属性影响
-
-      var hasDelWarn = true; // 删除是否有警告
-
-      var tabsName = false;
-      var rules = false;
-      var actions = false;
-      var value = [];
-      var rowSpace = undefined;
-      var type = null;
-      var hasBorder = true;
-      var insertValue = undefined;
-
-      if (libs_utils.isStr(array)) {
-        newArray.name = array;
-      } else if (!libs_utils.isObj(array)) {
-        newArray.name = libs_constant.ARRAY_ROW;
-      } else {
-        newArray.name = libs_utils.isStr(array.name) ? array.name : libs_constant.ARRAY_ROW;
-        hasSort = array.hasSort ? true : false;
-        hasDelete = libs_utils.isUndef(array.hasDelete) || array.hasDelete ? true : false;
-        hasAdd = libs_utils.isUndef(array.hasAdd) || array.hasAdd ? true : false;
-        hasCopy = array.hasCopy ? true : false;
-        min = libs_utils.isUndef(array.min) || array.min <= 0 || !libs_utils.isNum(array.min) ? 0 : array.min;
-        max = libs_utils.isUndef(array.max) || array.max <= 0 || !libs_utils.isNum(array.max) ? 0 : array.max;
-        fixed = libs_utils.isUndef(array.fixed) || array.fixed <= 0 || !libs_utils.isNum(array.fixed) ? 0 : array.fixed;
-        hasOrder = libs_utils.isUndef(array.hasOrder) || array.hasOrder ? true : false;
-        headRequired = array.name == libs_constant.ARRAY_TABLE && array.headRequired ? true : false;
-        tabsName = libs_utils.isStr(array.tabsName) ? array.tabsName : false;
-        hasDelWarn = libs_utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
-        value = libs_utils.isArr(array.value) ? array.value : [];
-        rules = this.__parsePropRules(array.rules);
-        actions = this.__parseActions(array.actions, myPathKey);
-        rowSpace = libs_utils.isNum(array.rowSpace) ? array.rowSpace : undefined;
-        type = libs_utils.isStr(array.type) ? array.type : false;
-        hasBorder = libs_utils.isBool(array.hasBorder) ? array.hasBorder : true;
-        insertValue = libs_utils.isUndef(array.insertValue) ? undefined : array.insertValue;
-      }
-
-      if (!this.__isPropItem(rawItem) && newArray.name == libs_constant.ARRAY_TABLE) {
-        newArray.name = libs_constant.ARRAY_ROW;
-        console.warn(myPathKey + "叶子节点(组件)不支持为" + libs_constant.ARRAY_TABLE + "数组, " + libs_constant.ARRAY_TABLE + "将失效, 强制转化为" + libs_constant.ARRAY_ROW);
-      } else if (this.__isPropItem(rawItem) && newArray.name == libs_constant.ARRAY_CARD) {
-        newArray.name = libs_constant.ARRAY_ROW;
-        console.warn(myPathKey + "为非叶子节点(非组件)，不支持为" + libs_constant.ARRAY_CARD + "数组, " + libs_constant.ARRAY_CARD + "将失效, 强制转化为" + libs_constant.ARRAY_ROW);
-      }
-
-      if (newArray.name == libs_constant.ARRAY_ROW || newArray.name == libs_constant.ARRAY_TABLE || newArray.name == libs_constant.ARRAY_TABS || newArray.name == libs_constant.ARRAY_CARD || newArray.name == libs_constant.ARRAY_LEGEND) {
-        newArray.hasSort = hasSort;
-        newArray.hasDelete = hasDelete;
-        newArray.hasDelWarn = hasDelWarn;
-        newArray.hasAdd = hasAdd;
-        newArray.hasCopy = hasCopy;
-        newArray.min = min;
-        newArray.max = max;
-        newArray.fixed = fixed;
-        newArray.hasOrder = hasOrder;
-        newArray.headRequired = headRequired;
-        newArray.value = value;
-        newArray.rules = rules;
-        newArray.actions = actions;
-        newArray.rowSpace = rowSpace;
-
-        if (newArray.name == libs_constant.ARRAY_TABS) {
-          newArray.tabsName = tabsName;
-          newArray.type = type;
-          newArray.hasBorder = hasBorder;
-        } else if (newArray.name == libs_constant.ARRAY_LEGEND) {
-          newArray.tabsName = tabsName;
-        }
-
-        if (!libs_utils.isUndef(insertValue)) {
-          newArray.insertValue = insertValue;
-        }
-      } else {
-        throw "formUtils.__parsePropArray: array.name不合法";
-      }
-
-      return newArray;
-    } else {
-      return false;
-    }
-  },
-  __perfectCheckItem: function __perfectCheckItem(item) {
-    // console.log("item = ", item);
-    if (libs_utils.isStr(item) || libs_utils.isFunc(item)) {
-      return {
-        name: item,
-        trigger: [libs_constant.INPUT_EVENT]
-      };
-    } else if (libs_utils.isObj(item) && (libs_utils.isStr(item.name) || libs_utils.isFunc(item.name))) {
-      var newTrigger = this.__parseTrigger(item.trigger);
-
-      newTrigger = newTrigger && newTrigger.length ? libs_utils.unique(newTrigger) : [libs_constant.INPUT_EVENT];
-      var newParams;
-
-      if (!libs_utils.isUndef(item.params)) {
-        //有定义，没有定义就不理会
-        if (libs_utils.isArr(item.params)) {
-          newParams = item.params;
-        } else {
-          newParams = [item.params];
-        }
-      }
-
-      var newItem = {
-        name: item.name,
-        trigger: newTrigger,
-        params: newParams
-      };
-      return newItem;
-    } else {
-      throw "formUtils.__perfectCheckItem: rules设置不正确"; // return null;
-    }
-  },
-  __filterKeys: function __filterKeys(propItem, propKeys, inheritObj, myPathKey) {
-    var newPropItem = {};
-    propKeys.forEach(function (key) {
-      if (key == "label") {
-        newPropItem[key] = formUtils.__parseLabel(propItem[key]);
-        return true;
-      }
-
-      if (key == "title") {
-        newPropItem[key] = formUtils.__parseTitle(propItem[key]);
-        return true;
-      }
-
-      if (key == "format") {
-        newPropItem[key] = formUtils.__parseFormat(propItem[key]);
-        return true;
-      }
-
-      if (key == "rules") {
-        newPropItem[key] = formUtils.__parsePropRules(propItem[key]);
-        newPropItem.__invalidMsg = false;
-        return true;
-      }
-
-      if (key == "help") {
-        newPropItem[key] = formUtils.__parsePropHelp(propItem[key]);
-        return true;
-      }
-
-      if (key == "desc") {
-        newPropItem[key] = formUtils.__parsePropComponent(propItem[key]);
-        return true;
-      }
-
-      if (key == "unit") {
-        newPropItem[key] = formUtils.__parsePropComponent(propItem[key]);
-        return true;
-      }
-
-      if (key == "array") {
-        newPropItem[key] = formUtils.__parsePropArray(propItem[key], propItem, myPathKey);
-        return true;
-      }
-
-      if (key == "layout") {
-        newPropItem[key] = formUtils.__parsePropLayout(propItem[key]);
-        return true;
-      }
-
-      if (key == "component") {
-        newPropItem[key] = formUtils.__parseMainComponent(propItem[key], myPathKey);
-        return true;
-      }
-
-      var specialKeyInfo = formUtils.__getSpecialInfo(key);
-
-      if (specialKeyInfo) {
-        newPropItem[key] = formUtils.__parseSpecialKey(propItem, specialKeyInfo);
-      } else {
-        var normalKeyInfo = formUtils.__getNormalInfo(key);
-
-        if (normalKeyInfo) {
-          newPropItem[key] = formUtils.__parseNormalKey(propItem, normalKeyInfo, inheritObj);
-        } else {
-          throw "程序的key(" + key + ")不对应，请修改";
-        }
-      }
-    });
-
-    if (!libs_utils.isUndef(newPropItem.rowSpace)) {
-      newPropItem.__rawRowSpace = newPropItem.rowSpace;
-    }
-
-    return newPropItem;
-  },
-  __newInheritObj: function __newInheritObj(propItem) {
-    var keys = ["direction", "colon", "boxRowSpace", "boxLabelWidth", "boxRowHeight"];
-    var keyObj = {
-      //把右边的数据给下一级的节点
-      rowHeight: "boxRowHeight",
-      rowSpace: "boxRowSpace",
-      labelWidth: "boxLabelWidth"
-    };
-    var obj = {};
-    keys.forEach(function (key) {
-      obj[key] = propItem[key];
-    });
-
-    for (var key in keyObj) {
-      obj[key] = propItem[keyObj[key]];
-    }
-
-    return obj;
-  },
-  __reinitGroup: function __reinitGroup(propItem) {
-    var lastGroup = false;
-    var groups;
-    var colSum = 0;
-    var gFirstItem; //每一组的第一项
-
-    for (var key in propItem.properties) {
-      var item = propItem.properties[key];
-      var curGroup = item["group"];
-
-      if (curGroup) {
-        if (lastGroup) {
-          //已经存在了
-          if (lastGroup === curGroup) {
-            //是前面的那一组
-            groups.push(key);
-            colSum += item.col;
-            gFirstItem.__groupCol = colSum > libs_constant.UI_MAX_COL ? libs_constant.UI_MAX_COL : colSum;
-          } else {
-            //不是前面的那一组，重新开组
-            lastGroup = curGroup;
-            gFirstItem = item;
-            groups = [key];
-            item.__groups = groups;
-            item.__hiddenGroup = false; // item.col = constant.UI_MAX_COL;
-
-            colSum += item.col;
-            gFirstItem.__groupCol = colSum > libs_constant.UI_MAX_COL ? libs_constant.UI_MAX_COL : colSum;
-          }
-        } else {
-          //前面没有组，重新开组
-          lastGroup = curGroup;
-          gFirstItem = item;
-          groups = [key];
-          item.__groups = groups;
-          item.__hiddenGroup = false; // item.col = constant.UI_MAX_COL;
-
-          colSum += item.col;
-          gFirstItem.__groupCol = colSum > libs_constant.UI_MAX_COL ? libs_constant.UI_MAX_COL : colSum;
-        }
-
-        item.__inGroups = true; //记录此项在分组里面
-      } else {
-        lastGroup = false;
-        groups = null;
-        colSum = 0;
-        gFirstItem = null;
-      }
-    }
-  },
-
-  /**
-   *
-   * @param {*} rules
-   * @param {*} value
-   * @param {*} trigger 当trigger没有时，说明rules的规则无论是什么条件触发都要判断一遍
-   * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
-   * @returns Boolean or string
-   * true 是需要检查的，并且正确
-   * false 不需要检查
-   * string 是需要检查的，但不正确
-   */
-  checkRules: function checkRules(rules, value, trigger, parseSources) {
-    if (!rules) {
-      //没有规则
-      return true;
-    }
-
-    var isRequired = libs_parse.smartEsValue(rules.required, parseSources); // console.log("isRequired: ", isRequired);
-
-    if (isRequired) {
-      //空要检查
-      if (formUtils.isEmpty(value)) {
-        return rules.emptyMsg && libs_utils.isStr(rules.emptyMsg) ? rules.emptyMsg : "不能为空";
-      }
-    } else if (!isRequired && formUtils.isEmpty(value)) {
-      //空时不检查，场景：当埋写邮件地址时，要么不写要么写正确
-      return true;
-    } //非空情况
-
-
-    var checkList = rules.check;
-    var errMsg = true;
-    var checkFun, params;
-
-    if (checkList && checkList.length > 0) {
-      var hadChecked = false;
-
-      for (var i = 0; i < checkList.length; i++) {
-        var checkItem = checkList[i];
-
-        if (checkItem.name) {
-          var checkTrigger = checkItem.trigger; //检查时机，默认为实时
-          // console.log("checkTrigger == trigger", checkTrigger, trigger)
-
-          if (!trigger || checkTrigger.includes(trigger)) {
-            hadChecked = true;
-            var result = true;
-
-            if (libs_utils.isStr(checkItem.name)) {
-              if (libs_rules[checkItem.name]) {
-                //系统或扩展的验证函数
-                checkFun = libs_rules[checkItem.name];
-                params = checkItem.params ? libs_utils.deepCopy(checkItem.params) : [];
-                params.unshift(value); // console.log("parmas: ", params);
-
-                result = checkFun.apply(null, params);
-              } else if (libs_parse.isEsScript(checkItem.name)) {
-                result = libs_parse.smartEsValue(checkItem.name, parseSources);
-              } else {//找不到，不理会，认为无问题
-              }
-            } else if (libs_utils.isFunc(checkItem.name)) {
-              //是一个函数
-              checkFun = checkItem.name;
-              params = checkItem.params ? libs_utils.deepCopy(checkItem.params) : [];
-              params.unshift(libs_utils.deepCopy(parseSources.rootData));
-              params.unshift(value);
-              result = checkFun.apply(null, params);
-            } // console.log("result2 = ", result);
-
-
-            if (result !== true) {
-              if (libs_utils.isStr(result)) {
-                //直接返回错误信息
-                errMsg = result;
-              } else {
-                //用统一的错误信息
-                errMsg = rules.errMsg && libs_utils.isStr(rules.errMsg) ? rules.errMsg : "格式不对";
-              }
-
-              break;
-            }
-          }
-        }
-      }
-
-      if (!hadChecked) {
-        // 都没有进入验证，说明这个事件是目标事件，返回false
-        errMsg = false;
-      }
-    } else {
-      // 没有要验证的东西
-      errMsg = true;
-    }
-
-    return errMsg;
-  },
-  clearErrorMsg: function clearErrorMsg(propItem) {
-    if (!libs_utils.isUndef(propItem.__invalidMsg)) {
-      propItem.__invalidMsg = false;
-    }
-
-    if (propItem.component) {// if (!utils.isUndef(propItem.__invalidMsg)) {
-      //   propItem.__invalidMsg = false;
-      // }
-    } else if (propItem.properties) {
-      if (propItem.array) {
-        var schemaList = propItem.__propSchemaList; // console.log(propItem.__propSchemaList);
-
-        for (var i = 0; i < schemaList.length; i++) {
-          formUtils.clearErrorMsg(schemaList[i]);
-        }
-      } else {
-        for (var key in propItem.properties) {
-          formUtils.clearErrorMsg(propItem.properties[key]);
-        }
-      }
-    } else {// return undefined;
-    }
-  },
-
-  /**
-   * 根据formData, 分析界面的情况。现主要是解析第一行的情况和hidden, required
-   * @param {*} schema
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
-   * @param {*} formData
-   * @param {*} rootSchema
-   */
-  analyzeUiProps: function analyzeUiProps(propItem, baseParseSources) {
-    var sum = 0;
-    var isHidden, isRequired, text, tabsName, listLen, schemaList, i;
-
-    var parseSources = assign_default()({}, baseParseSources);
-
-    parseSources.index = propItem.__index;
-    parseSources.idxChain = propItem.__idxChain;
-
-    if (propItem.component) {
-      if (propItem.__rawHidden) {
-        // false或为空都不用执行
-        isHidden = libs_parse.smartEsValue(propItem.__rawHidden, parseSources);
-
-        if (propItem.hidden != isHidden) {
-          propItem.hidden = isHidden;
-        }
-      }
-
-      if (propItem.label && propItem.label.__rawText) {
-        // false或为空都不用执行 properies array下propItem.label
-        text = libs_parse.smartEsValue(propItem.label.__rawText, parseSources);
-
-        if (propItem.label.text != text) {
-          propItem.label.text = text;
-        }
-      }
-
-      if (propItem.desc && !propItem.desc.name && propItem.desc.__rawText) {
-        // false或为空都不用执行 propItem.desc
-        text = libs_parse.smartEsValue(propItem.desc.__rawText, parseSources);
-
-        if (propItem.desc.text != text) {
-          propItem.desc.text = text;
-        }
-      }
-
-      if (propItem.unit && !propItem.unit.name && propItem.unit.__rawText) {
-        // false或为空都不用执行 propItem.unit
-        text = libs_parse.smartEsValue(propItem.unit.__rawText, parseSources);
-
-        if (propItem.unit.text != text) {
-          propItem.unit.text = text;
-        }
-      }
-
-      if (propItem.array) {
-        // 数组
-        schemaList = propItem.__propSchemaList;
-
-        for (i = 0; i < schemaList.length; i++) {
-          formUtils.analyzeUiProps(schemaList[i], baseParseSources);
-        } // 是数组array-tabs, 调整索引
-
-
-        if (propItem.array.name == libs_constant.ARRAY_TABS) {
-          listLen = propItem.__propSchemaList.length;
-
-          if (listLen > 0) {
-            if (propItem.__tabsIndex === false) {
-              // 刚开始，取第一个
-              propItem.__tabsIndex = 0;
-            } else {
-              if (propItem.__tabsIndex < 0 || propItem.__tabsIndex >= listLen - 1) {
-                propItem.__tabsIndex = listLen - 1; // 取最后一个
-              } else {// 此范围索引合法
-                }
-            }
-          } else {
-            if (propItem.__tabsIndex !== false) {
-              propItem.__tabsIndex = false;
-            }
-          }
-        }
-      } else if (propItem.rules && propItem.rules.__rawRequired) {
-        // 一般组件
-        // false或为空都不用执行
-        isRequired = libs_parse.smartEsValue(propItem.rules.__rawRequired, parseSources);
-
-        if (propItem.rules.required != isRequired) {
-          propItem.rules.required = isRequired;
-        }
-      }
-    } else if (propItem.properties) {
-      if (propItem.__rawHidden) {
-        // false或为空都不用执行
-        isHidden = libs_parse.smartEsValue( // propItem.__propSchemaList里面是没有hidden的，不过此写法不影响，smartEsValue前后都是undefined
-        propItem.__rawHidden, parseSources);
-
-        if (propItem.hidden != isHidden) {
-          propItem.hidden = isHidden;
-        }
-      }
-
-      if (propItem.label && propItem.label.__rawText) {
-        // false或为空都不用执行 properies array下propItem.label
-        text = libs_parse.smartEsValue(propItem.label.__rawText, parseSources);
-
-        if (propItem.label.text != text) {
-          propItem.label.text = text;
-        }
-      }
-
-      if (propItem.desc && !propItem.desc.name && propItem.desc.__rawText) {
-        // false或为空都不用执行 propItem.desc
-        text = libs_parse.smartEsValue(propItem.desc.__rawText, parseSources);
-
-        if (propItem.desc.text != text) {
-          propItem.desc.text = text;
-        }
-      }
-
-      if (propItem.unit && !propItem.unit.name && propItem.unit.__rawText) {
-        // false或为空都不用执行 propItem.unit
-        text = libs_parse.smartEsValue(propItem.unit.__rawText, parseSources);
-
-        if (propItem.unit.text != text) {
-          propItem.unit.text = text;
-        }
-      }
-
-      if (propItem.__tabsName) {
-        // console.log("propItem.__tabsName", propItem.__tabsName);
-        tabsName = libs_parse.smartEsValue(propItem.__tabsName, parseSources);
-
-        if (propItem.tabsName != tabsName) {
-          propItem.tabsName = tabsName;
-        }
-      }
-
-      if (propItem.array) {
-        schemaList = propItem.__propSchemaList;
-
-        for (i = 0; i < schemaList.length; i++) {
-          formUtils.analyzeUiProps(schemaList[i], baseParseSources);
-        } // 是数组tabs, 调整索引
-
-
-        if (propItem.array.name == libs_constant.ARRAY_TABS) {
-          listLen = propItem.__propSchemaList.length;
-
-          if (listLen > 0) {
-            if (propItem.__tabsIndex === false) {
-              // 刚开始，取第一个
-              propItem.__tabsIndex = 0;
-            } else {
-              if (propItem.__tabsIndex < 0 || propItem.__tabsIndex >= listLen - 1) {
-                propItem.__tabsIndex = listLen - 1; // 取最后一个
-              } else {// 此范围索引合法
-                }
-            }
-          } else {
-            if (propItem.__tabsIndex !== false) {
-              propItem.__tabsIndex = false;
-            }
-          }
-        }
-      } else {
-        var nextPropItem, key;
-
-        if (propItem.layout && propItem.layout.name == libs_constant.LAYOUT_TABS) {
-          // 是普通tabs
-          for (key in propItem.properties) {
-            nextPropItem = propItem.properties[key]; // 下一级
-
-            formUtils.analyzeUiProps(nextPropItem, baseParseSources);
-          } //调整索引
-
-
-          if (propItem.__tabsIndex === false) {
-            for (key in propItem.properties) {
-              // 取第一个不是隐藏的key作为索引
-              nextPropItem = propItem.properties[key];
-
-              if (!nextPropItem.hidden) {
-                propItem.__tabsIndex = key;
-                break;
-              }
-            }
-          } else {
-            var curIndexPropItem = propItem.properties[propItem.__tabsIndex]; // console.log("curIndexPropItem: ", curIndexPropItem, propItem.__tabsIndex);
-
-            if (curIndexPropItem.hidden) {
-              // 当前的索引对应的tab隐藏了
-              var indexs = [];
-
-              for (key in propItem.properties) {
-                nextPropItem = propItem.properties[key];
-
-                if (key === propItem.__tabsIndex) {
-                  indexs.push(key);
-                } else if (!nextPropItem.hidden) {
-                  indexs.push(key);
-                }
-              }
-
-              if (indexs.length > 1) {
-                var curIndex = indexs.indexOf(propItem.__tabsIndex);
-
-                if (curIndex < indexs.length - 1) {
-                  // 不是最后一个，取下一个
-                  propItem.__tabsIndex = indexs[curIndex + 1];
-                } else {
-                  // 取上一个
-                  propItem.__tabsIndex = indexs[curIndex - 1];
-                }
-              } else {
-                propItem.__tabsIndex = false; // 没有索引或全部tabs隐藏
-              }
-            } else {// 值有效，不必理会
-              }
-          }
-        } else {
-          sum = 0;
-
-          for (key in propItem.properties) {
-            nextPropItem = propItem.properties[key];
-
-            if (nextPropItem.__groups) {
-              //是一个组
-              isHidden = formUtils.isGroupHidden(propItem, nextPropItem.__groups, baseParseSources);
-
-              if (!isHidden) {
-                //组不隐藏
-                if (sum <= 0) {
-                  //这个组就是第一行
-                  sum = libs_constant.UI_MAX_COL;
-
-                  if (nextPropItem.rowSpace != 0) {
-                    nextPropItem.rowSpace = 0;
-                  }
-                } else {
-                  sum += libs_constant.UI_MAX_COL;
-                }
-
-                if (nextPropItem.__hiddenGroup != isHidden) {
-                  nextPropItem.__hiddenGroup = isHidden;
-                }
-              } else {//不必理会
-              }
-            } else if (nextPropItem.__inGroups) {
-              //组内成员
-              if (nextPropItem.rowSpace != 0) {
-                nextPropItem.rowSpace = 0;
-              }
-            } else {
-              //正常成员
-              var nextParseSources = assign_default()({}, baseParseSources);
-
-              nextParseSources.index = nextPropItem.__index;
-              nextParseSources.idxChain = nextPropItem.__idxChain;
-              isHidden = libs_parse.smartEsValue(nextPropItem.__rawHidden, nextParseSources); // console.log(nextPropItem.col, isHidden);
-
-              if (!isHidden) {
-                sum += nextPropItem.col;
-                var newRowSpace;
-
-                if (sum <= libs_constant.UI_MAX_COL) {
-                  //还在第一行
-                  newRowSpace = 0;
-                } else {
-                  newRowSpace = nextPropItem.__rawRowSpace;
-                }
-
-                if (nextPropItem.rowSpace != newRowSpace) {
-                  //还原
-                  nextPropItem.rowSpace = newRowSpace;
-                }
-              } else {//不必理会
-              }
-            } // 下一级
-
-
-            formUtils.analyzeUiProps(nextPropItem, baseParseSources);
-          }
-        }
-      }
-    } else {
-      // 占位空间等
-      if (propItem.__rawHidden) {
-        // false或为空都不用执行
-        isHidden = libs_parse.smartEsValue(propItem.__rawHidden, parseSources);
-
-        if (propItem.hidden != isHidden) {
-          propItem.hidden = isHidden;
-        }
-      }
-    }
-  },
-
-  /**
-   *
-   * @param {*} propItem
-   * @param {*} groups
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
-   */
-  isGroupHidden: function isGroupHidden(propItem, groups, baseParseSources) {
-    var result = false;
-
-    for (var i = 0; i < groups.length; i++) {
-      var fieldKeyName = groups[i];
-      var propSchema = propItem.properties[fieldKeyName];
-
-      if (!propSchema.layout || propSchema.layout.name !== libs_constant.LAYOUT_SPACE) {
-        var parseSources = assign_default()({}, baseParseSources);
-
-        parseSources.index = propSchema.__index;
-        parseSources.idxChain = propSchema.__idxChain;
-        result = libs_parse.smartEsValue(propSchema.__rawHidden, parseSources);
-      } else {
-        //占位空间是不可见的
-        result = true;
-      }
-
-      if (!result) {
-        return result;
-      }
-    }
-
-    return result;
-  },
-
-  /**
-   * 检查数据平铺时schema是否合法。也就是第一层的properies展开的key和第一层的key是否有重复印
-   * @param {*} schema // 已经整理过的schema
-   */
-  __checkForTile: function __checkForTile(schema) {
-    if (schema.autoMatch) {
-      var keyTotals = {};
-      var firstPropSchema = schema.properties;
-
-      for (var key in firstPropSchema) {
-        // 第一层的key
-        if (keyTotals[key]) {
-          keyTotals[key] = keyTotals[key] + 1;
-        } else {
-          keyTotals[key] = 1;
-        }
-
-        var nextSchema = firstPropSchema[key];
-
-        if (nextSchema.properties && !nextSchema.array) {
-          var nextPropItem = nextSchema.properties;
-
-          for (var nextKey in nextPropItem) {
-            // 第二层的key
-            if (keyTotals[nextKey]) {
-              keyTotals[nextKey] = keyTotals[nextKey] + 1;
-            } else {
-              keyTotals[nextKey] = 1;
-            }
-          }
-        }
-      }
-
-      var errKeys = [];
-
-      for (var schemaKey in keyTotals) {
-        if (keyTotals[schemaKey] > 1) {
-          errKeys.push(schemaKey + "(共" + keyTotals[schemaKey] + "次)");
-        }
-      }
-
-      if (errKeys.length > 0) {
-        throw "属性" + errKeys.join("、") + "出错重复，无法做到自动匹配"; // return false;
-      }
-
-      return true;
-    } else {
-      return true;
-    }
-  },
-
-  /**
-   * 组装平铺数据
-   * @param {*} schema // 已经整理过的schema
-   * @param {*} value
-   */
-  perfectTileValue: function perfectTileValue(schema, value) {
-    if (schema.autoMatch && value) {
-      if (libs_utils.isStr(value)) {
-        // 是key
-        return this.__perfectTileKey(schema, value);
-      } else if (libs_utils.isObj(value)) {
-        // 是key-value
-        var newValue = {};
-
-        for (var key in value) {
-          var seperator = ".";
-
-          var keyPath = this.__perfectTileKey(schema, key);
-
-          if (keyPath.indexOf(seperator) > 0) {
-            var paths = keyPath.split(seperator); // 两个
-
-            var firstKey = paths[0];
-            var second = paths[1];
-
-            if (newValue[firstKey]) {// newValue[firstKey][second] = value[second];
-            } else if (libs_utils.isObj(value[firstKey])) {
-              // 重复设值
-              newValue[firstKey] = value[firstKey];
-            } else {
-              newValue[firstKey] = {};
-            }
-
-            newValue[firstKey][second] = value[second];
-          } else {
-            newValue[key] = value[key];
-          }
-        } // console.log("newValue: ", newValue);
-
-
-        return newValue;
-      } else {
-        return value; // 不知类型，直接返回
-      }
-    } else {
-      return value; // 值不对或不需要自动匹配，直接返回
-    }
-  },
-  __perfectTileKey: function __perfectTileKey(schema, keyPath) {
-    var seperator = ".";
-    var keyArr = keyPath.split(seperator);
-    var firstKey = keyArr[0];
-    var firstPropSchema = schema.properties;
-
-    for (var key in firstPropSchema) {
-      // 第一层的key
-      if (key === firstKey) {
-        return keyPath;
-      }
-
-      var nextSchema = firstPropSchema[key];
-
-      if (nextSchema.properties && !nextSchema.array) {
-        var nextPropItem = nextSchema.properties;
-
-        for (var nextKey in nextPropItem) {
-          // 第二层的key
-          if (nextKey === firstKey) {
-            keyArr.unshift(key); // 前面加上第一层的key
-
-            return keyArr.join(seperator);
-          }
-        }
-      }
-    } // 没有找到，改造后直接返回
-
-
-    return keyPath;
-  },
-
-  /**
-   * 把结果数据平铺化
-   * @param {*} schema // 已经整理过的schema
-   * @param {*} value
-   */
-  __tileResultValue: function __tileResultValue(schema, value) {
-    if (schema.autoMatch) {
-      var newValue = {};
-      var firstPropSchema = schema.properties;
-
-      for (var key in value) {
-        var nextSchema = firstPropSchema[key];
-
-        if (nextSchema.properties && !nextSchema.array) {
-          newValue = assign_default()(newValue, value[key]);
-        } else {
-          newValue[key] = value[key];
-        }
-      }
-
-      return newValue;
-    } else {
-      return value;
-    }
-  },
-  getHandlers: function getHandlers(eventName, actions) {
-    var handlers = [];
-
-    if (actions) {
-      actions.forEach(function (actionItem) {
-        if (actionItem.trigger.includes(eventName)) {
-          handlers.push(actionItem.handler);
-        }
-      });
-    }
-
-    if (handlers.length > 0) {
-      return handlers;
-    } else {
-      return null;
-    }
-  },
-  getThisForm: function getThisForm($currentVue) {
-    var $form = $currentVue;
-
-    while ($form) {
-      $form = $form.$parent;
-
-      if (!libs_utils.isUndef($form.$data.formSchema) && !libs_utils.isUndef($form.$data.isInited)) {
-        break;
-      }
-    }
-
-    return $form ? $form : null;
-  },
-  getRootSchema: function getRootSchema($currentVue) {
-    var $form = this.getThisForm($currentVue);
-
-    if ($form) {
-      return $form.getRootSchema();
-    } else {
-      throw "无法取出表单";
-    }
-  }
-};
-/* harmony default export */ var form_utils = (formUtils);
-// CONCATENATED MODULE: ./src/package/libs/parse.js
-
-
-
-
-
-
-
-
-
-var parse = {
-  isEsScript: function isEsScript(scriptTxt) {
-    var expPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "es:";
-
-    if (libs_utils.isStr(scriptTxt)) {
-      var esIndex = scriptTxt.indexOf(expPrefix);
-
-      if (esIndex === 0) {
-        var execStr = scriptTxt.substr(expPrefix.length);
-
-        if (execStr && execStr.trim()) {
-          return true;
-        } else {
-          return false; // 为空，也不是
-        }
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  },
-
-  /**
-   * 智能分析值
-   * @param {*} val
-   * @param {*}
-   *   idxChain: 该值的索引链，即所在的路径中的所有数组中的索引，比如 persons[0].name[1].firstname，即该值为"0,1"
-   *   data: {rootData: 代表$root的值, globalData: 代表$global的值}
-   * 规则：
-   * 1. 普通值直接返回
-   * 2. 函数类型返回执行后的值
-   * 3. 字符串且以dx:开头的，则会进行处理成可执行的脚本并执行返回结果（其中表达式中$root代表rootData, $const代表constData）
-   */
-  smartEsValue: function smartEsValue(scriptTxt) {
-    var _ref = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        _ref$global = _ref.global,
-        global = _ref$global === void 0 ? {} : _ref$global,
-        _ref$rootData = _ref.rootData,
-        rootData = _ref$rootData === void 0 ? {} : _ref$rootData,
-        _ref$index = _ref.index,
-        index = _ref$index === void 0 ? -1 : _ref$index,
-        _ref$idxChain = _ref.idxChain,
-        idxChain = _ref$idxChain === void 0 ? "" : _ref$idxChain,
-        _ref$rootSchema = _ref.rootSchema,
-        rootSchema = _ref$rootSchema === void 0 ? {} : _ref$rootSchema;
-
-    // console.log("scriptTxt:", scriptTxt);
-    // console.log("global:", global);
-    // console.log("rootData:", rootData);
-    // console.log("index:", index);
-    // console.log("idxChain:", idxChain);
-    // console.log("rootSchema:", rootSchema);
-    if (keys_default()(rootData).length <= 0) {
-      throw "rootData = {}";
-    }
-
-    if (keys_default()(rootSchema).length <= 0) {
-      throw "rootSchema = {}";
-    }
-
-    return parse.__smartAnalyze(scriptTxt, {
-      sources: [{
-        symbol: "$global",
-        value: global
-      }, {
-        symbol: "$root",
-        value: rootData
-      }, {
-        symbol: "$index",
-        value: index
-      }],
-      idxChain: idxChain,
-      rootSchema: rootSchema
-    });
-  },
-
-  /**
-   * 智能分析值
-   * @param {*} scriptTxt
-   * @param {*}
-   *   idxChain: 该值的索引链，即所在的路径中的所有数组中的索引，比如 persons[0].name[1].firstname，即该值为"0,1"
-   *   data: [ { symbol: '', value: {} }, ... ] symbol指数据代表的符号，比如$root；value即为数据本身
-   *   expPrefix: 表达式前缀标识，默认值是"dx:"
-   *   rootSchema
-   *   execTotal 用来记录执行总数，当超过一定数目时，认为是死循环，因为正常人的话，几乎是不可能到达这个数目的
-   * 规则：
-   * 1. 普通值直接返回
-   * 2. 函数类型返回执行后的值
-   * 3. 字符串且以dx:开头的，则会进行处理成可执行的脚本并执行返回结果
-   *    支持的规则：$root.age / $root.person[0].age / $root.person[i].age (i表示取某数组中的某一项，由idxChain来指定具体项) / $root.person[e].age (e表示取该数组的每一项，返回是个数组值。注意：当使用e时，只能使用一次，并且不能与i搭配)
-   */
-  __smartAnalyze: function __smartAnalyze(scriptTxt) {
-    var _ref2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
-        _ref2$idxChain = _ref2.idxChain,
-        idxChain = _ref2$idxChain === void 0 ? "" : _ref2$idxChain,
-        _ref2$sources = _ref2.sources,
-        sources = _ref2$sources === void 0 ? [] : _ref2$sources,
-        _ref2$expPrefix = _ref2.expPrefix,
-        expPrefix = _ref2$expPrefix === void 0 ? "es:" : _ref2$expPrefix,
-        _ref2$rootSchema = _ref2.rootSchema,
-        rootSchema = _ref2$rootSchema === void 0 ? {} : _ref2$rootSchema;
-
-    var execTotal = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var MAX_TOTAL = 30;
-
-    if (execTotal > MAX_TOTAL) {
-      throw "解析" + scriptTxt + "出错，系统递规超过" + MAX_TOTAL + "次，可能造成死循环";
-    }
-
-    execTotal += 1;
-
-    var txtType = typeof_typeof(scriptTxt);
-
-    var result;
-
-    switch (txtType) {
-      case "string":
-        if (parse.isEsScript(scriptTxt)) {
-          (function () {
-            scriptTxt = scriptTxt.substring(expPrefix.length);
-            scriptTxt = scriptTxt.trim(); // 与isEsScript判断一致
-            // TODO daniel: 这里的替换可能需要再完善一下，可能会出错
-
-            idxChain = idxChain ? idxChain : "";
-            var idxChains = idxChain.split(","); // 解析$hidden
-
-            var hiddenPatt = /\{{(\s*\$hidden\()(.+?)(\)\s*}})/gi;
-            var hiddenResult = null;
-            var hiddenTargetPiece = "";
-            var hiddenPathKey = "";
-            var hiddenName = "isHidden";
-            var rootSchemaName = "rootSchema";
-            var execTotalName = "execTotal";
-            var hiddenFunTxt = "";
-            var newScriptTxt = "";
-            var curSliceIndex = 0;
-            var hasHiddenFun = false; // let hiddenMatchs = hiddenPatt.match() || []; // matchs值：["{{$hidden(persons[i].age)}}", "{{$hidden(persons[i].age)}}"]
-
-            hiddenResult = hiddenPatt.exec(scriptTxt);
-
-            var _loop = function _loop() {
-              hasHiddenFun = true; // 有隐藏函数
-              // document.write(hiddenPatt);
-              // var hiddenPatt = /\{{\s*$hidden\(.+?\)\s*}}/i;
-              // var scriptTxt= "{{$hidden(persons[i].age)}}";
-              // var result = hiddenPatt.exec(scriptTxt);
-              // console.log("result: ", result, hiddenPatt.lastIndex);
-              //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
-
-              hiddenTargetPiece = hiddenResult[0];
-              hiddenPathKey = hiddenResult[2]; // 去掉单双引号和$root若存在
-
-              hiddenPathKey = hiddenPathKey.trim();
-              hiddenPathKey = hiddenPathKey.replace(/^('|")|('|")$/g, "");
-              hiddenPathKey = hiddenPathKey.trim(); //去掉$root;若存在
-
-              hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
-              var chainPieces = hiddenPathKey.split("[i]");
-              var chainPiecesLen = chainPieces.length;
-              var chainPiecesTempVal = "";
-              chainPieces.forEach(function (piece, index) {
-                if (index < chainPiecesLen - 1) {
-                  chainPiecesTempVal += piece + "[" + idxChains[index] + "]";
-                } else {
-                  chainPiecesTempVal += piece;
-                }
-              });
-              hiddenPathKey = chainPiecesTempVal;
-              hiddenFunTxt = hiddenName + "(" + rootSchemaName + ", '" + hiddenPathKey + "', {{$global}}, {{$root}}, " + execTotalName + ")"; // 后面会进行解析替换
-              // console.log("hiddenFunTxt: ", hiddenFunTxt);
-              // hiddenFunTxt = "false ";
-
-              newScriptTxt += scriptTxt.slice(curSliceIndex, hiddenPatt.lastIndex - hiddenTargetPiece.length) + hiddenFunTxt;
-              curSliceIndex = hiddenPatt.lastIndex; // console.log("1 newScriptTxt: ", curSliceIndex);
-
-              hiddenResult = hiddenPatt.exec(scriptTxt);
-            };
-
-            while (hiddenResult) {
-              _loop();
-            }
-
-            newScriptTxt += scriptTxt.slice(curSliceIndex); // 最后的片段
-            // console.log("2 newScriptTxt: '" + newScriptTxt + "'");
-            // 假设val为：dx: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
-
-            var matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
-            // console.log("matchs", matchs);
-
-            matchs.forEach(function (mItem) {
-              // mItem值："{{$root.persons[i].age}}"
-              var tempVal = ""; //找出[i],按顺序说明出处
-
-              var pieces = mItem.split("[i]");
-              var piecesLen = pieces.length;
-              pieces.forEach(function (piece, index) {
-                if (index < piecesLen - 1) {
-                  tempVal += piece + "[" + idxChains[index] + "]";
-                } else {
-                  tempVal += piece;
-                }
-              }); // console.log("tempVal", tempVal, sources);
-              //替换数据源
-
-              sources.forEach(function (dataItem, index) {
-                tempVal = tempVal.replace(new RegExp("\\{{\\s*\\".concat(dataItem.symbol, "(\\.?.*)}}")), "sources[".concat(index, "].value$1"));
-              });
-              newScriptTxt = newScriptTxt.replace(mItem, tempVal);
-            });
-            newScriptTxt = "return (" + newScriptTxt + ");";
-
-            if (!hasHiddenFun) {
-              result = new Function("sources", newScriptTxt)(sources);
-            } else {
-              // 有$hidden, 传入解析函数
-              // console.log("newScriptTxt: ", newScriptTxt);
-              result = new Function("sources", hiddenName, rootSchemaName, execTotalName, newScriptTxt)(sources, parse.__isHiddenSchema, rootSchema, execTotal);
-            }
-          })();
-        } else {
-          result = scriptTxt;
-        }
-
-        break;
-
-      default:
-        result = scriptTxt;
-        break;
-    }
-
-    return result;
-  },
-  __isHiddenSchema: function __isHiddenSchema(rootSchema, pathKey, globalData, rootData, execTotal) {
-    // console.log("execTotal: ", execTotal);
-    var targetSchema = form_utils.getSchemaByKey(rootSchema, pathKey);
-
-    if (targetSchema) {
-      if (parse.isEsScript(targetSchema.__rawHidden)) {
-        var data = {
-          sources: [{
-            symbol: "$global",
-            value: globalData
-          }, {
-            symbol: "$root",
-            value: rootData
-          }, {
-            symbol: "$index",
-            value: targetSchema.__index
-          }],
-          idxChain: targetSchema.__idxChain,
-          rootSchema: rootSchema
-        };
-        return parse.__smartAnalyze(targetSchema.__rawHidden, data, execTotal);
-      } else {
-        return targetSchema.__rawHidden ? true : false;
-      }
-    } else {
-      console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
-      return false;
-    }
-  }
-};
-/* harmony default export */ var libs_parse = (parse);
-// CONCATENATED MODULE: ./src/package/base.js
-
-
-
-
-
-
-
-
-
-
-
-"use strict";
-
-/* harmony default export */ var base = ({
-  render: function render(createElement) {
-    // console.log("start ..........................");
-    // console.log(this.config.props);
-    // console.log("end ..........................");
-    if (!this.config.name) {
-      throw "es-base config.name必须存在";
-    }
-
-    return createElement(this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
-    {
-      attrs: this.$data.dataProps,
-      //attrs为原生属性
-      // style: this.config.style,
-      // class: this.config.class,
-      // DOM属性
-      domProps: {// innerHTML: "baz"
-        // value: this.config.value
-      },
-      // 组件props
-      props: _objectSpread({
-        // myProp: "bar",
-        value: libs_utils.isRefVal(this.value) ? libs_utils.deepCopy(this.value) : this.value
-      }, this.$data.dataProps),
-      // 事件监听基于 "on"
-      // 所以不再支持如 "v-on:keyup.enter" 修饰语
-      // 需要手动匹配 KeyCode
-      on: this.$data.emitOn,
-      // on: {
-      //   // click: (event) => {
-      //   // 	console.log("click...");
-      //   // },
-      //   input: event => {
-      //     // console.log("input...", event);
-      //     // this.value = event;
-      //     if (this.value != event) {
-      //       this.$emit("input", event);
-      //     }
-      //   },
-      //   change: event => {
-      //     // console.log("change", event);
-      //     this.$emit("change", event);
-      //   }
-      // },
-      // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
-      nativeOn: this.$data.nativeOn,
-      // nativeOn: {
-      // click: this.nativeClickHandler
-      // change: (event) => {
-      //   // console.log("change", event);
-      //   this.$emit("change", event);
-      // }
-      // },
-      // 自定义指令。注意事项：不能对绑定的旧值设值
-      // Vue 会为您持续追踪
-      directives: [// {
-        // 	name: "my-custom-directive",
-        // 	value: "2",
-        // 	expression: "1 + 1",
-        // 	arg: "foo",
-        // 	modifiers: {
-        // 		bar: true
-        // 	}
-        // }
-      ],
-      // Scoped slots in the form of
-      // { name: props => VNode | Array<VNode> }
-      scopedSlots: {// default: props => createElement('span', props.text + "test3")
-      },
-      // 如果组件是其他组件的子组件，需为插槽指定名称
-      // slot: "name-of-slot",
-      // 其他特殊顶层属性
-      // key: "myKey",
-      ref: "__comTarget__"
-    }, // [createElement('span', "test")]
-    // ["test2"]
-    // "测试{{config.value}}" // 子组件中的阵列
-    this.dataText);
-  },
-  props: {
-    // openSmart: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: true
-    // },
-    config: {
-      type: Object,
-      required: true,
-      default: function _default() {
-        return {
-          name: "",
-          //lg-element 组件 原生组件
-          // value: "",
-          // attrs: {},
-          // style: {},
-          // class: {},
-          props: {}
-        };
-      }
-    },
-    formData: {
-      type: Object,
-      required: false,
-      default: function _default() {
-        return {};
-      }
-    },
-    global: {
-      type: Object,
-      required: false,
-      default: function _default() {
-        return {};
-      }
-    },
-    emitEvents: {
-      type: Array,
-      required: false,
-      default: null
-    },
-    nativeEvents: {
-      type: Array,
-      required: false,
-      default: null
-    },
-    index: {
-      type: Number,
-      required: false,
-      default: -1
-    },
-    idxChain: {
-      //组成形式（索引,索引,索引）如：0、0,1、 1,12；“索引”用逗号隔开 通俗讲：因为array的值必须是一个数组，array里面包含array(不一定是孩子，也可能是孙子等)，每一个“索引”代表对应array的哪一项
-      // 用于记录在数组中的索引
-      type: String,
-      required: false,
-      default: ""
-    },
-    value: {
-      type: [Object, String, Date, Array, Boolean, Number],
-      required: false
-    }
-  },
-  data: function data() {
-    return {
-      // hasEsScript: false,
-      unGlobalWatch: false,
-      unFormDataWatch: false,
-      dataProps: {},
-      dataText: null,
-      emitOn: null,
-      nativeOn: null
-    };
-  },
-  created: function created() {
-    this.initUi();
-  },
-  methods: {
-    initUi: function initUi() {
-      // if (this.openSmart) {
-      if (this.needWatch()) {
-        this.setWatch(); //监听formData，当其值必变时，则props也要重新执行一遍
-      } else {
-        this.cancelWatch();
-      }
-
-      this.parseData();
-      this.createOn(); // } else {
-      //   this.cancelWatch();
-      //   this.$data.dataProps = utils.deepCopy(this.config.props);
-      // }
-    },
-    //判断组件的props是否存在es语句
-    needWatch: function needWatch() {
-      var hasEsScript = false;
-
-      for (var key in this.config.props) {
-        if (key != "value") {
-          //过滤掉value,要不然会换掉this.value
-          var scriptTxt = this.config.props[key];
-
-          if (libs_parse.isEsScript(scriptTxt)) {
-            hasEsScript = true;
-            break;
-          }
-        }
-      }
-
-      if (libs_parse.isEsScript(this.config.text)) {
-        hasEsScript = true;
-      }
-
-      return hasEsScript;
-    },
-    eventHandler: function eventHandler(eventName, eventData) {
-      this.$emit("trigger", eventName, eventData);
-    },
-
-    /**
-     * 创建所需要监听的事件
-     */
-    createOn: function createOn() {
-      var _this = this;
-
-      var emitEvents;
-
-      if (this.emitEvents) {
-        emitEvents = libs_utils.deepCopy(this.emitEvents);
-
-        if (!emitEvents.includes(libs_constant.INPUT_EVENT)) {
-          emitEvents.push(libs_constant.INPUT_EVENT);
-        }
-      } else {
-        emitEvents = [libs_constant.INPUT_EVENT];
-      } // emit发出的事件
-
-
-      var emitOn = {};
-      emitEvents.forEach(function (eventName) {
-        if (eventName == libs_constant.INPUT_EVENT) {
-          emitOn[eventName] = function (eventData) {
-            var eventValue;
-
-            if (eventData && eventData.target && eventData.target.nodeName) {
-              eventValue = eventData.target.value;
-            } else {
-              eventValue = eventData;
-            }
-
-            if (_this.value !== eventValue) {
-              // console.log("eventValue: ", eventValue);
-              _this.$emit("input", eventValue);
-
-              _this.eventHandler(eventName, eventValue);
-            }
-          };
-        } else {
-          emitOn[eventName] = function (eventData) {
-            _this.eventHandler(eventName, eventData);
-          };
-        }
-      });
-      this.$data.emitOn = keys_default()(emitOn).length > 0 ? emitOn : null; //原生事件
-      // emit发出的事件
-
-      if (this.nativeEvents && this.nativeEvents.length > 0) {
-        var nativeOn = {};
-        var nativeEvents = libs_utils.deepCopy(this.nativeEvents);
-        nativeEvents.forEach(function (eventName) {
-          nativeOn[eventName] = function (eventData) {
-            _this.eventHandler(eventName + "." + libs_constant.ADJ_NATIVE, eventData);
-          };
-        });
-        this.$data.nativeOn = keys_default()(nativeOn).length > 0 ? nativeOn : null;
-      } else {
-        this.$data.nativeOn = null;
-      }
-    },
-    parseData: function parseData() {
-      this.$data.dataProps = this.analyzeVal();
-      var parseSources = {
-        global: this.global,
-        rootData: this.formData,
-        index: this.index,
-        idxChain: this.idxChain,
-        rootSchema: form_utils.getRootSchema(this)
-      };
-      var dataText = libs_parse.smartEsValue(this.config.text, parseSources);
-
-      if (typeof dataText == "string") {
-        this.$data.dataText = dataText;
-      } else {
-        this.$data.dataText = null;
-      } // console.log("this.dataText", this.dataText);
-
-    },
-    analyzeVal: function analyzeVal() {
-      var dataProps = {};
-
-      for (var key in this.config.props) {
-        if (key != "value") {
-          //过滤掉value,要不然会换掉this.value
-          var scriptTxt = this.config.props[key];
-          var parseSources = {
-            global: this.global,
-            rootData: this.formData,
-            index: this.index,
-            idxChain: this.idxChain,
-            rootSchema: form_utils.getRootSchema(this)
-          };
-          dataProps[key] = libs_parse.smartEsValue(scriptTxt, parseSources);
-        }
-      }
-
-      return dataProps;
-    },
-    setWatch: function setWatch() {
-      var _this2 = this;
-
-      if (!this.$data.unGlobalWatch) {
-        this.$data.unGlobalWatch = this.$watch("global", function () {
-          // this.$data.dataProps = this.analyzeVal();
-          _this2.parseData();
-        }, {
-          deep: false
-        });
-      }
-
-      if (!this.$data.unFormDataWatch) {
-        this.$data.unFormDataWatch = this.$watch("formData", function () {
-          _this2.parseData();
-        }, {
-          deep: false
-        });
-      }
-    },
-    cancelWatch: function cancelWatch() {
-      if (this.$data.unGlobalWatch) {
-        this.$data.unGlobalWatch();
-        this.$data.unGlobalWatch = false;
-      }
-
-      if (this.$data.unFormDataWatch) {
-        this.$data.unFormDataWatch();
-        this.$data.unFormDataWatch = false;
-      }
-    }
-  },
-  destroyed: function destroyed() {},
-  watch: {
-    config: {
-      handler: function handler()
-      /* newVal, oldVal */
-      {
-        // console.log("base.config here...");
-        this.initUi();
-      },
-      deep: false
-    }
-  }
-});
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=script&lang=js&
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ var objectvue_type_script_lang_js_ = ({
-  mixins: [item_mixin],
-  data: function data() {
-    return {};
-  },
-  components: {
-    esBase: base
-  },
-  methods: {}
-});
-// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=script&lang=js&
- /* harmony default export */ var layout_objectvue_type_script_lang_js_ = (objectvue_type_script_lang_js_); 
-// EXTERNAL MODULE: ./src/package/layout/object.vue?vue&type=style&index=0&lang=scss&
-var objectvue_type_style_index_0_lang_scss_ = __webpack_require__("ac2a");
-
-// CONCATENATED MODULE: ./src/package/layout/object.vue
-
-
-
-
-
-
-/* normalize component */
-
-var object_component = normalizeComponent(
-  layout_objectvue_type_script_lang_js_,
-  objectvue_type_template_id_12ab3a91_render,
-  objectvue_type_template_id_12ab3a91_staticRenderFns,
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* harmony default export */ var object = (object_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-row.vue?vue&type=template&id=7aaa8e63&
-var array_rowvue_type_template_id_7aaa8e63_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-box"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
-          marginTop: (index > 0 ? _vm.schema.array.rowSpace : 0) + 'px'
-        })},[(_vm.schema.array.hasOrder !== false)?_c('div',{staticClass:"es-order-box",style:({
-            height:
-              typeof _vm.schema.boxRowHeight == 'number'
-                ? _vm.schema.boxRowHeight + 'px'
-                : _vm.schema.rowHeight + 'px'
-          })},[_vm._v("\n          "+_vm._s(index + 1)+".\n        ")]):_vm._e(),_c('div',{staticClass:"es-array-row-body"},[(
-              itemSchema.properties &&
-                itemSchema.layout &&
-                itemSchema.layout.name === 'tabs'
-            )?_c('tabs',{tag:"component",attrs:{"schema":itemSchema,"form-data":_vm.formData},on:{"formClick":_vm.formClick}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):(itemSchema.properties)?_c('es-object',{attrs:{"schema":itemSchema,"form-data":_vm.formData}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):[_vm._t("default",null,{"schema":itemSchema})]],2),(
-            _vm.schema.array.hasDelete ||
-              _vm.schema.array.hasSort ||
-              _vm.schema.array.hasCopy
-          )?_c('div',{staticClass:"es-btn-box",style:({
-            height:
-              typeof _vm.schema.boxRowHeight == 'number'
-                ? _vm.schema.boxRowHeight + 'px'
-                : _vm.schema.rowHeight + 'px'
-          })},[_c('edit-btns',{attrs:{"has-delete":_vm.schema.array.hasDelete,"has-sort":_vm.schema.array.hasSort,"can-delete":_vm.schema.__propSchemaList.length > _vm.schema.array.min,"fixed":_vm.schema.array.fixed,"is-first":index == 0,"is-last":index == _vm.schema.__propSchemaList.length - 1,"index":index,"has-del-warn":_vm.schema.array.hasDelWarn,"can-add":_vm.schema.array.max <= 0 ||
-                _vm.schema.__propSchemaList.length < _vm.schema.array.max,"has-add":_vm.schema.array.hasCopy},on:{"copyItem":_vm.copyItem,"delItem":_vm.delItem,"upItem":_vm.upItem,"downItem":_vm.downItem}})],1):_vm._e()])}),0),(_vm.schema.array.hasDelete || _vm.schema.array.hasAdd)?_c('div',{staticClass:"es-btn-footer",style:({
-        marginTop:
-          _vm.schema.__propSchemaList.length > 0
-            ? _vm.schema.array.rowSpace + 'px'
-            : '0px'
-      })},[_c('edit-bottom-btns',{attrs:{"has-delete":_vm.schema.array.hasDelete &&
-            _vm.schema.array.min <= 0 &&
-            _vm.schema.array.fixed <= 0,"has-add":_vm.schema.array.hasAdd,"can-delete":_vm.schema.__propSchemaList.length > 0 &&
-            _vm.schema.array.fixed <= 0 &&
-            _vm.schema.array.min <= 0,"can-add":_vm.schema.array.max <= 0 ||
-            _vm.schema.__propSchemaList.length < _vm.schema.array.max,"index":-1,"has-del-warn":_vm.schema.array.hasDelWarn},on:{"delItem":_vm.delAllItems,"addItem":_vm.addItem}})],1):_vm._e()]),(_vm.schema.help && _vm.schema.component)?_c('div',{staticClass:"es-form-help",style:({
-      height:
-        typeof _vm.schema.boxRowHeight == 'number'
-          ? _vm.schema.boxRowHeight + 'px'
-          : _vm.schema.rowHeight + 'px'
-    })},[_c('es-base',{attrs:{"config":_vm.schema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}})],1):_vm._e()])}
-var array_rowvue_type_template_id_7aaa8e63_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/package/layout/array-row.vue?vue&type=template&id=7aaa8e63&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/tabs.vue?vue&type=template&id=50cba1c0&
-var tabsvue_type_template_id_50cba1c0_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-layout-tabs"},[_c('es-tabs-nav',{attrs:{"type":_vm.schema.layout.type}},[_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return [(!itemSchema.hidden)?_c('es-tabs-nav-item',{key:fieldName,attrs:{"tabsName":itemSchema.label.text ? itemSchema.label.text : fieldName + '',"required":itemSchema.rules && itemSchema.rules.required,"is-active":fieldName === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"index":fieldName},on:{"clickActive":_vm.clickActiveHandler}}):_vm._e()]})],2),_c('ul',{staticClass:"es-tabs-body",style:({
-      padding: _vm.schema.boxRowSpace + 'px',
-      'border-width': _vm.schema.layout.hasBorder ? '1px' : '0px'
-    })},_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return _c('li',{directives:[{name:"show",rawName:"v-show",value:(fieldName === _vm.schema.__tabsIndex && !itemSchema.hidden),expression:"fieldName === schema.__tabsIndex && !itemSchema.hidden"}],key:fieldName},[_vm._t(fieldName)],2)}),0)],1)}
-var tabsvue_type_template_id_50cba1c0_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/package/layout/tabs.vue?vue&type=template&id=50cba1c0&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav.vue?vue&type=template&id=8c66c6c4&
-var tabs_navvue_type_template_id_8c66c6c4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.boxClass},[_c('div',{ref:"scrollBox",staticClass:"es-tabs-scroll-box"},[_c('div',{class:['es-tabs-scroll-wrap', _vm.showToggle ? 'es-has-toggle' : ''],style:({ padding: _vm.showToggle ? '0 ' + _vm.toggleZoneWidth + 'px' : '0' })},[_c('div',{class:['es-tabs-nav-wrap', _vm.hasAdd ? 'es-has-add' : '']},[_c('div',{staticClass:"es-tabs-nav-scroll"},[_c('ul',{ref:"scrollWrap",staticClass:"es-tabs-nav",style:({ transform: 'translateX(' + _vm.navX + 'px)' })},[_vm._t("default")],2)]),(_vm.hasAdd)?_c('es-tabs-btn',{staticClass:"es-tabs-add es-btn",attrs:{"disabled":_vm.canAdd},on:{"click":_vm.addItemHandler}}):_vm._e()],1),_c('span',{staticClass:"es-tabs-prev-btn",on:{"click":_vm.clickPrevHandler}},[_c('span',{staticClass:"es-arrow"})]),_c('span',{staticClass:"es-tabs-next-btn",on:{"click":_vm.clickNextHandler}},[_c('span',{staticClass:"es-arrow"})])])]),_c('div',{staticClass:"help-box"},[_vm._t("help")],2)])}
-var tabs_navvue_type_template_id_8c66c6c4_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/package/components/tabs-nav.vue?vue&type=template&id=8c66c6c4&
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav-item.vue?vue&type=template&id=3e0a7805&
-var tabs_nav_itemvue_type_template_id_3e0a7805_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{class:{
-    'is-active': _vm.isActive,
-    'has-close': _vm.hasDelete,
-    'has-pop': _vm.showPop
-  }},[_c('div',{class:{ 'es-tabs-nav-item-cnt': true, 'es-error': _vm.hasError },on:{"click":_vm.clickCntHandler}},[(_vm.required)?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),_vm._v(_vm._s(_vm.tabsName)+"\n    "),(_vm.hasDelete)?_c('div',{staticClass:"es-tabs-close-box"},[_c('es-tabs-btn',{ref:"delBtn",staticClass:"es-tabs-close",attrs:{"disabled":_vm.index + 1 <= _vm.fixed || !_vm.canDelete},on:{"click":_vm.clickDeletBtn}}),(_vm.canPop)?_c('transition',{attrs:{"name":"es-fade","mode":"out-in","appear":""}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPop),expression:"showPop"}],ref:"pop",staticClass:"es-form-pop-box",style:({
-            left: _vm.popPosition.left + 'px',
-            top: _vm.popPosition.top + 'px',
-            zIndex: _vm.popPosition.zindex + ''
-          }),on:{"click":function($event){$event.preventDefault();$event.stopPropagation();}}},[_c('div',{staticClass:"es-form-pop-content"},[_c('div',[_vm._v("确定删除吗？")]),_c('div',{staticClass:"es-btn-row"},[_c('div',{staticClass:"es-btn-group"},[_c('es-btn',{staticClass:"es-btn",on:{"click":_vm.clickPopConfirm}},[_vm._v("\n                  确定\n                ")]),_c('es-btn',{staticClass:"es-btn",on:{"click":_vm.closePop}},[_vm._v("\n                  取消\n                ")])],1)])]),(_vm.popArrow.direction)?_c('div',{class:'es-pop-arrow-' + _vm.popArrow.direction,style:({ left: _vm.popArrow.left + 'px', top: _vm.popArrow.top + 'px' })}):_vm._e()])]):_vm._e()],1):_vm._e()]),(_vm.hasSort)?_c('es-tabs-btn',{staticClass:"es-tabs-left-btn",attrs:{"disabled":_vm.isFirst || _vm.index <= _vm.fixed},on:{"click":_vm.upItem}},[_c('span',{staticClass:"es-arrow"})]):_vm._e(),(_vm.hasSort)?_c('es-tabs-btn',{staticClass:"es-tabs-right-btn",attrs:{"disabled":_vm.isLast || _vm.index < _vm.fixed},on:{"click":_vm.downItem}},[_c('span',{staticClass:"es-arrow"})]):_vm._e()],1)}
-var tabs_nav_itemvue_type_template_id_3e0a7805_staticRenderFns = []
-
-
-// CONCATENATED MODULE: ./src/package/components/tabs-nav-item.vue?vue&type=template&id=3e0a7805&
-
-// CONCATENATED MODULE: ./src/package/mixins/array-edit-item-mixin.js
-
-/* harmony default export */ var array_edit_item_mixin = ({
-  data: function data() {
-    return {};
-  },
-  props: {
-    canDelete: {
-      type: Boolean,
-      required: false,
-      default: true
-    },
-    hasSort: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    isFirst: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    isLast: {
-      type: Boolean,
-      required: false,
-      default: false
-    },
-    fixed: {
-      // 固定行（前几）
-      type: Number,
-      required: false,
-      default: 0
-    }
-  },
-  methods: {
-    upItem: function upItem() {
-      if (!this.isFirst) {
-        this.$emit("upItem", this.index);
-      }
-    },
-    downItem: function downItem() {
-      if (!this.isLast) {
-        this.$emit("downItem", this.index);
-      }
-    }
-  }
-});
 // CONCATENATED MODULE: ./src/package/mixins/array-del-pop-mixin.js
 
 // import utils from "../libs/utils";
@@ -11616,6 +7897,7 @@ var tabs_btn_component = normalizeComponent(
 //
 //
 //
+//
 
 
 
@@ -11642,11 +7924,11 @@ var tabs_btn_component = normalizeComponent(
     };
   },
   props: {
-    tabsName: {
-      type: String,
-      required: true,
-      default: "???"
-    },
+    // tabsName: {
+    //   type: String,
+    //   required: true,
+    //   default: "???"
+    // },
     isActive: {
       type: Boolean,
       required: true,
@@ -11695,8 +7977,8 @@ var tabs_btn_component = normalizeComponent(
 
 var tabs_nav_item_component = normalizeComponent(
   components_tabs_nav_itemvue_type_script_lang_js_,
-  tabs_nav_itemvue_type_template_id_3e0a7805_render,
-  tabs_nav_itemvue_type_template_id_3e0a7805_staticRenderFns,
+  tabs_nav_itemvue_type_template_id_bf58c136_render,
+  tabs_nav_itemvue_type_template_id_bf58c136_staticRenderFns,
   false,
   null,
   null,
@@ -11746,8 +8028,6 @@ var tabs_nav_item_component = normalizeComponent(
 //
 //
 //
-// import itemMixin from "../mixins/item-mixin";
-// import arrayMixins from "../mixins/array-mixin.js";
 
 
 /* harmony default export */ var tabs_navvue_type_script_lang_js_ = ({
@@ -12011,8 +8291,8 @@ var tabs_navvue_type_style_index_0_lang_scss_ = __webpack_require__("aef7");
 
 var tabs_nav_component = normalizeComponent(
   components_tabs_navvue_type_script_lang_js_,
-  tabs_navvue_type_template_id_8c66c6c4_render,
-  tabs_navvue_type_template_id_8c66c6c4_staticRenderFns,
+  tabs_navvue_type_template_id_34141644_render,
+  tabs_navvue_type_template_id_34141644_staticRenderFns,
   false,
   null,
   null,
@@ -12088,6 +8368,14 @@ var tabs_nav_component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+
+
 
 
 
@@ -12095,17 +8383,36 @@ var tabs_nav_component = normalizeComponent(
   mixins: [item_mixin],
   components: {
     esTabsNav: tabs_nav,
-    esTabsNavItem: tabs_nav_item
+    esTabsNavItem: tabs_nav_item,
+    esBase: base
   },
   data: function data() {
     return {};
   },
   methods: {
     clickActiveHandler: function clickActiveHandler(index) {
-      this.$emit("formClick", "tabs", {
+      var form = this.__getForm();
+
+      form._toggleUi("tabs", {
         key: this.schema.__pathKey,
         index: index
       });
+    },
+    __getForm: function __getForm() {
+      var formItem = this.$parent;
+
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+
+        if (type == libs_constant.UI_FORM) {
+          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
+        } else if (type == libs_constant.UI_ARRAY) {// checkSchema.push(formItem._getSchema());
+        } else {// ... 往上派
+          }
+
+        formItem = formItem.$parent;
+      }
     }
   },
   created: function created() {},
@@ -12128,8 +8435,8 @@ var tabsvue_type_style_index_0_lang_scss_ = __webpack_require__("8744");
 
 var tabs_component = normalizeComponent(
   layout_tabsvue_type_script_lang_js_,
-  tabsvue_type_template_id_50cba1c0_render,
-  tabsvue_type_template_id_50cba1c0_staticRenderFns,
+  tabsvue_type_template_id_df751e26_render,
+  tabsvue_type_template_id_df751e26_staticRenderFns,
   false,
   null,
   null,
@@ -12138,6 +8445,3459 @@ var tabs_component = normalizeComponent(
 )
 
 /* harmony default export */ var tabs = (tabs_component.exports);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.fixed.js
+var es6_string_fixed = __webpack_require__("d263");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
+var is_array = __webpack_require__("a745");
+var is_array_default = /*#__PURE__*/__webpack_require__.n(is_array);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/arrayWithoutHoles.js
+
+function _arrayWithoutHoles(arr) {
+  if (is_array_default()(arr)) {
+    for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) {
+      arr2[i] = arr[i];
+    }
+
+    return arr2;
+  }
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/from.js
+var from = __webpack_require__("774e");
+var from_default = /*#__PURE__*/__webpack_require__.n(from);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/is-iterable.js
+var is_iterable = __webpack_require__("c8bb");
+var is_iterable_default = /*#__PURE__*/__webpack_require__.n(is_iterable);
+
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/iterableToArray.js
+
+
+function _iterableToArray(iter) {
+  if (is_iterable_default()(Object(iter)) || Object.prototype.toString.call(iter) === "[object Arguments]") return from_default()(iter);
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/nonIterableSpread.js
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance");
+}
+// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/toConsumableArray.js
+
+
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+}
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js
+var parse_int = __webpack_require__("e814");
+var parse_int_default = /*#__PURE__*/__webpack_require__.n(parse_int);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
+var es6_regexp_constructor = __webpack_require__("3b2b");
+
+// CONCATENATED MODULE: ./src/package/libs/parse.js
+
+
+
+
+
+// import formUtils from "./form-utils";
+
+
+var parse = {
+  isEsScript: function isEsScript(scriptTxt) {
+    var expPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "es:";
+
+    if (libs_utils.isStr(scriptTxt)) {
+      var esIndex = scriptTxt.indexOf(expPrefix);
+
+      if (esIndex === 0) {
+        var execStr = scriptTxt.substr(expPrefix.length);
+
+        if (execStr && execStr.trim()) {
+          return true;
+        } else {
+          return false; // 为空，也不是
+        }
+      } else {
+        return false;
+      }
+    } else {
+      return false;
+    }
+  },
+
+  /**
+   * 智能分析值
+   * @param {*} val
+   * @param {*}
+   *   idxChain: 该值的索引链，即所在的路径中的所有数组中的索引，比如 persons[0].name[1].firstname，即该值为"0,1"
+   *   data: {rootData: 代表$root的值, globalData: 代表$global的值}
+   * 规则：
+   * 1. 普通值直接返回
+   * 2. 函数类型返回执行后的值
+   * 3. 字符串且以dx:开头的，则会进行处理成可执行的脚本并执行返回结果（其中表达式中$root代表rootData, $const代表constData）
+   */
+  smartEsValue: function smartEsValue(scriptTxt, // {
+  //   global = {},
+  //   rootData = {},
+  //   index = -1,
+  //   idxChain = "",
+  //   pathKey = "",
+  //   rootSchema = {},
+  //   isHidden
+  // } = {}
+  parseSources) {
+    if (libs_utils.isFunc(scriptTxt)) {
+      var options;
+
+      if (scriptTxt.__esFuncName === libs_constant.ES_FUNC_NAME) {
+        // es: 转过来的函数
+        options = {
+          global: parseSources.global,
+          rootData: parseSources.rootData,
+          idxChains: parseSources.idxChain ? parseSources.idxChain.split(",") : [],
+          index: parseSources.index,
+          rootSchema: parseSources.rootSchema,
+          isHidden: parseSources.isHidden
+        };
+      } else {
+        // 自定义函数
+        options = {
+          global: parseSources.global,
+          rootData: parseSources.rootData,
+          idxChain: parseSources.idxChain,
+          index: parseSources.index,
+          pathKey: parseSources.pathKey,
+          $hidden: parseSources.isHidden
+        };
+      }
+
+      return scriptTxt(options);
+    } else if (!parse.isEsScript(scriptTxt)) {
+      return scriptTxt;
+    } else {
+      throw "还有es: parse ....: " + scriptTxt;
+    }
+  },
+
+  /* 将es转换成为Function */
+  newEsFuncion: function newEsFuncion(scriptTxt) {
+    var expPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "es:";
+    var result;
+
+    if (parse.isEsScript(scriptTxt)) {
+      var options = [{
+        symbol: "$global",
+        paramKey: "global"
+      }, {
+        symbol: "$root",
+        paramKey: "rootData"
+      }, {
+        symbol: "$index",
+        paramKey: "index"
+        /* other paramKey */
+        // isHidden
+        // rootSchema
+        // idxChains
+
+      }];
+      scriptTxt = scriptTxt.substring(expPrefix.length);
+      scriptTxt = scriptTxt.trim(); // 与isEsScript判断一致
+      // 解析$hidden
+
+      var hiddenPatt = /\{{(\s*\$hidden\()(.+?)(\)\s*}})/gi;
+      var hiddenResult = null;
+      var hiddenTargetPiece = "";
+      var hiddenPathKey = "";
+      var hiddenFunTxt = "";
+      var newScriptTxt = "";
+      var curSliceIndex = 0; // let hasHiddenFun = false;
+
+      hiddenResult = hiddenPatt.exec(scriptTxt);
+
+      var _loop = function _loop() {
+        // hasHiddenFun = true; // 有隐藏函数
+        //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
+        hiddenTargetPiece = hiddenResult[0];
+        hiddenPathKey = hiddenResult[2]; // 去掉单双引号和$root若存在
+
+        hiddenPathKey = hiddenPathKey.trim();
+        hiddenPathKey = hiddenPathKey.replace(/^('|")|('|")$/g, "");
+        hiddenPathKey = hiddenPathKey.trim(); //去掉$root;若存在
+
+        hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
+        var chainPieces = hiddenPathKey.split("[i]");
+        var chainPiecesLen = chainPieces.length;
+        var chainPiecesTempVal = "";
+        chainPieces.forEach(function (piece, index) {
+          if (index < chainPiecesLen - 1) {
+            chainPiecesTempVal += piece + "[(".concat(libs_constant.ES_OPTIONS, ".idxChains[") + index + "])]";
+          } else {
+            chainPiecesTempVal += piece;
+          }
+        });
+        hiddenPathKey = chainPiecesTempVal;
+        hiddenFunTxt = "".concat(libs_constant.ES_OPTIONS) + ".isHidden('" + hiddenPathKey + "')"; // 后面会进行解析替换
+
+        newScriptTxt += scriptTxt.slice(curSliceIndex, hiddenPatt.lastIndex - hiddenTargetPiece.length) + hiddenFunTxt;
+        curSliceIndex = hiddenPatt.lastIndex;
+        hiddenResult = hiddenPatt.exec(scriptTxt);
+      };
+
+      while (hiddenResult) {
+        _loop();
+      }
+
+      newScriptTxt += scriptTxt.slice(curSliceIndex); // 最后的片段
+      // 假设val为：dx: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
+
+      var matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
+
+      matchs.forEach(function (mItem) {
+        // mItem值："{{$root.persons[i].age}}"
+        var tempVal = ""; //找出[i],按顺序说明出处
+
+        var pieces = mItem.split("[i]");
+        var piecesLen = pieces.length;
+        pieces.forEach(function (piece, index) {
+          if (index < piecesLen - 1) {
+            tempVal += piece + "[(".concat(libs_constant.ES_OPTIONS, ".idxChains[") + index + "])]";
+          } else {
+            tempVal += piece;
+          }
+        }); //替换数据源
+
+        options.forEach(function (item) {
+          tempVal = tempVal.replace(new RegExp("\\{{\\s*\\".concat(item.symbol, "(\\.?.*)}}")), "".concat(libs_constant.ES_OPTIONS, "['").concat(item.paramKey, "']$1"));
+        });
+        newScriptTxt = newScriptTxt.replace(mItem, tempVal);
+      });
+      newScriptTxt = "return (" + newScriptTxt + ");";
+      result = new Function(libs_constant.ES_OPTIONS, newScriptTxt);
+      result.__esFuncName = libs_constant.ES_FUNC_NAME;
+    } else {
+      result = scriptTxt;
+    }
+
+    return result;
+  }
+};
+/* harmony default export */ var libs_parse = (parse);
+// CONCATENATED MODULE: ./src/package/libs/global.js
+// import constant from "./constant";
+// import esHelp from "../components/help.vue";
+var global = {
+  boxRowHeight: 40,
+  boxRowSpace: 20,
+  boxLabelWidth: 100,
+  colon: false,
+  direction: "h",
+  defaultCom: "input",
+  defaultVal: "",
+  // 这个是对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；注：此值对其它组件不补充
+  // help: { name: esHelp, props: {} },
+  trimDoms: ["input", "textarea", "el-input"],
+  // 经测试：在el-input里，change比change.native先触发
+  trimEvent: "change.native"
+  /* 这个是form的表单项改变时，此事件触发后会去掉左右两边空格；一般都是change, 因为有些类库可以喜欢写changed */
+
+};
+/* harmony default export */ var libs_global = (global);
+// CONCATENATED MODULE: ./src/package/libs/schema-rules.js
+
+
+var schemaRules = {
+  isEs: function isEs(value) {
+    return libs_parse.isEsScript(value);
+  },
+  isStr: function isStr(value) {
+    return libs_utils.isStr(value);
+  },
+
+  /**
+   * [数值范围]
+   * @param  {[String]}  value [description]
+   * @return {Boolean}       [description]
+   */
+  // range: function(value, min, max, isInt) {
+  //   if (utils.isNum(value)) {
+  //     if (isInt) {
+  //       return schemaRules.isInt(value, min, max);
+  //     } else {
+  //       var tmpMin = min;
+  //       var tmpMax = max;
+  //       if (utils.isNum(min) && utils.isNum(min) && min > max) {
+  //         tmpMin = max;
+  //         tmpMax = min;
+  //       }
+  //       if (utils.isNum(tmpMin) && value < tmpMin) {
+  //         return false;
+  //       } else if (utils.isNum(tmpMax) && value > tmpMax) {
+  //         return false;
+  //       } else {
+  //         return true;
+  //       }
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // },
+
+  /**
+   * [isInt 是否整数]
+   * @param  {[Number or String]}  value [description]
+   * @param  {[Number]}  min [最小值(包含此值)，因为这个很常用, 不写就不比较]
+   * @return {Boolean}       [description]
+   */
+  isInt: function isInt(value, min, max) {
+    var tmpMin = min;
+    var tmpMax = max;
+
+    if (libs_utils.isNum(min) && libs_utils.isNum(min) && min > max) {
+      tmpMin = max;
+      tmpMax = min;
+    }
+
+    if (libs_utils.isNum(value) && /^\d+$/.test(value + "")) {
+      if (libs_utils.isNum(tmpMin) && value < tmpMin) {
+        return false;
+      } else if (libs_utils.isNum(tmpMax) && value > tmpMax) {
+        return false;
+      } else {
+        return true;
+      }
+    } else {
+      return false;
+    }
+  }
+};
+/* harmony default export */ var schema_rules = (schemaRules);
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/help.vue?vue&type=template&id=289081a2&
+var helpvue_type_template_id_289081a2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-help-box"},[(_vm.href)?_c('a',{staticClass:"help-btn",attrs:{"href":_vm.href,"target":"_blank"}},[_c('i',{ref:"icon",staticClass:"es-help-icon",on:{"mouseenter":_vm.enter,"mouseleave":_vm.leave}},[_vm._v("i")])]):_c('i',{ref:"icon",staticClass:"es-help-icon",on:{"mouseenter":_vm.enter,"mouseleave":_vm.leave}},[_vm._v("i")]),_c('transition',{attrs:{"name":"es-help-fade","mode":"out-in","appear":""},on:{"after-leave":_vm.popAnimateLeave}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPop && _vm.content),expression:"showPop && content"}],ref:"pop",staticClass:"es-help-tip-box",style:({
+        left: _vm.popPosition.left + 'px',
+        top: _vm.popPosition.top + 'px',
+        maxWidth: _vm.maxWidth + 'px',
+        zIndex: _vm.popPosition.zindex + ''
+      }),on:{"mouseenter":_vm.popEnter,"mouseleave":_vm.popLeave}},[_c('div',{staticClass:"es-content-box",domProps:{"innerHTML":_vm._s(_vm.content)}}),(_vm.popArrow.direction)?_c('div',{class:'help-arrow-' + _vm.popArrow.direction,style:({ left: _vm.popArrow.left + 'px', top: _vm.popArrow.top + 'px' })}):_vm._e()])])],1)}
+var helpvue_type_template_id_289081a2_staticRenderFns = []
+
+
+// CONCATENATED MODULE: ./src/package/components/help.vue?vue&type=template&id=289081a2&
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/help.vue?vue&type=script&lang=js&
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ var helpvue_type_script_lang_js_ = ({
+  /* ====================== 生命周期 ====================== */
+  created: function created() {
+    var _this = this;
+
+    this.$data.scrollWinHandler = function () {
+      _this.adjustPop();
+    };
+  },
+
+  /* ====================== 数据绑定 ====================== */
+  data: function data() {
+    return {
+      showPop: false,
+      scrollWinHandler: null,
+      popDom: null,
+      popLeaveDelay: 200,
+      // pop延迟消失的时间（ms）
+      popTimerId: null,
+      popPosition: {
+        left: 0,
+        top: 0,
+        zindex: 1
+      },
+      popArrow: {
+        direction: "",
+        left: 0,
+        top: 0
+      },
+      popInfo: {
+        popBorderRadius: 4,
+        viewSpace: 2,
+        // 距离判断边预留的空间
+        popArrowWH: 6,
+        // 箭头的宽度和高度
+        betweenSpace: 3 // pop与icon的空间
+
+      }
+    };
+  },
+  props: {
+    maxWidth: {
+      type: Number,
+      required: false,
+      default: 300
+    },
+    content: {
+      // 内容区
+      type: String,
+      required: false,
+      default: ""
+    },
+    href: {
+      // 若有些值，说是图标是一条链接
+      type: String,
+      required: false,
+      default: ""
+    },
+    placement: {
+      // pop的位置，当设置这个时，会优先考虑这个方向
+      type: String,
+      required: false,
+      default: "" //value: top right bottom left
+
+    }
+  },
+  watch: {},
+
+  /* ====================== 事件处理 ====================== */
+  methods: {
+    enter: function enter() {
+      var _this2 = this;
+
+      if (this.content) {
+        if (!this.$data.showPop) {
+          // 正常进来
+          this.$data.showPop = true;
+          this.addPopDom();
+          this.setScrollListen();
+          this.$data.popPosition.zindex = pop_utils.getMaxZIndex() + 1;
+          this.$nextTick(function () {
+            _this2.adjustPop();
+          });
+        } else {
+          // 从pop进入来
+          this.cancelPopTimer();
+        }
+      }
+    },
+    leave: function leave() {
+      if (this.content) {
+        this.setCloseTimer();
+      }
+    },
+    popEnter: function popEnter() {
+      this.cancelPopTimer();
+    },
+    popLeave: function popLeave() {
+      this.setCloseTimer();
+    },
+    popAnimateLeave: function popAnimateLeave() {
+      // console.log("popAnimateLeave...");
+      this.cancelScrollListen();
+      this.$data.popPosition = {
+        //这样放在最左，可以保持其长度最大化
+        left: 0,
+        top: 0
+      };
+    },
+    addPopDom: function addPopDom() {
+      if (!this.$data.popDom) {
+        this.$data.popDom = this.$refs.pop;
+        document.body.appendChild(this.$data.popDom);
+      }
+    },
+    removePopDom: function removePopDom() {
+      if (this.$data.popDom) {
+        document.body.removeChild(this.$data.popDom);
+        this.$data.popDom = null;
+      }
+    },
+    setScrollListen: function setScrollListen() {
+      window.addEventListener("scroll", this.$data.scrollWinHandler, true);
+    },
+    cancelScrollListen: function cancelScrollListen() {
+      window.removeEventListener("scroll", this.$data.scrollWinHandler, true);
+    },
+    closePop: function closePop() {
+      this.cancelPopTimer();
+      this.$data.showPop = false;
+    },
+    setCloseTimer: function setCloseTimer() {
+      var _this3 = this;
+
+      this.$data.popTimerId = setTimeout(function () {
+        _this3.$data.popTimerId = null;
+
+        _this3.closePop();
+      }, this.$data.popLeaveDelay);
+    },
+    cancelPopTimer: function cancelPopTimer() {
+      if (this.$data.popTimerId !== null) {
+        clearTimeout(this.$data.popTimerId);
+        this.$data.popTimerId = null;
+      }
+    },
+    adjustPop: function adjustPop() {
+      var pop = this.$refs["pop"];
+      var icon = this.$refs["icon"];
+      var popRect = pop.getBoundingClientRect();
+      var iconRect = icon.getBoundingClientRect();
+      var uiInfo = pop_utils.getPopUiInfo(popRect, iconRect, this.$data.popInfo, this.placement);
+
+      if (uiInfo) {
+        this.$data.popPosition = {
+          left: uiInfo.popLeft,
+          top: uiInfo.popTop
+        };
+        this.$data.popArrow = {
+          direction: uiInfo.arrowDirection,
+          left: uiInfo.arrowLeft,
+          top: uiInfo.arrowTop
+        };
+      } else {
+        this.closePop();
+      }
+    }
+  },
+  destroyed: function destroyed() {
+    if (this.$data.scrollWinHandler) {
+      this.cancelScrollListen();
+    }
+
+    this.$data.scrollWinHandler = null;
+    this.removePopDom();
+  }
+});
+// CONCATENATED MODULE: ./src/package/components/help.vue?vue&type=script&lang=js&
+ /* harmony default export */ var components_helpvue_type_script_lang_js_ = (helpvue_type_script_lang_js_); 
+// EXTERNAL MODULE: ./src/package/components/help.vue?vue&type=style&index=0&lang=scss&
+var helpvue_type_style_index_0_lang_scss_ = __webpack_require__("d0e9");
+
+// CONCATENATED MODULE: ./src/package/components/help.vue
+
+
+
+
+
+
+/* normalize component */
+
+var help_component = normalizeComponent(
+  components_helpvue_type_script_lang_js_,
+  helpvue_type_template_id_289081a2_render,
+  helpvue_type_template_id_289081a2_staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* harmony default export */ var components_help = (help_component.exports);
+// CONCATENATED MODULE: ./src/package/libs/submit.js
+/* 应用于表单组件函数，不能作为其它用途：因为this代表的是表单 */
+var onlySubmit = function onlySubmit() {
+  this.submit();
+};
+/**
+ * 应用于表单组件函数，不能作为其它用途：因为this代表的是表单, event代表的是keyup事件
+ * 参数就是组件事件所对就的参数
+ * @param {*} value 当前组件的值
+ * @param {*} key 组件的源key
+ * @param {*} event 事件所携带的事件
+ */
+
+
+var enterSubmit = function enterSubmit(value, key, event) {
+  // console.log("value: ", value);
+  // console.log("key: ", key);
+  if (event && event.keyCode === 13) {
+    this.submit();
+  }
+};
+
+
+// CONCATENATED MODULE: ./src/package/libs/form-utils.js
+
+
+
+
+
+
+
+
+
+
+
+// import sysExtRules from "./rules";
+
+
+
+
+
+
+
+var formUtils = {
+  /**
+   * 判断值是否为空, 以下几种情况都认为是空值
+   */
+  isEmpty: function isEmpty(value) {
+    if (libs_utils.isUndef(value) || libs_utils.isNull(value) || libs_utils.isStr(value) && !value || libs_utils.isObj(value) && keys_default()(value).length <= 0 || libs_utils.isArr(value) && value.length <= 0) {
+      return true;
+    }
+
+    return false;
+  },
+
+  /**
+   * 全局设置
+   * @param {*} propItem
+   * @param {*} value
+   */
+  setValue: function setValue(propItem, value) {
+    formUtils.__setValue(propItem, value);
+  },
+
+  /**
+   * 全局设置
+   * @param {*} propItem
+   * @param {*} value
+   * @param {*} hasIdxChainChanged //设置过程序是否idxChain做改变，因为父级改变，子级也做做出改变，所以子级就不用再重新设置，等值设置完后，再由父级改变idxChain
+   */
+  __setValue: function __setValue(propItem, value) {
+    var hasIdxChainChanged = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    if (propItem.array) {
+      if (libs_utils.isArr(value)) {
+        // console.log(propItem.__pathKey, "in...");
+        var hasChanged = false;
+        var schemaList = propItem.__propSchemaList;
+
+        if (schemaList.length > value.length) {
+          schemaList = schemaList.splice(0, value.length);
+          propItem.__propSchemaList = schemaList;
+        } else {
+          //不够，补上后面的；比如数组是3个，现在直接给了4个；
+          for (var i = schemaList.length; i < value.length; i++) {
+            formUtils.addArrayItem(propItem);
+          }
+
+          hasChanged = true;
+        }
+
+        var hasNextIdxChainChanged = hasChanged || hasIdxChainChanged ? true : false;
+
+        for (var j = 0; j < value.length; j++) {
+          formUtils.__setValue(schemaList[j], value[j], hasNextIdxChainChanged);
+        } // console.log(120);
+
+
+        if (hasChanged && !hasIdxChainChanged) {
+          formUtils.resetIndexArr(propItem, propItem.__idxChain, propItem.__pathKey);
+        }
+      } else {
+        // 值的格式不区配，不必理会
+        return true;
+      } // console.log("in-end...", propItem.__propSchemaList.length);
+
+
+      return true;
+    } // 不是数据组了
+
+
+    if (propItem.component) {
+      var tmpValue;
+
+      if (propItem.format) {
+        // 不是最终取值，或没有格式转换
+        tmpValue = this.__getFormatValue(propItem.format, value, true); // console.log(tmpValue, value);
+      } else {
+        tmpValue = value;
+      }
+
+      propItem.value = tmpValue;
+    } else if (propItem.properties) {
+      for (var key in propItem.properties) {
+        !libs_utils.isUndef(value[key]) && formUtils.__setValue(propItem.properties[key], value[key], hasIdxChainChanged);
+      }
+    } else {//可能是占位对象
+    }
+  },
+
+  /**
+   * 添加项，注：为什么写这个，统一过滤array, 避免无限循环
+   * @param {*} list 数组长列表, 会改变其结构
+   * @param {*} item 需要添加的项
+   * @param {*} insertInfo 需要添加的默认值；有值时是一个对象：格式如{value}
+   */
+  addArrayItem: function addArrayItem(schema, insertInfo) {
+    var newItem = {}; //排除一些可能排版重复的或不需要的
+
+    var excludeKeys = ["array", "__propSchemaList", "desc", "help", "hidden", "__rawHidden", "label", "title", "isTmp"];
+
+    for (var key in schema) {
+      if (!excludeKeys.includes(key)) {
+        newItem[key] = libs_utils.deepCopy(schema[key]);
+      }
+    }
+
+    if (!libs_utils.isUndef(schema.array.subLabel)) {
+      newItem.subLabel = libs_utils.deepCopy(schema.array.subLabel);
+      newItem.__invalidMsg = false;
+    } // console.log("schema.layout.name == constant.LAYOUT_TABS：", schema.layout.name == constant.LAYOUT_TABS);
+
+
+    if (schema.layout && schema.layout.name == libs_constant.LAYOUT_TABS) {
+      newItem.__tabsIndex = false;
+    } // newItem.array不可有此值
+
+
+    if (newItem.array) {
+      newItem.array = false;
+    }
+
+    if (insertInfo) {
+      formUtils.__setValue(newItem, insertInfo.value);
+
+      if (schema.__propSchemaList.length <= insertInfo.position) {
+        schema.__propSchemaList.push(newItem);
+      } else {
+        // 插入中间某个位置
+        schema.__propSchemaList.splice(insertInfo.position, 0, newItem);
+      }
+    } else {
+      schema.__propSchemaList.push(newItem);
+    }
+  },
+
+  /**
+   * 全局设置
+   * @param {*} propItem
+   * @param {*} idxChain  //父级的idxChain
+   */
+  resetIndexArr: function resetIndexArr(propItem, idxChain, pathKey) // 来自propItem.__propSchemaList循环
+  {
+    var currentIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : -1;
+    var fromArray = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+
+    // console.log(":", pathKey, ":", pathKey);
+    if (propItem.array) {
+      // 因为__propSchemaList里面的item不会含array
+      if (propItem.__idxChain != idxChain) {
+        propItem.__idxChain = idxChain;
+      }
+
+      if (propItem.__pathKey != pathKey) {
+        propItem.__pathKey = pathKey;
+      }
+
+      var schemaList = propItem.__propSchemaList;
+
+      for (var i = 0; i < schemaList.length; i++) {
+        var nextIdxChain = idxChain ? idxChain + "," + i : "" + i;
+        var nextPathKey = pathKey + "[" + i + "]";
+        formUtils.resetIndexArr(schemaList[i], nextIdxChain, nextPathKey, i, true);
+      }
+
+      return true;
+    } // 不是数组
+
+
+    if (propItem.component) {
+      if (propItem.__idxChain != idxChain) {
+        propItem.__idxChain = idxChain;
+      }
+
+      if (propItem.__pathKey != pathKey) {
+        propItem.__pathKey = pathKey;
+      }
+
+      if (propItem.__index != currentIndex) {
+        propItem.__index = currentIndex;
+      }
+    } else if (propItem.properties) {
+      if (propItem.__idxChain != idxChain) {
+        propItem.__idxChain = idxChain;
+      }
+
+      if (propItem.__pathKey != pathKey) {
+        propItem.__pathKey = pathKey;
+      }
+
+      if (propItem.__index != currentIndex) {
+        propItem.__index = currentIndex;
+      }
+
+      for (var key in propItem.properties) {
+        formUtils.resetIndexArr(propItem.properties[key], idxChain, pathKey + "." + key, fromArray ? currentIndex : -1, // 因为__propSchemaList的构成是[{properties: {}}]
+        false);
+      }
+    } else {//可能是占位对象
+    }
+  },
+
+  /**
+   * 获取某一个属性tabs的索引
+   * @param {*} schema
+   * @param {*} pathKey "age、more1[0].name"
+   * @param {*} index
+   */
+  getTabsIndex: function getTabsIndex(schema, pathKey) {
+    var targetSchema = this.__getSchemaByKey(schema, pathKey);
+
+    if (targetSchema) {
+      if (targetSchema.layout && targetSchema.layout.name === libs_constant.LAYOUT_TABS) {
+        // 一般tabs
+        return targetSchema.__tabsIndex;
+      } else if (targetSchema.array && targetSchema.array.name === libs_constant.ARRAY_TABS) {
+        // 数组tabs
+        return targetSchema.__tabsIndex;
+      } else {
+        // 不是tabs
+        return false;
+      }
+    } else {
+      return false; // 路径不对
+    }
+  },
+
+  /**
+   * 切换properies隐藏/打开
+   * @param {*} schema
+   * @param {*} pathKey "age、more1[0].name"
+   */
+  togglePropBody: function togglePropBody(schema, pathKey) {
+    var targetSchema = this.__getSchemaByKey(schema, pathKey);
+
+    if (targetSchema) {
+      if (targetSchema.ui) {
+        targetSchema.ui.showBody = !targetSchema.ui.showBody;
+      }
+    } else {// 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
+    }
+  },
+
+  /**
+   * 指定某一个tabs的索引
+   * @param {*} schema
+   * @param {*} pathKey "age、more1[0].name"
+   * @param {*} index
+   */
+  setTabsIndex: function setTabsIndex(schema, pathKey, index) {
+    var targetSchema = this.__getSchemaByKey(schema, pathKey); // console.log("targetSchema, pathKey, index: ", targetSchema, pathKey, index);
+
+
+    if (targetSchema) {
+      if (this.__isRightTabsIndex(targetSchema, index)) {
+        // 一般tabs
+        targetSchema.__tabsIndex = index;
+
+        if (targetSchema.array && targetSchema.array.name === libs_constant.ARRAY_TABS) {
+          // 数组tabs
+          if (libs_utils.isNum(index)) {
+            if (targetSchema.__propSchemaList[index].__hasError) {
+              targetSchema.__propSchemaList[index].__hasError = false;
+            }
+          } else {// array tabs要是整数
+          }
+        } else if (targetSchema.layout && targetSchema.layout.name === libs_constant.LAYOUT_TABS) {
+          if (targetSchema.properties[index].__hasError) {
+            targetSchema.properties[index].__hasError = false;
+          }
+        }
+      } else {// 不是tabs, 不用理会
+      }
+    } else {// 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
+      }
+  },
+  __isRightTabsIndex: function __isRightTabsIndex(targetSchema, index) {
+    var nextSchema, key;
+
+    if (targetSchema.array && targetSchema.array.name === libs_constant.ARRAY_TABS) {
+      // 数组tabs
+      if (libs_utils.isNum(index)) {
+        var newIndex = Math.floor(index);
+
+        if (newIndex === index && newIndex >= 0 && newIndex < targetSchema.__propSchemaList.length) {
+          return true;
+        }
+      } else {// array tabs要是整数
+      }
+    } else if (targetSchema.layout && targetSchema.layout.name === libs_constant.LAYOUT_TABS) {
+      // 一般tabs
+      for (key in targetSchema.properties) {
+        nextSchema = targetSchema.properties[key];
+
+        if (key == index && !nextSchema.hidden) {
+          return true;
+        }
+      }
+    } else {// 不是tabs, 不用理会
+    }
+
+    return false;
+  },
+  getSchemaByKey: function getSchemaByKey(schema, keyStr) {
+    // 这个函数可能对外单独使用，所以不可以使用this
+    return formUtils.__getSchemaByKey(schema, keyStr);
+  },
+
+  /**
+   *
+   * @param {*} schema
+   * @param {*} keyStr 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
+   */
+  __getSchemaByKey: function __getSchemaByKey(schema, keyStr) {
+    if (libs_utils.isStr(keyStr)) {
+      if (!keyStr) {
+        return schema;
+      }
+
+      var seperator = ".";
+      var keys = keyStr.split(seperator);
+      var curPropItem = schema;
+      var curProperties;
+      var nextPropItem;
+      var reg = /([\s\S]+?)\[(\d+)\]$/;
+
+      for (var i = 0; i < keys.length; i++) {
+        if (!curPropItem) {
+          //没有这一级数据，直接退出
+          return false;
+        }
+
+        curProperties = curPropItem.properties;
+
+        if (curProperties && !curPropItem.array) {
+          var key = keys[i];
+          var arrayItemKeys = key.match(reg);
+          var isLastKey = i == keys.length - 1;
+          var realKey = key;
+
+          if (arrayItemKeys) {
+            realKey = arrayItemKeys[1];
+
+            var realIndex = parse_int_default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
+
+
+            curPropItem = curProperties[realKey]; //取出下级继续扫描
+
+            if (!curPropItem) {
+              //没有这个属性，退出
+              return false;
+            }
+
+            if (isLastKey) {
+              //最后一个key,表明是设置值
+              if (curPropItem.array) {
+                //设置array中的某一行（项）
+                if (curPropItem.__propSchemaList && curPropItem.__propSchemaList.length > realIndex) {
+                  nextPropItem = curPropItem.__propSchemaList[realIndex];
+                  return nextPropItem;
+                } else {
+                  return false; //超出索引，不符合要求,直接退出
+                }
+              } else {
+                return false; //不符合要求：key是array类型，而当前的curPropItem不是数组
+              }
+            } else {
+              if (curPropItem.array) {
+                //进入array中的某一行（项），对某个属性进行设置
+                if (curPropItem.__propSchemaList && curPropItem.__propSchemaList.length > realIndex) {
+                  //有效
+                  curPropItem = curPropItem.__propSchemaList[realIndex]; //继续下一级（上面已经建立了新的curPropItem）
+                } else {
+                  return false; //超出索引，不符合要求
+                }
+              } else {
+                return false; //不符合要求：key是array类型，而当前的curPropItem不是数组
+              }
+            }
+          } else {
+            curPropItem = curProperties[realKey]; //取出下级继续扫描
+
+            if (!curPropItem) {
+              //没有这个属性，不符合要求
+              return false;
+            }
+
+            if (isLastKey) {
+              //最后一个key,表明是设置值
+              return curPropItem; // 不管是不是数组，直接取出
+            } else {
+              if (curPropItem.array) {
+                // 不是最后一个key, 但curPropItem又是array(因为此形式严格来讲就是一个叶子)
+                return false; //不符合要求，退出
+              } else {//继续下一级（上面已经建立了新的curPropItem）
+                }
+            }
+          }
+        } else {
+          return false; //没有这一级，不符合要求，退出
+        }
+      }
+    } else {
+      return false; //keyStr不符合要求，退出
+    }
+  },
+
+  /**
+   * 指定某一个属性设置
+   * @param {*} schema
+   * @param {*} keyStr "age、more1[0].name"
+   * @param {*} value
+   */
+  setValueByKey: function setValueByKey(schema, keyStr, value) {
+    // console.log("schema, keyStr: ", schema, keyStr, value);
+    var targetSchema = this.__getSchemaByKey(schema, keyStr); // console.log("current schema: ", targetSchema);
+
+
+    if (targetSchema) {
+      if (targetSchema.component) {
+        if (targetSchema.array) {
+          //是组件数组
+          if (libs_utils.isArr(value) || libs_utils.isNull(value)) {
+            //直接设置array的值
+            formUtils.setValue(targetSchema, value ? value : []);
+          }
+        } else {
+          var tmpValue;
+
+          if (targetSchema.format) {
+            // 不是最终取值，或没有格式转换
+            tmpValue = this.__getFormatValue(targetSchema.format, value, true); // console.log(tmpValue, value);
+          } else {
+            tmpValue = value;
+          }
+
+          targetSchema.value = tmpValue;
+        }
+      } else if (targetSchema.properties) {
+        if (targetSchema.array) {
+          // 是数组赋值
+          if (libs_utils.isArr(value) || libs_utils.isNull(value)) {
+            //直接设置array的值
+            formUtils.setValue(targetSchema, value ? value : []);
+          }
+        } else {
+          // properties赋值
+          if (libs_utils.isObj(value)) {
+            formUtils.setValue(targetSchema, value);
+          }
+        }
+      }
+    } else {// 路径不对，不用理会；不过这个是系统返回，一般不会执行到这里
+    }
+  },
+
+  /**
+   * 表单内部的结果
+   */
+  getValue: function getValue(propItem) {
+    return formUtils.__getValue(propItem);
+  },
+
+  /**
+   * 表单的最终结果
+   * @param {*} schema  perfect后的schema
+   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
+   * @param {*} globalData 表单的全局数据
+   * @param {*} formData 表单的内部值
+   */
+  getResultValue: function getResultValue(schema, baseParseSources) {
+    if (libs_utils.isObj(baseParseSources.rootData)) {
+      var resultValue = formUtils.__getValue(schema, baseParseSources);
+
+      return this.__tileResultValue(schema, resultValue);
+    } else {
+      throw "getResultValue： formData 必须是一个对象";
+    }
+  },
+
+  /**
+   * 取值
+   * @param {*} propItem
+   * @param {*} baseParseSources {global: globalData, rootData: formData(此时这个值不一定有传，没有传时说明是取表单内部传, 有传就取最终结果), rootSchema: rootSchema}
+   * @param {*} isParentHidden
+   */
+  __getValue: function __getValue(propItem) {
+    var baseParseSources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    var isParentHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+    var parseSources = assign_default()({}, baseParseSources);
+
+    parseSources.index = propItem.__index;
+    parseSources.idxChain = propItem.__idxChain;
+    parseSources.pathKey = propItem.__pathKey;
+    var formData = baseParseSources.rootData; // 当false没有值时，证明是表单的内容取值，后不的解析不用执行，提高效率
+
+    var isHidden = formData && (isParentHidden || libs_parse.smartEsValue(propItem.hidden, parseSources)) ? true : false;
+    var newValue, keyValue, newArr, i, schemaList;
+
+    if (propItem.component) {
+      if (formData) {
+        // 有表单内部值，则取出是用户表单值
+        if (!propItem.isTmp) {
+          // 不是临时值
+          if (isHidden && !libs_utils.isNull(propItem.hdValue)) {
+            // return propItem.hdValue;
+            if (!libs_utils.isUndef(propItem.hdValue)) {
+              return propItem.hdValue;
+            } else {
+              // 特殊约定，hdValue为undefined, 说明不用取出此值
+              return undefined;
+            }
+          } else {// 需要往下解析
+          }
+        } else {
+          // 临时字段，不用取出
+          return undefined;
+        }
+      } else {} // form 内部取值
+      // return propItem.value;
+      // 需要往下解析
+      // 内部值，也不隐藏
+
+
+      if (propItem.array) {
+        // 是数组
+        newArr = [];
+        schemaList = propItem.__propSchemaList;
+
+        for (i = 0; i < schemaList.length; i++) {
+          newValue = formUtils.__getValue(schemaList[i], baseParseSources, isHidden);
+          newArr.push(newValue);
+        }
+
+        return newArr;
+      } else {
+        // 不是数组
+        if (formData) {
+          if (propItem.format) {
+            // 不是最终取值，或没有格式转换
+            return this.__getFormatValue(propItem.format, propItem.value, false);
+          } else {
+            return propItem.value;
+          }
+        } else {
+          // form 内部取值
+          return propItem.value;
+        }
+      }
+    } else if (propItem.properties) {
+      if (formData) {
+        // 有表单内部值，则取出是用户表单值
+        if (propItem.isTmp) {
+          // 临时字段，不用取出
+          return undefined;
+        } else if (isHidden && !libs_utils.isNull(propItem.hdValue)) {
+          if (!libs_utils.isUndef(propItem.hdValue)) {
+            return propItem.hdValue;
+          } else {
+            // 特殊约定，hdValue为undefined, 说明不用取出此值
+            return undefined;
+          }
+        } else {// 往下取出正常值
+        }
+      }
+
+      if (propItem.array) {
+        newArr = [];
+        schemaList = propItem.__propSchemaList;
+
+        for (i = 0; i < schemaList.length; i++) {
+          newValue = formUtils.__getValue(schemaList[i], baseParseSources, isHidden);
+          newArr.push(newValue);
+        }
+
+        return newArr;
+      } else {
+        newValue = {};
+
+        for (var key in propItem.properties) {
+          keyValue = formUtils.__getValue(propItem.properties[key], baseParseSources, isHidden);
+
+          if (!libs_utils.isUndef(keyValue)) {
+            newValue[key] = keyValue;
+          }
+        }
+
+        return newValue;
+      }
+    } else {
+      return undefined;
+    }
+  },
+
+  /**
+   * 数值转换
+   * @param {*} format
+   * @param {*} outerToInner
+   */
+  __getFormatValue: function __getFormatValue(format, curVal) {
+    var outerToInner = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+    if (format) {
+      if (outerToInner) {
+        // 表单外部的值转换为表单内部的值
+        var curEmum, i;
+
+        if (libs_utils.isArr(format)) {
+          // 数组，说明是枚举转换
+          for (i = 0; i < format.length; i++) {
+            curEmum = format[i];
+
+            if (curEmum.outer == curVal) {
+              return curEmum.inner;
+            }
+          }
+        } else if (libs_utils.isFunc(format.outer)) {
+          // 有外部转换函数
+          return format.outer(curVal);
+        }
+      } else {
+        // 表单内部的值转换为表单外部的值
+        if (libs_utils.isArr(format)) {
+          // 数组，说明是枚举转换
+          for (i = 0; i < format.length; i++) {
+            curEmum = format[i];
+
+            if (curEmum.inner == curVal) {
+              return curEmum.outer;
+            }
+          }
+        } else if (libs_utils.isFunc(format.inner)) {
+          // 有内部转换函数
+          return format.inner(curVal);
+        }
+      }
+    }
+
+    return curVal;
+  },
+
+  /**
+   * 把原始的schema转化为标准的schema
+   * 解析原则：
+   * 对于一个对象{}来说
+   * type === 'space'时，说明是占位空间，即使有component或properties, 也认为是占位空间，且解析时会把两个属性去掉
+   * else if ：判断是否有properties且合法，即使有component也会去掉此属性
+   * else: 是component，即使没有component也会用系统的默认值
+   * 结论 >> 最后的输出是：
+   * type === 'space'、component、properties只有一个会输出；也是就if (item.layout.name === 'space')、if (item.component)、if (item.properties)中，只有一个为真
+   */
+  completeSchema: function completeSchema(schema) {
+    // const constant.ARRAY_TABLE = "array-table";
+    var autoMatch;
+
+    if (libs_utils.isObj(schema)) {
+      var tmpSchema = libs_utils.deepCopy(schema);
+      var rootObj = tmpSchema;
+
+      if (!libs_utils.isObj(tmpSchema.properties)) {
+        rootObj = {};
+        rootObj.title = false;
+        rootObj.direction = libs_global.direction;
+        rootObj.array = false; // 顶级是不支持数组的
+
+        rootObj.layout = false;
+        rootObj.properties = tmpSchema; // 根节点有效的属性
+
+        autoMatch = false;
+      } else {
+        // console.log("rootObj.layout.name", rootObj.layout.name === constant.LAYOUT_TABS);
+        var newLayout = this.__parsePropLayout(rootObj.layout);
+
+        rootObj.array = false; // 顶级是不支持数组的
+
+        if (newLayout && newLayout.name === libs_constant.LAYOUT_TABS) {
+          rootObj.layout = false;
+        }
+
+        rootObj.direction = ["h", "v"].includes(rootObj.direction) ? rootObj.direction : libs_global.direction; // 根节点有效的属性
+
+        autoMatch = rootObj.autoMatch === true ? true : false;
+      }
+
+      rootObj.label = {
+        text: false,
+        __rawText: false
+      }; // 顶级是不支持label
+      //设置表单的一些默认值
+
+      rootObj.rowHeight = rootObj.rowHeight ? rootObj.rowHeight : libs_global.boxRowHeight;
+      rootObj.boxRowHeight = rootObj.boxRowHeight ? rootObj.boxRowHeight : libs_global.boxRowHeight;
+      rootObj.rowSpace = 0;
+      rootObj.boxRowSpace = rootObj.boxRowSpace ? rootObj.boxRowSpace : libs_global.boxRowSpace;
+      rootObj.labelWidth = rootObj.labelWidth ? rootObj.labelWidth : libs_global.boxLabelWidth;
+      rootObj.boxLabelWidth = rootObj.boxLabelWidth ? rootObj.boxLabelWidth : libs_global.boxLabelWidth;
+      rootObj = formUtils.__parseProp(rootObj, 1, "根", formUtils.__newInheritObj(rootObj), ""); //根节点有效的属性
+
+      rootObj.autoMatch = autoMatch;
+
+      this.__checkForTile(rootObj);
+
+      return rootObj;
+    } else {
+      throw "根schema是一个Object类型";
+    }
+  },
+  __parseProp: function __parseProp(propItem, curLevel, parentKey, inheritObj, myPathKey) {
+    if (libs_utils.isStr(propItem)) {
+      propItem = {
+        label: propItem
+      };
+    } else if (!libs_utils.isObj(propItem)) {
+      throw "第" + curLevel + "层的属性值(" + parentKey + ")必须是一个字符串或Object类型";
+    }
+
+    var newPropItem, propKeys, isArray, isNormalTabs;
+
+    if (this.__isSpaceItem(propItem)) {
+      // 占位空间 为什么用恒等，因为会严格判断是否是true/false, 同时也严格要求用户用true/false, 不要用1/0
+      propKeys = formUtils.__getPropKeys("none");
+      newPropItem = formUtils.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
+    } else if (this.__isPropItem(propItem)) {
+      if (!this.__existEntityItem(propItem)) {
+        throw "属性" + parentKey + "没有具体的子节点";
+      } // 是否数组(优先级最高)
+
+
+      isArray = this.__isArray(propItem.array);
+      propKeys = formUtils.__getPropKeys("properties");
+      newPropItem = formUtils.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
+
+      if (isArray) {
+        if (libs_utils.isUndef(newPropItem.array.rowSpace)) {
+          // 当没有设置时，则取上一级的rowSpace
+          newPropItem.array.rowSpace = newPropItem.rowSpace;
+        }
+      }
+
+      isNormalTabs = newPropItem.layout && newPropItem.layout.name === libs_constant.LAYOUT_TABS;
+
+      if (isArray && newPropItem.array.name == libs_constant.ARRAY_TABLE && isNormalTabs) {
+        // 数组是以table形式布局，子节点无法进行tabs布局
+        newPropItem.layout = false;
+        isNormalTabs = false; // 强制置为非tabs
+
+        console.warn("第" + curLevel + "层(" + parentKey + ")为table数组且子节点为tabs, 子节点为tabs将失效");
+      } //有下一级
+
+
+      if (propItem.component) {
+        //提示警告
+        parentKey = parentKey ? parentKey : "根";
+        parentKey += "节点";
+        console.warn("第" + curLevel + "层(" + parentKey + ")中同时存在properties和component, component将失效");
+      }
+
+      if (newPropItem.title) {
+        newPropItem.title.__level = curLevel; //用于字号
+      }
+
+      newPropItem.__pathKey = myPathKey;
+      newPropItem.__idxChain = "";
+      newPropItem.__index = -1;
+
+      if (isNormalTabs) {
+        newPropItem.__tabsIndex = false;
+      } //递归，取出下一级的数据
+
+
+      var newProperties = {};
+
+      for (var key in propItem.properties) {
+        if (!this.__isRightKey(key)) {
+          console.warn("属性" + key + "存在危险字符，会导致程序出错");
+        }
+
+        var nextRawPropItem = propItem.properties[key];
+
+        if (this.__isIngnoreItem(nextRawPropItem)) {
+          console.log("属性" + key + "为null/undefined/false时，将不设置");
+        } else {
+          var isSpaceItem = this.__isSpaceItem(nextRawPropItem);
+
+          if (isSpaceItem && newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {
+            // 当父节点是table数组时，占位空间过滤掉
+            console.warn("属性" + key + "不符合" + libs_constant.ARRAY_TABLE + "布局的要求(properties存在占位空间), 将失效");
+            continue;
+          } else if (isSpaceItem && isNormalTabs) {
+            console.warn("属性" + key + "不符合" + libs_constant.LAYOUT_TABS + "布局的要求(properties存在占位空间), 将失效");
+            continue;
+          } else {// 符合要求了，进行下一步解析
+          }
+
+          var nextPropItem = formUtils.__parseProp(nextRawPropItem, curLevel + 1, key, formUtils.__newInheritObj(newPropItem), myPathKey ? myPathKey + "." + key : key);
+
+          if (isNormalTabs) {
+            // 是普通tabs
+            nextPropItem.__hasError = false;
+          }
+
+          if (isNormalTabs || newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {
+            if (nextPropItem.label.text === false) {
+              console.warn("当属性(" + parentKey + ")为" + libs_constant.LAYOUT_TABS + "或" + libs_constant.ARRAY_TABLE + "时，下一级的label必须存在, 否则用各自的key代表头部");
+            }
+          }
+
+          if (isNormalTabs || newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABS) {
+            newPropItem.__tabsIndex = false;
+            newPropItem.__hasError = false; // 用来做复制
+          }
+
+          newProperties[key] = nextPropItem;
+        }
+      }
+
+      if (keys_default()(newProperties).length <= 0) {
+        throw "properties不能为空，或其属性全部为空(null/undefined/false)";
+      }
+
+      newPropItem.properties = newProperties; // 当是列表数组时，重新计算列宽，使其点100%
+
+      if (newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {
+        //整理一下ref, 同一级别的只留最后一下
+        formUtils.__updateTableCol(newPropItem);
+      } //整理一下ref, 同一级别的只留最后一下
+
+
+      formUtils.__uniqueRef(newPropItem);
+
+      if (isNormalTabs || newPropItem.array && newPropItem.array.name == libs_constant.ARRAY_TABLE) {//当是tabs or constant.ARRAY_TABLE时，若是分组失效
+        // continue; //是占位空间，去掉
+      } else {
+        //直接改变newPropItem的值，设置分组情况
+        formUtils.__reinitGroup(newPropItem);
+      }
+
+      if (newPropItem.array) {
+        //数组类型，可增删
+        //有值且合规范
+        if (!newPropItem.array.value) {
+          newPropItem.array.value = [];
+        } else if (!libs_utils.isArr(newPropItem.array.value)) {
+          throw "array的值必须是数组或不写";
+        }
+
+        newPropItem.__propSchemaList = []; // console.log("newPropItem.array.value", newPropItem.array.value);
+
+        formUtils.__setValue(newPropItem, newPropItem.array.value); // console.log("end ...");
+
+
+        delete newPropItem.array.value; //任务完成
+      }
+    } else {
+      // 是组件了
+      propKeys = formUtils.__getPropKeys("component");
+      newPropItem = formUtils.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
+
+      if (this.__isTabsItem(propItem)) {
+        newPropItem.layout = false;
+        console.warn("当属性(" + parentKey + ")为叶子节点时，" + libs_constant.LAYOUT_TABS + "将不起作用");
+      } else {
+        newPropItem.layout = false;
+      }
+
+      if (libs_utils.isUndef(newPropItem.value) && newPropItem.component.name === libs_global.defaultCom) {
+        // 设置默认值组件的默认值
+        newPropItem.value = libs_global.defaultVal;
+      }
+
+      if (newPropItem.format) {
+        newPropItem.value = this.__getFormatValue(newPropItem.format, newPropItem.value, true);
+      }
+
+      var eventOn = formUtils.__listEvent(newPropItem);
+
+      newPropItem.component.__emitEvents = eventOn.__emitEvents;
+      newPropItem.component.__nativeEvents = eventOn.__nativeEvents;
+      newPropItem.__pathKey = myPathKey;
+      newPropItem.__idxChain = "";
+      newPropItem.__index = -1; // 是否数组(优先级最高)
+
+      isArray = this.__isArray(propItem.array);
+
+      if (isArray) {
+        //数组类型，可增删
+        //有值且合规范
+        if (!newPropItem.array.value) {
+          newPropItem.array.value = [];
+        } else if (!libs_utils.isArr(newPropItem.array.value)) {
+          throw "array.value的值必须是数组或不写";
+        }
+
+        if (libs_utils.isUndef(newPropItem.array.rowSpace)) {
+          // 当没有设置时，则取上一级的rowSpace
+          newPropItem.array.rowSpace = newPropItem.rowSpace;
+        }
+
+        if (newPropItem.array.name == libs_constant.ARRAY_TABS) {
+          newPropItem.__tabsIndex = false;
+        }
+
+        newPropItem.__propSchemaList = [];
+
+        formUtils.__setValue(newPropItem, newPropItem.array.value);
+
+        delete newPropItem.array.value; //任务完成
+      }
+    }
+
+    newPropItem.__rawHidden = libs_parse.newEsFuncion(newPropItem.hidden);
+    return newPropItem;
+  },
+  __updateTableCol: function __updateTableCol(newSchema) {
+    if (newSchema.properties) {
+      var curProp = newSchema.properties;
+      var nextPropItem, key, newCol;
+      var total = 0;
+
+      for (key in curProp) {
+        nextPropItem = curProp[key];
+        total += nextPropItem.col;
+      }
+
+      var newTotal = 0;
+
+      if (total !== libs_constant.UI_MAX_COL) {
+        for (key in curProp) {
+          nextPropItem = curProp[key];
+          newCol = Math.round(nextPropItem.col * libs_constant.UI_MAX_COL / total);
+          nextPropItem.col = newCol;
+          newTotal += newCol;
+        }
+      }
+
+      if (newTotal < libs_constant.UI_MAX_COL) {
+        // 不够100%， 补给后面的
+        curProp[key].col = curProp[key].col + (libs_constant.UI_MAX_COL - newTotal);
+      }
+    }
+  },
+
+  /**
+   *
+   * @param {*} newSchema 已经整理好的schema
+   */
+  __uniqueRef: function __uniqueRef(newSchema) {
+    if (newSchema.properties) {
+      var curProp = newSchema.properties;
+      var lastPropItem = {};
+
+      for (var key in curProp) {
+        // console.log("key: ", key);
+        var nextPropItem = curProp[key];
+
+        if (nextPropItem.component && nextPropItem.component.ref) {
+          var nextRef = nextPropItem.component.ref;
+
+          if (lastPropItem[nextRef] && nextPropItem.component.ref === lastPropItem[nextRef].component.ref) {
+            // 存在上一个，删除上一个的ref
+            var curCom = lastPropItem[nextRef].component; // console.log(curCom.ref);
+
+            delete curCom.ref;
+          }
+
+          lastPropItem[nextRef] = nextPropItem; // 我变为上一个，以便下一个使用
+        }
+      }
+
+      lastPropItem = null;
+    }
+  },
+
+  /**
+   * 解析触发事件
+   * @param {*} trigger
+   * 1. 事件字件串或者以空格隔开的事件所组成的字符串，如"click" or "click change"
+   * 2. 事件组成的数组
+   * @returns 返回数据组，没有时返回一个null
+   */
+  __parseTrigger: function __parseTrigger(trigger) {
+    var tmpTriggers;
+
+    if (libs_utils.isArr(trigger) || libs_utils.isStr(trigger)) {
+      if (libs_utils.isStr(trigger)) {
+        trigger = trigger.trim();
+        tmpTriggers = trigger.split(/\s+/);
+      } else {
+        tmpTriggers = [];
+        trigger.forEach(function (item) {
+          if (libs_utils.isStr(item)) {
+            item = item.trim();
+            tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
+          }
+        });
+      }
+
+      tmpTriggers = tmpTriggers.map(function (item) {
+        if (!item) {
+          // 为空，直接写默认事件
+          return libs_constant.CLICK_EVENT;
+        } else if (item.indexOf(".") === 0) {
+          // 只有修改，前面加默认事件
+          return libs_constant.CLICK_EVENT + item;
+        } else {
+          // 合法
+          return item;
+        }
+      });
+    } else {
+      tmpTriggers = null;
+    }
+
+    return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
+  },
+  __isRightKey: function __isRightKey(key) {
+    var illChars = ["[", "]", ".", "{", "}"];
+
+    for (var i = 0; i < illChars.length; i++) {
+      if (key.indexOf(illChars[i]) >= 0) {
+        throw "属性不能出现以下的危险字符：" + illChars.join(" ");
+      }
+    }
+
+    return true;
+  },
+
+  /* 整理出组件需要监听的外部事件 */
+  __listEvent: function __listEvent(propItem) {
+    var _this = this;
+
+    var emitEvents = [],
+        nativeEvents = [],
+        triggerList,
+        nativeName;
+
+    if (propItem.rules) {
+      var rules = propItem.rules;
+      var checkList = rules.checks;
+
+      if (checkList) {
+        checkList.forEach(function (checkItem) {
+          // 有检查
+          triggerList = checkItem.trigger;
+          triggerList.forEach(function (triggerItem) {
+            nativeName = _this.__getNativeName(triggerItem);
+
+            if (nativeName) {
+              // .native监听
+              nativeEvents.push(nativeName);
+            } else {
+              emitEvents.push(triggerItem);
+            }
+          });
+        });
+      }
+    }
+
+    if (propItem.isTrim || libs_utils.isUndef(propItem.isTrim) && libs_global.trimDoms.includes(propItem.component.name)) {
+      propItem.isTrim = true; // 要去掉左右两边的空格，添此触发事件
+
+      nativeName = this.__getNativeName(libs_global.trimEvent);
+
+      if (nativeName) {
+        // .native监听
+        nativeEvents.push(nativeName);
+      } else {
+        emitEvents.push(libs_global.trimEvent);
+      }
+    } // 自定义事件
+
+
+    if (propItem.component && propItem.component.actions) {
+      var actions = propItem.component.actions;
+      actions.forEach(function (actionItem) {
+        triggerList = actionItem.trigger;
+        triggerList.forEach(function (triggerItem) {
+          nativeName = _this.__getNativeName(triggerItem);
+
+          if (nativeName) {
+            // .native监听
+            nativeEvents.push(nativeName);
+          } else {
+            emitEvents.push(triggerItem);
+          }
+        });
+      });
+    }
+
+    return {
+      __emitEvents: emitEvents.length ? libs_utils.unique(emitEvents) : null,
+      __nativeEvents: nativeEvents.length ? libs_utils.unique(nativeEvents) : null
+    };
+  },
+  __getNativeName: function __getNativeName(eventName) {
+    var dotNative = "." + libs_constant.ADJ_NATIVE;
+    var lastIndex = eventName.lastIndexOf(dotNative);
+
+    if (lastIndex != -1 && eventName.substr(lastIndex) === dotNative) {
+      // .native监听
+      var nativeName = eventName.substr(0, lastIndex);
+
+      if (nativeName) {
+        return nativeName;
+      } else {
+        return false; //因为eventName是经过处理的,不会出现点在前面，所以不会进入这里
+      }
+    } else {
+      return false;
+    }
+  },
+
+  /**
+   * 根据不同的类型，取出不同的属性
+   * @param {*} type
+   */
+  __getPropKeys: function __getPropKeys(type) {
+    var propKeys = [];
+
+    switch (type) {
+      case "component":
+        propKeys = ["label", "rowHeight", "rowSpace", "labelWidth", "offsetLeft", "offsetRight", "hidden", "format", "hdValue", "colon", "group", "value", "isTrim", "help", "desc", "unit", "direction", "col", "rules", "component", "array", "layout", "isTmp"];
+        break;
+
+      case "properties":
+        propKeys = ["ui", "title", "label", "rowHeight", "boxRowHeight", "rowSpace", "boxRowSpace", "labelWidth", "boxLabelWidth", "offsetLeft", "offsetRight", "hidden", "hdValue", "colon", "help", "desc", // "unit",
+        "direction", "col", "array", "layout", "isTmp"];
+        break;
+
+      default:
+        //占位空间
+        propKeys = ["col", "group", "hidden", "layout"];
+        break;
+    }
+
+    return propKeys;
+  },
+  __getNormalInfo: function __getNormalInfo(key) {
+    var keyInfos = [{
+      key: "value",
+      enums: [],
+      defaultValue: undefined
+    }, {
+      key: "hidden",
+      enums: [true, false],
+      filters: ["isEs"],
+      // 取schema-rules规则过滤
+      defaultValue: false
+    }, {
+      key: "hdValue",
+      enums: [],
+      defaultValue: undefined
+    }, {
+      key: "colon",
+      enums: [true, false],
+      defaultValue: libs_global.colon
+    }, {
+      key: "group",
+      enums: [],
+      filters: ["isStr"],
+      defaultValue: false
+    }, {
+      key: "desc",
+      enums: [],
+      filters: ["isStr"],
+      defaultValue: false
+    }, {
+      key: "col",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [1, libs_constant.UI_MAX_COL]
+      }],
+      defaultValue: libs_constant.UI_MAX_COL
+    }, {
+      key: "direction",
+      enums: ["h", "v"],
+      defaultValue: libs_global.direction
+    }, {
+      key: "isTrim",
+      enums: [true, false],
+      defaultValue: undefined // undefined代表是否删除空格取自于全局设置
+
+    }, {
+      key: "unit",
+      enums: [],
+      filters: ["isStr"],
+      defaultValue: false
+    }, {
+      key: "rowHeight",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: libs_global.boxRowHeight
+    }, {
+      key: "boxRowHeight",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: libs_global.boxRowHeight
+    }, {
+      key: "rowSpace",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: libs_global.boxRowSpace
+    }, {
+      key: "boxRowSpace",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: libs_global.boxRowSpace
+    }, {
+      key: "labelWidth",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: libs_global.boxLabelWidth
+    }, {
+      key: "boxLabelWidth",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: libs_global.boxLabelWidth
+    }, {
+      key: "offsetLeft",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: 0
+    }, {
+      key: "offsetRight",
+      enums: [],
+      filters: [{
+        name: "isInt",
+        params: [0]
+      }],
+      defaultValue: 0
+    }, {
+      key: "isTmp",
+      enums: [true, false],
+      defaultValue: false
+    }];
+
+    for (var i = 0; i < keyInfos.length; i++) {
+      if (keyInfos[i].key === key) {
+        return keyInfos[i];
+      }
+    }
+
+    return false;
+  },
+  __getSpecialInfo: function __getSpecialInfo(key) {
+    var keyInfos = [// {
+      //   key: "title",
+      //   defaultValue: false,
+      //   nameKey: "text"
+      // },
+      // {
+      //   key: "label",
+      //   defaultValue: false,
+      //   nameKey: "text"
+      // },
+      // {
+      //   key: "component",
+      //   defaultValue: false,
+      //   nameKey: "name"
+      // },
+      // {
+      //   key: "array",
+      //   defaultValue: false,
+      //   nameKey: "name"
+      // }
+    ];
+
+    for (var i = 0; i < keyInfos.length; i++) {
+      if (keyInfos[i].key === key) {
+        return keyInfos[i];
+      }
+    }
+
+    return false;
+  },
+  __parseNormalKey: function __parseNormalKey(propItem, keyInfo, inheritObj) {
+    var value = propItem[keyInfo.key];
+    var tmpDefaultValue = libs_utils.isUndef(inheritObj[keyInfo.key]) ? keyInfo.defaultValue : inheritObj[keyInfo.key];
+
+    if (libs_utils.isUndef(value)) {
+      return tmpDefaultValue;
+    } else if (keyInfo.enums && keyInfo.enums.length > 0 && keyInfo.enums.includes(value)) {
+      return value;
+    } else {
+      // 看过滤信息
+      if (keyInfo.filters && keyInfo.filters.length > 0) {
+        var isRight = true;
+        var funcName, funcParams, filterFunc;
+
+        for (var filterIndex = 0; filterIndex < keyInfo.filters.length; filterIndex++) {
+          var filterItem = keyInfo.filters[filterIndex];
+
+          if (libs_utils.isStr(filterItem)) {
+            funcName = filterItem;
+            funcParams = [];
+          } else {
+            funcName = filterItem.name;
+            funcParams = libs_utils.isArr(filterItem.params) ? filterItem.params : [];
+          }
+
+          filterFunc = schema_rules[funcName];
+
+          if (filterFunc) {
+            var newParams = [value].concat(_toConsumableArray(funcParams)); // console.log(newParams);
+
+            if (filterFunc.apply(null, newParams) !== true) {
+              isRight = false;
+              break;
+            }
+          } else {
+            console.warn(funcName + "不存在，请检查");
+          }
+        }
+
+        if (isRight) {
+          // 走了一圈，此值正确
+          return value;
+        } else {
+          return tmpDefaultValue;
+        }
+      } else {
+        // 没有条件，那么就是正确的
+        return value;
+      }
+    }
+  },
+  __parseSpecialKey: function __parseSpecialKey(propItem, keyInfo) {
+    var value = propItem[keyInfo.key];
+
+    if (libs_utils.isUndef(value)) {
+      return keyInfo.defaultValue;
+    } else if (libs_utils.isStr(value)) {
+      var newObj = {};
+      newObj[keyInfo.nameKey] = value;
+      return newObj;
+    } else if (libs_utils.isObj(value)) {
+      return value;
+    } else {
+      return keyInfo.defaultValue;
+    }
+  },
+
+  /* 解析右栏组件 */
+  __parseMainComponent: function __parseMainComponent(component, myPathKey) {
+    var tmpComponent,
+        defaultAlign = false;
+
+    if (libs_utils.isObj(component) && keys_default()(component).length > 0) {
+      // console.log("ref: ", component.ref);
+      tmpComponent = {};
+      tmpComponent.name = component.name ? component.name : libs_global.defaultCom;
+      tmpComponent.actions = this.__parseActions(component.actions, myPathKey);
+      var ref = libs_utils.isStr(component.ref) ? component.ref.trim() : null;
+
+      if (ref) {
+        tmpComponent.ref = ref;
+      }
+
+      if (libs_utils.isObj(component.props)) {
+        if (this.__needParseInObj(component.props)) {
+          tmpComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
+
+          tmpComponent.__rawProps = this.__newEsFunction(component.props);
+        } else {
+          tmpComponent.props = libs_utils.deepCopy(component.props); // 可直接使用
+        }
+      } else {
+        tmpComponent.props = {};
+      }
+
+      if (libs_utils.isStr(component.text)) {
+        tmpComponent.text = component.text;
+
+        if (libs_parse.isEsScript(component.text)) {
+          tmpComponent.__rawText = libs_parse.newEsFuncion(component.text);
+        }
+      }
+
+      tmpComponent.align = this.__parseAlign(component.align, defaultAlign);
+      tmpComponent.flex = this.__parseFlex(component.flex, component.size);
+    } else if (libs_utils.isStr(component)) {
+      tmpComponent = {
+        name: component,
+        actions: [],
+        align: defaultAlign,
+        flex: false
+      };
+    } else {
+      tmpComponent = {
+        name: libs_global.defaultCom,
+        actions: [],
+        align: defaultAlign,
+        flex: false
+      };
+    }
+
+    return tmpComponent;
+  },
+  __newEmptyObj: function __newEmptyObj(obj) {
+    var newObj = {};
+
+    for (var key in obj) {
+      newObj[key] = null;
+    }
+
+    return newObj;
+  },
+  __newEsFunction: function __newEsFunction(obj) {
+    var newObj = {};
+
+    for (var key in obj) {
+      newObj[key] = libs_parse.isEsScript(obj[key]) ? libs_parse.newEsFuncion(obj[key]) : libs_utils.deepCopy(obj[key]);
+    }
+
+    return newObj;
+  },
+  __needParseInObj: function __needParseInObj(obj) {
+    var isRight = false;
+
+    for (var key in obj) {
+      var value = obj[key];
+
+      if (libs_utils.isFunc(value)) {
+        isRight = true;
+        break;
+      } else if (libs_parse.isEsScript(value)) {
+        isRight = true;
+        break;
+      }
+    }
+
+    return isRight;
+  },
+
+  /**
+   * 进出的值的格式转换
+   * @param {*} format
+   */
+  __parseFormat: function __parseFormat(format) {
+    var newFormat;
+
+    if (libs_utils.isArr(format)) {
+      // 是枚举
+      newFormat = [];
+      format.forEach(function (item) {
+        if (!libs_utils.isUndef(item.outer) && !libs_utils.isUndef(item.inner)) {
+          newFormat.push(item);
+        } else {
+          console.warn("format属性：outer和inner必须成对定义");
+        }
+      });
+      return newFormat.length > 0 ? newFormat : false;
+    } else if (libs_utils.isObj(format)) {
+      newFormat = {};
+
+      if (libs_utils.isFunc(format.outer)) {
+        newFormat.outer = format.outer;
+      } else {
+        newFormat.outer = false;
+      }
+
+      if (libs_utils.isFunc(format.inner)) {
+        newFormat.inner = format.inner;
+      } else {
+        newFormat.inner = false;
+      }
+
+      return newFormat.outer || newFormat.inner ? newFormat : false;
+    } else {
+      // 格式不合法
+      return false;
+    }
+  },
+  __parseActions: function __parseActions(actions, myPathKey) {
+    var _this2 = this;
+
+    // 解析是否为特殊写法
+    var newActions = [];
+
+    if (libs_utils.isObj(actions) && keys_default()(actions).length > 0 || libs_utils.isArr(actions) && actions.length > 0 || libs_utils.isFunc(actions) || libs_utils.isStr(actions)) {
+      var tmpActions;
+
+      if (libs_utils.isFunc(actions)) {
+        tmpActions = [{
+          trigger: libs_constant.CLICK_EVENT,
+          handler: actions
+        }];
+      } else if (libs_utils.isObj(actions)) {
+        tmpActions = [actions];
+      } else if (libs_utils.isStr(actions)) {
+        tmpActions = [actions];
+      } else {
+        // 就是数组了
+        tmpActions = actions;
+      }
+
+      tmpActions.forEach(function (tmpAction) {
+        var newTrigger, newAction;
+
+        if (libs_utils.isStr(tmpAction)) {
+          tmpAction = tmpAction.trim();
+
+          if (tmpAction == libs_constant.ENTER_SUBMIT) {
+            // keyup.native提交事件
+            newActions.push({
+              trigger: [libs_constant.KEYUP_NATIVE],
+              handler: enterSubmit
+            });
+          } else {
+            var actionInfos = tmpAction.split(/\s*=\s*/);
+
+            if (actionInfos && actionInfos.length == 2 && actionInfos[1] == libs_constant.ONLY_SUBMIT) {
+              // newActions.push({trigger: actionInfos[0], handler: onlySubmit});
+              newAction = {};
+              newTrigger = _this2.__parseTrigger(actionInfos[0]);
+              newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [libs_constant.CLICK_EVENT];
+              newAction.handler = onlySubmit;
+              newActions.push(newAction);
+            } else {
+              console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行.");
+            }
+          }
+        } else if (libs_utils.isFunc(tmpAction.handler)) {
+          newAction = {};
+          newTrigger = _this2.__parseTrigger(tmpAction.trigger);
+          newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [libs_constant.CLICK_EVENT];
+          newAction.handler = tmpAction.handler;
+          newActions.push(newAction);
+        } else {
+          // 非法写，不是函数，去掉它
+          console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行");
+        }
+      });
+    } else {// console.warn("key(" + myPathKey + ")component事件类型不合法.");
+    }
+
+    return newActions.length > 0 ? newActions : null;
+  },
+
+  /* 解析Label */
+  __parseLabel: function __parseLabel(value) {
+    var newValue,
+        defaultAlign = false;
+    newValue = this.__parsePropComponent(value, true); // 因为label有点特殊，所以不能为false
+
+    if (newValue) {
+      newValue.flex = this.__parseFlex(value.flex, value.size);
+      newValue.align = this.__parseAlign(value.align, defaultAlign);
+    } else {
+      newValue = {
+        text: false,
+        __rawText: false,
+        flex: false,
+        align: defaultAlign
+      };
+    }
+
+    return newValue;
+  },
+  __parseFlex: function __parseFlex(flex, size) {
+    var flexs = ["self", "full"];
+
+    if (flexs.includes(flex)) {
+      return flex;
+    } // 兼容一下之前的东西
+
+
+    var sizes = ["fixed", "auto"];
+    var sizeIndex = sizes.indexOf(size);
+
+    if (sizeIndex >= 0) {
+      console.warn('label.size and component.size ["fixed", "auto"]已经舍弃了，请使用flex ["self", "full"]');
+      return flexs[sizeIndex];
+    }
+
+    return false;
+  },
+  __parseAlign: function __parseAlign(align) {
+    var defaultVal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "left";
+    var aligns = ["left", "center", "right"];
+
+    if (aligns.includes(align)) {
+      return align;
+    }
+
+    return defaultVal;
+  },
+
+  /* 解析title */
+  __parseTitle: function __parseTitle(value) {
+    var newValue = this.__parsePropComponent(value);
+
+    return newValue;
+  },
+
+  /* 解析boxUi, 只支持properites */
+  __parseBoxUi: function __parseBoxUi(value) {
+    var newValue;
+
+    if (libs_utils.isObj(value) && keys_default()(value).length > 0) {
+      newValue = {};
+
+      if (libs_utils.isBool(value.showBody)) {
+        newValue.__hasToggle = true; // 有切换按钮
+
+        newValue.showBody = value.showBody;
+      } else {
+        newValue.__hasToggle = false; // 无切换按钮
+
+        newValue.showBody = true;
+      }
+
+      newValue.type = libs_utils.isStr(value.type) ? value.type.trim() : "";
+    } else if (libs_utils.isStr(value)) {
+      newValue = {
+        __hasToggle: false,
+        showBody: true,
+        type: value.trim()
+      };
+    } else {
+      // 为false
+      newValue = false;
+    }
+
+    return newValue;
+  },
+
+  /* 解析帮助 */
+  __parsePropHelp: function __parsePropHelp(help) {
+    // console.log("help: ", help);
+    var gHelp = false;
+
+    if (libs_utils.isObj(help) && keys_default()(help).length > 0) {
+      gHelp = {};
+
+      assign_default()(gHelp, help);
+
+      if (!gHelp.name) {
+        gHelp.name = components_help;
+      }
+
+      gHelp = this.__parsePropComponent(gHelp);
+    } else if (libs_utils.isStr(help)) {
+      gHelp = {
+        name: components_help,
+        props: {
+          content: help
+        }
+      };
+      gHelp = this.__parsePropComponent(gHelp);
+    } else {
+      gHelp = false;
+    } // console.log("gHelp: ", gHelp);
+
+
+    return gHelp;
+  },
+
+  /* 解析一般组件 */
+  __parsePropComponent: function __parsePropComponent(value) {
+    var canEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var newCom;
+
+    if (libs_utils.isObj(value) && keys_default()(value).length > 0) {
+      newCom = {};
+      var name = libs_utils.isStr(value.name) && value.name.trim() ? value.name.trim() : value.name;
+
+      if (name) {
+        newCom.name = name;
+
+        if (libs_utils.isObj(value.props)) {
+          if (this.__needParseInObj(value.props)) {
+            newCom.props = this.__newEmptyObj(value.props); // 后面(analyzeUiProps)有解析的
+
+            newCom.__rawProps = this.__newEsFunction(value.props);
+          } else {
+            newCom.props = libs_utils.deepCopy(value.props); // 直接使用，不用解析了
+          }
+        } else {
+          newCom.props = {};
+        }
+      }
+
+      var text;
+
+      if (libs_utils.isStr(value.text)) {
+        text = value.text.trim();
+        text = text || canEmpty ? text : false;
+        newCom.text = text;
+      } else {
+        if (!name) {
+          // 不符合要求，说明为空
+          // 说明为空
+          return false;
+        }
+
+        text = false;
+      }
+
+      newCom.text = text;
+      newCom.__rawText = libs_parse.newEsFuncion(text);
+      return newCom;
+    } else if (libs_utils.isStr(value)) {
+      value = value.trim();
+
+      if (value || canEmpty) {
+        newCom = {
+          text: value,
+          __rawText: libs_parse.newEsFuncion(value)
+        };
+      } else {
+        newCom = false;
+      }
+
+      return newCom;
+    } else {
+      return false;
+    }
+  },
+
+  /* 解析规则 */
+  __parsePropRules: function __parsePropRules(rules) {
+    var newRules;
+
+    if (libs_utils.isObj(rules)) {
+      if (rules.check) {
+        console.warn("rules.check已经舍弃了，请使用rules.checks");
+      }
+
+      newRules = {};
+      var rawCheckList = rules.checks ? rules.checks : rules.check;
+      var tmpCheckList = [];
+
+      if (!rawCheckList) {
+        rawCheckList = [];
+      } else if (!libs_utils.isArr(rawCheckList)) {
+        rawCheckList = [rawCheckList];
+      }
+
+      rawCheckList.forEach(function (item) {
+        var newItem = formUtils.__perfectCheckItem(item);
+
+        if (newItem) {
+          // 正确
+          tmpCheckList.push(newItem);
+        }
+      });
+
+      if (tmpCheckList.length > 0) {
+        newRules.checks = tmpCheckList;
+      }
+
+      if (libs_parse.isEsScript(rules.required)) {
+        newRules.required = false; // 让以后解析
+
+        newRules.__rawRequired = libs_parse.newEsFuncion(rules.required);
+      } else if (libs_utils.isBool(rules.required)) {
+        newRules.required = rules.required;
+        newRules.__rawRequired = rules.required;
+      } else {
+        newRules.required = false;
+        newRules.__rawRequired = false;
+      }
+    } else if (libs_utils.isBool(rules)) {
+      newRules = {
+        required: rules,
+        __rawRequired: rules
+      };
+    } else if (libs_parse.isEsScript(rules)) {
+      newRules = {
+        required: false,
+        __rawRequired: libs_parse.newEsFuncion(rules)
+      };
+    } else {
+      return false;
+    }
+
+    if (newRules.__rawRequired || newRules.checks && newRules.checks.length > 0) {
+      var emptyMsg, errMsg;
+
+      if (newRules.__rawRequired) {
+        // 有为空检查
+        if (libs_utils.isStr(rules.emptyMsg)) {
+          emptyMsg = rules.emptyMsg.trim();
+        }
+
+        newRules.emptyMsg = emptyMsg ? emptyMsg : "不能为空";
+      }
+
+      if (newRules.checks && newRules.checks.length > 0) {
+        // 有非空检查
+        if (libs_utils.isStr(rules.errMsg)) {
+          errMsg = rules.errMsg.trim();
+        }
+
+        newRules.errMsg = errMsg ? errMsg : "格式不对";
+      }
+
+      return newRules;
+    } else {
+      return false;
+    }
+  },
+  __isArray: function __isArray(array) {
+    if (array) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+  __isPropItem: function __isPropItem(rawItem) {
+    return !this.__isSpaceItem(rawItem) && libs_utils.isObj(rawItem.properties) && keys_default()(rawItem.properties).length > 0;
+  },
+  __existEntityItem: function __existEntityItem(rawPropItem) {
+    if (this.__isPropItem(rawPropItem)) {
+      for (var key in rawPropItem.properties) {
+        var nextRawProp = rawPropItem.properties[key];
+
+        if (this.__isIngnoreItem(nextRawProp)) {
+          continue;
+        }
+
+        if (!this.__isSpaceItem(nextRawProp)) {
+          return true; // 有一个即可以了
+        }
+      }
+    }
+
+    return false;
+  },
+  __isIngnoreItem: function __isIngnoreItem(rawPropItem) {
+    if (libs_utils.isNull(rawPropItem) || libs_utils.isUndef(rawPropItem) || rawPropItem === false) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  /**
+   * 是否为space item
+   * @param {*} subitem
+   */
+  __isSpaceItem: function __isSpaceItem(rawItem) {
+    if (libs_utils.isObj(rawItem) && (rawItem.layout === libs_constant.LAYOUT_SPACE || rawItem.layout && rawItem.layout.name === libs_constant.LAYOUT_SPACE)) {
+      return true;
+    }
+
+    return false;
+  },
+
+  /**
+   * 是否为tabs item
+   * @param {*} subitem
+   */
+  __isTabsItem: function __isTabsItem(rawItem) {
+    if (rawItem.layout === libs_constant.LAYOUT_TABS || rawItem.layout && rawItem.layout.name === libs_constant.LAYOUT_TABS) {
+      return true;
+    }
+
+    return false;
+  },
+  __parsePropLayout: function __parsePropLayout(layout) {
+    var newLayout = {
+      name: false
+    };
+    var layoutTypes = [libs_constant.LAYOUT_SPACE, libs_constant.LAYOUT_TABS];
+
+    if (libs_utils.isStr(layout)) {
+      if (layoutTypes.includes(layout)) {
+        newLayout.name = layout;
+        layout = {};
+      }
+    } else if (libs_utils.isObj(layout)) {
+      if (layoutTypes.includes(layout.name)) {
+        newLayout.name = layout.name;
+      }
+    } else {// nothing
+    }
+
+    if (newLayout.name === false) {
+      // 没有布局
+      return false;
+    } else if (newLayout.name === libs_constant.LAYOUT_TABS) {
+      // 是子节点布局是tabs时所需要的一些参数
+      // var types = ["bg", "card", "line"];
+      newLayout.type = layout.type;
+      newLayout.hasBorder = libs_utils.isBool(layout.hasBorder) ? layout.hasBorder : true;
+    }
+
+    return newLayout;
+  },
+  __parsePropArray: function __parsePropArray(array, rawItem, myPathKey) {
+    if (this.__isArray(array)) {
+      var newArray = {};
+      var hasSort = false; //是否有排序按钮，默认为false
+
+      var hasDelete = true; //是否有删除按钮，默认为true
+
+      var hasAdd = true; //是否有添加按钮(下边的添加按钮)，默认为true
+
+      var hasCopy = false; // //是否有拷贝添加按钮，默认为false
+
+      var max = 0; //不写或小于等于0代表不限制
+
+      var min = 0; //不写或小于等于0代表0
+
+      var fixed = 0; //不写或小于等于0代表0
+
+      var hasOrder = true; //是否有序号，默认为true
+
+      var headRequired = false; //此值当name为constant.ARRAY_TABLE有效，当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示，默认为true;注意：当为true时，required的值不能受properties里面的属性影响
+
+      var hasDelWarn = true; // 删除是否有警告
+
+      var subLabel = false;
+      var rules = false;
+      var actions = false;
+      var value = [];
+      var rowSpace = undefined;
+      var type = null;
+      var hasBorder = true;
+      var insertValue = undefined;
+
+      if (libs_utils.isStr(array)) {
+        newArray.name = array;
+      } else if (!libs_utils.isObj(array)) {
+        newArray.name = libs_constant.ARRAY_ROW;
+      } else {
+        newArray.name = libs_utils.isStr(array.name) ? array.name : libs_constant.ARRAY_ROW;
+        hasSort = array.hasSort ? true : false;
+        hasDelete = libs_utils.isUndef(array.hasDelete) || array.hasDelete ? true : false;
+        hasAdd = libs_utils.isUndef(array.hasAdd) || array.hasAdd ? true : false;
+        hasCopy = array.hasCopy ? true : false;
+        min = libs_utils.isUndef(array.min) || array.min <= 0 || !libs_utils.isNum(array.min) ? 0 : array.min;
+        max = libs_utils.isUndef(array.max) || array.max <= 0 || !libs_utils.isNum(array.max) ? 0 : array.max;
+        fixed = libs_utils.isUndef(array.fixed) || array.fixed <= 0 || !libs_utils.isNum(array.fixed) ? 0 : array.fixed;
+        hasOrder = libs_utils.isUndef(array.hasOrder) || array.hasOrder ? true : false;
+        headRequired = array.name == libs_constant.ARRAY_TABLE && array.headRequired ? true : false; // subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
+
+        subLabel = this.__parsePropComponent(array.subLabel);
+
+        if (!subLabel) {
+          subLabel = {
+            text: false,
+            __rawText: false // size: false,
+            // align: defaultAlign
+
+          };
+        }
+
+        hasDelWarn = libs_utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
+        value = libs_utils.isArr(array.value) ? array.value : [];
+        rules = this.__parsePropRules(array.rules);
+        actions = this.__parseActions(array.actions, myPathKey);
+        rowSpace = libs_utils.isNum(array.rowSpace) ? array.rowSpace : undefined;
+        type = libs_utils.isStr(array.type) ? array.type : false;
+        hasBorder = libs_utils.isBool(array.hasBorder) ? array.hasBorder : true;
+        insertValue = libs_utils.isUndef(array.insertValue) ? undefined : array.insertValue;
+      }
+
+      if (!this.__isPropItem(rawItem) && newArray.name == libs_constant.ARRAY_TABLE) {
+        newArray.name = libs_constant.ARRAY_ROW;
+        console.warn(myPathKey + "叶子节点(组件)不支持为" + libs_constant.ARRAY_TABLE + "数组, " + libs_constant.ARRAY_TABLE + "将失效, 强制转化为" + libs_constant.ARRAY_ROW);
+      } else if (this.__isPropItem(rawItem) && newArray.name == libs_constant.ARRAY_CARD) {
+        newArray.name = libs_constant.ARRAY_ROW;
+        console.warn(myPathKey + "为非叶子节点(非组件)，不支持为" + libs_constant.ARRAY_CARD + "数组, " + libs_constant.ARRAY_CARD + "将失效, 强制转化为" + libs_constant.ARRAY_ROW);
+      }
+
+      if (newArray.name == libs_constant.ARRAY_ROW || newArray.name == libs_constant.ARRAY_TABLE || newArray.name == libs_constant.ARRAY_TABS || newArray.name == libs_constant.ARRAY_CARD || newArray.name == libs_constant.ARRAY_LEGEND) {
+        newArray.hasSort = hasSort;
+        newArray.hasDelete = hasDelete;
+        newArray.hasDelWarn = hasDelWarn;
+        newArray.hasAdd = hasAdd;
+        newArray.hasCopy = hasCopy;
+        newArray.min = min;
+        newArray.max = max;
+        newArray.fixed = fixed;
+        newArray.hasOrder = hasOrder;
+        newArray.headRequired = headRequired;
+        newArray.value = value;
+        newArray.rules = rules;
+        newArray.actions = actions;
+        newArray.rowSpace = rowSpace;
+
+        if (newArray.name == libs_constant.ARRAY_TABS) {
+          newArray.subLabel = subLabel;
+          newArray.type = type;
+          newArray.hasBorder = hasBorder;
+        } else if (newArray.name == libs_constant.ARRAY_LEGEND) {
+          newArray.subLabel = subLabel;
+        }
+
+        if (!libs_utils.isUndef(insertValue)) {
+          newArray.insertValue = insertValue;
+        }
+      } else {
+        throw "formUtils.__parsePropArray: array.name不合法";
+      }
+
+      return newArray;
+    } else {
+      return false;
+    }
+  },
+  __perfectCheckItem: function __perfectCheckItem(item) {
+    if (libs_utils.isFunc(item)) {
+      return {
+        handler: item,
+        trigger: [libs_constant.INPUT_EVENT]
+      };
+    } else if (libs_parse.isEsScript(item)) {
+      return {
+        handler: libs_parse.newEsFuncion(item),
+        trigger: [libs_constant.INPUT_EVENT]
+      };
+    } else if (libs_utils.isObj(item) && (libs_parse.isEsScript(item.handler) || libs_parse.isEsScript(item.name) || libs_utils.isFunc(item.name) || libs_utils.isFunc(item.handler))) {
+      var handler;
+
+      if (libs_parse.isEsScript(item.name)) {
+        console.warn("rules.check.name已经舍弃了，请使用rules.checks.handler");
+        handler = libs_parse.newEsFuncion(item.name);
+      } else if (libs_parse.isEsScript(item.handler)) {
+        handler = libs_parse.newEsFuncion(item.handler);
+      } else {
+        handler = item.handler;
+      }
+
+      var newTrigger = this.__parseTrigger(item.trigger);
+
+      newTrigger = newTrigger && newTrigger.length ? libs_utils.unique(newTrigger) : [libs_constant.INPUT_EVENT];
+      var newItem = {
+        handler: handler,
+        trigger: newTrigger
+      };
+      return newItem;
+    } else {
+      console.warn("rules.checks设置不正确: 正确的格式如：[{trigger, handler}], 错误的item为", item);
+      return false;
+    }
+  },
+  __filterKeys: function __filterKeys(propItem, propKeys, inheritObj, myPathKey) {
+    var newPropItem = {};
+    propKeys.forEach(function (key) {
+      if (key == "label") {
+        newPropItem[key] = formUtils.__parseLabel(propItem[key]);
+        return true;
+      }
+
+      if (key == "title") {
+        newPropItem[key] = formUtils.__parseTitle(propItem[key]);
+        return true;
+      }
+
+      if (key == "ui") {
+        newPropItem[key] = formUtils.__parseBoxUi(propItem[key]);
+        return true;
+      }
+
+      if (key == "format") {
+        newPropItem[key] = formUtils.__parseFormat(propItem[key]);
+        return true;
+      }
+
+      if (key == "rules") {
+        newPropItem[key] = formUtils.__parsePropRules(propItem[key]);
+        newPropItem.__invalidMsg = false;
+        return true;
+      }
+
+      if (key == "help") {
+        newPropItem[key] = formUtils.__parsePropHelp(propItem[key]);
+        return true;
+      }
+
+      if (key == "desc") {
+        newPropItem[key] = formUtils.__parsePropComponent(propItem[key]);
+        return true;
+      }
+
+      if (key == "unit") {
+        newPropItem[key] = formUtils.__parsePropComponent(propItem[key]);
+        return true;
+      }
+
+      if (key == "array") {
+        newPropItem[key] = formUtils.__parsePropArray(propItem[key], propItem, myPathKey);
+        return true;
+      }
+
+      if (key == "layout") {
+        newPropItem[key] = formUtils.__parsePropLayout(propItem[key]);
+        return true;
+      }
+
+      if (key == "component") {
+        var mainComponent = formUtils.__parseMainComponent(propItem[key], myPathKey); // var esBakComponent = formUtils.__fetchComponentEs(mainComponent);
+        // if (esBakComponent) {
+        //   newPropItem["_component"] = esBakComponent;
+        // }
+
+
+        newPropItem[key] = mainComponent;
+        return true;
+      }
+
+      var specialKeyInfo = formUtils.__getSpecialInfo(key);
+
+      if (specialKeyInfo) {
+        newPropItem[key] = formUtils.__parseSpecialKey(propItem, specialKeyInfo);
+      } else {
+        var normalKeyInfo = formUtils.__getNormalInfo(key);
+
+        if (normalKeyInfo) {
+          newPropItem[key] = formUtils.__parseNormalKey(propItem, normalKeyInfo, inheritObj);
+        } else {
+          throw "程序的key(" + key + ")不对应，请修改";
+        }
+      }
+    });
+
+    if (!libs_utils.isUndef(newPropItem.rowSpace)) {
+      newPropItem.__rawRowSpace = newPropItem.rowSpace;
+    }
+
+    return newPropItem;
+  },
+  __newInheritObj: function __newInheritObj(propItem) {
+    var keys = ["direction", "colon", "boxRowSpace", "boxLabelWidth", "boxRowHeight"];
+    var keyObj = {
+      //把右边的数据给下一级的节点
+      rowHeight: "boxRowHeight",
+      rowSpace: "boxRowSpace",
+      labelWidth: "boxLabelWidth"
+    };
+    var obj = {};
+    keys.forEach(function (key) {
+      obj[key] = propItem[key];
+    });
+
+    for (var key in keyObj) {
+      obj[key] = propItem[keyObj[key]];
+    }
+
+    return obj;
+  },
+  __reinitGroup: function __reinitGroup(propItem) {
+    var lastGroup = false;
+    var groups;
+    var colSum = 0;
+    var gFirstItem; //每一组的第一项
+
+    for (var key in propItem.properties) {
+      var item = propItem.properties[key];
+      var curGroup = item["group"];
+
+      if (curGroup) {
+        if (lastGroup) {
+          //已经存在了
+          if (lastGroup === curGroup) {
+            //是前面的那一组
+            groups.push(key);
+            colSum += item.col;
+            gFirstItem.__groupCol = colSum > libs_constant.UI_MAX_COL ? libs_constant.UI_MAX_COL : colSum;
+          } else {
+            //不是前面的那一组，重新开组
+            lastGroup = curGroup;
+            gFirstItem = item;
+            groups = [key];
+            item.__groups = groups;
+            item.__hiddenGroup = false; // item.col = constant.UI_MAX_COL;
+
+            colSum = item.col;
+            gFirstItem.__groupCol = colSum > libs_constant.UI_MAX_COL ? libs_constant.UI_MAX_COL : colSum;
+          }
+        } else {
+          //前面没有组，重新开组
+          lastGroup = curGroup;
+          gFirstItem = item;
+          groups = [key];
+          item.__groups = groups;
+          item.__hiddenGroup = false; // item.col = constant.UI_MAX_COL;
+
+          colSum = item.col;
+          gFirstItem.__groupCol = colSum > libs_constant.UI_MAX_COL ? libs_constant.UI_MAX_COL : colSum;
+        }
+
+        item.__inGroups = true; //记录此项在分组里面
+      } else {
+        lastGroup = false;
+        groups = null;
+        colSum = 0;
+        gFirstItem = null;
+      }
+    }
+  },
+  clearErrorMsg: function clearErrorMsg(propItem) {
+    if (!libs_utils.isUndef(propItem.__invalidMsg)) {
+      propItem.__invalidMsg = false;
+    }
+
+    if (propItem.component) {// if (!utils.isUndef(propItem.__invalidMsg)) {
+      //   propItem.__invalidMsg = false;
+      // }
+    } else if (propItem.properties) {
+      if (propItem.array) {
+        var schemaList = propItem.__propSchemaList; // console.log(propItem.__propSchemaList);
+
+        for (var i = 0; i < schemaList.length; i++) {
+          formUtils.clearErrorMsg(schemaList[i]);
+        }
+      } else {
+        for (var key in propItem.properties) {
+          formUtils.clearErrorMsg(propItem.properties[key]);
+        }
+      }
+    } else {// return undefined;
+    }
+  },
+
+  /**
+   * 根据formData, 分析界面的情况。现主要是解析第一行的情况和hidden, required
+   * @param {*} schema
+   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema, isHidden: }
+   * @param {*} formData
+   * @param {*} rootSchema
+   */
+  analyzeUiProps: function analyzeUiProps(propItem, baseParseSources) {
+    var sum = 0;
+    var isHidden, isRequired, text, listLen, schemaList, i;
+
+    var parseSources = assign_default()({}, baseParseSources);
+
+    parseSources.index = propItem.__index;
+    parseSources.idxChain = propItem.__idxChain;
+    parseSources.pathKey = propItem.__pathKey;
+
+    if (propItem.component) {
+      if (propItem.__rawHidden) {
+        // false或为空都不用执行
+        isHidden = libs_parse.smartEsValue(propItem.__rawHidden, parseSources);
+
+        if (propItem.hidden != isHidden) {
+          propItem.hidden = isHidden;
+        }
+      }
+
+      if (propItem.label) {
+        if (!propItem.label.name && propItem.label.__rawText) {
+          // false或为空都不用执行 properies array下propItem.label
+          text = libs_parse.smartEsValue(propItem.label.__rawText, parseSources);
+
+          if (propItem.label.text != text) {
+            propItem.label.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.label, parseSources);
+        }
+      }
+
+      if (propItem.desc) {
+        if (!propItem.desc.name && propItem.desc.__rawText) {
+          // false或为空都不用执行 propItem.desc
+          text = libs_parse.smartEsValue(propItem.desc.__rawText, parseSources);
+
+          if (propItem.desc.text != text) {
+            propItem.desc.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.desc, parseSources);
+        }
+      }
+
+      if (propItem.unit) {
+        if (!propItem.unit.name && propItem.unit.__rawText) {
+          // false或为空都不用执行 propItem.unit
+          text = libs_parse.smartEsValue(propItem.unit.__rawText, parseSources);
+
+          if (propItem.unit.text != text) {
+            propItem.unit.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.unit, parseSources);
+        }
+      }
+
+      if (propItem.help) {
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.help, parseSources);
+      }
+
+      if (propItem.array) {
+        // 数组
+        schemaList = propItem.__propSchemaList;
+
+        for (i = 0; i < schemaList.length; i++) {
+          formUtils.analyzeUiProps(schemaList[i], baseParseSources);
+        } // 是数组array-tabs, 调整索引
+
+
+        if (propItem.array.name == libs_constant.ARRAY_TABS) {
+          listLen = propItem.__propSchemaList.length;
+
+          if (listLen > 0) {
+            if (propItem.__tabsIndex === false) {
+              // 刚开始，取第一个
+              propItem.__tabsIndex = 0;
+            } else {
+              if (propItem.__tabsIndex < 0 || propItem.__tabsIndex >= listLen - 1) {
+                propItem.__tabsIndex = listLen - 1; // 取最后一个
+              } else {// 此范围索引合法
+                }
+            }
+          } else {
+            if (propItem.__tabsIndex !== false) {
+              propItem.__tabsIndex = false;
+            }
+          }
+        }
+      } else {
+        /* 一般组件 */
+        if (propItem.rules && propItem.rules.__rawRequired) {
+          // false或为空都不用执行
+          isRequired = libs_parse.smartEsValue(propItem.rules.__rawRequired, parseSources);
+
+          if (propItem.rules.required != isRequired) {
+            propItem.rules.required = isRequired;
+          }
+        } // 解析组件内的属性
+
+
+        this.__esParseComponent(propItem.component, parseSources);
+      }
+    } else if (propItem.properties) {
+      if (propItem.__rawHidden) {
+        // false或为空都不用执行
+        isHidden = libs_parse.smartEsValue( // propItem.__propSchemaList里面是没有hidden的，不过此写法不影响，smartEsValue前后都是undefined
+        propItem.__rawHidden, parseSources);
+
+        if (propItem.hidden != isHidden) {
+          propItem.hidden = isHidden;
+        }
+      }
+
+      if (propItem.title) {
+        if (!propItem.title.name && propItem.title.__rawText) {
+          // false或为空都不用执行 properies array下propItem.title
+          text = libs_parse.smartEsValue(propItem.title.__rawText, parseSources);
+
+          if (propItem.title.text != text) {
+            propItem.title.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.title, parseSources);
+        }
+      }
+
+      if (propItem.label) {
+        if (!propItem.label.name && propItem.label.__rawText) {
+          // false或为空都不用执行 properies array下propItem.label
+          text = libs_parse.smartEsValue(propItem.label.__rawText, parseSources);
+
+          if (propItem.label.text != text) {
+            propItem.label.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.label, parseSources);
+        }
+      }
+
+      if (propItem.desc) {
+        if (!propItem.desc.name && propItem.desc.__rawText) {
+          // false或为空都不用执行 propItem.desc
+          text = libs_parse.smartEsValue(propItem.desc.__rawText, parseSources);
+
+          if (propItem.desc.text != text) {
+            propItem.desc.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.desc, parseSources);
+        }
+      }
+
+      if (propItem.unit) {
+        if (!propItem.unit.name && propItem.unit.__rawText) {
+          // false或为空都不用执行 propItem.unit
+          text = libs_parse.smartEsValue(propItem.unit.__rawText, parseSources);
+
+          if (propItem.unit.text != text) {
+            propItem.unit.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.unit, parseSources);
+        }
+      }
+
+      if (propItem.help) {
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.help, parseSources);
+      }
+
+      if (propItem.subLabel) {
+        if (!propItem.subLabel.name && propItem.subLabel.__rawText) {
+          text = libs_parse.smartEsValue(propItem.subLabel.__rawText, parseSources);
+
+          if (propItem.subLabel.text != text) {
+            propItem.subLabel.text = text;
+          }
+        } else {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.subLabel, parseSources);
+        }
+      }
+
+      if (propItem.array) {
+        schemaList = propItem.__propSchemaList;
+
+        for (i = 0; i < schemaList.length; i++) {
+          formUtils.analyzeUiProps(schemaList[i], baseParseSources);
+        } // 是数组tabs, 调整索引
+
+
+        if (propItem.array.name == libs_constant.ARRAY_TABS) {
+          listLen = propItem.__propSchemaList.length;
+
+          if (listLen > 0) {
+            if (propItem.__tabsIndex === false) {
+              // 刚开始，取第一个
+              propItem.__tabsIndex = 0;
+            } else {
+              if (propItem.__tabsIndex < 0 || propItem.__tabsIndex >= listLen - 1) {
+                propItem.__tabsIndex = listLen - 1; // 取最后一个
+              } else {// 此范围索引合法
+                }
+            }
+          } else {
+            if (propItem.__tabsIndex !== false) {
+              propItem.__tabsIndex = false;
+            }
+          }
+        }
+      } else {
+        var nextPropItem, key;
+
+        if (propItem.layout && propItem.layout.name == libs_constant.LAYOUT_TABS) {
+          // 是普通tabs
+          for (key in propItem.properties) {
+            nextPropItem = propItem.properties[key]; // 下一级
+
+            formUtils.analyzeUiProps(nextPropItem, baseParseSources);
+          } //调整索引
+
+
+          if (propItem.__tabsIndex === false) {
+            for (key in propItem.properties) {
+              // 取第一个不是隐藏的key作为索引
+              nextPropItem = propItem.properties[key];
+
+              if (!nextPropItem.hidden) {
+                propItem.__tabsIndex = key;
+                break;
+              }
+            }
+          } else {
+            var curIndexPropItem = propItem.properties[propItem.__tabsIndex]; // console.log("curIndexPropItem: ", curIndexPropItem, propItem.__tabsIndex);
+
+            if (curIndexPropItem.hidden) {
+              // 当前的索引对应的tab隐藏了
+              var indexs = [];
+
+              for (key in propItem.properties) {
+                nextPropItem = propItem.properties[key];
+
+                if (key === propItem.__tabsIndex) {
+                  indexs.push(key);
+                } else if (!nextPropItem.hidden) {
+                  indexs.push(key);
+                }
+              }
+
+              if (indexs.length > 1) {
+                var curIndex = indexs.indexOf(propItem.__tabsIndex);
+
+                if (curIndex < indexs.length - 1) {
+                  // 不是最后一个，取下一个
+                  propItem.__tabsIndex = indexs[curIndex + 1];
+                } else {
+                  // 取上一个
+                  propItem.__tabsIndex = indexs[curIndex - 1];
+                }
+              } else {
+                propItem.__tabsIndex = false; // 没有索引或全部tabs隐藏
+              }
+            } else {// 值有效，不必理会
+              }
+          }
+        } else {
+          sum = 0;
+          var newRowSpace;
+
+          for (key in propItem.properties) {
+            nextPropItem = propItem.properties[key];
+
+            if (nextPropItem.__groups) {
+              //是一个组
+              isHidden = formUtils.isGroupHidden(propItem, nextPropItem.__groups, baseParseSources);
+
+              if (!isHidden) {
+                //组不隐藏
+                sum += nextPropItem.__groupCol;
+
+                if (sum <= libs_constant.UI_MAX_COL) {
+                  //还在第一行
+                  newRowSpace = 0;
+                } else {
+                  newRowSpace = nextPropItem.__rawRowSpace;
+                }
+
+                if (nextPropItem.rowSpace != newRowSpace) {
+                  //还原
+                  nextPropItem.rowSpace = newRowSpace;
+                }
+
+                if (nextPropItem.__hiddenGroup != isHidden) {
+                  nextPropItem.__hiddenGroup = isHidden;
+                }
+              } else {//不必理会
+              }
+            } else if (nextPropItem.__inGroups) {
+              //组内成员
+              if (nextPropItem.rowSpace != 0) {
+                nextPropItem.rowSpace = 0;
+              }
+            } else {
+              //正常成员
+              var nextParseSources = assign_default()({}, baseParseSources);
+
+              nextParseSources.index = nextPropItem.__index;
+              nextParseSources.idxChain = nextPropItem.__idxChain;
+              nextParseSources.pathKey = nextPropItem.__pathKey;
+              isHidden = libs_parse.smartEsValue(nextPropItem.__rawHidden, nextParseSources); // console.log(nextPropItem.col, isHidden);
+
+              if (!isHidden) {
+                sum += nextPropItem.col;
+
+                if (sum <= libs_constant.UI_MAX_COL) {
+                  //还在第一行
+                  newRowSpace = 0;
+                } else {
+                  newRowSpace = nextPropItem.__rawRowSpace;
+                }
+
+                if (nextPropItem.rowSpace != newRowSpace) {
+                  //还原
+                  nextPropItem.rowSpace = newRowSpace;
+                }
+              } else {//不必理会
+              }
+            } // 下一级
+
+
+            formUtils.analyzeUiProps(nextPropItem, baseParseSources);
+          }
+        }
+      }
+    } else {
+      // 占位空间等
+      if (propItem.__rawHidden) {
+        // false或为空都不用执行
+        isHidden = libs_parse.smartEsValue(propItem.__rawHidden, parseSources);
+
+        if (propItem.hidden != isHidden) {
+          propItem.hidden = isHidden;
+        }
+      }
+    }
+  },
+  __esParseComponent: function __esParseComponent(component, parseSources) {
+    var text;
+
+    if (component.__rawProps) {
+      var curProps = component.props;
+      var rawProps = component.__rawProps;
+
+      for (var key in rawProps) {
+        text = libs_parse.smartEsValue(rawProps[key], parseSources);
+
+        if (curProps[key] !== text) {
+          curProps[key] = text;
+        }
+      }
+    }
+
+    if (component.__rawText) {
+      text = libs_parse.smartEsValue(component.__rawText, parseSources);
+
+      if (text !== component.text) {
+        component.text = text;
+      }
+    }
+  },
+
+  /**
+   *
+   * @param {*} propItem
+   * @param {*} groups
+   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
+   */
+  isGroupHidden: function isGroupHidden(propItem, groups, baseParseSources) {
+    var result = false;
+
+    for (var i = 0; i < groups.length; i++) {
+      var fieldKeyName = groups[i];
+      var propSchema = propItem.properties[fieldKeyName];
+
+      if (!propSchema.layout || propSchema.layout.name !== libs_constant.LAYOUT_SPACE) {
+        var parseSources = assign_default()({}, baseParseSources);
+
+        parseSources.index = propSchema.__index;
+        parseSources.idxChain = propSchema.__idxChain;
+        parseSources.pathKey = propSchema.__pathKey;
+        result = libs_parse.smartEsValue(propSchema.__rawHidden, parseSources);
+      } else {
+        //占位空间是不可见的
+        result = true;
+      }
+
+      if (!result) {
+        return result;
+      }
+    }
+
+    return result;
+  },
+
+  /**
+   * 检查数据平铺时schema是否合法。也就是第一层的properies展开的key和第一层的key是否有重复印
+   * @param {*} schema // 已经整理过的schema
+   */
+  __checkForTile: function __checkForTile(schema) {
+    if (schema.autoMatch) {
+      var keyTotals = {};
+      var firstPropSchema = schema.properties;
+
+      for (var key in firstPropSchema) {
+        // 第一层的key
+        if (keyTotals[key]) {
+          keyTotals[key] = keyTotals[key] + 1;
+        } else {
+          keyTotals[key] = 1;
+        }
+
+        var nextSchema = firstPropSchema[key];
+
+        if (nextSchema.properties && !nextSchema.array) {
+          var nextPropItem = nextSchema.properties;
+
+          for (var nextKey in nextPropItem) {
+            // 第二层的key
+            if (keyTotals[nextKey]) {
+              keyTotals[nextKey] = keyTotals[nextKey] + 1;
+            } else {
+              keyTotals[nextKey] = 1;
+            }
+          }
+        }
+      }
+
+      var errKeys = [];
+
+      for (var schemaKey in keyTotals) {
+        if (keyTotals[schemaKey] > 1) {
+          errKeys.push(schemaKey + "(共" + keyTotals[schemaKey] + "次)");
+        }
+      }
+
+      if (errKeys.length > 0) {
+        throw "属性" + errKeys.join("、") + "出错重复，无法做到自动匹配"; // return false;
+      }
+
+      return true;
+    } else {
+      return true;
+    }
+  },
+
+  /**
+   * 组装平铺数据
+   * @param {*} schema // 已经整理过的schema
+   * @param {*} value
+   */
+  perfectTileValue: function perfectTileValue(schema, value) {
+    if (schema.autoMatch && value) {
+      if (libs_utils.isStr(value)) {
+        // 是key
+        return this.__perfectTileKey(schema, value);
+      } else if (libs_utils.isObj(value)) {
+        // 是key-value
+        var newValue = {};
+
+        for (var key in value) {
+          var seperator = ".";
+
+          var keyPath = this.__perfectTileKey(schema, key);
+
+          if (keyPath.indexOf(seperator) > 0) {
+            var paths = keyPath.split(seperator); // 两个
+
+            var firstKey = paths[0];
+            var second = paths[1];
+
+            if (newValue[firstKey]) {// newValue[firstKey][second] = value[second];
+            } else if (libs_utils.isObj(value[firstKey])) {
+              // 重复设值
+              newValue[firstKey] = value[firstKey];
+            } else {
+              newValue[firstKey] = {};
+            }
+
+            newValue[firstKey][second] = value[second];
+          } else {
+            newValue[key] = value[key];
+          }
+        } // console.log("newValue: ", newValue);
+
+
+        return newValue;
+      } else {
+        return value; // 不知类型，直接返回
+      }
+    } else {
+      return value; // 值不对或不需要自动匹配，直接返回
+    }
+  },
+  __perfectTileKey: function __perfectTileKey(schema, keyPath) {
+    var seperator = ".";
+    var keyArr = keyPath.split(seperator);
+    var firstKey = keyArr[0];
+    var firstPropSchema = schema.properties;
+
+    for (var key in firstPropSchema) {
+      // 第一层的key
+      if (key === firstKey) {
+        return keyPath;
+      }
+
+      var nextSchema = firstPropSchema[key];
+
+      if (nextSchema.properties && !nextSchema.array) {
+        var nextPropItem = nextSchema.properties;
+
+        for (var nextKey in nextPropItem) {
+          // 第二层的key
+          if (nextKey === firstKey) {
+            keyArr.unshift(key); // 前面加上第一层的key
+
+            return keyArr.join(seperator);
+          }
+        }
+      }
+    } // 没有找到，改造后直接返回
+
+
+    return keyPath;
+  },
+
+  /**
+   * 把结果数据平铺化
+   * @param {*} schema // 已经整理过的schema
+   * @param {*} value
+   */
+  __tileResultValue: function __tileResultValue(schema, value) {
+    if (schema.autoMatch) {
+      var newValue = {};
+      var firstPropSchema = schema.properties;
+
+      for (var key in value) {
+        var nextSchema = firstPropSchema[key];
+
+        if (nextSchema.properties && !nextSchema.array) {
+          newValue = assign_default()(newValue, value[key]);
+        } else {
+          newValue[key] = value[key];
+        }
+      }
+
+      return newValue;
+    } else {
+      return value;
+    }
+  }
+};
+/* harmony default export */ var form_utils = (formUtils);
 // CONCATENATED MODULE: ./src/package/mixins/array-mixin.js
 // import utils from "../libs/utils";
 
@@ -12145,14 +11905,6 @@ var tabs_component = normalizeComponent(
 
 /* harmony default export */ var array_mixin = ({
   created: function created() {},
-  // props: {
-  //   schema: {
-  //     type: Object,
-  //     default() {
-  //       return {};
-  //     }
-  //   }
-  // },
   data: function data() {
     return {};
   },
@@ -12165,7 +11917,7 @@ var tabs_component = normalizeComponent(
     },
     delItem: function delItem(index) {
       if (index >= 0 && index < this.schema.__propSchemaList.length) {
-        var oldValue = form_utils.getValue(this.schema);
+        var oldValues = form_utils.getValue(this.schema);
 
         this.schema.__propSchemaList.splice(index, 1);
 
@@ -12173,23 +11925,23 @@ var tabs_component = normalizeComponent(
         var eventData = {
           type: "delete",
           index: index,
-          data: libs_utils.deepCopy(oldValue[index])
+          data: libs_utils.deepCopy(oldValues[index])
         };
         var newValue = form_utils.getValue(this.schema);
-        this.$emit("input", this.schema.__pathKey, this.getHandlers(), newValue, eventData);
+        this.$emit("input", newValue, eventData);
       }
     },
     delAllItems: function delAllItems() {
       if (this.schema.__propSchemaList.length > 0) {
-        var oldValue = form_utils.getValue(this.schema);
+        var oldValues = form_utils.getValue(this.schema);
         this.schema.__propSchemaList = [];
         var eventData = {
           type: "deleteAll",
           index: -1,
-          data: oldValue
+          data: oldValues
         };
         var newValue = form_utils.getValue(this.schema);
-        this.$emit("input", this.schema.__pathKey, this.getHandlers(), newValue, eventData);
+        this.$emit("input", newValue, eventData);
       }
     },
     upItem: function upItem(index) {
@@ -12202,7 +11954,7 @@ var tabs_component = normalizeComponent(
           index: index
         };
         var newValue = form_utils.getValue(this.schema);
-        this.$emit("input", this.schema.__pathKey, this.getHandlers(), newValue, eventData);
+        this.$emit("input", newValue, eventData);
       }
     },
     downItem: function downItem(index) {
@@ -12215,56 +11967,59 @@ var tabs_component = normalizeComponent(
           index: index
         };
         var newValue = form_utils.getValue(this.schema);
-        this.$emit("input", this.schema.__pathKey, this.getHandlers(), newValue, eventData);
-      }
-    },
-    getHandlers: function getHandlers() {
-      var inputHandlers = form_utils.getHandlers(libs_constant.INPUT_EVENT, this.schema.array.actions);
-      var changeHandlers = form_utils.getHandlers(libs_constant.CHANGE_EVENT, this.schema.array.actions);
-
-      if (inputHandlers || changeHandlers) {
-        inputHandlers = inputHandlers ? inputHandlers : [];
-        changeHandlers = changeHandlers ? changeHandlers : [];
-        return inputHandlers.concat(changeHandlers); // input先执行，change后执行
-      } else {
-        return null;
+        this.$emit("input", newValue, eventData);
       }
     },
     __addItem: function __addItem(index) {
       var insertInfo = false,
-          oldValue;
+          oldValues,
+          position;
+      oldValues = form_utils.getValue(this.schema);
       var isIndex = libs_utils.isNum(index);
+      position = isIndex ? index + 1 : this.schema.__propSchemaList.length;
+      var insertValue = this.schema.array.insertValue;
 
-      if (isIndex) {
-        // 拷贝某一项
-        oldValue = form_utils.getValue(this.schema);
-        insertInfo = {
-          value: libs_utils.deepCopy(oldValue[index]),
-          position: index + 1
-        }; // 固定的值
-      } else {
-        // 加入最后
-        var insertValue = this.schema.array.insertValue;
+      if (!libs_utils.isUndef(insertValue)) {
+        if (libs_utils.isFunc(insertValue)) {
+          // 是一个函数，过滤
+          var thisFrom = this.__getForm();
 
-        if (!libs_utils.isUndef(insertValue)) {
-          if (libs_utils.isFunc(insertValue)) {
-            // 是一个函数，过滤
-            oldValue = form_utils.getValue(this.schema);
-            var insertIndex = this.schema.__propSchemaList.length;
-            var thisFrom = form_utils.getThisForm(this); // console.log("thisFrom", thisFrom);
+          var rawDefaultValue = libs_utils.deepCopy(oldValues[index]);
+          var options = {
+            oldValues: oldValues,
+            position: position,
+            type: isIndex ? "copy" : "add"
+          };
+          var newDefaultValue = insertValue.call(thisFrom, options);
+          options = null;
 
-            var defaultValue = insertValue.call(thisFrom, oldValue, insertIndex);
-            insertInfo = {
-              value: defaultValue,
-              position: this.schema.__propSchemaList.length
-            };
+          if (libs_utils.isUndef(newDefaultValue)) {
+            if (isIndex) {
+              insertInfo = {
+                value: rawDefaultValue,
+                // 没有默认值，那就取拷贝的那行
+                position: position
+              };
+            } else {
+              insertInfo = false; // 没有返回值，那就不设置
+            }
           } else {
             insertInfo = {
-              value: libs_utils.deepCopy(insertValue),
-              position: this.schema.__propSchemaList.length
-            }; // 固定的值
+              value: newDefaultValue,
+              position: position
+            };
           }
+        } else {
+          insertInfo = {
+            value: libs_utils.deepCopy(insertValue),
+            position: position
+          }; // 固定的值
         }
+      } else if (isIndex) {
+        insertInfo = {
+          value: libs_utils.deepCopy(oldValues[index]),
+          position: position
+        }; // 固定的值
       }
 
       form_utils.addArrayItem(this.schema, insertInfo);
@@ -12276,7 +12031,23 @@ var tabs_component = normalizeComponent(
         index: curIndex,
         data: libs_utils.deepCopy(newValue[curIndex])
       };
-      this.$emit("input", this.schema.__pathKey, this.getHandlers(), newValue, eventData); //同步更新的
+      this.$emit("input", newValue, eventData); //同步更新的
+    },
+    __getForm: function __getForm() {
+      var formItem = this.$parent;
+
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+
+        if (type == libs_constant.UI_FORM) {
+          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
+        } else if (type == libs_constant.UI_ARRAY) {// checkSchema.push(formItem._getSchema());
+        } else {// ... 往上派
+          }
+
+        formItem = formItem.$parent;
+      }
     }
   }
 });
@@ -12784,18 +12555,6 @@ var edit_bottom_btns_component = normalizeComponent(
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -12812,16 +12571,7 @@ var edit_bottom_btns_component = normalizeComponent(
     tabs: tabs,
     esBase: base
   },
-  methods: {
-    /**
-     * sourcePathKey 是哪个tab容器触发
-     * index 触发哪个
-     */
-    formClick: function formClick(type, data) {
-      // console.log("formClick: ", sourcePathKey, index);
-      this.$emit("formClick", type, data); // 往上派发
-    }
-  }
+  methods: {}
 });
 // CONCATENATED MODULE: ./src/package/layout/array-row.vue?vue&type=script&lang=js&
  /* harmony default export */ var layout_array_rowvue_type_script_lang_js_ = (array_rowvue_type_script_lang_js_); 
@@ -12839,8 +12589,8 @@ var array_rowvue_type_style_index_0_lang_scss_ = __webpack_require__("2d97");
 
 var array_row_component = normalizeComponent(
   layout_array_rowvue_type_script_lang_js_,
-  array_rowvue_type_template_id_7aaa8e63_render,
-  array_rowvue_type_template_id_7aaa8e63_staticRenderFns,
+  array_rowvue_type_template_id_518768c2_render,
+  array_rowvue_type_template_id_518768c2_staticRenderFns,
   false,
   null,
   null,
@@ -12849,15 +12599,17 @@ var array_row_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_row = (array_row_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-legend.vue?vue&type=template&id=957fe830&
-var array_legendvue_type_template_id_957fe830_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-legend"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-legend.vue?vue&type=template&id=cf5507d8&
+var array_legendvue_type_template_id_cf5507d8_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-legend"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
           marginTop: (index > 0 ? _vm.schema.array.rowSpace : 0) + 'px'
         })},[(_vm.schema.array.hasOrder !== false)?_c('div',{staticClass:"es-order-box",style:({
             height:
               typeof _vm.schema.boxRowHeight == 'number'
                 ? _vm.schema.boxRowHeight + 'px'
                 : _vm.schema.rowHeight + 'px'
-          })},[_vm._v("\n          "+_vm._s(index + 1)+".\n        ")]):_vm._e(),_c('div',{staticClass:"es-array-fieldset-box"},[_c('div',{staticClass:"es-array-fieldset"},[_c('div',{staticClass:"es-legend"},[_vm._v("\n              "+_vm._s(itemSchema.tabsName ? itemSchema.tabsName : index + 1 + "")+"\n            ")]),(itemSchema.properties)?[(itemSchema.layout && itemSchema.layout.name === 'tabs')?_c('tabs',{tag:"component",attrs:{"schema":itemSchema,"form-data":_vm.formData},on:{"formClick":_vm.formClick}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):_c('es-object',{attrs:{"schema":itemSchema,"form-data":_vm.formData}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2),(
+          })},[_vm._v("\n          "+_vm._s(index + 1)+".\n        ")]):_vm._e(),_c('div',{staticClass:"es-array-fieldset-box"},[_c('div',{staticClass:"es-array-fieldset"},[_c('div',{staticClass:"es-legend"},[(!itemSchema.subLabel.name)?[_c('span',[_vm._v(_vm._s(itemSchema.subLabel.text
+                    ? itemSchema.subLabel.text
+                    : index + 1 + ""))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.subLabel}})],1)],2),(itemSchema.properties)?[(itemSchema.layout && itemSchema.layout.name === 'tabs')?_c('tabs',{tag:"component",attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):_c('es-object',{attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2),(
                   _vm.schema.array.hasDelete ||
                     _vm.schema.array.hasSort ||
                     _vm.schema.array.hasCopy
@@ -12892,13 +12644,15 @@ var array_legendvue_type_template_id_957fe830_render = function () {var _vm=this
         typeof _vm.schema.boxRowHeight == 'number'
           ? _vm.schema.boxRowHeight + 'px'
           : _vm.schema.rowHeight + 'px'
-    })},[_c('es-base',{attrs:{"config":_vm.schema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}})],1):_vm._e()])}
-var array_legendvue_type_template_id_957fe830_staticRenderFns = []
+    })},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()])}
+var array_legendvue_type_template_id_cf5507d8_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-legend.vue?vue&type=template&id=957fe830&
+// CONCATENATED MODULE: ./src/package/layout/array-legend.vue?vue&type=template&id=cf5507d8&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-legend.vue?vue&type=script&lang=js&
+//
+//
 //
 //
 //
@@ -13201,16 +12955,7 @@ var array_legendvue_type_template_id_957fe830_staticRenderFns = []
     tabs: tabs,
     esBase: base
   },
-  methods: {
-    /**
-     * sourcePathKey 是哪个tab容器触发
-     * index 触发哪个
-     */
-    formClick: function formClick(type, data) {
-      // console.log("formClick: ", sourcePathKey, index);
-      this.$emit("formClick", type, data); // 往上派发
-    }
-  }
+  methods: {}
 });
 // CONCATENATED MODULE: ./src/package/layout/array-legend.vue?vue&type=script&lang=js&
  /* harmony default export */ var layout_array_legendvue_type_script_lang_js_ = (array_legendvue_type_script_lang_js_); 
@@ -13228,8 +12973,8 @@ var array_legendvue_type_style_index_0_lang_scss_ = __webpack_require__("3710");
 
 var array_legend_component = normalizeComponent(
   layout_array_legendvue_type_script_lang_js_,
-  array_legendvue_type_template_id_957fe830_render,
-  array_legendvue_type_template_id_957fe830_staticRenderFns,
+  array_legendvue_type_template_id_cf5507d8_render,
+  array_legendvue_type_template_id_cf5507d8_staticRenderFns,
   false,
   null,
   null,
@@ -13238,8 +12983,8 @@ var array_legend_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_legend = (array_legend_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-card.vue?vue&type=template&id=20d7aa3f&
-var array_cardvue_type_template_id_20d7aa3f_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-card"},[_c('ul',{staticClass:"es-order-list-box",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-card.vue?vue&type=template&id=0a318352&
+var array_cardvue_type_template_id_0a318352_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-card"},[_c('ul',{staticClass:"es-order-list-box",style:({
       marginBottom:
         _vm.schema.__propSchemaList.length > 0
           ? -Math.floor(_vm.schema.array.rowSpace) + 'px'
@@ -13268,11 +13013,11 @@ var array_cardvue_type_template_id_20d7aa3f_render = function () {var _vm=this;v
         typeof _vm.schema.boxRowHeight == 'number'
           ? _vm.schema.boxRowHeight + 'px'
           : _vm.schema.rowHeight + 'px'
-    })},[_c('es-base',{attrs:{"config":_vm.schema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}})],1):_vm._e()])}
-var array_cardvue_type_template_id_20d7aa3f_staticRenderFns = []
+    })},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()])}
+var array_cardvue_type_template_id_0a318352_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-card.vue?vue&type=template&id=20d7aa3f&
+// CONCATENATED MODULE: ./src/package/layout/array-card.vue?vue&type=template&id=0a318352&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/edit-abbr-btns.vue?vue&type=template&id=29ab2734&
 var edit_abbr_btnsvue_type_template_id_29ab2734_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-edit-btns"},[_c('div',{staticClass:"btn-list-box"},[_c('span',{ref:"delBtn",staticClass:"edit-selected-box",on:{"click":_vm.clickEditHandler}})]),_c('transition',{attrs:{"name":"es-fade","mode":"out-in","appear":""}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPop),expression:"showPop"}],ref:"pop",staticClass:"es-form-pop-box",style:({
@@ -13715,12 +13460,6 @@ var edit_abbr_btns_component = normalizeComponent(
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 
@@ -13739,16 +13478,7 @@ var edit_abbr_btns_component = normalizeComponent(
     esBase: base,
     esBtn: btn
   },
-  methods: {
-    /**
-     * sourcePathKey 是哪个tab容器触发
-     * index 触发哪个
-     */
-    formClick: function formClick(type, data) {
-      // console.log("formClick: ", sourcePathKey, index);
-      this.$emit("formClick", type, data); // 往上派发
-    }
-  }
+  methods: {}
 });
 // CONCATENATED MODULE: ./src/package/layout/array-card.vue?vue&type=script&lang=js&
  /* harmony default export */ var layout_array_cardvue_type_script_lang_js_ = (array_cardvue_type_script_lang_js_); 
@@ -13766,8 +13496,8 @@ var array_cardvue_type_style_index_0_lang_scss_ = __webpack_require__("af3d");
 
 var array_card_component = normalizeComponent(
   layout_array_cardvue_type_script_lang_js_,
-  array_cardvue_type_template_id_20d7aa3f_render,
-  array_cardvue_type_template_id_20d7aa3f_staticRenderFns,
+  array_cardvue_type_template_id_0a318352_render,
+  array_cardvue_type_template_id_0a318352_staticRenderFns,
   false,
   null,
   null,
@@ -13776,17 +13506,25 @@ var array_card_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_card = (array_card_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-table.vue?vue&type=template&id=220cab5e&
-var array_tablevue_type_template_id_220cab5e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-table"},[_c('table',{staticClass:"es-table"},[_c('thead',[(_vm.schema.array.hasOrder !== false)?_c('th',{staticClass:"es-order-fixed",style:({ padding: _vm.schema.rowSpace / 2 + 'px' })},[_vm._v("\n        序号\n      ")]):_vm._e(),_vm._l((_vm.schema.properties),function(headerSchema,headerFieldName){return _c('th',{key:headerFieldName,class:['es-col-' + headerSchema.col],style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_c('div',{staticClass:"es-form-table-head"},[(
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-table.vue?vue&type=template&id=283c1ad6&
+var array_tablevue_type_template_id_283c1ad6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-table"},[_c('table',{staticClass:"es-table"},[_c('thead',[(_vm.schema.array.hasOrder !== false)?_c('th',{staticClass:"es-order-fixed",style:({ padding: _vm.schema.rowSpace / 2 + 'px' })},[_vm._v("\n        序号\n      ")]):_vm._e(),_vm._l((_vm.schema.properties),function(headerSchema,headerFieldName){return _c('th',{key:headerFieldName,class:['es-col-' + headerSchema.col],style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_c('div',{class:[
+            'es-form-table-head',
+            headerSchema.label.align
+              ? 'es-form-component-' + headerSchema.label.align
+              : ''
+          ]},[(
               _vm.schema.array.headRequired &&
                 headerSchema.rules &&
                 headerSchema.rules.required
-            )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),_vm._v("\n          "+_vm._s(headerSchema.label.text
-              ? headerSchema.label.text
-              : headerFieldName + "")),(headerSchema.help)?_c('span',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":headerSchema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":headerSchema.__idxChain,"index":headerSchema.__index}})],1):_vm._e()])])}),(_vm.schema.array.hasDelete || _vm.schema.array.hasSort)?_c('th',{staticClass:"es-btn-fixed",style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_vm._v("\n        操作\n      ")]):_vm._e()],2),_c('tbody',_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('tr',{key:index},[(_vm.schema.array.hasOrder !== false)?_c('td',{style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_c('span',{staticClass:"es-order-txt",style:({
+            )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!headerSchema.label.name)?[_vm._v("\n            "+_vm._s(headerSchema.label.text
+                ? headerSchema.label.text
+                : headerFieldName + "")+"\n          ")]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":headerSchema.label}})],1),(headerSchema.help)?_c('span',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":headerSchema.help}})],1):_vm._e()],2)])}),(_vm.schema.array.hasDelete || _vm.schema.array.hasSort)?_c('th',{staticClass:"es-btn-fixed",style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_vm._v("\n        操作\n      ")]):_vm._e()],2),_c('tbody',_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('tr',{key:index},[(_vm.schema.array.hasOrder !== false)?_c('td',{style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_c('span',{staticClass:"es-order-txt",style:({
               height: _vm.schema.boxRowHeight + 'px',
               lineHeight: _vm.schema.boxRowHeight + 'px'
-            })},[_vm._v(_vm._s(index + 1)+".")])]):_vm._e(),_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('td',{key:fieldName,style:({ padding: _vm.schema.boxRowSpace / 2 + 'px' })},[_c('es-object-table',{attrs:{"schema":fieldSchema,"form-data":_vm.formData,"has-required":!_vm.schema.array.headRequired}},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index})],2)],1)}),(
+            })},[_vm._v(_vm._s(index + 1)+".")])]):_vm._e(),_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('td',{key:fieldName,style:({
+            padding: _vm.schema.boxRowSpace / 2 + 'px',
+            textAlign: fieldSchema.label.align
+          })},[_c('es-object-table',{attrs:{"schema":fieldSchema,"has-required":!_vm.schema.array.headRequired}},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index})],2)],1)}),(
             _vm.schema.array.hasDelete ||
               _vm.schema.array.hasSort ||
               _vm.schema.array.hasCopy
@@ -13797,10 +13535,10 @@ var array_tablevue_type_template_id_220cab5e_render = function () {var _vm=this;
                 _vm.schema.array.fixed <= 0 &&
                 _vm.schema.array.min <= 0,"index":-1,"has-del-warn":_vm.schema.array.hasDelWarn,"can-add":_vm.schema.array.max <= 0 ||
                 _vm.schema.__propSchemaList.length < _vm.schema.array.max},on:{"delItem":_vm.delAllItems,"addItem":_vm.addItem}})],1)])]):_vm._e()])])}
-var array_tablevue_type_template_id_220cab5e_staticRenderFns = []
+var array_tablevue_type_template_id_283c1ad6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-table.vue?vue&type=template&id=220cab5e&
+// CONCATENATED MODULE: ./src/package/layout/array-table.vue?vue&type=template&id=283c1ad6&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object-table.vue?vue&type=template&id=2caff024&
 var object_tablevue_type_template_id_2caff024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-table-container"},[(_vm.hasRequired && _vm.schema.rules && _vm.schema.rules.required)?_c('span',{staticClass:"es-table-required es-required",style:({
@@ -14112,6 +13850,15 @@ var object_table_component = normalizeComponent(
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -14144,8 +13891,8 @@ var array_tablevue_type_style_index_0_lang_scss_ = __webpack_require__("6fe2");
 
 var array_table_component = normalizeComponent(
   layout_array_tablevue_type_script_lang_js_,
-  array_tablevue_type_template_id_220cab5e_render,
-  array_tablevue_type_template_id_220cab5e_staticRenderFns,
+  array_tablevue_type_template_id_283c1ad6_render,
+  array_tablevue_type_template_id_283c1ad6_staticRenderFns,
   false,
   null,
   null,
@@ -14154,20 +13901,24 @@ var array_table_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_table = (array_table_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=template&id=f823faa4&
-var array_tabsvue_type_template_id_f823faa4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-tabs"},[_c('es-tabs-nav',{attrs:{"hasAdd":_vm.schema.array.hasAdd,"canAdd":_vm.schema.array.max > 0 &&
-        _vm.schema.__propSchemaList.length >= _vm.schema.array.max,"type":_vm.schema.array.type},on:{"addItem":_vm.addItemHandler}},[_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return [_c('es-tabs-nav-item',{key:index,attrs:{"tabsName":itemSchema.tabsName ? itemSchema.tabsName : index + 1 + '',"is-active":index === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"has-delete":_vm.schema.array.hasDelete,"has-sort":_vm.schema.array.hasSort,"can-delete":_vm.schema.__propSchemaList.length > _vm.schema.array.min,"fixed":_vm.schema.array.fixed,"is-first":index == 0,"is-last":index == _vm.schema.__propSchemaList.length - 1,"index":index,"has-del-warn":_vm.schema.array.hasDelWarn},on:{"delItem":_vm.delItemHandler,"upItem":_vm.upItem,"downItem":_vm.downItem,"clickActive":_vm.clickActiveHandler}})]}),(_vm.schema.help && _vm.schema.component)?_c('div',{staticClass:"es-form-help",attrs:{"slot":"help"},slot:"help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"form-data":_vm.formData,"global":_vm.global,"idx-chain":_vm.schema.__idxChain,"index":_vm.schema.__index}})],1):_vm._e()],2),(_vm.schema.__propSchemaList.length)?_c('ul',{staticClass:"es-tabs-body",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=template&id=355cab71&
+var array_tabsvue_type_template_id_355cab71_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-tabs"},[_c('es-tabs-nav',{attrs:{"hasAdd":_vm.schema.array.hasAdd,"canAdd":_vm.schema.array.max > 0 &&
+        _vm.schema.__propSchemaList.length >= _vm.schema.array.max,"type":_vm.schema.array.type},on:{"addItem":_vm.addItemHandler}},[_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return [_c('es-tabs-nav-item',{key:index,attrs:{"tabsName":itemSchema.subLabel ? itemSchema.subLabel : index + 1 + '',"is-active":index === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"has-delete":_vm.schema.array.hasDelete,"has-sort":_vm.schema.array.hasSort,"can-delete":_vm.schema.__propSchemaList.length > _vm.schema.array.min,"fixed":_vm.schema.array.fixed,"is-first":index == 0,"is-last":index == _vm.schema.__propSchemaList.length - 1,"index":index,"has-del-warn":_vm.schema.array.hasDelWarn},on:{"delItem":_vm.delItemHandler,"upItem":_vm.upItem,"downItem":_vm.downItem,"clickActive":_vm.clickActiveHandler}},[(_vm.schema.array.hasOrder)?_c('span',{staticClass:"order-txt"},[_vm._v(_vm._s(index + 1)+".")]):_vm._e(),(!itemSchema.subLabel.name)?[(!(_vm.schema.array.hasOrder && !itemSchema.subLabel.text))?_c('span',[_vm._v("\n            "+_vm._s(itemSchema.subLabel.text
+                ? itemSchema.subLabel.text
+                : _vm.schema.array.hasOrder
+                ? ""
+                : index + 1 + "")+"\n          ")]):_vm._e()]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.subLabel}})],1)],2)]}),(_vm.schema.help && _vm.schema.component)?_c('div',{staticClass:"es-form-help",attrs:{"slot":"help"},slot:"help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()],2),(_vm.schema.__propSchemaList.length)?_c('ul',{staticClass:"es-tabs-body",style:({
       padding: _vm.schema.array.rowSpace + 'px',
       'border-width': _vm.schema.array.hasBorder ? '1px' : '0px'
     })},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{directives:[{name:"show",rawName:"v-show",value:(index === _vm.schema.__tabsIndex),expression:"index === schema.__tabsIndex"}],key:index},[(
           itemSchema.properties &&
             itemSchema.layout &&
             itemSchema.layout.name === 'tabs'
-        )?_c('tabs',{tag:"component",attrs:{"schema":itemSchema,"form-data":_vm.formData},on:{"formClick":_vm.formClick}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):(itemSchema.properties)?_c('es-object',{attrs:{"schema":itemSchema,"form-data":_vm.formData}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index})],2)})],2):[_vm._t("default",null,{"schema":itemSchema})]],2)}),0):_vm._e()],1)}
-var array_tabsvue_type_template_id_f823faa4_staticRenderFns = []
+        )?_c('tabs',{tag:"component",attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):(itemSchema.properties)?_c('es-object',{attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index})],2)})],2):[_vm._t("default",null,{"schema":itemSchema})]],2)}),0):_vm._e()],1)}
+var array_tabsvue_type_template_id_355cab71_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-tabs.vue?vue&type=template&id=f823faa4&
+// CONCATENATED MODULE: ./src/package/layout/array-tabs.vue?vue&type=template&id=355cab71&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=script&lang=js&
 //
@@ -14302,12 +14053,19 @@ var array_tabsvue_type_template_id_f823faa4_staticRenderFns = []
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
 
 
 
+ // import constant from "../libs/constant";
 
 /* harmony default export */ var array_tabsvue_type_script_lang_js_ = ({
   mixins: [item_mixin, array_mixin],
@@ -14323,7 +14081,9 @@ var array_tabsvue_type_template_id_f823faa4_staticRenderFns = []
   },
   methods: {
     clickActiveHandler: function clickActiveHandler(index) {
-      this.$emit("formClick", "tabs", {
+      var form = this.__getForm();
+
+      form._toggleUi("tabs", {
         key: this.schema.__pathKey,
         index: index
       });
@@ -14340,7 +14100,9 @@ var array_tabsvue_type_template_id_f823faa4_staticRenderFns = []
       this.delItem(index); // 这里会对this.schema.__propSchemaList进行减少
 
       if (newIndex !== false) {
-        this.$emit("formClick", "tabs", {
+        var form = this.__getForm();
+
+        form._toggleUi("tabs", {
           key: this.schema.__pathKey,
           index: newIndex
         });
@@ -14349,14 +14111,12 @@ var array_tabsvue_type_template_id_f823faa4_staticRenderFns = []
     addItemHandler: function addItemHandler() {
       this.addItem(); // 这里会对this.schema.__propSchemaList进行添加
 
-      this.$emit("formClick", "tabs", {
+      var form = this.__getForm();
+
+      form._toggleUi("tabs", {
         key: this.schema.__pathKey,
         index: this.schema.__propSchemaList.length - 1
       });
-    },
-    formClick: function formClick(type, data) {
-      // console.log("formClick: ", sourcePathKey, index);
-      this.$emit("formClick", type, data); // 往上派发
     }
   },
   mounted: function mounted() {},
@@ -14378,8 +14138,8 @@ var array_tabsvue_type_style_index_0_lang_scss_ = __webpack_require__("5100");
 
 var array_tabs_component = normalizeComponent(
   layout_array_tabsvue_type_script_lang_js_,
-  array_tabsvue_type_template_id_f823faa4_render,
-  array_tabsvue_type_template_id_f823faa4_staticRenderFns,
+  array_tabsvue_type_template_id_355cab71_render,
+  array_tabsvue_type_template_id_355cab71_staticRenderFns,
   false,
   null,
   null,
@@ -14392,7 +14152,6 @@ var array_tabs_component = normalizeComponent(
 
 
 
-
 //
 //
 //
@@ -14890,77 +14649,6 @@ var array_tabs_component = normalizeComponent(
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 
 
 
@@ -14978,11 +14666,10 @@ var array_tabs_component = normalizeComponent(
   // 声明name可以嵌套自身
   mixins: [item_mixin],
   data: function data() {
-    return {
-      unwatch: false,
+    return {// unwatch: false,
       // showBody: true,
-      isChanged: false,
-      triggerList: []
+      // isChanged: false,
+      // triggerList: []
     };
   },
   components: {
@@ -14995,21 +14682,20 @@ var array_tabs_component = normalizeComponent(
     arrayLegend: array_legend,
     tabs: tabs
   },
-  created: function created() {
-    this.__initUi();
-  },
+  created: function created() {},
   computed: {
     hasTitle: function hasTitle() {
-      return this.schema.properties && (this.schema.title.text !== false || this.schema.help); // 是否有头部
+      return this.schema.properties && (this.schema.title || this.schema.ui && this.schema.ui.__hasToggle || this.schema.help) ? true : false; // 是否有头部
     },
     bodyStyle: function bodyStyle() {
       var style = null;
 
-      if (this.schema.properties && (this.schema.title.text !== false || this.schema.help)) {
+      if (this.schema.properties && (this.schema.title || this.schema.ui && this.schema.ui.__hasToggle || this.schema.help)) {
         // 是否有头部
         //是properties且有头部
-        // style = {};
-        if (this.schema.title.type == "bg-border" || this.schema.title.type == "bg-block-border") {
+        var type = this.schema.ui ? this.schema.ui.type : "";
+
+        if (type == "bg-border" || type == "bg-block-border") {
           style = {
             padding: Math.floor(this.schema.boxRowSpace * 2 / 3) + "px"
           }; //有边框时的样式
@@ -15027,11 +14713,12 @@ var array_tabs_component = normalizeComponent(
     titleClass: function titleClass() {
       var tClass;
 
-      if (this.schema.properties && (this.schema.title || this.schema.help)) {
-        //是properties且有头部
+      if (this.schema.properties && (this.schema.title || this.schema.ui && this.schema.ui.__hasToggle || this.schema.help)) {
+        var type = this.schema.ui ? this.schema.ui.type : ""; //是properties且有头部
+
         tClass = ["es-title-box", "es-title", "es-title-l" + this.schema.title.__level];
 
-        switch (this.schema.title.type) {
+        switch (type) {
           case "bg":
             tClass.push("es-title-bg");
             break;
@@ -15062,16 +14749,14 @@ var array_tabs_component = normalizeComponent(
     }
   },
   methods: {
-    getRefs: function getRefs(name) {
-      var target = this.$refs[name];
+    /* 下划线一杠代表对内使用 */
+    _getType: function _getType() {
+      return this.schema.array ? libs_constant.UI_ARRAY : libs_constant.UI_ITEM;
+    },
 
-      if (!target) {
-        target = this.__getAllRefs(name);
-      } else {
-        target = target.$refs.__comTarget__; // 取出base组件内的目标组件
-      }
-
-      return target;
+    /* 下划线一杠代表对内使用 */
+    _getSchema: function _getSchema() {
+      return this.schema;
     },
     getRef: function getRef(name) {
       var target;
@@ -15091,26 +14776,7 @@ var array_tabs_component = normalizeComponent(
 
       return target;
     },
-    __initUi: function __initUi() {
-      // if (
-      //   this.schema.properties &&
-      //   this.schema.title &&
-      //   this.schema.title.hasToggle
-      // ) {
-      //   this.$data.showBody =
-      //     this.schema.title.showBody === false ? false : true;
-      // }
-      //不是所有的form-item都需要监听，只有有value值的才需求参加
-      if (this.needWatch()) {
-        this.setWatch();
-      } else {
-        // console.log('123456unwatch');
-        if (this.$data.unwatch) {
-          this.$data.unwatch();
-          this.$data.unwatch = false;
-        }
-      }
-    },
+    __initUi: function __initUi() {},
 
     /* 取出最后的，跟vue ref保持一致；也就是后面的会代表前面的 */
     __getLastRefs: function __getLastRefs(name) {
@@ -15122,7 +14788,7 @@ var array_tabs_component = normalizeComponent(
       for (var key in this.$refs) {
         // 这样扫描是为了按顺序正确取出
         if (sysRefIds.includes(key)) {
-          var tmpTargets = this.__getTargetsIncludeRef(key, name);
+          var tmpTargets = this.__getTargetRefs(key, name);
 
           if (tmpTargets) {
             refTargets = tmpTargets; // 后面的代替前面的，跟原生vue ref保持一致
@@ -15133,7 +14799,7 @@ var array_tabs_component = normalizeComponent(
 
       return refTargets;
     },
-    __getTargetsIncludeRef: function __getTargetsIncludeRef(refName, name) {
+    __getTargetRefs: function __getTargetRefs(refName, name) {
       var __objectRef__ = "__refObject__";
       var __tabsRef__ = "__refTabs__";
       var curRefObj,
@@ -15165,237 +14831,94 @@ var array_tabs_component = normalizeComponent(
 
       return newTarget;
     },
-    __getAllRefs: function __getAllRefs(name) {
-      return this.__getTargetRefs("__refObject__", name) || this.__getTargetRefs("__refTabs__", name) || this.__getTargetRefs("__refArrarCard__", name) || this.__getTargetRefs("__refArrarRow__", name) || this.__getTargetRefs("__refArrarLegend__", name) || this.__getTargetRefs("__refArrarTable__", name) || this.__getTargetRefs("__refArrarTabs__", name);
-    },
-    __getTargetRefs: function __getTargetRefs(targetName, name) {
-      // console.log("targetName: ", targetName);
-      var curRef,
-          nextTarget,
-          newTarget = null;
-      curRef = this.$refs[targetName]; // console.log("curRef: ", curRef);
-
-      if (curRef) {
-        curRef.forEach(function (item) {
-          nextTarget = item.getRefs(name);
-
-          if (nextTarget) {
-            // console.log("nextTarget", nextTarget);
-            newTarget = newTarget ? newTarget : [];
-
-            if (libs_utils.isArr(nextTarget)) {
-              newTarget = newTarget.concat(nextTarget);
-            } else {
-              newTarget.push(nextTarget);
-            }
-          }
-        });
-      }
-
-      return newTarget;
-    },
-    needWatch: function needWatch() {
-      //这个逻辑就是html的逻辑
-      if (this.schema.array) {
-        // 这个东西只要是检查rules, 没有rules时就不用监听了
-        if (this.schema.array && this.schema.array.rules) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        if (this.schema.component && this.schema.rules) {
-          return true;
-        } else {
-          return false;
-        }
-      }
-    },
     toggleBody: function toggleBody() {
-      // this.showBody = !this.showBody;
-      this.$emit("formClick", "toggle", {
+      var form = this.__getForm();
+
+      form._toggleUi("toggle", {
         key: this.schema.__pathKey
       });
     },
-    triggerHandler: function triggerHandler(eventName, eventData) {
-      var value = this.schema.value;
-      var handlers = form_utils.getHandlers(eventName, this.schema.component.actions);
-      var tmpValue = value;
+    // 只有组件会触发
+    triggerHandler: function triggerHandler(eventName, eventData, target) {
+      var checkSchema = [this.schema];
+      var eventNames = [eventName];
+      var targetValue = this.schema.value;
 
-      if (eventName == libs_global.trimEvent && this.schema.isTrim && libs_utils.isStr(value)) {
+      if (eventName == libs_global.trimEvent && this.schema.isTrim && libs_utils.isStr(targetValue)) {
         // global.trimEvent暂不会是constant.INPUT_EVENT事件，因为初始化时就不给设置为此值
-        tmpValue = tmpValue.trim();
+        var tmpValue = targetValue.trim();
 
-        if (tmpValue !== value) {
+        if (tmpValue !== targetValue) {
           this.schema.value = tmpValue;
-
-          if (this.needWatch()) {
-            this.$data.isChanged = true;
-            this.$data.triggerList.push(eventName);
-          } //值改变了，要发出input事件
-
-
-          var inputHandlers = form_utils.getHandlers(libs_constant.INPUT_EVENT, this.schema.component.actions);
-
-          if (inputHandlers) {
-            handlers = handlers ? handlers.concat(inputHandlers) : inputHandlers;
-          } // if (handlers) {
-
-
-          this.$emit("formChange", this.schema.__pathKey, handlers, libs_utils.deepCopy(tmpValue), eventData); // 等到系统数据同步了再执行
-          // } else {
-          //   this.$emit(
-          //     "formChange",
-          //     this.schema.__pathKey,
-          //     null,
-          //     null,
-          //     null
-          //   );
-          // }
-
-          return true; //退出，由formdata触发检查
+          targetValue = tmpValue;
+          eventNames.push(libs_constant.INPUT_EVENT); // 值有所改变，同时input一下
         }
       }
 
-      if (eventName == libs_constant.INPUT_EVENT) {
-        if (this.needWatch()) {
-          this.$data.isChanged = true;
-          this.$data.triggerList.push(eventName);
-        }
+      var options = {
+        value: targetValue,
+        event: eventData,
+        pathKey: this.schema.__pathKey,
+        index: this.schema.__index,
+        idxChain: this.schema.__idxChain,
+        target: target
+      };
 
-        if (handlers) {
-          // console.log("tmpValue: ", tmpValue);
-          // sourcePathKey, handlers, targetValue, eventData, onlyAction
-          this.$emit("formChange", this.schema.__pathKey, handlers, libs_utils.deepCopy(tmpValue), eventData); // 等到系统数据同步了再执行
-        } else {
-          this.$emit("formChange", this.schema.__pathKey, null, null, eventData);
-        }
-      } else {
-        if (this.needWatch()) {
-          if (this.$data.isChanged) {
-            this.$data.isChanged = true;
-            this.$data.triggerList.push(eventName); //放入队列中，等formData改变
-          } else {
-            this.checkValue(tmpValue, eventName);
-          }
-        }
+      var form = this.__getForm();
 
-        if (handlers) {
-          this.$emit("formChange", this.schema.__pathKey, handlers, libs_utils.deepCopy(tmpValue), eventData, true); // 等到系统数据同步了再执行
-        }
-      }
-    },
-    checkValue: function checkValue(value, triggerMode) {
-      // console.log("this.isInited", this.isInited);
-      if (this.isInited) {
-        var parseSources = {
-          global: this.global,
-          rootData: this.formData,
-          index: this.schema.__index,
-          idxChain: this.schema.__idxChain,
-          rootSchema: form_utils.getRootSchema(this)
-        }; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-
-        var checkedResult = form_utils.checkRules(this.schema.array ? this.schema.array.rules : this.schema.rules, value, triggerMode, parseSources);
-
-        if (checkedResult === true) {
-          this.schema.__invalidMsg = false;
-        } else if (checkedResult !== false) {
-          // 字符串，错误
-          this.schema.__invalidMsg = checkedResult;
-        } else {// 为false, 不是目标事件，不用理会
-        }
-      }
-    },
-
-    /**
-     * sourcePathKey 是哪个组件触发的
-     * eventData 事件本身的参数；如keyup事件携带的参数
-     * onlyAction 是否仅单单执行actions
-     */
-    formChange: function formChange(sourcePathKey, handlers, targetValue, eventData, onlyAction) {
-      if (!onlyAction && this.schema.array) {
-        if (this.schema.array.rules) {
-          this.$data.isChanged = true;
-          this.$data.triggerList = [libs_constant.INPUT_EVENT];
-        }
-
-        if (this.schema.array.actions) {
-          var arrayHandlers = form_utils.getHandlers(libs_constant.INPUT_EVENT, this.schema.array.actions);
-
-          if (arrayHandlers) {
-            handlers = handlers ? handlers.concat(arrayHandlers) : arrayHandlers; // 合并，放在最后一起执行
-          }
-        }
-      }
-
-      this.$emit("formChange", sourcePathKey, handlers, targetValue, eventData, onlyAction);
+      form._syncUi(checkSchema, eventNames, options);
     },
 
     /**
      * 数组改变：添加、删除、移动
-     * sourcePathKey 是哪个组件触发的
      * handlers 需要处理的input and change actions
      * eventData 事件本身的参数；具体看array-mixin.js
      */
-    formArrayInput: function formArrayInput(sourcePathKey, handlers, targetValue, eventData) {
-      // console.log("sourcePathKey, handlers, eventData", sourcePathKey, handlers, eventData);
+    formArrayInput: function formArrayInput(targetValue, eventData) {
+      var checkSchema = [this.schema];
+      var eventNames = [libs_constant.INPUT_EVENT, libs_constant.CHANGE_EVENT];
+      var options = {
+        value: targetValue,
+        event: eventData,
+        pathKey: this.schema.__pathKey,
+        index: this.schema.__index,
+        idxChain: this.schema.__idxChain,
+        target: null
+      };
 
-      /* 因为数组改变，根据传统要发送input和change事件：为什么直接写成一个，因为数组内的组件input也算是input事件（也会作实时检查和actions） */
-      this.$data.isChanged = true;
-      this.$data.triggerList = [libs_constant.INPUT_EVENT, libs_constant.CHANGE_EVENT];
-      this.$emit("formChange", sourcePathKey, handlers, targetValue, eventData, false);
+      var form = this.__getForm();
+
+      form._syncUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
+
     },
+    __getForm: function __getForm() {
+      var formItem = this.$parent;
 
-    /**
-     * sourcePathKey 是哪个tab容器触发
-     * index 触发哪个
-     */
-    formClick: function formClick(type, data) {
-      // console.log("formClick: ", type, data);
-      this.$emit("formClick", type, data); // 往上派发
-    },
-    setWatch: function setWatch() {
-      var _this = this;
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
 
-      if (!this.$data.unwatch) {
-        this.$data.unwatch = this.$watch("formData", function () {
-          // console.log("formData: ", this.schema);
-          if (_this.$data.isChanged) {
-            _this.$data.isChanged = false;
-
-            _this.$data.triggerList.forEach(function (triggerMode) {
-              var value = _this.schema.value;
-
-              if (_this.schema.array) {
-                value = form_utils.getValue(_this.schema);
-              }
-
-              _this.checkValue(value, triggerMode);
-            });
-
-            _this.$data.triggerList = [];
+        if (type == libs_constant.UI_FORM) {
+          return formItem; // 到达表单层
+        } else if (type == libs_constant.UI_ARRAY) {// checkSchema.push(formItem._getSchema());
+        } else {// ... 往上派
           }
-        }, {
-          deep: false
-        });
+
+        formItem = formItem.$parent;
       }
     }
   },
-  watch: {
-    schema: {
-      handler: function handler(newVal) {
-        if (libs_utils.isObj(newVal) && keys_default()(newVal).length > 0) {
-          // console.log("form-item.schema here...", this.schema);
-          // 更新了UI，暂不用初始化
-          this.$data.isChanged = false;
-          this.$data.triggerList = [];
-
-          this.__initUi();
-        }
-      },
-      deep: false
-    }
+  watch: {// schema: {
+    //   handler(newVal) {
+    //     if (utils.isObj(newVal) && Object.keys(newVal).length > 0) {
+    //       // console.log("form-item.schema here...", this.schema);
+    //       // 更新了UI，暂不用初始化
+    //       this.$data.isChanged = false;
+    //       this.$data.triggerList = [];
+    //       this.__initUi();
+    //     }
+    //   },
+    //   deep: false
+    // }
   }
 });
 // CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=script&lang=js&
@@ -15414,8 +14937,8 @@ var form_itemvue_type_style_index_0_lang_scss_ = __webpack_require__("fae7");
 
 var form_item_component = normalizeComponent(
   package_form_itemvue_type_script_lang_js_,
-  form_itemvue_type_template_id_48faf494_render,
-  form_itemvue_type_template_id_48faf494_staticRenderFns,
+  form_itemvue_type_template_id_68b8a2a6_render,
+  form_itemvue_type_template_id_68b8a2a6_staticRenderFns,
   false,
   null,
   null,
@@ -15429,13 +14952,11 @@ var form_item_component = normalizeComponent(
 
 
 
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
+
 //
 //
 //
@@ -15784,21 +15305,38 @@ var form_item_component = normalizeComponent(
   created: function created() {
     var _this = this;
 
-    if (libs_utils.isObj(this.global)) {
-      this.$data.formGlobal = libs_utils.deepCopy(this.global); // 为什么要重新复制，因为form-item为是深度监听
-    }
+    this._esHiddenLevel = 0; // 层级设置为0
+
+    this._esLockSubmit = false;
+    var hiddenFunc = this.isHidden;
+    this._esHiddenFunc = hiddenFunc.bind(this); // 用于作隐藏解析
 
     this.__initUi(this.schema);
 
     this.$nextTick(function () {
       _this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
 
-      _this.$emit("inited", libs_utils.deepCopy(_this.$data.resultValue));
+      _this.$emit("inited", libs_utils.deepCopy(_this._esResultValue));
     });
     return;
   },
   mounted: function mounted() {},
   destroyed: function destroyed() {},
+  data: function data() {
+    return {
+      /* _es这些属性都不涉及页面的控制，所以不设置为data
+      _esHiddenLevel: 0,
+      _esOriginalValue: null,
+      _esHiddenFunc: null,
+      _esResultValue: null,
+      _esFormData: null,
+      _esLockSubmit: false // 开始是false
+      */
+      formSchema: {},
+      // $data有这个值说明是es-form
+      isInited: false
+    };
+  },
 
   /* ====================== 引用组件 ====================== */
   components: {
@@ -15825,33 +15363,100 @@ var form_item_component = normalizeComponent(
       }
     }
   },
-  data: function data() {
-    return {
-      formSchema: {},
-      // $data有这个值说明是es-form
-      isInited: false,
-      formData: {},
-      formGlobal: {},
-      resultValue: {},
-      originalValue: {} // 最初的值
-
-    };
-  },
 
   /* ====================== 事件处理 ====================== */
   methods: {
-    getRefs: function getRefs(name) {
-      return this.$refs.formFrame.getRefs(name);
-    },
     getRef: function getRef(name) {
       return this.$refs.formFrame.getRef(name);
     },
-    getRootSchema: function getRootSchema() {
-      return libs_utils.deepCopy(this.$data.formSchema);
+
+    /* 
+    判断某项是否处于隐藏 
+    注：此函数有容灾处理，一定要执行到最后，不能中途退出
+    */
+    isHidden: function isHidden(pathKey) {
+      this._esHiddenLevel++;
+      var MAX_TOTAL = 50;
+
+      if (this._esHiddenLevel > MAX_TOTAL) {
+        // 实际上不会这么深的(虽然理论上存在)
+        throw "解析$hidden:[" + pathKey + "]出错，系统执行$hidden超过" + MAX_TOTAL + "次，可能为死循环";
+      }
+
+      var curHiddenValue = false;
+      var rootSchema = this.$data.formSchema;
+      var targetSchema = form_utils.getSchemaByKey(rootSchema, pathKey); // 看看最后一个是否存在
+
+      if (!targetSchema) {
+        console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
+        curHiddenValue = false;
+      }
+
+      var seperator = ".";
+      var keys = pathKey.split(seperator);
+      var parentPathKey = "",
+          tmpParentPathKey;
+      var reg = /\[\d+\]$/;
+      var arraySymbol = "[";
+      var key;
+      var len = keys.length - 1;
+
+      for (var i = 0; i <= len; i++) {
+        key = keys[i];
+
+        if (key.indexOf(arraySymbol) >= 0) {
+          key = key.replace(reg, "");
+        }
+
+        tmpParentPathKey = parentPathKey ? parentPathKey + seperator + key : key;
+        parentPathKey = parentPathKey ? parentPathKey + seperator + keys[i] : keys[i]; // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
+
+        var itemSchema = tmpParentPathKey == pathKey ? targetSchema : form_utils.getSchemaByKey(rootSchema, tmpParentPathKey);
+
+        if (itemSchema) {
+          var parseSources = {
+            global: this.global,
+            rootData: this._esFormData,
+            index: itemSchema.__index,
+            idxChain: itemSchema.__idxChain,
+            pathKey: itemSchema.__pathKey,
+            rootSchema: rootSchema,
+            isHidden: this._esHiddenFunc
+          };
+
+          if (libs_parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
+            curHiddenValue = true;
+            break;
+          } else {// 父节点是显示的，继续
+          }
+        } else {
+          console.warn("无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)");
+          curHiddenValue = false;
+          break;
+        }
+      }
+
+      this._esHiddenLevel--; // console.log("this._esHiddenLevel: ", this._esHiddenLevel);
+      // 全部都没有隐藏
+
+      return curHiddenValue;
+    },
+    // _isHidden(pathKey) {
+    //   return false;
+    // },
+
+    /* 下划线一杠代表对内使用 */
+    _getType: function _getType() {
+      return libs_constant.UI_FORM;
+    },
+
+    /* 下划线一杠代表对内使用 */
+    _getSchema: function _getSchema() {
+      return this.$data.formSchema;
     },
     //检查整个表单
     checkAll: function checkAll() {
-      var isValid = this.__checkProp(this.$data.formSchema, this.getRootSchema());
+      var isValid = this.__checkProp(this.$data.formSchema, this.$data.formSchema);
 
       return isValid;
     },
@@ -15865,26 +15470,27 @@ var form_item_component = normalizeComponent(
 
       this.__syncValue();
 
-      this.$data.originalValue = libs_utils.deepCopy(this.$data.formData);
+      this._esOriginalValue = libs_utils.deepCopy(this._esFormData);
     },
     __checkProp: function __checkProp(schema, rootSchema) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
       // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
       var isValid = true;
       var parseSources = {
-        global: this.$data.formGlobal,
-        rootData: this.formData,
+        global: this.global,
+        rootData: this._esFormData,
         index: schema.__index,
         idxChain: schema.__idxChain,
-        rootSchema: rootSchema
+        pathKey: schema.__pathKey,
+        rootSchema: rootSchema,
+        isHidden: this._esHiddenFunc
       }; //是否隐藏，隐藏就不用检查有效性了
 
-      var isHidden = libs_parse.smartEsValue(schema.hidden, parseSources);
+      var isHidden = schema.hidden; // 省资源，不做es转
 
       if (isHidden) {
         return isValid;
-      } // idxChain = idxChain ? idxChain : "";
-
+      }
 
       var validResult, checkedResult, isTabs, tabsIndex, nextPropItem, i, arrayValue, schemaList;
 
@@ -15892,7 +15498,7 @@ var form_item_component = normalizeComponent(
         if (schema.array) {
           if (schema.array.rules) {
             arrayValue = form_utils.getValue(schema);
-            checkedResult = form_utils.checkRules(schema.array.rules, arrayValue, "", parseSources);
+            checkedResult = this.__checkRules(schema, arrayValue, "", parseSources);
 
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -15928,9 +15534,9 @@ var form_item_component = normalizeComponent(
             isValid = !isValid ? isValid : validResult;
           }
 
-          if (!isValid && schema.title && !schema.title.showBody) {
+          if (!isValid && schema.ui && !schema.ui.showBody) {
             // 有错 schema.title为null, 可能是ARRAY_TABS的item
-            schema.title.showBody = true;
+            schema.ui.showBody = true;
           }
         } else {
           isTabs = schema.layout && schema.layout.name == libs_constant.LAYOUT_TABS ? true : false;
@@ -15966,7 +15572,7 @@ var form_item_component = normalizeComponent(
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = form_utils.checkRules(schema.rules, schema.value, "", parseSources);
+          checkedResult = this.__checkRules(schema, schema.value, "", parseSources);
 
           if (checkedResult === true) {
             schema.__invalidMsg = false;
@@ -15978,7 +15584,7 @@ var form_item_component = normalizeComponent(
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = form_utils.getValue(schema);
-            checkedResult = form_utils.checkRules(schema.array.rules, arrayValue, "", parseSources);
+            checkedResult = this.__checkRules(schema, arrayValue, "", parseSources);
 
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -16016,19 +15622,26 @@ var form_item_component = normalizeComponent(
         }
       }
 
+      parseSources = null;
       return isValid;
     },
     // 发出提交事件
     __submit: function __submit() {
       var _this2 = this;
 
-      this.$nextTick(function () {
-        if (_this2.$data.isInited) {
-          _this2.$emit("submit", libs_utils.deepCopy(_this2.$data.resultValue));
-        } else {
-          console.warn("表单还未初始化完成，无法派发submit事件");
-        }
-      });
+      if (!this.$data._esLockSubmit) {
+        this.$data._esLockSubmit = true; // 加锁，保存只触发一次
+
+        this.$nextTick(function () {
+          _this2.$data._esLockSubmit = false;
+
+          if (_this2.$data.isInited) {
+            _this2.$emit("submit", libs_utils.deepCopy(_this2._esResultValue));
+          } else {
+            console.warn("表单还未初始化完成，无法派发submit事件");
+          }
+        });
+      }
     },
     // 对外调用，发出提交事件
     submit: function submit() {
@@ -16039,7 +15652,21 @@ var form_item_component = normalizeComponent(
      * 对外调用，取值
      */
     getValue: function getValue() {
-      return libs_utils.deepCopy(this.$data.resultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+      return libs_utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getRootData: function getRootData() {
+      return libs_utils.deepCopy(this._esFormData);
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getGlobal: function getGlobal() {
+      return libs_utils.deepCopy(this.global);
     },
 
     /**
@@ -16077,8 +15704,8 @@ var form_item_component = normalizeComponent(
      * 对外调用，重置值
      */
     reset: function reset() {
-      // console.log(this.$data.originalValue);
-      this.setValue(this.$data.originalValue); //去年所有的错误提示
+      // console.log(this._esOriginalValue);
+      this.setValue(this._esOriginalValue); //去年所有的错误提示
 
       form_utils.clearErrorMsg(this.$data.formSchema);
     },
@@ -16101,46 +15728,75 @@ var form_item_component = normalizeComponent(
         form_utils.setValue(schema, form_utils.perfectTileValue(schema, libs_utils.deepCopy(value)));
       }
     },
-    __formChange: function __formChange(sourcePathKey, handlers, targetValue, eventData, onlyAction) {
+    _syncUi: function _syncUi(checkSchemas, eventNames, options) {
       var _this3 = this;
 
-      // console.log("targetValue: ", targetValue);
-      var tmpResultValue = false;
+      var sourcePathKey = checkSchemas[0].__pathKey; // checkSchemas必有值
 
-      if (!onlyAction) {
-        this.__syncValue(sourcePathKey);
+      if (eventNames.includes(libs_constant.INPUT_EVENT)) {
+        // 需要同步
+        this.__syncValue(sourcePathKey); // 第一个就是触发源
+        // tmpResultValue =this._esResultValue;
 
-        tmpResultValue = libs_utils.deepCopy(this.$data.resultValue);
-      } // console.log("__formChange: ", this.isInited);
+      }
+
+      if (this.isInited) {
+        var inputSchema = checkSchemas[0]; // 验证当前的输入框
+
+        var parseSources = {
+          global: this.global,
+          rootData: this._esFormData,
+          index: inputSchema.__index,
+          idxChain: inputSchema.__idxChain,
+          pathKey: inputSchema.__pathKey,
+          rootSchema: this.$data.formSchema,
+          isHidden: this._esHiddenFunc
+        }; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
+
+        var checkedResult = this.__checkRules(inputSchema, options.value, eventNames, parseSources);
+
+        if (checkedResult === true) {
+          inputSchema.__invalidMsg = false;
+        } else if (checkedResult !== false) {
+          // 字符串，错误
+          inputSchema.__invalidMsg = checkedResult;
+        } else {} // 为false, 不是目标事件，不用理会
+        // 取出所有需要执行的事件
 
 
-      if (this.isInited && (handlers || tmpResultValue)) {
-        var vm = this;
-        vm.$nextTick(function () {
+        var handlers = [];
+        var actions = inputSchema.array ? inputSchema.array.actions : inputSchema.component.actions;
+
+        if (actions) {
+          actions.forEach(function (action) {
+            if (libs_utils.isInter(action.trigger, eventNames)) {
+              handlers.push(action.handler);
+            }
+          });
+        }
+
+        if (handlers.length > 0 || eventNames.includes(libs_constant.INPUT_EVENT)) {
           // 这用可以记录是什么导致表单改变
-          if (handlers) {
+          if (handlers.length > 0) {
             handlers.forEach(function (handler) {
-              handler.call(vm, targetValue, sourcePathKey, eventData);
+              handler.call(_this3, options);
             });
           }
 
-          if (tmpResultValue) {
-            _this3.$emit("change", tmpResultValue, sourcePathKey);
+          if (eventNames.includes(libs_constant.INPUT_EVENT)) {
+            this.$emit("change", libs_utils.deepCopy(this._esResultValue), sourcePathKey);
           }
+        }
+        /* 释放内存 */
 
-          eventData = null;
-          handlers = undefined;
-          targetValue = undefined;
-        });
+
+        checkSchemas = null;
+        eventNames = undefined;
+        options = null;
+        handlers = null;
       }
     },
-
-    /**
-     * type: string 触发类型
-     * data 携带的数据 具体看各类型 {key: 指出出处，...}
-     */
-    __formClick: function __formClick(type, data) {
-      // console.log("type - data: ", type, data);
+    _toggleUi: function _toggleUi(type, data) {
       switch (type) {
         case "tabs":
           // tabs头部触发 data: {key, index}
@@ -16156,24 +15812,127 @@ var form_item_component = normalizeComponent(
 
         default:
           break;
-      } // this.$nextTick(() => {
-      //   this.$emit("formClick", sourcePathKey, index); // 往上派发
-      // });
-
+      }
     },
     __syncValue: function __syncValue(sourcePathKey) {
       // 不单只是执行actions
       var formData = form_utils.getValue(this.$data.formSchema);
-      this.$data.formData = formData;
+      this._esFormData = formData;
       var baseParseSources = {
-        global: this.$data.formGlobal,
-        rootData: this.$data.formData,
-        rootSchema: this.getRootSchema()
+        global: this.global,
+        rootData: this._esFormData,
+        rootSchema: this.$data.formSchema,
+        isHidden: this._esHiddenFunc
       };
       form_utils.analyzeUiProps(this.$data.formSchema, baseParseSources);
       var resultValue = form_utils.getResultValue(this.$data.formSchema, baseParseSources);
-      this.$data.resultValue = libs_utils.deepCopy(resultValue);
-      this.$emit("input", resultValue, sourcePathKey ? sourcePathKey : false);
+      this._esResultValue = resultValue;
+      this.$emit("input", libs_utils.deepCopy(resultValue), sourcePathKey ? sourcePathKey : false);
+      baseParseSources = null;
+      resultValue = null;
+    },
+
+    /**
+     *
+     * @param {*} schema 这个东西已经是解析过了，不用重新解析
+     * @param {*} value
+     * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
+     * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
+     * @returns Boolean or string
+     * true 是需要检查的，并且正确
+     * false 不需要检查
+     * string 是需要检查的，但不正确
+     */
+    __checkRules: function __checkRules(schema, value, triggers, parseSources) {
+      var rules = schema.array && schema.array.rules ? schema.array.rules : schema.rules;
+
+      if (!rules) {
+        //没有规则
+        return true;
+      }
+
+      var isRequired = rules.required;
+
+      if (isRequired) {
+        //空要检查
+        if (form_utils.isEmpty(value)) {
+          return rules.emptyMsg;
+        }
+      } else if (!isRequired && form_utils.isEmpty(value)) {
+        //空时不检查，场景：当埋写邮件地址时，要么不写要么写正确
+        return true;
+      } //非空情况
+
+
+      var checkList = rules.checks;
+      var errMsg = true;
+      var checkFun;
+      var newParseSources, newOptions;
+
+      if (checkList && checkList.length > 0) {
+        var hadChecked = false;
+
+        for (var i = 0; i < checkList.length; i++) {
+          var checkItem = checkList[i];
+          var checkTriggers = checkItem.trigger; //检查时机，默认为实时
+          // triggers为空时，就无条件检查(checkAll); 不为空时就条件触发
+
+          if (!triggers || libs_utils.isInter(checkTriggers, triggers)) {
+            checkFun = checkItem.handler;
+            hadChecked = true;
+            var result = true;
+
+            if (checkFun.__esFuncName === libs_constant.ES_FUNC_NAME) {
+              if (!newParseSources) {
+                newParseSources = {};
+                newParseSources = assign_default()(newParseSources, parseSources);
+                newParseSources.idxChains = parseSources.idxChain ? parseSources.idxChain.split(",") : [];
+                delete newParseSources.idxChain;
+              }
+
+              result = checkFun(newParseSources);
+            } else {
+              if (!newOptions) {
+                newOptions = {};
+                newOptions.value = value;
+                newOptions.pathKey = schema.__pathKey;
+                newOptions.idxChain = schema.__idxChain;
+                newOptions.index = schema.__index;
+              }
+
+              result = checkFun.call(this, newOptions);
+            }
+
+            if (result !== true) {
+              if (libs_utils.isStr(result)) {
+                //直接返回错误信息
+                errMsg = result.trim();
+
+                if (!errMsg) {
+                  errMsg = rules.errMsg;
+                }
+              } else {
+                //用统一的错误信息
+                errMsg = rules.errMsg;
+              }
+
+              break;
+            }
+          }
+        }
+
+        if (!hadChecked) {
+          // 都没有进入验证，说明这个事件是目标事件，返回false
+          errMsg = false;
+        }
+      } else {
+        // 没有要验证的东西
+        errMsg = true;
+      }
+
+      newParseSources = null;
+      newOptions = null;
+      return errMsg;
     }
   },
   watch: {
@@ -16181,7 +15940,6 @@ var form_item_component = normalizeComponent(
     schema: {
       handler: function handler(newVal) {
         if (libs_utils.isObj(newVal) && keys_default()(newVal).length > 0) {
-          // console.log("es-form index.vue: schema here...", this.value);
           this.__initUi(newVal);
         }
       },
@@ -16190,30 +15948,30 @@ var form_item_component = normalizeComponent(
     //watch是异步监听的，而$emit("input"...)是同步的
     value: {
       handler: function handler(newVal) {
-        // console.log(
-        //   "value: ",
-        //   JSON.stringify(newVal) === JSON.stringify(this.$data.resultValue)
-        // );
-        if (stringify_default()(newVal) !== stringify_default()(this.$data.resultValue)) {
+        if (stringify_default()(newVal) !== stringify_default()(this._esResultValue)) {
           this.__setValue(this.$data.formSchema, newVal);
 
           this.__syncValue();
-        } else {// console.log("==", this.$data.formData);
+        } else {// ...
         }
       },
       deep: false
     },
     global: {
-      handler: function handler(newVal) {
-        // console.log("global: ", newVal);
-        if (libs_utils.isObj(newVal) && stringify_default()(newVal) !== stringify_default()(this.$data.formGlobal)) {
-          this.$data.formGlobal = JSON.parse(stringify_default()(newVal)); // 为什么要重新复制，因为form-item为是深度监听
-
+      handler: function handler(newVal, oldVal) {
+        if (libs_utils.isObj(newVal) && stringify_default()(newVal) !== stringify_default()(oldVal)) {
+          // this.$data.formGlobal = JSON.parse(JSON.stringify(newVal)); // 为什么要重新复制，因为form-item为是深度监听
           this.__syncValue();
         }
       },
       deep: true
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this._esOriginalValue = null;
+    this._esHiddenFunc = null;
+    this._esResultValue = null;
+    this._esFormData = null;
   }
 });
 // CONCATENATED MODULE: ./src/package/index.vue?vue&type=script&lang=js&
@@ -16232,7 +15990,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = normalizeComponent(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_eec76b22_render,
+  packagevue_type_template_id_280c8e56_render,
   staticRenderFns,
   false,
   null,
@@ -16244,28 +16002,20 @@ var package_component = normalizeComponent(
 /* harmony default export */ var src_package = (package_component.exports);
 // CONCATENATED MODULE: ./src/package/index.js
 
-
-
-
-
-
 // import esBase from "./base";
  // import esHelp from "./components/help.vue";
-
+// import esRules from "./libs/rules.js";
 
 
  // import esConstant from "./libs/constant";
 
 var package_install = function install(Vue) {
-  var extendRules = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  var globalOpts = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+  var globalOpts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   /* istanbul ignore if */
-  if (install.installed) return;
-
-  if (keys_default()(extendRules).length > 0) {
-    assign_default()(libs_rules, extendRules);
-  }
+  if (install.installed) return; // if (Object.keys(extendRules).length > 0) {
+  //   Object.assign(esRules, extendRules);
+  // }
 
   if (keys_default()(globalOpts).length > 0) {
     libs_utils.mergeGlobal(libs_global, globalOpts); // console.log(esGlobal);
