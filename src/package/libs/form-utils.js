@@ -2304,7 +2304,7 @@ let formUtils = {
       } else if (parse.isEsScript(item.handler)) {
         handler = parse.newEsFuncion(item.handler);
       } else {
-        handler = item.handler;
+        handler = item.handler || item.name;
       }
 
       var newTrigger = this.__parseTrigger(item.trigger);
