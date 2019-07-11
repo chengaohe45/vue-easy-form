@@ -1,6 +1,7 @@
 <template>
   <div class="es-form">
     <form-item ref="formFrame" :schema="formSchema"></form-item>
+    <console></console>
   </div>
 </template>
 
@@ -28,8 +29,10 @@ $btnDisableColor: #d5d7dc;
 
 .es-form {
   // margin: 20px 15px;
-  overflow: hidden;
+  position: relative;
+  // overflow: hidden;
   line-height: normal;
+
 
   /* 一些公共样式 */
 
@@ -343,6 +346,8 @@ import formUtils from "./libs/form-utils.js";
 import parse from "./libs/parse.js";
 import constant from "./libs/constant.js";
 
+import console from "./components/console.vue";
+
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
@@ -383,7 +388,8 @@ export default {
   /* ====================== 引用组件 ====================== */
 
   components: {
-    formItem
+    formItem,
+    console
   },
 
   /* ====================== 数据绑定 ====================== */
