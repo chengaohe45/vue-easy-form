@@ -12,6 +12,7 @@ let global = {
   // help: { name: esHelp, props: {} },
   trimDoms: ["input", "textarea", "el-input"],
   // 经测试：在el-input里，change比change.native先触发
+  hasConsole: false, // 是否有控制台，默认为false
   trimEvent:
     "change.native" /* 这个是form的表单项改变时，此事件触发后会去掉左右两边空格；一般都是change, 因为有些类库可以喜欢写changed */
 };

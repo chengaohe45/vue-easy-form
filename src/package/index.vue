@@ -1,11 +1,11 @@
 <template>
   <div class="es-form">
     <form-item ref="formFrame" :schema="formSchema"></form-item>
-    <console
+    <consolePanel
       v-if="canConsole"
       :rootData="csRootData"
       :formValue="csFormValue"
-    ></console>
+    ></consolePanel>
   </div>
 </template>
 
@@ -345,15 +345,20 @@ $btnDisableColor: #d5d7dc;
 <script>
 import formItem from "./form-item.vue";
 import utils from "./libs/utils.js";
+import globalSettings from "./libs/global.js";
 import formUtils from "./libs/form-utils.js";
 import parse from "./libs/parse.js";
 import constant from "./libs/constant.js";
 
-import console from "./components/console.vue";
+import consolePanel from "./components/console.vue";
 
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
+    this.$data.canConsole = utils.isBool(this.hasConsole)
+      ? this.hasConsole
+      : globalSettings.hasConsole;
+
     this._esHiddenLevel = 0; // 层级设置为0
     this._esLockSubmit = false;
 
@@ -397,7 +402,7 @@ export default {
 
   components: {
     formItem,
-    console
+    consolePanel
   },
 
   /* ====================== 数据绑定 ====================== */
@@ -423,7 +428,8 @@ export default {
 
     hasConsole: {
       type: Boolean,
-      required: false
+      required: false,
+      default: undefined // 不能设置true/false,因为没设置会去匹配global
     }
   },
 

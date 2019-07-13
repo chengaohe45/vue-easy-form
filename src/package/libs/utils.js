@@ -271,6 +271,17 @@ let utils = {
                 );
               }
               break;
+            case "hasConsole":
+              if (utils.isBool(value)) {
+                global[key] = value;
+              } else {
+                console.warn(
+                  "mergeGlobal: key(" +
+                    key +
+                    ")不能设置为非true/false；此默认值将不重设"
+                );
+              }
+              break;
             default:
               break;
           }
