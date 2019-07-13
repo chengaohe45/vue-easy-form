@@ -419,6 +419,11 @@ export default {
       default: () => {
         return {};
       }
+    },
+
+    hasConsole: {
+      type: Boolean,
+      required: false
     }
   },
 

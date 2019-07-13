@@ -141,6 +141,8 @@
         max-width: 100%;
         outline: none;
         box-sizing: border-box;
+        font-size: 13px;
+        line-height: 20px;
       }
     }
   }
