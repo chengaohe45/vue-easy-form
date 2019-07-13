@@ -1,7 +1,11 @@
 <template>
   <div class="es-form">
     <form-item ref="formFrame" :schema="formSchema"></form-item>
-    <console></console>
+    <console
+      v-if="canConsole"
+      :rootData="csRootData"
+      :formValue="csFormValue"
+    ></console>
   </div>
 </template>
 
@@ -32,7 +36,6 @@ $btnDisableColor: #d5d7dc;
   position: relative;
   // overflow: hidden;
   line-height: normal;
-
 
   /* 一些公共样式 */
 
@@ -380,6 +383,11 @@ export default {
       _esFormData: null,
       _esLockSubmit: false // 开始是false
       */
+
+      canConsole: true,
+      csRootData: null, // 用于console, 只有当canConsole为true时才有值
+      csFormValue: null,
+
       formSchema: {}, // $data有这个值说明是es-form
       isInited: false
     };
@@ -931,6 +939,11 @@ export default {
         utils.deepCopy(resultValue),
         sourcePathKey ? sourcePathKey : false
       );
+
+      if (this.$data.canConsole) {
+        this.$data.csRootData = utils.deepCopy(formData);
+        this.$data.csFormValue = utils.deepCopy(resultValue);
+      }
 
       baseParseSources = null;
       resultValue = null;

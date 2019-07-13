@@ -86,7 +86,7 @@
           </div>
           <div v-else>
             表单值(formValue):
-            <pre>{{ JSON.stringify(formValue, null, 2) }}</pre>
+            <pre class="pre-box">{{ JSON.stringify(formValue, null, 2) }}</pre>
           </div>
         </div>
       </div>
@@ -369,6 +369,10 @@ export default {
     border-top: 1px dashed #d6d7da;
     padding: 10px;
     text-align: left;
+  }
+
+  .pre-box {
+    overflow: auto;
   }
 
   .demo-form-ui {
