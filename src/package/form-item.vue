@@ -774,19 +774,6 @@ export default {
     }
   },
 
-  watch: {
-    // schema: {
-    //   handler(newVal) {
-    //     if (utils.isObj(newVal) && Object.keys(newVal).length > 0) {
-    //       // console.log("form-item.schema here...", this.schema);
-    //       // 更新了UI，暂不用初始化
-    //       this.$data.isChanged = false;
-    //       this.$data.triggerList = [];
-    //       this.__initUi();
-    //     }
-    //   },
-    //   deep: false
-    // }
-  }
+  watch: {}
 };
 </script>

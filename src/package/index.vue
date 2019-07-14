@@ -440,6 +440,49 @@ export default {
       return this.$refs.formFrame.getRef(name);
     },
 
+    /**
+     * 对外调用，取值
+     */
+    getValue() {
+      return utils.deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getRootData() {
+      return utils.deepCopy(this._esFormData);
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getFormValue() {
+      return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+    },
+
+    /**
+     * 对外调用，取值
+     */
+    getGlobal() {
+      return utils.deepCopy(this.global);
+    },
+
+    /**
+     * 对外调用，设置值
+     */
+    setValue(key, value) {
+      if (utils.isStr(key)) {
+        //是字符串时，则值是键值，设置某个值
+        this.__setValueByKey(this.$data.formSchema, key, value);
+        this.__syncValue();
+      } else if (utils.isObj(key)) {
+        //是object,全局设置
+        this.__setValue(this.$data.formSchema, key);
+        this.__syncValue();
+      }
+    },
+
     /* 
     判断某项是否处于隐藏 
     注：此函数有容灾处理，一定要执行到最后，不能中途退出
@@ -524,9 +567,38 @@ export default {
       return curHiddenValue;
     },
 
-    // _isHidden(pathKey) {
-    //   return false;
-    // },
+    //检查整个表单
+    checkAll() {
+      var isValid = this.__checkProp(
+        this.$data.formSchema,
+        this.$data.formSchema
+      );
+      return isValid;
+    },
+
+    /**
+     * 对外调用，取某一个tabs的索引
+     */
+    getTabsIndex(key) {
+      return formUtils.getTabsIndex(this.$data.formSchema, key);
+    },
+
+    /**
+     * 对外调用，设某一个tabs的索引
+     */
+    setTabsIndex(key, index) {
+      formUtils.setTabsIndex(this.$data.formSchema, key, index);
+    },
+
+    /**
+     * 对外调用，重置值
+     */
+    reset() {
+      // console.log(this._esOriginalValue);
+      this.setValue(this._esOriginalValue);
+      //去年所有的错误提示
+      formUtils.clearErrorMsg(this.$data.formSchema);
+    },
 
     /* 下划线一杠代表对内使用 */
     _getType() {
@@ -536,15 +608,6 @@ export default {
     /* 下划线一杠代表对内使用 */
     _getSchema() {
       return this.$data.formSchema;
-    },
-
-    //检查整个表单
-    checkAll() {
-      var isValid = this.__checkProp(
-        this.$data.formSchema,
-        this.$data.formSchema
-      );
-      return isValid;
     },
 
     __initUi(schema) {
@@ -749,66 +812,6 @@ export default {
     // 对外调用，发出提交事件
     submit() {
       this.__submit();
-    },
-
-    /**
-     * 对外调用，取值
-     */
-    getValue() {
-      return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
-    },
-
-    /**
-     * 对外调用，取值
-     */
-    getRootData() {
-      return utils.deepCopy(this._esFormData);
-    },
-
-    /**
-     * 对外调用，取值
-     */
-    getGlobal() {
-      return utils.deepCopy(this.global);
-    },
-
-    /**
-     * 对外调用，设置值
-     */
-    setValue(key, value) {
-      if (utils.isStr(key)) {
-        //是字符串时，则值是键值，设置某个值
-        this.__setValueByKey(this.$data.formSchema, key, value);
-        this.__syncValue();
-      } else if (utils.isObj(key)) {
-        //是object,全局设置
-        this.__setValue(this.$data.formSchema, key);
-        this.__syncValue();
-      }
-    },
-
-    /**
-     * 对外调用，取某一个tabs的索引
-     */
-    getTabsIndex(key) {
-      return formUtils.getTabsIndex(this.$data.formSchema, key);
-    },
-
-    /**
-     * 对外调用，设某一个tabs的索引
-     */
-    setTabsIndex(key, index) {
-      formUtils.setTabsIndex(this.$data.formSchema, key, index);
-    },
-
-    /**
-     * 对外调用，重置值
-     */
-    reset() {
-      // console.log(this._esOriginalValue);
-      this.setValue(this._esOriginalValue);
-      //去年所有的错误提示
-      formUtils.clearErrorMsg(this.$data.formSchema);
     },
 
     /*

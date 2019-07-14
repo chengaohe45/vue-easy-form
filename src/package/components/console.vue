@@ -15,6 +15,11 @@
       </div>
       <div class="console-close" @click="showPanel = false">Close</div>
       <div class="panel-body">
+        <div class="question-box">
+          <a href="#" target="_blank" class="question">如何打开面版?</a>
+          <a href="#" target="_blank" class="question">什么是根数据?</a>
+          <a href="#" target="_blank" class="question">什么是表单数据?</a>
+        </div>
         <h3 class="subtitle">根数据(rootData) => getValue取出</h3>
         <textarea class="value-box" readonly="readonly"
           >{{ JSON.stringify(rootData, null, 2) }}
@@ -92,8 +97,8 @@
         margin: 0;
         padding: 0 0 0 10px;
         line-height: 40px;
-        font-size: 18px;
-        font-weight: 500;
+        font-size: 16px;
+        font-weight: bold;
 
         // @include flex-full;
       }
@@ -115,6 +120,7 @@
 
       &:hover {
         color: #66b1ff;
+        text-decoration: underline;
       }
     }
 
@@ -123,11 +129,30 @@
       padding: 0px 10px 10px 10px;
 
       .subtitle {
-        margin: 10px 0 0 5px;
+        margin: 6px 0 0 5px;
         padding: 0;
-        line-height: 24px;
-        font-size: 15px;
-        font-weight: 400;
+        line-height: 20px;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .question-box {
+        margin-top: 10px;
+      }
+
+      .question {
+        margin: 0 5px;
+        text-decoration: none;
+        color: #409eff;
+        outline: none;
+        padding: 0;
+        line-height: 15px;
+        font-size: 13px;
+        font-weight: 500;
+
+        &:hover {
+          border-bottom: 1px solid #409eff;
+        }
       }
 
       .value-box {
