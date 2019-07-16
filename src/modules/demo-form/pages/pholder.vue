@@ -11,7 +11,7 @@
 
 <script>
 import demoFrame from "../components/demo-frame.vue";
-import title from "@/components/units/title";
+// import title from "@/components/units/title";
 export default {
   data() {
     return {
@@ -19,6 +19,7 @@ export default {
 
       formSchema: {
         colon: true,
+        boxRowSpace: 20,
         properties: {
           name: {
             label: "广告名称",
@@ -33,6 +34,7 @@ export default {
           author: {
             isTmp: true,
             label: "作者名称",
+            rowHeight: 22,
             component: {
               name: "div",
               text: "es: {{$root}}.author"
@@ -42,46 +44,11 @@ export default {
           },
           status: {
             label: "状态",
+            rowHeight: 22,
             component: {
               name: "el-switch"
             },
             value: true
-          },
-          bgTitle: {
-            isTmp: true,
-            label: false,
-            rowSpace: 30,
-            component: {
-              name: title,
-              props: {
-                text: "背景设置"
-              }
-            },
-            value: ""
-          },
-          bgColor: {
-            label: "颜色",
-            component: "el-color-picker",
-            value: "#409EFF"
-          },
-
-          fontTitle: {
-            isTmp: true,
-            label: false,
-            rowSpace: 30,
-            component: {
-              name: title,
-              props: {
-                text: "字体设置",
-                color: "es: {{$root}}.fontColor"
-              }
-            },
-            value: ""
-          },
-          fontColor: {
-            label: "颜色",
-            component: "el-color-picker",
-            value: "#409EFF"
           }
         }
       }

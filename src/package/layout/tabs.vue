@@ -26,7 +26,13 @@
     <ul
       class="es-tabs-body"
       :style="{
-        padding: schema.boxRowSpace + 'px',
+        padding: schema.layout.hasBorder
+          ? schema.layout.padding
+            ? schema.layout.padding
+            : schema.boxRowSpace + 'px'
+          : schema.layout.padding
+          ? schema.layout.padding
+          : schema.boxRowSpace + 'px 0 0 0',
         'border-width': schema.layout.hasBorder ? '1px' : '0px'
       }"
     >

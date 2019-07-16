@@ -16,6 +16,7 @@ export default {
       title: "子属性(块)设置",
 
       formSchema: {
+        boxRowSpace: 20,
         properties: {
           name: {
             label: "广告名称",
@@ -32,6 +33,7 @@ export default {
               text: "基本信息"
             },
             label: false,
+            boxRowSpace: 10,
             properties: {
               startTime: {
                 label: "上线时间",
@@ -68,8 +70,10 @@ export default {
           },
 
           target: {
+            boxRowSpace: 10,
             ui: {
-              type: "bg-border"
+              type: "bg",
+              hasBorder: true
             },
             title: {
               text: "投放目标"
@@ -106,8 +110,10 @@ export default {
           },
 
           district: {
+            boxRowSpace: 10,
             ui: {
-              type: "bg-block-border"
+              type: "bg-block",
+              hasBorder: true
             },
             title: {
               text: "投放地区"
@@ -125,9 +131,12 @@ export default {
           },
 
           more: {
+            boxRowSpace: 10,
             ui: {
-              type: "bg-block",
-              showBody: false
+              type: "block",
+              showBody: false,
+              hasBorder: true,
+              padding: 20
             },
             title: {
               text: "更多设置"
@@ -140,6 +149,13 @@ export default {
                   name: "el-input"
                 },
                 value: "xiaoming.lo"
+              },
+              note: {
+                label: "备注",
+                component: {
+                  name: "el-input"
+                },
+                value: "备注就是这么简单"
               }
             }
           }

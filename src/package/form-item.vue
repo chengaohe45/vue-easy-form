@@ -1,13 +1,19 @@
 <template>
   <div class="es-form-item">
-    <div v-if="hasTitle" :class="titleClass">
-      <div v-if="schema.title" class="es-title-txt">
+    <div
+      v-if="needHeader"
+      :class="['es-form-header', schema.ui ? 'es-form-' + schema.ui.type : '']"
+    >
+      <div
+        v-if="schema.title"
+        :class="['es-form-title', 'es-title-l' + schema.title.__level]"
+      >
         <template v-if="!schema.title.name">
           {{ schema.title.text }}
         </template>
         <es-base v-else :config="schema.title"></es-base>
       </div>
-      <div v-else class="es-title-txt es-title-empty">&nbsp;</div>
+      <div v-else class="es-form-title es-title-empty">&nbsp;</div>
       <div
         v-if="schema.ui && schema.ui.__hasToggle"
         class="es-more-btn"
@@ -20,7 +26,10 @@
       </div>
     </div>
     <div
-      class="es-form-body"
+      :class="[
+        'es-form-body',
+        schema.ui && schema.ui.hasBorder ? 'es-body-border' : ''
+      ]"
       v-show="!schema.ui || schema.ui.showBody"
       :style="bodyStyle"
     >
@@ -297,7 +306,7 @@
   @include flex-full;
   overflow: hidden;
 
-  .es-title-box {
+  .es-form-header {
     margin: 0 0 0 0;
     padding: 3px 0 0 0;
     text-align: left;
@@ -328,32 +337,25 @@
   @for $i from 1 through 3 {
     .es-title-l#{$i} {
       margin: 0 0 0 0;
-      // margin-left: 10px * ($i - 1);
       font-weight: 400;
       font-size: 24px - 2 * ($i - 1);
       line-height: 26px - 2 * ($i - 1);
     }
   }
 
-  // .es-title.es-title-line {
-  //   padding-left: 10px;
-  //   // border-left: 5px solid #50bfff;
-  //   border-left: 5px solid #909399;
-  // }
-
-  .es-title.es-title-bg {
+  .es-form-header.es-form-bg {
     background: $g_bgColor2;
     border-top-left-radius: $g_borderRadius;
     border-top-right-radius: $g_borderRadius;
     padding: 5px 0 3px 10px;
   }
 
-  .es-title.es-title-block {
+  .es-form-header.es-form-block {
     padding: 1px 0 1px 10px;
     border-left: 4px solid #909399;
   }
 
-  .es-title.es-title-bg-block {
+  .es-form-header.es-form-bg-block {
     background: $g_bgColor2;
     border-top-left-radius: $g_borderRadius;
     border-top-right-radius: $g_borderRadius;
@@ -361,16 +363,24 @@
     border-left: 4px solid #909399;
   }
 
-  .es-title.es-body-border + .es-form-body {
-    padding: 20px 10px 10px 10px;
-    border-left: 1px solid $g_borderColor;
-    border-right: 1px solid $g_borderColor;
-    border-bottom: 1px solid $g_borderColor;
-    border-bottom-left-radius: $g_borderRadius;
-    border-bottom-right-radius: $g_borderRadius;
+  .es-form-body.es-body-border {
+    border: 1px solid $g_borderColor;
+    border-radius: $g_borderRadius;
   }
 
-  .es-title-txt {
+  .es-form-header + .es-body-border {
+    margin-top: 10px;
+  }
+
+  .es-form-header.es-form-bg + .es-body-border,
+  .es-form-header.es-form-bg-block + .es-body-border {
+    margin-top: 0px;
+    border-top: none;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .es-form-title {
     @include flex-full;
     text-align: left;
   }
@@ -536,7 +546,7 @@ export default {
   created() {},
 
   computed: {
-    hasTitle() {
+    needHeader() {
       return this.schema.properties &&
         (this.schema.title ||
           (this.schema.ui && this.schema.ui.__hasToggle) ||
@@ -547,67 +557,30 @@ export default {
 
     bodyStyle() {
       var style = null;
-      if (
-        this.schema.properties &&
-        (this.schema.title ||
-          (this.schema.ui && this.schema.ui.__hasToggle) ||
-          this.schema.help)
-      ) {
+      if (this.needHeader) {
         // 是否有头部
         //是properties且有头部
-        var type = this.schema.ui ? this.schema.ui.type : "";
-        if (type == "bg-border" || type == "bg-block-border") {
+        var hasBorder =
+          this.schema.ui && this.schema.ui.hasBorder
+            ? this.schema.ui.hasBorder
+            : false;
+        if (hasBorder) {
           style = {
-            padding: Math.floor((this.schema.boxRowSpace * 2) / 3) + "px"
+            padding: this.schema.ui.padding
+              ? this.schema.ui.padding
+              : this.schema.boxRowSpace + "px"
           }; //有边框时的样式
         } else {
           style = {
-            paddingTop: Math.floor((this.schema.boxRowSpace * 3) / 3) + "px"
+            padding: this.schema.ui.padding
+              ? this.schema.ui.padding
+              : this.schema.boxRowSpace + "px 0 0 0"
           }; //无边框时的样式
         }
       } else {
         style = null;
       }
       return style;
-    },
-    titleClass() {
-      var tClass;
-      if (
-        this.schema.properties &&
-        (this.schema.title ||
-          (this.schema.ui && this.schema.ui.__hasToggle) ||
-          this.schema.help)
-      ) {
-        var type = this.schema.ui ? this.schema.ui.type : "";
-        //是properties且有头部
-        tClass = [
-          "es-title-box",
-          "es-title",
-          "es-title-l" + this.schema.title.__level
-        ];
-        switch (type) {
-          case "bg":
-            tClass.push("es-title-bg");
-            break;
-          case "block":
-            tClass.push("es-title-block");
-            break;
-          case "bg-block":
-            tClass.push("es-title-bg-block");
-            break;
-          case "bg-border":
-            tClass.push("es-title-bg");
-            tClass.push("es-body-border");
-            break;
-          case "bg-block-border":
-            tClass.push("es-title-bg-block");
-            tClass.push("es-body-border");
-            break;
-        }
-      } else {
-        tClass = [];
-      }
-      return tClass;
     }
   },
 

@@ -16,6 +16,7 @@ export default {
 
       formSchema: {
         layout: "tabs",
+        boxRowSpace: 20,
         properties: {
           isRequired: {
             label: "是否验证",
@@ -73,7 +74,6 @@ export default {
             },
             title: "投放目标",
             label: "",
-            boxRowSpace: 15,
             // col: 15,
             array: {
               name: "array",
@@ -84,31 +84,10 @@ export default {
               hasAdd: true,
               fixed: 1,
               max: 20,
-              rowSpace: 30,
+              rowSpace: 20,
               value: [
                 { name: "语文", code: "001", applyNum: 155 },
-                { name: "数学", code: "003" },
-                // { name: "语文", code: 123 },
-                // { name: "数学", code: 123 },
-                // { name: "语文", code: 123 },
                 { name: "英语", code: "005", applyNum: 888 }
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
-                // { name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },{ name: "语文", code: 123 }, { name: "数学", code: 123 },
               ],
               actions: {
                 trigger: "change",
@@ -117,6 +96,7 @@ export default {
                 }
               }
             },
+            boxRowSpace: 10,
             boxRowHeight: 32,
             properties: {
               name: {

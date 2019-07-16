@@ -98,14 +98,14 @@ export default {
           more: {
             ui: {
               type: "bg-border",
-              showBody: false
+              showBody: true
             },
             title: {
               name: "div",
               text: "es: {{$root}}.status ? '更多设置' : '很多设置'"
             },
             label: false,
-            boxRowSpace: 20,
+            boxRowSpace: 10,
             boxRowHeight: 28,
             colon: true,
             boxLabelWidth: 80,

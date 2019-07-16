@@ -17,6 +17,7 @@ import rulesForm from "../modules/demo-form/pages/rules";
 import comUnitForm from "../modules/demo-form/pages/unit";
 import comDescForm from "../modules/demo-form/pages/desc";
 import comHelpForm from "../modules/demo-form/pages/help";
+import comTitleForm from "../modules/demo-form/pages/title";
 
 // import helpForm from "../modules/demo-form/pages/help";
 import propertiesForm from "../modules/demo-form/pages/properties";
@@ -150,6 +151,13 @@ let navList = [
         link: "/help",
         path: "/help",
         component: comHelpForm
+      },
+      {
+        icon: "",
+        name: "标题",
+        link: "/title",
+        path: "/title",
+        component: comTitleForm
       },
       {
         icon: "",

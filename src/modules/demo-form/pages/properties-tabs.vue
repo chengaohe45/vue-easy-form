@@ -23,7 +23,10 @@ export default {
             value: true
           },
           test1: {
-            layout: "tabs",
+            layout: {
+              name: "tabs",
+              padding: "20px 10px"
+            },
             title: "tabs类型(card)",
             label: "",
             properties: {

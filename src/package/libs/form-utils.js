@@ -1847,7 +1847,8 @@ let formUtils = {
 
   /* 解析boxUi, 只支持properites */
   __parseBoxUi: function(value) {
-    var newValue;
+    var newValue, type;
+    var types = ["bg", "block", "bg-block"];
     if (utils.isObj(value) && Object.keys(value).length > 0) {
       newValue = {};
       if (utils.isBool(value.showBody)) {
@@ -1857,19 +1858,95 @@ let formUtils = {
         newValue.__hasToggle = false; // 无切换按钮
         newValue.showBody = true;
       }
-      newValue.type = utils.isStr(value.type) ? value.type.trim() : "";
+      type = utils.isStr(value.type) ? value.type.trim() : "";
+      newValue.type = types.includes(type) ? type : "";
+      newValue.hasBorder = utils.isBool(value.hasBorder)
+        ? value.hasBorder
+        : false;
+      newValue.padding = this.parsePadding(value.padding);
     } else if (utils.isStr(value)) {
-      newValue = {
-        __hasToggle: false,
-        showBody: true,
-        type: value.trim()
-      };
+      type = value ? value : "";
+      if (type) {
+        newValue = {
+          __hasToggle: false,
+          showBody: true,
+          type: type,
+          hasBorder: false,
+          padding: false
+        };
+      } else {
+        newValue = false;
+      }
     } else {
       // 为false
       newValue = false;
     }
 
     return newValue;
+  },
+
+  /**
+   * 解析样式值：类似于padding margin(现仅支持px, 可以不写单位): 如20 或 “20px 20 30px”
+   * @param {*} value
+   * @param {*} canNegative 是否可以是负数；因为大多数时我们都不需要负数，所以默认为false
+   * @returns false 或 一个长度为4的类组
+   */
+  parsePadding(value, canNegative) {
+    var resultVals;
+    if (utils.isNum(value)) {
+      if (canNegative || value >= 0) {
+        resultVals = [value, value, value, value];
+      } else {
+        resultVals = [0, 0, 0, 0];
+      }
+    } else if (utils.isStr(value)) {
+      value = value.trim();
+      if (value) {
+        var tmpVals = value.split(/\s+/);
+        if (tmpVals.length <= 4) {
+          resultVals = [];
+          var reg1 = /^(-?\d+(\.\d+)?)(px)?$/; // 点号有数字
+          var reg2 = /^(-?\.\d+)(px)?$/; // 点号无数字
+
+          for (var i = 0; i < tmpVals.length; i++) {
+            var tmpVal = tmpVals[i];
+            var match = tmpVal.match(reg1) || tmpVal.match(reg2);
+            if (match) {
+              var numVal = Number(match[1]);
+              if (canNegative || numVal >= 0) {
+                resultVals.push(numVal);
+              } else {
+                resultVals.push(0);
+              }
+            } else {
+              break; // 不合法，退出循环
+            }
+          }
+          if (resultVals.length === tmpVals.length) {
+            // 解析是正确的，看个数
+            if (resultVals.length === 1) {
+              resultVals.push(resultVals[0], resultVals[0], resultVals[0]);
+            } else if (resultVals.length === 2) {
+              resultVals.push(resultVals[0], resultVals[1]);
+            } else if (resultVals.length === 3) {
+              resultVals.push(resultVals[1]);
+            } else {
+              // 长度为4个
+            }
+          } else {
+            resultVals = false;
+          }
+        } else {
+          resultVals = false;
+        }
+      } else {
+        resultVals = false;
+      }
+    } else {
+      resultVals = false;
+    }
+
+    return resultVals ? resultVals.join("px ") + "px" : false;
   },
 
   /* 解析帮助 */
@@ -2124,6 +2201,7 @@ let formUtils = {
       newLayout.hasBorder = utils.isBool(layout.hasBorder)
         ? layout.hasBorder
         : true;
+      newLayout.padding = this.parsePadding(layout.padding);
     }
 
     return newLayout;
