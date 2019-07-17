@@ -118,3 +118,12 @@ data() {
     };
   }
 ```
+
+handler => options包含的属性：
+- `value`： 当前项组件的值，表单的值可以通过this取出
+- `event`： 事件本身所携带的信息, 如keyup.native,可以从这里提取键值；若是$emit事件，则value等于event
+- `target`： 当前项组件(若是`数组事件`，这个为`null`)
+- `pathKey`： 需要检查的组件的路径
+- `idxChain`： 需要检查的组件所要数组所组成的id 如: 1,2
+- `index`：组件处于数组的子节点(非孙子)时的索引，其余的返回-1
+> 注：[数组事件](./array.html#数组事件)是没有target信息的

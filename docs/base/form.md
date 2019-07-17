@@ -35,7 +35,7 @@
 
 | 属性名 | 说明 | 参数 | 备注
 | -- | -- | -- | -- 
-| getRef | 取元素或组件 | (name) | 类似于ref
+| getRef | 取元素或组件 | (name) | 类似于ref；若项组件在表单数组中，则返回来的是一个数组
 | checkAll | 检查表单是否有错 | 空 | true/false
 | submit | 触发submit事件 | 空 | --
 | isHidden | 判断某项是否隐藏 | 字符串 | --

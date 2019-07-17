@@ -73,7 +73,7 @@ export default {
                   hasCopy: true,
                   fixed: 1,
                   max: 5,
-                  rowSpace: 8,
+                  rowSpace: 23,
                   value: [
                     { name: "语文", code: 123 },
                     { name: "数学", code: 123 }

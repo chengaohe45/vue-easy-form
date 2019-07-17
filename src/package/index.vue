@@ -576,6 +576,11 @@ export default {
       return isValid;
     },
 
+    // 对外调用，发出提交事件
+    submit() {
+      this.__submit();
+    },
+
     /**
      * 对外调用，取某一个tabs的索引
      */
@@ -807,11 +812,6 @@ export default {
           }
         });
       }
-    },
-
-    // 对外调用，发出提交事件
-    submit() {
-      this.__submit();
     },
 
     /*

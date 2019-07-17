@@ -93,7 +93,12 @@
         :style="{
           marginTop:
             schema.__propSchemaList.length > 0
-              ? schema.array.rowSpace + 'px'
+              ? Math.round(
+                  Math.min(
+                    Math.max(schema.array.rowSpace / 2, 10),
+                    schema.array.rowSpace
+                  )
+                ) + 'px'
               : '0px'
         }"
       >

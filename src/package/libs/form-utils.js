@@ -2449,11 +2449,15 @@ let formUtils = {
       }
 
       if (key == "array") {
-        newPropItem[key] = formUtils.__parsePropArray(
+        var arrayAttr = formUtils.__parsePropArray(
           propItem[key],
           propItem,
           myPathKey
         );
+        newPropItem[key] = arrayAttr;
+        if (arrayAttr) {
+          newPropItem.__invalidMsg = false;
+        }
         return true;
       }
 

@@ -82,7 +82,8 @@ export default {
               hasDelete: true,
               hasSort: true,
               hasAdd: true,
-              fixed: 1,
+              // fixed: 1,
+              rules: true,
               max: 20,
               rowSpace: 20,
               value: [
@@ -157,7 +158,7 @@ export default {
                 }
               }
             },
-            desc: "提示： 最多只能添加20条数据",
+            desc: "提示： 至少要添加一条数据",
             help: "help： 最多只能添加20条数据"
           },
           courses: {

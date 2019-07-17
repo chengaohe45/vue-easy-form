@@ -63,13 +63,13 @@ data() {
   },
 ```
 
-## array属性
+## 配置属性
 
 若array存在，说明是一个数组，具体配置如下：
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
-| name | 哪种分组 | string/object | "array"、"array-table"、"array-tabs"、"array-legend"、"array-card"、"array-tabs" | "array" | 
+| name | 哪种分组 | string/object | "array"、<br />"array-table"、<br />"array-tabs"、<br />"array-legend"、<br />"array-card"、<br />"array-tabs" | "array" | 
 | hasSort | 是否有排序按钮 | boolean | -- | false | 
 | hasDelete | 是否有删除按钮 | boolean | -- | true |
 | hasAdd | 是否有添加按钮 | boolean | -- | true | 
@@ -77,20 +77,32 @@ data() {
 | fixed | 固定数量 | number | >=0 | 0 | 前几条是固定的，不可移动，也不可删除
 | min | 最少多少条 | number | >=0 | 0 | 0 代表无限制
 | max | 最多多少条 | number | >=0 | 0 | 0 代表无限制
-| hasOrder | 可排序 | boolean | -- | true | 
+| hasOrder | 可排序 | boolean | -- | true | --
 | hasDelWarn | 删除提示 | boolean | -- | true | 删除时是否有提示
-| headRequired | “星号”的位置 | boolean | -- | true | 当name为`array`无效，为`array-table`有效；当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示；注意：required的值不能受properties里面的属性影响
-| type | 头部类型 | string | `line`,`card`,`bg` | 'card' | `array-tabs`时有效
+| headRequired | “星号”的位置 | boolean | -- | true | 当name为`array`无效，为`array-table`有效；<br />当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示；<br />注意：required的值不能受properties里面的属性影响
+| type | 头部类型 | string | `line`,<br />`card`,<br />`bg` | 'card' | `array-tabs`时有效
 | rowSpace | 每一行的间隔 | number | >=0 | undefined | 当为`undefined`, 继承父类的rowSpace
-| insertValue | 插入时的值 | function/其它的值 | 函数时会动态过滤 | 添加或拷贝时各自的默认值 | 
+| insertValue | 插入时的值 | function/其它的值 | -- | 添加或拷贝时各自的默认值 | 
 | hasBorder | 是否有边框 | boolean | true/false | true |
 | subLabel | tabs头部名称 | number | >=0 | 0 | `array-tabs` or `array-legend`时有效，其余情况无效; 支持es语法
+| actions | 数组事件 | array/object | trigger只有:<br> input<br>change | -- | 跟[项组件事件写法](./component.html#组件事件)一样，就是返回信息少了`target`
+| rules | 数组验证 | boolean/object | trigger只有:<br> input<br>change | -- | 跟[项组件验证写法](./rules.html)一样
+| value | 数组的默认值 | array | -- | -- | --
 
 ### insertValue
 当insertValue为函数时，insertValue(options)的`this`指向`表单`，返回值（不为undefined, undefined说明取各自的默认值）即为插入的值；参数options为一个对象，包含的信息为：
 - `oldValues`： 插入前，当前数组的值
 - `position`： 插入的位置，从0开始计算
 - `type`： "copy" or "add"
+
+## 数组事件
+
+属性array.actions写法跟项组件事件一样，具体见[项组件事件](./component.html#组件事件)<br>
+> 注：数组事件是没有target信息的，其trigger只有 input、change
+
+## 数组验证
+
+属性array.rules写法跟项组件验证一样，具体见[项组件验证](./rules.html)
 
 
 [schema的具体写法](./schema.md)
