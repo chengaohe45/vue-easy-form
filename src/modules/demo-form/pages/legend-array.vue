@@ -17,6 +17,20 @@ export default {
       formSchema: {
         // layout: "tabs",
         properties: {
+          name: {
+            value: "默认名",
+            direction: "h",
+            offsetRight: 200,
+            // col: 12,
+            label: "Test",
+            // hidden: "es: !{{$hidden(  courses[i].code)}}",
+            component: {
+              ref: "code",
+              name: "el-input"
+            },
+            rules: true
+          },
+
           target: {
             title: {
               text: "投放目标",
@@ -25,6 +39,7 @@ export default {
             },
             label: "",
             // col: 15,
+            boxRowSpace: 20,
             array: {
               name: "array-legend",
               subLabel: "es: '投放目标' + ({{$index}} + 1)",
@@ -35,8 +50,11 @@ export default {
               hasCopy: true,
               fixed: 1,
               max: 15,
-              rowSpace: 8,
-              value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
+              rowSpace: 10,
+              value: [
+                { name: "清华", code: "a??" },
+                { name: "北大", code: "b??" }
+              ],
               actions: {
                 trigger: "change",
                 handler: function(options) {
@@ -47,13 +65,14 @@ export default {
             boxRowHeight: 32,
             properties: {
               name: {
-                value: "默认名",
+                value: "大学默认名",
                 direction: "h",
                 offsetRight: 200,
                 // col: 12,
-                label: "es: '学科名' + ({{$index}} + 1)",
+                label: "es: '大学' + ({{$index}} + 1)",
                 // hidden: "es: !{{$hidden(  courses[i].code)}}",
                 component: {
+                  ref: "code",
                   name: "el-input",
                   props: {
                     // disabled: "es:!{{$root.courses[i].code}} || {{$index}} == 0",
@@ -73,10 +92,10 @@ export default {
                   hasCopy: true,
                   fixed: 1,
                   max: 5,
-                  rowSpace: 23,
+                  rowSpace: 10,
                   value: [
-                    { name: "语文", code: 123 },
-                    { name: "数学", code: 123 }
+                    { name: "语文", code: "a" },
+                    { name: "数学", code: "b" }
                   ],
                   actions: {
                     trigger: "change",
@@ -105,6 +124,7 @@ export default {
                     },
                     col: 12,
                     component: {
+                      ref: "code",
                       name: "el-input",
                       props: {
                         size: "small",
@@ -146,6 +166,20 @@ export default {
             },
             desc: "提示： 最多只能添加5条数据",
             help: "help： 最多只能添加5条数据"
+          },
+
+          name1: {
+            value: "默认名",
+            direction: "h",
+            offsetRight: 200,
+            // col: 12,
+            label: "Test",
+            // hidden: "es: !{{$hidden(  courses[i].code)}}",
+            component: {
+              ref: "code1",
+              name: "el-input"
+            },
+            rules: true
           }
         }
       }

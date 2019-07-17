@@ -596,25 +596,35 @@ export default {
     },
 
     getRef(name) {
-      var target;
+      var ignoreKeys = [];
+      var info = this.__getRef(name, ignoreKeys);
+      var ref = info && info.target ? info.target : null;
+      // console.log("ignoreKeys: ", ignoreKeys);
+      ignoreKeys = null;
+      return ref;
+    },
+
+    __getRef(name, ignoreKeys) {
+      var targetInfo;
       if (this.schema.component && !this.schema.array) {
         // 是叶子节点，直接取出
         var refTarget = this.$refs[name];
         if (refTarget) {
-          target = refTarget.$refs.__comTarget__;
+          targetInfo = {
+            target: refTarget.$refs.__comTarget__,
+            sourceKey: this.schema.__pathKey.replace(/\[\d+\]/g, "[i]")
+          };
         } else {
-          target = null;
+          targetInfo = null;
         }
       } else {
-        target = this.__getLastRefs(name);
+        targetInfo = this.__getLastRefs(name, ignoreKeys);
       }
-      return target;
+      return targetInfo;
     },
 
-    __initUi() {},
-
     /* 取出最后的，跟vue ref保持一致；也就是后面的会代表前面的 */
-    __getLastRefs(name) {
+    __getLastRefs(name, ignoreKeys) {
       var __objectRef__ = "__refObject__";
       var __tabsRef__ = "__refTabs__";
       var sysRefIds = [
@@ -631,7 +641,7 @@ export default {
       for (var key in this.$refs) {
         // 这样扫描是为了按顺序正确取出
         if (sysRefIds.includes(key)) {
-          var tmpTargets = this.__getTargetRefs(key, name);
+          var tmpTargets = this.__getTargetRefs(key, name, ignoreKeys);
           if (tmpTargets) {
             refTargets = tmpTargets; // 后面的代替前面的，跟原生vue ref保持一致
           }
@@ -642,33 +652,61 @@ export default {
       return refTargets;
     },
 
-    __getTargetRefs(refName, name) {
+    __getTargetRefs(refName, name, ignoreKeys) {
       var __objectRef__ = "__refObject__";
       var __tabsRef__ = "__refTabs__";
       var curRefObj,
-        nextTarget,
-        newTarget = null;
+        nextTargetInfo,
+        newTargetInfo = null;
       curRefObj = this.$refs[refName];
+      // console.log("curRefObj: ", curRefObj);
       if (curRefObj) {
         curRefObj.forEach(item => {
-          nextTarget = item.getRef(name);
-          if (nextTarget) {
-            if (refName === __objectRef__ || refName === __tabsRef__) {
-              // 不是数组，取最后一个
-              newTarget = nextTarget;
-            } else {
-              // 是数组，合并成数组
-              newTarget = newTarget ? newTarget : [];
-              if (utils.isArr(nextTarget)) {
-                newTarget = newTarget.concat(nextTarget);
+          nextTargetInfo = item.__getRef(name, ignoreKeys);
+          if (nextTargetInfo) {
+            newTargetInfo = newTargetInfo ? newTargetInfo : {};
+
+            if (!ignoreKeys.includes(nextTargetInfo.sourceKey)) {
+              // 不是忽略的pathkey
+
+              if (refName === __objectRef__ || refName === __tabsRef__) {
+                // 不是数组，取最后一个
+                if (
+                  newTargetInfo.sourceKey &&
+                  !ignoreKeys.includes(newTargetInfo.sourceKey)
+                ) {
+                  ignoreKeys.push(newTargetInfo.sourceKey);
+                }
+                newTargetInfo = nextTargetInfo;
               } else {
-                newTarget.push(nextTarget);
+                // 是数组，合并成数组
+                if (newTargetInfo.sourceKey == nextTargetInfo.sourceKey) {
+                  // 一样的路径，说明是目标对象
+                  var curTarget = newTargetInfo.target
+                    ? newTargetInfo.target
+                    : [];
+                  curTarget.push(nextTargetInfo.target);
+                  newTargetInfo.target = curTarget;
+                } else {
+                  if (
+                    newTargetInfo.sourceKey &&
+                    !ignoreKeys.includes(newTargetInfo.sourceKey)
+                  ) {
+                    ignoreKeys.push(newTargetInfo.sourceKey);
+                  }
+                  newTargetInfo = {
+                    target: [nextTargetInfo.target],
+                    sourceKey: nextTargetInfo.sourceKey
+                  };
+                }
               }
+            } else {
+              // 不用理会，之前已经出现过
             }
           }
         });
       }
-      return newTarget;
+      return newTargetInfo && newTargetInfo.target ? newTargetInfo : null;
     },
 
     toggleBody() {

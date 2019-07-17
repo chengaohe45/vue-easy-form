@@ -436,8 +436,35 @@ export default {
   /* ====================== 事件处理 ====================== */
 
   methods: {
-    getRef(name) {
-      return this.$refs.formFrame.getRef(name);
+    /**
+     * @param name 索引值
+     * @param idxChain 组件所在的位置 如: 1,2 或 0
+     */
+    getRef(name, idxChain) {
+      // var start = +new Date();
+      var ref = this.$refs.formFrame.getRef(name);
+      // console.log("ref: ", ref);
+      if (ref && utils.isArr(ref)) {
+        if (utils.isNum(idxChain)) {
+          ref = ref[idxChain];
+        } else if (idxChain && utils.isStr(idxChain)) {
+          var indexs = idxChain.split(",");
+          var curLevel = ref;
+          for (var i = 0; i < indexs.length; i++) {
+            var index = indexs[i];
+            if (utils.isArr(curLevel) && index !== "" && curLevel[index]) {
+              curLevel = curLevel[index];
+            } else {
+              curLevel = null;
+              break;
+            }
+          }
+          ref = curLevel;
+        }
+      }
+      // var end = +new Date();
+      // console.log("expired = ", end - start);
+      return ref ? ref : null;
     },
 
     /**
