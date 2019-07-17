@@ -17,19 +17,19 @@ export default {
       formSchema: {
         // layout: "tabs",
         properties: {
-          name: {
-            value: "默认名",
-            direction: "h",
-            offsetRight: 200,
-            // col: 12,
-            label: "Test",
-            // hidden: "es: !{{$hidden(  courses[i].code)}}",
-            component: {
-              ref: "code",
-              name: "el-input"
-            },
-            rules: true
-          },
+          // name: {
+          //   value: "默认名",
+          //   direction: "h",
+          //   offsetRight: 200,
+          //   // col: 12,
+          //   label: "Test",
+          //   // hidden: "es: !{{$hidden(  courses[i].code)}}",
+          //   component: {
+          //     ref: "code",
+          //     name: "el-input"
+          //   },
+          //   rules: true
+          // },
 
           target: {
             title: {
@@ -166,21 +166,21 @@ export default {
             },
             desc: "提示： 最多只能添加5条数据",
             help: "help： 最多只能添加5条数据"
-          },
-
-          name1: {
-            value: "默认名",
-            direction: "h",
-            offsetRight: 200,
-            // col: 12,
-            label: "Test",
-            // hidden: "es: !{{$hidden(  courses[i].code)}}",
-            component: {
-              ref: "code1",
-              name: "el-input"
-            },
-            rules: true
           }
+
+          // name1: {
+          //   value: "默认名",
+          //   direction: "h",
+          //   offsetRight: 200,
+          //   // col: 12,
+          //   label: "Test",
+          //   // hidden: "es: !{{$hidden(  courses[i].code)}}",
+          //   component: {
+          //     ref: "code1",
+          //     name: "el-input"
+          //   },
+          //   rules: true
+          // }
         }
       }
     };

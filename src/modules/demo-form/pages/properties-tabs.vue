@@ -112,7 +112,7 @@ export default {
                     value: "kyle.lo"
                   },
                   weight: {
-                    col: 12,
+                    // col: 12,
                     label: {
                       text: "体重"
                     },
@@ -189,7 +189,7 @@ export default {
               // hasBorder: false
             },
             title: "tabs类型(bg)",
-            rowSpace: 30,
+            rowSpace: 20,
             label: "",
             properties: {
               base: {
@@ -254,7 +254,7 @@ export default {
                     },
                     component: {
                       name: "el-input-number",
-                      flex: "self"
+                      flex: "full"
                     },
                     unit: "公斤",
                     value: 100
@@ -271,7 +271,7 @@ export default {
               hasBorder: false
             },
             title: "tabs类型(line)",
-            rowSpace: 30,
+            rowSpace: 20,
             label: "",
             properties: {
               base: {
@@ -335,7 +335,7 @@ export default {
                     },
                     component: {
                       name: "el-input-number",
-                      flex: "self"
+                      flex: "full"
                     },
                     unit: "公斤",
                     value: 100

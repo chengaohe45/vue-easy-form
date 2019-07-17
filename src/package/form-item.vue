@@ -568,13 +568,13 @@ export default {
           style = {
             padding: this.schema.ui.padding
               ? this.schema.ui.padding
-              : this.schema.boxRowSpace + "px"
+              : Math.min(this.schema.boxRowSpace, 10) + "px"
           }; //有边框时的样式
         } else {
           style = {
             padding: this.schema.ui.padding
               ? this.schema.ui.padding
-              : this.schema.boxRowSpace + "px 0 0 0"
+              : Math.min(this.schema.boxRowSpace, 10) + "px 0 0 0"
           }; //无边框时的样式
         }
       } else {

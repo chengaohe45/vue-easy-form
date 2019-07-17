@@ -235,7 +235,7 @@
   }
 
   .es-array-fieldset-box {
-    padding-top: 15px;
+    padding-top: 12px;
     @include flex-full;
   }
 
