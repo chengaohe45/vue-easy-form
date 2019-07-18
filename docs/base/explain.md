@@ -13,12 +13,21 @@ formValue: 表单中用户所需要的值（一般不包含隐藏的值、临时
 - 在表单逻辑控制中，隐藏的`表单项组件`需要提交的指定的值(可设置`hdValue`)；
 - 在`表单项组件`件显示中，有的值只是显示，但并不需要提交(可设置`isTmp`)
 
-支持es语法的属性：
-- `label`： 动态控制标签值
-- `hidden`： 动态控制每一项是否显示
-- `组件props对象的所有属性`： 动态控制组件的属性
-- `required`： 动态控制组件是否必填
-- `验证函数`： 用于rules.check的写法中，简洁快速
+## 索引链
+idxChain: 指出`表单项组件`所处于数组的位置<br>
+如：base.student[0].courses[1].name, 如索引链为'0,1'; 当父节点或祖先节点不是数据时，则`表单项组件`为`空字符`
+> 应用场景：[项组件事件](./component.md#组件事件)、[项组件验证](./rules.md)、[数组事件](./array.md#数组事件)所携带的信息会返回此值
+
+
+## 项组件路径
+pathKey: `表单项组件`位置的具体路径<br>
+如：<br>
+base.student[0].courses[1].name<br>
+base.target
+> 应用场景：[项组件事件](./component.md#组件事件)、[项组件验证](./rules.md)、[数组事件](./array.md#数组事件)所携带的信息会返回此值; [form.setValue](./form.md#表单方法)等需要此值设置
+::: warning
+暂不支持这样的写法：base["target"].name;  正确的写法是 base.target.name
+:::
 
 ## es语法
 

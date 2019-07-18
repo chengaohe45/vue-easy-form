@@ -498,14 +498,14 @@ export default {
     /**
      * 对外调用，设置值
      */
-    setValue(key, value) {
-      if (utils.isStr(key)) {
+    setValue(pathKey, value) {
+      if (utils.isStr(pathKey)) {
         //是字符串时，则值是键值，设置某个值
-        this.__setValueByKey(this.$data.formSchema, key, value);
+        this.__setValueByKey(this.$data.formSchema, pathKey, value);
         this.__syncValue();
-      } else if (utils.isObj(key)) {
+      } else if (utils.isObj(pathKey)) {
         //是object,全局设置
-        this.__setValue(this.$data.formSchema, key);
+        this.__setValue(this.$data.formSchema, pathKey);
         this.__syncValue();
       }
     },
@@ -611,15 +611,15 @@ export default {
     /**
      * 对外调用，取某一个tabs的索引
      */
-    getTabsIndex(key) {
-      return formUtils.getTabsIndex(this.$data.formSchema, key);
+    getTabsIndex(pathKey) {
+      return formUtils.getTabsIndex(this.$data.formSchema, pathKey);
     },
 
     /**
      * 对外调用，设某一个tabs的索引
      */
-    setTabsIndex(key, index) {
-      formUtils.setTabsIndex(this.$data.formSchema, key, index);
+    setTabsIndex(pathKey, index) {
+      formUtils.setTabsIndex(this.$data.formSchema, pathKey, index);
     },
 
     /**

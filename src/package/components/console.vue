@@ -86,6 +86,7 @@
 
     .console-header {
       background: #ecf5ff;
+      // background: -webkit-linear-gradient(top, #409EFF, #ecf5ff);
 
       cursor: move;
 

@@ -1164,7 +1164,7 @@ let formUtils = {
   },
 
   __isRightKey(key) {
-    var illChars = ["[", "]", ".", "{", "}"];
+    var illChars = ["[", "]", ".", "{", "}", "(", ")"];
     for (var i = 0; i < illChars.length; i++) {
       if (key.indexOf(illChars[i]) >= 0) {
         throw "属性不能出现以下的危险字符：" + illChars.join(" ");
