@@ -1334,7 +1334,7 @@ let formUtils = {
       {
         key: "hidden",
         enums: [true, false],
-        filters: ["isEs"], // 取schema-rules规则过滤
+        filters: ["isEsOrFunc"], // 取schema-rules规则过滤
         defaultValue: false
       },
       {
@@ -1611,7 +1611,7 @@ let formUtils = {
       if (utils.isObj(component.props)) {
         if (this.__needParseInObj(component.props)) {
           newComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
-          newComponent.__rawProps = this.__newEsFunction(component.props);
+          newComponent.__rawProps = this.__newEsFuncProps(component.props);
         } else {
           newComponent.props = utils.deepCopy(component.props); // 可直接使用
         }
@@ -1663,11 +1663,12 @@ let formUtils = {
     return newObj;
   },
 
-  __newEsFunction(obj, excludeKeys = ["value", "style", "class"]) {
+  __newEsFuncProps(obj, excludeKeys = ["value", "style", "class"]) {
     var newObj = {};
     for (var key in obj) {
       if (!excludeKeys.includes(key)) {
-        newObj[key] = parse.isEsScript(obj[key])
+        var newKey = utils.vueCamelCase(key);
+        newObj[newKey] = parse.isEsScript(obj[key])
           ? parse.newEsFuncion(obj[key])
           : utils.deepCopy(obj[key]);
       }
@@ -1995,7 +1996,7 @@ let formUtils = {
         if (utils.isObj(value.props)) {
           if (this.__needParseInObj(value.props)) {
             newCom.props = this.__newEmptyObj(value.props); // 后面(analyzeUiProps)有解析的
-            newCom.__rawProps = this.__newEsFunction(value.props);
+            newCom.__rawProps = this.__newEsFuncProps(value.props);
           } else {
             newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
           }

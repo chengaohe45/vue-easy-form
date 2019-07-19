@@ -13,84 +13,136 @@ export default {
       title: "逻辑控制",
 
       formSchema: {
+        boxRowSpace: 20,
         properties: {
-          name: {
-            label: "广告名称",
-            component: "el-input",
-            value: "首页位置",
-            col: 12,
-            rules: {
-              required: "es: {{$root}}.delivery ? true : false"
-            }
-          },
-          pholder: {
-            layout: "space",
-            col: 12
-          },
-          delivery: {
-            // rowHeight: 20,
-            label: "简单投放",
+          isOpen: {
+            label: "开关切换",
             component: "el-switch",
-            value: false,
-            col: 12
+            value: false
           },
 
-          target: {
+          esMethod: {
+            boxRowSpace: 10,
             ui: {
-              type: "bg-border"
+              type: "bg",
+              hasBorder: true
             },
             title: {
-              text: "投放目标"
+              text: "es写法"
             },
             label: false,
             properties: {
               name: {
-                label: "es: {{$root}}.delivery ? '姓名' : '姓名2'",
+                label: "姓名",
                 component: {
                   name: "el-input",
                   props: {
-                    disabled:
-                      "es: {{$root}}.delivery && {{$global.isOpen}} ? false : true"
+                    disabled: "es: {{$root}}.isOpen",
+                    placeholder: "开关打开我就不可写"
                   }
                 },
-                value: "kyle.lo"
+                value: ""
               },
-              weight: {
-                hidden: "es: {{$root}}.delivery",
-                hdValue: 0,
-                col: 18,
-                label: {
-                  text: "体重"
-                },
+              level1: {
+                label: "es级别1",
+                hidden: "es: {{$root}}.isOpen",
                 component: {
-                  name: "el-input-number",
-                  flex: "full"
+                  name: "el-input",
+                  props: {
+                    placeholder: "开关打开我就隐藏"
+                  }
                 },
-                unit: "公斤",
-                value: 100
+                value: ""
+              },
+              level2: {
+                label: "es级别2",
+                hidden: "es: {{$hidden('esMethod.level1')}}",
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "es级别1隐藏我就跟着隐藏"
+                  }
+                },
+                value: ""
+              },
+              level3: {
+                label: "es级别3",
+                hidden: "es: {{$hidden('esMethod.level2')}}",
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "es级别2隐藏我就跟着隐藏"
+                  }
+                },
+                value: ""
               }
             }
           },
 
-          district: {
+          funcMethod: {
+            boxRowSpace: 10,
             ui: {
-              type: "bg-block-border",
-              showBody: true
+              type: "bg",
+              hasBorder: true
             },
             title: {
-              text: "投放地区"
+              text: "函数写法"
             },
-            hidden: "es: {{$root}}.delivery",
-            hdValue: null,
             label: false,
             properties: {
-              province: {
-                label: "省份",
+              name: {
+                label: "姓名",
                 component: {
-                  name: "el-input"
+                  name: "el-input",
+                  props: {
+                    disabled: function(options) {
+                      return options.rootData.isOpen;
+                    },
+                    placeholder: "开关打开我就不可写"
+                  }
                 },
-                hdValue: null,
-                value: "广东省"
+                value: ""
+              },
+              level1: {
+                label: "函数级别1",
+                hidden: function(options) {
+                  return options.rootData.isOpen;
+                },
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "开关打开我就隐藏"
+                  }
+                },
+                value: ""
+              },
+              level2: {
+                label: "函数级别2",
+                hidden: function(options) {
+                  var $hidden = options.$hidden;
+                  return $hidden("funcMethod.level1");
+                },
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "函数级别1隐藏我就跟着隐藏"
+                  }
+                },
+                value: ""
+              },
+              level3: {
+                label: "函数级别3",
+                hidden: function(options) {
+                  var $hidden = options.$hidden;
+                  return $hidden("funcMethod.level2");
+                },
+                component: {
+                  name: "el-input",
+                  props: {
+                    placeholder: "函数级别2隐藏我就跟着隐藏"
+                  }
+                },
+                value: ""
               }
             }
           }

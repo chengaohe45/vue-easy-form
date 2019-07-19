@@ -2,6 +2,10 @@ import utils from "./utils";
 import parse from "./parse";
 
 let schemaRules = {
+  isEsOrFunc: function(value) {
+    return parse.isEsScript(value) || utils.isFunc(value);
+  },
+
   isEs: function(value) {
     return parse.isEsScript(value);
   },
