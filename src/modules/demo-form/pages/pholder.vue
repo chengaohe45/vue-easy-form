@@ -38,6 +38,10 @@ export default {
             component: {
               name: "div",
               text: "es: {{$root}}.author"
+              // style: {
+              //   color: "red"
+              // },
+              // class: "haha hah"
             },
             value: "我不需要提交(前面有一个占位空间，所以掉下来)",
             col: 12

@@ -14,10 +14,16 @@ export default {
       console.error("错误的config: ", this.config);
       throw "es-base config.name必须存在";
     }
-    return createElement(
+
+    var vnode = createElement(
       this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
       {
         attrs: this.config.props, //attrs为原生属性
+
+        class: this.config.class,
+
+        style: this.config.style,
+
         // DOM属性
         domProps: {
           // innerHTML: "baz"
@@ -69,6 +75,33 @@ export default {
       // "测试{{config.value}}" // 子组件中的阵列
       this.config.text
     );
+
+    // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
+    var componentOptions = vnode.componentOptions;
+    var dataAttrs = {};
+    var comProps =
+      componentOptions && componentOptions.Ctor.options.props
+        ? componentOptions.Ctor.options.props
+        : false;
+    var thisProps = this.config.props;
+    if (
+      comProps &&
+      thisProps &&
+      Object.keys(comProps).length &&
+      Object.keys(thisProps).length
+    ) {
+      var comPropsKeys = Object.keys(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
+      for (var key in thisProps) {
+        if (!comPropsKeys.includes(key)) {
+          dataAttrs[key] = thisProps[key];
+        }
+      }
+      if (vnode.data) {
+        vnode.data.attrs = dataAttrs;
+      }
+    }
+
+    return vnode;
   },
   // inheritAttrs: false,
   props: {

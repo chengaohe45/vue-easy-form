@@ -60,6 +60,10 @@ export default {
             value: "",
             desc: {
               name: desc
+              // style: {
+              //   color: "red"
+              // },
+              // class: "haha hah"
             }
           }
         }

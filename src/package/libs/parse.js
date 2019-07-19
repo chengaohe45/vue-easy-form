@@ -174,7 +174,7 @@ let parse = {
         //替换数据源
         options.forEach(item => {
           tempVal = tempVal.replace(
-            new RegExp(`\\{{\\s*\\${item.symbol}(\\.?.*)}}`),
+            new RegExp(`\\{{\\s*\\${item.symbol}(\\.\\S*)?\\s*}}`),
             `${constant.ES_OPTIONS}['${item.paramKey}']$1`
           );
         });

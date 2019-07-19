@@ -1596,46 +1596,55 @@ let formUtils = {
 
   /* 解析右栏组件 */
   __parseMainComponent: function(component, myPathKey) {
-    var tmpComponent,
+    var newComponent,
       defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
       // console.log("ref: ", component.ref);
-      tmpComponent = {};
-      tmpComponent.name = component.name ? component.name : global.defaultCom;
-      tmpComponent.actions = this.__parseActions(component.actions, myPathKey);
+      newComponent = {};
+      newComponent.name = component.name ? component.name : global.defaultCom;
+      newComponent.actions = this.__parseActions(component.actions, myPathKey);
       var ref = utils.isStr(component.ref) ? component.ref.trim() : null;
       if (ref) {
-        tmpComponent.ref = ref;
+        newComponent.ref = ref;
       }
 
       if (utils.isObj(component.props)) {
         if (this.__needParseInObj(component.props)) {
-          tmpComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
-          tmpComponent.__rawProps = this.__newEsFunction(component.props);
+          newComponent.props = this.__newEmptyObj(component.props); // 后面(analyzeUiProps)有解析的
+          newComponent.__rawProps = this.__newEsFunction(component.props);
         } else {
-          tmpComponent.props = utils.deepCopy(component.props); // 可直接使用
+          newComponent.props = utils.deepCopy(component.props); // 可直接使用
         }
       } else {
-        tmpComponent.props = {};
+        newComponent.props = {};
       }
 
       if (utils.isStr(component.text)) {
-        tmpComponent.text = component.text;
+        newComponent.text = component.text;
         if (parse.isEsScript(component.text)) {
-          tmpComponent.__rawText = parse.newEsFuncion(component.text);
+          newComponent.__rawText = parse.newEsFuncion(component.text);
         }
       }
-      tmpComponent.align = this.__parseAlign(component.align, defaultAlign);
-      tmpComponent.flex = this.__parseFlex(component.flex, component.size);
+
+      if (utils.isStr(component.class)) {
+        newComponent.class = component.class;
+      }
+
+      if (utils.isObj(component.style) && Object.keys(component.style).length) {
+        newComponent.style = utils.deepCopy(component.style);
+      }
+
+      newComponent.align = this.__parseAlign(component.align, defaultAlign);
+      newComponent.flex = this.__parseFlex(component.flex, component.size);
     } else if (utils.isStr(component)) {
-      tmpComponent = {
+      newComponent = {
         name: component,
         actions: [],
         align: defaultAlign,
         flex: false
       };
     } else {
-      tmpComponent = {
+      newComponent = {
         name: global.defaultCom,
         actions: [],
         align: defaultAlign,
@@ -1643,7 +1652,7 @@ let formUtils = {
       };
     }
 
-    return tmpComponent;
+    return newComponent;
   },
 
   __newEmptyObj(obj) {
@@ -1654,12 +1663,14 @@ let formUtils = {
     return newObj;
   },
 
-  __newEsFunction(obj) {
+  __newEsFunction(obj, excludeKeys = ["value", "style", "class"]) {
     var newObj = {};
     for (var key in obj) {
-      newObj[key] = parse.isEsScript(obj[key])
-        ? parse.newEsFuncion(obj[key])
-        : utils.deepCopy(obj[key]);
+      if (!excludeKeys.includes(key)) {
+        newObj[key] = parse.isEsScript(obj[key])
+          ? parse.newEsFuncion(obj[key])
+          : utils.deepCopy(obj[key]);
+      }
     }
     return newObj;
   },
@@ -1991,6 +2002,15 @@ let formUtils = {
         } else {
           newCom.props = {};
         }
+
+        // 只有在name有值时有效
+        if (utils.isStr(value.class)) {
+          newCom.class = value.class;
+        }
+
+        if (utils.isObj(value.style) && Object.keys(value.style).length) {
+          newCom.style = utils.deepCopy(value.style);
+        }
       }
 
       var text;
@@ -2009,6 +2029,7 @@ let formUtils = {
       newCom.text = text;
 
       newCom.__rawText = parse.newEsFuncion(text);
+
       return newCom;
     } else if (utils.isStr(value)) {
       value = value.trim();

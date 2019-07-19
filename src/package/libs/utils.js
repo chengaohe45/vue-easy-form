@@ -146,6 +146,20 @@ let utils = {
     return false;
   },
 
+  /**
+   * 转在vue的驼峰形式
+   * @param {*} value
+   * 经在Vue的实例中测试，Vue对props属性名的解析有：
+   * 1. "text-Str" "text-str"  都会转成"textStr", 但"text--str"会报错，主要是template无法显示
+   * 1. "text-8str" 都会转成"text8str"
+   */
+  vueCamelCase(value) {
+    var reg = /-(\w)/g;
+    return value.replace(reg, function($0, $1) {
+      return $1.toUpperCase();
+    });
+  },
+
   mergeGlobal(global, extra) {
     if (utils.isObj(extra)) {
       for (var key in extra) {
