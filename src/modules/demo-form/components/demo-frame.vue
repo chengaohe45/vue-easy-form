@@ -30,6 +30,7 @@
             ref="form"
             :schema="formSchema"
             v-model="formValue"
+            :hasConsole="hasConsole"
             @input="formInput"
             @change="formChange"
             @submit="formSubmit"
@@ -159,6 +160,12 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+
+    hasConsole: {
+      type: Boolean,
+      required: false,
+      default: undefined
     },
 
     docsTitle: {

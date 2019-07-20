@@ -16,9 +16,24 @@
       <div class="console-close" @click="showPanel = false">Close</div>
       <div class="panel-body">
         <div class="question-box">
-          <a href="#" target="_blank" class="question">如何打开面版?</a>
-          <a href="#" target="_blank" class="question">什么是根数据?</a>
-          <a href="#" target="_blank" class="question">什么是表单数据?</a>
+          <a
+            href="/vue-easy-form-docs/dist/base/console.html"
+            target="_blank"
+            class="question"
+            >如何打开面版?</a
+          >
+          <a
+            href="/vue-easy-form-docs/dist/base/explain.html#根值"
+            target="_blank"
+            class="question"
+            >什么是根数据?</a
+          >
+          <a
+            href="/vue-easy-form-docs/dist/base/explain.html#表单值"
+            target="_blank"
+            class="question"
+            >什么是表单数据?</a
+          >
         </div>
         <h3 class="subtitle">根数据(rootData) => getValue取出</h3>
         <textarea class="value-box" readonly="readonly"

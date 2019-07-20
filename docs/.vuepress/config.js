@@ -17,6 +17,7 @@ module.exports = {
             'base/install',
             'base/settings',
             'base/explain',
+            'base/console',
             'base/form',
             'base/form-value',
             'base/array',

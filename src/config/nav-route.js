@@ -162,8 +162,8 @@ let navList = [
       {
         icon: "",
         name: "es/函数化写法",
-        link: "/es",
-        path: "/es",
+        link: "/es-function",
+        path: "/es-function",
         component: esFuncForm
       }
       // {

@@ -6,6 +6,10 @@
 ```js
 属性名: {     // 表单配置属性名如：label, help
   name: "el-input",  // 这个是不支持es写法，也就是一经固定，不支持改变
+  style: {  // 一个对象
+    color: "#000"
+  },
+  class: "box1 box2", // 类，多个以空格隔开
   props: { // Vue组件需要的属性
     type: "textarea",   // 值固定写法
     placeholder: "es: {{$root}}.isOpen ? '提示1' : '提示2'", // 支持es写法

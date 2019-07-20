@@ -1,5 +1,5 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame :title="title" :formSchema="formSchema" :hasConsole="hasConsole">
     <div slot="details"></div>
   </demo-frame>
 </template>
@@ -11,6 +11,7 @@ export default {
   data() {
     return {
       title: "Es/函数化写法",
+      hasConsole: true,
 
       formSchema: {
         boxRowSpace: 20,
