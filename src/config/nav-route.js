@@ -22,7 +22,7 @@ import comTitleForm from "../modules/demo-form/pages/title";
 // import helpForm from "../modules/demo-form/pages/help";
 import propertiesForm from "../modules/demo-form/pages/properties";
 import propertiesTabsForm from "../modules/demo-form/pages/properties-tabs";
-import logicForm from "../modules/demo-form/pages/logic";
+import esFuncForm from "../modules/demo-form/pages/es-function";
 import rowArrForm from "../modules/demo-form/pages/row-array";
 import legendArrForm from "../modules/demo-form/pages/legend-array";
 import tabArrForm from "../modules/demo-form/pages/table-array";
@@ -161,10 +161,10 @@ let navList = [
       },
       {
         icon: "",
-        name: "es逻辑控制",
+        name: "es/函数化写法",
         link: "/es",
         path: "/es",
-        component: logicForm
+        component: esFuncForm
       }
       // {
       //   icon: "",

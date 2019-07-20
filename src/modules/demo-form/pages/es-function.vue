@@ -10,7 +10,7 @@ import demoFrame from "../components/demo-frame.vue";
 export default {
   data() {
     return {
-      title: "逻辑控制",
+      title: "Es/函数化写法",
 
       formSchema: {
         boxRowSpace: 20,

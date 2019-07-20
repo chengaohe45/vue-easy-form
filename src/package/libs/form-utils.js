@@ -1334,7 +1334,8 @@ let formUtils = {
       {
         key: "hidden",
         enums: [true, false],
-        filters: ["isEsOrFunc"], // 取schema-rules规则过滤
+        isOr: true, // filters里面的关系，默认为false
+        filters: ["isEs", "isFunc"], // 取schema-rules规则过滤
         defaultValue: false
       },
       {
@@ -1353,12 +1354,13 @@ let formUtils = {
         filters: ["isStr"],
         defaultValue: false
       },
-      {
-        key: "desc",
-        enums: [],
-        filters: ["isStr"],
-        defaultValue: false
-      },
+      // {
+      //   key: "desc",
+      //   enums: [],
+      //   isOr: true,   // filters里面的关系，默认为false
+      //   filters: ["isStr", "isEs", "isFunc"],
+      //   defaultValue: false
+      // },
       {
         key: "col",
         enums: [],
@@ -1380,12 +1382,13 @@ let formUtils = {
         enums: [true, false],
         defaultValue: undefined // undefined代表是否删除空格取自于全局设置
       },
-      {
-        key: "unit",
-        enums: [],
-        filters: ["isStr"],
-        defaultValue: false
-      },
+      // {
+      //   key: "unit",
+      //   enums: [],
+      //   isOr: true,   // filters里面的关系，默认为false
+      //   filters: ["isStr", "isEs", "isFunc"],
+      //   defaultValue: false
+      // },
       {
         key: "rowHeight",
         enums: [],
@@ -1489,28 +1492,7 @@ let formUtils = {
   },
 
   __getSpecialInfo: function(key) {
-    var keyInfos = [
-      // {
-      //   key: "title",
-      //   defaultValue: false,
-      //   nameKey: "text"
-      // },
-      // {
-      //   key: "label",
-      //   defaultValue: false,
-      //   nameKey: "text"
-      // },
-      // {
-      //   key: "component",
-      //   defaultValue: false,
-      //   nameKey: "name"
-      // },
-      // {
-      //   key: "array",
-      //   defaultValue: false,
-      //   nameKey: "name"
-      // }
-    ];
+    var keyInfos = [];
     for (var i = 0; i < keyInfos.length; i++) {
       if (keyInfos[i].key === key) {
         return keyInfos[i];
@@ -1534,6 +1516,7 @@ let formUtils = {
       return value;
     } else {
       // 看过滤信息
+      var isOr = keyInfo.isOr ? true : false;
       if (keyInfo.filters && keyInfo.filters.length > 0) {
         var isRight = true;
         var funcName, funcParams, filterFunc;
@@ -1557,9 +1540,23 @@ let formUtils = {
           if (filterFunc) {
             var newParams = [value, ...funcParams];
             // console.log(newParams);
-            if (filterFunc.apply(null, newParams) !== true) {
-              isRight = false;
-              break;
+            var funcResult = filterFunc.apply(null, newParams);
+            if (isOr) {
+              // or 关系
+              if (funcResult === true) {
+                isRight = true;
+                break;
+              } else {
+                isRight = false;
+              }
+            } else {
+              // and 关系
+              if (funcResult !== true) {
+                isRight = false;
+                break;
+              } else {
+                isRight = true;
+              }
             }
           } else {
             console.warn(funcName + "不存在，请检查");
@@ -1579,20 +1576,20 @@ let formUtils = {
     }
   },
 
-  __parseSpecialKey: function(propItem, keyInfo) {
-    var value = propItem[keyInfo.key];
-    if (utils.isUndef(value)) {
-      return keyInfo.defaultValue;
-    } else if (utils.isStr(value)) {
-      var newObj = {};
-      newObj[keyInfo.nameKey] = value;
-      return newObj;
-    } else if (utils.isObj(value)) {
-      return value;
-    } else {
-      return keyInfo.defaultValue;
-    }
-  },
+  // __parseSpecialKey: function(propItem, keyInfo) {
+  //   var value = propItem[keyInfo.key];
+  //   if (utils.isUndef(value)) {
+  //     return keyInfo.defaultValue;
+  //   } else if (utils.isStr(value)) {
+  //     var newObj = {};
+  //     newObj[keyInfo.nameKey] = value;
+  //     return newObj;
+  //   } else if (utils.isObj(value)) {
+  //     return value;
+  //   } else {
+  //     return keyInfo.defaultValue;
+  //   }
+  // },
 
   /* 解析右栏组件 */
   __parseMainComponent: function(component, myPathKey) {
@@ -2493,32 +2490,28 @@ let formUtils = {
           propItem[key],
           myPathKey
         );
-        // var esBakComponent = formUtils.__fetchComponentEs(mainComponent);
-        // if (esBakComponent) {
-        //   newPropItem["_component"] = esBakComponent;
-        // }
         newPropItem[key] = mainComponent;
         return true;
       }
 
-      var specialKeyInfo = formUtils.__getSpecialInfo(key);
-      if (specialKeyInfo) {
-        newPropItem[key] = formUtils.__parseSpecialKey(
+      // var specialKeyInfo = formUtils.__getSpecialInfo(key);
+      // if (specialKeyInfo) {
+      //   newPropItem[key] = formUtils.__parseSpecialKey(
+      //     propItem,
+      //     specialKeyInfo
+      //   );
+      // } else {
+      var normalKeyInfo = formUtils.__getNormalInfo(key);
+      if (normalKeyInfo) {
+        newPropItem[key] = formUtils.__parseNormalKey(
           propItem,
-          specialKeyInfo
+          normalKeyInfo,
+          inheritObj
         );
       } else {
-        var normalKeyInfo = formUtils.__getNormalInfo(key);
-        if (normalKeyInfo) {
-          newPropItem[key] = formUtils.__parseNormalKey(
-            propItem,
-            normalKeyInfo,
-            inheritObj
-          );
-        } else {
-          throw "程序的key(" + key + ")不对应，请修改";
-        }
+        throw "程序的key(" + key + ")不对应，请修改";
       }
+      // }
     });
     if (!utils.isUndef(newPropItem.rowSpace)) {
       newPropItem.__rawRowSpace = newPropItem.rowSpace;
