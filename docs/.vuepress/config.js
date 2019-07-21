@@ -5,7 +5,7 @@ module.exports = {
   themeConfig: {
     // lastUpdated: '最后更新',
     nav: [
-      { text: 'esForm例子', link: 'https://chengaohe45.github.io/vue-easy-form-docs/demo/#/form-simple' }
+      { text: 'esForm例子', link: 'https://chengaohe45.github.io/vue-easy-form-docs/demo' }
     ],
     sidebar: {
       '/': [
