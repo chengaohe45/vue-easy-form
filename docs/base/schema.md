@@ -43,8 +43,14 @@ schema就是一个json对象
   offsetRight: 0,   // 非必填 每一项右边留白的空间
   hidden: false, // 非必填 持es语法; 是否隐藏此级，默认为显示
   hdValue: '',  // 非必填。有hidden的地方可设置此值
-  layout: '',     // 非必填。区分大小写: space: 是一个占位符; tabs: 下一级tabs布局
+  layout: '',     // 非必填。space: 是一个占位符; tabs: 下一级tabs布局, 详情见[表单开始/配置]
   isTmp: false,   // true时表单不输出此项值
+  ui: { // 非必填. 对properties界面的补充
+    showBody: undefined,  // 此值有undefined, true, false
+    type: undefined,      // 此值有undefined, bg, block, bg-block
+    hasBorder: false,
+    padding: undefined   // 内容区的内边距
+  },
   properties: { // 根节点：表单字段
     name: {
       value: '', // 必填：数据的值
@@ -56,18 +62,23 @@ schema就是一个json对象
       // label: "姓名", // 必填
       label: {
         text: "广告名称",
-        size: ""        // auto or fixed 默认为没有设置，则label的长度将会是labelWidth
+        flex: ""        // self or full 默认为没有设置，则label的长度将会是labelWidth
       },
       rules: { // 非必填
         required: true, //支持es语法; 
         emptyMsg: "代号不能为空", //当requred为true时有用
-        check: "isMobile",
+        checks: {
+          trigger: "input", // 触发时机
+          handler: (options) {  // 处理
+
+          }
+        },
         errMsg: "代号不能大于10"  //当check中的函数返回的值不是字符串（为false）时有效
       },
       //component: "el-input" // 非必填, 组件名, 不配置取全局默认的
       component: {  //标准写法
         name: "el-input",
-        size: "", // auto or fixed
+        flex: "", // self or full
         props: {  // 组件需要的属性配置 全部属性(如type)支持es语法; 
           type: "password",
           placeholder: "请输入代号"
@@ -80,7 +91,7 @@ schema就是一个json对象
       // 是排列component,对properties无效
       group: "g", // 非必填
       unit: "%",  // 非必填 字符串，对组件进行补充; 是对component的补充,对properties无效
-      desc: "1. 姓名必须这个样子<br />2. 姓名必须这个样子", // 非必填 对此属性的描述，支持html
+      desc: "姓名必须这个样子", // 非必填 对此属性的描述
       help: "我就是要提示" //非必填
     },
 
@@ -107,12 +118,12 @@ schema就是一个json对象
     },
     more2: {
       title: ...
-      // array值有"array" or "array-table", "array-legend", "array-card", "array-tabs";有此值说明是一个动态数组，可添加、删除、排序
-      // array: "array",  // 简写
-      array: {
+      // array: "array",  // 简写, 其余使用默认值
+      array: {  // 有此值说明是一个动态数组，可添加、删除、排序
         name: "array",
         hasSort: true,  //是否有排序按钮，默认为true
         hasDelete: true,  //是否有删除按钮，默认为true
+        hasCopy: false, //是否有拷贝按钮，默认为false
         hasAdd: true, //是否有添加按钮，默认为true
         min: 0,  //不写或小于等于0代表不限制
         max: 10,  //不写或小于等于0代表不限制

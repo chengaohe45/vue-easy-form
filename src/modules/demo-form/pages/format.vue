@@ -24,6 +24,7 @@ export default {
         },
         status: {
           label: "状态",
+          rowHeight: 20,
           component: {
             name: "el-switch"
           },
@@ -42,6 +43,7 @@ export default {
 
         isOpen: {
           label: "是否打开",
+          rowHeight: 20,
           component: {
             name: "el-switch"
           },

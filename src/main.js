@@ -17,9 +17,15 @@ import gComponent from "@/components/register.js";
 gComponent.register();
 Vue.use(elementUI);
 Vue.use(esForm, {
-  boxRowSpace: 10,
-  defaultCom: "el-input",
-  hasConsole: process.env.NODE_ENV !== "production"
+  boxRowHeight: 40,
+  boxRowSpace: 20,
+  boxLabelWidth: 100,
+  colon: false,
+  direction: "h",
+  defaultCom: "el-input", // 如：若用element-ui, 改为el-input
+  defaultVal: "", // 对defaultCom这个组件的value设置默认值
+  trimDoms: ["input", "textarea", "el-input"], // 数组，空数组会全部清空
+  hasConsole: process.env.NODE_ENV != "production" // 推荐写成动态，编译时不用修改
 });
 
 Vue.config.productionTip = false;

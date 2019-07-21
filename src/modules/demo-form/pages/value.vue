@@ -24,7 +24,7 @@ export default {
     return {
       title: "取值/赋值",
       docsTitle: "所有表单事件/方法",
-      docsHref: "/vue-easy-form-docs/dist/base/event.html",
+      docsHref: "/vue-easy-form-docs/dist/base/form.html",
 
       formSchema: {
         direction: "v",

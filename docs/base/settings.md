@@ -7,7 +7,7 @@
 
 ## 标准写法
 
-标准的表单配置从一个对象开始，里面包含一个properties，可在每一层properties这一相同的层级中设置一些影响此表单的基本配罢(如ui, boxRowSpace)。
+标准的表单配置从一个对象开始，里面包含一个properties，可在每一层properties这一相同的层级中设置一些影响此表单的基本配置(如ui, boxRowSpace)。
 
 ```js
 data() {
@@ -91,7 +91,7 @@ data() {
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
 | autoMatch | 一二级的数据自动匹配 | boolean | -- | false | 只在根节点中有效
-| title | 表单（或properties块）的名称 [写法](./title.md) | string/object | -- | -- | properties中有效
+| title | 表单（或properties块）的名称 [写法](./title.md) | string/object | -- | -- | properties中有效<br/>支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
 | ui | 影响块(properties)的布局 [写法](#ui属性) | string/object | -- | -- | properties中有效
 | direction | 项的排版方向 | string | "h" "v" | 全局 | 不设置时，继承上一级的direction
 | colon | label中是否有冒号 | boolean | -- | 全局 |
@@ -103,7 +103,7 @@ data() {
 | boxLabelWidth | 子节点的label的宽度 | number | -- | 全局 | properties中有效
 | offsetLeft | 每一项左边留白的空间 | number | >=0 | 0 | 没有继承
 | offsetRight | 每一项右边留白的空间 | number | >=0 | 0 | 没有继承
-| hidden | 是否隐藏此项 | boolean | -- | true | 支持es语法
+| hidden | 是否隐藏此项 | boolean | -- | true | 支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
 | hdValue | `hidden`或`祖先hidden`为true时有效 | -- | -- | -- | 值为`undefined`时：相应的字段不会取出<br />值为`null`时: 为正常遍历节点<br />`其余`: 取此值
 | value | 组件的值 | -- | -- | -- |
 | isTrim | 是否去掉两边的空格 | boolean | -- | true |
@@ -113,9 +113,9 @@ data() {
 | format | 数值转换 [写法](./format.md) | array/object | -- | -- | 组件内有效
 | component | 配置组件 [写法](./component.md) | string/object | -- | 全局 |
 | group | 项与项进行分组 | string | -- | -- | 设置为分组，是`相邻`的
-| unit | 对项进行补充 | string | -- | -- | 如：px；支持es或组件化
-| desc | 对项进行描述 | string | -- | 全局 | 支持es或组件化
-| help | 对项设置帮助 [写法](./help.md) | string/object | -- | -- |
+| unit | 对项进行补充 | string | -- | -- | 如：px；支持es或组件化<br/>支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
+| desc | 对项进行描述 | string | -- | 全局 | 支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
+| help | 对项设置帮助 [写法](./help.md) | string/object | -- | -- | 支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
 | array | properties或组件是数组，[写法](./array.md) | string/object | -- | -- | 
 | isTmp | 临时值 | boolean | -- | false | 表单不输出此项值,但可作为表单内部使用
 | layout | 布局 | object/string | "space" "tabs" or Object | false | `区分大小写`<br />`space`: 是一个占位符<br />`tabs`:下一级为tabs布局[写法](#layout属性)

@@ -29,7 +29,7 @@ export default {
     return {
       title: "引用",
       docsTitle: "所有表单事件/方法",
-      docsHref: "/vue-easy-form-docs/dist/base/event.html",
+      docsHref: "/vue-easy-form-docs/dist/base/form.html",
 
       formSchema: {
         direction: "h",
