@@ -259,7 +259,7 @@ let utils = {
                 if (tmpValue.length <= 0) {
                   console.log("trimDoms的长度为0");
                 }
-                console.log("tmpValue", tmpValue);
+                // console.log("tmpValue", tmpValue);
                 global[key] = tmpValue;
               }
               break;

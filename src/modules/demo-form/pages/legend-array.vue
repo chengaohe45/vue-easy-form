@@ -70,7 +70,7 @@ export default {
                 offsetRight: 200,
                 // col: 12,
                 label: "es: '大学' + ({{$index}} + 1)",
-                // hidden: "es: !{{$hidden(  courses[i].code)}}",
+                // hidden: "es: {{$hidden(target)}}",
                 component: {
                   ref: "code",
                   name: "el-input",
@@ -119,6 +119,7 @@ export default {
                     value: "100",
                     // direction: "v",
                     // col: 12,
+                    // hidden: "es: {{$hidden(target)}}",
                     label: {
                       text: "学科代号"
                     },
@@ -143,6 +144,7 @@ export default {
                     value: "100",
                     // direction: "v",
                     // col: 12,
+                    // hidden: "es: {{$hidden(target[i][courseList][i].code)}}",
                     label: {
                       text: "报名人数"
                     },
@@ -154,9 +156,8 @@ export default {
                       },
                       actions: {
                         trigger: "input",
-                        handler: function(value, pathkey) {
-                          console.log("value: ", value);
-                          console.log("pathkey: ", pathkey);
+                        handler: function(options) {
+                          console.log("options: ", options);
                         }
                       }
                     }

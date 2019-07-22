@@ -20,14 +20,13 @@ idxChain: 指出`表单项组件`所处于数组的位置<br>
 
 
 ## 项组件路径
-pathKey: `表单项组件`位置的具体路径<br>
-如：<br>
-base.student[0].courses[1].name<br>
-base.target
+pathKey: `表单项组件`位置的具体路径. 如：
+```js
+base.student[0].courses[1].name // 推荐的写法
+base.target.name        // 推荐的写法
+base.target["name"]
+```
 > 应用场景：[项组件事件](./component.md#组件事件)、[项组件验证](./rules.md)、[数组事件](./array.md#数组事件)所携带的信息会返回此值; [form.setValue](./form.md#表单方法)等需要此值设置
-::: warning
-暂不支持这样的写法：base["target"].name;  正确的写法是 base.target.name
-:::
 
 ## es语法
 es语法就一条`es:`为前缀的字符串，再按照一定的规则解析出来的js语句。<br />

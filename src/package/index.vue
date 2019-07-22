@@ -500,6 +500,7 @@ export default {
      */
     setValue(pathKey, value) {
       if (utils.isStr(pathKey)) {
+        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
         //是字符串时，则值是键值，设置某个值
         this.__setValueByKey(this.$data.formSchema, pathKey, value);
         this.__syncValue();
@@ -515,6 +516,12 @@ export default {
     注：此函数有容灾处理，一定要执行到最后，不能中途退出
     */
     isHidden(pathKey) {
+      if (pathKey && utils.isStr(pathKey)) {
+        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+      } else {
+        throw "isHidden: 参数必须是字符串且不能为空";
+      }
+
       this._esHiddenLevel++;
       const MAX_TOTAL = 50;
       if (this._esHiddenLevel > MAX_TOTAL) {
@@ -533,57 +540,57 @@ export default {
       if (!targetSchema) {
         console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
         curHiddenValue = false;
-      }
-
-      var seperator = ".";
-      var keys = pathKey.split(seperator);
-      var parentPathKey = "",
-        tmpParentPathKey;
-      var reg = /\[\d+\]$/;
-      var arraySymbol = "[";
-      var key;
-      var len = keys.length - 1;
-      for (var i = 0; i <= len; i++) {
-        key = keys[i];
-        if (key.indexOf(arraySymbol) >= 0) {
-          key = key.replace(reg, "");
-        }
-
-        tmpParentPathKey = parentPathKey
-          ? parentPathKey + seperator + key
-          : key;
-        parentPathKey = parentPathKey
-          ? parentPathKey + seperator + keys[i]
-          : keys[i];
-
-        // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
-        var itemSchema =
-          tmpParentPathKey == pathKey
-            ? targetSchema
-            : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
-        if (itemSchema) {
-          var parseSources = {
-            global: this.global,
-            rootData: this._esFormData,
-            index: itemSchema.__index,
-            idxChain: itemSchema.__idxChain,
-            pathKey: itemSchema.__pathKey,
-            rootSchema: rootSchema,
-            isHidden: this._esHiddenFunc
-          };
-
-          if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
-            curHiddenValue = true;
-            break;
-          } else {
-            // 父节点是显示的，继续
+      } else {
+        var seperator = ".";
+        var keys = pathKey.split(seperator);
+        var parentPathKey = "",
+          tmpParentPathKey;
+        var reg = /\[\d+\]$/;
+        var arraySymbol = "[";
+        var key;
+        var len = keys.length - 1;
+        for (var i = 0; i <= len; i++) {
+          key = keys[i];
+          if (key.indexOf(arraySymbol) >= 0) {
+            key = key.replace(reg, "");
           }
-        } else {
-          console.warn(
-            "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
-          );
-          curHiddenValue = false;
-          break;
+
+          tmpParentPathKey = parentPathKey
+            ? parentPathKey + seperator + key
+            : key;
+          parentPathKey = parentPathKey
+            ? parentPathKey + seperator + keys[i]
+            : keys[i];
+
+          // 为什么写tmpParentPathKey == pathKey, 防止test.name[0]这种情况
+          var itemSchema =
+            tmpParentPathKey == pathKey
+              ? targetSchema
+              : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
+          if (itemSchema) {
+            var parseSources = {
+              global: this.global,
+              rootData: this._esFormData,
+              index: itemSchema.__index,
+              idxChain: itemSchema.__idxChain,
+              pathKey: itemSchema.__pathKey,
+              rootSchema: rootSchema,
+              isHidden: this._esHiddenFunc
+            };
+
+            if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
+              curHiddenValue = true;
+              break;
+            } else {
+              // 父节点是显示的，继续
+            }
+          } else {
+            console.warn(
+              "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
+            );
+            curHiddenValue = false;
+            break;
+          }
         }
       }
 
@@ -612,6 +619,12 @@ export default {
      * 对外调用，取某一个tabs的索引
      */
     getTabsIndex(pathKey) {
+      if (pathKey && utils.isStr(pathKey)) {
+        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+      } else {
+        throw "isHidden: 参数必须是字符串且不能为空";
+      }
+
       return formUtils.getTabsIndex(this.$data.formSchema, pathKey);
     },
 
@@ -619,6 +632,12 @@ export default {
      * 对外调用，设某一个tabs的索引
      */
     setTabsIndex(pathKey, index) {
+      if (pathKey && utils.isStr(pathKey)) {
+        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+      } else {
+        throw "isHidden: 参数必须是字符串且不能为空";
+      }
+
       formUtils.setTabsIndex(this.$data.formSchema, pathKey, index);
     },
 

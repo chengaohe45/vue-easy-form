@@ -129,19 +129,22 @@ let parse = {
         hiddenPathKey = hiddenPathKey.trim();
         //去掉$root;若存在
         hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
+        hiddenPathKey = parse.chainPathKey(hiddenPathKey, "[i]");
         let chainPieces = hiddenPathKey.split("[i]");
         let chainPiecesLen = chainPieces.length;
         let chainPiecesTempVal = "";
         chainPieces.forEach((piece, index) => {
           if (index < chainPiecesLen - 1) {
             chainPiecesTempVal +=
-              piece + `[(${constant.ES_OPTIONS}.idxChains[` + index + "])]";
+              piece +
+              `[' + (${constant.ES_OPTIONS}.idxChains[` +
+              index +
+              "]) + ']";
           } else {
             chainPiecesTempVal += piece;
           }
         });
         hiddenPathKey = chainPiecesTempVal;
-
         hiddenFunTxt =
           `${constant.ES_OPTIONS}` + ".isHidden('" + hiddenPathKey + "')"; // 后面会进行解析替换
 
@@ -189,6 +192,53 @@ let parse = {
     }
 
     return result;
+  },
+
+  /**
+   * rawRathKey把pathKey转化为标准的链式形式
+   * 如：base["person"].name => base.person.name
+   * 小括号会直接掉
+   * @param {*} rawRathKey
+   * @param {*} exclude 如[i]不需要解析，它有特定的含义
+   */
+  chainPathKey(rawRathKey, exclude) {
+    var parenthesesReg = /\(|\)/g;
+    var tmpRathKey = rawRathKey.replace(parenthesesReg, "");
+    var sumTxt;
+    if (rawRathKey.indexOf("[") >= 0) {
+      // 进行解析
+      var mBracketReg = /\[('|")?(.+?)\1\]/g;
+      var curExec,
+        lastIndex = 0;
+      sumTxt = "";
+      var numReg = /^\d+$/;
+      curExec = mBracketReg.exec(tmpRathKey);
+      while (curExec) {
+        var fullKey = curExec[0];
+        var subKey = curExec[2].trim();
+        sumTxt += tmpRathKey.substr(lastIndex, curExec.index - lastIndex);
+        if (exclude != fullKey) {
+          if (numReg.test(subKey)) {
+            sumTxt += "[" + subKey + "]";
+          } else {
+            sumTxt += "." + subKey;
+          }
+        } else {
+          sumTxt += fullKey;
+        }
+        lastIndex = curExec.index + fullKey.length;
+
+        curExec = mBracketReg.exec(tmpRathKey);
+      }
+
+      // 补上最后的字段
+      sumTxt += tmpRathKey.substr(lastIndex);
+    } else {
+      // 不需要转换，土又白目直接返回
+      sumTxt = tmpRathKey;
+    }
+
+    return sumTxt;
   }
 };
 

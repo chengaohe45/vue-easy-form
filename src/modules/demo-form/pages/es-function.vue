@@ -57,7 +57,7 @@ export default {
               },
               level2: {
                 label: "es级别2",
-                hidden: "es: {{$hidden('esMethod.level1')}}",
+                hidden: "es: {{$hidden('esMethod[\"level1\"]')}}",
                 component: {
                   name: "el-input",
                   props: {

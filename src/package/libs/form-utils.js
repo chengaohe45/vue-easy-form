@@ -356,23 +356,23 @@ let formUtils = {
     return false;
   },
 
-  getSchemaByKey(schema, keyStr) {
+  getSchemaByKey(schema, pathKey) {
     // 这个函数可能对外单独使用，所以不可以使用this
-    return formUtils.__getSchemaByKey(schema, keyStr);
+    return formUtils.__getSchemaByKey(schema, pathKey);
   },
 
   /**
    *
    * @param {*} schema
-   * @param {*} keyStr 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
+   * @param {*} pathKey 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
    */
-  __getSchemaByKey(schema, keyStr) {
-    if (utils.isStr(keyStr)) {
-      if (!keyStr) {
+  __getSchemaByKey(schema, pathKey) {
+    if (utils.isStr(pathKey)) {
+      if (!pathKey) {
         return schema;
       }
       var seperator = ".";
-      var keys = keyStr.split(seperator);
+      var keys = pathKey.split(seperator);
       var curPropItem = schema;
       var curProperties;
       var nextPropItem;
@@ -453,19 +453,19 @@ let formUtils = {
         }
       }
     } else {
-      return false; //keyStr不符合要求，退出
+      return false; //pathKey不符合要求，退出
     }
   },
 
   /**
    * 指定某一个属性设置
    * @param {*} schema
-   * @param {*} keyStr "age、more1[0].name"
+   * @param {*} pathKey "age、more1[0].name"
    * @param {*} value
    */
-  setValueByKey: function(schema, keyStr, value) {
-    // console.log("schema, keyStr: ", schema, keyStr, value);
-    var targetSchema = this.__getSchemaByKey(schema, keyStr);
+  setValueByKey: function(schema, pathKey, value) {
+    // console.log("schema, pathKey: ", schema, pathKey, value);
+    var targetSchema = this.__getSchemaByKey(schema, pathKey);
     // console.log("current schema: ", targetSchema);
     if (targetSchema) {
       if (targetSchema.component) {
@@ -547,11 +547,9 @@ let formUtils = {
     var formData = baseParseSources.rootData;
 
     // 当false没有值时，证明是表单的内容取值，后不的解析不用执行，提高效率
+    // formData有值，说明propItem.hidden都是已经出来的了，不做es转换，省资源
     var isHidden =
-      formData &&
-      (isParentHidden || parse.smartEsValue(propItem.hidden, parseSources))
-        ? true
-        : false;
+      formData && (isParentHidden || propItem.hidden) ? true : false;
 
     var newValue, keyValue, newArr, i, schemaList;
 
@@ -1491,15 +1489,15 @@ let formUtils = {
     return false;
   },
 
-  __getSpecialInfo: function(key) {
-    var keyInfos = [];
-    for (var i = 0; i < keyInfos.length; i++) {
-      if (keyInfos[i].key === key) {
-        return keyInfos[i];
-      }
-    }
-    return false;
-  },
+  // __getSpecialInfo: function(key) {
+  //   var keyInfos = [];
+  //   for (var i = 0; i < keyInfos.length; i++) {
+  //     if (keyInfos[i].key === key) {
+  //       return keyInfos[i];
+  //     }
+  //   }
+  //   return false;
+  // },
 
   __parseNormalKey: function(propItem, keyInfo, inheritObj) {
     var value = propItem[keyInfo.key];
