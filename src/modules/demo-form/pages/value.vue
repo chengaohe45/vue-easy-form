@@ -37,7 +37,8 @@ export default {
           },
           courses: {
             ui: {
-              showBody: true
+              showBody: true,
+              rowHeight: 32
             },
             title: {
               text: "我的课程"
@@ -54,7 +55,6 @@ export default {
               headRequired: true,
               value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }]
             },
-            boxRowHeight: 32,
             properties: {
               name: {
                 value: "默认名",

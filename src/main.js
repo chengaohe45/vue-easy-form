@@ -17,9 +17,11 @@ import gComponent from "@/components/register.js";
 gComponent.register();
 Vue.use(elementUI);
 Vue.use(esForm, {
-  boxRowHeight: 40,
-  boxRowSpace: 20,
-  boxLabelWidth: 100,
+  rowHeight: 40,
+  rowSpace: 20,
+  labelWidth: 100,
+  offsetLeft: 0,
+  offsetRight: 0,
   colon: false,
   direction: "h",
   defaultCom: "el-input", // 如：若用element-ui, 改为el-input

@@ -169,6 +169,24 @@ let utils = {
             case "boxRowHeight":
             case "boxRowSpace":
             case "boxLabelWidth":
+            case "rowHeight":
+            case "rowSpace":
+            case "labelWidth":
+            case "offsetLeft":
+            case "offsetRight":
+              if (key == "boxRowHeight") {
+                console.warn("全局设置boxRowHeight已经弃用，请改用为rowHeight");
+                key = "rowHeight";
+              } else if (key == "boxRowSpace") {
+                console.warn("全局设置boxRowSpace已经弃用，请改用为rowSpace");
+                key = "rowSpace";
+              } else if (key == "boxLabelWidth") {
+                console.warn(
+                  "全局设置boxLabelWidth已经弃用，请改用为labelWidth"
+                );
+                key = "labelWidth";
+              }
+
               if (utils.isNum(value) && value >= 0) {
                 global[key] = value;
               } else {
@@ -214,21 +232,6 @@ let utils = {
               break;
 
             case "trimEvent":
-              // if (
-              //   value &&
-              //   utils.isStr(value) &&
-              //   value != constant.INPUT_EVENT
-              // ) {
-              //   global[key] = value;
-              // } else {
-              //   console.warn(
-              //     "mergeGlobal: key(" +
-              //       key +
-              //       ")的值有误(1. 不能为空; 2. 是字符串; 3. 不能是" +
-              //       constant.INPUT_EVENT +
-              //       ")；此默认值将不重设"
-              //   );
-              // }
               console.warn("trimEvent已经移走了，请关注trimDoms");
               break;
 
@@ -263,17 +266,6 @@ let utils = {
                 global[key] = tmpValue;
               }
               break;
-            // case "help":
-            //   if (utils.isObj(value) && value.name) {
-            //     global[key] = value;
-            //   } else {
-            //     console.warn(
-            //       "mergeGlobal: key(" +
-            //         key +
-            //         ')的不是一个对象{name: "xxx"}；此默认值将不重设'
-            //     );
-            //   }
-            //   break;
             case "defaultVal":
               if (!utils.isUndef(value)) {
                 global[key] = value;

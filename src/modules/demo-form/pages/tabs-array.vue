@@ -78,11 +78,13 @@ export default {
             layout: {
               name: "tabs",
               type: "line",
-              hasBorder: false
+              hasBorder: false,
+              padding: 10
             },
 
             ui: {
               type: "bg-border",
+              rowHeight: 32,
               showBody: true
             },
 
@@ -119,7 +121,7 @@ export default {
                 { name: "管理学", code: 55 }
               ]
             },
-            boxRowHeight: 32,
+
             properties: {
               name: {
                 value: "默认名",

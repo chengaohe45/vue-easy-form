@@ -29,10 +29,10 @@
         padding: schema.layout.hasBorder
           ? schema.layout.padding
             ? schema.layout.padding
-            : schema.boxRowSpace + 'px'
+            : Math.min(schema.ui.rowSpace, 10) + 'px'
           : schema.layout.padding
           ? schema.layout.padding
-          : schema.boxRowSpace + 'px 0 0 0',
+          : Math.min(schema.ui.rowSpace, 10) + 'px 0 0 0',
         'border-width': schema.layout.hasBorder ? '1px' : '0px'
       }"
     >

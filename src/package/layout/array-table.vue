@@ -5,7 +5,7 @@
         <th
           class="es-order-fixed"
           v-if="schema.array.hasOrder !== false"
-          :style="{ padding: schema.rowSpace / 2 + 'px' }"
+          :style="{ padding: schema.ui.rowSpace / 2 + 'px' }"
         >
           序号
         </th>
@@ -13,7 +13,7 @@
           v-for="(headerSchema, headerFieldName) in schema.properties"
           :key="headerFieldName"
           :class="['es-col-' + headerSchema.col]"
-          :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
+          :style="{ padding: schema.ui.rowSpace / 2 + 'px' }"
         >
           <div
             :class="[
@@ -54,7 +54,7 @@
         <th
           class="es-btn-fixed"
           v-if="schema.array.hasDelete || schema.array.hasSort"
-          :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
+          :style="{ padding: schema.ui.rowSpace / 2 + 'px' }"
         >
           操作
         </th>
@@ -63,13 +63,13 @@
         <tr v-for="(itemSchema, index) in schema.__propSchemaList" :key="index">
           <td
             v-if="schema.array.hasOrder !== false"
-            :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
+            :style="{ padding: schema.array.rowSpace / 2 + 'px' }"
           >
             <span
               class="es-order-txt"
               :style="{
-                height: schema.boxRowHeight + 'px',
-                lineHeight: schema.boxRowHeight + 'px'
+                height: schema.ui.rowHeight + 'px',
+                lineHeight: schema.ui.rowHeight + 'px'
               }"
               >{{ index + 1 }}.</span
             >
@@ -78,7 +78,7 @@
             v-for="(fieldSchema, fieldName) in itemSchema.properties"
             :key="fieldName"
             :style="{
-              padding: schema.boxRowSpace / 2 + 'px',
+              padding: schema.array.rowSpace / 2 + 'px',
               textAlign: fieldSchema.label.align
             }"
           >
@@ -99,11 +99,11 @@
                 schema.array.hasSort ||
                 schema.array.hasCopy
             "
-            :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
+            :style="{ padding: schema.array.rowSpace / 2 + 'px' }"
           >
             <div
               class="es-btn-box"
-              :style="{ height: schema.boxRowHeight + 'px' }"
+              :style="{ height: schema.ui.rowHeight + 'px' }"
             >
               <edit-btns
                 :has-delete="schema.array.hasDelete"
@@ -132,7 +132,7 @@
         <tr>
           <td
             colspan="100%"
-            :style="{ padding: schema.boxRowSpace / 2 + 'px' }"
+            :style="{ padding: schema.array.rowSpace / 2 + 'px' }"
           >
             <edit-bottom-btns
               :has-delete="

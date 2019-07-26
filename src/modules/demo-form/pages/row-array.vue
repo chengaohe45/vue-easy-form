@@ -16,7 +16,9 @@ export default {
 
       formSchema: {
         layout: "tabs",
-        boxRowSpace: 20,
+        ui: {
+          rowSpace: 20
+        },
         properties: {
           isRequired: {
             label: "是否验证",
@@ -70,6 +72,8 @@ export default {
           target: {
             ui: {
               type: "bg-block",
+              rowSpace: 10,
+              rowHeight: 32,
               showBody: true
             },
             title: "投放目标",
@@ -78,14 +82,14 @@ export default {
             array: {
               name: "array",
               subLabel: "es: '投放目标' + ({{$index}} + 1)",
-              hasOrder: false,
+              hasOrder: true,
               hasDelete: true,
               hasSort: true,
               hasAdd: true,
               // fixed: 1,
               rules: true,
               max: 20,
-              rowSpace: 20,
+              // rowSpace: 20,
               value: [
                 { name: "语文", code: "001", applyNum: 155 },
                 { name: "英语", code: "005", applyNum: 888 }
@@ -97,8 +101,7 @@ export default {
                 }
               }
             },
-            boxRowSpace: 10,
-            boxRowHeight: 32,
+
             properties: {
               name: {
                 value: "默认名",
@@ -165,6 +168,7 @@ export default {
             layout: "tabs",
             ui: {
               type: "bg-border",
+              rowHeight: 32,
               showBody: true
             },
             title: "我的课程",
@@ -188,7 +192,7 @@ export default {
                 }
               }
             },
-            boxRowHeight: 32,
+
             properties: {
               name: {
                 value: "默认名",

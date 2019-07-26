@@ -73,10 +73,9 @@
       v-if="schema.array.hasAdd"
       class="es-card-add-box"
       :style="{
-        height:
-          typeof schema.boxRowHeight == 'number'
-            ? schema.boxRowHeight + 'px'
-            : schema.rowHeight + 'px'
+        height: schema.properties
+          ? schema.ui.rowHeight + 'px'
+          : schema.rowHeight + 'px'
       }"
     >
       <!-- <span @click="addItem" class="es-btn es-plus-btn"></span> -->
@@ -95,10 +94,9 @@
       v-if="schema.help && schema.component"
       class="es-form-help"
       :style="{
-        height:
-          typeof schema.boxRowHeight == 'number'
-            ? schema.boxRowHeight + 'px'
-            : schema.rowHeight + 'px'
+        height: schema.properties
+          ? schema.ui.rowHeight + 'px'
+          : schema.rowHeight + 'px'
       }"
     >
       <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->

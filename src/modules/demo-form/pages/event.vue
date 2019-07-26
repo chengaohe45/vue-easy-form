@@ -69,6 +69,8 @@ export default {
         targets: {
           ui: {
             type: "bg-border",
+            rowHeight: 32,
+            rowSpace: 15,
             showBody: true
           },
           title: {
@@ -89,8 +91,7 @@ export default {
             hasAdd: true,
             max: 5
           },
-          boxRowHeight: 32,
-          boxRowSpace: 15,
+
           properties: {
             name: {
               value: "默认名",

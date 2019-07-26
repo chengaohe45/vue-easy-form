@@ -722,7 +722,7 @@ let formUtils = {
       if (!utils.isObj(tmpSchema.properties)) {
         rootObj = {};
         rootObj.title = false;
-        rootObj.direction = global.direction;
+        // rootObj.direction = global.direction;
         rootObj.array = false; // 顶级是不支持数组的
         rootObj.layout = false;
         rootObj.properties = tmpSchema;
@@ -731,14 +731,14 @@ let formUtils = {
         autoMatch = false;
       } else {
         // console.log("rootObj.layout.name", rootObj.layout.name === constant.LAYOUT_TABS);
-        var newLayout = this.__parsePropLayout(rootObj.layout);
+        // var newLayout = this.__parsePropLayout(rootObj.layout);
         rootObj.array = false; // 顶级是不支持数组的
-        if (newLayout && newLayout.name === constant.LAYOUT_TABS) {
-          rootObj.layout = false;
-        }
-        rootObj.direction = ["h", "v"].includes(rootObj.direction)
-          ? rootObj.direction
-          : global.direction;
+        // if (newLayout && newLayout.name === constant.LAYOUT_TABS) {
+        //   rootObj.layout = false;
+        // }
+        // rootObj.direction = ["h", "v"].includes(rootObj.direction)
+        //   ? rootObj.direction
+        //   : global.direction;
 
         // 根节点有效的属性
         autoMatch = rootObj.autoMatch === true ? true : false;
@@ -746,30 +746,30 @@ let formUtils = {
       rootObj.label = { text: false, __rawText: false }; // 顶级是不支持label
 
       //设置表单的一些默认值
-      rootObj.rowHeight = rootObj.rowHeight
-        ? rootObj.rowHeight
-        : global.boxRowHeight;
-      rootObj.boxRowHeight = rootObj.boxRowHeight
-        ? rootObj.boxRowHeight
-        : global.boxRowHeight;
+      // rootObj.rowHeight = rootObj.rowHeight
+      //   ? rootObj.rowHeight
+      //   : global.boxRowHeight;
+      // rootObj.boxRowHeight = rootObj.boxRowHeight
+      //   ? rootObj.boxRowHeight
+      //   : global.boxRowHeight;
 
-      rootObj.rowSpace = 0;
-      rootObj.boxRowSpace = rootObj.boxRowSpace
-        ? rootObj.boxRowSpace
-        : global.boxRowSpace;
+      // rootObj.rowSpace = 0;
+      // rootObj.boxRowSpace = rootObj.boxRowSpace
+      //   ? rootObj.boxRowSpace
+      //   : global.boxRowSpace;
 
-      rootObj.labelWidth = rootObj.labelWidth
-        ? rootObj.labelWidth
-        : global.boxLabelWidth;
-      rootObj.boxLabelWidth = rootObj.boxLabelWidth
-        ? rootObj.boxLabelWidth
-        : global.boxLabelWidth;
+      // rootObj.labelWidth = rootObj.labelWidth
+      //   ? rootObj.labelWidth
+      //   : global.boxLabelWidth;
+      // rootObj.boxLabelWidth = rootObj.boxLabelWidth
+      //   ? rootObj.boxLabelWidth
+      //   : global.boxLabelWidth;
 
       rootObj = formUtils.__parseProp(
         rootObj,
         1,
         "根",
-        formUtils.__newInheritObj(rootObj),
+        formUtils.__getGlobalInheritObj(), // 取自global
         ""
       );
 
@@ -816,12 +816,21 @@ let formUtils = {
         inheritObj,
         myPathKey
       );
+
+      var nextInheritObj = newPropItem.nextInherit;
+      newPropItem.nextInherit = null;
+      delete newPropItem.nextInherit;
       if (isArray) {
         if (utils.isUndef(newPropItem.array.rowSpace)) {
           // 当没有设置时，则取上一级的rowSpace
           newPropItem.array.rowSpace = newPropItem.rowSpace;
         }
       }
+      // 判断ui, 因为是数组的话，有些属性可能有会（ui.rowHeight可能很用到）
+      var newUi = newPropItem.ui ? newPropItem.ui : { showBody: true };
+      newUi.rowSpace = nextInheritObj.rowSpace;
+      newUi.rowHeight = nextInheritObj.rowHeight;
+      newPropItem.ui = newUi;
 
       isNormalTabs =
         newPropItem.layout && newPropItem.layout.name === constant.LAYOUT_TABS;
@@ -909,7 +918,7 @@ let formUtils = {
             nextRawPropItem,
             curLevel + 1,
             key,
-            formUtils.__newInheritObj(newPropItem),
+            nextInheritObj,
             myPathKey ? myPathKey + "." + key : key
           );
 
@@ -1294,11 +1303,12 @@ let formUtils = {
           "title",
           "label",
           "rowHeight",
-          "boxRowHeight",
+          // "boxRowHeight",
           "rowSpace",
-          "boxRowSpace",
+          // "boxRowSpace",
           "labelWidth",
-          "boxLabelWidth",
+          // "boxLabelWidth",
+          "nextInherit", // 这个比较特殊，不会对应哪个字段
           "offsetLeft",
           "offsetRight",
           "hidden",
@@ -1352,13 +1362,6 @@ let formUtils = {
         filters: ["isStr"],
         defaultValue: false
       },
-      // {
-      //   key: "desc",
-      //   enums: [],
-      //   isOr: true,   // filters里面的关系，默认为false
-      //   filters: ["isStr", "isEs", "isFunc"],
-      //   defaultValue: false
-      // },
       {
         key: "col",
         enums: [],
@@ -1380,26 +1383,8 @@ let formUtils = {
         enums: [true, false],
         defaultValue: undefined // undefined代表是否删除空格取自于全局设置
       },
-      // {
-      //   key: "unit",
-      //   enums: [],
-      //   isOr: true,   // filters里面的关系，默认为false
-      //   filters: ["isStr", "isEs", "isFunc"],
-      //   defaultValue: false
-      // },
       {
         key: "rowHeight",
-        enums: [],
-        filters: [
-          {
-            name: "isInt",
-            params: [0]
-          }
-        ],
-        defaultValue: global.boxRowHeight
-      },
-      {
-        key: "boxRowHeight",
         enums: [],
         filters: [
           {
@@ -1421,29 +1406,7 @@ let formUtils = {
         defaultValue: global.boxRowSpace
       },
       {
-        key: "boxRowSpace",
-        enums: [],
-        filters: [
-          {
-            name: "isInt",
-            params: [0]
-          }
-        ],
-        defaultValue: global.boxRowSpace
-      },
-      {
         key: "labelWidth",
-        enums: [],
-        filters: [
-          {
-            name: "isInt",
-            params: [0]
-          }
-        ],
-        defaultValue: global.boxLabelWidth
-      },
-      {
-        key: "boxLabelWidth",
         enums: [],
         filters: [
           {
@@ -1489,16 +1452,12 @@ let formUtils = {
     return false;
   },
 
-  // __getSpecialInfo: function(key) {
-  //   var keyInfos = [];
-  //   for (var i = 0; i < keyInfos.length; i++) {
-  //     if (keyInfos[i].key === key) {
-  //       return keyInfos[i];
-  //     }
-  //   }
-  //   return false;
-  // },
-
+  /**
+   *
+   * @param {*} propItem propItem or propItem.ui
+   * @param {*} keyInfo
+   * @param {*} inheritObj
+   */
   __parseNormalKey: function(propItem, keyInfo, inheritObj) {
     var value = propItem[keyInfo.key];
     var tmpDefaultValue = utils.isUndef(inheritObj[keyInfo.key])
@@ -1573,21 +1532,6 @@ let formUtils = {
       }
     }
   },
-
-  // __parseSpecialKey: function(propItem, keyInfo) {
-  //   var value = propItem[keyInfo.key];
-  //   if (utils.isUndef(value)) {
-  //     return keyInfo.defaultValue;
-  //   } else if (utils.isStr(value)) {
-  //     var newObj = {};
-  //     newObj[keyInfo.nameKey] = value;
-  //     return newObj;
-  //   } else if (utils.isObj(value)) {
-  //     return value;
-  //   } else {
-  //     return keyInfo.defaultValue;
-  //   }
-  // },
 
   /* 解析右栏组件 */
   __parseMainComponent: function(component, myPathKey) {
@@ -1853,43 +1797,104 @@ let formUtils = {
   },
 
   /* 解析boxUi, 只支持properites */
-  __parseBoxUi: function(value) {
-    var newValue, type;
+  __parseBoxUi: function(ui) {
+    var newUi, type;
     var types = ["bg", "block", "bg-block"];
-    if (utils.isObj(value) && Object.keys(value).length > 0) {
-      newValue = {};
-      if (utils.isBool(value.showBody)) {
-        newValue.__hasToggle = true; // 有切换按钮
-        newValue.showBody = value.showBody;
+    if (utils.isObj(ui) && Object.keys(ui).length > 0) {
+      newUi = {};
+      if (utils.isBool(ui.showBody)) {
+        newUi.__hasToggle = true; // 有切换按钮
+        newUi.showBody = ui.showBody;
       } else {
-        newValue.__hasToggle = false; // 无切换按钮
-        newValue.showBody = true;
+        newUi.__hasToggle = false; // 无切换按钮
+        newUi.showBody = true;
       }
-      type = utils.isStr(value.type) ? value.type.trim() : "";
-      newValue.type = types.includes(type) ? type : "";
-      newValue.hasBorder = utils.isBool(value.hasBorder)
-        ? value.hasBorder
-        : false;
-      newValue.padding = this.parsePadding(value.padding);
-    } else if (utils.isStr(value)) {
-      type = value ? value : "";
-      if (type) {
-        newValue = {
-          __hasToggle: false,
+      type = utils.isStr(ui.type) ? ui.type.trim() : "";
+      newUi.type = types.includes(type) ? type : "";
+      newUi.hasBorder = utils.isBool(ui.hasBorder) ? ui.hasBorder : false;
+      newUi.padding = this.parsePadding(ui.padding);
+    } else if (utils.isStr(ui)) {
+      type = ui ? ui : "";
+      type = utils.isStr(type) ? type.trim() : "";
+
+      if (types.includes(type)) {
+        newUi = {
+          // __hasToggle: false,
           showBody: true,
-          type: type,
-          hasBorder: false,
-          padding: false
+          type: type
+          // hasBorder: false,
+          // padding: false
         };
       } else {
-        newValue = false;
+        newUi = {
+          // __hasToggle: false,
+          showBody: true,
+          type: ""
+          // hasBorder: false,
+          // padding: false
+        };
       }
     } else {
-      // 为false
-      newValue = false;
+      newUi = {
+        // __hasToggle: false,
+        showBody: true,
+        type: ""
+        // hasBorder: false,
+        // padding: false
+      };
     }
 
-    return newValue;
+    return newUi;
+  },
+
+  __parseInherit(propItem, inheritObj) {
+    var ui = utils.isObj(propItem.ui) ? propItem.ui : {};
+
+    var keys = [
+      "offsetLeft",
+      "offsetRight",
+      "direction",
+      "colon",
+      ["rowSpace", "boxRowSpace"],
+      ["labelWidth", "boxLabelWidth"],
+      ["rowHeight", "boxRowHeight"]
+    ];
+
+    var tmpUi = {};
+
+    var newInherit = {};
+
+    keys.forEach(key => {
+      var newKey, oldKey;
+      if (utils.isStr(key)) {
+        newKey = key;
+        oldKey = false;
+      } else {
+        newKey = key[0];
+        oldKey = key[1];
+      }
+      var normalKeyInfo = formUtils.__getNormalInfo(newKey);
+      if (normalKeyInfo) {
+        var curValue = ui[newKey];
+        tmpUi[newKey] = curValue;
+        if (utils.isUndef(curValue) && oldKey) {
+          if (!utils.isUndef(propItem[oldKey])) {
+            tmpUi[newKey] = propItem[oldKey];
+            console.warn("属性" + oldKey + "已舍弃，请使用ui." + newKey);
+          }
+        }
+        // console.log("-- tmpUi: ", tmpUi);
+        newInherit[newKey] = formUtils.__parseNormalKey(
+          tmpUi,
+          normalKeyInfo,
+          inheritObj
+        );
+      } else {
+        throw "BoxUi: 程序的key(" + key + ")不对应，请修改";
+      }
+    });
+
+    return newInherit;
   },
 
   /**
@@ -2437,7 +2442,12 @@ let formUtils = {
       }
 
       if (key == "ui") {
-        newPropItem[key] = formUtils.__parseBoxUi(propItem[key]);
+        newPropItem[key] = formUtils.__parseBoxUi(propItem.ui);
+        return true;
+      }
+
+      if (key == "nextInherit") {
+        newPropItem[key] = formUtils.__parseInherit(propItem, inheritObj);
         return true;
       }
 
@@ -2492,13 +2502,6 @@ let formUtils = {
         return true;
       }
 
-      // var specialKeyInfo = formUtils.__getSpecialInfo(key);
-      // if (specialKeyInfo) {
-      //   newPropItem[key] = formUtils.__parseSpecialKey(
-      //     propItem,
-      //     specialKeyInfo
-      //   );
-      // } else {
       var normalKeyInfo = formUtils.__getNormalInfo(key);
       if (normalKeyInfo) {
         newPropItem[key] = formUtils.__parseNormalKey(
@@ -2509,7 +2512,6 @@ let formUtils = {
       } else {
         throw "程序的key(" + key + ")不对应，请修改";
       }
-      // }
     });
     if (!utils.isUndef(newPropItem.rowSpace)) {
       newPropItem.__rawRowSpace = newPropItem.rowSpace;
@@ -2517,27 +2519,21 @@ let formUtils = {
     return newPropItem;
   },
 
-  __newInheritObj: function(propItem) {
+  __getGlobalInheritObj: function() {
     var keys = [
+      "offsetLeft",
+      "offsetRight",
       "direction",
       "colon",
-      "boxRowSpace",
-      "boxLabelWidth",
-      "boxRowHeight"
+      "rowSpace",
+      "labelWidth",
+      "rowHeight"
     ];
-    var keyObj = {
-      //把右边的数据给下一级的节点
-      rowHeight: "boxRowHeight",
-      rowSpace: "boxRowSpace",
-      labelWidth: "boxLabelWidth"
-    };
     var obj = {};
     keys.forEach(key => {
-      obj[key] = propItem[key];
+      obj[key] = global[key];
     });
-    for (var key in keyObj) {
-      obj[key] = propItem[keyObj[key]];
-    }
+    // console.log("obj: ", obj);
     return obj;
   },
 

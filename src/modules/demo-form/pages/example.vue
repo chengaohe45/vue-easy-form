@@ -203,6 +203,8 @@ export default {
           staffs: {
             ui: {
               type: "bg-border",
+              rowHeight: 32,
+              rowSpace: 15,
               showBody: true
             },
             title: {
@@ -224,8 +226,6 @@ export default {
                 { name: "小花", code: "A623" }
               ]
             },
-            boxRowHeight: 32,
-            boxRowSpace: 15,
             properties: {
               name: {
                 value: "默认名",

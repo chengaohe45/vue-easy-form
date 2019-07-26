@@ -19,7 +19,9 @@ export default {
 
       formSchema: {
         colon: true,
-        boxRowSpace: 20,
+        ui: {
+          rowSpace: 20
+        },
         properties: {
           name: {
             label: "广告名称",

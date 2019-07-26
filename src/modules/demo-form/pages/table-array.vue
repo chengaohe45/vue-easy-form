@@ -29,6 +29,7 @@ export default {
           courses: {
             layout: "tabs",
             ui: {
+              rowHeight: 32,
               showBody: true
             },
             title: {
@@ -50,7 +51,7 @@ export default {
               headRequired: true,
               value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }]
             },
-            boxRowHeight: 32,
+
             properties: {
               name: {
                 value: "默认名",

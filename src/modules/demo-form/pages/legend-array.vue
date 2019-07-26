@@ -38,8 +38,10 @@ export default {
               showBody: true
             },
             label: "",
-            // col: 15,
-            boxRowSpace: 20,
+            ui: {
+              rowSpace: 20,
+              rowHeight: 32
+            },
             array: {
               name: "array-legend",
               subLabel: "es: '投放目标' + ({{$index}} + 1)",
@@ -62,7 +64,7 @@ export default {
                 }
               }
             },
-            boxRowHeight: 32,
+
             properties: {
               name: {
                 value: "大学默认名",

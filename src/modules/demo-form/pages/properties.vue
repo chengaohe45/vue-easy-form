@@ -16,7 +16,10 @@ export default {
       title: "子属性(块)设置",
 
       formSchema: {
-        boxRowSpace: 20,
+        ui: {
+          rowSpace: 20
+        },
+        title: "表单",
         properties: {
           name: {
             label: "广告名称",
@@ -33,7 +36,6 @@ export default {
               text: "基本信息"
             },
             label: false,
-            boxRowSpace: 10,
             properties: {
               startTime: {
                 label: "上线时间",
@@ -70,10 +72,11 @@ export default {
           },
 
           target: {
-            boxRowSpace: 10,
             ui: {
               type: "bg",
-              hasBorder: true
+              hasBorder: true,
+              rowSpace: 20,
+              padding: 20
             },
             title: {
               text: "投放目标"
@@ -110,9 +113,9 @@ export default {
           },
 
           district: {
-            boxRowSpace: 10,
             ui: {
               type: "bg-block",
+              rowSpace: 10,
               hasBorder: true
             },
             title: {
@@ -131,11 +134,11 @@ export default {
           },
 
           more: {
-            boxRowSpace: 10,
             ui: {
               type: "block",
               showBody: false,
               hasBorder: true,
+              rowSpace: 10,
               padding: 20
             },
             title: {

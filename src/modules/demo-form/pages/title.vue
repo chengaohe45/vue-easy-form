@@ -19,7 +19,9 @@ export default {
 
       formSchema: {
         colon: true,
-        boxRowSpace: 20,
+        ui: {
+          rowSpace: 20
+        },
         properties: {
           name: {
             label: "广告名称",
@@ -48,9 +50,9 @@ export default {
           },
 
           district: {
-            boxRowSpace: 10,
             ui: {
               type: "bg-block",
+              rowSpace: 10,
               hasBorder: true
             },
             title: {
@@ -69,10 +71,10 @@ export default {
           },
 
           more: {
-            boxRowSpace: 10,
             ui: {
               showBody: true,
               hasBorder: true,
+              rowSpace: 10,
               padding: 20
             },
             title: {
