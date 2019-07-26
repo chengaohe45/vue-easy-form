@@ -30,7 +30,7 @@
         'es-form-body',
         schema.ui && schema.ui.hasBorder ? 'es-body-border' : ''
       ]"
-      v-show="!schema.ui || schema.ui.showBody"
+      v-show="!schema.properties || schema.ui.showBody"
       :style="bodyStyle"
     >
       <!-- 非数组 -->
@@ -548,9 +548,7 @@ export default {
   computed: {
     needHeader() {
       return this.schema.properties &&
-        (this.schema.title ||
-          (this.schema.ui && this.schema.ui.__hasToggle) ||
-          this.schema.help)
+        (this.schema.title || this.schema.ui.__hasToggle || this.schema.help)
         ? true
         : false; // 是否有头部
     },
@@ -560,21 +558,20 @@ export default {
       if (this.needHeader) {
         // 是否有头部
         //是properties且有头部
-        var hasBorder =
-          this.schema.ui && this.schema.ui.hasBorder
-            ? this.schema.ui.hasBorder
-            : false;
+        var hasBorder = this.schema.ui.hasBorder
+          ? this.schema.ui.hasBorder
+          : false;
         if (hasBorder) {
           style = {
             padding: this.schema.ui.padding
               ? this.schema.ui.padding
-              : Math.min(this.schema.boxRowSpace, 10) + "px"
+              : Math.min(this.schema.ui.rowSpace, 10) + "px"
           }; //有边框时的样式
         } else {
           style = {
             padding: this.schema.ui.padding
               ? this.schema.ui.padding
-              : Math.min(this.schema.boxRowSpace, 10) + "px 0 0 0"
+              : Math.min(this.schema.ui.rowSpace, 10) + "px 0 0 0"
           }; //无边框时的样式
         }
       } else {

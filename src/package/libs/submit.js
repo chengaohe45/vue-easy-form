@@ -10,10 +10,10 @@ let onlySubmit = function() {
  * @param {*} key 组件的源key
  * @param {*} event 事件所携带的事件
  */
-let enterSubmit = function(value, key, event) {
+let enterSubmit = function(options) {
   // console.log("value: ", value);
   // console.log("key: ", key);
-  if (event && event.keyCode === 13) {
+  if (options.event && options.event.keyCode === 13) {
     this.submit();
   }
 };

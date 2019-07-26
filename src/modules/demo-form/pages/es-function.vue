@@ -14,7 +14,9 @@ export default {
       hasConsole: true,
 
       formSchema: {
-        boxRowSpace: 20,
+        ui: {
+          rowSpace: 20
+        },
         properties: {
           isOpen: {
             label: "开关切换",
@@ -23,10 +25,10 @@ export default {
           },
 
           esMethod: {
-            boxRowSpace: 10,
             ui: {
               type: "bg",
-              hasBorder: true
+              hasBorder: true,
+              rowSpace: 10
             },
             title: {
               text: "es写法"
@@ -81,9 +83,9 @@ export default {
           },
 
           funcMethod: {
-            boxRowSpace: 10,
             ui: {
               type: "bg",
+              rowSpace: 10,
               hasBorder: true
             },
             title: {

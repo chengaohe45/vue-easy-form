@@ -14,10 +14,9 @@
             class="es-order-box"
             v-if="schema.array.hasOrder !== false"
             :style="{
-              height:
-                typeof schema.boxRowHeight == 'number'
-                  ? schema.boxRowHeight + 'px'
-                  : schema.rowHeight + 'px'
+              height: schema.properties
+                ? schema.ui.rowHeight + 'px'
+                : schema.rowHeight + 'px'
             }"
           >
             {{ index + 1 }}.
@@ -70,10 +69,9 @@
                   <div
                     class="es-btn-box"
                     :style="{
-                      height:
-                        typeof schema.boxRowHeight == 'number'
-                          ? schema.boxRowHeight + 'px'
-                          : schema.rowHeight + 'px'
+                      height: schema.properties
+                        ? schema.ui.rowHeight + 'px'
+                        : schema.rowHeight + 'px'
                     }"
                   >
                     <edit-btns
@@ -113,10 +111,9 @@
                     "
                     class="es-btn-box es-single-btn-box"
                     :style="{
-                      height:
-                        typeof schema.boxRowHeight == 'number'
-                          ? schema.boxRowHeight + 'px'
-                          : schema.rowHeight + 'px'
+                      height: schema.properties
+                        ? schema.ui.rowHeight + 'px'
+                        : schema.rowHeight + 'px'
                     }"
                   >
                     <edit-btns
@@ -189,10 +186,9 @@
       v-if="schema.help && schema.component"
       class="es-form-help"
       :style="{
-        height:
-          typeof schema.boxRowHeight == 'number'
-            ? schema.boxRowHeight + 'px'
-            : schema.rowHeight + 'px'
+        height: schema.properties
+          ? schema.ui.rowHeight + 'px'
+          : schema.rowHeight + 'px'
       }"
     >
       <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->

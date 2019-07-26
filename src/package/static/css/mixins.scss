@@ -29,13 +29,13 @@
 
 @mixin display-center {
 	@include display-flex;
-	align-items:center;
+	align-items: center;
 	justify-content: center;
 }
 
 @mixin inline-center {
 	@include inline-flex;
-	align-items:center;
+	align-items: center;
 	justify-content: center;
 }
 

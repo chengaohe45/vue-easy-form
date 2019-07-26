@@ -5,8 +5,15 @@ let global = {
   boxRowHeight: 40,
   boxRowSpace: 20,
   boxLabelWidth: 100,
+
+  rowHeight: 40,
+  rowSpace: 20,
+  labelWidth: 100,
   colon: false,
   direction: "h",
+  offsetLeft: 0, // 项的左边偏移
+  offsetRight: 0, // // 项的右边偏移
+
   defaultCom: "input",
   defaultVal: "", // 这个是对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；注：此值对其它组件不补充
   // help: { name: esHelp, props: {} },

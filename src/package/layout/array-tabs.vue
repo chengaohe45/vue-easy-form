@@ -61,7 +61,13 @@
       class="es-tabs-body"
       v-if="schema.__propSchemaList.length"
       :style="{
-        padding: schema.array.rowSpace + 'px',
+        padding: schema.array.hasBorder
+          ? schema.array.padding
+            ? schema.array.padding
+            : Math.min(schema.array.rowSpace, 10) + 'px'
+          : schema.array.padding
+          ? schema.array.padding
+          : Math.min(schema.array.rowSpace, 10) + 'px 0 0 0',
         'border-width': schema.array.hasBorder ? '1px' : '0px'
       }"
     >
