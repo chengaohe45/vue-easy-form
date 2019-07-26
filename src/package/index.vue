@@ -386,7 +386,8 @@ export default {
       _esHiddenFunc: null,
       _esResultValue: null,
       _esFormData: null,
-      _esLockSubmit: false // 开始是false
+      _esLockSubmit: false // 开始是false,
+      _esWarns: []
       */
 
       canConsole: true,
@@ -538,7 +539,20 @@ export default {
       var rootSchema = this.$data.formSchema;
       var targetSchema = formUtils.getSchemaByKey(rootSchema, pathKey); // 看看最后一个是否存在
       if (!targetSchema) {
-        console.warn("无法匹配" + pathKey + "(系统则认为hidden为false)");
+        if (this.$data.canConsole) {  // 说明是调试状才打印
+          if (!this._esWarns) {
+            this._esWarns = [pathKey];
+            this.$nextTick(() => {
+              if (this._esWarns) {
+                console.warn("无法匹配" + this._esWarns.join("、") + ",系统则认为其hidden为false");
+                this._esWarns = null;
+              }
+            });
+          } else if (!this._esWarns.includes(pathKey)) {
+            this._esWarns.push(pathKey)
+          }
+        }
+        
         curHiddenValue = false;
       } else {
         var seperator = ".";
@@ -567,7 +581,7 @@ export default {
             tmpParentPathKey == pathKey
               ? targetSchema
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
-          if (itemSchema) {
+          // if (itemSchema) {
             var parseSources = {
               global: this.global,
               rootData: this._esFormData,
@@ -584,13 +598,13 @@ export default {
             } else {
               // 父节点是显示的，继续
             }
-          } else {
-            console.warn(
-              "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
-            );
-            curHiddenValue = false;
-            break;
-          }
+          // } else {
+          //   console.warn(
+          //     "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
+          //   );
+          //   curHiddenValue = false;
+          //   break;
+          // }
         }
       }
 
