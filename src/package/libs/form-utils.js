@@ -322,6 +322,11 @@ let formUtils = {
     }
   },
 
+  /**
+   * 是否正确的tabs索引
+   * @param {*} targetSchema
+   * @param {*} index
+   */
   __isRightTabsIndex(targetSchema, index) {
     var nextSchema, key;
     if (targetSchema.array && targetSchema.array.name === constant.ARRAY_TABS) {
@@ -356,6 +361,11 @@ let formUtils = {
     return false;
   },
 
+  /**
+   * 取出指定的schema
+   * @param {*} schema
+   * @param {*} pathKey
+   */
   getSchemaByKey(schema, pathKey) {
     // 这个函数可能对外单独使用，所以不可以使用this
     return formUtils.__getSchemaByKey(schema, pathKey);
@@ -782,6 +792,9 @@ let formUtils = {
     }
   },
 
+  /**
+   * 解析项
+   */
   __parseProp: function(propItem, curLevel, parentKey, inheritObj, myPathKey) {
     if (utils.isStr(propItem)) {
       propItem = { label: propItem };
@@ -1073,6 +1086,10 @@ let formUtils = {
     return newPropItem;
   },
 
+  /**
+   * 对table数组布局，重新计算长度，使项相加为UI_MAX_COL(24列)
+   * @param {*} newSchema
+   */
   __updateTableCol(newSchema) {
     if (newSchema.properties) {
       var curProp = newSchema.properties;
@@ -1101,7 +1118,7 @@ let formUtils = {
   },
 
   /**
-   *
+   * 去掉同一级别的属性中，有相同的ref，保留最后一个
    * @param {*} newSchema 已经整理好的schema
    */
   __uniqueRef(newSchema) {
@@ -1170,6 +1187,10 @@ let formUtils = {
     return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
   },
 
+  /**
+   * 判断属性是否合法
+   * @param {*} key
+   */
   __isRightKey(key) {
     var illChars = ["[", "]", ".", "{", "}", "(", ")"];
     for (var i = 0; i < illChars.length; i++) {
@@ -1180,7 +1201,9 @@ let formUtils = {
     return true;
   },
 
-  /* 整理出组件需要监听的外部事件 */
+  /**
+   * 整理出组件需要监听的外部事件
+   */
   __listEvent: function(propItem) {
     var emitEvents = [],
       nativeEvents = [],
@@ -1247,6 +1270,10 @@ let formUtils = {
     };
   },
 
+  /**
+   * 提取是否为.native事件
+   * @param {*} eventName
+   */
   __getNativeName(eventName) {
     var dotNative = "." + constant.ADJ_NATIVE;
     var lastIndex = eventName.lastIndexOf(dotNative);
@@ -1332,6 +1359,9 @@ let formUtils = {
     return propKeys;
   },
 
+  /**
+   * 取出schema的属性的判断信息，用来判断是否合法或设置默认值
+   */
   __getNormalInfo: function(key) {
     var keyInfos = [
       {
@@ -1453,7 +1483,7 @@ let formUtils = {
   },
 
   /**
-   *
+   * 统一解析普通属性
    * @param {*} propItem propItem or propItem.ui
    * @param {*} keyInfo
    * @param {*} inheritObj
@@ -1533,7 +1563,9 @@ let formUtils = {
     }
   },
 
-  /* 解析右栏组件 */
+  /**
+   * 解析右栏组件
+   */
   __parseMainComponent: function(component, myPathKey) {
     var newComponent,
       defaultAlign = false;
@@ -1594,6 +1626,10 @@ let formUtils = {
     return newComponent;
   },
 
+  /**
+   * 置对象的属性为null
+   * @param {*} obj
+   */
   __newEmptyObj(obj) {
     var newObj = {};
     for (var key in obj) {
@@ -1602,6 +1638,11 @@ let formUtils = {
     return newObj;
   },
 
+  /**
+   * 函数化component.props的字段
+   * @param {*} obj
+   * @param {array} excludeKeys 排除的属性，因为这些属性在其它地方设置，不用重复
+   */
   __newEsFuncProps(obj, excludeKeys = ["value", "style", "class"]) {
     var newObj = {};
     for (var key in obj) {
@@ -1615,6 +1656,10 @@ let formUtils = {
     return newObj;
   },
 
+  /**
+   * 判断对象中是否有动态解析：es或函数；主要是对component.props的判断
+   * @param {*} obj
+   */
   __needParseInObj(obj) {
     var isRight = false;
     for (var key in obj) {
@@ -1666,6 +1711,11 @@ let formUtils = {
     }
   },
 
+  /**
+   * 解析/标准化项组件的事件
+   * @param {*} actions
+   * @param {*} myPathKey
+   */
   __parseActions(actions, myPathKey) {
     // 解析是否为特殊写法
     var newActions = [];
@@ -1741,7 +1791,9 @@ let formUtils = {
     return newActions.length > 0 ? newActions : null;
   },
 
-  /* 解析Label */
+  /**
+   * 解析项Label
+   */
   __parseLabel: function(value) {
     var newValue,
       defaultAlign = false;
@@ -1763,6 +1815,9 @@ let formUtils = {
     return newValue;
   },
 
+  /**
+   * 解析项label和项组件的在弹性布局中的占位情况
+   */
   __parseFlex(flex, size) {
     var flexs = ["self", "full"];
     if (flexs.includes(flex)) {
@@ -1782,6 +1837,9 @@ let formUtils = {
     return false;
   },
 
+  /**
+   * 解析项label和项组件的对齐方式
+   */
   __parseAlign(align, defaultVal = "left") {
     var aligns = ["left", "center", "right"];
     if (aligns.includes(align)) {
@@ -1790,13 +1848,17 @@ let formUtils = {
     return defaultVal;
   },
 
-  /* 解析title */
+  /**
+   * 解析title
+   */
   __parseTitle: function(value) {
     var newValue = this.__parsePropComponent(value);
     return newValue;
   },
 
-  /* 解析boxUi, 只支持properites */
+  /**
+   * 解析boxUi, 只支持properites
+   */
   __parseBoxUi: function(ui) {
     var newUi, type;
     var types = ["bg", "block", "bg-block"];
@@ -1847,6 +1909,11 @@ let formUtils = {
     return newUi;
   },
 
+  /**
+   * 块（properties）中提取可继承的属性，为下一组做准备
+   * @param {*} propItem
+   * @param {*} inheritObj 从上一级继承的数据
+   */
   __parseInherit(propItem, inheritObj) {
     var ui = utils.isObj(propItem.ui) ? propItem.ui : {};
 
@@ -1961,7 +2028,9 @@ let formUtils = {
     return resultVals ? resultVals.join("px ") + "px" : false;
   },
 
-  /* 解析帮助 */
+  /**
+   * 解析帮助
+   */
   __parsePropHelp: function(help) {
     // console.log("help: ", help);
     var gHelp = false;
@@ -1982,7 +2051,9 @@ let formUtils = {
     return gHelp;
   },
 
-  /* 解析一般组件 */
+  /**
+   * 解析一般组件
+   */
   __parsePropComponent: function(value, canEmpty = false) {
     var newCom;
     if (utils.isObj(value) && Object.keys(value).length > 0) {
@@ -2045,7 +2116,9 @@ let formUtils = {
     }
   },
 
-  /* 解析规则 */
+  /**
+   * 解析规则
+   */
   __parsePropRules: function(rules) {
     var newRules;
     if (utils.isObj(rules)) {
@@ -2124,6 +2197,10 @@ let formUtils = {
     }
   },
 
+  /**
+   * array是否为数组
+   * @param {*} array
+   */
   __isArray(array) {
     if (array) {
       return true;
@@ -2132,6 +2209,10 @@ let formUtils = {
     }
   },
 
+  /**
+   * 是否为块(properties)
+   * @param {*} rawItem
+   */
   __isPropItem(rawItem) {
     return (
       !this.__isSpaceItem(rawItem) &&
@@ -2140,6 +2221,10 @@ let formUtils = {
     );
   },
 
+  /**
+   * 块(properties)里面是否存在非空项
+   * @param {*} rawPropItem
+   */
   __existEntityItem(rawPropItem) {
     if (this.__isPropItem(rawPropItem)) {
       for (var key in rawPropItem.properties) {
@@ -2156,6 +2241,10 @@ let formUtils = {
     return false;
   },
 
+  /**
+   * 项设置为null 或 undefined则忽略（在新增或编辑时特别有用）
+   * @param {*} rawPropItem
+   */
   __isIngnoreItem(rawPropItem) {
     if (
       utils.isNull(rawPropItem) ||
@@ -2197,6 +2286,9 @@ let formUtils = {
     return false;
   },
 
+  /**
+   * 布局设置标准化
+   */
   __parsePropLayout: function(layout) {
     var newLayout = { name: false };
     var layoutTypes = [constant.LAYOUT_SPACE, constant.LAYOUT_TABS];
@@ -2229,6 +2321,9 @@ let formUtils = {
     return newLayout;
   },
 
+  /**
+   * 数组设置标准化
+   */
   __parsePropArray: function(array, rawItem, myPathKey) {
     if (this.__isArray(array)) {
       var newArray = {};
@@ -2382,6 +2477,9 @@ let formUtils = {
     }
   },
 
+  /**
+   * 验证函数标准化
+   */
   __perfectCheckItem: function(item) {
     if (utils.isFunc(item)) {
       return { handler: item, trigger: [constant.INPUT_EVENT] };
@@ -2514,11 +2612,14 @@ let formUtils = {
       }
     });
     if (!utils.isUndef(newPropItem.rowSpace)) {
-      newPropItem.__rawRowSpace = newPropItem.rowSpace;
+      newPropItem.__rawRowSpace = newPropItem.rowSpace; // __rawRowSpace用于第一行计算或恢复，因为第一行可能会变为0
     }
     return newPropItem;
   },
 
+  /**
+   * 取出全局设置的属性：以便继承
+   */
   __getGlobalInheritObj: function() {
     var keys = [
       "offsetLeft",

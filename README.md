@@ -12,6 +12,7 @@ npm run mock
 ### Compiles and hot-reloads for development
 ```
 npm run serve
+npm run dev
 ```
 
 ### Compiles and minifies for production
@@ -29,4 +30,4 @@ npm run lint
 npm run test:unit
 ```
 [基本配置](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
-[具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo//#/form-base)
+[具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo/)

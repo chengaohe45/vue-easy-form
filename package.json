@@ -12,6 +12,7 @@
   "main": "dist/es-form.umd.min.js",
   "scripts": {
     "mock": "vue-cli-service serve --mode mock",
+    "dev": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "release": "vue-cli-service build --target lib --name es-form ./src/package/index.js",

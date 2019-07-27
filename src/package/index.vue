@@ -539,20 +539,25 @@ export default {
       var rootSchema = this.$data.formSchema;
       var targetSchema = formUtils.getSchemaByKey(rootSchema, pathKey); // 看看最后一个是否存在
       if (!targetSchema) {
-        if (this.$data.canConsole) {  // 说明是调试状才打印
+        if (this.$data.canConsole) {
+          // 说明是调试状才打印
           if (!this._esWarns) {
             this._esWarns = [pathKey];
             this.$nextTick(() => {
               if (this._esWarns) {
-                console.warn("无法匹配" + this._esWarns.join("、") + ",系统则认为其hidden为false");
+                console.warn(
+                  "无法匹配" +
+                    this._esWarns.join("、") +
+                    ",系统则认为其hidden为false"
+                );
                 this._esWarns = null;
               }
             });
           } else if (!this._esWarns.includes(pathKey)) {
-            this._esWarns.push(pathKey)
+            this._esWarns.push(pathKey);
           }
         }
-        
+
         curHiddenValue = false;
       } else {
         var seperator = ".";
@@ -582,22 +587,22 @@ export default {
               ? targetSchema
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
           // if (itemSchema) {
-            var parseSources = {
-              global: this.global,
-              rootData: this._esFormData,
-              index: itemSchema.__index,
-              idxChain: itemSchema.__idxChain,
-              pathKey: itemSchema.__pathKey,
-              rootSchema: rootSchema,
-              isHidden: this._esHiddenFunc
-            };
+          var parseSources = {
+            global: this.global,
+            rootData: this._esFormData,
+            index: itemSchema.__index,
+            idxChain: itemSchema.__idxChain,
+            pathKey: itemSchema.__pathKey,
+            rootSchema: rootSchema,
+            isHidden: this._esHiddenFunc
+          };
 
-            if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
-              curHiddenValue = true;
-              break;
-            } else {
-              // 父节点是显示的，继续
-            }
+          if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
+            curHiddenValue = true;
+            break;
+          } else {
+            // 父节点是显示的，继续
+          }
           // } else {
           //   console.warn(
           //     "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
