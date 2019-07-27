@@ -8,7 +8,7 @@
 ```js
 Vue.use(esForm, 
   { 
-    boxRowSpace: 10,
+    rowSpace: 10,
     hasConsole: process.env.NODE_ENV != "production"  // 推荐写成动态，这样编译时不用修改；
   });
 ```

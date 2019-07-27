@@ -1971,52 +1971,78 @@ let formUtils = {
    * @returns false 或 一个长度为4的类组
    */
   parsePadding(value, canNegative) {
-    var resultVals;
+    var resultVals,
+      tmpVals,
+      max = 4;
     if (utils.isNum(value)) {
       if (canNegative || value >= 0) {
         resultVals = [value, value, value, value];
       } else {
         resultVals = [0, 0, 0, 0];
       }
+
+      return resultVals.join("px ") + "px";
     } else if (utils.isStr(value)) {
       value = value.trim();
       if (value) {
-        var tmpVals = value.split(/\s+/);
-        if (tmpVals.length <= 4) {
-          resultVals = [];
-          var reg1 = /^(-?\d+(\.\d+)?)(px)?$/; // 点号有数字
-          var reg2 = /^(-?\.\d+)(px)?$/; // 点号无数字
+        tmpVals = value.split(/\s+/);
+        if (tmpVals.length <= max) {
+          // 暂时合法，下面统一判断
+        } else {
+          tmpVals = false;
+        }
+      } else {
+        tmpVals = false;
+      }
+    } else if (utils.isArr(value) && value.length <= max) {
+      // 暂时合法，下面统一判断
+      tmpVals = value;
+    } else {
+      return false;
+    }
 
-          for (var i = 0; i < tmpVals.length; i++) {
-            var tmpVal = tmpVals[i];
-            var match = tmpVal.match(reg1) || tmpVal.match(reg2);
-            if (match) {
-              var numVal = Number(match[1]);
-              if (canNegative || numVal >= 0) {
-                resultVals.push(numVal);
-              } else {
-                resultVals.push(0);
-              }
-            } else {
-              break; // 不合法，退出循环
-            }
-          }
-          if (resultVals.length === tmpVals.length) {
-            // 解析是正确的，看个数
-            if (resultVals.length === 1) {
-              resultVals.push(resultVals[0], resultVals[0], resultVals[0]);
-            } else if (resultVals.length === 2) {
-              resultVals.push(resultVals[0], resultVals[1]);
-            } else if (resultVals.length === 3) {
-              resultVals.push(resultVals[1]);
-            } else {
-              // 长度为4个
-            }
+    // string or array
+    if (tmpVals) {
+      // 看数组的内容是否正确
+      resultVals = [];
+      var reg1 = /^(-?\d+(\.\d+)?)(px)?$/; // 点号有数字
+      var reg2 = /^(-?\.\d+)(px)?$/; // 点号无数字
+
+      var numVal;
+
+      for (var i = 0; i < tmpVals.length; i++) {
+        var tmpVal = tmpVals[i];
+        if (utils.isNum(tmpVal)) {
+          numVal = tmpVal;
+          if (canNegative || numVal >= 0) {
+            resultVals.push(numVal);
           } else {
-            resultVals = false;
+            resultVals.push(0);
           }
         } else {
-          resultVals = false;
+          var match = tmpVal.match(reg1) || tmpVal.match(reg2);
+          if (match) {
+            numVal = Number(match[1]);
+            if (canNegative || numVal >= 0) {
+              resultVals.push(numVal);
+            } else {
+              resultVals.push(0);
+            }
+          } else {
+            break; // 不合法，退出循环
+          }
+        }
+      }
+      if (resultVals.length === tmpVals.length) {
+        // 解析是正确的，看个数
+        if (resultVals.length === 1) {
+          resultVals.push(resultVals[0], resultVals[0], resultVals[0]);
+        } else if (resultVals.length === 2) {
+          resultVals.push(resultVals[0], resultVals[1]);
+        } else if (resultVals.length === 3) {
+          resultVals.push(resultVals[1]);
+        } else {
+          // 长度为4个
         }
       } else {
         resultVals = false;

@@ -62,11 +62,11 @@ data() {
           value: "首页位置"
         },
         more: {
-          boxRowSpace: 10,
           ui: {
             showBody: true,
             hasBorder: true,
-            padding: 20
+            padding: 20,
+            rowSpace: 10
           },
           title: {
             name: title,  // title为自定义的组件

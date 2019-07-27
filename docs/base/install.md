@@ -20,9 +20,11 @@ Vue.use(esForm);
 或
 Vue.use(esForm, 
 {
-  boxRowHeight: 40,
-  boxRowSpace: 20,
-  boxLabelWidth: 100,
+  rowHeight: 40,
+  rowSpace: 20,
+  labelWidth: 100,
+  offsetLeft: 0,
+  offsetRight: 0,
   colon: false,
   direction: "h",
   defaultCom: "input",  // 如：若用element-ui, 改为el-input
@@ -41,9 +43,11 @@ Vue.use(esForm,
 表单全局配置有如下
 | 属性名 | 默认值 | 说明
 | -- | -- | --
-| boxRowHeight | 40 | 设置每一块中每一行的高度；主要用于项label和项组件横向对齐
-| boxRowSpace | 20 | 整数（px） 设置每一块中行与行的距离
-| boxLabelWidth | 100 | 整数（px） 设置每一块中每一行的label的宽度
+| rowHeight | 40 | 设置每一项(行)的高度；主要用于项label和项组件横向对齐
+| rowSpace | 20 | 整数（px） 设置项(行)与项(行)的距离
+| labelWidth | 100 | 整数（px） 设置项(行)的label的宽度
+| offsetLeft | 0 | 整数（px） 项的左偏移量
+| offsetRight | 0 | 整数（px） 项的右偏移量
 | colon | false | 是否有冒号
 | direction | "h" | 竖排还是横排
 | defaultCom | "input" | 当配置时，不写component.name时用这个

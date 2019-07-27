@@ -34,11 +34,8 @@ schema就是一个json对象
   direction: "v", // 非必填 类型：字符串; 值：v或h 横排还是竖排
   colon: false, // 非必填 是否有冒号，根节点默认为没有，其它的没有设置就会继承
   rowHeight: 40, // 非必填 整数（px） 每一行的高度
-  boxRowHeight: 40, // 非必填 整数（px） 子节点的高度，在properties中有效，会被子节点继承
   rowSpace: 20, // 非必填 整数（px）与上一次行之间的间隔
-  boxRowSpace: 20, // 非必填 整数（px）在properties中有效,子节点中行之间的间隔,会被子节点继承
   labelWidth: 120, // 非必填 整数（px） label的宽度
-  boxLabelWidth: 120, // 非必填 整数（px）原理同boxRowSpace，不过在table中无效
   offsetLeft: 0,    // 非必填 每一项左边留白的空间
   offsetRight: 0,   // 非必填 每一项右边留白的空间
   hidden: false, // 非必填 持es语法; 是否隐藏此级，默认为显示
@@ -49,7 +46,17 @@ schema就是一个json对象
     showBody: undefined,  // 此值有undefined, true, false
     type: undefined,      // 此值有undefined, bg, block, bg-block
     hasBorder: false,
-    padding: undefined   // 内容区的内边距
+    padding: undefined,   // 内容区的内边距
+    hidden: false, // 非必填 持es语法; 是否隐藏此级，默认为显示
+
+    direction: "v", // 非必填 类型：字符串; 值：v或h 横排还是竖排
+    colon: false, // 非必填 是否有冒号，根节点默认为没有，其它的没有设置就会继承
+    rowHeight: 40, // 非必填 整数（px） 每一行的高度
+    rowSpace: 20, // 非必填 整数（px）与上一次行之间的间隔
+    labelWidth: 120, // 非必填 整数（px） label的宽度
+    offsetLeft: 0,    // 非必填 每一项左边留白的空间
+    offsetRight: 0   // 非必填 每一项右边留白的空间
+    
   },
   properties: { // 根节点：表单字段
     name: {

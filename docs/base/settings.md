@@ -7,7 +7,7 @@
 
 ## 标准写法
 
-标准的表单配置从一个对象开始，里面包含一个properties，可在每一层properties这一相同的层级中设置一些影响此表单的基本配置(如ui, boxRowSpace)。
+标准的表单配置从一个对象开始，里面包含一个properties，可在每一层properties这一相同的层级中设置一些影响此表单的基本配置(如ui)。
 
 ```js
 data() {
@@ -16,11 +16,17 @@ data() {
         // name: "默认小花"
       },
       formSchema: {   // 从一个对象开始，里面包含一个properties
-        colon: true,  // label前是否有冒号
-        boxRowSpace: 20,  // 每一行的间距
         ui: {
-          showBody: true  // 隐藏/打开切换按钮
-          // ...
+          showBody: true,  // 隐藏/打开切换按钮
+          // 以下的配置会被properties里面的字段(name/baseInfo)继承，
+          // name和baseInfo若没有覆盖，则继承
+          rowHeight: 40,
+          rowSpace: 20,
+          labelWidth: 100,
+          offsetLeft: 0,
+          offsetRight: 0,
+          colon: false,
+          direction: "h"
         },
         properties: {   // 最外层的properties(第一层级)
           title: "个人信息",
@@ -30,6 +36,7 @@ data() {
             value: "首页位置"
           },
           baseInfo: {
+            rowSpace: 30, // 覆盖上一级的ui.rowSpace(若没有ui就往上取，直到全局)
             properties: { // 下一层级(第二层级)
               age: {
                 label: "年龄",
@@ -66,6 +73,7 @@ data() {
           value: "首页位置"
         },
         baseInfo: {
+          rowSpace: 30, // 覆盖上一级的ui.rowSpace(若没有ui就往上取，直到全局)
           properties: { // 下一层级(第二层级，因为第一层级的properties不写了)
             age: {
               label: "年龄",
@@ -91,18 +99,15 @@ data() {
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
 | autoMatch | 一二级的数据自动匹配 | boolean | -- | false | 只在根节点中有效
-| title | 表单（或properties块）的名称 [写法](./title.md) | string/object | -- | -- | properties中有效<br/>支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
+| title | 表单块（properties）的名称 [写法](./title.md) | string/object | -- | -- | properties中有效<br/>支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
 | ui | 影响块(properties)的布局 [写法](#ui属性) | string/object | -- | -- | properties中有效
-| direction | 项的排版方向 | string | "h" "v" | 全局 | 不设置时，继承上一级的direction
-| colon | label中是否有冒号 | boolean | -- | 全局 |
-| rowHeight | 项的行高 | number | -- | --  | 不设置时，继承上一级的boxRowHeight
-| boxRowHeight | 子节点中每一项的高度 | number | -- | 全局 | properties中有效
-| rowSpace | 与上一次行之间的间隔 | number | -- | -- | 不设置时，继承上一级的boxRowSpace
-| boxRowSpace | 子节点中行与行的高度 | number | -- | 全局 | properties中有效
-| labelWidth | label的宽度 | number | -- | 全局 | 不设置时，继承上一级的boxLabelWidth
-| boxLabelWidth | 子节点的label的宽度 | number | -- | 全局 | properties中有效
-| offsetLeft | 每一项左边留白的空间 | number | >=0 | 0 | 没有继承
-| offsetRight | 每一项右边留白的空间 | number | >=0 | 0 | 没有继承
+| rowHeight | 项的行高 | number | -- | 上一级 | 不设置时，继承上一级的[ui](#ui属性).rowHeight
+| rowSpace | 与上一次项(行)之间的间隔 | number | -- | 上一级 | 不设置时，继承上一级的[ui](#ui属性).rowSpace
+| labelWidth | 项label的宽度 | number | -- | 上一级 | 不设置时，继承上一级的[ui](#ui属性).labelWidth
+| offsetLeft | 项的左边偏移量 | number | >=0 | 上一级 | 不设置时，继承上一级的[ui](#ui属性).offsetLeft
+| offsetRight | 项的右边偏移量 | number | >=0 | 上一级 | 不设置时，继承上一级的[ui](#ui属性).offsetRight
+| colon | label中是否有冒号 | boolean | -- | 上一级 | 不设置时，继承上一级的[ui](#ui属性).colon
+| direction | 项的排版方向 | string | "h" "v" | 上一级 | 不设置时，继承上一级的[ui](#ui属性).direction
 | hidden | 是否隐藏此项 | boolean | -- | true | 支持[es写法](./com-standard.md#es写法)、[函数写法](./com-standard.md#函数写法)
 | hdValue | `hidden`或`祖先hidden`为true时有效 | -- | -- | -- | 值为`undefined`时：相应的字段不会取出<br />值为`null`时: 为正常遍历节点<br />`其余`: 取此值
 | value | 组件的值 | -- | -- | -- |
@@ -124,14 +129,31 @@ data() {
 
 ### ui属性
 
-只有在properties中有效；主要是影响头部的样式和body的边距
+只有在properties中有效；主要是影响头部的样式和body的边距<br />
+`（下面都是ui的属性，分为两部分是为了更好区别分类）`
+
+- 1. ui属性>>界面设置
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
 | showBody | 隐藏/打开切换按钮 | boolean | -- | -- | 不设置没有按钮；设置有按钮，此值代表最先是否显示body
 | type | 整个块的布局类型 | string | `bg`, `block`, `bg-block` | -- | `block`就是前面有一竖
 | hasBorder | 内容区是否有边框 | boolean | -- | false | --
-| padding | 内容区的内边距 | number/string | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px'
+| padding | 内容区的内边距 | number/string | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px', `数组`：[20, 10]
+
+- 2. ui属性>>可被继承
+
+| 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
+| -- | -- | -- | -- | -- | --
+| rowHeight | 项的行高 | number | -- | 上一级 | 注：影响的是下一级
+| rowSpace | 与上一次项(行)之间的间隔 | number | -- | 上一级 | 注：影响的是下一级
+| labelWidth | 项label的宽度 | number | -- | 上一级 | 注：影响的是下一级
+| offsetLeft | 项的左边偏移量 | number | >=0 | 上一级 | 注：影响的是下一级
+| offsetRight | 项的右边偏移量 | number | >=0 | 上一级 | 注：影响的是下一级
+| colon | label中是否有冒号 | boolean | -- | 上一级 | 注：影响的是下一级
+| direction | 项的排版方向 | string | "h" "v" | 上一级 | 注：影响的是下一级
+
+>`ui属性>>可被继承`里的配置并不影响当前的项，只会影响下一级，这样做只是为了统一配置下一级，不用一个一个配置
 
 ### layout属性
 
@@ -147,7 +169,7 @@ data() {
 | name | 类型 | string | `space`, `tabs` | -- | --
 | type | 布局类型 | string | `bg`, `card`, `line` | `card` | --
 | hasBorder | 内容区是否有边框 | boolean | -- | false | --
-| padding | 内容区的内边距 | number/string | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px'
+| padding | 内容区的内边距 | number/string | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px', `数组`：[20, 10]
 
 注：`当name为space时，其余的属性是无效的，不用设置也可`
 
