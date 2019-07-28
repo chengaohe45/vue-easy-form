@@ -32,7 +32,9 @@ export default {
       docsHref: "/vue-easy-form-docs/dist/base/form.html",
 
       formSchema: {
-        direction: "h",
+        ui: {
+          direction: "h"
+        },
         properties: {
           name: {
             label: "名称",

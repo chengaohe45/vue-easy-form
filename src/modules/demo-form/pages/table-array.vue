@@ -15,7 +15,9 @@ export default {
       title: "表格数组",
 
       formSchema: {
-        direction: "v",
+        ui: {
+          direction: "v"
+        },
         properties: {
           name: {
             label: "名称",

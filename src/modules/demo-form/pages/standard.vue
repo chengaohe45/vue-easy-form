@@ -21,7 +21,9 @@ export default {
 
       formSchema: {
         title: "表单名称",
-        colon: true,
+        ui: {
+          colon: true
+        },
         properties: {
           test: null,
           name: {

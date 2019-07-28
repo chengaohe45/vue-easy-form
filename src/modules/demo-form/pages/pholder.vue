@@ -18,8 +18,8 @@ export default {
       title: "占位空间",
 
       formSchema: {
-        colon: true,
         ui: {
+          colon: true,
           rowSpace: 20
         },
         properties: {
