@@ -17,7 +17,9 @@ export default {
       details: "字段unit, desc; desc支持html",
 
       formSchema: {
-        colon: true,
+        ui: {
+          colon: true
+        },
         properties: {
           name: {
             label: "广告名称",

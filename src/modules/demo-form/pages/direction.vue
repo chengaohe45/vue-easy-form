@@ -15,8 +15,10 @@ export default {
       title: "项排列设置",
 
       formSchema: {
-        direction: "v",
-        colon: true,
+        ui: {
+          direction: "v",
+          colon: true
+        },
         properties: {
           name: {
             label: "作者",

@@ -15,7 +15,9 @@ export default {
       title: "帮助",
 
       formSchema: {
-        direction: "h",
+        ui: {
+          direction: "h"
+        },
         properties: {
           name: {
             label: "广告名称",

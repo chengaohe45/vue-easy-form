@@ -71,6 +71,7 @@ export default {
               rowSpace: 10,
               rowHeight: 28,
               labelWidth: 80,
+              colon: true,
               showBody: true
             },
             title: {
@@ -78,7 +79,6 @@ export default {
               text: "es: {{$root}}.status ? '更多设置' : '很多设置'"
             },
             label: false,
-            colon: true,
             offsetLeft: 30,
             offsetRight: 30,
             properties: {
