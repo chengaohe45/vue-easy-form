@@ -1,3 +1,8 @@
+/**
+ * 点击拖拽
+ * @param {*} event mousedown事件
+ * @param {*} callback 回调函数。mousemove返回偏移量，mouseup返回false
+ */
 function esDrag(event, callback) {
   // The mouse position (in window coordinates)
   // at which the drag begins

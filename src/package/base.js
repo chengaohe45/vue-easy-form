@@ -1,7 +1,15 @@
-// import parse from "./libs/parse.js";
+
+/**
+ * base.js
+ * 
+ * Copyright (c) 2019 chengaohe All rights reserved.
+ *
+ * 无缝对接vue组件
+ *
+ */
+
 import utils from "./libs/utils.js";
 import constant from "./libs/constant.js";
-// import formUtils from "./libs/form-utils";
 
 ("use strict");
 
