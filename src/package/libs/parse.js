@@ -1,8 +1,21 @@
-// import formUtils from "./form-utils";
+/**
+ * parse.js
+ *
+ * Copyright (c) 2019 chengaohe All rights reserved.
+ *
+ * 用于解析es语句
+ *
+ */
+
 import utils from "./utils";
 import constant from "./constant";
 
 let parse = {
+  /**
+   * 判断是否正确的es语句
+   * @param {*} scriptTxt
+   * @param {*} expPrefix
+   */
   isEsScript(scriptTxt, expPrefix = "es:") {
     if (utils.isStr(scriptTxt)) {
       var esIndex = scriptTxt.indexOf(expPrefix);
@@ -22,15 +35,12 @@ let parse = {
   },
 
   /**
-   * 智能分析值
-   * @param {*} val
-   * @param {*}
-   *   idxChain: 该值的索引链，即所在的路径中的所有数组中的索引，比如 persons[0].name[1].firstname，即该值为"0,1"
-   *   data: {rootData: 代表$root的值, globalData: 代表$global的值}
-   * 规则：
+   * 智能解析脚本
+   * @param {*} scriptTxt
+   * @param {*} parseSources
+   * scriptTxt情况：
    * 1. 普通值直接返回
    * 2. 函数类型返回执行后的值
-   * 3. 字符串且以dx:开头的，则会进行处理成可执行的脚本并执行返回结果（其中表达式中$root代表rootData, $const代表constData）
    */
   smartEsValue(
     scriptTxt,
@@ -79,7 +89,11 @@ let parse = {
     }
   },
 
-  /* 将es转换成为Function */
+  /**
+   * 将es转换成为Function
+   * @param {*} scriptTxt
+   * @param {*} expPrefix
+   */
   newEsFuncion(scriptTxt, expPrefix = "es:") {
     let result;
 
@@ -158,7 +172,7 @@ let parse = {
       }
       newScriptTxt += scriptTxt.slice(curSliceIndex); // 最后的片段
 
-      // 假设val为：dx: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
+      // 假设val为：es: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
       const matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
       matchs.forEach(mItem => {
         // mItem值："{{$root.persons[i].age}}"

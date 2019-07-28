@@ -1,7 +1,6 @@
-
 /**
  * base.js
- * 
+ *
  * Copyright (c) 2019 chengaohe All rights reserved.
  *
  * 无缝对接vue组件
