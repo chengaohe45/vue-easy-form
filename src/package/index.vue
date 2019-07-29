@@ -346,6 +346,7 @@ $btnDisableColor: #d5d7dc;
 import formItem from "./form-item.vue";
 import utils from "./libs/utils.js";
 import globalSettings from "./libs/global.js";
+import schemaUtils from "./libs/schema-utils.js";
 import formUtils from "./libs/form-utils.js";
 import parse from "./libs/parse.js";
 import constant from "./libs/constant.js";
@@ -681,7 +682,7 @@ export default {
     },
 
     __initUi(schema) {
-      var tmpSchema = formUtils.completeSchema(schema);
+      var tmpSchema = schemaUtils.completeSchema(schema);
       //将value的值同步到schema中
       this.__setValue(tmpSchema, this.value);
       //进行初始化
