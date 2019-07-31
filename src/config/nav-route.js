@@ -27,13 +27,13 @@ import rowArrForm from "../modules/demo-form/pages/row-array";
 import legendArrForm from "../modules/demo-form/pages/legend-array";
 import tabArrForm from "../modules/demo-form/pages/table-array";
 import tabsArrForm from "../modules/demo-form/pages/tabs-array";
-import valueForm from "../modules/demo-form/pages/value";
+// import valueForm from "../modules/demo-form/pages/value";
 import formatForm from "../modules/demo-form/pages/format";
 import refForm from "../modules/demo-form/pages/ref";
 import actionsForm from "../modules/demo-form/pages/actions";
 // import eventForm from "../modules/demo-form/pages/event";
 import exampleForm from "../modules/demo-form/pages/example";
-import tryForm from "../modules/demo-form/pages/try";
+// import tryForm from "../modules/demo-form/pages/try";
 
 import notFound from "../modules/notfound/pages/index";
 
@@ -304,13 +304,13 @@ let navList = [
       //   path: "/ref",
       //   component: refForm
       // },
-      {
-        icon: "",
-        name: "取值/赋值",
-        link: "/value",
-        path: "/value",
-        component: valueForm
-      },
+      // {
+      //   icon: "",
+      //   name: "取值/赋值",
+      //   link: "/value",
+      //   path: "/value",
+      //   component: valueForm
+      // },
 
       {
         icon: "",
@@ -335,15 +335,15 @@ let navList = [
       //   component: eventForm
       // }
     ]
-  },
-  {
-    icon: "el-icon-edit",
-    name: "试一试",
-    link:
-      "/try" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
-    path: "/try" /* 用于路由, 要跟link保持一致 */,
-    component: tryForm /* 对应的模块 */
   }
+  // {
+  //   icon: "el-icon-edit",
+  //   name: "试一试",
+  //   link:
+  //     "/try" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
+  //   path: "/try" /* 用于路由, 要跟link保持一致 */,
+  //   component: tryForm /* 对应的模块 */
+  // }
   // <!-- Don"t touch me - modules-->
 ];
 

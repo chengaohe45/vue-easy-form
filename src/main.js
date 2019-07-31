@@ -13,6 +13,10 @@ import esForm from "@/package/index.js";
 
 import gComponent from "@/components/register.js";
 
+import VueCodemirror from "vue-codemirror";
+// require styles
+import "codemirror/lib/codemirror.css";
+
 // 注册全局组件
 gComponent.register();
 Vue.use(elementUI);
@@ -29,6 +33,8 @@ Vue.use(esForm, {
   trimDoms: ["input", "textarea", "el-input"], // 数组，空数组会全部清空
   hasConsole: process.env.NODE_ENV != "production" // 推荐写成动态，编译时不用修改
 });
+
+Vue.use(VueCodemirror);
 
 Vue.config.productionTip = false;
 

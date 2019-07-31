@@ -15,7 +15,6 @@ export default {
       title: "行数组",
 
       formSchema: {
-        layout: "tabs",
         ui: {
           rowSpace: 20
         },

@@ -24,98 +24,35 @@
       </div>
     </div>
     <div class="demo-form-body">
-      <div class="demo-form-ui">
-        <div class="demo-form-wrap">
-          <es-form
-            ref="form"
-            :schema="formSchema"
-            v-model="formValue"
-            :hasConsole="hasConsole"
-            @input="formInput"
-            @change="formChange"
-            @submit="formSubmit"
-          ></es-form>
+      <div class="demo-es-source">
+        <h3 class="subtitle">formSchema:</h3>
+        <div class="demo-source-panel">
+          <!-- <el-button type="primary" plain @click="clickHandler">运行</el-button> -->
+          <codemirror
+            v-model="code"
+            :options="cmOptions"
+            style="height: 100%;"
+          ></codemirror>
         </div>
-        <div class="demo-value-box">
-          <div class="demo-set-get-box" v-if="hasValue">
-            <div class="get-box">
-              <div class="box-inner">
-                <el-button type="primary" @click="getFormValue"
-                  >取值( form.getValue() )</el-button
-                >
-                <div class="value-parse-box" v-if="formValue2">
-                  <pre>{{ JSON.stringify(formValue2, null, 2) }}</pre>
-                </div>
-              </div>
-            </div>
-            <div class="set-box">
-              <div class="box-inner">
-                <el-button type="primary" @click="setFormValue"
-                  >赋值( form.setValue({}) )</el-button
-                >
-                <div class="value-parse-box">
-                  <el-input
-                    type="textarea"
-                    :rows="10"
-                    placeholder="请输入Json"
-                    v-model="rawFormValue"
-                  >
-                  </el-input>
-                </div>
-                <div v-if="errorMsg">{{ errorMsg }}</div>
-              </div>
-            </div>
-            <div class="reset-box">
-              <div class="box-inner">
-                <el-button type="primary" @click="resetFormValue"
-                  >重置( form.reset() )</el-button
-                >
-                <br /><br />
-                <div>
-                  <el-button type="primary" @click="checkFormValue"
-                    >验证( form.checkAll() )</el-button
-                  >
-                  <div
-                    class="value-parse-box"
-                    v-if="typeof checkResult == 'boolean'"
-                  >
-                    <pre>{{ JSON.stringify(checkResult, null, 2) }}</pre>
-                  </div>
-                </div>
-              </div>
-            </div>
+      </div>
+      <div class="demo-es-result">
+        <h3 class="subtitle">表单输出</h3>
+        <div class="demo-result-panel">
+          <div class="demo-form-ui">
+            <es-form
+              ref="form"
+              :schema="schema"
+              v-model="formValue"
+              :hasConsole="hasConsole"
+              @input="formInput"
+              @change="formChange"
+              @submit="formSubmit"
+            ></es-form>
           </div>
-          <div v-else>
+          <div class="demo-form-value">
             表单值(formValue):
             <pre class="pre-box">{{ JSON.stringify(formValue, null, 2) }}</pre>
           </div>
-        </div>
-      </div>
-      <div class="demo-form-source">
-        <div class="source-inner">
-          <strong>formSchema:</strong>
-          <pre>{{
-            JSON.stringify(
-              formSchema,
-              (key, value) => {
-                if (
-                  value &&
-                  key == "name" &&
-                  typeof value == "object" &&
-                  value.render &&
-                  value.staticRenderFns
-                ) {
-                  return "[编译的Vue Object]";
-                } else if (typeof value == "function") {
-                  //return "[Function]";
-                  return value.toString();
-                } else {
-                  return value;
-                }
-              },
-              2
-            )
-          }}</pre>
         </div>
       </div>
     </div>
@@ -123,6 +60,48 @@
 </template>
 
 <script>
+// language
+import "codemirror/mode/javascript/javascript.js";
+// theme css
+// import 'codemirror/theme/monokai.css'
+// // require active-line.js
+// import'codemirror/addon/selection/active-line.js'
+// // styleSelectedText
+// import'codemirror/addon/selection/mark-selection.js'
+// import'codemirror/addon/search/searchcursor.js'
+// // hint
+// import'codemirror/addon/hint/show-hint.js'
+// import'codemirror/addon/hint/show-hint.css'
+// import'codemirror/addon/hint/javascript-hint.js'
+// import'codemirror/addon/selection/active-line.js'
+// highlightSelectionMatches
+// import'codemirror/addon/scroll/annotatescrollbar.js'
+// import'codemirror/addon/search/matchesonscrollbar.js'
+// import'codemirror/addon/search/searchcursor.js'
+// import'codemirror/addon/search/match-highlighter.js'
+// keyMap
+// import'codemirror/mode/clike/clike.js'
+// import'codemirror/addon/edit/matchbrackets.js'
+// import'codemirror/addon/comment/comment.js'
+// import'codemirror/addon/dialog/dialog.js'
+// import'codemirror/addon/dialog/dialog.css'
+// import'codemirror/addon/search/searchcursor.js'
+// import'codemirror/addon/search/search.js'
+// import'codemirror/keymap/sublime.js'
+// foldGutter
+// import'codemirror/addon/fold/foldgutter.css'
+// import'codemirror/addon/fold/brace-fold.js'
+// import'codemirror/addon/fold/comment-fold.js'
+// import'codemirror/addon/fold/foldcode.js'
+// import'codemirror/addon/fold/foldgutter.js'
+// import'codemirror/addon/fold/indent-fold.js'
+// import'codemirror/addon/fold/markdown-fold.js'
+// import'codemirror/addon/fold/xml-fold.js'
+
+// import CodeMirror from "codemirror";
+
+const FUNCTIONNAME = "FUNCTIONNAME";
+
 export default {
   data() {
     return {
@@ -130,12 +109,36 @@ export default {
         // name: "默认小花"
       },
 
-      openDetails: true,
+      // functionIndex: 0,
 
-      formValue2: null,
-      rawFormValue: "",
-      checkResult: null,
-      errorMsg: ""
+      schema: {},
+
+      code: "",
+
+      cmOptions: {
+        tabSize: 4,
+        // styleActiveLine: false,
+        lineNumbers: true,
+        // styleSelectedText: false,
+        // line: true,
+        // foldGutter: true,
+        // gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"],
+        // highlightSelectionMatches: { showToken: /\w/, annotateScrollbar: true },
+        mode: "text/javascript"
+        // hint.js options
+        // hintOptions:{
+        //   // 当匹配只有一项的时候是否自动补全
+        //   completeSingle: false
+        // },
+        //快捷键 可提供三种模式 sublime、emacs、vim
+        // keyMap: "sublime",
+        // matchBrackets: true,
+        // showCursorWhenSelecting: true,
+        // theme: "monokai",
+        // extraKeys: { "Ctrl": "autocomplete" }
+      },
+
+      openDetails: true
     };
   },
 
@@ -149,11 +152,6 @@ export default {
     formSchema: {
       type: Object,
       required: true
-    },
-
-    hasValue: {
-      type: Boolean,
-      required: false
     },
 
     printEvent: {
@@ -183,6 +181,50 @@ export default {
 
   created() {
     window.demoVm = this;
+
+    this.$data.schema = this.formSchema;
+
+    var functionObj = {},
+      functionIndex = 0;
+    var newCode = JSON.stringify(
+      this.formSchema,
+      (key, value) => {
+        if (
+          value &&
+          key == "name" &&
+          typeof value == "object" &&
+          value.render &&
+          value.staticRenderFns
+        ) {
+          return "[编译的Vue Object]";
+        } else if (typeof value == "function") {
+          // var obj = this.$data.functionObj;
+          var funcKey = FUNCTIONNAME + ++functionIndex;
+          var funcStr = value.toString();
+          funcStr = funcStr.replace(
+            new RegExp("function\\\s+" + key + "\\(", "g"),
+            "function("
+          );
+          functionObj[funcKey] = funcStr;
+          return funcKey;
+        } else {
+          return value;
+        }
+      },
+      2
+    );
+
+    newCode = newCode.replace(/\"(.+?)\"\:/g, "$1:");
+
+    for (var key in functionObj) {
+      var reg = new RegExp('\\"' + key + '\\"', "g");
+      newCode = newCode.replace(reg, functionObj[key]);
+    }
+
+    // 使命完成
+    functionObj = null;
+
+    this.$data.code = newCode;
   },
 
   computed: {},
@@ -190,43 +232,16 @@ export default {
   mounted() {},
 
   methods: {
-    getFormValue() {
-      this.$data.formValue2 = this.$refs.form.getValue();
-
-      this.$data.rawFormValue = JSON.stringify(this.$data.formValue2, null, 2);
-
-      this.$message({
-        message: "值也填进赋值框里，可以修改试试",
-        type: "success"
-      });
-    },
-
-    checkFormValue() {
-      this.$data.checkResult = this.$refs.form.checkAll();
-    },
-
-    resetFormValue() {
-      this.$data.checkResult = null;
-      this.$data.formValue2 = null;
-      this.$refs.form.reset();
+    clickHandler() {
+      var result;
+      eval("result = " + this.$data.code);
+      // console.log("code: ", result);
+      this.$data.formValue = {};
+      this.$data.schema = result;
     },
 
     toggleDetails() {
       this.$data.openDetails = !this.$data.openDetails;
-    },
-
-    setFormValue() {
-      try {
-        this.$data.errorMsg = "";
-        // console.log(1);
-        var result;
-        eval("result = " + this.$data.rawFormValue);
-        // console.log(2);
-        this.$refs.form.setValue(result);
-      } catch (e) {
-        // console.error("e: ", e);
-        this.$data.errorMsg = "此值解析不出来";
-      }
     },
 
     formInput(value, sourcePathKey) {
@@ -276,7 +291,7 @@ export default {
   @include flex-full;
   overflow: auto;
   height: 100%;
-  padding: 10px;
+  padding: 10px 10px 0;
   box-sizing: border-box;
   font-size: 14px;
 
@@ -289,13 +304,6 @@ export default {
     font-weight: 400;
     font-size: 22px;
     line-height: 24px;
-  }
-
-  .demo-form-wrap {
-    margin: 10px;
-    padding: 10px 10px;
-    border: 1px solid #d6d7da;
-    border-radius: 4px;
   }
 
   .demo-form-details {
@@ -322,7 +330,7 @@ export default {
     height: 100%;
     @include display-flex;
     @include direction-h;
-    padding-top: 20px;
+    // padding-top: 5px;
     box-sizing: border-box;
     min-height: 300px;
   }
@@ -340,70 +348,82 @@ export default {
     padding: 0px;
   }
 
-  .demo-set-get-box {
-    // margin: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    background: #eee;
-    // overflow: auto;
-    @include flex-full;
-    // height: 100%;
-    @include display-flex;
-    @include direction-h;
-    padding-top: 20px;
-    box-sizing: border-box;
-
-    .get-box {
-      width: 35%;
-    }
-
-    .set-box {
-      width: 65%;
-    }
-
-    .box-inner {
-      margin: 0 5px;
-    }
-
-    .value-parse-box {
-      margin-top: 10px;
-    }
-  }
-
-  .demo-value-box {
-    margin: 20px 10px 0 10px;
-    border-top: 1px dashed #d6d7da;
-    padding: 10px;
-    text-align: left;
-  }
-
   .pre-box {
     overflow: auto;
   }
 
-  .demo-form-ui {
-    width: 70%;
-    padding: 10px 0;
-    box-sizing: border-box;
-    border: 1px dashed #d6d7da;
-    border-radius: 4px;
-    overflow: auto;
+  .subtitle {
+    margin: 0 0 0 3px;
+    padding: 0;
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 30px;
+    @include flex-fixed;
   }
 
-  .demo-form-source {
-    width: 30%;
-    overflow: auto;
-    .source-inner {
+  .demo-es-result {
+    padding: 5px 0 10px 0;
+    @include flex-full;
+    overflow: hidden;
+    box-sizing: border-box;
+    @include display-flex;
+    @include direction-v;
+
+    .demo-result-panel {
+      margin: 0;
+      padding: 0;
       box-sizing: border-box;
-      border: 1px dashed #d6d7da;
+      border: 1px dashed #b3d8ff;
       border-radius: 4px;
       text-align: left;
-      margin-left: 20px;
+      overflow: auto;
+      width: 100%;
+      @include flex-full;
+    }
+
+    .demo-form-ui {
+      margin: 10px;
+      padding: 10px 10px;
+      border: 1px solid #d6d7da;
+      border-radius: 4px;
+    }
+
+    .demo-form-value {
+      margin: 20px 10px 0;
+      border-top: 1px dashed #d6d7da;
       padding: 10px;
+      text-align: left;
+    }
+  }
+
+  .demo-es-source {
+    margin-right: 5px;
+    padding: 5px 10px 10px 10px;
+    width: 35%;
+    @include flex-fixed;
+    overflow: hidden;
+    box-sizing: border-box;
+    @include display-flex;
+    @include direction-v;
+
+    background: #f3f3f3;
+
+    .demo-source-panel {
+      box-sizing: border-box;
+      border: 1px dashed #b3d8ff;
+      border-radius: 4px;
+      text-align: left;
+      // padding: 5px;
       overflow: auto;
       height: 100%;
+      @include flex-full;
     }
+  }
+
+  .CodeMirror {
+    border: 1px solid #eee;
+    // height: 500px;
+    height: auto;
   }
 }
 </style>

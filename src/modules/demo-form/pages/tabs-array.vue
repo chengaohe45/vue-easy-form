@@ -31,8 +31,8 @@ export default {
               rules: true,
               actions: {
                 trigger: "change",
-                handler: function(value, key, event) {
-                  console.log("input change: ", value, key, event);
+                handler: function(options) {
+                  console.log("input change: ", options);
                 }
               }
             },
@@ -61,8 +61,8 @@ export default {
               rules: true,
               actions: {
                 trigger: "change",
-                handler: function(value, key, event) {
-                  console.log("input change: ", value, key, event);
+                handler: function(options) {
+                  console.log("input change: ", options);
                 }
               }
             },
