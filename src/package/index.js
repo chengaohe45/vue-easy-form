@@ -1,6 +1,6 @@
 // import esBase from "./base";
 import esForm from "./index.vue";
-// import esHelp from "./components/help.vue";
+import schemaUtils from "./libs/schema-utils";
 
 // import esRules from "./libs/rules.js";
 import esUtils from "./libs/utils";
@@ -25,6 +25,10 @@ const install = function(Vue, globalOpts = {}) {
   Vue.component("es-form", esForm);
 };
 
+const check = function(schema) {
+  return schemaUtils.check(schema);
+};
+
 /* istanbul ignore if */
 if (typeof window !== "undefined" && window.Vue) {
   install(window.Vue);
@@ -33,5 +37,6 @@ if (typeof window !== "undefined" && window.Vue) {
 export default {
   version: "1.1.6",
   install,
-  esForm
+  esForm,
+  check
 };

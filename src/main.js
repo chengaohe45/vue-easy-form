@@ -13,9 +13,13 @@ import esForm from "@/package/index.js";
 
 import gComponent from "@/components/register.js";
 
-import VueCodemirror from "vue-codemirror";
-// require styles
-import "codemirror/lib/codemirror.css";
+// codemirror的引入
+// import VueCodemirror from "vue-codemirror";
+// // require styles
+// import "codemirror/lib/codemirror.css";
+// // language
+// import "codemirror/mode/javascript/javascript.js";
+// Vue.use(VueCodemirror);
 
 // 注册全局组件
 gComponent.register();
@@ -34,11 +38,13 @@ Vue.use(esForm, {
   hasConsole: process.env.NODE_ENV != "production" // 推荐写成动态，编译时不用修改
 });
 
-Vue.use(VueCodemirror);
-
 Vue.config.productionTip = false;
 
 window.vm = new Vue({
   router,
   render: h => h(App)
 }).$mount("#app");
+
+window.onerror = function() {
+  alert(1);
+};

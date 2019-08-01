@@ -19,6 +19,18 @@ import { enterSubmit, onlySubmit } from "./submit";
 
 let schemaUtils = {
   /**
+   * 用于检查rawSchema是否符合要求
+   * @param {*} rawSchema
+   */
+  check(rawSchema) {
+    try {
+      this.completeSchema(rawSchema);
+    } catch (e) {
+      return e;
+    }
+    return true;
+  },
+  /**
    * 把原始的schema转化为标准的schema
    * 解析原则：
    * 对于一个对象{}来说
@@ -100,7 +112,7 @@ let schemaUtils = {
       );
     } else if (this.__isPropItem(propItem)) {
       if (!this.__existEntityItem(propItem)) {
-        throw "属性" + parentKey + "没有具体的子节点";
+        throw "属性" + parentKey + "没有具体的子节点(properties全为空)";
       }
 
       // 是否数组(优先级最高)
@@ -1523,11 +1535,7 @@ let schemaUtils = {
    * @param {*} rawItem
    */
   __isPropItem(rawItem) {
-    return (
-      !this.__isSpaceItem(rawItem) &&
-      utils.isObj(rawItem.properties) &&
-      Object.keys(rawItem.properties).length > 0
-    );
+    return !this.__isSpaceItem(rawItem) && utils.isObj(rawItem.properties);
   },
 
   /**
