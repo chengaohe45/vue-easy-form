@@ -919,8 +919,11 @@ let schemaUtils = {
     }
 
     // 判断名称是否合法
-    if (utils.isStr(newComponent.name) && (!utils.validateComponentName(newComponent.name))) {
-      throw "组件名(" + newComponent.name + ")存在html非法字符"
+    if (
+      utils.isStr(newComponent.name) &&
+      !utils.validateComponentName(newComponent.name)
+    ) {
+      throw "组件名(" + newComponent.name + ")存在html非法字符";
     }
 
     return newComponent;
@@ -1442,12 +1445,15 @@ let schemaUtils = {
     }
 
     // 判断名称是否合法
-    if (newCom && utils.isStr(newCom.name) && (!utils.validateComponentName(newCom.name))) {
-      throw "组件名(" + newCom.name + ")存在html非法字符"
+    if (
+      newCom &&
+      utils.isStr(newCom.name) &&
+      !utils.validateComponentName(newCom.name)
+    ) {
+      throw "组件名(" + newCom.name + ")存在html非法字符";
     }
 
     return newCom;
-
   },
 
   /**
