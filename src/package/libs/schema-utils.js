@@ -918,6 +918,11 @@ let schemaUtils = {
       };
     }
 
+    // 判断名称是否合法
+    if (utils.isStr(newComponent.name) && (!utils.validateComponentName(newComponent.name))) {
+      throw "组件名(" + newComponent.name + ")存在html非法字符"
+    }
+
     return newComponent;
   },
 
@@ -1423,18 +1428,26 @@ let schemaUtils = {
 
       newCom.__rawText = parse.newEsFuncion(text);
 
-      return newCom;
+      // return newCom;
     } else if (utils.isStr(value)) {
       value = value.trim();
       if (value || canEmpty) {
         newCom = { text: value, __rawText: parse.newEsFuncion(value) };
       } else {
-        newCom = false;
+        return false;
       }
-      return newCom;
+      // return newCom;
     } else {
       return false;
     }
+
+    // 判断名称是否合法
+    if (newCom && utils.isStr(newCom.name) && (!utils.validateComponentName(newCom.name))) {
+      throw "组件名(" + newCom.name + ")存在html非法字符"
+    }
+
+    return newCom;
+
   },
 
   /**
