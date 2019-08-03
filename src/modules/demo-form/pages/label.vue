@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       字段label
     </div>
@@ -13,6 +18,8 @@ export default {
   data() {
     return {
       title: "项标签",
+      docsTitle: "项标签配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/label.html",
 
       formSchema: {
         name: {

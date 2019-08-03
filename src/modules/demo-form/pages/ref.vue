@@ -1,10 +1,5 @@
 <template>
-  <demo-frame
-    :title="title"
-    :formSchema="formSchema"
-    :docsTitle="docsTitle"
-    :docsHref="docsHref"
-  >
+  <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
       <div>
         在component对象中添加ref属性，应用时再用form.getRef('testRef')取出
@@ -28,8 +23,6 @@ export default {
   data() {
     return {
       title: "引用",
-      docsTitle: "所有表单事件/方法",
-      docsHref: "/vue-easy-form-docs/dist/base/form.html",
 
       formSchema: {
         ui: {

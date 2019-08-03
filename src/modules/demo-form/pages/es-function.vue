@@ -1,5 +1,11 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema" :hasConsole="hasConsole">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :hasConsole="hasConsole"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <!-- <div slot="details"></div> -->
   </demo-frame>
 </template>
@@ -11,6 +17,8 @@ export default {
   data() {
     return {
       title: "Es/函数化写法",
+      docsTitle: "写法配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/com-standard.html",
       hasConsole: true,
 
       formSchema: {

@@ -408,7 +408,7 @@ export default {
     }
 
     .docs-btn {
-      margin-left: 10px;
+      margin-left: 5px;
       color: #409eff;
       text-decoration: none;
       &:hover {

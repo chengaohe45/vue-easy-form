@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       字段component.actions
     </div>
@@ -13,6 +18,8 @@ export default {
   data() {
     return {
       title: "组件行为/事件",
+      docsTitle: "组件行为/事件文档",
+      docsHref: "/vue-easy-form-docs/dist/base/component.html#组件事件",
 
       formSchema: {
         properties: {

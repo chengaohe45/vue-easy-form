@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>字段component</div>
       “广告名称1” >>
@@ -15,6 +20,8 @@ export default {
   data() {
     return {
       title: "项组件",
+      docsTitle: "项组件配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/component.html",
 
       formSchema: {
         name1: "广告名称1",

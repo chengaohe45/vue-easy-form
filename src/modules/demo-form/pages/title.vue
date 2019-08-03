@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>字段title</div>
       <div class="sys-danger">块的标题、在项中不起作用(跟properties同级)</div>
@@ -13,7 +18,9 @@ import title from "@/components/units/title";
 export default {
   data() {
     return {
-      title: "占位空间",
+      title: "标题",
+      docsTitle: "标题配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/title.html",
 
       formSchema: {
         ui: {

@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>字段desc: 对每一项进行补充</div>
     </div>
@@ -13,8 +18,8 @@ export default {
   data() {
     return {
       title: "描述",
-
-      details: "字段unit, desc; desc支持html",
+      docsTitle: "描述配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/desc.html",
 
       formSchema: {
         ui: {

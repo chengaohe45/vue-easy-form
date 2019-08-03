@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>字段format</div>
       <div class="sys-danger">
@@ -16,6 +21,8 @@ export default {
   data() {
     return {
       title: "数据转换",
+      docsTitle: "数据转换配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/form-value.html#值转换",
 
       formSchema: {
         name: {

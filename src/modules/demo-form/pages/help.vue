@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema">
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       字段help
     </div>
@@ -13,6 +18,8 @@ export default {
   data() {
     return {
       title: "帮助",
+      docsTitle: "帮助配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/help.html",
 
       formSchema: {
         ui: {

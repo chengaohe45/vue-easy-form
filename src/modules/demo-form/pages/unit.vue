@@ -1,5 +1,11 @@
 <template>
-  <demo-frame class="demo-frame" :title="title" :formSchema="formSchema">
+  <demo-frame
+    class="demo-frame"
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  >
     <div slot="details">
       <div>字段unit: 对组件进行补充，一般用于单位</div>
     </div>
@@ -13,8 +19,8 @@ export default {
   data() {
     return {
       title: "单位",
-
-      details: "字段unit, desc; desc支持html",
+      docsTitle: "单位配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/unit.html",
 
       formSchema: {
         properties: {
