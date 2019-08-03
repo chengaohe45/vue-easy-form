@@ -1,59 +1,15 @@
 <template>
-  <div class="demo-example-box">
-    <div class="demo-example-body">
-      <div class="demo-example-ui">
-        <div class="demo-example-wrap">
-          <es-form
-            ref="form"
-            :schema="formSchema"
-            v-model="formValue"
-            @inited="inited"
-            @input="formInput"
-            @change="formChange"
-          ></es-form>
-          <div class="btn-box">
-            <el-button type="primary" @click="onSubmit">立即创建</el-button>
-            <el-button @click="onReset">重置</el-button>
-          </div>
-        </div>
-        <div class="demo-example-value-box">
-          <div>
-            表单值(formValue):
-            <pre>{{ JSON.stringify(formValue, null, 2) }}</pre>
-          </div>
-        </div>
-      </div>
-      <div class="demo-example-source">
-        <div class="source-inner">
-          <strong>formSchema:</strong>
-          <pre>{{
-            JSON.stringify(
-              formSchema,
-              (key, value) => {
-                if (
-                  key == "name" &&
-                  typeof value == "object" &&
-                  value.render &&
-                  value.staticRenderFns
-                ) {
-                  return "[编译的Vue Object]";
-                } else if (typeof value == "function") {
-                  //return "[Function]";
-                  return value.toString();
-                } else {
-                  return value;
-                }
-              },
-              2
-            )
-          }}</pre>
-        </div>
-      </div>
-    </div>
-  </div>
+  <demo-frame :title="title" :formSchema="formSchema">
+    <!-- <div slot="details">
+      属性format >>
+      场景：当接口所需要的是1/0,而"开关组件"则是true/false,此时就需要转换
+    </div> -->
+  </demo-frame>
 </template>
 
 <script>
+import demoFrame from "../components/demo-frame.vue";
+
 import Select from "@/components/units/select";
 import CheckboxGroup from "@/components/units/checkbox-group";
 import radioGroup from "@/components/units/radio-group";
@@ -61,9 +17,7 @@ import radioGroup from "@/components/units/radio-group";
 export default {
   data() {
     return {
-      formValue: {
-        // name: "默认小花"
-      },
+      title: "综合例子",
 
       formSchema: {
         rowSpace: 40,
@@ -262,134 +216,19 @@ export default {
     };
   },
 
-  props: {},
-
-  created() {},
+  created() {
+    // console.log("dynamicTags", dynamicTags);
+  },
 
   computed: {},
 
   mounted() {},
 
-  methods: {
-    inited(value) {
-      console.log("inited(value)：打印结果 ******************** start");
-      console.log(">>>>>返回value的值: ", value);
-      console.log("inited(value)：打印结果 ******************** end");
-      console.log("\n");
-    },
-    formInput(value, sourcePathKey) {
-      console.log(
-        "formInput(value, sourcePathKey)：打印结果 ******************** start"
-      );
-      console.log(">>>>>返回两个value的值: ", value);
-      console.log(">>>>>返回两个sourcePathKey的值: ", sourcePathKey);
-      console.log(
-        "formInput(value, sourcePathKey)：打印结果 ******************** end"
-      );
-      console.log("\n");
-    },
-    formChange(value, sourcePathKey) {
-      console.log(
-        "formChange(value, sourcePathKey)：打印结果 --------------- start"
-      );
-      console.log(">>>>>返回两个value的值: ", value);
-      console.log(">>>>>返回两个sourcePathKey的值: ", sourcePathKey);
-      console.log(
-        "formChange(value, sourcePathKey)：打印结果 --------------- end"
-      );
-      console.log("\n");
-    },
-
-    onSubmit() {
-      if (this.$refs.form.checkAll()) {
-        this.$message({
-          message: "恭喜你，这是一条成功消息",
-          type: "success"
-        });
-      }
-    },
-
-    onReset() {
-      this.$refs.form.reset();
-    }
-  },
-  components: {}
+  methods: {},
+  components: {
+    demoFrame
+  }
 };
 </script>
 
-<style lang="scss">
-@import "@/static/css/mixins.scss";
-
-.demo-example-box {
-  @include display-flex;
-  @include direction-v;
-  @include flex-full;
-  overflow: hidden;
-  height: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  font-size: 14px;
-
-  .demo-example-wrap {
-    margin: 10px;
-    padding: 20px;
-    border: 1px solid #caccd2;
-    border-radius: 4px;
-  }
-
-  .demo-example-body {
-    overflow: auto;
-    @include flex-full;
-    height: 100%;
-    @include display-flex;
-    @include direction-h;
-    padding-top: 20px;
-    box-sizing: border-box;
-  }
-
-  .demo-example-value-box {
-    margin: 20px 10px 0 10px;
-    border-top: 1px dashed #d6d7da;
-    padding: 10px;
-    text-align: left;
-  }
-
-  .demo-example-ui {
-    width: 70%;
-    padding: 10px 0;
-    box-sizing: border-box;
-    border: 1px dashed #d6d7da;
-    border-radius: 4px;
-    overflow: auto;
-  }
-
-  .demo-example-source {
-    width: 30%;
-    overflow: auto;
-    .source-inner {
-      box-sizing: border-box;
-      border: 1px dashed #d6d7da;
-      border-radius: 4px;
-      text-align: left;
-      margin-left: 20px;
-      padding: 10px;
-      overflow: auto;
-      height: 100%;
-      @include display-flex;
-      @include direction-v;
-    }
-
-    .source-area-box {
-      margin-top: 5px;
-      @include flex-full;
-      @include display-flex;
-      @include direction-v;
-    }
-  }
-
-  .btn-box {
-    margin-top: 20px;
-    text-align: center;
-  }
-}
-</style>
+<style lang="scss"></style>

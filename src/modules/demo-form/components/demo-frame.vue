@@ -1,24 +1,26 @@
 <template>
   <div class="demo-form-box">
     <div class="demo-form-header">
-      <h2 class="demo-form-title">{{ title }}</h2>
-      <el-button type="text" class="toggle-btn" @click="toggleDetails">{{
-        openDetails ? "隐藏详情" : "打开详情"
-      }}</el-button>
-      <div class="demo-form-details" v-show="openDetails">
+      <div class="demo-details-header">
+        <h2 class="demo-form-title">{{ title }}</h2>
+        <a
+          type="text"
+          class="docs-btn"
+          target="_blank"
+          :href="'https://chengaohe45.github.io' + docsHref"
+          @click="toggleDetails"
+          >{{ docsTitle }}</a
+        >
+        <el-button type="text" class="toggle-btn" @click="toggleDetails">{{
+          openDetails ? "隐藏详情" : "打开详情"
+        }}</el-button>
+      </div>
+      <div class="demo-details-content" v-show="openDetails">
         <div>
           <strong>表单写法:</strong> &lt;es-form ref="form" :schema="formSchema"
           v-model="formValue"&gt;&lt;/es-form&gt;
         </div>
-        <div>
-          <span class="docs-title">{{ docsTitle }}</span
-          >的具体配置见<a
-            target="_blank"
-            :href="'https://chengaohe45.github.io' + docsHref"
-            >配置文档</a
-          >
-        </div>
-        <div class="details">
+        <div class="details-content">
           <slot name="details" class="details"></slot>
         </div>
       </div>
@@ -136,7 +138,7 @@ export default {
     docsTitle: {
       type: String,
       required: false,
-      default: "schema"
+      default: "配置文档"
     },
 
     docsHref: {
@@ -386,28 +388,60 @@ export default {
   box-sizing: border-box;
   font-size: 14px;
 
-  .demo-form-title {
-    background: #d6d7da;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
-    padding: 5px 0 3px 10px;
-    margin: 0 0 0 0;
-    font-weight: 400;
-    font-size: 22px;
-    line-height: 24px;
+  .demo-form-header {
+    .demo-details-header {
+      position: relative;
+      @include display-flex;
+      align-items: center;
+
+      background: #d6d7da;
+      border-top-left-radius: 4px;
+      border-top-right-radius: 4px;
+      padding: 5px 0 3px 10px;
+    }
+
+    .demo-form-title {
+      margin: 0 0 0 0;
+      font-weight: 400;
+      font-size: 22px;
+      line-height: 24px;
+    }
+
+    .docs-btn {
+      margin-left: 10px;
+      color: #409eff;
+      text-decoration: none;
+      &:hover {
+        color: #66b1ff;
+      }
+    }
+
+    .toggle-btn {
+      position: absolute;
+      right: 10px;
+      top: 5px;
+      line-height: 24px;
+      margin: 0;
+      padding: 0px;
+    }
   }
 
-  .demo-form-details {
+  .demo-details-content {
     padding: 10px 10px 10px 10px;
     border-left: 1px solid #d6d7da;
     border-right: 1px solid #d6d7da;
     border-bottom: 1px solid #d6d7da;
     border-bottom-left-radius: 4px;
     border-bottom-right-radius: 4px;
-    line-height: 28px;
+    line-height: 24px;
 
-    .details {
-      margin-top: 10px;
+    .details-content {
+      margin-top: 5px;
+      line-height: 22px;
+
+      &:empty {
+        margin-top: 0px;
+      }
     }
   }
 
@@ -460,19 +494,6 @@ export default {
     box-sizing: border-box;
   }
 
-  .demo-form-header {
-    position: relative;
-  }
-
-  .toggle-btn {
-    position: absolute;
-    right: 10px;
-    top: 5px;
-    line-height: 24px;
-    margin: 0;
-    padding: 0px;
-  }
-
   .pre-box {
     overflow: auto;
   }
@@ -502,7 +523,7 @@ export default {
       border-radius: 4px;
       text-align: left;
       overflow: auto;
-      width: 100%;
+      // width: 100%;
       @include flex-full;
     }
 
@@ -514,7 +535,7 @@ export default {
     }
 
     .demo-form-value {
-      margin: 20px 10px 0;
+      margin: 10px 10px 0;
       border-top: 1px dashed #d6d7da;
       padding: 10px;
       text-align: left;

@@ -1,8 +1,9 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      字段properties: 当存在这个字段时，说明存在下一级；若同时存在component,
-      component将失效
+      字段properties: 当存在这个字段时，说明存在下一级；<span class="sys-danger"
+        >若同时存在component, component将失效</span
+      >
     </div>
   </demo-frame>
 </template>

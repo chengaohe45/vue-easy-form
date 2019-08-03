@@ -322,7 +322,7 @@ let navList = [
 
       {
         icon: "",
-        name: "详细例子",
+        name: "综合例子",
         link: "/example",
         path: "/example",
         component: exampleForm

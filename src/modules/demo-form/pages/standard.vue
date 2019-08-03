@@ -1,11 +1,11 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      properties说明是一个模块;<br />properties里面的属性代表一项;<br />
-      当项设置为null或undefined时; 此项是不显示的; 这样写的目的是为了提高可读性
-      <div style="color: red">
-        场景：新增和编辑可能用到同一个页面，编辑时可能某些项是不需要的，但是新增是需要填写的；<br />写法如：someAttr:
-        this.$route.params.id ? null : {正常的组件}
+      当项设置为null、undefined、false时; 此项是不显示的;
+      这样写的目的是为了提高可读性
+      <div class="sys-danger">
+        场景：新增和编辑可能用到同一个页面，编辑时可能某些项是不需要的，但是新增是需要填写的；写法如：someAttr:
+        this.$route.params.id ? false : {正常的组件}
       </div>
     </div>
   </demo-frame>
@@ -45,7 +45,7 @@ export default {
             },
             value: ["标签1", "标签2"]
           },
-          someAttr: null
+          someAttr: false
         }
       }
     };

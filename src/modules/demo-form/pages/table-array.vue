@@ -1,7 +1,7 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      <!-- ?? -->
+      字段array
     </div>
   </demo-frame>
 </template>

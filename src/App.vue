@@ -90,6 +90,10 @@ export default {
     @include flex-full;
     height: 100%;
   }
+
+  .sys-danger {
+    color: #f56c6c;
+  }
 }
 
 /* 设置持续时间和动画函数 */

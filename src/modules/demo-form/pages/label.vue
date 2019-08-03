@@ -1,6 +1,8 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
-    <div slot="details"></div>
+    <div slot="details">
+      字段label
+    </div>
   </demo-frame>
 </template>
 

@@ -1,7 +1,11 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      字段direction：设置label和组件的排列方向；值：v或h；根节点默认为h（横排），其它的没有设置就会继承上一级的方向(注：group项不受接爱v的控制，无论怎么样都是横排)"
+      <div>字段direction</div>
+      设置label和组件的排列方向；值：v或h；根节点默认为h（横排）;
+      <span class="sys-danger"
+        >注：group项(也就是有字段group)不接受direction的控制，无论怎么样都是横排</span
+      >
     </div>
   </demo-frame>
 </template>

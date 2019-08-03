@@ -1,10 +1,8 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      写法跟写一个平常组件一样：<br />
-      layout有两个值："space", "tabs"; 区分大小写；其余的认为是false<br />
-      当layout为'space'时,说明这个是占位空间，此值不会取出，label也不会显示（有效值只有col,hidden,
-      group;其余的失效）
+      <div>字段title</div>
+      <div class="sys-danger">块的标题、在项中不起作用(跟properties同级)</div>
     </div>
   </demo-frame>
 </template>

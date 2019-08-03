@@ -3,7 +3,10 @@
     <div slot="details">
       <div class="ui-details">
         colon, direction, rowHeight, rowSpace, labelWidth, offsetLeft,
-        offsetRight
+        offsetRight;
+        <span class="sys-danger"
+          >这几个字段若没有设置时，会继承上一级(ui)的字段</span
+        >
       </div>
     </div>
   </demo-frame>

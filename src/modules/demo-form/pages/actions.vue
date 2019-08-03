@@ -1,7 +1,7 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      字段component.actions: 会返回三个参数：value, key, event
+      字段component.actions
     </div>
   </demo-frame>
 </template>

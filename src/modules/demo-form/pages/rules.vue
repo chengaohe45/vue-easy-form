@@ -2,7 +2,7 @@
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
       <div>
-        字段rules: 函数会返回三个参数：value, formData, key
+        字段rules
       </div>
       <div>提交时判断表单是否合法则用：form.checkAll()</div>
     </div>

@@ -1,6 +1,7 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
+      <div>字段component</div>
       “广告名称1” >>
       只有一个属性，它会去匹配全局的默认项组件和值(看esform初始化设置)
     </div>

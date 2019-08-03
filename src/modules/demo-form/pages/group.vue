@@ -1,9 +1,8 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      字段group：设置此值说明相邻且同值(注意是相邻且同值)的项为一组，不换行,
-      组件（注意是组件，不是label）会按比例分配空间;
-      (这一组的长度就是里面的每一项col相加起来，相加起来后大于24就取24，因为一行只分24列)
+      字段group：设置此值说明相邻且同值(注意是相邻且同值)的项为一组，不换行;
+      <span class="sys-danger">这个组的长度就是这些组项的长度(col)的总和</span>
     </div>
   </demo-frame>
 </template>

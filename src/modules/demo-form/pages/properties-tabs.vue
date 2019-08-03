@@ -1,8 +1,7 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      字段properties且type为tabs:
-      properties的字节点也必须为properties，否则过滤掉。
+      字段properties且type为tabs
     </div>
   </demo-frame>
 </template>
