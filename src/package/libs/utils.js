@@ -117,20 +117,59 @@ let utils = {
    * @return {[type]}   [description]
    */
   deepCopy: function(data) {
+    var rawRefs = [];
+    var newRefs = [];
+    var newData = this.__deepCopy(data, rawRefs, newRefs);
+    rawRefs = null;
+    newRefs = null;
+    return newData;
+  },
+
+  /**
+   * [deepCopy 深拷贝, 深拷贝的数据是object和array]
+   * @param  {[type]} data [description]
+   * @return {[Array]}   [rawRefs] 记录原始的object and array
+   * @return {[Array]}   [newRefs] 记录新的object and array
+   * rawRefs和newRefs是一对一的关系，作用防止数据中某个地方存在循环的问题
+   */
+  __deepCopy: function(data, rawRefs, newRefs) {
     var type = utils.type(data);
-    var newData;
+    var newData, rawIndex;
     if (type == "array") {
-      newData = [];
-      for (var i = 0; i < data.length; ++i) {
-        newData[i] = utils.deepCopy(data[i]);
+      rawIndex = rawRefs.indexOf(data);
+      if (rawIndex < 0) {
+        newData = [];
+
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+        newRefs.push(newData);
+
+        for (var i = 0; i < data.length; ++i) {
+          newData[i] = this.__deepCopy(data[i], rawRefs, newRefs);
+        }
+
+        return newData;
+      } else {
+        // 已经存在的数据，则取出上个拷贝的数组
+        return newRefs[rawIndex];
       }
-      return newData;
     } else if (type === "object") {
-      newData = {};
-      for (var key in data) {
-        newData[key] = utils.deepCopy(data[key]);
+      rawIndex = rawRefs.indexOf(data);
+      if (rawIndex < 0) {
+        newData = {};
+
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+        newRefs.push(newData);
+
+        for (var key in data) {
+          newData[key] = this.__deepCopy(data[key], rawRefs, newRefs);
+        }
+        return newData;
+      } else {
+        // 已经存在的数据，则取出上个拷贝的对象
+        return newRefs[rawIndex];
       }
-      return newData;
     } else {
       return data;
     }

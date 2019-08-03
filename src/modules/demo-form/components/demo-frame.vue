@@ -56,7 +56,7 @@
           </div>
         </div>
         <div class="demo-es-result">
-          <h3 class="subtitle">表单输出:</h3>
+          <!-- <h3 class="subtitle">表单输出:</h3> -->
           <div class="demo-result-panel">
             <div class="demo-form-ui">
               <es-form
@@ -181,7 +181,7 @@ export default {
         this.$nextTick(() => {
           var runMsg = "Vue解析: 存在警告信息(信息可开发者模查看).";
           if (utils.isStr(err)) {
-            var comReg = /\<(.+?)\>/;
+            var comReg = /<(.+?)>/;
             var arr = err.match(comReg);
             if (arr) {
               if (!this._esErrorNames) {
@@ -231,7 +231,7 @@ export default {
             var funcKey = "FUNCTIONNAME" + ++uniqIndex;
             var funcStr = value.toString();
             funcStr = funcStr.replace(
-              new RegExp("function\\\s+" + key + "\\(", "g"),
+              new RegExp("function\\s+" + key + "\\(", "g"),
               "function("
             );
             functionObj[funcKey] = funcStr;
@@ -243,7 +243,7 @@ export default {
         2
       );
 
-      newCode = newCode.replace(/\"(.+?)\"\:/g, "$1:");
+      newCode = newCode.replace(/"(.+?)":/g, "$1:");
 
       for (var key in functionObj) {
         var reg = new RegExp('\\"' + key + '\\"', "g");
@@ -308,7 +308,7 @@ export default {
 
       this.$nextTick(() => {
         this.$data.runRight = true;
-        this.$data.runMsg = "解析成功";
+        this.$data.runMsg = "格式正确，具体输出见右侧";
       });
 
       this.$data.formValue = {};
