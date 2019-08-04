@@ -250,7 +250,7 @@ export default {
         2
       );
 
-      newSource = newSource.replace(/"(.+?)":/g, "$1:");
+      newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
 
       // undefined 代替
       // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED

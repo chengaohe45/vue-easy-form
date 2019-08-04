@@ -180,7 +180,7 @@ let utils = {
       2
     );
 
-    newSource = newSource.replace(/"(.+?)":/g, "$1:");
+    newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
 
     for (var key in functionObj) {
       var reg = new RegExp('\\"' + key + '\\"', "g");
