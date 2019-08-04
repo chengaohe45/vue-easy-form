@@ -37,11 +37,11 @@
         </div>
         <h3 class="subtitle">根数据(rootData) => getValue取出</h3>
         <textarea class="value-box" readonly="readonly"
-          >{{ JSON.stringify(rootData, null, 2) }}
+          >{{ toJson(rootData) }}
         </textarea>
         <h3 class="subtitle">表单数据(formValue) => getFormValue取出</h3>
         <textarea class="value-box" readonly="readonly"
-          >{{ JSON.stringify(formValue, null, 2) }}
+          >{{ toJson(formValue) }}
         </textarea>
       </div>
     </div>
@@ -237,6 +237,29 @@ export default {
   },
 
   methods: {
+    toJson(source) {
+      const UNDEFINED = "__UNDEFINED_VALUE__"; // 加上双引号，这样才不会出现相同的
+      var newSource = JSON.stringify(
+        source,
+        (key, value) => {
+          if (value === undefined) {
+            value = UNDEFINED;
+          }
+          return value;
+        },
+        2
+      );
+
+      newSource = newSource.replace(/"(.+?)":/g, "$1:");
+
+      // undefined 代替
+      // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
+      var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
+      newSource = newSource.replace(undefinedReg, "undefined");
+
+      return newSource;
+    },
+
     clickHandler() {
       if (!this.$data.showPanel) {
         this.$data.positions.right = 2;

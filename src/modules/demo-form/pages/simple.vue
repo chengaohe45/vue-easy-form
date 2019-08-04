@@ -3,7 +3,7 @@
     <div slot="details">
       只需求配置label、component、value即可;
       <span class="sys-danger"
-        >最好配置value,否则默认为null,应用于默认值和重置</span
+        >最好配置value,否则默认为undefined,应用于默认值和重置</span
       >
     </div>
   </demo-frame>
