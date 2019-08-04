@@ -149,7 +149,7 @@ export default {
   },
 
   created() {
-    // window.demoVm = this;
+    window.demoVm = this;
     // console.log("Vue:", Vue.component("el-input"));
 
     this.$data.schema = this.formSchema;
@@ -213,6 +213,7 @@ export default {
     filterCode() {
       var functionObj = {},
         uniqIndex = 0;
+      const UNDEFINED = "__UNDEFINED_VALUE__";  // 加上双引号，这样才不会出现相同的
       var newCode = JSON.stringify(
         this.formSchema,
         (key, value) => {
@@ -229,7 +230,7 @@ export default {
             myVues[vueKey] = value;
             this._esMyVues = myVues;
             return vueKey;
-          } else if (typeof value == "function") {
+          } else if (typeof value == "function") {  // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
             var funcKey = "FUNCTIONNAME" + ++uniqIndex;
             var funcStr = value.toString();
             funcStr = funcStr.replace(
@@ -239,6 +240,9 @@ export default {
             functionObj[funcKey] = funcStr;
             return funcKey;
           } else {
+            if (value === undefined) {
+              value = UNDEFINED;
+            }
             return value;
           }
         },
@@ -251,6 +255,11 @@ export default {
         var reg = new RegExp('\\"' + key + '\\"', "g");
         newCode = newCode.replace(reg, functionObj[key]);
       }
+
+      // undefined 代替
+      // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
+      var undefinedReg = new RegExp("\"" + UNDEFINED + "\"", "g")
+      newCode = newCode.replace(undefinedReg, "undefined");
 
       // 使命完成
       functionObj = null;

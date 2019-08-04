@@ -25,7 +25,7 @@ export default {
           colon: true
         },
         properties: {
-          test: null,
+          test: false,
           name: {
             label: {
               text: "广告名称"
@@ -45,7 +45,7 @@ export default {
             },
             value: ["标签1", "标签2"]
           },
-          someAttr: false
+          someAttr: undefined
         }
       }
     };
