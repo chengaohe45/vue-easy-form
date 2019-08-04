@@ -73,9 +73,7 @@
             </div>
             <div class="demo-form-value">
               <strong>表单值(formValue):</strong>
-              <pre class="pre-box">{{
-                JSON.stringify(formValue, null, 2)
-              }}</pre>
+              <pre class="pre-box">{{ stringify(formValue) }}</pre>
             </div>
           </div>
         </div>
@@ -153,7 +151,7 @@ export default {
     // console.log("Vue:", Vue.component("el-input"));
 
     this.$data.schema = this.formSchema;
-    this.$data.code = this.filterCode();
+    this.$data.code = utils.toJson(this.formSchema);
   },
 
   computed: {},
@@ -210,61 +208,65 @@ export default {
     初始化时，把formSchema还原出来 
     经测试：null, array, object, function, number, boolean, string都OK；当value是undefined时会被JSON.stringify漏掉（感觉也没有错）
     */
-    filterCode() {
-      var functionObj = {},
-        uniqIndex = 0;
-      const UNDEFINED = "__UNDEFINED_VALUE__";  // 加上双引号，这样才不会出现相同的
-      var newCode = JSON.stringify(
-        this.formSchema,
-        (key, value) => {
-          if (
-            value &&
-            key == "name" &&
-            typeof value == "object" &&
-            value.render &&
-            value.staticRenderFns
-          ) {
-            var vueKey =
-              "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
-            var myVues = this._esMyVues ? this._esMyVues : {};
-            myVues[vueKey] = value;
-            this._esMyVues = myVues;
-            return vueKey;
-          } else if (typeof value == "function") {  // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
-            var funcKey = "FUNCTIONNAME" + ++uniqIndex;
-            var funcStr = value.toString();
-            funcStr = funcStr.replace(
-              new RegExp("function\\s+" + key + "\\(", "g"),
-              "function("
-            );
-            functionObj[funcKey] = funcStr;
-            return funcKey;
-          } else {
-            if (value === undefined) {
-              value = UNDEFINED;
-            }
-            return value;
-          }
-        },
-        2
-      );
+    // filterCode() {
+    //   var functionObj = {},
+    //     uniqIndex = 0;
+    //   const UNDEFINED = "__UNDEFINED_VALUE__";  // 加上双引号，这样才不会出现相同的
+    //   var newCode = JSON.stringify(
+    //     this.formSchema,
+    //     (key, value) => {
+    //       if (
+    //         value &&
+    //         key == "name" &&
+    //         typeof value == "object" &&
+    //         value.render &&
+    //         value.staticRenderFns
+    //       ) {
+    //         var vueKey =
+    //           "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
+    //         var myVues = this._esMyVues ? this._esMyVues : {};
+    //         myVues[vueKey] = value;
+    //         this._esMyVues = myVues;
+    //         return vueKey;
+    //       } else if (typeof value == "function") {  // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
+    //         var funcKey = "FUNCTIONNAME" + ++uniqIndex;
+    //         var funcStr = value.toString();
+    //         funcStr = funcStr.replace(
+    //           new RegExp("function\\s+" + key + "\\(", "g"),
+    //           "function("
+    //         );
+    //         functionObj[funcKey] = funcStr;
+    //         return funcKey;
+    //       } else {
+    //         if (value === undefined) {
+    //           value = UNDEFINED;
+    //         }
+    //         return value;
+    //       }
+    //     },
+    //     2
+    //   );
 
-      newCode = newCode.replace(/"(.+?)":/g, "$1:");
+    //   newCode = newCode.replace(/"(.+?)":/g, "$1:");
 
-      for (var key in functionObj) {
-        var reg = new RegExp('\\"' + key + '\\"', "g");
-        newCode = newCode.replace(reg, functionObj[key]);
-      }
+    //   for (var key in functionObj) {
+    //     var reg = new RegExp('\\"' + key + '\\"', "g");
+    //     newCode = newCode.replace(reg, functionObj[key]);
+    //   }
 
-      // undefined 代替
-      // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
-      var undefinedReg = new RegExp("\"" + UNDEFINED + "\"", "g")
-      newCode = newCode.replace(undefinedReg, "undefined");
+    //   // undefined 代替
+    //   // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
+    //   var undefinedReg = new RegExp("\"" + UNDEFINED + "\"", "g")
+    //   newCode = newCode.replace(undefinedReg, "undefined");
 
-      // 使命完成
-      functionObj = null;
+    //   // 使命完成
+    //   functionObj = null;
 
-      return newCode;
+    //   return newCode;
+    // },
+
+    stringify(value) {
+      return utils.toJson(value);
     },
 
     replaceVue(result) {

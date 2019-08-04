@@ -634,14 +634,26 @@ let formUtils = {
       } else {
         newValue = {};
         for (var key in propItem.properties) {
-          keyValue = this.__getValue(
-            propItem.properties[key],
-            baseParseSources,
-            isHidden
-          );
-          if (!utils.isUndef(keyValue)) {
+          var nextPropItem = propItem.properties[key];
+          var isNextHidden = isParentHidden || propItem.hidden ? true : false;
+          if (
+            formData &&
+            (nextPropItem.isTmp ||
+              (isNextHidden && utils.isUndef(nextPropItem.hdValue)))
+          ) {
+            // ...说明是不取出
+          } else {
+            keyValue = this.__getValue(
+              nextPropItem,
+              baseParseSources,
+              isHidden
+            );
             newValue[key] = keyValue;
           }
+
+          // if (!utils.isUndef(keyValue)) {
+          //   newValue[key] = keyValue;
+          // }
         }
         return newValue;
       }

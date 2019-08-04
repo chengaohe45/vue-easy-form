@@ -141,6 +141,63 @@ let utils = {
     }
   },
 
+  toJson(source) {
+    var functionObj = {},
+      uniqIndex = 0;
+    const UNDEFINED = "__UNDEFINED_VALUE__"; // 加上双引号，这样才不会出现相同的
+    var newSource = JSON.stringify(
+      source,
+      (key, value) => {
+        if (
+          value &&
+          key == "name" &&
+          typeof value == "object" &&
+          value.render &&
+          value.staticRenderFns
+        ) {
+          var vueKey = "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
+          var myVues = this._esMyVues ? this._esMyVues : {};
+          myVues[vueKey] = value;
+          this._esMyVues = myVues;
+          return vueKey;
+        } else if (typeof value == "function") {
+          // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
+          var funcKey = "FUNCTIONNAME" + ++uniqIndex;
+          var funcStr = value.toString();
+          funcStr = funcStr.replace(
+            new RegExp("function\\s+" + key + "\\(", "g"),
+            "function("
+          );
+          functionObj[funcKey] = funcStr;
+          return funcKey;
+        } else {
+          if (value === undefined) {
+            value = UNDEFINED;
+          }
+          return value;
+        }
+      },
+      2
+    );
+
+    newSource = newSource.replace(/"(.+?)":/g, "$1:");
+
+    for (var key in functionObj) {
+      var reg = new RegExp('\\"' + key + '\\"', "g");
+      newSource = newSource.replace(reg, functionObj[key]);
+    }
+
+    // undefined 代替
+    // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
+    var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
+    newSource = newSource.replace(undefinedReg, "undefined");
+
+    // 使命完成
+    functionObj = null;
+
+    return newSource;
+  },
+
   /* 判断路径是否动态路径(vue-router) */
   isDynaPath(path) {
     return path && path.indexOf("/:") >= 0;
