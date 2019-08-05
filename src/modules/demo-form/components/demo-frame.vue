@@ -151,7 +151,7 @@ export default {
     // console.log("Vue:", Vue.component("el-input"));
 
     this.$data.schema = this.formSchema;
-    this.$data.code = utils.toJson(this.formSchema);
+    this.$data.code = this.stringify(this.formSchema);
   },
 
   computed: {},
@@ -204,69 +204,103 @@ export default {
         });
       }
     },
-    /* 
-    初始化时，把formSchema还原出来 
-    经测试：null, array, object, function, number, boolean, string都OK；当value是undefined时会被JSON.stringify漏掉（感觉也没有错）
-    */
-    // filterCode() {
-    //   var functionObj = {},
-    //     uniqIndex = 0;
-    //   const UNDEFINED = "__UNDEFINED_VALUE__";  // 加上双引号，这样才不会出现相同的
-    //   var newCode = JSON.stringify(
-    //     this.formSchema,
-    //     (key, value) => {
-    //       if (
-    //         value &&
-    //         key == "name" &&
-    //         typeof value == "object" &&
-    //         value.render &&
-    //         value.staticRenderFns
-    //       ) {
-    //         var vueKey =
-    //           "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
-    //         var myVues = this._esMyVues ? this._esMyVues : {};
-    //         myVues[vueKey] = value;
-    //         this._esMyVues = myVues;
-    //         return vueKey;
-    //       } else if (typeof value == "function") {  // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
-    //         var funcKey = "FUNCTIONNAME" + ++uniqIndex;
-    //         var funcStr = value.toString();
-    //         funcStr = funcStr.replace(
-    //           new RegExp("function\\s+" + key + "\\(", "g"),
-    //           "function("
-    //         );
-    //         functionObj[funcKey] = funcStr;
-    //         return funcKey;
-    //       } else {
-    //         if (value === undefined) {
-    //           value = UNDEFINED;
-    //         }
-    //         return value;
-    //       }
-    //     },
-    //     2
-    //   );
-
-    //   newCode = newCode.replace(/"(.+?)":/g, "$1:");
-
-    //   for (var key in functionObj) {
-    //     var reg = new RegExp('\\"' + key + '\\"', "g");
-    //     newCode = newCode.replace(reg, functionObj[key]);
-    //   }
-
-    //   // undefined 代替
-    //   // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
-    //   var undefinedReg = new RegExp("\"" + UNDEFINED + "\"", "g")
-    //   newCode = newCode.replace(undefinedReg, "undefined");
-
-    //   // 使命完成
-    //   functionObj = null;
-
-    //   return newCode;
-    // },
 
     stringify(value) {
-      return utils.toJson(value);
+      return this.__toJson(value);
+    },
+
+    /**
+     * 变为JSON输出，增强可读性
+     * 经测试：null, array, object, function, number, boolean, string都OK；当value是undefined时会被JSON.stringify漏掉（感觉也没有错）
+     * @param source 解析源
+     * @param curTimes 解析了多少次了
+     */
+    __toJson(source, curTimes = 1) {
+      const MAX = 3; // 大于3次就不做变换了
+      const CAN_REPLACE = curTimes <= MAX ? true : false;
+      var randStr = utils.randStr(15, 20);
+      var uniqIndex = 0;
+      const UNDEFINED =
+        curTimes < CAN_REPLACE ? "UND" + randStr : "undefined值";
+      const FUNCTION_NAME =
+        curTimes < CAN_REPLACE ? "FUNC" + randStr : "function值";
+
+      var undefinedObj = {},
+        functionObj = {},
+        hasSameUndefined = false;
+
+      var newSource = JSON.stringify(
+        source,
+        (key, value) => {
+          if (
+            key === UNDEFINED ||
+            value === UNDEFINED ||
+            key.indexOf(FUNCTION_NAME) == 0
+          ) {
+            // 出现相同的字符串，说明UNDEFINED值不可用(只是存在理论上的可能，比当上联合国秘书长的概率还低)
+            hasSameUndefined = true;
+          } else if (value === undefined) {
+            value = UNDEFINED;
+            undefinedObj[key] = value;
+          } else if (
+            value &&
+            key == "name" &&
+            typeof value == "object" &&
+            value.render &&
+            value.staticRenderFns
+          ) {
+            var vueKey =
+              "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
+            var myVues = this._esMyVues ? this._esMyVues : {};
+            myVues[vueKey] = value;
+            this._esMyVues = myVues;
+            return vueKey;
+          } else if (utils.isFunc(value)) {
+            // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
+            var funcKey = FUNCTION_NAME + ++uniqIndex;
+            var funcStr = value.toString();
+            funcStr = funcStr.replace(
+              new RegExp("function\\s+" + key + "\\(", "g"),
+              "function("
+            );
+            functionObj[funcKey] = funcStr;
+            return funcKey;
+          }
+          return value;
+        },
+        2
+      );
+
+      newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
+
+      if (CAN_REPLACE) {
+        if (!hasSameUndefined) {
+          // 没有有相同的字符串，替换
+
+          for (var key in functionObj) {
+            var reg = new RegExp('\\"' + key + '\\"', "g");
+            newSource = newSource.replace(reg, functionObj[key]);
+          }
+
+          if (Object.keys(undefinedObj).length > 0) {
+            // 需要替挽
+            // undefined 代替
+            // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
+            var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
+            newSource = newSource.replace(undefinedReg, "undefined");
+          }
+
+          return newSource;
+        } else {
+          //  有相同的字符串，重来一次
+          newSource = null;
+          var nextTime = curTimes + 1;
+          return this.__toJson(source, nextTime);
+        }
+      } else {
+        // 直接输出；不做替换了；因为之前做过了MAX次了；理论就不会进入这里，进入这里只是备用做展示，对功能没有什么影响
+        return newSource;
+      }
     },
 
     replaceVue(result) {

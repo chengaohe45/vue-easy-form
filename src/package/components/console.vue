@@ -192,6 +192,7 @@
 
 <script>
 import esDrag from "../libs/drag.js";
+import utils from "../libs/utils";
 
 export default {
   data() {
@@ -237,13 +238,28 @@ export default {
   },
 
   methods: {
-    toJson(source) {
-      const UNDEFINED = "__UNDEFINED_VALUE__"; // 加上双引号，这样才不会出现相同的
+    /**
+     * 变为JSON输出，增强可读性
+     * @param source 解析源
+     * @param curTimes 解析了多少次了
+     */
+    toJson(source, curTimes = 1) {
+      const MAX = 3; // 大于3次就不做变换了
+      const CAN_REPLACE = curTimes <= MAX ? true : false;
+      const UNDEFINED = curTimes < MAX ? utils.randStr(15, 20) : "undefined值";
+
+      var undefinedObj = {},
+        hasSameUndefined = false;
+
       var newSource = JSON.stringify(
         source,
         (key, value) => {
-          if (value === undefined) {
+          if (key === UNDEFINED || value === UNDEFINED) {
+            // 出现相同的字符串，说明UNDEFINED值不可用(只是存在理论上的可能，比当上联合国秘书长的概率还低)
+            hasSameUndefined = true;
+          } else if (value === undefined) {
             value = UNDEFINED;
+            undefinedObj[key] = value;
           }
           return value;
         },
@@ -252,12 +268,29 @@ export default {
 
       newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
 
-      // undefined 代替
-      // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
-      var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
-      newSource = newSource.replace(undefinedReg, "undefined");
+      if (CAN_REPLACE) {
+        if (!hasSameUndefined) {
+          // 没有有相同的字符串，替换
 
-      return newSource;
+          if (Object.keys(undefinedObj).length > 0) {
+            // 需要替挽
+            // undefined 代替
+            // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
+            var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
+            newSource = newSource.replace(undefinedReg, "undefined");
+          }
+
+          return newSource;
+        } else {
+          //  有相同的字符串，重来一次
+          newSource = null;
+          var nextTime = curTimes + 1;
+          return this.toJson(source, nextTime);
+        }
+      } else {
+        // 直接输出；不做替换了；因为之前做过了MAX次了；理论就不会进入这里，进入这里只是备用做展示，对功能没有什么影响
+        return newSource;
+      }
     },
 
     clickHandler() {

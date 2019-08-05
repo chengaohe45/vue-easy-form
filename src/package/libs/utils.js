@@ -215,6 +215,110 @@ let utils = {
     });
   },
 
+  /**
+   * 随机产生一定长度的字符串：只有数字和字母
+   * @param {*} min 最小长度，默认为10，必须大于0
+   * @param {*} max 最大长度，默认为10，必须大于0
+   */
+  randStr(min, max) {
+    var chars = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ];
+
+    var len;
+
+    var isRightMax = true;
+    if (!this.isNum(min) || min < 1) {
+      min = 10;
+    }
+
+    if (!this.isNum(max) || max < 1) {
+      isRightMax = false;
+      max = 10;
+    }
+
+    if (!isRightMax) {
+      len = min;
+    } else {
+      if (min >= max) {
+        len = max;
+      } else {
+        // 取出min和max的随机长度
+        len = min + Math.round(Math.random() * (max - min));
+      }
+    }
+
+    var randStr = "",
+      randIndex;
+    var charsLen = chars.length;
+    for (var i = 0; i < len; i++) {
+      randIndex = Math.floor(Math.random() * charsLen);
+      randStr += chars[randIndex];
+    }
+    return randStr;
+  },
+
   mergeGlobal(global, extra) {
     if (utils.isObj(extra)) {
       for (var key in extra) {

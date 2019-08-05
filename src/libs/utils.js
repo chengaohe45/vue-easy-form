@@ -141,61 +141,108 @@ let utils = {
     }
   },
 
-  toJson(source) {
-    var functionObj = {},
-      uniqIndex = 0;
-    const UNDEFINED = "__UNDEFINED_VALUE__"; // 加上双引号，这样才不会出现相同的
-    var newSource = JSON.stringify(
-      source,
-      (key, value) => {
-        if (
-          value &&
-          key == "name" &&
-          typeof value == "object" &&
-          value.render &&
-          value.staticRenderFns
-        ) {
-          var vueKey = "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
-          var myVues = this._esMyVues ? this._esMyVues : {};
-          myVues[vueKey] = value;
-          this._esMyVues = myVues;
-          return vueKey;
-        } else if (typeof value == "function") {
-          // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
-          var funcKey = "FUNCTIONNAME" + ++uniqIndex;
-          var funcStr = value.toString();
-          funcStr = funcStr.replace(
-            new RegExp("function\\s+" + key + "\\(", "g"),
-            "function("
-          );
-          functionObj[funcKey] = funcStr;
-          return funcKey;
-        } else {
-          if (value === undefined) {
-            value = UNDEFINED;
-          }
-          return value;
-        }
-      },
-      2
-    );
+  /**
+   * 随机产生一定长度的字符串：只有数字和字母
+   * @param {*} min 最小长度，默认为10，必须大于0
+   * @param {*} max 最大长度，默认为10，必须大于0
+   */
+  randStr(min, max) {
+    var chars = [
+      "0",
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "g",
+      "h",
+      "i",
+      "j",
+      "k",
+      "l",
+      "m",
+      "n",
+      "o",
+      "p",
+      "q",
+      "r",
+      "s",
+      "t",
+      "u",
+      "v",
+      "w",
+      "x",
+      "y",
+      "z",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "F",
+      "G",
+      "H",
+      "I",
+      "J",
+      "K",
+      "L",
+      "M",
+      "N",
+      "O",
+      "P",
+      "Q",
+      "R",
+      "S",
+      "T",
+      "U",
+      "V",
+      "W",
+      "X",
+      "Y",
+      "Z"
+    ];
 
-    newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
+    var len;
 
-    for (var key in functionObj) {
-      var reg = new RegExp('\\"' + key + '\\"', "g");
-      newSource = newSource.replace(reg, functionObj[key]);
+    var isRightMax = true;
+    if (!this.isNum(min) || min < 1) {
+      min = 10;
     }
 
-    // undefined 代替
-    // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
-    var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
-    newSource = newSource.replace(undefinedReg, "undefined");
+    if (!this.isNum(max) || max < 1) {
+      isRightMax = false;
+      max = 10;
+    }
 
-    // 使命完成
-    functionObj = null;
+    if (!isRightMax) {
+      len = min;
+    } else {
+      if (min >= max) {
+        len = max;
+      } else {
+        // 取出min和max的随机长度
+        len = min + Math.round(Math.random() * (max - min));
+      }
+    }
 
-    return newSource;
+    var randStr = "",
+      randIndex;
+    var charsLen = chars.length;
+    for (var i = 0; i < len; i++) {
+      randIndex = Math.floor(Math.random() * charsLen);
+      randStr += chars[randIndex];
+    }
+    return randStr;
   },
 
   /* 判断路径是否动态路径(vue-router) */
