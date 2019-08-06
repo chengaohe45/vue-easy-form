@@ -44,11 +44,6 @@
       <div class="demo-body-row">
         <div class="demo-es-source">
           <div class="demo-source-panel">
-            <!-- <codemirror
-              v-model="code"
-              :options="cmOptions"
-              style="height: 100%;"
-            ></codemirror> -->
             <textarea
               class="textarea"
               autocomplete="off"
@@ -151,7 +146,7 @@ export default {
     // console.log("Vue:", Vue.component("el-input"));
 
     this.$data.schema = this.formSchema;
-    this.$data.code = this.stringify(this.formSchema);
+    this.$data.code = this.stringify(this.formSchema, true);
   },
 
   computed: {},
@@ -205,8 +200,8 @@ export default {
       }
     },
 
-    stringify(value) {
-      return this.__toJson(value);
+    stringify(value, isFromSchema = false) {
+      return this.__toJson(value, 1, isFromSchema);
     },
 
     /**
@@ -214,8 +209,9 @@ export default {
      * 经测试：null, array, object, function, number, boolean, string都OK；当value是undefined时会被JSON.stringify漏掉（感觉也没有错）
      * @param source 解析源
      * @param curTimes 解析了多少次了
+     * @param isFromSchema 是否来自schema, 因为schema在弄漂亮点，去掉key的双引号
      */
-    __toJson(source, curTimes = 1) {
+    __toJson(source, curTimes = 1, isFromSchema = false) {
       const MAX = 3; // 大于3次就不做变换了
       const CAN_REPLACE = curTimes <= MAX ? true : false;
       var randStr = utils.randStr(15, 20);
@@ -271,7 +267,10 @@ export default {
         2
       );
 
-      newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
+      if (isFromSchema) {
+        // 去年双引号
+        newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
+      }
 
       if (CAN_REPLACE) {
         if (!hasSameUndefined) {
@@ -295,7 +294,7 @@ export default {
           //  有相同的字符串，重来一次
           newSource = null;
           var nextTime = curTimes + 1;
-          return this.__toJson(source, nextTime);
+          return this.__toJson(source, nextTime, isFromSchema);
         }
       } else {
         // 直接输出；不做替换了；因为之前做过了MAX次了；理论就不会进入这里，进入这里只是备用做展示，对功能没有什么影响
@@ -659,12 +658,6 @@ export default {
     100% {
       transform: scale(1);
     }
-  }
-
-  .CodeMirror {
-    border: 1px solid #eee;
-    // height: 500px;
-    height: auto;
   }
 }
 </style>

@@ -17,36 +17,59 @@ data() {
       formValue: {},
 
       formSchema: {
-        name: {
+        // 组件项
+        name: {       // pathKey: name
           label: "广告名称",
           component: "el-input",
           value: "首页位置"
         },
 
+        // 组件块
         base: {
           title: {
             text: "基本信息"
           },
           label: false,
           properties: {
-            startTime: {
+            startTime: {    // pathKey: base.startTime
               label: "上线时间",
               col: 12,
               component: "el-input",
               value: ""
             },
-            endTime: {
+            endTime: {    // pathKey: base.endTime
               label: "到",
               col: 12,
               component: "el-input",
               value: ""
             }
           }
+        },
+
+        // 数组
+        courses: {
+          array: true,
+          properties: {
+            name: {   // pathKey: 当是第一个时，则是: courses[0].name, 如此类推
+              col: 12,
+              label: "学科名",
+              component: "el-input",
+              value: "语文"
+            },
+            code: { // pathKey: 当是第一个时，则是: courses[0].code, 如此类推
+              value: "100",
+              col: 12,
+              label: "学科代号",
+              component: "el-input"
+            }
+          }
         }
+
       }
     };
   }
 ```
+>[pathKey:项组件路径](./explain.md#项组件路径)的组成形式：各个块(properties)中的属性(如name, base)连接起来形式唯一的字符路径
 
 ## 设值
 有两种方式设置：

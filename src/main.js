@@ -13,14 +13,6 @@ import esForm from "@/package/index.js";
 
 import gComponent from "@/components/register.js";
 
-// codemirror的引入
-// import VueCodemirror from "vue-codemirror";
-// // require styles
-// import "codemirror/lib/codemirror.css";
-// // language
-// import "codemirror/mode/javascript/javascript.js";
-// Vue.use(VueCodemirror);
-
 // 注册全局组件
 gComponent.register();
 Vue.use(elementUI);

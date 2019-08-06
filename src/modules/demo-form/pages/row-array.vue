@@ -171,10 +171,10 @@ export default {
             help: "help： 最多只能添加20条数据"
           },
           courses: {
-            layout: "tabs",
+            // layout: "tabs",
             ui: {
               type: "bg-border",
-              rowHeight: 32,
+              // rowHeight: 32,
               showBody: true
             },
             title: "我的课程",
@@ -190,7 +190,7 @@ export default {
               fixed: 1,
               max: 5,
               rowSpace: 8,
-              value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }],
+              value: [{ name: "语文", code: "100" }, { name: "", code: "" }],
               actions: {
                 trigger: "change",
                 handler: function(options) {
@@ -201,38 +201,23 @@ export default {
 
             properties: {
               name: {
-                value: "默认名",
-                direction: "h",
+                // pathKey: 当是第一个时，则是: courses[0].name, 如此类推
                 col: 12,
-                label: "es: '学科名' + ({{$index}} + 1)",
-                // hidden: "es: !{{$hidden(  courses[i].code)}}",
-                component: {
-                  name: "el-input",
-                  props: {
-                    // disabled: "es:!{{$root.courses[i].code}} || {{$index}} == 0",
-                    size: "small"
-                  }
-                },
-                rules: true
+                label: "学科名",
+                component: "el-input",
+                value: "语文"
               },
               code: {
-                value: "100",
-                // direction: "v",
+                // pathKey: 当是第一个时，则是: courses[0].code, 如此类推
+                value: "",
                 col: 12,
-                label: {
-                  text: "代号"
-                },
+                label: "学科代号",
                 component: {
                   name: "el-input",
                   props: {
-                    size: "small"
-                  },
-                  actions: {
-                    trigger: "input",
-                    handler: function(value, pathkey) {
-                      console.log("value: ", value);
-                      console.log("pathkey: ", pathkey);
-                    }
+                    placeholder:
+                      "es: !{{$root['courses'][i].name}} ? '学科名有值我才可写' : '输入学科代号'",
+                    disabled: "es: !{{$root.courses[i]}}.name" // [i]代表当前行
                   }
                 }
               }

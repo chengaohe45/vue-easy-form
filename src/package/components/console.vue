@@ -266,7 +266,8 @@ export default {
         2
       );
 
-      newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
+      // 不需要做那么漂亮，这种东西会影响性能的
+      // newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
 
       if (CAN_REPLACE) {
         if (!hasSameUndefined) {

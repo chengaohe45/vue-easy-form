@@ -50,24 +50,21 @@ let schemaUtils = {
       if (!utils.isObj(tmpSchema.properties)) {
         rootObj = {};
         rootObj.title = false;
-        // rootObj.direction = global.direction;
-        rootObj.array = false; // 顶级是不支持数组的
         rootObj.layout = false;
         rootObj.properties = tmpSchema;
 
         // 根节点有效的属性
         autoMatch = false;
       } else {
-        // console.log("rootObj.layout.name", rootObj.layout.name === constant.LAYOUT_TABS);
-        // var newLayout = this.__parsePropLayout(rootObj.layout);
-        rootObj.array = false; // 顶级是不支持数组的
-        // if (newLayout && newLayout.name === constant.LAYOUT_TABS) {
-        //   rootObj.layout = false;
-        // }
-
         // 根节点有效的属性
         autoMatch = rootObj.autoMatch === true ? true : false;
       }
+
+      // 基础设置，最外层的一些东西固定
+      rootObj.array = false; // 顶级是不支持数组的
+      rootObj.hidden = false; // 最外层也不支持隐藏
+      rootObj.isTmp = false; // 最外层也不支持临时值
+      rootObj.col = constant.UI_MAX_COL; // 最外层保持最大
       rootObj.label = { text: false, __rawText: false }; // 顶级是不支持label
 
       rootObj = this.__parseProp(

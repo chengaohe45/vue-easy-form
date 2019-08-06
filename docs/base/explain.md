@@ -26,7 +26,9 @@ base.student[0].courses[1].name // 推荐的写法
 base.target.name        // 推荐的写法
 base.target["name"]
 ```
+生成形式见[表单值/value](./form-value.md)
 > 应用场景：[项组件事件](./component.md#组件事件)、[项组件验证](./rules.md)、[数组事件](./array.md#数组事件)所携带的信息会返回此值; [form.setValue](./form.md#表单方法)等需要此值设置
+
 
 ## es语法
 es语法就一条`es:`为前缀的字符串，再按照一定的规则解析出来的js语句。<br />

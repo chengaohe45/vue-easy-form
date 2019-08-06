@@ -104,5 +104,47 @@ data() {
 
 属性array.rules写法跟项组件验证一样，具体见[项组件验证](./rules.html)
 
+## 数组[es写法](./com-standard.md#es写法)
+
+如schema为：
+```js
+data() {
+    return {
+      formSchema: {
+        // ...
+        // 数组
+        courses: {
+          array: true,
+          properties: {
+            name: {   // pathKey: 当是第一个时，则是: courses[0].name, 如此类推
+              col: 12,
+              label: "学科名",
+              component: "el-input",
+              value: "语文"
+            },
+            code: { // pathKey: 当是第一个时，则是: courses[0].code, 如此类推
+              value: "100",
+              col: 12,
+              label: "学科代号",
+              component: {
+                name: "el-input",
+                props: {
+                  placeholder: "学科名有值我才可写",
+                  // [i]代表当前行，必须写在大括号内
+                  disabled: "es: !{{$root.courses[i].name}}"
+                }
+              }
+            }
+          }
+        }
+
+      }
+    };
+  }
+```
+>在es写法中，`[i]`是一个固定的写法，它代表当前的行，运行时会用[索引链(idxChain)](./explain.md#索引链)进行代替. <br/>若孩(孙)子节点也为数组，也是用`[i]`, <br/>如：<span v-pre>`es: !{{$root.courses[i].students[i].name}}`</span>
+::: warning
+`[i]`必须写在大括号内
+:::
 
 [schema的具体写法](./schema.md)

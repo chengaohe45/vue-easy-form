@@ -59,6 +59,8 @@ level: {
 - `index`：数组中孩子节点(非孙子节点))项所在的索引，其它节点(非孩子)节点此值是-1. index在es语法中的写法是<span v-pre>`{{$index}}`</span>
 - `hidden`： 用于判断某一项是否隐藏的`函数`. hidden在es语法中的写法是<span v-pre>`{{$hidden(base.target)}}`</span>; 括号中是路径
 
+[数组es写法](./array.md#数组es写法)
+
 ## 函数写法
 属性直接写成一个函数，再传入相应的参数(数据源)进行动态解析. 实例见[函数写法实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/es-function)
 ```js

@@ -176,9 +176,12 @@ let parse = {
       const matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
       matchs.forEach(mItem => {
         // mItem值："{{$root.persons[i].age}}"
+        // console.log("1 mItem: ", mItem);
+        var tmpItem = parse.chainPathKey(mItem, "[i]");
+        // console.log("2 tmpItem: ", tmpItem);
         let tempVal = "";
         //找出[i],按顺序说明出处
-        let pieces = mItem.split("[i]");
+        let pieces = tmpItem.split("[i]");
         let piecesLen = pieces.length;
         pieces.forEach((piece, index) => {
           if (index < piecesLen - 1) {
@@ -197,6 +200,7 @@ let parse = {
         });
         newScriptTxt = newScriptTxt.replace(mItem, tempVal);
       });
+      // console.log("newScriptTxt: ", newScriptTxt);
       newScriptTxt = "return (" + newScriptTxt + ");";
 
       result = new Function(constant.ES_OPTIONS, newScriptTxt);
