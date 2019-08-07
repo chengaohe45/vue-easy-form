@@ -5,6 +5,21 @@ module.exports = {
   themeConfig: {
     // lastUpdated: '最后更新',
     nav: [
+      { text: '指南', link: '/' },
+      {
+        text: '版本',
+        items: [
+          {
+            text: '版本总览',
+            link: '/version/overview'
+          },
+          {
+            text: '1.4.0（最新）',
+            link: '/version/1.4.*'
+          }
+        ]
+      },
+      { text: 'GitHub', link: 'https://github.com/chengaohe45/vue-easy-form' },
       { text: 'esForm例子', link: 'https://chengaohe45.github.io/vue-easy-form-docs/demo' }
     ],
     sidebar: {
@@ -38,7 +53,8 @@ module.exports = {
             'base/desc'
           ]
         }
-      ]
+      ],
+      '/version/': ['overview', '1.4.*']
     }
   }
 };
