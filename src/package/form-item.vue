@@ -476,10 +476,11 @@
   }
 
   .es-form-desc {
-    margin: 5px 0 0px 3px;
+    margin: 4px 0 0px 3px;
     text-align: left;
     color: #b3b5b9;
     font-size: 13px;
+    line-height: 16px;
   }
 
   .es-form-help {

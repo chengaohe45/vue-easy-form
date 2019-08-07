@@ -8,10 +8,9 @@
           class="docs-btn"
           target="_blank"
           :href="'https://chengaohe45.github.io' + docsHref"
-          @click="toggleDetails"
           >{{ docsTitle }}</a
         >
-        <el-button type="text" class="toggle-btn" @click="toggleDetails">{{
+        <el-button type="text" class="toggle-btn" @click="toggleHandler">{{
           openDetails ? "隐藏详情" : "打开详情"
         }}</el-button>
       </div>
@@ -31,7 +30,7 @@
           class="run-btn"
           type="primary"
           plain
-          @click="clickHandler"
+          @click="runHandler"
           size="small"
           >运行schema</el-button
         >
@@ -53,21 +52,62 @@
           </div>
         </div>
         <div class="demo-es-result">
-          <!-- <h3 class="subtitle">表单输出:</h3> -->
           <div class="demo-result-panel">
-            <div class="demo-form-ui">
-              <es-form
-                ref="form"
-                :schema="schema"
-                v-model="formValue"
-                :hasConsole="hasConsole"
-                @input="formInput"
-                @change="formChange"
-                @submit="formSubmit"
-              ></es-form>
+            <div class="demo-form-ui-box">
+              <h3 class="demo-title">表单输出</h3>
+              <div class="demo-form-ui">
+                <es-form
+                  ref="form"
+                  :schema="schema"
+                  v-model="formValue"
+                  :hasConsole="hasConsole"
+                  @input="formInput"
+                  @change="formChange"
+                  @submit="formSubmit"
+                ></es-form>
+              </div>
             </div>
-            <div class="demo-form-value">
-              <strong>表单值(formValue):</strong>
+            <div class="demo-form-op-box">
+              <h3 class="demo-title">表单操作</h3>
+              <div class="demo-form-set-wrap">
+                <div class="demo-form-btn-row">
+                  <el-button
+                    size="small"
+                    type="primary"
+                    round
+                    @click="validHandler"
+                    >表单验证</el-button
+                  >
+                  <el-button size="small" round @click="resetHandler"
+                    >重置</el-button
+                  >
+                </div>
+                <div class="demo-form-set-row">
+                  <div class="demo-op-title">
+                    设置表单form.setValue(key, value):
+                  </div>
+                  <div class="demo-op-form-box">
+                    <div class="demo-op-form-col">
+                      <es-form
+                        ref="opRef"
+                        :schema="opSchema"
+                        v-model="opValue"
+                        :hasConsole="false"
+                      ></es-form>
+                    </div>
+                    <el-button
+                      class="demo-op-btn-col"
+                      size="small"
+                      type="primary"
+                      @click="setValueHandler"
+                      >提交值设置</el-button
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="demo-form-op-box">
+              <h3 class="demo-title">表单值(formValue)</h3>
               <pre class="pre-box">{{ stringify(formValue) }}</pre>
             </div>
           </div>
@@ -78,72 +118,93 @@
 </template>
 
 <script>
-import utils from "@/libs/utils";
-import esForm from "@/package/index.js";
-import Vue from "vue";
+// import utils from "@/libs/utils";
+import sysMixin from "../mixins/sys-mixin.js";
+import utils from "../../../package/libs/utils";
 
 export default {
+  mixins: [sysMixin],
   data() {
     return {
-      formValue: {
-        // name: "默认小花"
-      },
-
-      runMsg: "",
-      runRight: true,
-
+      formValue: {},
       schema: {},
-
       code: "",
+      openDetails: true,
 
-      openDetails: true
-
-      /**
-       * 注：_es为前缀的不跟页面同步，所以不写入data里
-       */
+      /* 值设置所用到 */
+      opSchema: {
+        ui: {
+          colon: true,
+          rowSpace: 10,
+          labelWidth: 72
+        },
+        properties: {
+          key: {
+            label: "Key",
+            component: {
+              name: "el-input",
+              props: {
+                placeholder: "项组件路径/pathKey"
+              }
+            },
+            value: "",
+            help: {
+              props: {
+                content: "点击查看pathKey",
+                href:
+                  "https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#项组件路径"
+              }
+            }
+            // desc: "pathKey可以为空；为空则\"值\"要写成一个Object"
+          },
+          value: {
+            label: "Value",
+            component: {
+              name: "el-input",
+              props: {
+                placeholder:
+                  "es: {{$root.key}} ? '格式：整数(123)，字符串(\"123\")': '格式：对象({...})'",
+                type: "textarea",
+                rows: 4
+              }
+            },
+            value: "",
+            rules: {
+              required: true,
+              emptyMsg: "值不能为空"
+            },
+            desc:
+              "es: {{$root.key}} ? '对应的值(字符串两边记得加上双引号，如：\"你好\")': '必须是一个Object(可复制下面的值来试试)'",
+            help: {
+              props: {
+                content:
+                  "此值会用eval解析, 所以输入要符合格式。<br/>点击可查看值设值",
+                href:
+                  "https://chengaohe45.github.io/vue-easy-form-docs/dist/base/form-value.html#设值"
+              }
+            }
+          }
+        }
+      },
+      opValue: {}
     };
   },
 
   props: {
-    title: {
-      type: String,
-      required: false,
-      default: "demo标题"
-    },
-
     formSchema: {
       type: Object,
       required: true
-    },
-
-    printEvent: {
-      type: Boolean,
-      required: false,
-      default: false
     },
 
     hasConsole: {
       type: Boolean,
       required: false,
       default: undefined
-    },
-
-    docsTitle: {
-      type: String,
-      required: false,
-      default: "配置文档"
-    },
-
-    docsHref: {
-      type: String,
-      required: false,
-      default: "/vue-easy-form-docs/dist/base/settings.html"
     }
   },
 
   created() {
-    window.demoVm = this;
-    // console.log("Vue:", Vue.component("el-input"));
+    window.demoVm = this; //test
 
     this.$data.schema = this.formSchema;
     this.$data.code = this.stringify(this.formSchema, true);
@@ -152,13 +213,7 @@ export default {
   computed: {},
 
   mounted() {
-    this._esInfoHandler = (err, vm, info) => {
-      this.printSystem(err, vm, info);
-    };
-
-    // Vue构造时的错误信息和警告信息：是赋值，不是监听
-    Vue.config.errorHandler = this._esInfoHandler;
-    Vue.config.warnHandler = this._esInfoHandler;
+    this.initListener();
   },
 
   updated() {
@@ -166,256 +221,108 @@ export default {
   },
 
   methods: {
-    printSystem(err, vm, info) {
-      console.error(err, vm, info);
-      var constructorTxt = Object.prototype.toString.call(err);
-      if (constructorTxt && constructorTxt.indexOf("DOMException") >= 0) {
-        alert("Vue构造节点时出错，Vue停止执行，需要重新刷新页面");
-        location.reload();
-      } else {
-        this.$nextTick(() => {
-          var runMsg = "Vue解析: 存在警告信息(信息可开发者模查看).";
-          if (utils.isStr(err)) {
-            var comReg = /<(.+?)>/;
-            var arr = err.match(comReg);
-            if (arr) {
-              if (!this._esErrorNames) {
-                this._esErrorNames = [arr[1]];
-              } else if (!this._esErrorNames.includes(arr[1])) {
-                this._esErrorNames.push(arr[1]);
-              }
-              runMsg =
-                "Vue解析: <" +
-                this._esErrorNames.join(">, <") +
-                ">组件不存在,请修改.(注意：若不修改，Vue机制下将不提示上一次相同组件名的警告)";
-            } else if (err.indexOf("Invalid prop") >= 0) {
-              runMsg = "组件属性的类型可能不对(信息可开发者模式查看)！";
-            } else if (err.indexOf("Missing required prop") >= 0) {
-              runMsg = "缺少必要的组件属性(信息可开发者模式查看)！";
-            }
-          }
-          this.$data.runRight = false;
-          this.$data.runMsg = runMsg;
-        });
-      }
-    },
-
     stringify(value, isFromSchema = false) {
-      return this.__toJson(value, 1, isFromSchema);
+      return this.toJson(value, 1, isFromSchema);
     },
 
     /**
-     * 变为JSON输出，增强可读性
-     * 经测试：null, array, object, function, number, boolean, string都OK；当value是undefined时会被JSON.stringify漏掉（感觉也没有错）
-     * @param source 解析源
-     * @param curTimes 解析了多少次了
-     * @param isFromSchema 是否来自schema, 因为schema在弄漂亮点，去掉key的双引号
+     * 点击运行
      */
-    __toJson(source, curTimes = 1, isFromSchema = false) {
-      const MAX = 3; // 大于3次就不做变换了
-      const CAN_REPLACE = curTimes <= MAX ? true : false;
-      var randStr = utils.randStr(15, 20);
-      var uniqIndex = 0;
-      const UNDEFINED =
-        curTimes < CAN_REPLACE ? "UND" + randStr : "undefined值";
-      const FUNCTION_NAME =
-        curTimes < CAN_REPLACE ? "FUNC" + randStr : "function值";
-
-      var undefinedObj = {},
-        functionObj = {},
-        hasSameUndefined = false;
-
-      var newSource = JSON.stringify(
-        source,
-        (key, value) => {
-          if (
-            key === UNDEFINED ||
-            value === UNDEFINED ||
-            key.indexOf(FUNCTION_NAME) == 0
-          ) {
-            // 出现相同的字符串，说明UNDEFINED值不可用(只是存在理论上的可能，比当上联合国秘书长的概率还低)
-            hasSameUndefined = true;
-          } else if (value === undefined) {
-            value = UNDEFINED;
-            undefinedObj[key] = value;
-          } else if (
-            value &&
-            key == "name" &&
-            typeof value == "object" &&
-            value.render &&
-            value.staticRenderFns
-          ) {
-            var vueKey =
-              "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
-            var myVues = this._esMyVues ? this._esMyVues : {};
-            myVues[vueKey] = value;
-            this._esMyVues = myVues;
-            return vueKey;
-          } else if (utils.isFunc(value)) {
-            // 因为数据是来自于开发者，这个基本可以控制字符串有FUNCTIONNAME
-            var funcKey = FUNCTION_NAME + ++uniqIndex;
-            var funcStr = value.toString();
-            funcStr = funcStr.replace(
-              new RegExp("function\\s+" + key + "\\(", "g"),
-              "function("
-            );
-            functionObj[funcKey] = funcStr;
-            return funcKey;
-          }
-          return value;
-        },
-        2
-      );
-
-      if (isFromSchema) {
-        // 去年双引号
-        newSource = newSource.replace(/"([^\\"]+?)":/g, "$1:");
-      }
-
-      if (CAN_REPLACE) {
-        if (!hasSameUndefined) {
-          // 没有有相同的字符串，替换
-
-          for (var key in functionObj) {
-            var reg = new RegExp('\\"' + key + '\\"', "g");
-            newSource = newSource.replace(reg, functionObj[key]);
-          }
-
-          if (Object.keys(undefinedObj).length > 0) {
-            // 需要替挽
-            // undefined 代替
-            // 因为数据是来自于开发者，这个基本可以控制字符串有UNDEFINED
-            var undefinedReg = new RegExp('"' + UNDEFINED + '"', "g");
-            newSource = newSource.replace(undefinedReg, "undefined");
-          }
-
-          return newSource;
-        } else {
-          //  有相同的字符串，重来一次
-          newSource = null;
-          var nextTime = curTimes + 1;
-          return this.__toJson(source, nextTime, isFromSchema);
-        }
+    runHandler() {
+      var rawSchema = this.runSchema(this.$data.code);
+      if (rawSchema) {
+        // 数据有效，返回一个对象
+        this.$data.formValue = {};
+        this.$data.schema = rawSchema;
       } else {
-        // 直接输出；不做替换了；因为之前做过了MAX次了；理论就不会进入这里，进入这里只是备用做展示，对功能没有什么影响
-        return newSource;
+        // 数据不正确，runSchema已经做提示了
       }
     },
 
-    replaceVue(result) {
-      if (
-        utils.isObj(result) &&
-        this._esMyVues &&
-        Object.keys(this._esMyVues).length > 0
-      ) {
-        var myVues = this._esMyVues;
-        for (var key in result) {
-          var value = result[key];
-          if (utils.isStr(value) && myVues[value]) {
-            result[key] = myVues[value];
-          } else if (utils.isObj(value)) {
-            this.replaceVue(value);
-          }
+    /**
+     * 点击表单验证
+     */
+    validHandler() {
+      if (this.$refs.form.checkAll()) {
+        this.$message({
+          message: "调用form.checkAll(): 表单输入正确",
+          type: "success"
+        });
+      } else {
+        this.$message({
+          message: "调用form.checkAll(): 表单输入不合法",
+          type: "error"
+        });
+      }
+    },
+
+    /**
+     * 点击重置
+     */
+    resetHandler() {
+      this.$refs.form.reset();
+      this.$message({
+        message: "调用form.reset(): 重置成功",
+        type: "success"
+      });
+    },
+
+    setValueHandler() {
+      if (this.$refs.opRef.checkAll()) {
+        var opValue = this.$data.opValue;
+
+        var value;
+        try {
+          eval("value = " + opValue.value);
+        } catch (e) {
+          this.$message({
+            message: "值无法解析",
+            type: "error"
+          });
+          console.error(e);
+          return false;
+        }
+
+        if (opValue.key) {
+          this.$refs.form.setValue(opValue.key, value);
+        } else if (utils.isObj(value)) {
+          this.$refs.form.setValue(value);
+        } else {
+          this.$message({
+            message: "当key为空时，value必须是一个对象",
+            type: "warning"
+          });
         }
       }
     },
 
-    clickHandler() {
-      // 重置一些基本信息
-      this.$data.runMsg = "";
-      this._esErrorNames = null;
-
-      var rawSchema;
-
-      // 检查结果是否正确
-      try {
-        eval("rawSchema = " + this.$data.code);
-      } catch (e) {
-        this.$nextTick(() => {
-          this.$data.runRight = false;
-          this.$data.runMsg = "输入框schema无法解析";
-        });
-        console.error(e);
-        return false;
-      }
-
-      // 代替自定义组件
-      this.replaceVue(rawSchema);
-
-      var checkResult = esForm.check(rawSchema);
-      if (checkResult !== true) {
-        this.$nextTick(() => {
-          this.$data.runRight = false;
-          this.$data.runMsg = checkResult;
-        });
-        console.error(checkResult);
-        return false;
-      }
-
-      this.$nextTick(() => {
-        this.$data.runRight = true;
-        this.$data.runMsg = "格式正确，具体输出见右侧";
-      });
-
-      this.$data.formValue = {};
-      this.$data.schema = rawSchema;
-    },
-
-    toggleDetails() {
+    /**
+     * 点击详情切换
+     */
+    toggleHandler() {
       this.$data.openDetails = !this.$data.openDetails;
     },
 
-    formInput(value, sourcePathKey) {
-      if (this.printEvent) {
-        console.log(
-          "formInput(value, sourcePathKey)：打印结果 ******************** start"
-        );
-        console.log(">>>>>返回两个value的值: ", value);
-        console.log(">>>>>返回两个sourcePathKey的值: ", sourcePathKey);
-        console.log(
-          "formInput(value, sourcePathKey)：打印结果 ******************** end"
-        );
-        console.log("\n");
+    formInput(formValue, sourcePathKey) {
+      if (this.hasConsole) {
+        console.log("@input:", formValue, sourcePathKey);
       }
     },
-    formChange(value, sourcePathKey) {
-      if (this.printEvent) {
-        console.log(
-          "formChange(value, sourcePathKey)：打印结果 --------------- start"
-        );
-        console.log(">>>>>返回两个value的值: ", value);
-        console.log(">>>>>返回两个sourcePathKey的值: ", sourcePathKey);
-        console.log(
-          "formChange(value, sourcePathKey)：打印结果 --------------- end"
-        );
-        console.log("\n");
+
+    formChange(formValue, sourcePathKey) {
+      if (this.hasConsole) {
+        console.log("@change:", formValue, sourcePathKey);
       }
     },
+
     formSubmit(/*value*/) {
-      // console.log("formSubmit: ", value);
       this.$message({
         message: "触发了表单的提交事件",
         type: "success"
       });
     }
   },
-  components: {},
-
-  beforeDestroy() {
-    if (this._esInfoHandler) {
-      // 若别的地方修改了，不用理会
-      if (this._esInfoHandler == Vue.config.errorHandler) {
-        Vue.config.errorHandler = null;
-      }
-
-      // 若别的地方修改了，不用理会
-      if (this._esInfoHandler == Vue.config.warnHandler) {
-        Vue.config.warnHandler = null;
-      }
-
-      this._esInfoHandler = null;
-    }
-  }
+  components: {}
 };
 </script>
 
@@ -539,16 +446,8 @@ export default {
   }
 
   .pre-box {
+    margin: 8px;
     overflow: auto;
-  }
-
-  .subtitle {
-    margin: 0 0 0 3px;
-    padding: 0;
-    font-size: 16px;
-    font-weight: bold;
-    line-height: 30px;
-    @include flex-fixed;
   }
 
   .demo-es-result {
@@ -571,18 +470,72 @@ export default {
       @include flex-full;
     }
 
-    .demo-form-ui {
+    .demo-title {
+      margin: 0 0 0 3px;
+      padding: 0;
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 20px;
+      text-align: left;
+    }
+
+    .demo-form-ui-box {
       margin: 10px;
+    }
+
+    .demo-form-ui {
+      margin: 8px 0 0 0;
       padding: 10px 10px;
       border: 1px solid #d6d7da;
       border-radius: 4px;
     }
 
-    .demo-form-value {
+    .demo-form-op-box {
       margin: 10px 10px 0;
+      padding-top: 10px;
       border-top: 1px dashed #d6d7da;
-      padding: 10px;
       text-align: left;
+
+      .demo-form-set-wrap {
+        margin-top: 8px;
+        padding: 10px;
+        background: #f3f3f3;
+        border-radius: 3px;
+      }
+
+      .demo-form-btn-row {
+        margin-top: 2px;
+        text-align: center;
+      }
+
+      .demo-form-set-row {
+        margin: 10px auto 0 auto;
+        padding: 10px 10px 0;
+        border-top: 1px dashed #d6d7da;
+        max-width: 700px;
+        text-align: center;
+
+        .demo-op-title {
+          margin-left: 50px;
+          text-align: left;
+          font-weight: bold;
+        }
+
+        .demo-op-form-box {
+          margin-top: 10px;
+          @include display-flex;
+          align-items: flex-start;
+
+          .demo-op-form-col {
+            @include flex-full;
+          }
+
+          .demo-op-btn-col {
+            margin: 4px 0 0 20px;
+            @include flex-fixed;
+          }
+        }
+      }
     }
   }
 

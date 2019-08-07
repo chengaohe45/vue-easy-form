@@ -87,13 +87,16 @@ let formUtils = {
       }
       propItem.value = tmpValue;
     } else if (propItem.properties) {
-      for (var key in propItem.properties) {
-        !utils.isUndef(value[key]) &&
-          this.__setValue(
-            propItem.properties[key],
-            value[key],
-            hasIdxChainChanged
-          );
+      if (utils.isObj(value)) {
+        for (var key in propItem.properties) {
+          if (value.hasOwnProperty(key)) {
+            this.__setValue(
+              propItem.properties[key],
+              value[key],
+              hasIdxChainChanged
+            );
+          }
+        }
       }
     } else {
       //可能是占位对象
