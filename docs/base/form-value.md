@@ -1,11 +1,5 @@
 # 表单值/value
 
-值：
-- `array`： 枚举写法
-- `object`： 函数写法
-
-控制入值和输出的转换功能。比如：el-switch的值是一个boolean值，但是后台保存的是0/1(取和存)，此时就需要做转换
-
 ## 实例
 ```html
 <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -72,7 +66,7 @@ data() {
 >[pathKey:项组件路径](./explain.md#项组件路径)的组成形式：各个块(properties)中的属性(如name, base)连接起来形式唯一的字符路径
 
 ## 设值
-有两种方式设置：
+有两种方式设置([具体实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/value))：
 - `formValue`: 表单非深度监听此值，若要通过此值设置表单值，必须重新改变此变量的地址(`不推荐`)
 - `form.setValue(key, value)`: 表单设置值(`推荐`)
 
@@ -80,7 +74,7 @@ data() {
 ```js
 // setValue参数只有一个对象，则一次性设置多个值
 // 设置多个值：只设置所要设置的key, 如endTime是不会改变的
-form.setValue({
+form.setValue({     // 多值设置
   name: "广告名称", 
   base: {
     startTime: "2015/02/03"
@@ -88,7 +82,7 @@ form.setValue({
   });
 
 // setValue参数有两个，单设置某项的值
-form.setValue("base.startTime", "2015/02/03");
+form.setValue("base.startTime", "2015/02/03");  // 单值设置
 ```
 
 ## 取值
@@ -104,7 +98,7 @@ form.setValue("base.startTime", "2015/02/03");
 - `form.getRootData()`: 表单的根(原始)值(setValue过后，可即时取出，实时)
 
 ## 值转换
-字段format<br/>
+字段format；[具体实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/format)<br/>
 控制入值和输出值的转换; 场景：当外部值不是表单所需要的数据或类型时（`比如：el-switch的值是一个boolean值，但是后台保存的是0/1`），此时就需要做转换<br/>
 值转换有两种形式写法：
 - `枚举`： (推荐)

@@ -119,7 +119,7 @@ export default {
 
       this.$nextTick(() => {
         this.$data.runRight = true;
-        this.$data.runMsg = "格式正确，具体输出见右侧";
+        this.$data.runMsg = "格式正确，详情具体输出";
       });
 
       return rawSchema;

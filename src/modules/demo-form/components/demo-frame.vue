@@ -1,8 +1,16 @@
 <template>
   <div class="demo-form-box">
+    <!-- 主题概述 -->
     <div class="demo-form-header">
       <div class="demo-details-header">
         <h2 class="demo-form-title">{{ title }}</h2>
+        <a
+          type="text"
+          class="docs-btn"
+          target="_blank"
+          href="https://github.com/chengaohe45/vue-easy-form"
+          >Github</a
+        >
         <a
           type="text"
           class="docs-btn"
@@ -24,6 +32,8 @@
         </div>
       </div>
     </div>
+
+    <!-- 功能操作 -->
     <div class="demo-form-body">
       <div class="demo-btn-row">
         <el-button
@@ -34,13 +44,17 @@
           size="small"
           >运行schema</el-button
         >
-        <transition name="bounce">
-          <div :class="runRight ? 'run-msg' : 'run-msg error'" v-if="runMsg">
-            {{ runMsg }}
-          </div>
-        </transition>
+        <!-- 运行错误或警告显示 -->
+        <div class="run-msg-box">
+          <transition name="bounce">
+            <span :class="runRight ? 'run-msg' : 'run-msg error'" v-if="runMsg">
+              {{ runMsg }}
+            </span>
+          </transition>
+        </div>
       </div>
       <div class="demo-body-row">
+        <!-- 源码操作栏 -->
         <div class="demo-es-source">
           <div class="demo-source-panel">
             <textarea
@@ -51,8 +65,11 @@
             ></textarea>
           </div>
         </div>
+
+        <!-- 效果输出栏 -->
         <div class="demo-es-result">
           <div class="demo-result-panel">
+            <!-- 表单界面区 -->
             <div class="demo-form-ui-box">
               <h3 class="demo-title">表单输出</h3>
               <div class="demo-form-ui">
@@ -67,7 +84,9 @@
                 ></es-form>
               </div>
             </div>
-            <div class="demo-form-op-box">
+
+            <!-- 表单操作区 -->
+            <div class="demo-form-op-box" v-if="canOperate">
               <h3 class="demo-title">表单操作</h3>
               <div class="demo-form-set-wrap">
                 <div class="demo-form-btn-row">
@@ -106,6 +125,8 @@
                 </div>
               </div>
             </div>
+
+            <!-- 值输出显示区 -->
             <div class="demo-form-op-box">
               <h3 class="demo-title">表单值(formValue)</h3>
               <pre class="pre-box">{{ stringify(formValue) }}</pre>
@@ -122,6 +143,8 @@
 import sysMixin from "../mixins/sys-mixin.js";
 import utils from "../../../package/libs/utils";
 
+import operateSchema from "../schemas/operation-schema.js";
+
 export default {
   mixins: [sysMixin],
   data() {
@@ -131,61 +154,10 @@ export default {
       code: "",
       openDetails: true,
 
+      canOperate: false /* 是否可以打开操作区域 */,
+
       /* 值设置所用到 */
-      opSchema: {
-        ui: {
-          colon: true,
-          rowSpace: 10,
-          labelWidth: 72
-        },
-        properties: {
-          key: {
-            label: "Key",
-            component: {
-              name: "el-input",
-              props: {
-                placeholder: "项组件路径/pathKey"
-              }
-            },
-            value: "",
-            help: {
-              props: {
-                content: "点击查看pathKey",
-                href:
-                  "https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#项组件路径"
-              }
-            }
-            // desc: "pathKey可以为空；为空则\"值\"要写成一个Object"
-          },
-          value: {
-            label: "Value",
-            component: {
-              name: "el-input",
-              props: {
-                placeholder:
-                  "es: {{$root.key}} ? '格式：整数(123)，字符串(\"123\")': '格式：对象({...})'",
-                type: "textarea",
-                rows: 4
-              }
-            },
-            value: "",
-            rules: {
-              required: true,
-              emptyMsg: "值不能为空"
-            },
-            desc:
-              "es: {{$root.key}} ? '对应的值(字符串两边记得加上双引号，如：\"你好\")': '必须是一个Object(可复制下面的值来试试)'",
-            help: {
-              props: {
-                content:
-                  "此值会用eval解析, 所以输入要符合格式。<br/>点击可查看值设值",
-                href:
-                  "https://chengaohe45.github.io/vue-easy-form-docs/dist/base/form-value.html#设值"
-              }
-            }
-          }
-        }
-      },
+      opSchema: operateSchema,
       opValue: {}
     };
   },
@@ -200,11 +172,22 @@ export default {
       type: Boolean,
       required: false,
       default: undefined
+    },
+
+    hasOperate: {
+      /* 是否有操作区域：默认是没有的 */
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
 
   created() {
     window.demoVm = this; //test
+
+    /* 当在开发环境时，都可以打开操作区域。为什么这样做，因为这个开发人员可以快速调试；对于用户来说是隐藏的，这样更易于学习，减少干扰 */
+    // this.$data.canOperate = this.hasOperate || process.env.NODE_ENV != "production";
+    this.$data.canOperate = this.hasOperate;
 
     this.$data.schema = this.formSchema;
     this.$data.code = this.stringify(this.formSchema, true);
@@ -352,14 +335,14 @@ export default {
     }
 
     .demo-form-title {
-      margin: 0 0 0 0;
+      margin: 0 5px 0 0;
       font-weight: 400;
       font-size: 22px;
       line-height: 24px;
     }
 
     .docs-btn {
-      margin-left: 5px;
+      margin: 0 5px;
       color: #409eff;
       text-decoration: none;
       &:hover {
@@ -417,14 +400,24 @@ export default {
     @include flex-fixed;
     text-align: left;
     @include display-flex;
+    justify-content: space-between;
     align-items: center;
 
     .run-btn {
       @include flex-fixed;
     }
 
+    .run-msg-box {
+      margin: 0;
+      padding: 0 0 0 5px;
+      min-width: 65%;
+      text-align: left;
+      box-sizing: border-box;
+      // @include flex-fixed;
+    }
+
     .run-msg {
-      margin: 0 0 0 10px;
+      margin: 0;
       font-size: 13px;
       line-height: 16px;
       color: #67c23a;
@@ -596,20 +589,22 @@ export default {
   }
 
   .bounce-enter-active {
-    animation: bounce-in 0.5s;
+    animation: bounce-in 0.3s;
   }
   .bounce-leave-active {
     animation: bounce-in 0.1s reverse;
   }
   @keyframes bounce-in {
     0% {
-      transform: scale(0);
+      // transform: scale(0);
+      opacity: 0;
     }
-    50% {
-      transform: scale(1.1);
-    }
+    // 50% {
+    //   transform: scale(1.1);
+    // }
     100% {
-      transform: scale(1);
+      // transform: scale(1);
+      opacity: 1;
     }
   }
 }

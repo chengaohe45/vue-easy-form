@@ -27,7 +27,7 @@ import rowArrForm from "../modules/demo-form/pages/row-array";
 import legendArrForm from "../modules/demo-form/pages/legend-array";
 import tabArrForm from "../modules/demo-form/pages/table-array";
 import tabsArrForm from "../modules/demo-form/pages/tabs-array";
-// import valueForm from "../modules/demo-form/pages/value";
+import valueForm from "../modules/demo-form/pages/value";
 import formatForm from "../modules/demo-form/pages/format";
 import refForm from "../modules/demo-form/pages/ref";
 import actionsForm from "../modules/demo-form/pages/actions";
@@ -166,13 +166,6 @@ let navList = [
         path: "/es-function",
         component: esFuncForm
       }
-      // {
-      //   icon: "",
-      //   name: "取值/赋值",
-      //   link: "/value",
-      //   path: "/value",
-      //   component: valueForm
-      // },
 
       // {
       //   icon: "",
@@ -304,13 +297,6 @@ let navList = [
       //   path: "/ref",
       //   component: refForm
       // },
-      // {
-      //   icon: "",
-      //   name: "取值/赋值",
-      //   link: "/value",
-      //   path: "/value",
-      //   component: valueForm
-      // },
 
       {
         icon: "",
@@ -318,6 +304,14 @@ let navList = [
         link: "/ref",
         path: "/ref",
         component: refForm
+      },
+
+      {
+        icon: "",
+        name: "value/值",
+        link: "/value",
+        path: "/value",
+        component: valueForm
       },
 
       {
