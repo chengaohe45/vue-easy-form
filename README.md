@@ -29,5 +29,12 @@ npm run lint
 ```
 npm run test:unit
 ```
+
+## 示例安装
+::: warning
+Node 版本要求<br>
+Vue CLI 需要 [Node.js](https://nodejs.org/en/) 8.11 或更高版本 (推荐 8.12.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
+:::
+
 [基本配置](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
 [具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo/)

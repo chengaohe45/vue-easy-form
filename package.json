@@ -34,7 +34,6 @@
   ],
   "dependencies": {
     "vue": "^2.6.10",
-    "vue-codemirror": "^4.0.6",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

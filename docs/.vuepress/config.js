@@ -15,7 +15,7 @@ module.exports = {
           },
           {
             text: '1.4.0（最新）',
-            link: '/version/1.4.*'
+            link: '/version/1.4.all'
           }
         ]
       },
@@ -54,7 +54,7 @@ module.exports = {
           ]
         }
       ],
-      '/version/': ['overview', '1.4.*']
+      '/version/': ['overview', '1.4.all']
     }
   }
 };
