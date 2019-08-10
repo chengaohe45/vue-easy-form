@@ -1112,9 +1112,17 @@ export default {
           }
         }
 
-        if (!hadChecked) {
-          // 都没有进入验证，说明这个事件是目标事件，返回false
-          errMsg = false;
+        if (!hadChecked) {  // 当triggers为空时是不会进入这里的，所以triggers不会为空
+          /* 若是正在输入且之前的错误信息为空提示则删掉 */
+          if (
+            // triggers &&
+            triggers.includes(constant.INPUT_EVENT) &&
+            schema.__invalidMsg === rules.emptyMsg
+          ) {
+            errMsg = true;
+          } else {
+            errMsg = false;
+          }
         }
       } else {
         // 没有要验证的东西
