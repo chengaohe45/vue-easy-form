@@ -1,7 +1,9 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      只需求配置label、component、value即可
+      只需求配置label、component、value即可；<span class="sys-danger"
+        >（注：esForm框架并不依赖于element-ui，只是编写示例时结合element-ui编写）</span
+      >
     </div>
   </demo-frame>
 </template>

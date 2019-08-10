@@ -16,8 +16,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "release": "vue-cli-service build --target lib --name es-form ./src/package/index.js",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit"
   },
@@ -48,7 +46,6 @@
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue-template-compiler": "^2.6.10",
-    "vuepress": "^0.14.11",
     "webpack-api-mocker": "^1.5.15"
   }
 }

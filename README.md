@@ -38,7 +38,7 @@ npm run test:unit
 ### 技术要求
 `npm install` 会自行安装；无需特别安装
 - [vue2.6.10](https://cn.vuejs.org/v2/guide/)
-- [element-ui2.4.6](https://element.eleme.cn/#/zh-CN/component/installation)
+- [element-ui2.4.6](https://element.eleme.cn/#/zh-CN/component/installation)（注：esForm框架并不依赖于element-ui；只是编写示例时结合element-ui编写）
 
 [框架基本配置](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
 [框架具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo/)

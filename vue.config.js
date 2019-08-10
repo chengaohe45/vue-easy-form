@@ -40,7 +40,7 @@ module.exports = {
 
   // outputDir: 'dist',
 
-  outputDir: isRelease ? "dist" : "docs/.vuepress/demo",
+  outputDir: isRelease ? "dist" : "../vue-easy-form-docs/demo",
 
   // pages:{ type:Object,Default:undfind }
   /*
