@@ -30,10 +30,15 @@ npm run lint
 npm run test:unit
 ```
 
-## 示例安装
+## 项目安装
 
 ### Node 版本要求
-源代码(含示例) 需要 [Node.js](https://nodejs.org/en/) 8.11 或更高版本 (推荐 8.12.0+)。你可以使用 [nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 在同一台电脑中管理多个 Node 版本。
+[Node.js](https://nodejs.org/en/) >= 8.11; 若需要升级；可使用[nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 进行多个 Node 版本管理。
 
-[基本配置](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
-[具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo/)
+### 技术要求
+`npm install` 会自行安装；无需特别安装
+- [vue2.6.10](https://cn.vuejs.org/v2/guide/)
+- [element-ui2.4.6](https://element.eleme.cn/#/zh-CN/component/installation)
+
+[框架基本配置](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
+[框架具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo/)
