@@ -368,11 +368,6 @@ export default {
 
     this.__initUi(this.schema);
 
-    this.$nextTick(() => {
-      this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-      this.$emit("inited", utils.deepCopy(this._esResultValue));
-    });
-    return;
   },
 
   mounted() {},
@@ -682,6 +677,7 @@ export default {
     },
 
     __initUi(schema) {
+      this.$data.isInited = false;
       var tmpSchema = schemaUtils.completeSchema(schema);
       //将value的值同步到schema中
       this.__setValue(tmpSchema, this.value);
@@ -689,6 +685,11 @@ export default {
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
       this._esOriginalValue = utils.deepCopy(this._esFormData);
+
+      this.$nextTick(() => {
+        this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
+        this.$emit("inited", utils.deepCopy(this._esResultValue));
+      });
     },
 
     __checkProp(schema, rootSchema) {
@@ -1041,8 +1042,15 @@ export default {
      * string 是需要检查的，但不正确
      */
     __checkRules: function(schema, value, triggers, parseSources) {
-      var rules =
-        schema.array && schema.array.rules ? schema.array.rules : schema.rules;
+      var rules, fromArray;
+      if (schema.array && schema.array.rules) {
+        rules = schema.array.rules;
+        fromArray = true;
+      } else {
+        rules = schema.rules;
+        fromArray = false;
+      }
+
       if (!rules) {
         //没有规则
         return true;
@@ -1063,6 +1071,16 @@ export default {
       var errMsg = true;
       var checkFun;
       var newParseSources, newOptions;
+
+      // 是数组,检查min, max
+      if (fromArray) {
+        if (schema.array.min > 0 && schema.__propSchemaList.length < schema.array.min) {
+          errMsg = "最少" + schema.array.max + "条数据";
+        } else if (schema.array.max > 0 && schema.__propSchemaList.length < schema.array.max) {
+          errMsg = "最多" + schema.array.max + "条数据";
+        }
+      }
+
       if (checkList && checkList.length > 0) {
         var hadChecked = false;
         for (var i = 0; i < checkList.length; i++) {

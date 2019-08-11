@@ -38,13 +38,13 @@ export default {
             rowHeight: 22,
             component: {
               name: "div",
-              text: "es: {{$root}}.author"
-              // style: {
-              //   color: "red"
-              // },
+              text: "es: {{$root}}.author",
+              style: {
+                color: "red"
+              }
               // class: "haha hah"
             },
-            value: "我不需要提交(前面有一个占位空间，所以掉下来)",
+            value: "我是临时值(前面有一个占位空间，所以掉下来)",
             col: 12
           },
           status: {

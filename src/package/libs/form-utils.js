@@ -129,9 +129,13 @@ let formUtils = {
       }
     }
 
+    if (newItem.hasOwnProperty("__invalidMsg")) {
+      newItem.__invalidMsg = false;
+    }
+
     if (!utils.isUndef(schema.array.subLabel)) {
       newItem.subLabel = utils.deepCopy(schema.array.subLabel);
-      newItem.__invalidMsg = false;
+      // newItem.__invalidMsg = false;
     }
 
     // console.log("schema.layout.name == constant.LAYOUT_TABS：", schema.layout.name == constant.LAYOUT_TABS);
@@ -560,32 +564,6 @@ let formUtils = {
     var newValue, keyValue, newArr, i, schemaList;
 
     if (propItem.component) {
-      /* 当取出是表单值时，已经在properties中取出了，这里没有用处了 */
-      // if (formData) {
-      //   // 有表单内部值，则取出是用户表单值
-      //   if (!propItem.isTmp) {
-      //     // 不是临时值
-      //     if (isHidden && !utils.isNull(propItem.hdValue)) {
-      //       // return propItem.hdValue;
-      //       if (!utils.isUndef(propItem.hdValue)) {
-      //         return propItem.hdValue;
-      //       } else {
-      //         // 特殊约定，hdValue为undefined, 说明不用取出此值
-      //         return undefined;
-      //       }
-      //     } else {
-      //       // 需要往下解析
-      //     }
-      //   } else {
-      //     // 临时字段，不用取出
-      //     return undefined;
-      //   }
-      // } else {
-      //   // form 内部取值
-      //   // return propItem.value;
-      //   // 需要往下解析
-      // }
-
       // 内部值，也不隐藏
       if (propItem.array) {
         // 是数组
@@ -611,23 +589,6 @@ let formUtils = {
         }
       }
     } else if (propItem.properties) {
-      // if (formData) {
-      //   // 有表单内部值，则取出是用户表单值
-      //   if (propItem.isTmp) {
-      //     // 临时字段，不用取出
-      //     return undefined;
-      //   } else if (isHidden && !utils.isNull(propItem.hdValue)) {
-      //     if (!utils.isUndef(propItem.hdValue)) {
-      //       return propItem.hdValue;
-      //     } else {
-      //       // 特殊约定，hdValue为undefined, 说明不用取出此值
-      //       return undefined;
-      //     }
-      //   } else {
-      //     // 往下取出正常值
-      //   }
-      // }
-
       if (propItem.array) {
         newArr = [];
         schemaList = propItem.__propSchemaList;
@@ -640,47 +601,47 @@ let formUtils = {
         newValue = {};
         for (var key in propItem.properties) {
           var nextPropItem = propItem.properties[key];
+
+          // 占位空间，不需要取出；往下取
+          if (nextPropItem.layout && nextPropItem.layout.name === constant.LAYOUT_SPACE) {
+            continue; 
+          } else if (formData && nextPropItem.isTmp) {  // 是取表单数据且是临时值
+            continue; 
+          }
+          
           var isNextHidden =
             formData && (isHidden || nextPropItem.hidden) ? true : false;
           // console.log("isNextHidden...: ", isNextHidden);
-          if (!isNextHidden) {
-            // 取表单内部值且不隐藏
+          if (!isNextHidden) { // 取表单内部值或用户数据时不隐藏
             keyValue = this.__getValue(
               nextPropItem,
               baseParseSources,
               isHidden
             );
             newValue[key] = keyValue;
-          } else {
-            // 说明是取表单用户数据，这里判断是否需要往下取
-
-            if (!nextPropItem.isTmp) {
-              // 不是临时的
-              if (utils.isUndef(nextPropItem.hdValue)) {
-                // ...说明是不取出
-              } else if (!utils.isNull(nextPropItem.hdValue)) {
-                // ...直接返回
-                if (nextPropItem.format) {
-                  // 不是最终取值，或没有格式转换
-                  newValue[key] = this.getFormatValue(
-                    nextPropItem.format,
-                    nextPropItem.hdValue,
-                    false
-                  );
-                } else {
-                  newValue[key] = nextPropItem.hdValue;
-                }
-              } else {
-                // 剩下null, 说明是取原始值，是什么是就什么
-                keyValue = this.__getValue(
-                  nextPropItem,
-                  baseParseSources,
-                  isHidden
+          } else {  // 说明是取表单用户数据且隐藏
+            if (utils.isUndef(nextPropItem.hdValue)) {
+              // ...说明是不取出
+            } else if (!utils.isNull(nextPropItem.hdValue)) {
+              // ...直接返回
+              if (nextPropItem.format) {
+                // 不是最终取值，或没有格式转换
+                newValue[key] = this.getFormatValue(
+                  nextPropItem.format,
+                  nextPropItem.hdValue,
+                  false
                 );
-                newValue[key] = keyValue;
+              } else {
+                newValue[key] = nextPropItem.hdValue;
               }
             } else {
-              // ...说明是不取出
+              // 剩下null, 说明是取原始值，是什么是就什么
+              keyValue = this.__getValue(
+                nextPropItem,
+                baseParseSources,
+                isHidden
+              );
+              newValue[key] = keyValue;
             }
           }
         }
