@@ -367,7 +367,6 @@ export default {
     this._esHiddenFunc = hiddenFunc.bind(this); // 用于作隐藏解析
 
     this.__initUi(this.schema);
-
   },
 
   mounted() {},
@@ -1056,6 +1055,22 @@ export default {
         return true;
       }
 
+      // 是数组,检查min, max
+      if (!triggers && fromArray) {
+        // 数据提交时再检查
+        if (
+          schema.array.min > 0 &&
+          schema.__propSchemaList.length < schema.array.min
+        ) {
+          return "最少" + schema.array.min + "条数据";
+        } else if (
+          schema.array.max > 0 &&
+          schema.__propSchemaList.length > schema.array.max
+        ) {
+          return "最多" + schema.array.max + "条数据";
+        }
+      }
+
       var isRequired = rules.required;
       if (isRequired) {
         //空要检查
@@ -1071,15 +1086,6 @@ export default {
       var errMsg = true;
       var checkFun;
       var newParseSources, newOptions;
-
-      // 是数组,检查min, max
-      if (fromArray) {
-        if (schema.array.min > 0 && schema.__propSchemaList.length < schema.array.min) {
-          errMsg = "最少" + schema.array.max + "条数据";
-        } else if (schema.array.max > 0 && schema.__propSchemaList.length < schema.array.max) {
-          errMsg = "最多" + schema.array.max + "条数据";
-        }
-      }
 
       if (checkList && checkList.length > 0) {
         var hadChecked = false;
@@ -1130,10 +1136,10 @@ export default {
           }
         }
 
-        if (!hadChecked) {  // 当triggers为空时是不会进入这里的，所以triggers不会为空
+        if (!hadChecked) {
+          // 当triggers为空时是不会进入这里的，所以triggers不会为空
           /* 若是正在输入且之前的错误信息为空提示则删掉 */
           if (
-            // triggers &&
             triggers.includes(constant.INPUT_EVENT) &&
             schema.__invalidMsg === rules.emptyMsg
           ) {

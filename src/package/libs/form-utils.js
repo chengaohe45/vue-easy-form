@@ -603,23 +603,29 @@ let formUtils = {
           var nextPropItem = propItem.properties[key];
 
           // 占位空间，不需要取出；往下取
-          if (nextPropItem.layout && nextPropItem.layout.name === constant.LAYOUT_SPACE) {
-            continue; 
-          } else if (formData && nextPropItem.isTmp) {  // 是取表单数据且是临时值
-            continue; 
+          if (
+            nextPropItem.layout &&
+            nextPropItem.layout.name === constant.LAYOUT_SPACE
+          ) {
+            continue;
+          } else if (formData && nextPropItem.isTmp) {
+            // 是取表单数据且是临时值
+            continue;
           }
-          
+
           var isNextHidden =
             formData && (isHidden || nextPropItem.hidden) ? true : false;
           // console.log("isNextHidden...: ", isNextHidden);
-          if (!isNextHidden) { // 取表单内部值或用户数据时不隐藏
+          if (!isNextHidden) {
+            // 取表单内部值或用户数据时不隐藏
             keyValue = this.__getValue(
               nextPropItem,
               baseParseSources,
               isHidden
             );
             newValue[key] = keyValue;
-          } else {  // 说明是取表单用户数据且隐藏
+          } else {
+            // 说明是取表单用户数据且隐藏
             if (utils.isUndef(nextPropItem.hdValue)) {
               // ...说明是不取出
             } else if (!utils.isNull(nextPropItem.hdValue)) {

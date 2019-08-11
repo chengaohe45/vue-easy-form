@@ -187,7 +187,8 @@ export default {
     window.demoVm = this; //test
 
     /* 当在开发环境时，都可以打开操作区域。为什么这样做，因为这个开发人员可以快速调试；对于用户来说是隐藏的，这样更易于学习，减少干扰 */
-    this.$data.canOperate = this.hasOperate || process.env.NODE_ENV != "production";
+    this.$data.canOperate =
+      this.hasOperate || process.env.NODE_ENV != "production";
     // this.$data.canOperate = this.hasOperate;
 
     this.$data.schema = this.formSchema;
