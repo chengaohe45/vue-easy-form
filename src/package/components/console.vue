@@ -1,6 +1,6 @@
 <template>
   <div class="console-box" :style="{ zIndex: boxZIndex }">
-    <button class="console-btn" @click="clickHandler">Console</button>
+    <button class="console-btn" @click="clickHandler">C</button>
     <div
       class="console-panel"
       v-if="showPanel"
