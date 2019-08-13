@@ -55,7 +55,7 @@
   left: 0px;
   top: 0px;
 
-  overflow: visible;  // chrome设置hidden panel不受影响；safari会隐藏
+  overflow: visible; // chrome设置hidden panel不受影响；safari会隐藏
 
   .console-btn {
     display: inline-block;

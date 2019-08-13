@@ -96,7 +96,7 @@ $btnDisableColor: #d5d7dc;
   height: 30px;
   position: relative;
   z-index: 1;
-  vertical-align: middle;  // safari
+  vertical-align: middle; // safari
 
   &:not(.disabled):hover {
     border-color: #c6e2ff;

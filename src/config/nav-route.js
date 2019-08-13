@@ -33,7 +33,7 @@ import refForm from "../modules/demo-form/pages/ref";
 import actionsForm from "../modules/demo-form/pages/actions";
 // import eventForm from "../modules/demo-form/pages/event";
 import exampleForm from "../modules/demo-form/pages/example";
-// import tryForm from "../modules/demo-form/pages/try";
+import autoMatchForm from "../modules/demo-form/pages/auto-match";
 
 import notFound from "../modules/notfound/pages/index";
 
@@ -166,28 +166,6 @@ let navList = [
         path: "/es-function",
         component: esFuncForm
       }
-
-      // {
-      //   icon: "",
-      //   name: "引用",
-      //   link: "/ref",
-      //   path: "/ref",
-      //   component: refForm
-      // },
-      // {
-      //   icon: "",
-      //   name: "表单事件",
-      //   link: "/event",
-      //   path: "/event",
-      //   component: eventForm
-      // },
-      // {
-      //   icon: "",
-      //   name: "试一试",
-      //   link: "/try",
-      //   path: "/try",
-      //   component: tryForm
-      // }
     ]
   },
   {
@@ -283,21 +261,6 @@ let navList = [
     icon: "el-icon-menu",
     name: "表单事件/方法",
     children: [
-      // {
-      //   icon: "",
-      //   name: "表单事件",
-      //   link: "/com-unit",
-      //   path: "/com-unit",
-      //   component: rulesForm
-      // },
-      // {
-      //   icon: "",
-      //   name: "表单方法",
-      //   link: "/ref",
-      //   path: "/ref",
-      //   component: refForm
-      // },
-
       {
         icon: "",
         name: "引用",
@@ -316,18 +279,19 @@ let navList = [
 
       {
         icon: "",
+        name: "自动匹配",
+        link: "/auto-match",
+        path: "/auto-match",
+        component: autoMatchForm
+      },
+
+      {
+        icon: "",
         name: "综合例子",
         link: "/example",
         path: "/example",
         component: exampleForm
       }
-      // {
-      //   icon: "",
-      //   name: "表单事件",
-      //   link: "/event",
-      //   path: "/event",
-      //   component: eventForm
-      // }
     ]
   }
   // {

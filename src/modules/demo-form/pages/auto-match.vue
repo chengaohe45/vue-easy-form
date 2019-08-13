@@ -1,0 +1,87 @@
+<template>
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :hasOperate="hasOperate"
+    :hasConsole="hasConsole"
+  >
+    <div slot="details">
+      autoMatch为true，则第二级的项（font.fontSize、font.backgroundImage）会在<span
+        class="sys-danger"
+        >输出表单值</span
+      >时会提升到一级，而根值rootData是不变的（见控制台）。
+    </div>
+  </demo-frame>
+</template>
+
+<script>
+import demoFrame from "../components/demo-frame.vue";
+// import dynamicTags from "@/components/dynamicTags/index";
+export default {
+  data() {
+    return {
+      title: "标准写法",
+      hasConsole: true,
+      hasOperate: true,
+
+      formSchema: {
+        autoMatch: true,
+        properties: {
+          name: "页面名称",
+          font: {
+            title: {
+              text: "字体信息"
+            },
+            label: false,
+            properties: {
+              fontSize: {
+                label: "字体大小",
+                component: "el-input-number",
+                value: 14
+              },
+              fontColor: {
+                label: "字体颜色",
+                component: "el-color-picker",
+                value: "#67C23A"
+              }
+            }
+          },
+          background: {
+            title: {
+              text: "背景信息"
+            },
+            label: false,
+            properties: {
+              backgroundImage: {
+                label: "背景图片",
+                component: "el-input",
+                value: ""
+              },
+              backgroundColor: {
+                label: "背景颜色",
+                component: "el-color-picker",
+                value: "#3AABC2"
+              }
+            }
+          }
+        }
+      }
+    };
+  },
+
+  created() {
+    // console.log("dynamicTags", dynamicTags);
+  },
+
+  computed: {},
+
+  mounted() {},
+
+  methods: {},
+  components: {
+    demoFrame
+  }
+};
+</script>
+
+<style lang="scss"></style>
