@@ -559,7 +559,7 @@ export default {
       text-align: left;
       // padding: 5px;
       overflow: visible;
-      // height: 100%;
+      height: 100%; //safari要加
       @include flex-full;
 
       .textarea {
