@@ -1,6 +1,6 @@
 /* 设置注意：当:router="true"时，点击切换页面，会先判断:route="{path: subItem.link || ""}"有没有值，再判断它的:index */
 
-import home from "../modules/home/pages/index";
+// import homePage from "../modules/home/pages/index";
 
 import labelForm from "../modules/demo-form/pages/label";
 import componentForm from "../modules/demo-form/pages/component";
@@ -13,13 +13,11 @@ import groupForm from "../modules/demo-form/pages/group";
 import directionForm from "../modules/demo-form/pages/direction";
 import rulesForm from "../modules/demo-form/pages/rules";
 
-// import unitDescForm from "../modules/demo-form/pages/unit-desc";
 import comUnitForm from "../modules/demo-form/pages/unit";
 import comDescForm from "../modules/demo-form/pages/desc";
 import comHelpForm from "../modules/demo-form/pages/help";
 import comTitleForm from "../modules/demo-form/pages/title";
 
-// import helpForm from "../modules/demo-form/pages/help";
 import propertiesForm from "../modules/demo-form/pages/properties";
 import propertiesTabsForm from "../modules/demo-form/pages/properties-tabs";
 import esFuncForm from "../modules/demo-form/pages/es-function";
@@ -31,11 +29,12 @@ import valueForm from "../modules/demo-form/pages/value";
 import formatForm from "../modules/demo-form/pages/format";
 import refForm from "../modules/demo-form/pages/ref";
 import actionsForm from "../modules/demo-form/pages/actions";
-// import eventForm from "../modules/demo-form/pages/event";
 import exampleForm from "../modules/demo-form/pages/example";
 import autoMatchForm from "../modules/demo-form/pages/auto-match";
 
 import notFound from "../modules/notfound/pages/index";
+
+// import testForm from "../modules/demo-form/pages/test";
 
 let navKeys2 = ["icon", "name"];
 let navKeys3 = ["icon", "name", "link", "path"];
@@ -50,15 +49,15 @@ let pathKeys = ["path", "component", "alias"];
 // };
 
 /* home跟navList都会添加到左边菜单 */
-let homeItem = {
-  icon: "el-icon-setting",
-  name: "首页",
-  link:
-    "/home" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
-  path: "/home" /* 用于路由, 要跟link保持一致 */,
-  alias: "/",
-  component: home /* 对应的模块 */
-};
+// let homeItem = {
+//   icon: "el-icon-setting",
+//   name: "首页",
+//   link:
+//     "/home" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
+//   path: "/home" /* 用于路由, 要跟link保持一致 */,
+//   alias: "/",
+//   component: homePage /* 对应的模块 */
+// };
 
 let notFoundItem = {
   icon: "" /* 不需要，因为不在左边菜单上 */,
@@ -68,12 +67,12 @@ let notFoundItem = {
   component: notFound //404 页
 };
 
-let emptyItem = {
-  icon: "" /* 不需要，因为不在左边菜单上 */,
-  name: "···", //【主要用于面包碎：当中间动态路径找不到的时候】
-  link: "" /* 不需要，因为不在左边菜单上 */,
-  path: ""
-};
+// let emptyItem = {
+//   icon: "" /* 不需要，因为不在左边菜单上 */,
+//   name: "···", //【主要用于面包碎：当中间动态路径找不到的时候】
+//   link: "" /* 不需要，因为不在左边菜单上 */,
+//   path: ""
+// };
 
 /* home跟navList都会添加到左边菜单 */
 let navList = [
@@ -81,6 +80,13 @@ let navList = [
     icon: "el-icon-menu",
     name: "基础属性详解",
     children: [
+      // {
+      //   icon: "",
+      //   name: "测试页面",
+      //   link: "/test",
+      //   path: "/test",
+      //   component: testForm
+      // },
       {
         icon: "",
         name: "简单写法",
@@ -341,35 +347,35 @@ function scan(curNavList) {
   return newPageList;
 }
 
-function find(curNavList, curPath) {
-  let newPaths = [];
-  for (let i = 0; i < curNavList.length; i++) {
-    let item = curNavList[i];
-    if (item.path == curPath) {
-      newPaths.push(fetch(item, navKeys3));
-      return newPaths;
-    }
-    if (item.children && item.children.length > 0) {
-      let nextItems = find(item.children, curPath);
-      if (nextItems) {
-        if (item.path) {
-          newPaths.push(fetch(item, navKeys3), ...nextItems);
-          return newPaths;
-        } else {
-          newPaths.push(...nextItems); //navList最外面那一层是没有path的
-          return newPaths;
-        }
-      }
-    }
-  }
+// function find(curNavList, curPath) {
+//   let newPaths = [];
+//   for (let i = 0; i < curNavList.length; i++) {
+//     let item = curNavList[i];
+//     if (item.path == curPath) {
+//       newPaths.push(fetch(item, navKeys3));
+//       return newPaths;
+//     }
+//     if (item.children && item.children.length > 0) {
+//       let nextItems = find(item.children, curPath);
+//       if (nextItems) {
+//         if (item.path) {
+//           newPaths.push(fetch(item, navKeys3), ...nextItems);
+//           return newPaths;
+//         } else {
+//           newPaths.push(...nextItems); //navList最外面那一层是没有path的
+//           return newPaths;
+//         }
+//       }
+//     }
+//   }
 
-  return false;
-}
+//   return false;
+// }
 
 let navRoute = {
-  getHomePath() {
-    return homeItem.path;
-  },
+  // getHomePath() {
+  //   return homeItem.path;
+  // },
 
   /* 取出左边菜单的数据 */
   getNav() {
@@ -410,74 +416,74 @@ let navRoute = {
     //放在最后
     newPageList.push(fetch(notFoundItem, pathKeys));
     return newPageList;
-  },
+  }
 
   /* 取出当前页面的面包碎 */
-  getBreadcrumbs(toPage) {
-    var routeMatchedInfo = toPage.matched[0];
-    let newPaths = [];
-    if (routeMatchedInfo) {
-      newPaths.push(fetch(homeItem, navKeys3));
-      if (routeMatchedInfo.path == notFoundItem.path) {
-        newPaths.push(fetch(notFoundItem, navKeys3));
-      } else if (routeMatchedInfo.path != homeItem.path) {
-        //上面已经加了，排除一下，免得重复
-        let tmpPaths = find(navList, routeMatchedInfo.path);
-        if (!tmpPaths) {
-          tmpPaths = find(otherList, routeMatchedInfo.path);
-        }
-        if (tmpPaths) {
-          tmpPaths[tmpPaths.length - 1].link = toPage.path;
-          newPaths.push(...tmpPaths);
-        }
-      }
-      // delete newPaths[newPaths.length - 1].link; //删除最后一个的link，因为最后一个不用做跳转
-    } else {
-      // 返回空数组
-    }
-    return newPaths;
-  },
+  // getBreadcrumbs(toPage) {
+  //   var routeMatchedInfo = toPage.matched[0];
+  //   let newPaths = [];
+  //   if (routeMatchedInfo) {
+  //     newPaths.push(fetch(homeItem, navKeys3));
+  //     if (routeMatchedInfo.path == notFoundItem.path) {
+  //       newPaths.push(fetch(notFoundItem, navKeys3));
+  //     } else if (routeMatchedInfo.path != homeItem.path) {
+  //       //上面已经加了，排除一下，免得重复
+  //       let tmpPaths = find(navList, routeMatchedInfo.path);
+  //       if (!tmpPaths) {
+  //         tmpPaths = find(otherList, routeMatchedInfo.path);
+  //       }
+  //       if (tmpPaths) {
+  //         tmpPaths[tmpPaths.length - 1].link = toPage.path;
+  //         newPaths.push(...tmpPaths);
+  //       }
+  //     }
+  //     // delete newPaths[newPaths.length - 1].link; //删除最后一个的link，因为最后一个不用做跳转
+  //   } else {
+  //     // 返回空数组
+  //   }
+  //   return newPaths;
+  // },
 
-  getEmptyBreadcrumb() {
-    return fetch(emptyItem, navKeys3);
-  },
+  // getEmptyBreadcrumb() {
+  //   return fetch(emptyItem, navKeys3);
+  // },
 
-  isToChild(toPage, fromPage) {
-    //用于from和to, 是否前往子页（孙子也为false）:主要作用用于列表页
-    var routeMatchedInfo = toPage.matched[0];
-    let tmpPaths = find(navList, routeMatchedInfo.path);
-    if (tmpPaths && tmpPaths.length > 1) {
-      var tmpParentPath = tmpPaths[tmpPaths.length - 2];
-      if (tmpParentPath.path == fromPage.matched[0].path) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
-  },
+  // isToChild(toPage, fromPage) {
+  //   //用于from和to, 是否前往子页（孙子也为false）:主要作用用于列表页
+  //   var routeMatchedInfo = toPage.matched[0];
+  //   let tmpPaths = find(navList, routeMatchedInfo.path);
+  //   if (tmpPaths && tmpPaths.length > 1) {
+  //     var tmpParentPath = tmpPaths[tmpPaths.length - 2];
+  //     if (tmpParentPath.path == fromPage.matched[0].path) {
+  //       return true;
+  //     } else {
+  //       return false;
+  //     }
+  //   } else {
+  //     return false;
+  //   }
+  // },
 
-  isFromChild(toPage, fromPage) {
-    //用于from和to, 是否前往子页返回（孙子也为false）:主要作用用于列表页
-    // console.log("toPage, fromPage", toPage, fromPage);
-    var routeMatchedInfo = fromPage.matched[0];
-    if (routeMatchedInfo) {
-      let tmpPaths = find(navList, routeMatchedInfo.path);
-      if (tmpPaths && tmpPaths.length > 1) {
-        var tmpParentPath = tmpPaths[tmpPaths.length - 2];
-        if (tmpParentPath.path == toPage.matched[0].path) {
-          return true;
-        } else {
-          return false;
-        }
-      } else {
-        return false;
-      }
-    } else {
-      //没有mathch, 可能是页面刷新
-      return true;
-    }
-  }
+  // isFromChild(toPage, fromPage) {
+  //   //用于from和to, 是否前往子页返回（孙子也为false）:主要作用用于列表页
+  //   // console.log("toPage, fromPage", toPage, fromPage);
+  //   var routeMatchedInfo = fromPage.matched[0];
+  //   if (routeMatchedInfo) {
+  //     let tmpPaths = find(navList, routeMatchedInfo.path);
+  //     if (tmpPaths && tmpPaths.length > 1) {
+  //       var tmpParentPath = tmpPaths[tmpPaths.length - 2];
+  //       if (tmpParentPath.path == toPage.matched[0].path) {
+  //         return true;
+  //       } else {
+  //         return false;
+  //       }
+  //     } else {
+  //       return false;
+  //     }
+  //   } else {
+  //     //没有mathch, 可能是页面刷新
+  //     return true;
+  //   }
+  // }
 };
 export default { ...navRoute };

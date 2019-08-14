@@ -27,7 +27,7 @@ export default {
       formSchema: {
         autoMatch: true,
         properties: {
-          name: "页面名称",
+          pageName: "页面名称",
           font: {
             title: {
               text: "字体信息"
