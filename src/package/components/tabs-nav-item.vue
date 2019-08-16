@@ -11,7 +11,9 @@
       @click="clickCntHandler"
     >
       <span v-if="required" class="es-required">*</span>
-      <slot></slot>
+      <div>
+        <slot></slot>
+      </div>
       <div class="es-tabs-close-box" v-if="hasDelete">
         <es-tabs-btn
           ref="delBtn"

@@ -2,6 +2,8 @@
   <demo-frame
     :title="title"
     :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
     :hasOperate="hasOperate"
     :hasConsole="hasConsole"
   >
@@ -20,7 +22,9 @@ import demoFrame from "../components/demo-frame.vue";
 export default {
   data() {
     return {
-      title: "标准写法",
+      title: "自动匹配",
+      docsTitle: "自动匹配配置文档",
+      docsHref: "/vue-easy-form-docs/dist/base/auto-match.html",
       hasConsole: true,
       hasOperate: true,
 

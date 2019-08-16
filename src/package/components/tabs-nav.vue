@@ -10,7 +10,10 @@
             <ul
               ref="scrollWrap"
               class="es-tabs-nav"
-              :style="{ transform: 'translateX(' + navX + 'px)' }"
+              :style="{
+                transform: 'translateX(' + navX + 'px)',
+                '-webkit-transform': 'translateX(' + navX + 'px)'
+              }"
             >
               <slot></slot>
             </ul>
@@ -94,6 +97,7 @@ export default {
       toggleZoneWidth: 20, // 当出现左右箭头时，左右区域的宽度
 
       observer: null,
+      lockObserver: false,
       oldRecord: {
         // 记录下旧的宽高数据，避免重复触发回调函数
         mainWidth: 0,
@@ -117,8 +121,25 @@ export default {
         window.WebKitMutationObserver ||
         window.MozMutationObserver;
 
-      this.observer = new MutationObserver(() => {
-        this.observerHandler(0);
+      this.observer = new MutationObserver(mutationsList => {
+        // console.log("mutationsList: ", mutationsList);
+        var canDo = true;
+        if (this.$data.lockObserver) {
+          canDo = false;
+        } else if (mutationsList && mutationsList.length == 1) {
+          var mutation = mutationsList[0];
+          // console.log("mutationsList: ", mutation.target.className=="es-tabs-nav");
+          if (
+            mutation.target.className == "es-tabs-nav" &&
+            mutation.type == "attributes" &&
+            mutation.attributeName == "style"
+          ) {
+            canDo = false;
+          }
+        }
+        if (canDo) {
+          this.observerHandler(0);
+        }
       });
       this.observer.observe(document.body, {
         childList: true,
@@ -134,10 +155,12 @@ export default {
      * offset = 1 来自于clickNextHandler
      */
     observerHandler(offset = 0) {
+      console.log("Math.random(): ", offset);
+
       var mainWidth = this.getAttrValue(this.$data.mainScrollBox, "width");
       var navWidth = this.getAttrValue(this.$data.navBox, "width");
 
-      // console.log(mainWidth, navWidth, addBtnZoneWidth);
+      // console.log(mainWidth, navWidth);
       if (
         offset == 0 &&
         mainWidth === this.oldRecord.mainWidth &&
@@ -155,6 +178,9 @@ export default {
       var borderWidth = 0; // 0 是父容器左右的边框
       var needTotalWidth = navWidth + borderWidth + addBtnZoneWidth;
       var twoToggleWidth = 0;
+
+      var newNavX = false;
+
       if (mainWidth < needTotalWidth) {
         // 会出现切换按钮
         this.$data.showToggle = true;
@@ -164,25 +190,25 @@ export default {
         minNavX = Math.floor(
           mainWidth - borderWidth - addBtnZoneWidth - navWidth - twoToggleWidth
         ); // 为什么写这个Math.floor，因为有些机器是会有小数的，所以取小一点才能显示全部
+
         if (this.$data.fromAdd) {
           // 来自点击添加
           if (newNavX > 0) {
             minNavX = 0;
           }
-          this.$data.navX = minNavX;
+          newNavX = minNavX;
         } else {
           // 来自删除或内容改动等
           if (offset == 0) {
             if (this.$data.navX < minNavX) {
               // 原内容偏移了左边，靠右
-              this.$data.navX = minNavX;
+              newNavX = minNavX;
             } else {
               // 保持内容不变
             }
           } else {
             var offsetWidth =
               mainWidth - borderWidth - addBtnZoneWidth - twoToggleWidth; // 偏移量，也就是一个导航的宽度
-            var newNavX;
             if (offset < 0) {
               newNavX = this.$data.navX + offsetWidth;
             } else {
@@ -195,7 +221,7 @@ export default {
               // 原内容偏移了左边，靠右
               newNavX = minNavX;
             }
-            this.$data.navX = newNavX;
+            // this.$data.navX = newNavX;
           }
         }
       } else {
@@ -204,12 +230,24 @@ export default {
         }
         // 菜单置0放在最左
         if (this.$data.navX != 0) {
-          this.$data.navX = 0;
+          newNavX = 0;
         }
       }
 
       this.oldRecord = { mainWidth, navWidth };
       this.$data.fromAdd = false;
+      if (newNavX !== false) {
+        this.$data.lockObserver = true;
+        this.$nextTick(() => {
+          console.log("lockObserver", false);
+          this.$data.lockObserver = false;
+          this.$data.navX = newNavX;
+          // requestAnimationFrame(() => {
+          //   this.$data.lockObserver = false;
+          //   this.$data.navX = newNavX;
+          // });
+        });
+      }
     },
 
     stopListener() {
@@ -476,7 +514,7 @@ $activeBgColor: #fff;
     position: relative;
     width: 100%;
     overflow: hidden;
-    @include clear;
+    // @include clear;
     box-sizing: border-box;
     border-bottom: none;
     height: $styleHeight;
@@ -487,20 +525,26 @@ $activeBgColor: #fff;
     margin: 0 0 0 0;
     padding: 0;
     list-style: none;
-    @include display-flex;
+    white-space: nowrap;
+    // @include display-flex;
+
     transition: transform 0.3s;
+    // transition-delay: 0ms;
+    position: relative;
+    z-index: 2;
 
     box-sizing: border-box;
 
     li {
-      @include flex-fixed;
+      // @include flex-fixed;
+      display: inline-block;
       position: relative;
       height: $styleHeight;
       box-sizing: border-box;
       border-bottom: 1px solid transparent;
       cursor: default;
       user-select: none;
-      @include display-center;
+      // @include display-center;
 
       .es-tabs-nav-item-cnt {
         margin: 0;
@@ -525,6 +569,13 @@ $activeBgColor: #fff;
         //   padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
         transition: border-color 0.1s cubic-bezier(0.645, 0.045, 0.355, 1),
           padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+        -webkit-transition: border-color 0.1s
+            cubic-bezier(0.645, 0.045, 0.355, 1),
+          padding 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+      }
+
+      .es-tabs-nav-item-cnt > * {
+        @include flex-fixed;
       }
 
       .es-tabs-nav-item-cnt.es-error {
@@ -657,21 +708,26 @@ $activeBgColor: #fff;
   }
 
   .es-tabs-close-box {
-    margin: 1px 0 0 0;
+    margin: 2px 0 0 0;
     padding: 0;
     width: 0;
     height: $closeBtnWidth;
+    line-height: $closeBtnWidth;
     text-align: right;
     overflow: hidden;
     position: relative;
-    @include display-flex;
-    justify-content: flex-end;
+    // @include display-flex;
+    // justify-content: flex-end;
     transition: all 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
   .es-tabs-close {
     @include mixin-tabs-btn;
+    display: block; // safari
     position: relative;
     background: transparent;
+
+    // transform-origin: 50% 50%;
+    // -webkit-transform-origin: 50% 50%;
 
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg); /* Safari 和 Chrome */
