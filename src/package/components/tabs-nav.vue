@@ -43,6 +43,8 @@
 import esTabsNavItem from "./tabs-nav-item";
 import esTabsBtn from "./tabs-btn.vue";
 
+import tabsObserver from "../libs/tabs-observer.js";
+
 export default {
   // mixins: [itemMixin, arrayMixins],
   components: {
@@ -95,8 +97,6 @@ export default {
       showToggle: false,
       navX: 0,
       toggleZoneWidth: 20, // 当出现左右箭头时，左右区域的宽度
-
-      observer: null,
       lockObserver: false,
       oldRecord: {
         // 记录下旧的宽高数据，避免重复触发回调函数
@@ -105,48 +105,47 @@ export default {
       }
     };
   },
+
+  mounted() {
+    // 初始化页面数据
+    let navBox = this.$refs.scrollWrap;
+    let mainScrollBox = this.$refs.scrollBox;
+    // 这个没有涉及到界面，所以不在data里
+    this.$data.navBox = navBox;
+    this.$data.navWrap = navBox.parentNode.parentNode;
+    this.$data.mainScrollBox = mainScrollBox;
+    this.$data.fromAdd = false;
+    // window resize
+    this.$data.resizeCallback = mutationsList => {
+      var canDo = true;
+      if (this.$data.lockObserver) {
+        canDo = false;
+      } else if (mutationsList && mutationsList.length == 1) {
+        var mutation = mutationsList[0];
+        // console.log("mutation.target == this.$data.navBox: ", mutation.target == this.$data.navBox);
+        if (
+          mutation.target == this.$data.navBox &&
+          mutation.type == "attributes" &&
+          mutation.attributeName == "style"
+        ) {
+          canDo = false;
+        }
+      }
+      if (canDo) {
+        this.resizeHandler(0);
+      }
+    };
+
+    // 启用监听
+    tabsObserver.add(this.$data.resizeCallback);
+
+    this.resizeHandler();
+  },
+
   methods: {
     addItemHandler() {
       this.$data.fromAdd = true;
       this.$emit("addItem");
-    },
-
-    startListener() {
-      // console.log("startObserver...");
-
-      window.addEventListener("resize", this.$data.resizeWinHandler, true);
-
-      let MutationObserver =
-        window.MutationObserver ||
-        window.WebKitMutationObserver ||
-        window.MozMutationObserver;
-
-      this.observer = new MutationObserver(mutationsList => {
-        // console.log("mutationsList: ", mutationsList);
-        var canDo = true;
-        if (this.$data.lockObserver) {
-          canDo = false;
-        } else if (mutationsList && mutationsList.length == 1) {
-          var mutation = mutationsList[0];
-          // console.log("mutationsList: ", mutation.target.className=="es-tabs-nav");
-          if (
-            mutation.target.className == "es-tabs-nav" &&
-            mutation.type == "attributes" &&
-            mutation.attributeName == "style"
-          ) {
-            canDo = false;
-          }
-        }
-        if (canDo) {
-          this.observerHandler(0);
-        }
-      });
-      this.observer.observe(document.body, {
-        childList: true,
-        subtree: true,
-        attributes: true,
-        characterData: true
-      });
     },
 
     /**
@@ -154,9 +153,7 @@ export default {
      * offset = 0 来自于MutationObserver或window resize
      * offset = 1 来自于clickNextHandler
      */
-    observerHandler(offset = 0) {
-      console.log("Math.random(): ", offset);
-
+    resizeHandler(offset = 0) {
       var mainWidth = this.getAttrValue(this.$data.mainScrollBox, "width");
       var navWidth = this.getAttrValue(this.$data.navBox, "width");
 
@@ -239,44 +236,21 @@ export default {
       if (newNavX !== false) {
         this.$data.lockObserver = true;
         this.$nextTick(() => {
-          console.log("lockObserver", false);
           this.$data.lockObserver = false;
           this.$data.navX = newNavX;
-          // requestAnimationFrame(() => {
-          //   this.$data.lockObserver = false;
-          //   this.$data.navX = newNavX;
-          // });
         });
-      }
-    },
-
-    stopListener() {
-      if (this.observer) {
-        this.observer.disconnect();
-        this.observer.takeRecords();
-        this.observer = null;
-      }
-
-      if (this.$data.resizeWinHandler) {
-        window.removeEventListener("resize", this.$data.resizeWinHandler, true);
-        this.$data.resizeWinHandler = null;
-      }
-
-      if (this.$data.throttleTimer) {
-        clearTimeout(this.$data.throttleTimer);
-        this.$data.throttleTimer = null;
       }
     },
 
     clickPrevHandler() {
       if (this.$data.showToggle) {
-        this.observerHandler(-1); // 向左偏移
+        this.resizeHandler(-1); // 向左偏移
       }
     },
 
     clickNextHandler() {
       if (this.$data.showToggle) {
-        this.observerHandler(1); // 向右偏移
+        this.resizeHandler(1); // 向右偏移
       }
     },
 
@@ -298,36 +272,8 @@ export default {
     }
   },
 
-  mounted() {
-    // 初始化页面数据
-    let navBox = this.$refs.scrollWrap;
-    let mainScrollBox = this.$refs.scrollBox;
-    // 这个没有涉及到界面，所以不在data里
-    this.$data.navBox = navBox;
-    this.$data.navWrap = navBox.parentNode.parentNode;
-    this.$data.mainScrollBox = mainScrollBox;
-    this.$data.fromAdd = false;
-    this.$data.throttleTimer = null;
-    // window resize
-    this.$data.resizeWinHandler = () => {
-      // console.log("resizeWinHandler out...");
-      var throttleInterval = 50;
-      if (!this.$data.throttleTimer)
-        this.$data.throttleTimer = setTimeout(() => {
-          // console.log("resizeWinHandler in...");
-          this.$data.throttleTimer = null;
-          this.observerHandler(0);
-        }, throttleInterval);
-    };
-
-    // 启用监听
-    this.startListener();
-
-    this.observerHandler();
-  },
-
   beforeDestroy() {
-    this.stopListener();
+    tabsObserver.remove(this.$data.resizeCallback);
     this.$data.navBox = null;
     this.$data.navWrap = null;
     this.$data.mainScrollBox = null;
