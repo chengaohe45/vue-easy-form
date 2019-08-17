@@ -157,6 +157,11 @@ export default {
       var mainWidth = this.getAttrValue(this.$data.mainScrollBox, "width");
       var navWidth = this.getAttrValue(this.$data.navBox, "width");
 
+      if (mainWidth <= 0 && navWidth <= 0) {
+        // console.log("tabs is not visible");
+        return false;
+      }
+
       // console.log(mainWidth, navWidth);
       if (
         offset == 0 &&
