@@ -1691,20 +1691,9 @@ let schemaUtils = {
           utils.isUndef(array.hasDelete) || array.hasDelete ? true : false;
         hasAdd = utils.isUndef(array.hasAdd) || array.hasAdd ? true : false;
         hasCopy = array.hasCopy ? true : false;
-        min =
-          utils.isUndef(array.min) || array.min <= 0 || !utils.isNum(array.min)
-            ? 0
-            : array.min;
-        max =
-          utils.isUndef(array.max) || array.max <= 0 || !utils.isNum(array.max)
-            ? 0
-            : array.max;
-        fixed =
-          utils.isUndef(array.fixed) ||
-          array.fixed <= 0 ||
-          !utils.isNum(array.fixed)
-            ? 0
-            : array.fixed;
+        min = utils.isNum(array.min) && array.min > 0 ? array.min : 0;
+        max = utils.isNum(array.max) && array.max > 0 ? array.max : 0;
+        fixed = utils.isNum(array.fixed) && array.fixed > 0 ? array.fixed : 0;
         hasOrder =
           utils.isUndef(array.hasOrder) || array.hasOrder ? true : false;
         headRequired =
@@ -1780,7 +1769,7 @@ let schemaUtils = {
         newArray.hasAdd = hasAdd;
         newArray.hasCopy = hasCopy;
         newArray.min = min;
-        newArray.max = max;
+        newArray.max = max >= min ? max : 0;
         newArray.fixed = fixed;
         newArray.hasOrder = hasOrder;
         newArray.headRequired = headRequired;
@@ -1799,6 +1788,22 @@ let schemaUtils = {
 
         if (!utils.isUndef(insertValue)) {
           newArray.insertValue = insertValue;
+        }
+
+        if (newArray.min > 0) {
+          var minMsg = utils.isStr(array.minMsg) ? array.minMsg.trim() : "";
+          if (!minMsg) {
+            minMsg = "长度不能小于" + newArray.min;
+          }
+          newArray.minMsg = minMsg;
+        }
+
+        if (newArray.max > 0) {
+          var maxMsg = utils.isStr(array.maxMsg) ? array.maxMsg.trim() : "";
+          if (!maxMsg) {
+            maxMsg = "长度不能大于" + newArray.max;
+          }
+          newArray.maxMsg = maxMsg;
         }
       } else {
         throw "this.__parsePropArray: array.name不合法";

@@ -11,8 +11,7 @@
               ref="scrollWrap"
               class="es-tabs-nav"
               :style="{
-                transform: 'translateX(' + navX + 'px)',
-                '-webkit-transform': 'translateX(' + navX + 'px)'
+                left: navX + 'px'
               }"
             >
               <slot></slot>
@@ -462,8 +461,8 @@ $activeBgColor: #fff;
   }
 
   .es-tabs-nav-scroll {
-    position: relative;
-    width: 100%;
+    // position: relative;
+    // width: 100%;
     overflow: hidden;
     // @include clear;
     box-sizing: border-box;
@@ -477,10 +476,9 @@ $activeBgColor: #fff;
     padding: 0;
     list-style: none;
     white-space: nowrap;
-    // @include display-flex;
 
-    transition: transform 0.3s;
-    // transition-delay: 0ms;
+    // transition: transform 0.3s;
+    transition: left 0.3s;
     position: relative;
     z-index: 2;
 

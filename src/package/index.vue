@@ -1063,12 +1063,12 @@ export default {
           schema.array.min > 0 &&
           schema.__propSchemaList.length < schema.array.min
         ) {
-          return "最少" + schema.array.min + "条数据";
+          return schema.array.minMsg;
         } else if (
           schema.array.max > 0 &&
           schema.__propSchemaList.length > schema.array.max
         ) {
-          return "最多" + schema.array.max + "条数据";
+          return schema.array.maxMsg;
         }
       }
 
@@ -1145,6 +1145,24 @@ export default {
             schema.__invalidMsg === rules.emptyMsg
           ) {
             errMsg = true;
+          } else if (fromArray) {
+            if (
+              schema.array.min > 0 &&
+              schema.__propSchemaList.length >= schema.array.min &&
+              schema.__invalidMsg === schema.array.minMsg
+            ) {
+              // 之前是最小提示有误；现在去掉
+              errMsg = true;
+            } else if (
+              schema.array.max > 0 &&
+              schema.__propSchemaList.length <= schema.array.max &&
+              schema.__invalidMsg === schema.array.maxMsg
+            ) {
+              // 之前是最大提示有误；现在去掉
+              errMsg = true;
+            } else {
+              errMsg = false; // 保持原样
+            }
           } else {
             errMsg = false;
           }
@@ -1152,6 +1170,31 @@ export default {
       } else {
         // 没有要验证的东西
         errMsg = true;
+        if (triggers && fromArray) {
+          // 数组非提交时
+          if (
+            triggers.includes(constant.INPUT_EVENT) &&
+            schema.__invalidMsg === rules.emptyMsg
+          ) {
+            errMsg = true;
+          } else if (
+            schema.array.min > 0 &&
+            schema.__propSchemaList.length >= schema.array.min &&
+            schema.__invalidMsg === schema.array.minMsg
+          ) {
+            // 之前是最小提示有误；现在去掉
+            errMsg = true;
+          } else if (
+            schema.array.max > 0 &&
+            schema.__propSchemaList.length <= schema.array.max &&
+            schema.__invalidMsg === schema.array.maxMsg
+          ) {
+            // 之前是最大提示有误；现在去掉
+            errMsg = true;
+          } else {
+            errMsg = false; // 保持原样
+          }
+        }
       }
       newParseSources = null;
       newOptions = null;
