@@ -882,9 +882,9 @@ let schemaUtils = {
         newComponent.props = {};
       }
 
-      if (utils.isStr(component.text)) {
+      if (utils.isStr(component.text) && utils.isFunc(component.text)) {
         newComponent.text = component.text;
-        if (parse.isEsScript(component.text)) {
+        if (parse.isEsOrFunc(component.text)) {
           newComponent.__rawText = parse.newEsFuncion(component.text);
         }
       }
@@ -964,10 +964,7 @@ let schemaUtils = {
     var isRight = false;
     for (var key in obj) {
       var value = obj[key];
-      if (utils.isFunc(value)) {
-        isRight = true;
-        break;
-      } else if (parse.isEsScript(value)) {
+      if (parse.isEsOrFunc(value)) {
         isRight = true;
         break;
       }
@@ -1437,6 +1434,8 @@ let schemaUtils = {
         return false;
       }
       // return newCom;
+    } else if (utils.isFunc(value)) {
+      newCom = { text: value, __rawText: value };
     } else {
       return false;
     }
@@ -1482,7 +1481,7 @@ let schemaUtils = {
       if (tmpCheckList.length > 0) {
         newRules.checks = tmpCheckList;
       }
-      if (parse.isEsScript(rules.required)) {
+      if (parse.isEsOrFunc(rules.required)) {
         newRules.required = false; // 让以后解析
         newRules.__rawRequired = parse.newEsFuncion(rules.required);
       } else if (utils.isBool(rules.required)) {
@@ -1497,7 +1496,7 @@ let schemaUtils = {
         required: rules,
         __rawRequired: rules
       };
-    } else if (parse.isEsScript(rules)) {
+    } else if (parse.isEsOrFunc(rules)) {
       newRules = {
         required: false,
         __rawRequired: parse.newEsFuncion(rules)

@@ -12,6 +12,19 @@ import constant from "./constant";
 
 let parse = {
   /**
+   * 判断是否正确的es语句或函数
+   * @param {*} scriptTxt
+   * @param {*} expPrefix
+   */
+  isEsOrFunc(scriptTxt, expPrefix = "es:") {
+    if (utils.isFunc(scriptTxt)) {
+      return true;
+    } else {
+      return this.isEsScript(scriptTxt, expPrefix);
+    }
+  },
+
+  /**
    * 判断是否正确的es语句
    * @param {*} scriptTxt
    * @param {*} expPrefix
