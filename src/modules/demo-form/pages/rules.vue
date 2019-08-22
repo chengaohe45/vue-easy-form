@@ -63,6 +63,10 @@ export default {
             col: 18,
             rules: {
               required: "es: {{$root}}.isOpen",
+              // required: function(data) {
+              //   var rootData = data.rootData;
+              //   return rootData.isOpen;
+              // },
               emptyMsg: "名称不能为空"
             },
             desc: "required支持es语法"
@@ -99,12 +103,14 @@ export default {
             value: 10,
             rules: {
               checks: {
-                handler: "es: {{$root.age}}>=10",
+                handler: function(data) {
+                  var value = data.value;
+                  return value > 10;
+                },
                 trigger: "change"
               },
               errMsg: "年龄不能小于10"
-            },
-            desc: "checks.handler支持es(这里不能小于10)"
+            }
           },
           desc: {
             label: "广告描述",

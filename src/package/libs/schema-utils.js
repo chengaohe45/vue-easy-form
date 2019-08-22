@@ -1464,7 +1464,13 @@ let schemaUtils = {
 
       newRules = {};
 
-      var rawCheckList = rules.checks ? rules.checks : rules.check;
+      var rawCheckList;
+      if (rules.checks) {
+        rawCheckList = rules.checks;
+      } else if (rules.check) {
+        console.warn("rules.check已经舍弃了，请使用rules.checks");
+        rawCheckList = rules.check;
+      }
       var tmpCheckList = [];
       if (!rawCheckList) {
         rawCheckList = [];
@@ -1827,19 +1833,18 @@ let schemaUtils = {
       };
     } else if (
       utils.isObj(item) &&
-      (parse.isEsScript(item.handler) ||
-        parse.isEsScript(item.name) ||
-        utils.isFunc(item.name) ||
-        utils.isFunc(item.handler))
+      (parse.isEsOrFunc(item.handler) || parse.isEsOrFunc(item.name))
     ) {
       var handler;
-      if (parse.isEsScript(item.name)) {
-        console.warn("rules.check.name已经舍弃了，请使用rules.checks.handler");
-        handler = parse.newEsFuncion(item.name);
+      if (utils.isFunc(item.handler)) {
+        handler = item.handler;
+      } else if (utils.isFunc(item.name)) {
+        console.warn("rules.checks.name已经舍弃了，请使用rules.checks.handler");
+        handler = item.name;
       } else if (parse.isEsScript(item.handler)) {
-        handler = parse.newEsFuncion(item.handler);
+        throw "rules.check.handler已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       } else {
-        handler = item.handler || item.name;
+        throw "rules.check.name已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       }
 
       var newTrigger = this.__parseTrigger(item.trigger);

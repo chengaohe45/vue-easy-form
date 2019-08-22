@@ -104,10 +104,13 @@ export default {
                 value: 100,
                 rules: {
                   checks: {
-                    handler: "es: {{$root.target.weight}}>=100",
+                    handler: function(data) {
+                      // console.log(this.getRootData());
+                      return data.value >= 100;
+                    },
                     trigger: "input"
                   },
-                  errMsg: "体重不能小于100."
+                  errMsg: "体重不能小于100"
                 }
               }
             }

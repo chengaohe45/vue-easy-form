@@ -35,11 +35,26 @@ export default {
         },
 
         esLabel: {
-          label: "es: '广告标签' + ({{$root}}.isOpen ? '(开)' : '(关)')",
+          label: "es: {{$root}}.isOpen ? '广告标签(开)' : '广告标签(关)'",
           component: {
             name: "el-input",
             props: {
-              placeholder: "切换开关试试"
+              placeholder: "切换开关试试: es写法"
+            }
+          },
+          rules: true,
+          value: ""
+        },
+
+        funcLabel: {
+          label: function(data) {
+            var rootData = data.rootData;
+            return rootData.isOpen ? "广告标签(开)" : "广告标签(关)";
+          },
+          component: {
+            name: "el-input",
+            props: {
+              placeholder: "切换开关试试: 函数写法"
             }
           },
           rules: true,

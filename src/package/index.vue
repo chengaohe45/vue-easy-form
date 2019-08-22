@@ -697,15 +697,15 @@ export default {
       // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
       var isValid = true;
 
-      var parseSources = {
-        global: this.global,
-        rootData: this._esFormData,
-        index: schema.__index,
-        idxChain: schema.__idxChain,
-        pathKey: schema.__pathKey,
-        rootSchema: rootSchema,
-        isHidden: this._esHiddenFunc
-      };
+      // var parseSources = {
+      //   global: this.global,
+      //   rootData: this._esFormData,
+      //   index: schema.__index,
+      //   idxChain: schema.__idxChain,
+      //   pathKey: schema.__pathKey,
+      //   rootSchema: rootSchema,
+      //   isHidden: this._esHiddenFunc
+      // };
 
       //是否隐藏，隐藏就不用检查有效性了
       var isHidden = schema.hidden; // 省资源，不做es转
@@ -725,12 +725,7 @@ export default {
         if (schema.array) {
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            checkedResult = this.__checkRules(
-              schema,
-              arrayValue,
-              "",
-              parseSources
-            );
+            checkedResult = this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
@@ -805,12 +800,7 @@ export default {
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = this.__checkRules(
-            schema,
-            schema.value,
-            "",
-            parseSources
-          );
+          checkedResult = this.__checkRules(schema, schema.value, "");
           if (checkedResult === true) {
             schema.__invalidMsg = false;
           } else {
@@ -821,12 +811,7 @@ export default {
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            checkedResult = this.__checkRules(
-              schema,
-              arrayValue,
-              "",
-              parseSources
-            );
+            checkedResult = this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
@@ -862,7 +847,7 @@ export default {
           }
         }
       }
-      parseSources = null;
+      // parseSources = null;
       return isValid;
     },
 
@@ -1035,13 +1020,12 @@ export default {
      * @param {*} schema 这个东西已经是解析过了，不用重新解析
      * @param {*} value
      * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
-     * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
      * @returns Boolean or string
      * true 是需要检查的，并且正确
      * false 不需要检查
      * string 是需要检查的，但不正确
      */
-    __checkRules: function(schema, value, triggers, parseSources) {
+    __checkRules: function(schema, value, triggers) {
       var rules, fromArray;
       if (schema.array && schema.array.rules) {
         rules = schema.array.rules;
@@ -1085,8 +1069,8 @@ export default {
       //非空情况
       var checkList = rules.checks;
       var errMsg = true;
-      var checkFun;
-      var newParseSources, newOptions;
+      var checkFun, newOptions;
+      // var newParseSources;
 
       if (checkList && checkList.length > 0) {
         var hadChecked = false;
@@ -1100,26 +1084,26 @@ export default {
             hadChecked = true;
             var result = true;
 
-            if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
-              if (!newParseSources) {
-                newParseSources = {};
-                newParseSources = Object.assign(newParseSources, parseSources);
-                newParseSources.idxChains = parseSources.idxChain
-                  ? parseSources.idxChain.split(",")
-                  : [];
-                delete newParseSources.idxChain;
-              }
-              result = checkFun(newParseSources);
-            } else {
-              if (!newOptions) {
-                newOptions = {};
-                newOptions.value = value;
-                newOptions.pathKey = schema.__pathKey;
-                newOptions.idxChain = schema.__idxChain;
-                newOptions.index = schema.__index;
-              }
-              result = checkFun.call(this, newOptions);
+            // if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
+            //   if (!newParseSources) {
+            //     newParseSources = {};
+            //     newParseSources = Object.assign(newParseSources, parseSources);
+            //     newParseSources.idxChains = parseSources.idxChain
+            //       ? parseSources.idxChain.split(",")
+            //       : [];
+            //     delete newParseSources.idxChain;
+            //   }
+            //   result = checkFun(newParseSources);
+            // } else {
+            if (!newOptions) {
+              newOptions = {};
+              newOptions.value = value;
+              newOptions.pathKey = schema.__pathKey;
+              newOptions.idxChain = schema.__idxChain;
+              newOptions.index = schema.__index;
             }
+            result = checkFun.call(this, newOptions);
+            // }
 
             if (result !== true) {
               if (utils.isStr(result)) {
@@ -1196,7 +1180,7 @@ export default {
           }
         }
       }
-      newParseSources = null;
+      // newParseSources = null;
       newOptions = null;
       return errMsg;
     }
