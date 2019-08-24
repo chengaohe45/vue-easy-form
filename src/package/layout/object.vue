@@ -56,7 +56,11 @@
                   :config="schema.properties[fieldKeyName].label"
                 ></es-base>
               </span>
-              <span v-if="schema.properties[fieldKeyName].colon">:</span>
+              <span
+                v-if="schema.properties[fieldKeyName].colon"
+                class="es-form-colon"
+                >:</span
+              >
             </label>
             <div
               v-show="!schema.properties[fieldKeyName].hidden"
@@ -192,7 +196,7 @@
           <span v-else class="es-form-label-box">
             <es-base :config="fieldSchema.label"></es-base>
           </span>
-          <span v-if="fieldSchema.colon">:</span>
+          <span v-if="fieldSchema.colon" class="es-form-colon">:</span>
         </label>
         <div
           :class="
@@ -277,6 +281,10 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     text-align: right;
     line-height: 1.2;
     white-space: nowrap;
+  }
+
+  .es-form-colon {
+    margin-left: 3px;
   }
 
   .es-form-v > .es-form-label {
