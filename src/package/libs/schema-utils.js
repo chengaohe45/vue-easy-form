@@ -882,7 +882,7 @@ let schemaUtils = {
         newComponent.props = {};
       }
 
-      if (utils.isStr(component.text) && utils.isFunc(component.text)) {
+      if (utils.isStr(component.text) || utils.isFunc(component.text)) {
         newComponent.text = component.text;
         if (parse.isEsOrFunc(component.text)) {
           newComponent.__rawText = parse.newEsFuncion(component.text);
@@ -1413,6 +1413,8 @@ let schemaUtils = {
         text = value.text.trim();
         text = text || canEmpty ? text : false;
         newCom.text = text;
+      } else if (utils.isFunc(value.text)) {
+        text = value.text;
       } else {
         if (!name) {
           // 不符合要求，说明为空
