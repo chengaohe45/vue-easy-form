@@ -1412,7 +1412,7 @@ let schemaUtils = {
       if (utils.isStr(value.text)) {
         text = value.text.trim();
         text = text || canEmpty ? text : false;
-        newCom.text = text;
+        // newCom.text = text;
       } else if (utils.isFunc(value.text)) {
         text = value.text;
       } else {
