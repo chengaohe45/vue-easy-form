@@ -1163,7 +1163,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".es-col-1{width:4.16667%}.es-col-2{width:8.33333%}.es-col-3{width:12.5%}.es-col-4{width:16.66667%}.es-col-5{width:20.83333%}.es-col-6{width:25%}.es-col-7{width:29.16667%}.es-col-8{width:33.33333%}.es-col-9{width:37.5%}.es-col-10{width:41.66667%}.es-col-11{width:45.83333%}.es-col-12{width:50%}.es-col-13{width:54.16667%}.es-col-14{width:58.33333%}.es-col-15{width:62.5%}.es-col-16{width:66.66667%}.es-col-17{width:70.83333%}.es-col-18{width:75%}.es-col-19{width:79.16667%}.es-col-20{width:83.33333%}.es-col-21{width:87.5%}.es-col-22{width:91.66667%}.es-col-23{width:95.83333%}.es-col-24{width:100%}.es-form-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-ms-flex-wrap:wrap;flex-wrap:wrap}.es-form-container:after,.es-form-container:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-form-container:after{clear:both}.es-form-container .es-form-placeholder{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-object,.es-form-container .es-form-placeholder{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-flex:0;-webkit-box-pack:start;justify-content:flex-start}.es-form-container .es-form-object{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:0}.es-form-container .es-form-none{display:none}.es-form-container .es-form-v{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.es-form-container .es-form-label{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;width:115px;padding:0 10px 0 4px;text-align:right;line-height:1.2;white-space:nowrap}.es-form-container .es-form-v>.es-form-label{text-align:left;width:auto;line-height:20px;padding:4px 3px}.es-form-container .es-form-label-full{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-label-self{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-comp-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-comp-content,.es-form-container .es-form-props-content{-webkit-box-flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-pack:start;justify-content:flex-start;overflow:hidden}.es-form-container .es-form-props-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.es-form-container .es-form-placeholder-txt{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}", ""]);
+exports.push([module.i, ".es-col-1{width:4.16667%}.es-col-2{width:8.33333%}.es-col-3{width:12.5%}.es-col-4{width:16.66667%}.es-col-5{width:20.83333%}.es-col-6{width:25%}.es-col-7{width:29.16667%}.es-col-8{width:33.33333%}.es-col-9{width:37.5%}.es-col-10{width:41.66667%}.es-col-11{width:45.83333%}.es-col-12{width:50%}.es-col-13{width:54.16667%}.es-col-14{width:58.33333%}.es-col-15{width:62.5%}.es-col-16{width:66.66667%}.es-col-17{width:70.83333%}.es-col-18{width:75%}.es-col-19{width:79.16667%}.es-col-20{width:83.33333%}.es-col-21{width:87.5%}.es-col-22{width:91.66667%}.es-col-23{width:95.83333%}.es-col-24{width:100%}.es-form-container{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-pack:start;-ms-flex-pack:start;justify-content:flex-start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;-ms-flex-wrap:wrap;flex-wrap:wrap}.es-form-container:after,.es-form-container:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-form-container:after{clear:both}.es-form-container .es-form-placeholder{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-object,.es-form-container .es-form-placeholder{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-flex:0;-webkit-box-pack:start;justify-content:flex-start}.es-form-container .es-form-object{-ms-flex-direction:row;flex-direction:row;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start;padding:0}.es-form-container .es-form-none{display:none}.es-form-container .es-form-v{-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:stretch;-ms-flex-align:stretch;align-items:stretch}.es-form-container .es-form-label{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;-wekit-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;width:115px;padding:0 10px 0 4px;text-align:right;line-height:1.2;white-space:nowrap}.es-form-container .es-form-colon{margin-left:3px}.es-form-container .es-form-v>.es-form-label{text-align:left;width:auto;line-height:20px;padding:4px 3px}.es-form-container .es-form-label-full{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-label-self{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;width:auto;padding:0 10px;text-align:center;white-space:nowrap}.es-form-container .es-form-comp-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:center;-ms-flex-align:center;align-items:center}.es-form-container .es-form-comp-content,.es-form-container .es-form-props-content{-webkit-box-flex:1;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:horizontal;-webkit-box-direction:normal;-webkit-box-pack:start;justify-content:flex-start;overflow:hidden}.es-form-container .es-form-props-content{-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto;-ms-flex-direction:row;flex-direction:row;-ms-flex-pack:start;-webkit-box-align:start;-ms-flex-align:start;align-items:flex-start}.es-form-container .es-form-placeholder-txt{-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}", ""]);
 
 // exports
 
@@ -5794,32 +5794,16 @@ if (typeof window !== 'undefined') {
 var object_keys = __webpack_require__("a4bb");
 var keys_default = /*#__PURE__*/__webpack_require__.n(object_keys);
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
-var es7_promise_finally = __webpack_require__("097d");
-
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=68b9a0dc&
-var packagevue_type_template_id_68b9a0dc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=41261fd2&
+var packagevue_type_template_id_41261fd2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=68b9a0dc&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=41261fd2&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
 var stringify_default = /*#__PURE__*/__webpack_require__.n(stringify);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("5176");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
@@ -5865,8 +5849,8 @@ var form_itemvue_type_template_id_fc76e05a_staticRenderFns = []
 
 // CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=fc76e05a&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=b0161c3e&
-var objectvue_type_template_id_b0161c3e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=53e35946&
+var objectvue_type_template_id_53e35946_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
         marginTop: fieldSchema.rowSpace + 'px',
         paddingLeft: fieldSchema.offsetLeft + 'px',
         paddingRight: fieldSchema.offsetRight + 'px'
@@ -5889,7 +5873,7 @@ var objectvue_type_template_id_b0161c3e_render = function () {var _vm=this;var _
             ])},[(
                 _vm.schema.properties[fieldKeyName].rules &&
                   _vm.schema.properties[fieldKeyName].rules.required
-              )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!_vm.schema.properties[fieldKeyName].label.name)?[_c('span',[_vm._v(_vm._s(_vm.schema.properties[fieldKeyName].label.text))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].label}})],1),(_vm.schema.properties[fieldKeyName].colon)?_c('span',[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'content-' + fieldKeyName,staticClass:"es-form-comp-content",style:([
+              )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!_vm.schema.properties[fieldKeyName].label.name)?[_c('span',[_vm._v(_vm._s(_vm.schema.properties[fieldKeyName].label.text))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].label}})],1),(_vm.schema.properties[fieldKeyName].colon)?_c('span',{staticClass:"es-form-colon"},[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'content-' + fieldKeyName,staticClass:"es-form-comp-content",style:([
               {
                 minHeight: _vm.schema.properties[fieldKeyName].rowHeight + 'px',
                 marginLeft:
@@ -5943,15 +5927,15 @@ var objectvue_type_template_id_b0161c3e_render = function () {var _vm=this;var _
               ]
             : { textAlign: fieldSchema.label.align })},[(fieldSchema.rules && fieldSchema.rules.required)?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!fieldSchema.label.name)?[_c('span',[_vm._v(_vm._s(fieldSchema.direction != "v" || fieldSchema.label.text
               ? fieldSchema.label.text
-              : " "))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":fieldSchema.label}})],1),(fieldSchema.colon)?_c('span',[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{class:fieldSchema.properties
+              : " "))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":fieldSchema.label}})],1),(fieldSchema.colon)?_c('span',{staticClass:"es-form-colon"},[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{class:fieldSchema.properties
             ? 'es-form-props-content'
             : 'es-form-comp-content',style:(fieldSchema.direction == 'h'
             ? [{ minHeight: fieldSchema.rowHeight + 'px' }]
             : '')},[_vm._t(fieldName)],2)]):(!fieldSchema.__inGroups && !fieldSchema.component)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.hidden),expression:"!fieldSchema.hidden"}],key:fieldName,class:['es-form-object', 'es-col-' + fieldSchema.col],style:({ marginTop: fieldSchema.rowSpace + 'px' })}):_vm._e()]})],2)}
-var objectvue_type_template_id_b0161c3e_staticRenderFns = []
+var objectvue_type_template_id_53e35946_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=template&id=b0161c3e&
+// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=template&id=53e35946&
 
 // CONCATENATED MODULE: ./src/package/mixins/item-mixin.js
 /* harmony default export */ var item_mixin = ({
@@ -7016,6 +7000,14 @@ var constant = {
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ var objectvue_type_script_lang_js_ = ({
@@ -7139,8 +7131,8 @@ function normalizeComponent (
 
 var object_component = normalizeComponent(
   layout_objectvue_type_script_lang_js_,
-  objectvue_type_template_id_b0161c3e_render,
-  objectvue_type_template_id_b0161c3e_staticRenderFns,
+  objectvue_type_template_id_53e35946_render,
+  objectvue_type_template_id_53e35946_staticRenderFns,
   false,
   null,
   null,
@@ -7221,6 +7213,18 @@ var tabs_navvue_type_template_id_6b803b28_staticRenderFns = []
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.match.js
 var es6_regexp_match = __webpack_require__("4917");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("cadf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("f751");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
+var es7_promise_finally = __webpack_require__("097d");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav-item.vue?vue&type=template&id=08cf06cc&
 var tabs_nav_itemvue_type_template_id_08cf06cc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{class:{
@@ -8769,6 +8773,10 @@ var tabs_component = normalizeComponent(
 )
 
 /* harmony default export */ var tabs = (tabs_component.exports);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+var object_assign = __webpack_require__("5176");
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js
 var parse_int = __webpack_require__("e814");
 var parse_int_default = /*#__PURE__*/__webpack_require__.n(parse_int);
@@ -8791,6 +8799,21 @@ var parse_int_default = /*#__PURE__*/__webpack_require__.n(parse_int);
 
 
 var parse = {
+  /**
+   * 判断是否正确的es语句或函数
+   * @param {*} scriptTxt
+   * @param {*} expPrefix
+   */
+  isEsOrFunc: function isEsOrFunc(scriptTxt) {
+    var expPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "es:";
+
+    if (libs_utils.isFunc(scriptTxt)) {
+      return true;
+    } else {
+      return this.isEsScript(scriptTxt, expPrefix);
+    }
+  },
+
   /**
    * 判断是否正确的es语句
    * @param {*} scriptTxt
@@ -12280,10 +12303,6 @@ var array_tabsvue_type_template_id_75c51b09_staticRenderFns = []
 // CONCATENATED MODULE: ./src/package/layout/array-tabs.vue?vue&type=template&id=75c51b09&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=script&lang=js&
-
-
-
-
 //
 //
 //
@@ -13752,10 +13771,6 @@ var enterSubmit = function enterSubmit(options) {
 
 
 
-
-
-
-
 /**
  * schema-utils.js
  *
@@ -14513,10 +14528,10 @@ var schemaUtils = {
         newComponent.props = {};
       }
 
-      if (libs_utils.isStr(component.text)) {
+      if (libs_utils.isStr(component.text) || libs_utils.isFunc(component.text)) {
         newComponent.text = component.text;
 
-        if (libs_parse.isEsScript(component.text)) {
+        if (libs_parse.isEsOrFunc(component.text)) {
           newComponent.__rawText = libs_parse.newEsFuncion(component.text);
         }
       }
@@ -14598,10 +14613,7 @@ var schemaUtils = {
     for (var key in obj) {
       var value = obj[key];
 
-      if (libs_utils.isFunc(value)) {
-        isRight = true;
-        break;
-      } else if (libs_parse.isEsScript(value)) {
+      if (libs_parse.isEsOrFunc(value)) {
         isRight = true;
         break;
       }
@@ -15062,8 +15074,9 @@ var schemaUtils = {
 
       if (libs_utils.isStr(value.text)) {
         text = value.text.trim();
-        text = text || canEmpty ? text : false;
-        newCom.text = text;
+        text = text || canEmpty ? text : false; // newCom.text = text;
+      } else if (libs_utils.isFunc(value.text)) {
+        text = value.text;
       } else {
         if (!name) {
           // 不符合要求，说明为空
@@ -15088,6 +15101,11 @@ var schemaUtils = {
         return false;
       } // return newCom;
 
+    } else if (libs_utils.isFunc(value)) {
+      newCom = {
+        text: value,
+        __rawText: value
+      };
     } else {
       return false;
     } // 判断名称是否合法
@@ -15114,7 +15132,15 @@ var schemaUtils = {
       }
 
       newRules = {};
-      var rawCheckList = rules.checks ? rules.checks : rules.check;
+      var rawCheckList;
+
+      if (rules.checks) {
+        rawCheckList = rules.checks;
+      } else if (rules.check) {
+        console.warn("rules.check已经舍弃了，请使用rules.checks");
+        rawCheckList = rules.check;
+      }
+
       var tmpCheckList = [];
 
       if (!rawCheckList) {
@@ -15136,7 +15162,7 @@ var schemaUtils = {
         newRules.checks = tmpCheckList;
       }
 
-      if (libs_parse.isEsScript(rules.required)) {
+      if (libs_parse.isEsOrFunc(rules.required)) {
         newRules.required = false; // 让以后解析
 
         newRules.__rawRequired = libs_parse.newEsFuncion(rules.required);
@@ -15152,7 +15178,7 @@ var schemaUtils = {
         required: rules,
         __rawRequired: rules
       };
-    } else if (libs_parse.isEsScript(rules)) {
+    } else if (libs_parse.isEsOrFunc(rules)) {
       newRules = {
         required: false,
         __rawRequired: libs_parse.newEsFuncion(rules)
@@ -15452,16 +15478,18 @@ var schemaUtils = {
         handler: libs_parse.newEsFuncion(item),
         trigger: [libs_constant.INPUT_EVENT]
       };
-    } else if (libs_utils.isObj(item) && (libs_parse.isEsScript(item.handler) || libs_parse.isEsScript(item.name) || libs_utils.isFunc(item.name) || libs_utils.isFunc(item.handler))) {
+    } else if (libs_utils.isObj(item) && (libs_parse.isEsOrFunc(item.handler) || libs_parse.isEsOrFunc(item.name))) {
       var handler;
 
-      if (libs_parse.isEsScript(item.name)) {
-        console.warn("rules.check.name已经舍弃了，请使用rules.checks.handler");
-        handler = libs_parse.newEsFuncion(item.name);
+      if (libs_utils.isFunc(item.handler)) {
+        handler = item.handler;
+      } else if (libs_utils.isFunc(item.name)) {
+        console.warn("rules.checks.name已经舍弃了，请使用rules.checks.handler");
+        handler = item.name;
       } else if (libs_parse.isEsScript(item.handler)) {
-        handler = libs_parse.newEsFuncion(item.handler);
+        throw "rules.check.handler已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       } else {
-        handler = item.handler || item.name;
+        throw "rules.check.name已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       }
 
       var newTrigger = this.__parseTrigger(item.trigger);
@@ -16163,11 +16191,6 @@ var console_component = normalizeComponent(
 
 
 
-
-
-
-
-
 //
 //
 //
@@ -16846,16 +16869,16 @@ var console_component = normalizeComponent(
     __checkProp: function __checkProp(schema, rootSchema) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
       // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
-      var isValid = true;
-      var parseSources = {
-        global: this.global,
-        rootData: this._esFormData,
-        index: schema.__index,
-        idxChain: schema.__idxChain,
-        pathKey: schema.__pathKey,
-        rootSchema: rootSchema,
-        isHidden: this._esHiddenFunc
-      }; //是否隐藏，隐藏就不用检查有效性了
+      var isValid = true; // var parseSources = {
+      //   global: this.global,
+      //   rootData: this._esFormData,
+      //   index: schema.__index,
+      //   idxChain: schema.__idxChain,
+      //   pathKey: schema.__pathKey,
+      //   rootSchema: rootSchema,
+      //   isHidden: this._esHiddenFunc
+      // };
+      //是否隐藏，隐藏就不用检查有效性了
 
       var isHidden = schema.hidden; // 省资源，不做es转
 
@@ -16869,7 +16892,7 @@ var console_component = normalizeComponent(
         if (schema.array) {
           if (schema.array.rules) {
             arrayValue = form_utils.getValue(schema);
-            checkedResult = this.__checkRules(schema, arrayValue, "", parseSources);
+            checkedResult = this.__checkRules(schema, arrayValue, "");
 
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -16943,7 +16966,7 @@ var console_component = normalizeComponent(
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = this.__checkRules(schema, schema.value, "", parseSources);
+          checkedResult = this.__checkRules(schema, schema.value, "");
 
           if (checkedResult === true) {
             schema.__invalidMsg = false;
@@ -16955,7 +16978,7 @@ var console_component = normalizeComponent(
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = form_utils.getValue(schema);
-            checkedResult = this.__checkRules(schema, arrayValue, "", parseSources);
+            checkedResult = this.__checkRules(schema, arrayValue, "");
 
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -16991,9 +17014,9 @@ var console_component = normalizeComponent(
             isValid = !isValid ? isValid : validResult;
           }
         }
-      }
+      } // parseSources = null;
 
-      parseSources = null;
+
       return isValid;
     },
     // 发出提交事件
@@ -17148,13 +17171,12 @@ var console_component = normalizeComponent(
      * @param {*} schema 这个东西已经是解析过了，不用重新解析
      * @param {*} value
      * @param {*} triggers 当triggers没有时，说明rules的规则无论是什么条件触发都要判断一遍
-     * @param {*} parseSources {global, rootData, index, idxChain, rootSchema}
      * @returns Boolean or string
      * true 是需要检查的，并且正确
      * false 不需要检查
      * string 是需要检查的，但不正确
      */
-    __checkRules: function __checkRules(schema, value, triggers, parseSources) {
+    __checkRules: function __checkRules(schema, value, triggers) {
       var rules, fromArray;
 
       if (schema.array && schema.array.rules) {
@@ -17195,8 +17217,7 @@ var console_component = normalizeComponent(
 
       var checkList = rules.checks;
       var errMsg = true;
-      var checkFun;
-      var newParseSources, newOptions;
+      var checkFun, newOptions; // var newParseSources;
 
       if (checkList && checkList.length > 0) {
         var hadChecked = false;
@@ -17209,28 +17230,27 @@ var console_component = normalizeComponent(
           if (!triggers || libs_utils.isInter(checkTriggers, triggers)) {
             checkFun = checkItem.handler;
             hadChecked = true;
-            var result = true;
+            var result = true; // if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
+            //   if (!newParseSources) {
+            //     newParseSources = {};
+            //     newParseSources = Object.assign(newParseSources, parseSources);
+            //     newParseSources.idxChains = parseSources.idxChain
+            //       ? parseSources.idxChain.split(",")
+            //       : [];
+            //     delete newParseSources.idxChain;
+            //   }
+            //   result = checkFun(newParseSources);
+            // } else {
 
-            if (checkFun.__esFuncName === libs_constant.ES_FUNC_NAME) {
-              if (!newParseSources) {
-                newParseSources = {};
-                newParseSources = assign_default()(newParseSources, parseSources);
-                newParseSources.idxChains = parseSources.idxChain ? parseSources.idxChain.split(",") : [];
-                delete newParseSources.idxChain;
-              }
-
-              result = checkFun(newParseSources);
-            } else {
-              if (!newOptions) {
-                newOptions = {};
-                newOptions.value = value;
-                newOptions.pathKey = schema.__pathKey;
-                newOptions.idxChain = schema.__idxChain;
-                newOptions.index = schema.__index;
-              }
-
-              result = checkFun.call(this, newOptions);
+            if (!newOptions) {
+              newOptions = {};
+              newOptions.value = value;
+              newOptions.pathKey = schema.__pathKey;
+              newOptions.idxChain = schema.__idxChain;
+              newOptions.index = schema.__index;
             }
+
+            result = checkFun.call(this, newOptions); // }
 
             if (result !== true) {
               if (libs_utils.isStr(result)) {
@@ -17288,9 +17308,9 @@ var console_component = normalizeComponent(
             errMsg = false; // 保持原样
           }
         }
-      }
+      } // newParseSources = null;
 
-      newParseSources = null;
+
       newOptions = null;
       return errMsg;
     }
@@ -17350,7 +17370,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = normalizeComponent(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_68b9a0dc_render,
+  packagevue_type_template_id_41261fd2_render,
   staticRenderFns,
   false,
   null,
@@ -17361,10 +17381,6 @@ var package_component = normalizeComponent(
 
 /* harmony default export */ var src_package = (package_component.exports);
 // CONCATENATED MODULE: ./src/package/index.js
-
-
-
-
 
 // import esBase from "./base";
 
