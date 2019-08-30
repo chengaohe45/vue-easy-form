@@ -1211,12 +1211,11 @@ export default {
     },
 
     global: {
-      handler(newVal, oldVal) {
-        if (
-          utils.isObj(newVal) &&
-          JSON.stringify(newVal) !== JSON.stringify(oldVal)
-        ) {
-          // this.$data.formGlobal = JSON.parse(JSON.stringify(newVal)); // 为什么要重新复制，因为form-item为是深度监听
+      /**
+       * 注：不是深度改变时，newVal和oldVal是一样的
+       */
+      handler(newVal/* , oldVal*/) {
+        if (utils.isObj(newVal)) {
           this.__syncValue();
         }
       },

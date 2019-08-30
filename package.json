@@ -31,8 +31,7 @@
     "README.md"
   ],
   "dependencies": {
-    "vue": "^2.6.10",
-    "vue-router": "^3.0.1"
+    "vue": "^2.6.10"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.1",
@@ -45,6 +44,7 @@
     "element-ui": "^2.4.6",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
+    "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.6.10",
     "webpack-api-mocker": "^1.5.15"
   }
