@@ -26,6 +26,7 @@ export default {
           component: {
             name: "el-input",
             props: {
+              // disabled: "es: {{$global}}.isApp ? true : false",
               placeholder: "请输入作者的名字"
             }
           },

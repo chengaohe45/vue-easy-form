@@ -405,9 +405,16 @@ export default {
   /* ====================== 数据绑定 ====================== */
 
   props: {
+    // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
     global: {
+      // 经测试：当传为null时，global的值就为null, 当传为undefined时，global的值就为default
       // 用来接受外部数据
       type: Object,
+      // 经测试：当传为null或undefined时，validator中的value参数都为default，跟global有点不同，奇怪吧
+      // validator: function (value) {
+      //   console.log("value: ", value);
+      //   return value !== null;
+      // },
       default: () => ({})
     },
 
@@ -489,7 +496,7 @@ export default {
      * 对外调用，取值
      */
     getGlobal() {
-      return utils.deepCopy(this.global);
+      return utils.deepCopy(this.global ? this.global : {}); // 防止null情况
     },
 
     /**
@@ -584,7 +591,7 @@ export default {
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
           // if (itemSchema) {
           var parseSources = {
-            global: this.global,
+            global: this.global ? this.global : {}, // 防止null情况
             rootData: this._esFormData,
             index: itemSchema.__index,
             idxChain: itemSchema.__idxChain,
@@ -696,16 +703,6 @@ export default {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
       // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
       var isValid = true;
-
-      // var parseSources = {
-      //   global: this.global,
-      //   rootData: this._esFormData,
-      //   index: schema.__index,
-      //   idxChain: schema.__idxChain,
-      //   pathKey: schema.__pathKey,
-      //   rootSchema: rootSchema,
-      //   isHidden: this._esHiddenFunc
-      // };
 
       //是否隐藏，隐藏就不用检查有效性了
       var isHidden = schema.hidden; // 省资源，不做es转
@@ -904,7 +901,7 @@ export default {
         var inputSchema = checkSchemas[0];
         // 验证当前的输入框
         var parseSources = {
-          global: this.global,
+          global: this.global ? this.global : {}, // 防止null情况
           rootData: this._esFormData,
           index: inputSchema.__index,
           idxChain: inputSchema.__idxChain,
@@ -986,7 +983,7 @@ export default {
       this._esFormData = formData;
 
       var baseParseSources = {
-        global: this.global,
+        global: this.global ? this.global : {}, // 防止null情况
         rootData: this._esFormData,
         rootSchema: this.$data.formSchema,
         isHidden: this._esHiddenFunc
@@ -1214,8 +1211,22 @@ export default {
       /**
        * 注：不是深度改变时，newVal和oldVal是一样的
        */
-      handler(newVal/* , oldVal*/) {
+      handler(newVal, oldVal) {
+        // console.log("newValue: ", newVal, oldVal, this.global);
         if (utils.isObj(newVal)) {
+          // undefined也就变为{default}, 从而下入这里
+          if (newVal === oldVal) {
+            // 深度改变
+            // console.log("=== here...");
+            this.__syncValue();
+          } else if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
+            // 地址改变且值不同
+            // console.log("!== here...");
+            this.__syncValue();
+          }
+        } else if (newVal === null) {
+          // global的值变为null，需要做兼容
+          // console.log("123");
           this.__syncValue();
         }
       },

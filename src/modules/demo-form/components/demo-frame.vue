@@ -76,6 +76,7 @@
                 <es-form
                   ref="form"
                   :schema="schema"
+                  :global="globalValue"
                   v-model="formValue"
                   :hasConsole="hasConsole"
                   @input="formInput"
@@ -101,6 +102,9 @@
                   <el-button size="small" round @click="resetHandler"
                     >重置</el-button
                   >
+                  <!-- <el-button size="small" round @click="toggleGlobalHandler"
+                    >切换Global</el-button
+                  > -->
                 </div>
                 <div class="demo-form-set-row">
                   <div class="demo-op-title">
@@ -150,6 +154,8 @@ export default {
   mixins: [sysMixin],
   data() {
     return {
+      globalValue: {},
+
       formValue: {},
       schema: {},
       code: "",
@@ -250,6 +256,25 @@ export default {
         message: "调用form.reset(): 重置成功",
         type: "success"
       });
+    },
+
+    toggleGlobalHandler() {
+      console.log("this.$data.globalValue: ", this.$data.globalValue);
+      if (utils.isObj(this.$data.globalValue)) {
+        if (this.$data.globalValue.isApp) {
+          console.log("utils.isObj... to false");
+          this.$data.globalValue = { isApp: false };
+        } else {
+          console.log("utils.isObj... to undefined");
+          this.$data.globalValue = undefined;
+        }
+      } else if (utils.isUndef(this.$data.globalValue)) {
+        console.log("utils.isUndef... to null");
+        this.$data.globalValue = null;
+      } else {
+        console.log("utils.isNull... to true");
+        this.$data.globalValue = { isApp: true };
+      }
     },
 
     setValueHandler() {
