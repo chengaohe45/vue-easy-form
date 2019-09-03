@@ -5794,12 +5794,24 @@ if (typeof window !== 'undefined') {
 var object_keys = __webpack_require__("a4bb");
 var keys_default = /*#__PURE__*/__webpack_require__.n(object_keys);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=41261fd2&
-var packagevue_type_template_id_41261fd2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("cadf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("f751");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
+var es7_promise_finally = __webpack_require__("097d");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=2cd8e27c&
+var packagevue_type_template_id_2cd8e27c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=41261fd2&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=2cd8e27c&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
@@ -7213,18 +7225,6 @@ var tabs_navvue_type_template_id_6b803b28_staticRenderFns = []
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.match.js
 var es6_regexp_match = __webpack_require__("4917");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
-var es7_promise_finally = __webpack_require__("097d");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"c886e30c-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav-item.vue?vue&type=template&id=08cf06cc&
 var tabs_nav_itemvue_type_template_id_08cf06cc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('li',{class:{
@@ -12303,6 +12303,10 @@ var array_tabsvue_type_template_id_75c51b09_staticRenderFns = []
 // CONCATENATED MODULE: ./src/package/layout/array-tabs.vue?vue&type=template&id=75c51b09&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=script&lang=js&
+
+
+
+
 //
 //
 //
@@ -16587,9 +16591,16 @@ var console_component = normalizeComponent(
 
   /* ====================== 数据绑定 ====================== */
   props: {
+    // 基础的类型检查 (`null` 和 `undefined` 会通过任何类型验证)
     global: {
+      // 经测试：当传为null时，global的值就为null, 当传为undefined时，global的值就为default
       // 用来接受外部数据
       type: Object,
+      // 经测试：当传为null或undefined时，validator中的value参数都为default，跟global有点不同，奇怪吧
+      // validator: function (value) {
+      //   console.log("value: ", value);
+      //   return value !== null;
+      // },
       default: function _default() {
         return {};
       }
@@ -16674,7 +16685,7 @@ var console_component = normalizeComponent(
      * 对外调用，取值
      */
     getGlobal: function getGlobal() {
-      return libs_utils.deepCopy(this.global);
+      return libs_utils.deepCopy(this.global ? this.global : {}); // 防止null情况
     },
 
     /**
@@ -16761,7 +16772,8 @@ var console_component = normalizeComponent(
           var itemSchema = tmpParentPathKey == pathKey ? targetSchema : form_utils.getSchemaByKey(rootSchema, tmpParentPathKey); // if (itemSchema) {
 
           var parseSources = {
-            global: this.global,
+            global: this.global ? this.global : {},
+            // 防止null情况
             rootData: this._esFormData,
             index: itemSchema.__index,
             idxChain: itemSchema.__idxChain,
@@ -16869,16 +16881,7 @@ var console_component = normalizeComponent(
     __checkProp: function __checkProp(schema, rootSchema) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
       // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
-      var isValid = true; // var parseSources = {
-      //   global: this.global,
-      //   rootData: this._esFormData,
-      //   index: schema.__index,
-      //   idxChain: schema.__idxChain,
-      //   pathKey: schema.__pathKey,
-      //   rootSchema: rootSchema,
-      //   isHidden: this._esHiddenFunc
-      // };
-      //是否隐藏，隐藏就不用检查有效性了
+      var isValid = true; //是否隐藏，隐藏就不用检查有效性了
 
       var isHidden = schema.hidden; // 省资源，不做es转
 
@@ -17072,7 +17075,8 @@ var console_component = normalizeComponent(
         var inputSchema = checkSchemas[0]; // 验证当前的输入框
 
         var parseSources = {
-          global: this.global,
+          global: this.global ? this.global : {},
+          // 防止null情况
           rootData: this._esFormData,
           index: inputSchema.__index,
           idxChain: inputSchema.__idxChain,
@@ -17147,7 +17151,8 @@ var console_component = normalizeComponent(
       var formData = form_utils.getValue(this.$data.formSchema);
       this._esFormData = formData;
       var baseParseSources = {
-        global: this.global,
+        global: this.global ? this.global : {},
+        // 防止null情况
         rootData: this._esFormData,
         rootSchema: this.$data.formSchema,
         isHidden: this._esHiddenFunc
@@ -17338,9 +17343,25 @@ var console_component = normalizeComponent(
       deep: false
     },
     global: {
+      /**
+       * 注：不是深度改变时，newVal和oldVal是一样的
+       */
       handler: function handler(newVal, oldVal) {
-        if (libs_utils.isObj(newVal) && stringify_default()(newVal) !== stringify_default()(oldVal)) {
-          // this.$data.formGlobal = JSON.parse(JSON.stringify(newVal)); // 为什么要重新复制，因为form-item为是深度监听
+        // console.log("newValue: ", newVal, oldVal, this.global);
+        if (libs_utils.isObj(newVal)) {
+          // undefined也就变为{default}, 从而下入这里
+          if (newVal === oldVal) {
+            // 深度改变
+            // console.log("=== here...");
+            this.__syncValue();
+          } else if (stringify_default()(newVal) !== stringify_default()(oldVal)) {
+            // 地址改变且值不同
+            // console.log("!== here...");
+            this.__syncValue();
+          }
+        } else if (newVal === null) {
+          // global的值变为null，需要做兼容
+          // console.log("123");
           this.__syncValue();
         }
       },
@@ -17370,7 +17391,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = normalizeComponent(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_41261fd2_render,
+  packagevue_type_template_id_2cd8e27c_render,
   staticRenderFns,
   false,
   null,
@@ -17381,6 +17402,10 @@ var package_component = normalizeComponent(
 
 /* harmony default export */ var src_package = (package_component.exports);
 // CONCATENATED MODULE: ./src/package/index.js
+
+
+
+
 
 // import esBase from "./base";
 
