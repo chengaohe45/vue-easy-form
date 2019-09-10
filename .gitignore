@@ -4,6 +4,7 @@ node_modules
 docs/.vuepress/dist
 docs/.vuepress/demo
 docs/.vuepress/.gitignore
+package-lock.json
 
 # local env files
 .env.local
