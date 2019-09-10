@@ -2,10 +2,6 @@
 // const path = require("path");
 // const mocker = path.resolve(__dirname, "./mock/data.js");
 
-// console.log('process.env.isMock = ', process.env.isMock);
-// console.log('process.env.NODE_ENV = ', process.env.NODE_ENV);   //见：http://www.cnblogs.com/heroljy/p/9305263.html
-// console.log('process.env = ', process.env);
-
 // vue.config.js 配置说明 (这个file是peter我加的)
 // 这里只列一部分，具体配置惨考文档啊
 
@@ -49,37 +45,8 @@ module.exports = {
   的字符串，
   注意：请保证pages里配置的路径和文件名 在你的文档目录都存在 否则启动服务会报错的
   */
-  // pages: {
-  // index: {
-  // entry for the page
-  // entry: 'src/index/main.js',
-  // the source template
-  // template: 'public/index.html',
-  // output as dist/index.html
-  // filename: 'index.html'
-  // },
-  // when using the entry-only string format,
-  // template is inferred to be `public/subpage.html`
-  // and falls back to `public/index.html` if not found.
-  // Output filename is inferred to be `subpage.html`.
-  // subpage: 'src/subpage/main.js'
-  // },
+  
   configureWebpack: config => {
-    // console.log('---------------------------');
-    // console.log(config);
-    // console.log('---------------------------');
-    // return;
-    // Object.assign(config, { // 开发生产共同配置
-    //   resolve: {
-    //     alias: {
-    //       // '@': path.resolve(__dirname, './src'),
-    //       // '@c': path.resolve(__dirname, './src/components'),
-    //       // 'vue$': 'vue/dist/vue.esm.js'
-    //       'coms': path.resolve(__dirname, './src/components'),
-    //     }
-    //   }
-    // });
-    // console.log("config.externals", config.externals);
     if (isRelease) {
       config.externals = {
         ...config.externals,
@@ -103,28 +70,6 @@ module.exports = {
         }
       };
     }
-
-    // if (process.env.isMock === "true") {
-    //   // config.devtool = 'source-map'
-    //   // mutate config for production...
-    //   // config.resolve = {
-    //   //   alias: {
-    //   //     'coms': path.resolve(__dirname, './src', 'components'),
-    //   //   }
-    //   // };
-    //   config.devServer = {
-    //     // port: 8081, // 端口号
-    //     // open: true, //配置自动启动浏览器
-    //     before: app => {
-    //       apiMocker(app, mocker, {
-    //         proxy: {
-    //           // '/api/*': 'http://domain.com.com'  //当没有mock数据，只符合此规则，则转换
-    //         },
-    //         changeHost: true
-    //       });
-    //     }
-    //   };
-    // }
   },
   css: {
     extract: false // 是否内联css
