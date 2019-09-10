@@ -1,6 +1,6 @@
 # vue-easy-form
 
-<p align="center">
+<p align="left">
   <a href="https://github.com/vuejs/vue"><img src="https://img.shields.io/badge/vue-2.6.10-brightgreen.svg" alt="vue"></a>
   <a href="https://www.npmjs.com/package/vue-easy-form"><img src="https://img.shields.io/npm/v/vue-easy-form.svg" alt="version"></a>
   <!-- <a href="https://chengaohe45.github.io/vue-easy-form-docs/dist/donate.html"><img src="https://img.shields.io/badge/%24-donate-green.svg" alt="donate"></a> -->
