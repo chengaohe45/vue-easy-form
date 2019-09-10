@@ -47,7 +47,7 @@ npm run lint
 npm run test:unit
 ```
 
-### 赏一杯
+## 赏一杯
 如果你觉得这个项目对你有所帮助，你可以帮作者买一杯咖啡以表示鼓励
 <div align="left">
   <table border="0" style="width: 90%; text-align: center; border-collapse: collapse;table-layout: fixed; border-collapse: separate; display: table;">
