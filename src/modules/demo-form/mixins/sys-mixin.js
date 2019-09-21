@@ -119,7 +119,8 @@ export default {
 
       this.$nextTick(() => {
         this.$data.runRight = true;
-        this.$data.runMsg = "格式正确，详情具体输出";
+        this.$data.runMsg =
+          "格式正确，输出如下（注：Vue机制，若组件不存在，组件区将为空白）";
       });
 
       return rawSchema;
