@@ -21,7 +21,7 @@ vue-easy-form是一个独立、不依赖第三方类库的vue表单组件。通�
 [框架基本配置](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
 [框架具体示例](https://chengaohe45.github.io/vue-easy-form-docs/demo/)
 
-## Project setup
+### Install
 ```
 npm install
 ```
@@ -45,4 +45,32 @@ npm run lint
 ### Run your unit tests
 ```
 npm run test:unit
+```
+
+## 目录结构
+本项目包含`esForm框架源码`和`实例源码`，其中`esForm框架源码`独立存在于`/src/package`文件夹中。整个项目具体结构如下：
+
+```js
+├── dist                       # 构建相关
+├── public                     # 编译资源
+│   │── favicon.ico            # favicon图标
+│   └── index.html             # html模板
+├── src                        # 源代码
+│   ├── assets                 # 静态资源
+│   ├── components             # 全局公用组件
+│   ├── config                 # 配置信息，主要是路由和菜单信息
+│   ├── libs                   # 工具类
+│   ├── modules                # 页面模块，demo就存在于此
+│   ├── package                # 独立的esform源码，不依赖其它文件夹
+│   ├── static                 # 全局样式
+│   ├── App.vue                # vue入口组件
+│   ├── main.js                # 入口文件
+│   ├── router.js              # 路由实例化
+├── tests                      # 测试模块
+├── .eslintrc.js               # eslint配置项
+├── .gitignore                 # git忽略文件
+├── vue.config.js              # vue-cli3脚手架配置
+├── postcss.config.js          # postcss配置
+├── README.md                  # readme文件
+└── package.json               # package.json安装依赖
 ```
