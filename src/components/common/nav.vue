@@ -43,7 +43,7 @@
 
 // import utils from "@/libs/utils";
 
-import navRoute from "@/config/nav-route";
+import navRoute from "@/router/nav-route";
 
 export default {
   props: {},
