@@ -17,7 +17,10 @@
           <template v-if="schema.properties[fieldKeyName].component">
             <label
               v-show="!schema.properties[fieldKeyName].hidden"
-              v-if="schema.properties[fieldKeyName].label.text !== false"
+              v-if="
+                schema.properties[fieldKeyName].__creatable &&
+                  schema.properties[fieldKeyName].label.text !== false
+              "
               :style="[
                 {
                   height: schema.properties[fieldKeyName].rowHeight + 'px',
@@ -63,6 +66,7 @@
               >
             </label>
             <div
+              v-if="schema.properties[fieldKeyName].__creatable"
               v-show="!schema.properties[fieldKeyName].hidden"
               class="es-form-comp-content"
               :key="'content-' + fieldKeyName"
@@ -135,88 +139,96 @@
         </template>
       </div>
       <!-- 不是分组情况 -->
-      <div
-        v-show="!fieldSchema.hidden"
+      <template
         v-else-if="
           !fieldSchema.__inGroups &&
             (!fieldSchema.layout || fieldSchema.layout.name !== 'space')
         "
-        :style="{
-          marginTop: fieldSchema.rowSpace + 'px',
-          paddingLeft: fieldSchema.offsetLeft + 'px',
-          paddingRight: fieldSchema.offsetRight + 'px'
-        }"
-        :class="[
-          'es-form-object',
-          'es-col-' + fieldSchema.col,
-          fieldSchema.direction == 'v' ? 'es-form-v' : ''
-        ]"
-        :key="fieldName"
       >
-        <!-- 一般的控件 -->
-        <label
-          v-if="fieldSchema.label.text !== false"
-          :class="[
-            'es-form-label',
-            fieldSchema.label.flex
-              ? 'es-form-label-' + fieldSchema.label.flex
-              : ''
-          ]"
-          :style="
-            fieldSchema.direction == 'h'
-              ? [
-                  {
-                    height: fieldSchema.rowHeight + 'px',
-                    lineHeight: fieldSchema.rowHeight + 'px',
-                    textAlign: fieldSchema.label.align
-                  },
-                  fieldSchema.label.flex
-                    ? { textAlign: fieldSchema.label.align }
-                    : {
-                        width: fieldSchema.labelWidth + 'px',
-                        textAlign: fieldSchema.label.align
-                      }
-                ]
-              : { textAlign: fieldSchema.label.align }
-          "
-        >
-          <span
-            v-if="fieldSchema.rules && fieldSchema.rules.required"
-            class="es-required"
-            >*</span
-          >
-          <!-- {{ fieldSchema.label.text }} -->
-          <template v-if="!fieldSchema.label.name">
-            <span>{{
-              fieldSchema.direction != "v" || fieldSchema.label.text
-                ? fieldSchema.label.text
-                : "&nbsp;"
-            }}</span>
-          </template>
-          <span v-else class="es-form-label-box">
-            <es-base :config="fieldSchema.label"></es-base>
-          </span>
-          <span v-if="fieldSchema.colon" class="es-form-colon">:</span>
-        </label>
         <div
-          :class="
-            fieldSchema.properties
-              ? 'es-form-props-content'
-              : 'es-form-comp-content'
-          "
-          :style="
-            fieldSchema.direction == 'h'
-              ? [{ minHeight: fieldSchema.rowHeight + 'px' }]
-              : ''
-          "
+          v-if="fieldSchema.__creatable"
+          v-show="!fieldSchema.hidden"
+          :style="{
+            marginTop: fieldSchema.rowSpace + 'px',
+            paddingLeft: fieldSchema.offsetLeft + 'px',
+            paddingRight: fieldSchema.offsetRight + 'px'
+          }"
+          :class="[
+            'es-form-object',
+            'es-col-' + fieldSchema.col,
+            fieldSchema.direction == 'v' ? 'es-form-v' : ''
+          ]"
+          :key="fieldName"
         >
-          <slot :name="fieldName"></slot>
+          <!-- 一般的控件 -->
+          <label
+            v-if="fieldSchema.label.text !== false"
+            :class="[
+              'es-form-label',
+              fieldSchema.label.flex
+                ? 'es-form-label-' + fieldSchema.label.flex
+                : ''
+            ]"
+            :style="
+              fieldSchema.direction == 'h'
+                ? [
+                    {
+                      height: fieldSchema.rowHeight + 'px',
+                      lineHeight: fieldSchema.rowHeight + 'px',
+                      textAlign: fieldSchema.label.align
+                    },
+                    fieldSchema.label.flex
+                      ? { textAlign: fieldSchema.label.align }
+                      : {
+                          width: fieldSchema.labelWidth + 'px',
+                          textAlign: fieldSchema.label.align
+                        }
+                  ]
+                : { textAlign: fieldSchema.label.align }
+            "
+          >
+            <span
+              v-if="fieldSchema.rules && fieldSchema.rules.required"
+              class="es-required"
+              >*</span
+            >
+            <!-- {{ fieldSchema.label.text }} -->
+            <template v-if="!fieldSchema.label.name">
+              <span>{{
+                fieldSchema.direction != "v" || fieldSchema.label.text
+                  ? fieldSchema.label.text
+                  : "&nbsp;"
+              }}</span>
+            </template>
+            <span v-else class="es-form-label-box">
+              <es-base :config="fieldSchema.label"></es-base>
+            </span>
+            <span v-if="fieldSchema.colon" class="es-form-colon">:</span>
+          </label>
+          <div
+            :class="
+              fieldSchema.properties
+                ? 'es-form-props-content'
+                : 'es-form-comp-content'
+            "
+            :style="
+              fieldSchema.direction == 'h'
+                ? [{ minHeight: fieldSchema.rowHeight + 'px' }]
+                : ''
+            "
+          >
+            <slot :name="fieldName"></slot>
+          </div>
         </div>
-      </div>
+      </template>
       <!-- 占位空间控件 -->
       <div
         v-show="!fieldSchema.hidden"
-        v-else-if="!fieldSchema.__inGroups && !fieldSchema.component"
+        v-else-if="
+          !fieldSchema.__inGroups &&
+            !fieldSchema.component &&
+            fieldSchema.__creatable
+        "
         :style="{ marginTop: fieldSchema.rowSpace + 'px' }"
         :class="['es-form-object', 'es-col-' + fieldSchema.col]"
         :key="fieldName"

@@ -204,6 +204,7 @@ export default {
   computed: {},
 
   mounted() {
+    window.form = this.$refs.form; //test
     this.initListener();
   },
 

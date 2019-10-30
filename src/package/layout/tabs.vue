@@ -36,13 +36,15 @@
         'border-width': schema.layout.hasBorder ? '1px' : '0px'
       }"
     >
-      <li
-        v-for="(itemSchema, fieldName) in schema.properties"
-        :key="fieldName"
-        v-show="fieldName === schema.__tabsIndex && !itemSchema.hidden"
-      >
-        <slot :name="fieldName"></slot>
-      </li>
+      <template v-for="(itemSchema, fieldName) in schema.properties">
+        <li
+          :key="fieldName"
+          v-if="itemSchema.__creatable"
+          v-show="fieldName === schema.__tabsIndex && !itemSchema.hidden"
+        >
+          <slot :name="fieldName"></slot>
+        </li>
+      </template>
     </ul>
   </div>
 </template>

@@ -54,7 +54,7 @@
             ]"
           >
             <es-base
-              :ref="schema.component.ref"
+              :ref="!schema.hidden ? schema.component.ref : undefined"
               :class="[
                 schema.component.flex
                   ? 'es-form-component-' + schema.component.flex
@@ -97,7 +97,7 @@
             :slot="fieldName"
           >
             <form-item
-              ref="__refTabs__"
+              :ref="!fieldSchema.hidden ? '__refTabs__' : undefined"
               :schema="fieldSchema"
               :key="fieldName"
             ></form-item>
@@ -115,7 +115,7 @@
             :slot="fieldName"
           >
             <form-item
-              ref="__refObject__"
+              :ref="!fieldSchema.hidden ? '__refObject__' : undefined"
               :schema="fieldSchema"
               :key="fieldName"
             ></form-item>
@@ -647,6 +647,7 @@ export default {
           // 不是系统所需要的，不需要理会；不过一般不会运行到这
         }
       }
+      // console.log(">>>>>>>>>>>>>>>>>end\n\n\n");
       return refTargets;
     },
 

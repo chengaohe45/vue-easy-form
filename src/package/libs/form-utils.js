@@ -119,6 +119,7 @@ let formUtils = {
       "help",
       "hidden",
       "__rawHidden",
+      "__creatable",
       "label",
       "title",
       "isTmp"
@@ -751,6 +752,15 @@ let formUtils = {
         }
       }
 
+      if (
+        propItem.hasOwnProperty("__creatable") &&
+        !propItem.hidden &&
+        !propItem.__creatable
+      ) {
+        // 只有false时才可修改
+        propItem.__creatable = true;
+      }
+
       if (propItem.label) {
         if (!propItem.label.name && propItem.label.__rawText) {
           // false或为空都不用执行 properies array下propItem.label
@@ -852,6 +862,15 @@ let formUtils = {
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
         }
+      }
+
+      if (
+        propItem.hasOwnProperty("__creatable") &&
+        !propItem.hidden &&
+        !propItem.__creatable
+      ) {
+        // 只有false时才可修改
+        propItem.__creatable = true;
       }
 
       if (propItem.title) {
@@ -1081,6 +1100,15 @@ let formUtils = {
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
         }
+      }
+
+      if (
+        propItem.hasOwnProperty("__creatable") &&
+        !propItem.hidden &&
+        !propItem.__creatable
+      ) {
+        // 只有false时才可修改
+        propItem.__creatable = true;
       }
     }
   },

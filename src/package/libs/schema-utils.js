@@ -374,6 +374,7 @@ let schemaUtils = {
     }
 
     newPropItem.__rawHidden = parse.newEsFuncion(newPropItem.hidden);
+    newPropItem.__creatable = false; // 这个一定要设置要false, 说明初始化时是创建组件，一旦设置成true, 就改不回false
 
     return newPropItem;
   },
