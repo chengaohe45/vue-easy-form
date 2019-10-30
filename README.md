@@ -57,14 +57,13 @@ npm run test:unit
 ├── src                        # 源代码
 │   ├── assets                 # 静态资源
 │   ├── components             # 全局公用组件
-│   ├── config                 # 配置信息，主要是路由和菜单信息
 │   ├── libs                   # 工具类
-│   ├── modules                # 页面模块，demo就存在于此
 │   ├── package                # 独立的esform源码，不依赖其它文件夹
+│   ├── router                 # 菜单配置和路由实现
 │   ├── static                 # 全局样式
+│   ├── views                  # 页面视图，demo就存在于此
 │   ├── App.vue                # vue入口组件
 │   ├── main.js                # 入口文件
-│   ├── router.js              # 路由实例化
 ├── tests                      # 测试模块
 ├── .eslintrc.js               # eslint配置项
 ├── .gitignore                 # git忽略文件
