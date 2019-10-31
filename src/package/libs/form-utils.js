@@ -1032,6 +1032,7 @@ let formUtils = {
                 nextPropItem.__groups,
                 baseParseSources
               );
+              // console.log("isHidden: " + isHidden);
               if (!isHidden) {
                 //组不隐藏
 
@@ -1046,12 +1047,12 @@ let formUtils = {
                   //还原
                   nextPropItem.rowSpace = newRowSpace;
                 }
-
-                if (nextPropItem.__hiddenGroup != isHidden) {
-                  nextPropItem.__hiddenGroup = isHidden;
-                }
               } else {
                 //不必理会
+              }
+
+              if (nextPropItem.__hiddenGroup != isHidden) {
+                nextPropItem.__hiddenGroup = isHidden;
               }
             } else if (nextPropItem.__inGroups) {
               //组内成员
@@ -1142,6 +1143,7 @@ let formUtils = {
    * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
    */
   __isGroupHidden(propItem, groups, baseParseSources) {
+    // console.log("groups: ", groups);
     var result = false;
     for (var i = 0; i < groups.length; i++) {
       var fieldKeyName = groups[i];
@@ -1156,6 +1158,7 @@ let formUtils = {
         parseSources.pathKey = propSchema.__pathKey;
 
         result = parse.smartEsValue(propSchema.__rawHidden, parseSources);
+        // console.log("fieldKeyName: " + fieldKeyName, result);
       } else {
         //占位空间是不可见的
         result = true;

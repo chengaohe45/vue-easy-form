@@ -87,7 +87,12 @@
                 :name="fieldKeyName"
               ></slot>
             </div>
-            <template v-if="schema.properties[fieldKeyName].unit">
+            <template
+              v-if="
+                schema.properties[fieldKeyName].unit &&
+                  schema.properties[fieldKeyName].__creatable
+              "
+            >
               <div
                 v-if="schema.properties[fieldKeyName].unit.name"
                 v-show="!schema.properties[fieldKeyName].hidden"
@@ -119,7 +124,10 @@
             <div
               v-show="!schema.properties[fieldKeyName].hidden"
               :key="'help-' + fieldKeyName"
-              v-if="schema.properties[fieldKeyName].help"
+              v-if="
+                schema.properties[fieldKeyName].help &&
+                  schema.properties[fieldKeyName].__creatable
+              "
               class="es-form-help"
               :style="[
                 { height: schema.properties[fieldKeyName].rowHeight + 'px' }
@@ -128,7 +136,9 @@
               <es-base :config="schema.properties[fieldKeyName].help"></es-base>
             </div>
           </template>
+          <!-- 占位空间控件: 不判断__creatable，因为是系统的，里面没有用户自定义的东西 -->
           <div
+            v-show="!schema.properties[fieldKeyName].hidden"
             v-else
             :key="fieldKeyName"
             :class="[
@@ -221,14 +231,10 @@
           </div>
         </div>
       </template>
-      <!-- 占位空间控件 -->
+      <!-- 占位空间控件: 不判断__creatable，因为是系统的，里面没有用户自定义的东西 -->
       <div
         v-show="!fieldSchema.hidden"
-        v-else-if="
-          !fieldSchema.__inGroups &&
-            !fieldSchema.component &&
-            fieldSchema.__creatable
-        "
+        v-else-if="!fieldSchema.__inGroups && !fieldSchema.component"
         :style="{ marginTop: fieldSchema.rowSpace + 'px' }"
         :class="['es-form-object', 'es-col-' + fieldSchema.col]"
         :key="fieldName"

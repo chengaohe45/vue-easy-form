@@ -54,7 +54,7 @@
             ]"
           >
             <es-base
-              :ref="!schema.hidden ? schema.component.ref : undefined"
+              :ref="schema.component.ref"
               :class="[
                 schema.component.flex
                   ? 'es-form-component-' + schema.component.flex
