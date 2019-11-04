@@ -30,6 +30,17 @@ Vue.use(esForm, {
   hasConsole: process.env.NODE_ENV != "production" // 推荐写成动态，编译时不用修改
 });
 
+/* 
+打印类库的版本
+当处于生产环境时：hash中存在libs_version=就行了，不宜写过多的代码来做查询判断；因为只是个调试信息，不影响功能
+ */
+if (
+  process.env.NODE_ENV != "production" ||
+  (location.hash && location.hash.indexOf("libs_version=") >= 1)
+) {
+  console.log("esForm's version: " + esForm.version);
+}
+
 Vue.config.productionTip = false;
 
 window.vm = new Vue({

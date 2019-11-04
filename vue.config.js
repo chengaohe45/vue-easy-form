@@ -5,6 +5,8 @@
 // vue.config.js 配置说明 (这个file是peter我加的)
 // 这里只列一部分，具体配置惨考文档啊
 
+process.env.VUE_APP_VERSION = require("./package.json").version;
+
 const prodEnv = "production";
 
 let isRelease = false;

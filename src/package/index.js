@@ -35,7 +35,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 export default {
-  version: "1.1.6",
+  version: process.env.VUE_APP_VERSION,
   install,
   esForm,
   check
