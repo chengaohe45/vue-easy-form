@@ -48,6 +48,6 @@ window.vm = new Vue({
   render: h => h(App)
 }).$mount("#app");
 
-window.onerror = function() {
-  alert(1);
-};
+// window.onerror = function() {
+//   alert(1);
+// };
