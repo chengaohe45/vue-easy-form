@@ -40,6 +40,8 @@ module.exports = {
 
   outputDir: isRelease ? "dist" : "../vue-easy-form-docs/demo",
 
+  // outputDir: isRelease ? "/Users/chengaohe/Documents/my-projects/ad-kernel/node_modules/vue-easy-form/dist" : "../vue-easy-form-docs/demo",
+
   // pages:{ type:Object,Default:undfind }
   /*
   构建多页面模式的应用程序.每个“页面”都应该有一个相应的JavaScript条目文件。该值应该是一
@@ -50,6 +52,11 @@ module.exports = {
 
   configureWebpack: config => {
     if (isRelease) {
+      if (!config.output) {
+        config.output = {};
+      }
+      config.output.library = "esForm";
+      config.output.libraryExport = "default";
       config.externals = {
         ...config.externals,
         vue: {
