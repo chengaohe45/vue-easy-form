@@ -530,13 +530,20 @@ let schemaUtils = {
         global.trimDoms.includes(propItem.component.name))
     ) {
       propItem.isTrim = true;
+
+      var componentName = propItem.component.name.toLowerCase
+        ? propItem.component.name.toLowerCase()
+        : propItem.component.name;
+      var curTrimEvent = constant.FORM_INPUTS.includes(componentName)
+        ? constant.INPUT_CHANGE
+        : global.trimEvent;
       // 要去掉左右两边的空格，添此触发事件
-      nativeName = this.__getNativeName(global.trimEvent);
+      nativeName = this.__getNativeName(curTrimEvent);
       if (nativeName) {
         // .native监听
         nativeEvents.push(nativeName);
       } else {
-        emitEvents.push(global.trimEvent);
+        emitEvents.push(curTrimEvent);
       }
     }
 
@@ -875,7 +882,10 @@ let schemaUtils = {
       if (utils.isObj(component.props)) {
         if (this.__needParseInObj(component.props)) {
           newComponent.props = this.__newEmptyObj(component.props); // 后面有解析的
-          newComponent.__rawProps = this.__newEsFuncProps(component.props);
+          newComponent.__rawProps = this.__newEsFuncProps(component.props, [
+            "style",
+            "class"
+          ]);
         } else {
           newComponent.props = utils.deepCopy(component.props); // 可直接使用
         }
@@ -944,7 +954,8 @@ let schemaUtils = {
    * @param {*} obj
    * @param {array} excludeKeys 排除的属性，因为这些属性在其它地方设置，不用重复
    */
-  __newEsFuncProps(obj, excludeKeys = ["value", "style", "class"]) {
+  __newEsFuncProps(obj, excludeKeys) {
+    excludeKeys = excludeKeys ? excludeKeys : [];
     var newObj = {};
     for (var key in obj) {
       if (!excludeKeys.includes(key)) {
@@ -1391,7 +1402,11 @@ let schemaUtils = {
         if (utils.isObj(value.props)) {
           if (this.__needParseInObj(value.props)) {
             newCom.props = this.__newEmptyObj(value.props); // 后面有解析的
-            newCom.__rawProps = this.__newEsFuncProps(value.props);
+            newCom.__rawProps = this.__newEsFuncProps(value.props, [
+              "value",
+              "style",
+              "class"
+            ]);
           } else {
             newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
           }

@@ -9,42 +9,125 @@
 
 import utils from "./libs/utils.js";
 import constant from "./libs/constant.js";
+// import { throws } from "assert";
 
 ("use strict");
 
 export default {
   render: function(createElement) {
-    // console.log("start ..........................");
-    // console.log(this.config.props);
-    // console.log("end ..........................");
     if (!this.config.name) {
       console.error("错误的config: ", this.config);
       throw "es-base config.name必须存在";
     }
 
+    // 计算出props, attrs
+    var newProps = {};
+    var newAttrs = {};
+    var domProps = {};
+
+    var componentName = this.config.name.toLowerCase
+      ? this.config.name.toLowerCase()
+      : this.config.name;
+    if (
+      componentName === constant.TAG_INPUT && // 不区分大小写
+      (this.config.props.type === constant.TYPE_RADIO ||
+        this.config.props.type === constant.TYPE_CHECKBOX)
+    ) {
+      if (this.config.props.type === constant.TYPE_RADIO) {
+        Object.assign(newAttrs, this.config.props);
+        newAttrs.checked = this.value === this.config.props.value;
+
+        Object.assign(newProps, this.config.props);
+        if (newProps.hasOwnProperty("checked")) {
+          delete newProps.checked;
+        }
+
+        domProps.checked = newAttrs.checked;
+      } else {
+        var checked = false;
+        if (!utils.isUndef(this.config.props.trueValue)) {
+          // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
+          if (this.value === this.config.props.trueValue) {
+            checked = true;
+          } else {
+            checked = false;
+          }
+        } else if (!utils.isUndef(this.config.props.falseValue)) {
+          // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
+          if (this.value === this.config.props.falseValue) {
+            checked = false;
+          } else {
+            checked = true;
+          }
+        } else {
+          // 经测试：当trueValue和falseValue没有指定，checked才为!!this.value
+          checked = !!this.value;
+        }
+        Object.assign(newAttrs, this.config.props);
+        newAttrs.checked = checked;
+
+        Object.assign(newProps, this.config.props);
+        if (newProps.hasOwnProperty("checked")) {
+          delete newProps.checked;
+        }
+
+        domProps.checked = newAttrs.checked;
+      }
+    } else {
+      var newValue = utils.isRefVal(this.value)
+        ? utils.deepCopy(this.value)
+        : this.value; // 这样防止引用地址被组件内部修改
+      if (!constant.FORM_INPUTS.includes(componentName)) {
+        Object.assign(newAttrs, this.config.props);
+        if (newAttrs.hasOwnProperty("value")) {
+          delete newAttrs.value;
+        }
+        Object.assign(newProps, this.config.props);
+        newProps.value = newValue;
+      } else {
+        Object.assign(newAttrs, this.config.props);
+        if (newAttrs.hasOwnProperty("value")) {
+          delete newAttrs.value;
+        }
+
+        Object.assign(newProps, this.config.props);
+        if (newProps.hasOwnProperty("value")) {
+          delete newProps.value;
+        }
+
+        // 经测试（value）：
+        // textarea必须要在domProps才能显示；
+        // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
+        domProps.value = newValue;
+      }
+    }
+
     var vnode = createElement(
       this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
       {
-        attrs: this.config.props, //attrs为原生属性
+        // attrs: this.config.props, //attrs为原生属性
+        attrs: newAttrs,
 
         class: this.config.class,
 
         style: this.config.style,
 
         // DOM属性
-        domProps: {
-          // innerHTML: "baz"
-          // value: this.config.value
-        },
+        domProps: domProps,
+        // domProps: {
+        //   // innerHTML: "baz"
+        //   // value: this.config.value
+        // },
         // 组件props
-        props: {
-          // myProp: "bar",
-          value: utils.isRefVal(this.value)
-            ? utils.deepCopy(this.value)
-            : this.value, // 这样防止引用地址被组件内部修改
-          ...this.config.props
-          // clearable: true,
-        },
+        props: newProps,
+        // props: {
+        //   // myProp: "bar",
+        //   value: utils.isRefVal(this.value)
+        //     ? utils.deepCopy(this.value)
+        //     : this.value, // 这样防止引用地址被组件内部修改
+        //   ...this.config.props
+        //   // clearable: true,
+        // },
         // 事件监听基于 "on"
         // 所以不再支持如 "v-on:keyup.enter" 修饰语
         // 需要手动匹配 KeyCode
@@ -108,6 +191,10 @@ export default {
       }
     }
 
+    newAttrs = null;
+    newProps = null;
+    domProps = null;
+
     return vnode;
   },
   // inheritAttrs: false,
@@ -165,6 +252,42 @@ export default {
       this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
     },
 
+    __parseInputEvent(eventData) {
+      var eventValue;
+      if (eventData && eventData.target && eventData.target.nodeName) {
+        var tagName = eventData.target.tagName;
+        var nodeType = eventData.target.type;
+        if (tagName.toLowerCase() === constant.TAG_INPUT) {
+          if (nodeType === constant.TYPE_RADIO) {
+            if (eventData.target.checked) {
+              eventValue = this.config.props.value;
+            } else {
+              eventValue = undefined;
+            }
+          } else if (nodeType === constant.TYPE_CHECKBOX) {
+            if (eventData.target.checked) {
+              eventValue = true;
+              if (!utils.isUndef(this.config.props.trueValue)) {
+                eventValue = this.config.props.trueValue;
+              }
+            } else {
+              eventValue = false;
+              if (!utils.isUndef(this.config.props.falseValue)) {
+                eventValue = this.config.props.falseValue;
+              }
+            }
+          } else {
+            eventValue = eventData.target.value;
+          }
+        } else {
+          eventValue = eventData.target.value;
+        }
+      } else {
+        eventValue = eventData;
+      }
+      return eventValue;
+    },
+
     /**
      * 创建所需要监听的事件
      */
@@ -184,14 +307,9 @@ export default {
       emitEvents.forEach(eventName => {
         if (eventName == constant.INPUT_EVENT) {
           emitOn[eventName] = eventData => {
-            var eventValue;
-            if (eventData && eventData.target && eventData.target.nodeName) {
-              eventValue = eventData.target.value;
-            } else {
-              eventValue = eventData;
-            }
+            var eventValue = this.__parseInputEvent(eventData);
+            // console.log("eventValue: ", this.value, eventValue);
             if (this.value !== eventValue) {
-              // console.log("eventValue: ", eventValue);
               this.$emit("input", eventValue);
               this.eventHandler(eventName, eventValue);
             }

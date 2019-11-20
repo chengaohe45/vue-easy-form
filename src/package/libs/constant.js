@@ -17,6 +17,10 @@ let constant = {
   CHANGE_EVENT: "change", // 应用于数组改变
   CLICK_EVENT: "click",
 
+  TAG_INPUT: "input",
+  TYPE_RADIO: "radio",
+  TYPE_CHECKBOX: "checkbox",
+
   KEYUP_NATIVE: "keyup.native",
   ENTER_SUBMIT: "@enterSubmit",
   ONLY_SUBMIT: "@submit",
@@ -30,7 +34,11 @@ let constant = {
   UI_ARRAY: "_es_array_aadfsd_",
 
   ES_FUNC_NAME: "__E0S1_2F3U4NC_N4AM5E__",
-  ES_OPTIONS: "__es__Options__" // 此值要是正规的命名
+  ES_OPTIONS: "__es__Options__", // 此值要是正规的命名
+
+  // 原生的表单组件，主要是用来过滤空格
+  FORM_INPUTS: ["input", "textarea"],
+  INPUT_CHANGE: "change"
 };
 
 export default constant;
