@@ -25,6 +25,10 @@ export default {
     var newAttrs = {};
     var domProps = {};
 
+    var directives = this.config.directives
+      ? utils.deepCopy(this.config.directives)
+      : []; // false, 不是数组也没有事
+
     var componentName = this.config.name.toLowerCase
       ? this.config.name.toLowerCase()
       : this.config.name;
@@ -138,17 +142,18 @@ export default {
 
         // 自定义指令。注意事项：不能对绑定的旧值设值
         // Vue 会为您持续追踪
-        directives: [
-          // {
-          // 	name: "my-custom-directive",
-          // 	value: "2",
-          // 	expression: "1 + 1",
-          // 	arg: "foo",
-          // 	modifiers: {
-          // 		bar: true
-          // 	}
-          // }
-        ],
+        // directives: [
+        //   // {
+        //   // 	name: "my-custom-directive",
+        //   // 	value: "2",
+        //   // 	expression: "1 + 1",
+        //   // 	arg: "foo",
+        //   // 	modifiers: {
+        //   // 		bar: true
+        //   // 	}
+        //   // }
+        // ],
+        directives: directives,
         // Scoped slots in the form of
         // { name: props => VNode | Array<VNode> }
         scopedSlots: {
@@ -194,6 +199,7 @@ export default {
     newAttrs = null;
     newProps = null;
     domProps = null;
+    directives = null;
 
     return vnode;
   },

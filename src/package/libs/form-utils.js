@@ -1117,6 +1117,7 @@ let formUtils = {
   __esParseComponent(component, parseSources) {
     var text;
 
+    // 解析属性
     if (component.__rawProps) {
       var curProps = component.props;
       var rawProps = component.__rawProps;
@@ -1124,6 +1125,19 @@ let formUtils = {
         text = parse.smartEsValue(rawProps[key], parseSources);
         if (curProps[key] !== text) {
           curProps[key] = text;
+        }
+      }
+    }
+
+    // 解析指令
+    if (component.__rawDirectives) {
+      var curDirectives = component.directives;
+      var rawDirectives = component.__rawDirectives;
+      for (var i = 0; i < rawDirectives.length; i++) {
+        var rawDirective = rawDirectives[i];
+        var value = parse.smartEsValue(rawDirective.value, parseSources);
+        if (value !== curDirectives[i].value) {
+          curDirectives[i].value = value;
         }
       }
     }

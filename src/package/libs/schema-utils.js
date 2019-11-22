@@ -880,17 +880,31 @@ let schemaUtils = {
       }
 
       if (utils.isObj(component.props)) {
-        if (this.__needParseInObj(component.props)) {
+        var excludeKeys = ["style", "class"];
+        if (this.__needParseInObj(component.props, excludeKeys)) {
           newComponent.props = this.__newEmptyObj(component.props); // 后面有解析的
-          newComponent.__rawProps = this.__newEsFuncProps(component.props, [
-            "style",
-            "class"
-          ]);
+          newComponent.__rawProps = this.__newEsFuncProps(
+            component.props,
+            excludeKeys
+          );
         } else {
           newComponent.props = utils.deepCopy(component.props); // 可直接使用
         }
       } else {
         newComponent.props = {};
+      }
+
+      // 指令
+      var directiveInfo = this.__parseDirectives(
+        utils.isUndef(component.directives) ? component.v : component.directives
+      );
+
+      if (directiveInfo.new) {
+        newComponent.directives = directiveInfo.new;
+      }
+
+      if (directiveInfo.raw) {
+        newComponent.__rawDirectives = directiveInfo.raw;
       }
 
       if (utils.isStr(component.text) || utils.isFunc(component.text)) {
@@ -972,13 +986,16 @@ let schemaUtils = {
    * 判断对象中是否有动态解析：es或函数；主要是对component.props的判断
    * @param {*} obj
    */
-  __needParseInObj(obj) {
+  __needParseInObj(obj, excludeKeys) {
+    excludeKeys = excludeKeys ? excludeKeys : [];
     var isRight = false;
     for (var key in obj) {
-      var value = obj[key];
-      if (parse.isEsOrFunc(value)) {
-        isRight = true;
-        break;
+      if (!excludeKeys.includes(key)) {
+        var value = obj[key];
+        if (parse.isEsOrFunc(value)) {
+          isRight = true;
+          break;
+        }
       }
     }
     return isRight;
@@ -1400,18 +1417,28 @@ let schemaUtils = {
       if (name) {
         newCom.name = name;
         if (utils.isObj(value.props)) {
-          if (this.__needParseInObj(value.props)) {
+          var excludeKeys = ["value", "style", "class"];
+          if (this.__needParseInObj(value.props, excludeKeys)) {
             newCom.props = this.__newEmptyObj(value.props); // 后面有解析的
-            newCom.__rawProps = this.__newEsFuncProps(value.props, [
-              "value",
-              "style",
-              "class"
-            ]);
+            newCom.__rawProps = this.__newEsFuncProps(value.props, excludeKeys);
           } else {
             newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
           }
         } else {
           newCom.props = {};
+        }
+
+        // 指令
+        var directiveInfo = this.__parseDirectives(
+          utils.isUndef(value.directives) ? value.v : value.directives
+        );
+
+        if (directiveInfo.new) {
+          newCom.directives = directiveInfo.new;
+        }
+
+        if (directiveInfo.raw) {
+          newCom.__rawDirectives = directiveInfo.raw;
         }
 
         // 只有在name有值时有效
@@ -1555,6 +1582,88 @@ let schemaUtils = {
     } else {
       return false;
     }
+  },
+
+  /**
+   * 解析指令
+   */
+  __parseDirectives: function(directives) {
+    var newDirectives = [],
+      rawDirectives = [];
+    if (utils.isObj(directives)) {
+      directives = [directives];
+    } else if (utils.isStr(directives)) {
+      directives = [
+        {
+          name: directives
+        }
+      ];
+    } else if (!utils.isArr(directives)) {
+      directives = [];
+    }
+
+    var hasEsFunc = false;
+
+    // 转化为数组了
+    directives.forEach(directive => {
+      var name, value, expression, arg, modifiers;
+      name = directive.name;
+      var prefix = "v-";
+      if (utils.isStr(name)) {
+        name = name.trim();
+        if (name.indexOf(prefix) === 0) {
+          name = name.substr(prefix.length);
+        }
+      } else {
+        name = false;
+      }
+
+      // 指令名合法
+      if (name) {
+        expression = utils.isStr(directive.expression)
+          ? directive.expression.trim()
+          : undefined;
+        expression = expression ? expression : undefined;
+
+        arg = utils.isStr(directive.arg) ? directive.arg.trim() : undefined;
+        arg = arg ? arg : undefined;
+
+        modifiers = utils.isObj(directive.modifiers)
+          ? utils.deepCopy(modifiers)
+          : {};
+
+        if (parse.isEsOrFunc(directive.value)) {
+          hasEsFunc = true;
+          value = parse.newEsFuncion(directive.value);
+        } else {
+          value = utils.deepCopy(directive.value);
+        }
+
+        var rawDirective = {
+          name: name,
+          value: value,
+          expression: expression,
+          arg: arg,
+          modifiers: modifiers
+        };
+        rawDirectives.push(rawDirective);
+      }
+    });
+
+    if (hasEsFunc) {
+      rawDirectives.forEach(rawDirective => {
+        var newDirective = {};
+        Object.assign(newDirective, rawDirective);
+        newDirective.value = null;
+        newDirectives.push(newDirective);
+      });
+    } else {
+      newDirectives = rawDirectives;
+      rawDirectives = false;
+    }
+
+    newDirectives = newDirectives.length > 0 ? newDirectives : false;
+    return { new: newDirectives, raw: rawDirectives };
   },
 
   /**
