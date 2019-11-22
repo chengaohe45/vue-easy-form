@@ -1629,7 +1629,7 @@ let schemaUtils = {
         arg = arg ? arg : undefined;
 
         modifiers = utils.isObj(directive.modifiers)
-          ? utils.deepCopy(modifiers)
+          ? utils.deepCopy(directive.modifiers)
           : {};
 
         if (parse.isEsOrFunc(directive.value)) {
