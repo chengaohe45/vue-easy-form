@@ -96,248 +96,6 @@ return /******/ (function(modules) { // webpackBootstrap
 /************************************************************************/
 /******/ ({
 
-/***/ "014b":
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-// ECMAScript 6 symbols shim
-var global = __webpack_require__("e53d");
-var has = __webpack_require__("07e3");
-var DESCRIPTORS = __webpack_require__("8e60");
-var $export = __webpack_require__("63b6");
-var redefine = __webpack_require__("9138");
-var META = __webpack_require__("ebfd").KEY;
-var $fails = __webpack_require__("294c");
-var shared = __webpack_require__("dbdb");
-var setToStringTag = __webpack_require__("45f2");
-var uid = __webpack_require__("62a0");
-var wks = __webpack_require__("5168");
-var wksExt = __webpack_require__("ccb9");
-var wksDefine = __webpack_require__("6718");
-var enumKeys = __webpack_require__("47ee");
-var isArray = __webpack_require__("9003");
-var anObject = __webpack_require__("e4ae");
-var isObject = __webpack_require__("f772");
-var toIObject = __webpack_require__("36c3");
-var toPrimitive = __webpack_require__("1bc3");
-var createDesc = __webpack_require__("aebd");
-var _create = __webpack_require__("a159");
-var gOPNExt = __webpack_require__("0395");
-var $GOPD = __webpack_require__("bf0b");
-var $DP = __webpack_require__("d9f6");
-var $keys = __webpack_require__("c3a1");
-var gOPD = $GOPD.f;
-var dP = $DP.f;
-var gOPN = gOPNExt.f;
-var $Symbol = global.Symbol;
-var $JSON = global.JSON;
-var _stringify = $JSON && $JSON.stringify;
-var PROTOTYPE = 'prototype';
-var HIDDEN = wks('_hidden');
-var TO_PRIMITIVE = wks('toPrimitive');
-var isEnum = {}.propertyIsEnumerable;
-var SymbolRegistry = shared('symbol-registry');
-var AllSymbols = shared('symbols');
-var OPSymbols = shared('op-symbols');
-var ObjectProto = Object[PROTOTYPE];
-var USE_NATIVE = typeof $Symbol == 'function';
-var QObject = global.QObject;
-// Don't use setters in Qt Script, https://github.com/zloirock/core-js/issues/173
-var setter = !QObject || !QObject[PROTOTYPE] || !QObject[PROTOTYPE].findChild;
-
-// fallback for old Android, https://code.google.com/p/v8/issues/detail?id=687
-var setSymbolDesc = DESCRIPTORS && $fails(function () {
-  return _create(dP({}, 'a', {
-    get: function () { return dP(this, 'a', { value: 7 }).a; }
-  })).a != 7;
-}) ? function (it, key, D) {
-  var protoDesc = gOPD(ObjectProto, key);
-  if (protoDesc) delete ObjectProto[key];
-  dP(it, key, D);
-  if (protoDesc && it !== ObjectProto) dP(ObjectProto, key, protoDesc);
-} : dP;
-
-var wrap = function (tag) {
-  var sym = AllSymbols[tag] = _create($Symbol[PROTOTYPE]);
-  sym._k = tag;
-  return sym;
-};
-
-var isSymbol = USE_NATIVE && typeof $Symbol.iterator == 'symbol' ? function (it) {
-  return typeof it == 'symbol';
-} : function (it) {
-  return it instanceof $Symbol;
-};
-
-var $defineProperty = function defineProperty(it, key, D) {
-  if (it === ObjectProto) $defineProperty(OPSymbols, key, D);
-  anObject(it);
-  key = toPrimitive(key, true);
-  anObject(D);
-  if (has(AllSymbols, key)) {
-    if (!D.enumerable) {
-      if (!has(it, HIDDEN)) dP(it, HIDDEN, createDesc(1, {}));
-      it[HIDDEN][key] = true;
-    } else {
-      if (has(it, HIDDEN) && it[HIDDEN][key]) it[HIDDEN][key] = false;
-      D = _create(D, { enumerable: createDesc(0, false) });
-    } return setSymbolDesc(it, key, D);
-  } return dP(it, key, D);
-};
-var $defineProperties = function defineProperties(it, P) {
-  anObject(it);
-  var keys = enumKeys(P = toIObject(P));
-  var i = 0;
-  var l = keys.length;
-  var key;
-  while (l > i) $defineProperty(it, key = keys[i++], P[key]);
-  return it;
-};
-var $create = function create(it, P) {
-  return P === undefined ? _create(it) : $defineProperties(_create(it), P);
-};
-var $propertyIsEnumerable = function propertyIsEnumerable(key) {
-  var E = isEnum.call(this, key = toPrimitive(key, true));
-  if (this === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return false;
-  return E || !has(this, key) || !has(AllSymbols, key) || has(this, HIDDEN) && this[HIDDEN][key] ? E : true;
-};
-var $getOwnPropertyDescriptor = function getOwnPropertyDescriptor(it, key) {
-  it = toIObject(it);
-  key = toPrimitive(key, true);
-  if (it === ObjectProto && has(AllSymbols, key) && !has(OPSymbols, key)) return;
-  var D = gOPD(it, key);
-  if (D && has(AllSymbols, key) && !(has(it, HIDDEN) && it[HIDDEN][key])) D.enumerable = true;
-  return D;
-};
-var $getOwnPropertyNames = function getOwnPropertyNames(it) {
-  var names = gOPN(toIObject(it));
-  var result = [];
-  var i = 0;
-  var key;
-  while (names.length > i) {
-    if (!has(AllSymbols, key = names[i++]) && key != HIDDEN && key != META) result.push(key);
-  } return result;
-};
-var $getOwnPropertySymbols = function getOwnPropertySymbols(it) {
-  var IS_OP = it === ObjectProto;
-  var names = gOPN(IS_OP ? OPSymbols : toIObject(it));
-  var result = [];
-  var i = 0;
-  var key;
-  while (names.length > i) {
-    if (has(AllSymbols, key = names[i++]) && (IS_OP ? has(ObjectProto, key) : true)) result.push(AllSymbols[key]);
-  } return result;
-};
-
-// 19.4.1.1 Symbol([description])
-if (!USE_NATIVE) {
-  $Symbol = function Symbol() {
-    if (this instanceof $Symbol) throw TypeError('Symbol is not a constructor!');
-    var tag = uid(arguments.length > 0 ? arguments[0] : undefined);
-    var $set = function (value) {
-      if (this === ObjectProto) $set.call(OPSymbols, value);
-      if (has(this, HIDDEN) && has(this[HIDDEN], tag)) this[HIDDEN][tag] = false;
-      setSymbolDesc(this, tag, createDesc(1, value));
-    };
-    if (DESCRIPTORS && setter) setSymbolDesc(ObjectProto, tag, { configurable: true, set: $set });
-    return wrap(tag);
-  };
-  redefine($Symbol[PROTOTYPE], 'toString', function toString() {
-    return this._k;
-  });
-
-  $GOPD.f = $getOwnPropertyDescriptor;
-  $DP.f = $defineProperty;
-  __webpack_require__("6abf").f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__("355d").f = $propertyIsEnumerable;
-  __webpack_require__("9aa9").f = $getOwnPropertySymbols;
-
-  if (DESCRIPTORS && !__webpack_require__("b8e3")) {
-    redefine(ObjectProto, 'propertyIsEnumerable', $propertyIsEnumerable, true);
-  }
-
-  wksExt.f = function (name) {
-    return wrap(wks(name));
-  };
-}
-
-$export($export.G + $export.W + $export.F * !USE_NATIVE, { Symbol: $Symbol });
-
-for (var es6Symbols = (
-  // 19.4.2.2, 19.4.2.3, 19.4.2.4, 19.4.2.6, 19.4.2.8, 19.4.2.9, 19.4.2.10, 19.4.2.11, 19.4.2.12, 19.4.2.13, 19.4.2.14
-  'hasInstance,isConcatSpreadable,iterator,match,replace,search,species,split,toPrimitive,toStringTag,unscopables'
-).split(','), j = 0; es6Symbols.length > j;)wks(es6Symbols[j++]);
-
-for (var wellKnownSymbols = $keys(wks.store), k = 0; wellKnownSymbols.length > k;) wksDefine(wellKnownSymbols[k++]);
-
-$export($export.S + $export.F * !USE_NATIVE, 'Symbol', {
-  // 19.4.2.1 Symbol.for(key)
-  'for': function (key) {
-    return has(SymbolRegistry, key += '')
-      ? SymbolRegistry[key]
-      : SymbolRegistry[key] = $Symbol(key);
-  },
-  // 19.4.2.5 Symbol.keyFor(sym)
-  keyFor: function keyFor(sym) {
-    if (!isSymbol(sym)) throw TypeError(sym + ' is not a symbol!');
-    for (var key in SymbolRegistry) if (SymbolRegistry[key] === sym) return key;
-  },
-  useSetter: function () { setter = true; },
-  useSimple: function () { setter = false; }
-});
-
-$export($export.S + $export.F * !USE_NATIVE, 'Object', {
-  // 19.1.2.2 Object.create(O [, Properties])
-  create: $create,
-  // 19.1.2.4 Object.defineProperty(O, P, Attributes)
-  defineProperty: $defineProperty,
-  // 19.1.2.3 Object.defineProperties(O, Properties)
-  defineProperties: $defineProperties,
-  // 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-  getOwnPropertyDescriptor: $getOwnPropertyDescriptor,
-  // 19.1.2.7 Object.getOwnPropertyNames(O)
-  getOwnPropertyNames: $getOwnPropertyNames,
-  // 19.1.2.8 Object.getOwnPropertySymbols(O)
-  getOwnPropertySymbols: $getOwnPropertySymbols
-});
-
-// 24.3.2 JSON.stringify(value [, replacer [, space]])
-$JSON && $export($export.S + $export.F * (!USE_NATIVE || $fails(function () {
-  var S = $Symbol();
-  // MS Edge converts symbol values to JSON as {}
-  // WebKit converts symbol values to JSON as null
-  // V8 throws on boxed symbols
-  return _stringify([S]) != '[null]' || _stringify({ a: S }) != '{}' || _stringify(Object(S)) != '{}';
-})), 'JSON', {
-  stringify: function stringify(it) {
-    var args = [it];
-    var i = 1;
-    var replacer, $replacer;
-    while (arguments.length > i) args.push(arguments[i++]);
-    $replacer = replacer = args[1];
-    if (!isObject(replacer) && it === undefined || isSymbol(it)) return; // IE8 returns string on undefined
-    if (!isArray(replacer)) replacer = function (key, value) {
-      if (typeof $replacer == 'function') value = $replacer.call(this, key, value);
-      if (!isSymbol(value)) return value;
-    };
-    args[1] = replacer;
-    return _stringify.apply($JSON, args);
-  }
-});
-
-// 19.4.3.4 Symbol.prototype[@@toPrimitive](hint)
-$Symbol[PROTOTYPE][TO_PRIMITIVE] || __webpack_require__("35e8")($Symbol[PROTOTYPE], TO_PRIMITIVE, $Symbol[PROTOTYPE].valueOf);
-// 19.4.3.5 Symbol.prototype[@@toStringTag]
-setToStringTag($Symbol, 'Symbol');
-// 20.2.1.9 Math[@@toStringTag]
-setToStringTag(Math, 'Math', true);
-// 24.3.3 JSON[@@toStringTag]
-setToStringTag(global.JSON, 'JSON', true);
-
-
-/***/ }),
-
 /***/ "01f9":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -450,32 +208,6 @@ var at = __webpack_require__("02f4")(true);
 // https://tc39.github.io/ecma262/#sec-advancestringindex
 module.exports = function (S, index, unicode) {
   return index + (unicode ? at(S, index).length : 1);
-};
-
-
-/***/ }),
-
-/***/ "0395":
-/***/ (function(module, exports, __webpack_require__) {
-
-// fallback for IE11 buggy Object.getOwnPropertyNames with iframe and window
-var toIObject = __webpack_require__("36c3");
-var gOPN = __webpack_require__("6abf").f;
-var toString = {}.toString;
-
-var windowNames = typeof window == 'object' && window && Object.getOwnPropertyNames
-  ? Object.getOwnPropertyNames(window) : [];
-
-var getWindowNames = function (it) {
-  try {
-    return gOPN(it);
-  } catch (e) {
-    return windowNames.slice();
-  }
-};
-
-module.exports.f = function getOwnPropertyNames(it) {
-  return windowNames && toString.call(it) == '[object Window]' ? getWindowNames(it) : gOPN(toIObject(it));
 };
 
 
@@ -999,13 +731,6 @@ module.exports = function (it) {
   return it;
 };
 
-
-/***/ }),
-
-/***/ "268f":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("fde4");
 
 /***/ }),
 
@@ -1699,18 +1424,6 @@ module.exports = function (Constructor, NAME, next) {
 
 /***/ }),
 
-/***/ "454f":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("46a7");
-var $Object = __webpack_require__("584a").Object;
-module.exports = function defineProperty(it, key, desc) {
-  return $Object.defineProperty(it, key, desc);
-};
-
-
-/***/ }),
-
 /***/ "4588":
 /***/ (function(module, exports) {
 
@@ -1748,38 +1461,6 @@ module.exports = function (bitmap, value) {
     writable: !(bitmap & 4),
     value: value
   };
-};
-
-
-/***/ }),
-
-/***/ "46a7":
-/***/ (function(module, exports, __webpack_require__) {
-
-var $export = __webpack_require__("63b6");
-// 19.1.2.4 / 15.2.3.6 Object.defineProperty(O, P, Attributes)
-$export($export.S + $export.F * !__webpack_require__("8e60"), 'Object', { defineProperty: __webpack_require__("d9f6").f });
-
-
-/***/ }),
-
-/***/ "47ee":
-/***/ (function(module, exports, __webpack_require__) {
-
-// all enumerable object keys, includes symbols
-var getKeys = __webpack_require__("c3a1");
-var gOPS = __webpack_require__("9aa9");
-var pIE = __webpack_require__("355d");
-module.exports = function (it) {
-  var result = getKeys(it);
-  var getSymbols = gOPS.f;
-  if (getSymbols) {
-    var symbols = getSymbols(it);
-    var isEnum = pIE.f;
-    var i = 0;
-    var key;
-    while (symbols.length > i) if (isEnum.call(it, key = symbols[i++])) result.push(key);
-  } return result;
 };
 
 
@@ -2722,22 +2403,6 @@ module.exports = $export;
 
 /***/ }),
 
-/***/ "6718":
-/***/ (function(module, exports, __webpack_require__) {
-
-var global = __webpack_require__("e53d");
-var core = __webpack_require__("584a");
-var LIBRARY = __webpack_require__("b8e3");
-var wksExt = __webpack_require__("ccb9");
-var defineProperty = __webpack_require__("d9f6").f;
-module.exports = function (name) {
-  var $Symbol = core.Symbol || (core.Symbol = LIBRARY ? {} : global.Symbol || {});
-  if (name.charAt(0) != '_' && !(name in $Symbol)) defineProperty($Symbol, name, { value: wksExt.f(name) });
-};
-
-
-/***/ }),
-
 /***/ "6762":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2796,20 +2461,6 @@ module.exports = function (it, S) {
   if (typeof (fn = it.valueOf) == 'function' && !isObject(val = fn.call(it))) return val;
   if (!S && typeof (fn = it.toString) == 'function' && !isObject(val = fn.call(it))) return val;
   throw TypeError("Can't convert object to primitive value");
-};
-
-
-/***/ }),
-
-/***/ "6abf":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.7 / 15.2.3.4 Object.getOwnPropertyNames(O)
-var $keys = __webpack_require__("e6f3");
-var hiddenKeys = __webpack_require__("1691").concat('length', 'prototype');
-
-exports.f = Object.getOwnPropertyNames || function getOwnPropertyNames(O) {
-  return $keys(O, hiddenKeys);
 };
 
 
@@ -3172,13 +2823,6 @@ module.exports = function () { /* empty */ };
 
 module.exports = {};
 
-
-/***/ }),
-
-/***/ "85f2":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("454f");
 
 /***/ }),
 
@@ -4111,45 +3755,6 @@ var update = add("bd46342e", content, true, {"sourceMap":false,"shadowMode":fals
 
 /***/ }),
 
-/***/ "bf0b":
-/***/ (function(module, exports, __webpack_require__) {
-
-var pIE = __webpack_require__("355d");
-var createDesc = __webpack_require__("aebd");
-var toIObject = __webpack_require__("36c3");
-var toPrimitive = __webpack_require__("1bc3");
-var has = __webpack_require__("07e3");
-var IE8_DOM_DEFINE = __webpack_require__("794b");
-var gOPD = Object.getOwnPropertyDescriptor;
-
-exports.f = __webpack_require__("8e60") ? gOPD : function getOwnPropertyDescriptor(O, P) {
-  O = toIObject(O);
-  P = toPrimitive(P, true);
-  if (IE8_DOM_DEFINE) try {
-    return gOPD(O, P);
-  } catch (e) { /* empty */ }
-  if (has(O, P)) return createDesc(!pIE.f.call(O, P), O[P]);
-};
-
-
-/***/ }),
-
-/***/ "bf90":
-/***/ (function(module, exports, __webpack_require__) {
-
-// 19.1.2.6 Object.getOwnPropertyDescriptor(O, P)
-var toIObject = __webpack_require__("36c3");
-var $getOwnPropertyDescriptor = __webpack_require__("bf0b").f;
-
-__webpack_require__("ce7e")('getOwnPropertyDescriptor', function () {
-  return function getOwnPropertyDescriptor(it, key) {
-    return $getOwnPropertyDescriptor(toIObject(it), key);
-  };
-});
-
-
-/***/ }),
-
 /***/ "bfe4":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4426,14 +4031,6 @@ var update = add("2f1e47df", content, true, {"sourceMap":false,"shadowMode":fals
 
 /***/ }),
 
-/***/ "ccb9":
-/***/ (function(module, exports, __webpack_require__) {
-
-exports.f = __webpack_require__("5168");
-
-
-/***/ }),
-
 /***/ "ce10":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4667,13 +4264,6 @@ module.exports = (
 
 /***/ }),
 
-/***/ "e265":
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__("ed33");
-
-/***/ }),
-
 /***/ "e36a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4800,66 +4390,6 @@ module.exports = function (O, D) {
 
 /***/ }),
 
-/***/ "ebfd":
-/***/ (function(module, exports, __webpack_require__) {
-
-var META = __webpack_require__("62a0")('meta');
-var isObject = __webpack_require__("f772");
-var has = __webpack_require__("07e3");
-var setDesc = __webpack_require__("d9f6").f;
-var id = 0;
-var isExtensible = Object.isExtensible || function () {
-  return true;
-};
-var FREEZE = !__webpack_require__("294c")(function () {
-  return isExtensible(Object.preventExtensions({}));
-});
-var setMeta = function (it) {
-  setDesc(it, META, { value: {
-    i: 'O' + ++id, // object ID
-    w: {}          // weak collections IDs
-  } });
-};
-var fastKey = function (it, create) {
-  // return primitive with prefix
-  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
-  if (!has(it, META)) {
-    // can't set metadata to uncaught frozen object
-    if (!isExtensible(it)) return 'F';
-    // not necessary to add metadata
-    if (!create) return 'E';
-    // add missing metadata
-    setMeta(it);
-  // return object ID
-  } return it[META].i;
-};
-var getWeak = function (it, create) {
-  if (!has(it, META)) {
-    // can't set metadata to uncaught frozen object
-    if (!isExtensible(it)) return true;
-    // not necessary to add metadata
-    if (!create) return false;
-    // add missing metadata
-    setMeta(it);
-  // return hash weak collections IDs
-  } return it[META].w;
-};
-// add metadata on freeze-family methods calling
-var onFreeze = function (it) {
-  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
-  return it;
-};
-var meta = module.exports = {
-  KEY: META,
-  NEED: false,
-  fastKey: fastKey,
-  getWeak: getWeak,
-  onFreeze: onFreeze
-};
-
-
-/***/ }),
-
 /***/ "ec12":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -4872,15 +4402,6 @@ if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__("499e").default
 var update = add("2f883485", content, true, {"sourceMap":false,"shadowMode":false});
-
-/***/ }),
-
-/***/ "ed33":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("014b");
-module.exports = __webpack_require__("584a").Object.getOwnPropertySymbols;
-
 
 /***/ }),
 
@@ -5046,8 +4567,8 @@ var es6_string_includes = __webpack_require__("2fdb");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
 var es6_regexp_split = __webpack_require__("28a5");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=5fdfc985&
-var form_itemvue_type_template_id_5fdfc985_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]:_c('es-base',{attrs:{"config":_vm.schema.title}})],2):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody ? "隐藏" : "打开")+"\n    ")]):_vm._e(),(_vm.schema.help)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties || _vm.schema.ui.showBody),expression:"!schema.properties || schema.ui.showBody"}],class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=aded4c5c&
+var form_itemvue_type_template_id_aded4c5c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]:_c('es-base',{attrs:{"config":_vm.schema.title}})],2):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody ? "隐藏" : "打开")+"\n    ")]):_vm._e(),(_vm.schema.help)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties || _vm.schema.ui.showBody),expression:"!schema.properties || schema.ui.showBody"}],class:[
       'es-form-body',
       _vm.schema.ui && _vm.schema.ui.hasBorder ? 'es-body-border' : ''
     ],style:(_vm.bodyStyle)},[(!_vm.schema.array)?[(_vm.schema.component)?_c('div',{class:[
@@ -5067,10 +4588,10 @@ var form_itemvue_type_template_id_5fdfc985_render = function () {var _vm=this;va
             ],attrs:{"config":_vm.schema.component,"emitEvents":_vm.schema.component.__emitEvents,"nativeEvents":_vm.schema.component.__nativeEvents},on:{"trigger":_vm.triggerHandler},model:{value:(_vm.schema.value),callback:function ($$v) {_vm.$set(_vm.schema, "value", $$v)},expression:"schema.value"}})],1),(_vm.schema.unit && !_vm.schema.__inGroups)?[(_vm.schema.unit.name)?_c('div',{staticClass:"es-form-unit"},[_c('es-base',{attrs:{"config":_vm.schema.unit}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.unit.text),expression:"schema.unit.text"}],staticClass:"es-form-unit"},[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")])]:_vm._e(),(_vm.schema.help && !_vm.schema.__inGroups && _vm.showHelpInBody)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()],2):(
           _vm.schema.properties && _vm.schema.layout && _vm.schema.layout.name === 'tabs'
         )?_c('tabs',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refTabs__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):(_vm.schema.properties)?_c('es-object',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refObject__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):_vm._e()]:[(_vm.schema.array.name == 'array')?_c('array-row',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-legend')?_c('array-legend',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-card')?_c('array-card',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarCard__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):(_vm.schema.array.name == 'array-table')?_c('array-table',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTable__",refInFor:true,attrs:{"schema":props.schema,"showHelpInBody":false}})]}}})],null,true)}):(_vm.schema.array && _vm.schema.array.name == 'array-tabs')?_c('array-tabs',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e()],_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error"},[_vm._v("\n      "+_vm._s(_vm.schema.__invalidMsg)+"\n    ")]),(_vm.schema.desc)?_c('div',{staticClass:"es-form-desc"},[(_vm.schema.desc.name)?_c('es-base',{attrs:{"config":_vm.schema.desc}}):[_vm._v("\n        "+_vm._s(_vm.schema.desc.text)+"\n      ")]],2):_vm._e()],2)])}
-var form_itemvue_type_template_id_5fdfc985_staticRenderFns = []
+var form_itemvue_type_template_id_aded4c5c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=5fdfc985&
+// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=aded4c5c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=40c5dce4&
 var objectvue_type_template_id_40c5dce4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
@@ -5189,58 +4710,10 @@ var objectvue_type_template_id_40c5dce4_staticRenderFns = []
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js
-var get_own_property_descriptor = __webpack_require__("268f");
-var get_own_property_descriptor_default = /*#__PURE__*/__webpack_require__.n(get_own_property_descriptor);
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+var object_assign = __webpack_require__("5176");
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js
-var get_own_property_symbols = __webpack_require__("e265");
-var get_own_property_symbols_default = /*#__PURE__*/__webpack_require__.n(get_own_property_symbols);
-
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js
-var define_property = __webpack_require__("85f2");
-var define_property_default = /*#__PURE__*/__webpack_require__.n(define_property);
-
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    define_property_default()(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-// CONCATENATED MODULE: ./node_modules/@babel/runtime-corejs2/helpers/esm/objectSpread.js
-
-
-
-
-function _objectSpread(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = arguments[i] != null ? arguments[i] : {};
-
-    var ownKeys = keys_default()(source);
-
-    if (typeof get_own_property_symbols_default.a === 'function') {
-      ownKeys = ownKeys.concat(get_own_property_symbols_default()(source).filter(function (sym) {
-        return get_own_property_descriptor_default()(source, sym).enumerable;
-      }));
-    }
-
-    ownKeys.forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    });
-  }
-
-  return target;
-}
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.to-string.js
 var es6_regexp_to_string = __webpack_require__("6b54");
 
@@ -5655,6 +5128,9 @@ var constant = {
   CHANGE_EVENT: "change",
   // 应用于数组改变
   CLICK_EVENT: "click",
+  TAG_INPUT: "input",
+  TYPE_RADIO: "radio",
+  TYPE_CHECKBOX: "checkbox",
   KEYUP_NATIVE: "keyup.native",
   ENTER_SUBMIT: "@enterSubmit",
   ONLY_SUBMIT: "@submit",
@@ -5668,8 +5144,11 @@ var constant = {
   UI_ITEM: "_es_item_qwerrf_",
   UI_ARRAY: "_es_array_aadfsd_",
   ES_FUNC_NAME: "__E0S1_2F3U4NC_N4AM5E__",
-  ES_OPTIONS: "__es__Options__" // 此值要是正规的命名
-
+  ES_OPTIONS: "__es__Options__",
+  // 此值要是正规的命名
+  // 原生的表单组件，主要是用来过滤空格
+  FORM_INPUTS: ["input", "textarea"],
+  INPUT_CHANGE: "change"
 };
 /* harmony default export */ var libs_constant = (constant);
 // CONCATENATED MODULE: ./src/package/base.js
@@ -5690,34 +5169,128 @@ var constant = {
  *
  */
 
+ // import { throws } from "assert";
 
 "use strict";
 
 /* harmony default export */ var base = ({
   render: function render(createElement) {
-    // console.log("start ..........................");
-    // console.log(this.config.props);
-    // console.log("end ..........................");
     if (!this.config.name) {
       console.error("错误的config: ", this.config);
       throw "es-base config.name必须存在";
+    } // 计算出props, attrs
+
+
+    var newProps = {};
+    var newAttrs = {};
+    var domProps = {};
+    var directives = this.config.directives ? libs_utils.deepCopy(this.config.directives) : []; // false, 不是数组也没有事
+
+    var componentName = this.config.name.toLowerCase ? this.config.name.toLowerCase() : this.config.name;
+
+    if (componentName === libs_constant.TAG_INPUT && ( // 不区分大小写
+    this.config.props.type === libs_constant.TYPE_RADIO || this.config.props.type === libs_constant.TYPE_CHECKBOX)) {
+      if (this.config.props.type === libs_constant.TYPE_RADIO) {
+        assign_default()(newAttrs, this.config.props);
+
+        newAttrs.checked = this.value === this.config.props.value;
+
+        assign_default()(newProps, this.config.props);
+
+        if (newProps.hasOwnProperty("checked")) {
+          delete newProps.checked;
+        }
+
+        domProps.checked = newAttrs.checked;
+      } else {
+        var checked = false;
+
+        if (!libs_utils.isUndef(this.config.props.trueValue)) {
+          // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
+          if (this.value === this.config.props.trueValue) {
+            checked = true;
+          } else {
+            checked = false;
+          }
+        } else if (!libs_utils.isUndef(this.config.props.falseValue)) {
+          // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
+          if (this.value === this.config.props.falseValue) {
+            checked = false;
+          } else {
+            checked = true;
+          }
+        } else {
+          // 经测试：当trueValue和falseValue没有指定，checked才为!!this.value
+          checked = !!this.value;
+        }
+
+        assign_default()(newAttrs, this.config.props);
+
+        newAttrs.checked = checked;
+
+        assign_default()(newProps, this.config.props);
+
+        if (newProps.hasOwnProperty("checked")) {
+          delete newProps.checked;
+        }
+
+        domProps.checked = newAttrs.checked;
+      }
+    } else {
+      var newValue = libs_utils.isRefVal(this.value) ? libs_utils.deepCopy(this.value) : this.value; // 这样防止引用地址被组件内部修改
+
+      if (!libs_constant.FORM_INPUTS.includes(componentName)) {
+        assign_default()(newAttrs, this.config.props);
+
+        if (newAttrs.hasOwnProperty("value")) {
+          delete newAttrs.value;
+        }
+
+        assign_default()(newProps, this.config.props);
+
+        newProps.value = newValue;
+      } else {
+        assign_default()(newAttrs, this.config.props);
+
+        if (newAttrs.hasOwnProperty("value")) {
+          delete newAttrs.value;
+        }
+
+        assign_default()(newProps, this.config.props);
+
+        if (newProps.hasOwnProperty("value")) {
+          delete newProps.value;
+        } // 经测试（value）：
+        // textarea必须要在domProps才能显示；
+        // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
+
+
+        domProps.value = newValue;
+      }
     }
 
     var vnode = createElement(this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
     {
-      attrs: this.config.props,
-      //attrs为原生属性
+      // attrs: this.config.props, //attrs为原生属性
+      attrs: newAttrs,
       class: this.config.class,
       style: this.config.style,
       // DOM属性
-      domProps: {// innerHTML: "baz"
-        // value: this.config.value
-      },
+      domProps: domProps,
+      // domProps: {
+      //   // innerHTML: "baz"
+      //   // value: this.config.value
+      // },
       // 组件props
-      props: _objectSpread({
-        // myProp: "bar",
-        value: libs_utils.isRefVal(this.value) ? libs_utils.deepCopy(this.value) : this.value
-      }, this.config.props),
+      props: newProps,
+      // props: {
+      //   // myProp: "bar",
+      //   value: utils.isRefVal(this.value)
+      //     ? utils.deepCopy(this.value)
+      //     : this.value, // 这样防止引用地址被组件内部修改
+      //   ...this.config.props
+      //   // clearable: true,
+      // },
       // 事件监听基于 "on"
       // 所以不再支持如 "v-on:keyup.enter" 修饰语
       // 需要手动匹配 KeyCode
@@ -5726,16 +5299,18 @@ var constant = {
       nativeOn: this.$data.nativeOn,
       // 自定义指令。注意事项：不能对绑定的旧值设值
       // Vue 会为您持续追踪
-      directives: [// {
-        // 	name: "my-custom-directive",
-        // 	value: "2",
-        // 	expression: "1 + 1",
-        // 	arg: "foo",
-        // 	modifiers: {
-        // 		bar: true
-        // 	}
-        // }
-      ],
+      // directives: [
+      //   // {
+      //   // 	name: "my-custom-directive",
+      //   // 	value: "2",
+      //   // 	expression: "1 + 1",
+      //   // 	arg: "foo",
+      //   // 	modifiers: {
+      //   // 		bar: true
+      //   // 	}
+      //   // }
+      // ],
+      directives: directives,
       // Scoped slots in the form of
       // { name: props => VNode | Array<VNode> }
       scopedSlots: {// default: props => createElement('span', props.text + "test3")
@@ -5770,6 +5345,10 @@ var constant = {
       }
     }
 
+    newAttrs = null;
+    newProps = null;
+    domProps = null;
+    directives = null;
     return vnode;
   },
   // inheritAttrs: false,
@@ -5820,6 +5399,46 @@ var constant = {
     eventHandler: function eventHandler(eventName, eventData) {
       this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
     },
+    __parseInputEvent: function __parseInputEvent(eventData) {
+      var eventValue;
+
+      if (eventData && eventData.target && eventData.target.nodeName) {
+        var tagName = eventData.target.tagName;
+        var nodeType = eventData.target.type;
+
+        if (tagName.toLowerCase() === libs_constant.TAG_INPUT) {
+          if (nodeType === libs_constant.TYPE_RADIO) {
+            if (eventData.target.checked) {
+              eventValue = this.config.props.value;
+            } else {
+              eventValue = undefined;
+            }
+          } else if (nodeType === libs_constant.TYPE_CHECKBOX) {
+            if (eventData.target.checked) {
+              eventValue = true;
+
+              if (!libs_utils.isUndef(this.config.props.trueValue)) {
+                eventValue = this.config.props.trueValue;
+              }
+            } else {
+              eventValue = false;
+
+              if (!libs_utils.isUndef(this.config.props.falseValue)) {
+                eventValue = this.config.props.falseValue;
+              }
+            }
+          } else {
+            eventValue = eventData.target.value;
+          }
+        } else {
+          eventValue = eventData.target.value;
+        }
+      } else {
+        eventValue = eventData;
+      }
+
+      return eventValue;
+    },
 
     /**
      * 创建所需要监听的事件
@@ -5844,16 +5463,10 @@ var constant = {
       emitEvents.forEach(function (eventName) {
         if (eventName == libs_constant.INPUT_EVENT) {
           emitOn[eventName] = function (eventData) {
-            var eventValue;
+            var eventValue = _this.__parseInputEvent(eventData); // console.log("eventValue: ", this.value, eventValue);
 
-            if (eventData && eventData.target && eventData.target.nodeName) {
-              eventValue = eventData.target.value;
-            } else {
-              eventValue = eventData;
-            }
 
             if (_this.value !== eventValue) {
-              // console.log("eventValue: ", eventValue);
               _this.$emit("input", eventValue);
 
               _this.eventHandler(eventName, eventValue);
@@ -8009,10 +7622,6 @@ var tabs_component = normalizeComponent(
 )
 
 /* harmony default export */ var tabs = (tabs_component.exports);
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("5176");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/parse-int.js
 var parse_int = __webpack_require__("e814");
 var parse_int_default = /*#__PURE__*/__webpack_require__.n(parse_int);
@@ -9361,7 +8970,7 @@ var formUtils = {
     }
   },
   __esParseComponent: function __esParseComponent(component, parseSources) {
-    var text;
+    var text; // 解析属性
 
     if (component.__rawProps) {
       var curProps = component.props;
@@ -9372,6 +8981,21 @@ var formUtils = {
 
         if (curProps[key] !== text) {
           curProps[key] = text;
+        }
+      }
+    } // 解析指令
+
+
+    if (component.__rawDirectives) {
+      var curDirectives = component.directives;
+      var rawDirectives = component.__rawDirectives;
+
+      for (var i = 0; i < rawDirectives.length; i++) {
+        var rawDirective = rawDirectives[i];
+        var value = libs_parse.smartEsValue(rawDirective.value, parseSources);
+
+        if (value !== curDirectives[i].value) {
+          curDirectives[i].value = value;
         }
       }
     }
@@ -12519,7 +12143,7 @@ var global = {
       var eventNames = [eventName];
       var targetValue = this.schema.value;
 
-      if (eventName == libs_global.trimEvent && this.schema.isTrim && libs_utils.isStr(targetValue)) {
+      if (this.schema.isTrim && libs_utils.isStr(targetValue) && (eventName == libs_global.trimEvent || libs_constant.FORM_INPUTS.includes(this.schema.component.name) && eventName == libs_constant.INPUT_CHANGE)) {
         // global.trimEvent暂不会是constant.INPUT_EVENT事件，因为初始化时就不给设置为此值
         var tmpValue = targetValue.trim();
 
@@ -12600,8 +12224,8 @@ var form_itemvue_type_style_index_0_lang_scss_ = __webpack_require__("fae7");
 
 var form_item_component = normalizeComponent(
   package_form_itemvue_type_script_lang_js_,
-  form_itemvue_type_template_id_5fdfc985_render,
-  form_itemvue_type_template_id_5fdfc985_staticRenderFns,
+  form_itemvue_type_template_id_aded4c5c_render,
+  form_itemvue_type_template_id_aded4c5c_staticRenderFns,
   false,
   null,
   null,
@@ -13489,15 +13113,17 @@ var schemaUtils = {
     }
 
     if (propItem.isTrim || libs_utils.isUndef(propItem.isTrim) && libs_global.trimDoms.includes(propItem.component.name)) {
-      propItem.isTrim = true; // 要去掉左右两边的空格，添此触发事件
+      propItem.isTrim = true;
+      var componentName = propItem.component.name.toLowerCase ? propItem.component.name.toLowerCase() : propItem.component.name;
+      var curTrimEvent = libs_constant.FORM_INPUTS.includes(componentName) ? libs_constant.INPUT_CHANGE : libs_global.trimEvent; // 要去掉左右两边的空格，添此触发事件
 
-      nativeName = this.__getNativeName(libs_global.trimEvent);
+      nativeName = this.__getNativeName(curTrimEvent);
 
       if (nativeName) {
         // .native监听
         nativeEvents.push(nativeName);
       } else {
-        emitEvents.push(libs_global.trimEvent);
+        emitEvents.push(curTrimEvent);
       }
     } // 自定义事件
 
@@ -13772,15 +13398,28 @@ var schemaUtils = {
       }
 
       if (libs_utils.isObj(component.props)) {
-        if (this.__needParseInObj(component.props)) {
+        var excludeKeys = ["style", "class"];
+
+        if (this.__needParseInObj(component.props, excludeKeys)) {
           newComponent.props = this.__newEmptyObj(component.props); // 后面有解析的
 
-          newComponent.__rawProps = this.__newEsFuncProps(component.props);
+          newComponent.__rawProps = this.__newEsFuncProps(component.props, excludeKeys);
         } else {
           newComponent.props = libs_utils.deepCopy(component.props); // 可直接使用
         }
       } else {
         newComponent.props = {};
+      } // 指令
+
+
+      var directiveInfo = this.__parseDirectives(libs_utils.isUndef(component.directives) ? component.v : component.directives);
+
+      if (directiveInfo.new) {
+        newComponent.directives = directiveInfo.new;
+      }
+
+      if (directiveInfo.raw) {
+        newComponent.__rawDirectives = directiveInfo.raw;
       }
 
       if (libs_utils.isStr(component.text) || libs_utils.isFunc(component.text)) {
@@ -13844,8 +13483,8 @@ var schemaUtils = {
    * @param {*} obj
    * @param {array} excludeKeys 排除的属性，因为这些属性在其它地方设置，不用重复
    */
-  __newEsFuncProps: function __newEsFuncProps(obj) {
-    var excludeKeys = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ["value", "style", "class"];
+  __newEsFuncProps: function __newEsFuncProps(obj, excludeKeys) {
+    excludeKeys = excludeKeys ? excludeKeys : [];
     var newObj = {};
 
     for (var key in obj) {
@@ -13862,15 +13501,18 @@ var schemaUtils = {
    * 判断对象中是否有动态解析：es或函数；主要是对component.props的判断
    * @param {*} obj
    */
-  __needParseInObj: function __needParseInObj(obj) {
+  __needParseInObj: function __needParseInObj(obj, excludeKeys) {
+    excludeKeys = excludeKeys ? excludeKeys : [];
     var isRight = false;
 
     for (var key in obj) {
-      var value = obj[key];
+      if (!excludeKeys.includes(key)) {
+        var value = obj[key];
 
-      if (libs_parse.isEsOrFunc(value)) {
-        isRight = true;
-        break;
+        if (libs_parse.isEsOrFunc(value)) {
+          isRight = true;
+          break;
+        }
       }
     }
 
@@ -14304,15 +13946,28 @@ var schemaUtils = {
         newCom.name = name;
 
         if (libs_utils.isObj(value.props)) {
-          if (this.__needParseInObj(value.props)) {
+          var excludeKeys = ["value", "style", "class"];
+
+          if (this.__needParseInObj(value.props, excludeKeys)) {
             newCom.props = this.__newEmptyObj(value.props); // 后面有解析的
 
-            newCom.__rawProps = this.__newEsFuncProps(value.props);
+            newCom.__rawProps = this.__newEsFuncProps(value.props, excludeKeys);
           } else {
             newCom.props = libs_utils.deepCopy(value.props); // 直接使用，不用解析了
           }
         } else {
           newCom.props = {};
+        } // 指令
+
+
+        var directiveInfo = this.__parseDirectives(libs_utils.isUndef(value.directives) ? value.v : value.directives);
+
+        if (directiveInfo.new) {
+          newCom.directives = directiveInfo.new;
+        }
+
+        if (directiveInfo.raw) {
+          newCom.__rawDirectives = directiveInfo.raw;
         } // 只有在name有值时有效
 
 
@@ -14467,6 +14122,87 @@ var schemaUtils = {
     } else {
       return false;
     }
+  },
+
+  /**
+   * 解析指令
+   */
+  __parseDirectives: function __parseDirectives(directives) {
+    var newDirectives = [],
+        rawDirectives = [];
+
+    if (libs_utils.isObj(directives)) {
+      directives = [directives];
+    } else if (libs_utils.isStr(directives)) {
+      directives = [{
+        name: directives
+      }];
+    } else if (!libs_utils.isArr(directives)) {
+      directives = [];
+    }
+
+    var hasEsFunc = false; // 转化为数组了
+
+    directives.forEach(function (directive) {
+      var name, value, expression, arg, modifiers;
+      name = directive.name;
+      var prefix = "v-";
+
+      if (libs_utils.isStr(name)) {
+        name = name.trim();
+
+        if (name.indexOf(prefix) === 0) {
+          name = name.substr(prefix.length);
+        }
+      } else {
+        name = false;
+      } // 指令名合法
+
+
+      if (name) {
+        expression = libs_utils.isStr(directive.expression) ? directive.expression.trim() : undefined;
+        expression = expression ? expression : undefined;
+        arg = libs_utils.isStr(directive.arg) ? directive.arg.trim() : undefined;
+        arg = arg ? arg : undefined;
+        modifiers = libs_utils.isObj(directive.modifiers) ? libs_utils.deepCopy(directive.modifiers) : {};
+
+        if (libs_parse.isEsOrFunc(directive.value)) {
+          hasEsFunc = true;
+          value = libs_parse.newEsFuncion(directive.value);
+        } else {
+          value = libs_utils.deepCopy(directive.value);
+        }
+
+        var rawDirective = {
+          name: name,
+          value: value,
+          expression: expression,
+          arg: arg,
+          modifiers: modifiers
+        };
+        rawDirectives.push(rawDirective);
+      }
+    });
+
+    if (hasEsFunc) {
+      rawDirectives.forEach(function (rawDirective) {
+        var newDirective = {};
+
+        assign_default()(newDirective, rawDirective);
+
+        newDirective.value = null;
+        newDirectives.push(newDirective);
+      });
+    } else {
+      newDirectives = rawDirectives;
+      rawDirectives = false;
+    }
+
+    newDirectives = newDirectives.length > 0 ? newDirectives : false;
+    return {
+      new: newDirectives,
+      raw: rawDirectives
+    };
   },
 
   /**
@@ -16689,7 +16425,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ var src_package_0 = ({
-  version: "1.5.1",
+  version: "1.5.2",
   install: package_install,
   esForm: src_package,
   check: package_check
@@ -16699,18 +16435,6 @@ if (typeof window !== "undefined" && window.Vue) {
 
 /* harmony default export */ var entry_lib = __webpack_exports__["default"] = (src_package_0);
 
-
-
-/***/ }),
-
-/***/ "fde4":
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__("bf90");
-var $Object = __webpack_require__("584a").Object;
-module.exports = function getOwnPropertyDescriptor(it, key) {
-  return $Object.getOwnPropertyDescriptor(it, key);
-};
 
 
 /***/ }),
