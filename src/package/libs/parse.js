@@ -24,6 +24,28 @@ let parse = {
     }
   },
 
+  // isStaticKey(key) {
+  //   var prefixs = constant.PREFIX_STATIC_FUNC;
+  //   for (var i = 0; i < prefixs.length; i++) {
+  //     var prefix = prefixs[i];
+  //     if (key.indexOf(prefix) === 0) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // },
+
+  getStaticKey(key) {
+    var prefixs = constant.PREFIX_STATIC_FUNC;
+    for (var i = 0; i < prefixs.length; i++) {
+      var prefix = prefixs[i];
+      if (key.indexOf(prefix) === 0) {
+        return key.substr(prefix.length);
+      }
+    }
+    return false;
+  },
+
   /**
    * 判断是否正确的es语句
    * @param {*} scriptTxt

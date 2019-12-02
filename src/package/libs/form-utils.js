@@ -1121,8 +1121,14 @@ let formUtils = {
     if (component.__rawProps) {
       var curProps = component.props;
       var rawProps = component.__rawProps;
+      var staticPropNames = component.__staticPropNames;
+      staticPropNames = staticPropNames ? staticPropNames : [];
       for (var key in rawProps) {
-        text = parse.smartEsValue(rawProps[key], parseSources);
+        if (!staticPropNames.includes(key)) {
+          text = parse.smartEsValue(rawProps[key], parseSources);
+        } else {
+          text = rawProps[key];
+        }
         if (curProps[key] !== text) {
           curProps[key] = text;
         }

@@ -879,19 +879,32 @@ let schemaUtils = {
         newComponent.ref = ref;
       }
 
-      if (utils.isObj(component.props)) {
-        var excludeKeys = ["style", "class"];
-        if (this.__needParseInObj(component.props, excludeKeys)) {
-          newComponent.props = this.__newEmptyObj(component.props); // 后面有解析的
-          newComponent.__rawProps = this.__newEsFuncProps(
-            component.props,
-            excludeKeys
-          );
-        } else {
-          newComponent.props = utils.deepCopy(component.props); // 可直接使用
-        }
-      } else {
-        newComponent.props = {};
+      // if (utils.isObj(component.props)) {
+      //   var excludeKeys = ["style", "class"];
+      //   if (this.__needParseInObj(component.props, excludeKeys)) {
+      //     newComponent.props = this.__newEmptyObj(component.props); // 后面有解析的
+      //     newComponent.__rawProps = this.__newEsFuncProps(
+      //       component.props,
+      //       excludeKeys
+      //     );
+      //   } else {
+      //     newComponent.props = utils.deepCopy(component.props); // 可直接使用
+      //   }
+      // } else {
+      //   newComponent.props = {};
+      // }
+
+      var propInfo = this.__parseComProps(component.props, ["style", "class"]);
+      if (propInfo.new) {
+        newComponent.props = propInfo.new;
+      }
+
+      if (propInfo.raw) {
+        newComponent.__rawProps = propInfo.raw;
+      }
+
+      if (propInfo.staticNames) {
+        newComponent.__staticPropNames = propInfo.staticNames;
       }
 
       // 指令
@@ -999,6 +1012,80 @@ let schemaUtils = {
       }
     }
     return isRight;
+  },
+
+  /**
+   * 解析组件属性
+   */
+  __parseComProps(props, excludeKeys) {
+    var newProps = {},
+      rawProps = {};
+    var staticNames = [];
+
+    if (!utils.isObj(props)) {
+      props = {};
+    }
+
+    var hasEsFunc = false;
+
+    // var PREFIXS = constant.PREFIX_STATIC_FUNC;
+
+    var realKey, newRealKey;
+    var staticKey, isStatic;
+    var value, newValue;
+    for (var key in props) {
+      realKey = key; // 会保留空格的
+      staticKey = parse.getStaticKey(realKey); // 取静态key,不是返回false
+      // console.log(staticKey);
+      isStatic = staticKey !== false ? true : false;
+      if (isStatic) {
+        realKey = staticKey;
+      }
+
+      if (!realKey.trim()) {
+        // 全空，不必理会
+        break;
+      }
+
+      newRealKey = utils.vueCamelCase(realKey);
+      if (excludeKeys.includes(newRealKey)) {
+        // 存在不能包括的属性，不必理会
+        break;
+      }
+
+      value = props[key];
+      if (!isStatic && parse.isEsOrFunc(props[key])) {
+        // 不是静态且需要转化
+        hasEsFunc = true;
+        newValue = parse.newEsFuncion(value);
+        newProps[newRealKey] = newValue;
+        rawProps[newRealKey] = newValue;
+      } else if (!isStatic || !utils.isFunc(value)) {
+        // 不是静态或是（静态，其值不是函数），保持原样
+        newProps[newRealKey] = value;
+        rawProps[newRealKey] = value;
+      } else {
+        // 是静态属性、值是函数
+        newProps[newRealKey] = value;
+        rawProps[newRealKey] = value; // 保持前缀，因为解析需要用到；为什么要这样
+        staticNames.push(newRealKey); // 记录下来
+      }
+    }
+
+    if (hasEsFunc) {
+      for (var tmpkey in newProps) {
+        newProps[tmpkey] = null;
+      }
+    } else {
+      rawProps = {};
+    }
+
+    rawProps = Object.keys(rawProps).length > 0 ? rawProps : false;
+    return {
+      new: newProps,
+      raw: rawProps,
+      staticNames: staticNames.length ? staticNames : false
+    };
   },
 
   /**
@@ -1416,16 +1503,34 @@ let schemaUtils = {
           : value.name;
       if (name) {
         newCom.name = name;
-        if (utils.isObj(value.props)) {
-          var excludeKeys = ["value", "style", "class"];
-          if (this.__needParseInObj(value.props, excludeKeys)) {
-            newCom.props = this.__newEmptyObj(value.props); // 后面有解析的
-            newCom.__rawProps = this.__newEsFuncProps(value.props, excludeKeys);
-          } else {
-            newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
-          }
-        } else {
-          newCom.props = {};
+        // if (utils.isObj(value.props)) {
+        //   var excludeKeys = ["value", "style", "class"];
+        //   if (this.__needParseInObj(value.props, excludeKeys)) {
+        //     newCom.props = this.__newEmptyObj(value.props); // 后面有解析的
+        //     newCom.__rawProps = this.__newEsFuncProps(value.props, excludeKeys);
+        //   } else {
+        //     newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
+        //   }
+        // } else {
+        //   newCom.props = {};
+        // }
+        // 属性
+        var propInfo = this.__parseComProps(value.props, [
+          "value",
+          "style",
+          "class"
+        ]);
+        // console.log(propInfo);
+        if (propInfo.new) {
+          newCom.props = propInfo.new;
+        }
+
+        if (propInfo.raw) {
+          newCom.__rawProps = propInfo.raw;
+        }
+
+        if (propInfo.staticNames) {
+          newCom.__staticPropNames = propInfo.staticNames;
         }
 
         // 指令
