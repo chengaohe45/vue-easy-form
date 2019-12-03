@@ -52,7 +52,6 @@
         class="es-form-help"
         slot="help"
       >
-        <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
         <es-base :config="schema.help"></es-base>
       </div>
     </es-tabs-nav>

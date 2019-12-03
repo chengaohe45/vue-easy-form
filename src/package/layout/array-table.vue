@@ -43,10 +43,6 @@
               <es-base :config="headerSchema.label"></es-base>
             </span>
             <span v-if="headerSchema.help" class="es-form-help">
-              <!-- <es-base
-                :config="headerSchema.help"
-                :open-smart="false"
-              ></es-base> -->
               <es-base :config="headerSchema.help"></es-base>
             </span>
           </div>
@@ -205,9 +201,6 @@
     .es-order-txt {
       // line-height: 40px;
       display: block;
-    }
-    .es-btn-fixed {
-      // width: 130px;
     }
 
     .es-form-table-head {

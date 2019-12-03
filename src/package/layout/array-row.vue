@@ -132,7 +132,6 @@
           : schema.rowHeight + 'px'
       }"
     >
-      <!-- <es-base :config="schema.help" :open-smart="false"> </es-base> -->
       <es-base :config="schema.help"></es-base>
     </div>
   </div>

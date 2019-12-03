@@ -339,7 +339,7 @@ let schemaUtils = {
         );
       }
 
-      var eventOn = this.__listEvent(newPropItem);
+      var eventOn = this.__fetchFormEvent(newPropItem);
       newPropItem.component.__emitEvents = eventOn.__emitEvents;
       newPropItem.component.__nativeEvents = eventOn.__nativeEvents;
       newPropItem.__pathKey = myPathKey;
@@ -495,9 +495,9 @@ let schemaUtils = {
   },
 
   /**
-   * 整理出组件需要监听的外部事件
+   * 整理出"表单"组件需要监听的外部事件
    */
-  __listEvent: function(propItem) {
+  __fetchFormEvent: function(propItem) {
     var emitEvents = [],
       nativeEvents = [],
       triggerList,
@@ -549,7 +549,45 @@ let schemaUtils = {
 
     // 自定义事件
     if (propItem.component && propItem.component.actions) {
-      var actions = propItem.component.actions;
+      // var actions = propItem.component.actions;
+      // actions.forEach(actionItem => {
+      //   triggerList = actionItem.trigger;
+      //   triggerList.forEach(triggerItem => {
+      //     nativeName = this.__getNativeName(triggerItem);
+      //     if (nativeName) {
+      //       // .native监听
+      //       nativeEvents.push(nativeName);
+      //     } else {
+      //       emitEvents.push(triggerItem);
+      //     }
+      //   });
+      // });
+
+      var actionInfo = this.__fetchActionEvent(propItem.component.actions);
+      if (actionInfo.__emitEvents) {
+        emitEvents = emitEvents.concat(actionInfo.__emitEvents);
+      }
+
+      if (actionInfo.__nativeEvents) {
+        nativeEvents = nativeEvents.concat(actionInfo.__nativeEvents);
+      }
+    }
+
+    return {
+      __emitEvents: emitEvents.length ? utils.unique(emitEvents) : null,
+      __nativeEvents: nativeEvents.length ? utils.unique(nativeEvents) : null
+    };
+  },
+
+  /**
+   * 整理出"表单"组件需要监听的外部事件
+   */
+  __fetchActionEvent: function(actions) {
+    var emitEvents = [];
+    var nativeEvents = [];
+    var triggerList, nativeName;
+    // 自定义事件
+    if (actions) {
       actions.forEach(actionItem => {
         triggerList = actionItem.trigger;
         triggerList.forEach(triggerItem => {
@@ -1143,10 +1181,10 @@ let schemaUtils = {
   /**
    * 解析项Label
    */
-  __parseLabel: function(value) {
+  __parseLabel: function(value, myPathKey) {
     var newValue,
       defaultAlign = false;
-    newValue = this.__parsePropComponent(value, true);
+    newValue = this.__parsePropComponent(value, myPathKey, true);
 
     // 因为label有点特殊，所以不能为false
     if (newValue) {
@@ -1200,8 +1238,8 @@ let schemaUtils = {
   /**
    * 解析title
    */
-  __parseTitle: function(value) {
-    var newValue = this.__parsePropComponent(value);
+  __parseTitle: function(value, myPathKey) {
+    var newValue = this.__parsePropComponent(value, myPathKey);
     return newValue;
   },
 
@@ -1406,7 +1444,7 @@ let schemaUtils = {
   /**
    * 解析帮助
    */
-  __parsePropHelp: function(help) {
+  __parsePropHelp: function(help, myPathKey) {
     // console.log("help: ", help);
     var gHelp = false;
     if (utils.isObj(help) && Object.keys(help).length > 0) {
@@ -1415,10 +1453,10 @@ let schemaUtils = {
       if (!gHelp.name) {
         gHelp.name = esHelp;
       }
-      gHelp = this.__parsePropComponent(gHelp);
+      gHelp = this.__parsePropComponent(gHelp, myPathKey);
     } else if (utils.isStr(help)) {
       gHelp = { name: esHelp, props: { content: help } };
-      gHelp = this.__parsePropComponent(gHelp);
+      gHelp = this.__parsePropComponent(gHelp, myPathKey);
     } else {
       gHelp = false;
     }
@@ -1429,7 +1467,7 @@ let schemaUtils = {
   /**
    * 解析一般组件
    */
-  __parsePropComponent: function(value, canEmpty = false) {
+  __parsePropComponent: function(value, myPathKey, canEmpty = false) {
     var newCom;
     if (utils.isObj(value) && Object.keys(value).length > 0) {
       newCom = {};
@@ -1439,6 +1477,8 @@ let schemaUtils = {
           : value.name;
       if (name) {
         newCom.name = name;
+        newCom.actions = this.__parseActions(value.actions, myPathKey);
+
         // 属性
         var propInfo = this.__parseComProps(value.props, [
           "value",
@@ -1525,6 +1565,10 @@ let schemaUtils = {
     }
 
     newCom.props = newCom.props ? newCom.props : {};
+
+    var eventOn = this.__fetchActionEvent(newCom.actions);
+    newCom.__emitEvents = eventOn.__emitEvents;
+    newCom.__nativeEvents = eventOn.__nativeEvents;
 
     return newCom;
   },
@@ -1866,7 +1910,7 @@ let schemaUtils = {
             : false;
         // subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
 
-        subLabel = this.__parsePropComponent(array.subLabel);
+        subLabel = this.__parsePropComponent(array.subLabel, myPathKey);
         if (!subLabel) {
           subLabel = {
             text: false,
@@ -2038,12 +2082,12 @@ let schemaUtils = {
     var newPropItem = {};
     propKeys.forEach(key => {
       if (key == "label") {
-        newPropItem[key] = this.__parseLabel(propItem[key]);
+        newPropItem[key] = this.__parseLabel(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "title") {
-        newPropItem[key] = this.__parseTitle(propItem[key]);
+        newPropItem[key] = this.__parseTitle(propItem[key], myPathKey);
         return true;
       }
 
@@ -2068,16 +2112,16 @@ let schemaUtils = {
         return true;
       }
       if (key == "help") {
-        newPropItem[key] = this.__parsePropHelp(propItem[key]);
+        newPropItem[key] = this.__parsePropHelp(propItem[key], myPathKey);
         return true;
       }
       if (key == "desc") {
-        newPropItem[key] = this.__parsePropComponent(propItem[key]);
+        newPropItem[key] = this.__parsePropComponent(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "unit") {
-        newPropItem[key] = this.__parsePropComponent(propItem[key]);
+        newPropItem[key] = this.__parsePropComponent(propItem[key], myPathKey);
         return true;
       }
 
