@@ -870,7 +870,6 @@ let schemaUtils = {
     var newComponent,
       defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
-      // console.log("ref: ", component.ref);
       newComponent = {};
       newComponent.name = component.name ? component.name : global.defaultCom;
       newComponent.actions = this.__parseActions(component.actions, myPathKey);
@@ -878,21 +877,6 @@ let schemaUtils = {
       if (ref) {
         newComponent.ref = ref;
       }
-
-      // if (utils.isObj(component.props)) {
-      //   var excludeKeys = ["style", "class"];
-      //   if (this.__needParseInObj(component.props, excludeKeys)) {
-      //     newComponent.props = this.__newEmptyObj(component.props); // 后面有解析的
-      //     newComponent.__rawProps = this.__newEsFuncProps(
-      //       component.props,
-      //       excludeKeys
-      //     );
-      //   } else {
-      //     newComponent.props = utils.deepCopy(component.props); // 可直接使用
-      //   }
-      // } else {
-      //   newComponent.props = {};
-      // }
 
       var propInfo = this.__parseComProps(component.props, ["style", "class"]);
       if (propInfo.new) {
@@ -961,57 +945,9 @@ let schemaUtils = {
       throw "组件名(" + newComponent.name + ")存在html非法字符";
     }
 
+    newComponent.props = newComponent.props ? newComponent.props : {};
+
     return newComponent;
-  },
-
-  /**
-   * 置对象的属性为null
-   * @param {*} obj
-   */
-  __newEmptyObj(obj) {
-    var newObj = {};
-    for (var key in obj) {
-      newObj[key] = null;
-    }
-    return newObj;
-  },
-
-  /**
-   * 函数化component.props的字段
-   * @param {*} obj
-   * @param {array} excludeKeys 排除的属性，因为这些属性在其它地方设置，不用重复
-   */
-  __newEsFuncProps(obj, excludeKeys) {
-    excludeKeys = excludeKeys ? excludeKeys : [];
-    var newObj = {};
-    for (var key in obj) {
-      if (!excludeKeys.includes(key)) {
-        var newKey = utils.vueCamelCase(key);
-        newObj[newKey] = parse.isEsScript(obj[key])
-          ? parse.newEsFuncion(obj[key])
-          : utils.deepCopy(obj[key]);
-      }
-    }
-    return newObj;
-  },
-
-  /**
-   * 判断对象中是否有动态解析：es或函数；主要是对component.props的判断
-   * @param {*} obj
-   */
-  __needParseInObj(obj, excludeKeys) {
-    excludeKeys = excludeKeys ? excludeKeys : [];
-    var isRight = false;
-    for (var key in obj) {
-      if (!excludeKeys.includes(key)) {
-        var value = obj[key];
-        if (parse.isEsOrFunc(value)) {
-          isRight = true;
-          break;
-        }
-      }
-    }
-    return isRight;
   },
 
   /**
@@ -1503,17 +1439,6 @@ let schemaUtils = {
           : value.name;
       if (name) {
         newCom.name = name;
-        // if (utils.isObj(value.props)) {
-        //   var excludeKeys = ["value", "style", "class"];
-        //   if (this.__needParseInObj(value.props, excludeKeys)) {
-        //     newCom.props = this.__newEmptyObj(value.props); // 后面有解析的
-        //     newCom.__rawProps = this.__newEsFuncProps(value.props, excludeKeys);
-        //   } else {
-        //     newCom.props = utils.deepCopy(value.props); // 直接使用，不用解析了
-        //   }
-        // } else {
-        //   newCom.props = {};
-        // }
         // 属性
         var propInfo = this.__parseComProps(value.props, [
           "value",
@@ -1598,6 +1523,8 @@ let schemaUtils = {
     ) {
       throw "组件名(" + newCom.name + ")存在html非法字符";
     }
+
+    newCom.props = newCom.props ? newCom.props : {};
 
     return newCom;
   },

@@ -20,6 +20,9 @@ export default {
       throw "es-base config.name必须存在";
     }
 
+    // 防止props不存在
+    var configProps = this.config.props ? this.config.props : {};
+
     // 计算出props, attrs
     var newProps = {};
     var newAttrs = {};
@@ -34,14 +37,14 @@ export default {
       : this.config.name;
     if (
       componentName === constant.TAG_INPUT && // 不区分大小写
-      (this.config.props.type === constant.TYPE_RADIO ||
-        this.config.props.type === constant.TYPE_CHECKBOX)
+      (configProps.type === constant.TYPE_RADIO ||
+        configProps.type === constant.TYPE_CHECKBOX)
     ) {
-      if (this.config.props.type === constant.TYPE_RADIO) {
-        Object.assign(newAttrs, this.config.props);
-        newAttrs.checked = this.value === this.config.props.value;
+      if (configProps.type === constant.TYPE_RADIO) {
+        Object.assign(newAttrs, configProps);
+        newAttrs.checked = this.value === configProps.value;
 
-        Object.assign(newProps, this.config.props);
+        Object.assign(newProps, configProps);
         if (newProps.hasOwnProperty("checked")) {
           delete newProps.checked;
         }
@@ -49,16 +52,16 @@ export default {
         domProps.checked = newAttrs.checked;
       } else {
         var checked = false;
-        if (!utils.isUndef(this.config.props.trueValue)) {
+        if (!utils.isUndef(configProps.trueValue)) {
           // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
-          if (this.value === this.config.props.trueValue) {
+          if (this.value === configProps.trueValue) {
             checked = true;
           } else {
             checked = false;
           }
-        } else if (!utils.isUndef(this.config.props.falseValue)) {
+        } else if (!utils.isUndef(configProps.falseValue)) {
           // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
-          if (this.value === this.config.props.falseValue) {
+          if (this.value === configProps.falseValue) {
             checked = false;
           } else {
             checked = true;
@@ -67,10 +70,10 @@ export default {
           // 经测试：当trueValue和falseValue没有指定，checked才为!!this.value
           checked = !!this.value;
         }
-        Object.assign(newAttrs, this.config.props);
+        Object.assign(newAttrs, configProps);
         newAttrs.checked = checked;
 
-        Object.assign(newProps, this.config.props);
+        Object.assign(newProps, configProps);
         if (newProps.hasOwnProperty("checked")) {
           delete newProps.checked;
         }
@@ -82,19 +85,19 @@ export default {
         ? utils.deepCopy(this.value)
         : this.value; // 这样防止引用地址被组件内部修改
       if (!constant.FORM_INPUTS.includes(componentName)) {
-        Object.assign(newAttrs, this.config.props);
+        Object.assign(newAttrs, configProps);
         if (newAttrs.hasOwnProperty("value")) {
           delete newAttrs.value;
         }
-        Object.assign(newProps, this.config.props);
+        Object.assign(newProps, configProps);
         newProps.value = newValue;
       } else {
-        Object.assign(newAttrs, this.config.props);
+        Object.assign(newAttrs, configProps);
         if (newAttrs.hasOwnProperty("value")) {
           delete newAttrs.value;
         }
 
-        Object.assign(newProps, this.config.props);
+        Object.assign(newProps, configProps);
         if (newProps.hasOwnProperty("value")) {
           delete newProps.value;
         }
@@ -178,17 +181,15 @@ export default {
       componentOptions && componentOptions.Ctor.options.props
         ? componentOptions.Ctor.options.props
         : false;
-    var thisProps = this.config.props;
     if (
       comProps &&
-      thisProps &&
       Object.keys(comProps).length &&
-      Object.keys(thisProps).length
+      Object.keys(configProps).length
     ) {
       var comPropsKeys = Object.keys(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-      for (var key in thisProps) {
+      for (var key in configProps) {
         if (!comPropsKeys.includes(key)) {
-          dataAttrs[key] = thisProps[key];
+          dataAttrs[key] = configProps[key];
         }
       }
       if (vnode.data) {
@@ -200,6 +201,8 @@ export default {
     newProps = null;
     domProps = null;
     directives = null;
+
+    configProps = null;
 
     return vnode;
   },
@@ -264,22 +267,27 @@ export default {
         var tagName = eventData.target.tagName;
         var nodeType = eventData.target.type;
         if (tagName.toLowerCase() === constant.TAG_INPUT) {
+          var configProps;
           if (nodeType === constant.TYPE_RADIO) {
+            // 防止props不存在
+            configProps = this.config.props ? this.config.props : {};
             if (eventData.target.checked) {
-              eventValue = this.config.props.value;
+              eventValue = configProps.value;
             } else {
               eventValue = undefined;
             }
           } else if (nodeType === constant.TYPE_CHECKBOX) {
+            // 防止props不存在
+            configProps = this.config.props ? this.config.props : {};
             if (eventData.target.checked) {
               eventValue = true;
-              if (!utils.isUndef(this.config.props.trueValue)) {
-                eventValue = this.config.props.trueValue;
+              if (!utils.isUndef(configProps.trueValue)) {
+                eventValue = configProps.trueValue;
               }
             } else {
               eventValue = false;
-              if (!utils.isUndef(this.config.props.falseValue)) {
-                eventValue = this.config.props.falseValue;
+              if (!utils.isUndef(configProps.falseValue)) {
+                eventValue = configProps.falseValue;
               }
             }
           } else {
