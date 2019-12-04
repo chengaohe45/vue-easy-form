@@ -1115,7 +1115,7 @@ let formUtils = {
   },
 
   __esParseComponent(component, parseSources) {
-    var text;
+    var text, style, className, value;
 
     // 解析属性
     if (component.__rawProps) {
@@ -1141,17 +1141,34 @@ let formUtils = {
       var rawDirectives = component.__rawDirectives;
       for (var i = 0; i < rawDirectives.length; i++) {
         var rawDirective = rawDirectives[i];
-        var value = parse.smartEsValue(rawDirective.value, parseSources);
+        value = parse.smartEsValue(rawDirective.value, parseSources);
         if (value !== curDirectives[i].value) {
           curDirectives[i].value = value;
         }
       }
     }
 
+    // 解析text
     if (component.__rawText) {
       text = parse.smartEsValue(component.__rawText, parseSources);
       if (text !== component.text) {
         component.text = text;
+      }
+    }
+
+    // 解析style
+    if (component.__rawStyle) {
+      style = parse.smartEsValue(component.__rawStyle, parseSources);
+      if (style !== component.style) {
+        component.style = style;
+      }
+    }
+
+    // 解析class
+    if (component.__rawClass) {
+      className = parse.smartEsValue(component.__rawClass, parseSources);
+      if (className !== component.class) {
+        component.class = className;
       }
     }
   },

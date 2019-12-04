@@ -36,7 +36,7 @@ let constant = {
   ES_FUNC_NAME: "__E0S1_2F3U4NC_N4AM5E__",
   ES_OPTIONS: "__es__Options__", // 此值要是正规的命名
 
-  PREFIX_STATIC_FUNC: ["f:"], // 对于props里面的属性，以PRE_STATIC_FUNC开头的且是函数，则说明是静态，不解析
+  PREFIX_STATIC_FUNC: ["s:"], // 对于props里面的属性，以PRE_STATIC_FUNC开头的且是函数，则说明是静态，不解析
 
   // 原生的表单组件，主要是用来过滤空格
   FORM_INPUTS: ["input", "textarea"],

@@ -115,9 +115,10 @@ export default {
         // attrs: this.config.props, //attrs为原生属性
         attrs: newAttrs,
 
+        // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
+        // this.config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
         class: this.config.class,
-
-        style: this.config.style,
+        style: this.config.style, // this.config.style必须是一个对象才能有效；原理同上
 
         // DOM属性
         domProps: domProps,
