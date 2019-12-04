@@ -324,13 +324,18 @@ let schemaUtils = {
         newPropItem.layout = false;
       }
 
-      if (
-        utils.isUndef(newPropItem.value) &&
-        newPropItem.component.name === global.defaultCom
-      ) {
-        // 设置默认值组件的默认值
-        newPropItem.value = global.defaultVal;
+      // 处理一下值
+      if (!newPropItem.hasOwnProperty("value")) {
+        if (newPropItem.component.name === global.defaultCom) {
+          // 设置默认值组件的默认值
+          newPropItem.value = global.defaultVal;
+        } else {
+          newPropItem.value = undefined;
+        }
+      } else {
+        // 值存在，不用理会
       }
+
       if (newPropItem.format) {
         newPropItem.value = formUtils.getFormatValue(
           newPropItem.format,
@@ -664,11 +669,11 @@ let schemaUtils = {
    */
   __getNormalInfo: function(key) {
     var keyInfos = [
-      {
-        key: "value",
-        enums: [],
-        defaultValue: undefined
-      },
+      // {
+      //   key: "value",
+      //   enums: [],
+      //   defaultValue: undefined
+      // },
       {
         key: "hidden",
         enums: [true, false],
@@ -911,12 +916,23 @@ let schemaUtils = {
         }
       }
 
-      if (utils.isStr(component.class)) {
-        newComponent.class = component.class;
+      if (parse.isEsOrFunc(component.class)) {
+        newComponent.class = null;
+        newComponent.__rawClass = parse.newEsFuncion(component.class);
+      } else {
+        newComponent.class = utils.deepCopy(component.class);
       }
 
-      if (utils.isObj(component.style) && Object.keys(component.style).length) {
-        newComponent.style = utils.deepCopy(component.style);
+      if (parse.isEsOrFunc(component.style)) {
+        newComponent.style = null;
+        newComponent.__rawStyle = parse.newEsFuncion(component.style);
+      } else {
+        if (
+          utils.isObj(component.style) &&
+          Object.keys(component.style).length
+        ) {
+          newComponent.style = utils.deepCopy(component.style);
+        }
       }
 
       newComponent.align = this.__parseAlign(component.align, defaultAlign);
@@ -1472,12 +1488,20 @@ let schemaUtils = {
         }
 
         // 只有在name有值时有效
-        if (utils.isStr(value.class)) {
-          newCom.class = value.class;
+        if (parse.isEsOrFunc(value.class)) {
+          newCom.class = null;
+          newCom.__rawClass = parse.newEsFuncion(value.class);
+        } else {
+          newCom.class = utils.deepCopy(value.class);
         }
 
-        if (utils.isObj(value.style) && Object.keys(value.style).length) {
-          newCom.style = utils.deepCopy(value.style);
+        if (parse.isEsOrFunc(value.style)) {
+          newCom.style = null;
+          newCom.__rawStyle = parse.newEsFuncion(value.style);
+        } else {
+          if (utils.isObj(value.style) && Object.keys(value.style).length) {
+            newCom.style = utils.deepCopy(value.style);
+          }
         }
       }
 
@@ -2039,6 +2063,21 @@ let schemaUtils = {
     propKeys.forEach(key => {
       if (key == "label") {
         newPropItem[key] = this.__parseLabel(propItem[key]);
+        return true;
+      }
+
+      if (key == "value") {
+        // 这个比较特殊: 有值就记录下来
+        if (propItem.hasOwnProperty("value")) {
+          newPropItem.value = propItem.value;
+        } else if (
+          utils.isObj(propItem.component) &&
+          propItem.component.hasOwnProperty("value")
+        ) {
+          newPropItem.value = propItem.component.value;
+        } else {
+          // 没有值，无需记录，留给后面判断：因为有默认值的问题
+        }
         return true;
       }
 
