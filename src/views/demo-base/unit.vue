@@ -73,22 +73,22 @@ export default {
             },
             value: 80,
             // col: 12,
-            // unit: {
-            //   name: unit,
-            //   props: {
-            //     num: "es: {{$root.comType}}"
-            //   }
-            // }
             unit: {
-              name: "el-button",
-              text: "123",
-              actions: {
-                trigger: "click",
-                handler: data => {
-                  console.log("data: ", data);
-                }
+              name: unit,
+              props: {
+                num: "es: {{$root.comType}}"
               }
             }
+            // unit: {
+            //   name: "el-button",
+            //   text: "123",
+            //   actions: {
+            //     trigger: "click",
+            //     handler: data => {
+            //       console.log("data: ", data);
+            //     }
+            //   }
+            // }
           }
         }
       }

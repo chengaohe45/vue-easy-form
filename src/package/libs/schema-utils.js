@@ -1690,22 +1690,25 @@ let schemaUtils = {
   __parseDirectives: function(directives) {
     var newDirectives = [],
       rawDirectives = [];
-    if (utils.isObj(directives)) {
+    if (!utils.isArr(directives)) {
       directives = [directives];
-    } else if (utils.isStr(directives)) {
-      directives = [
-        {
-          name: directives
-        }
-      ];
-    } else if (!utils.isArr(directives)) {
-      directives = [];
     }
 
     var hasEsFunc = false;
 
     // 转化为数组了
-    directives.forEach(directive => {
+    directives.forEach(directiveItem => {
+      var directive;
+      if (utils.isStr(directiveItem)) {
+        directive = { name: directiveItem };
+      } else if (!utils.isObj(directiveItem)) {
+        // 不合法，去掉
+        return false;
+      } else {
+        directive = directiveItem;
+      }
+
+      // 全部转成对象了
       var name, value, expression, arg, modifiers;
       name = directive.name;
       var prefix = "v-";

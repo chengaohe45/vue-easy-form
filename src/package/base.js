@@ -214,27 +214,27 @@ export default {
       required: true,
       default: () => {
         return {
-          name: "", //lg-element 组件 原生组件
+          name: "" //lg-element 组件 原生组件
           // value: "",
           // attrs: {},
           // style: {},
           // class: {},
-          props: {}
+          // props: {}
         };
       }
     },
 
-    emitEvents: {
-      type: Array,
-      required: false,
-      default: null
-    },
+    // emitEvents: {
+    //   type: Array,
+    //   required: false,
+    //   default: null
+    // },
 
-    nativeEvents: {
-      type: Array,
-      required: false,
-      default: null
-    },
+    // nativeEvents: {
+    //   type: Array,
+    //   required: false,
+    //   default: null
+    // },
 
     value: {
       type: [Object, String, Date, Array, Boolean, Number],
@@ -308,8 +308,8 @@ export default {
      */
     createOn() {
       var emitEvents;
-      if (this.emitEvents) {
-        emitEvents = utils.deepCopy(this.emitEvents);
+      if (this.config.__emitEvents) {
+        emitEvents = utils.deepCopy(this.config.__emitEvents);
         if (!emitEvents.includes(constant.INPUT_EVENT)) {
           emitEvents.push(constant.INPUT_EVENT);
         }
@@ -340,9 +340,9 @@ export default {
 
       //原生事件
       // emit发出的事件
-      if (this.nativeEvents && this.nativeEvents.length > 0) {
+      if (this.config.__nativeEvents && this.config.__nativeEvents.length > 0) {
         var nativeOn = {};
-        var nativeEvents = utils.deepCopy(this.nativeEvents);
+        var nativeEvents = utils.deepCopy(this.config.__nativeEvents);
         nativeEvents.forEach(eventName => {
           nativeOn[eventName] = eventData => {
             this.eventHandler(eventName + "." + constant.ADJ_NATIVE, eventData);

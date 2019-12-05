@@ -473,13 +473,15 @@ export default {
 
     /**
      * 对外调用，取值
+     * 实时取值，表单存在的值;也是getRootData的别名
      */
     getValue() {
-      return utils.deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+      return utils.deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
      * 对外调用，取值
+     * 实时取值，表单存在的值;也是getValue的别名
      */
     getRootData() {
       return utils.deepCopy(this._esFormData);
@@ -487,9 +489,10 @@ export default {
 
     /**
      * 对外调用，取值
+     * 实时取值，用户提交所需要的值，不包括隐藏的或临时的；也就是v-model
      */
     getFormValue() {
-      return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+      return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -1081,17 +1084,6 @@ export default {
             hadChecked = true;
             var result = true;
 
-            // if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
-            //   if (!newParseSources) {
-            //     newParseSources = {};
-            //     newParseSources = Object.assign(newParseSources, parseSources);
-            //     newParseSources.idxChains = parseSources.idxChain
-            //       ? parseSources.idxChain.split(",")
-            //       : [];
-            //     delete newParseSources.idxChain;
-            //   }
-            //   result = checkFun(newParseSources);
-            // } else {
             if (!newOptions) {
               newOptions = {};
               newOptions.value = value;
@@ -1100,7 +1092,6 @@ export default {
               newOptions.index = schema.__index;
             }
             result = checkFun.call(this, newOptions);
-            // }
 
             if (result !== true) {
               if (utils.isStr(result)) {

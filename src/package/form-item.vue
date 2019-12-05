@@ -62,8 +62,6 @@
               ]"
               :config="schema.component"
               v-model="schema.value"
-              :emitEvents="schema.component.__emitEvents"
-              :nativeEvents="schema.component.__nativeEvents"
               @trigger="triggerHandler"
             >
             </es-base>
