@@ -231,6 +231,13 @@ export default {
           // props: {}
         };
       }
+    },
+
+    // 当!!this.info为非真时，处理事件会让父级处理
+    info: {
+      type: Object,
+      required: false,
+      default: undefined
     }
 
     // emitEvents: {
@@ -268,7 +275,51 @@ export default {
     },
 
     eventHandler(eventName, eventData) {
-      this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
+      if (!this.info) {
+        // 让父类去处理
+        this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
+      } else {
+        // 一般组件，自己处理
+        var options = {
+          value: utils.deepCopy(this.config.value),
+          event: eventData,
+          pathKey: this.info.pathKey,
+          index: this.info.index,
+          idxChain: this.info.idxChain,
+          target: this.$refs.__comTarget__
+        };
+
+        var handlers = [];
+        var actions = this.config.actions;
+        if (actions) {
+          actions.forEach(action => {
+            if (action.trigger && action.trigger.includes(eventName)) {
+              handlers.push(action.handler);
+            }
+          });
+        }
+
+        if (handlers.length > 0) {
+          var thisFrom = this.__getForm();
+          thisFrom._handleEvents(handlers, options);
+        }
+      }
+    },
+
+    __getForm() {
+      var formItem = this.$parent;
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+        if (type == constant.UI_FORM) {
+          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
+        } else if (type == constant.UI_ARRAY) {
+          // checkSchema.push(formItem._getSchema());
+        } else {
+          // ... 往上派
+        }
+        formItem = formItem.$parent;
+      }
     },
 
     __parseInputEvent(eventData) {
@@ -340,7 +391,7 @@ export default {
             if (this.config.value !== eventValue) {
               // this.$emit("input", eventValue);
               this.config.value = eventValue;
-              this.eventHandler(eventName, eventValue);
+              this.eventHandler(eventName, eventData);
             }
           };
         } else {

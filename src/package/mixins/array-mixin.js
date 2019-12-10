@@ -24,8 +24,8 @@ export default {
         this.schema.__propSchemaList.splice(index, 1);
         formUtils.resetIndexArr(
           this.schema,
-          this.schema.__idxChain,
-          this.schema.__pathKey
+          this.schema.__info.idxChain,
+          this.schema.__info.pathKey
         );
         var eventData = {
           type: "delete",
@@ -56,8 +56,8 @@ export default {
         );
         formUtils.resetIndexArr(
           this.schema,
-          this.schema.__idxChain,
-          this.schema.__pathKey
+          this.schema.__info.idxChain,
+          this.schema.__info.pathKey
         );
         var eventData = { type: "up", index: index };
         var newValue = formUtils.getValue(this.schema);
@@ -74,8 +74,8 @@ export default {
         );
         formUtils.resetIndexArr(
           this.schema,
-          this.schema.__idxChain,
-          this.schema.__pathKey
+          this.schema.__info.idxChain,
+          this.schema.__info.pathKey
         );
         var eventData = { type: "down", index: index };
         var newValue = formUtils.getValue(this.schema);
@@ -137,8 +137,8 @@ export default {
       formUtils.addArrayItem(this.schema, insertInfo);
       formUtils.resetIndexArr(
         this.schema,
-        this.schema.__idxChain,
-        this.schema.__pathKey
+        this.schema.__info.idxChain,
+        this.schema.__info.pathKey
       );
       var newValue = formUtils.getValue(this.schema);
       var curIndex = isIndex ? index : this.schema.__propSchemaList.length - 1;
@@ -155,7 +155,7 @@ export default {
       while (formItem) {
         var type = formItem._getType ? formItem._getType() : "";
         if (type == constant.UI_FORM) {
-          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
           return formItem; // 到达表单层
         } else if (type == constant.UI_ARRAY) {
           // checkSchema.push(formItem._getSchema());

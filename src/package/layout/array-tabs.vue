@@ -42,7 +42,10 @@
             </span>
           </template>
           <span v-else class="es-form-label-box">
-            <es-base :config="itemSchema.subLabel"></es-base>
+            <es-base
+              :config="itemSchema.subLabel"
+              :info="itemSchema.__info"
+            ></es-base>
           </span>
         </es-tabs-nav-item>
       </template>
@@ -52,7 +55,7 @@
         class="es-form-help"
         slot="help"
       >
-        <es-base :config="schema.help"></es-base>
+        <es-base :config="schema.help" :info="schema.__info"></es-base>
       </div>
     </es-tabs-nav>
     <ul
@@ -167,7 +170,7 @@ export default {
     clickActiveHandler(index) {
       var form = this.__getForm();
       form._toggleUi("tabs", {
-        key: this.schema.__pathKey,
+        key: this.schema.__info.pathKey,
         index: index
       });
     },
@@ -183,7 +186,7 @@ export default {
       if (newIndex !== false) {
         var form = this.__getForm();
         form._toggleUi("tabs", {
-          key: this.schema.__pathKey,
+          key: this.schema.__info.pathKey,
           index: newIndex
         });
       }
@@ -194,7 +197,7 @@ export default {
 
       var form = this.__getForm();
       form._toggleUi("tabs", {
-        key: this.schema.__pathKey,
+        key: this.schema.__info.pathKey,
         index: this.schema.__propSchemaList.length - 1
       });
     }

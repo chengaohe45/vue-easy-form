@@ -16,7 +16,10 @@
             itemSchema.label.text ? itemSchema.label.text : fieldName + ""
           }}</span>
           <span v-else class="es-form-label-box">
-            <es-base :config="itemSchema.label"></es-base>
+            <es-base
+              :config="itemSchema.label"
+              :info="itemSchema.__info"
+            ></es-base>
           </span>
         </es-tabs-nav-item>
       </template>
@@ -98,7 +101,7 @@ export default {
     clickActiveHandler(index) {
       var form = this.__getForm();
       form._toggleUi("tabs", {
-        key: this.schema.__pathKey,
+        key: this.schema.__info.pathKey,
         index: index
       });
     },
@@ -108,7 +111,7 @@ export default {
       while (formItem) {
         var type = formItem._getType ? formItem._getType() : "";
         if (type == constant.UI_FORM) {
-          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
           return formItem; // 到达表单层
         } else if (type == constant.UI_ARRAY) {
           // checkSchema.push(formItem._getSchema());

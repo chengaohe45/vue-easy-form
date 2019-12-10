@@ -596,9 +596,9 @@ export default {
           var parseSources = {
             global: this.global ? this.global : {}, // 防止null情况
             rootData: this._esFormData,
-            index: itemSchema.__index,
-            idxChain: itemSchema.__idxChain,
-            pathKey: itemSchema.__pathKey,
+            index: itemSchema.__info.index,
+            idxChain: itemSchema.__info.idxChain,
+            pathKey: itemSchema.__info.pathKey,
             rootSchema: rootSchema,
             isHidden: this._esHiddenFunc
           };
@@ -704,7 +704,6 @@ export default {
 
     __checkProp(schema, rootSchema) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
-      // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
       var isValid = true;
 
       //是否隐藏，隐藏就不用检查有效性了
@@ -892,12 +891,14 @@ export default {
       }
     },
 
-    _syncUi(checkSchemas, eventNames, options) {
-      var sourcePathKey = checkSchemas[0].__pathKey; // checkSchemas必有值
+    /**
+     * 当表单组件发生改变时：处理事件，同步项
+     */
+    _syncFormUi(checkSchemas, eventNames, options) {
+      var sourcePathKey = checkSchemas[0].__info.pathKey; // checkSchemas必有值
       if (eventNames.includes(constant.INPUT_EVENT)) {
         // 需要同步
         this.__syncValue(sourcePathKey); // 第一个就是触发源
-        // tmpResultValue =this._esResultValue;
       }
 
       if (this.isInited) {
@@ -906,9 +907,9 @@ export default {
         var parseSources = {
           global: this.global ? this.global : {}, // 防止null情况
           rootData: this._esFormData,
-          index: inputSchema.__index,
-          idxChain: inputSchema.__idxChain,
-          pathKey: inputSchema.__pathKey,
+          index: inputSchema.__info.index,
+          idxChain: inputSchema.__info.idxChain,
+          pathKey: inputSchema.__info.pathKey,
           rootSchema: this.$data.formSchema,
           isHidden: this._esHiddenFunc
         };
@@ -965,6 +966,15 @@ export default {
         options = null;
         handlers = null;
       }
+    },
+
+    /**
+     * 执行事件：一般用于非组件表单，只是执行事件
+     */
+    _handleEvents(handlers, options) {
+      handlers.forEach(handler => {
+        handler.call(this, options);
+      });
     },
 
     _toggleUi(type, data) {
@@ -1087,9 +1097,9 @@ export default {
             if (!newOptions) {
               newOptions = {};
               newOptions.value = value;
-              newOptions.pathKey = schema.__pathKey;
-              newOptions.idxChain = schema.__idxChain;
-              newOptions.index = schema.__index;
+              newOptions.pathKey = schema.__info.pathKey;
+              newOptions.idxChain = schema.__info.idxChain;
+              newOptions.index = schema.__info.index;
             }
             result = checkFun.call(this, newOptions);
 

@@ -45,7 +45,6 @@ let formUtils = {
   __setValue: function(propItem, value, hasIdxChainChanged = false) {
     if (propItem.array) {
       if (utils.isArr(value)) {
-        // console.log(propItem.__pathKey, "in...");
         var hasChanged = false;
         var schemaList = propItem.__propSchemaList;
         if (schemaList.length > value.length) {
@@ -65,7 +64,11 @@ let formUtils = {
         }
         // console.log(120);
         if (hasChanged && !hasIdxChainChanged) {
-          this.resetIndexArr(propItem, propItem.__idxChain, propItem.__pathKey);
+          this.resetIndexArr(
+            propItem,
+            propItem.__info.idxChain,
+            propItem.__info.pathKey
+          );
         }
       } else {
         // 值的格式不区配，不必理会
@@ -178,11 +181,11 @@ let formUtils = {
     if (propItem.array) {
       // 因为__propSchemaList里面的item不会含array
 
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
       }
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
       }
 
       var schemaList = propItem.__propSchemaList;
@@ -196,27 +199,27 @@ let formUtils = {
 
     // 不是数组
     if (propItem.component) {
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
       }
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
       }
 
-      if (propItem.__index != currentIndex) {
-        propItem.__index = currentIndex;
+      if (propItem.__info.index != currentIndex) {
+        propItem.__info.index = currentIndex;
       }
     } else if (propItem.properties) {
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
       }
 
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
       }
 
-      if (propItem.__index != currentIndex) {
-        propItem.__index = currentIndex;
+      if (propItem.__info.index != currentIndex) {
+        propItem.__info.index = currentIndex;
       }
 
       for (var key in propItem.properties) {
@@ -230,6 +233,16 @@ let formUtils = {
       }
     } else {
       //可能是占位对象
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
+      }
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
+      }
+
+      if (propItem.__info.index != currentIndex) {
+        propItem.__info.index = currentIndex;
+      }
     }
   },
 
@@ -551,9 +564,9 @@ let formUtils = {
     isParentHidden = false
   ) {
     var parseSources = Object.assign({}, baseParseSources);
-    parseSources.index = propItem.__index;
-    parseSources.idxChain = propItem.__idxChain;
-    parseSources.pathKey = propItem.__pathKey;
+    parseSources.index = propItem.__info.index;
+    parseSources.idxChain = propItem.__info.idxChain;
+    parseSources.pathKey = propItem.__info.pathKey;
 
     var formData = baseParseSources.rootData;
 
@@ -742,9 +755,9 @@ let formUtils = {
     var isHidden, isRequired, text, listLen, schemaList, i;
 
     var parseSources = Object.assign({}, baseParseSources);
-    parseSources.index = propItem.__index;
-    parseSources.idxChain = propItem.__idxChain;
-    parseSources.pathKey = propItem.__pathKey;
+    parseSources.index = propItem.__info.index;
+    parseSources.idxChain = propItem.__info.idxChain;
+    parseSources.pathKey = propItem.__info.pathKey;
 
     if (propItem.component) {
       if (propItem.__rawHidden) {
@@ -1066,9 +1079,9 @@ let formUtils = {
             } else {
               //正常成员
               var nextParseSources = Object.assign({}, baseParseSources);
-              nextParseSources.index = nextPropItem.__index;
-              nextParseSources.idxChain = nextPropItem.__idxChain;
-              nextParseSources.pathKey = nextPropItem.__pathKey;
+              nextParseSources.index = nextPropItem.__info.index;
+              nextParseSources.idxChain = nextPropItem.__info.idxChain;
+              nextParseSources.pathKey = nextPropItem.__info.pathKey;
 
               isHidden = parse.smartEsValue(
                 nextPropItem.__rawHidden,
@@ -1194,9 +1207,9 @@ let formUtils = {
         propSchema.layout.name !== constant.LAYOUT_SPACE
       ) {
         var parseSources = Object.assign({}, baseParseSources);
-        parseSources.index = propSchema.__index;
-        parseSources.idxChain = propSchema.__idxChain;
-        parseSources.pathKey = propSchema.__pathKey;
+        parseSources.index = propSchema.__info.index;
+        parseSources.idxChain = propSchema.__info.idxChain;
+        parseSources.pathKey = propSchema.__info.pathKey;
 
         result = parse.smartEsValue(propSchema.__rawHidden, parseSources);
         // console.log("fieldKeyName: " + fieldKeyName, result);

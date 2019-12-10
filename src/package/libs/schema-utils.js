@@ -107,6 +107,11 @@ let schemaUtils = {
         inheritObj,
         myPathKey
       );
+      newPropItem.__info = {
+        pathKey: myPathKey,
+        idxChain: "",
+        index: -1
+      };
     } else if (this.__isPropItem(propItem)) {
       if (!this.__existEntityItem(propItem)) {
         throw "属性" + parentKey + "没有具体的子节点(properties全为空)";
@@ -174,9 +179,12 @@ let schemaUtils = {
         newPropItem.title.__level = curLevel; //用于字号
       }
 
-      newPropItem.__pathKey = myPathKey;
-      newPropItem.__idxChain = "";
-      newPropItem.__index = -1;
+      // 记录节点的修改，用于事件
+      newPropItem.__info = {
+        pathKey: myPathKey,
+        idxChain: "",
+        index: -1
+      };
       if (isNormalTabs) {
         newPropItem.__tabsIndex = false;
       }
@@ -324,18 +332,6 @@ let schemaUtils = {
         newPropItem.layout = false;
       }
 
-      // 处理一下值
-      // if (!newPropItem.hasOwnProperty("value")) {
-      //   if (newPropItem.component.name === global.defaultCom) {
-      //     // 设置默认值组件的默认值
-      //     newPropItem.value = global.defaultVal;
-      //   } else {
-      //     newPropItem.value = undefined;
-      //   }
-      // } else {
-      //   // 值存在，不用理会
-      // }
-
       if (newPropItem.format) {
         newPropItem.value = formUtils.getFormatValue(
           newPropItem.format,
@@ -347,9 +343,11 @@ let schemaUtils = {
       var eventOn = this.__fetchFormEvent(newPropItem);
       newPropItem.component.__emitEvents = eventOn.__emitEvents;
       newPropItem.component.__nativeEvents = eventOn.__nativeEvents;
-      newPropItem.__pathKey = myPathKey;
-      newPropItem.__idxChain = "";
-      newPropItem.__index = -1;
+      newPropItem.__info = {
+        pathKey: myPathKey,
+        idxChain: "",
+        index: -1
+      };
 
       // 是否数组(优先级最高)
       isArray = this.__isArray(propItem.array);
@@ -1516,11 +1514,7 @@ let schemaUtils = {
         newCom.actions = this.__parseActions(value.actions, myPathKey);
 
         // 属性
-        var propInfo = this.__parseComProps(value.props, [
-          "value",
-          "style",
-          "class"
-        ]);
+        var propInfo = this.__parseComProps(value.props, ["style", "class"]);
         // console.log(propInfo);
         if (propInfo.new) {
           newCom.props = propInfo.new;

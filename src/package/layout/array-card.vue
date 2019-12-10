@@ -99,7 +99,7 @@
           : schema.rowHeight + 'px'
       }"
     >
-      <es-base :config="schema.help"></es-base>
+      <es-base :config="schema.help" :info="schema.__info"></es-base>
     </div>
   </div>
 </template>

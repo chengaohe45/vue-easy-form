@@ -57,6 +57,7 @@
               <span v-else class="es-form-label-box">
                 <es-base
                   :config="schema.properties[fieldKeyName].label"
+                  :info="schema.properties[fieldKeyName].__info"
                 ></es-base>
               </span>
               <span
@@ -104,6 +105,7 @@
               >
                 <es-base
                   :config="schema.properties[fieldKeyName].unit"
+                  :info="schema.properties[fieldKeyName].__info"
                 ></es-base>
               </div>
               <div
@@ -133,7 +135,10 @@
                 { height: schema.properties[fieldKeyName].rowHeight + 'px' }
               ]"
             >
-              <es-base :config="schema.properties[fieldKeyName].help"></es-base>
+              <es-base
+                :config="schema.properties[fieldKeyName].help"
+                :info="schema.properties[fieldKeyName].__info"
+              ></es-base>
             </div>
           </template>
           <!-- 占位空间控件: 不判断__creatable，因为是系统的，里面没有用户自定义的东西 -->
@@ -211,7 +216,10 @@
               }}</span>
             </template>
             <span v-else class="es-form-label-box">
-              <es-base :config="fieldSchema.label"></es-base>
+              <es-base
+                :config="fieldSchema.label"
+                :info="fieldSchema.__info"
+              ></es-base>
             </span>
             <span v-if="fieldSchema.colon" class="es-form-colon">:</span>
           </label>

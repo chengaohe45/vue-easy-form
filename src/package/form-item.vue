@@ -11,7 +11,7 @@
         <template v-if="!schema.title.name">
           {{ schema.title.text }}
         </template>
-        <es-base v-else :config="schema.title"></es-base>
+        <es-base v-else :config="schema.title" :info="schema.__info"></es-base>
       </div>
       <div v-else class="es-form-title es-title-empty">&nbsp;</div>
       <div
@@ -22,7 +22,7 @@
         {{ schema.ui.showBody ? "隐藏" : "打开" }}
       </div>
       <div v-if="schema.help" class="es-form-help">
-        <es-base :config="schema.help"></es-base>
+        <es-base :config="schema.help" :info="schema.__info"></es-base>
       </div>
     </div>
     <div
@@ -53,6 +53,7 @@
                 : ''
             ]"
           >
+            <!-- 表单组件不要写info属性: 当info为undefined，处理事件会让上一级处理 -->
             <es-base
               :ref="schema.component.ref"
               :class="[
@@ -67,7 +68,7 @@
           </div>
           <template v-if="schema.unit && !schema.__inGroups">
             <div v-if="schema.unit.name" class="es-form-unit">
-              <es-base :config="schema.unit"></es-base>
+              <es-base :config="schema.unit" :info="schema.__info"></es-base>
             </div>
             <div v-else class="es-form-unit" v-show="schema.unit.text">
               {{ schema.unit.text }}
@@ -77,7 +78,7 @@
             v-if="schema.help && !schema.__inGroups && showHelpInBody"
             class="es-form-help"
           >
-            <es-base :config="schema.help"></es-base>
+            <es-base :config="schema.help" :info="schema.__info"></es-base>
           </div>
         </div>
 
@@ -287,7 +288,11 @@
 
       <!-- 描述信息，可以html -->
       <div v-if="schema.desc" class="es-form-desc">
-        <es-base v-if="schema.desc.name" :config="schema.desc"></es-base>
+        <es-base
+          v-if="schema.desc.name"
+          :config="schema.desc"
+          :info="schema.__info"
+        ></es-base>
         <template v-else>
           {{ schema.desc.text }}
         </template>
@@ -607,7 +612,7 @@ export default {
         if (refTarget) {
           targetInfo = {
             target: refTarget.$refs.__comTarget__,
-            sourceKey: this.schema.__pathKey.replace(/\[\d+\]/g, "[i]")
+            sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
           };
         } else {
           targetInfo = null;
@@ -707,7 +712,7 @@ export default {
 
     toggleBody() {
       var form = this.__getForm();
-      form._toggleUi("toggle", { key: this.schema.__pathKey });
+      form._toggleUi("toggle", { key: this.schema.__info.pathKey });
     },
 
     // 只有组件会触发
@@ -733,16 +738,16 @@ export default {
       }
 
       var options = {
-        value: targetValue,
+        value: utils.deepCopy(targetValue),
         event: eventData,
-        pathKey: this.schema.__pathKey,
-        index: this.schema.__index,
-        idxChain: this.schema.__idxChain,
+        pathKey: this.schema.__info.pathKey,
+        index: this.schema.__info.index,
+        idxChain: this.schema.__info.idxChain,
         target: target
       };
 
       var form = this.__getForm();
-      form._syncUi(checkSchema, eventNames, options);
+      form._syncFormUi(checkSchema, eventNames, options);
     },
 
     /**
@@ -757,14 +762,14 @@ export default {
       var options = {
         value: targetValue,
         event: eventData,
-        pathKey: this.schema.__pathKey,
-        index: this.schema.__index,
-        idxChain: this.schema.__idxChain,
+        pathKey: this.schema.__info.pathKey,
+        index: this.schema.__info.index,
+        idxChain: this.schema.__info.idxChain,
         target: null
       };
 
       var form = this.__getForm();
-      form._syncUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
+      form._syncFormUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
     },
 
     __getForm() {
