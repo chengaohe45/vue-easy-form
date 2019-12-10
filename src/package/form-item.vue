@@ -61,7 +61,6 @@
                   : ''
               ]"
               :config="schema.component"
-              v-model="schema.value"
               @trigger="triggerHandler"
             >
             </es-base>
@@ -715,7 +714,7 @@ export default {
     triggerHandler(eventName, eventData, target) {
       var checkSchema = [this.schema];
       var eventNames = [eventName];
-      var targetValue = this.schema.value;
+      var targetValue = this.schema.component.value;
 
       if (
         this.schema.isTrim &&
@@ -727,7 +726,7 @@ export default {
         // global.trimEvent暂不会是constant.INPUT_EVENT事件，因为初始化时就不给设置为此值
         var tmpValue = targetValue.trim();
         if (tmpValue !== targetValue) {
-          this.schema.value = tmpValue;
+          this.schema.component.value = tmpValue;
           targetValue = tmpValue;
           eventNames.push(constant.INPUT_EVENT); // 值有所改变，同时input一下
         }

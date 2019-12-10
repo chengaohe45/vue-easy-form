@@ -42,7 +42,17 @@ export default {
     ) {
       if (configProps.type === constant.TYPE_RADIO) {
         Object.assign(newAttrs, configProps);
-        newAttrs.checked = this.value === configProps.value;
+        if (this.config.hasOwnProperty("value")) {
+          // 用户设置了value的情况
+          newAttrs.checked = this.config.value === configProps.value;
+        } else {
+          // 没有用户value
+          newAttrs.checked =
+            configProps.hasOwnProperty("checked") &&
+            configProps.checked !== false
+              ? true
+              : false;
+        }
 
         Object.assign(newProps, configProps);
         if (newProps.hasOwnProperty("checked")) {
@@ -52,23 +62,31 @@ export default {
         domProps.checked = newAttrs.checked;
       } else {
         var checked = false;
-        if (!utils.isUndef(configProps.trueValue)) {
-          // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
-          if (this.value === configProps.trueValue) {
-            checked = true;
+        if (this.config.hasOwnProperty("value")) {
+          if (!utils.isUndef(configProps.trueValue)) {
+            // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
+            if (this.config.value === configProps.trueValue) {
+              checked = true;
+            } else {
+              checked = false;
+            }
+          } else if (!utils.isUndef(configProps.falseValue)) {
+            // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
+            if (this.config.value === configProps.falseValue) {
+              checked = false;
+            } else {
+              checked = true;
+            }
           } else {
-            checked = false;
-          }
-        } else if (!utils.isUndef(configProps.falseValue)) {
-          // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
-          if (this.value === configProps.falseValue) {
-            checked = false;
-          } else {
-            checked = true;
+            // 经测试：当trueValue和falseValue没有指定，checked才为!!this.config.value
+            checked = !!this.config.value;
           }
         } else {
-          // 经测试：当trueValue和falseValue没有指定，checked才为!!this.value
-          checked = !!this.value;
+          checked =
+            configProps.hasOwnProperty("checked") &&
+            configProps.checked !== false
+              ? true
+              : false;
         }
         Object.assign(newAttrs, configProps);
         newAttrs.checked = checked;
@@ -81,9 +99,14 @@ export default {
         domProps.checked = newAttrs.checked;
       }
     } else {
-      var newValue = utils.isRefVal(this.value)
-        ? utils.deepCopy(this.value)
-        : this.value; // 这样防止引用地址被组件内部修改
+      var newValue;
+      if (this.config.hasOwnProperty("value")) {
+        newValue = utils.isRefVal(this.config.value)
+          ? utils.deepCopy(this.config.value)
+          : this.config.value; // 这样防止引用地址被组件内部修改
+      } else {
+        newValue = configProps.value;
+      }
       if (!constant.FORM_INPUTS.includes(componentName)) {
         Object.assign(newAttrs, configProps);
         if (newAttrs.hasOwnProperty("value")) {
@@ -112,30 +135,16 @@ export default {
     var vnode = createElement(
       this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
       {
-        // attrs: this.config.props, //attrs为原生属性
-        attrs: newAttrs,
+        attrs: newAttrs, //attrs为原生属性
 
         // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
         // this.config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
         class: this.config.class,
         style: this.config.style, // this.config.style必须是一个对象才能有效；原理同上
 
-        // DOM属性
-        domProps: domProps,
-        // domProps: {
-        //   // innerHTML: "baz"
-        //   // value: this.config.value
-        // },
-        // 组件props
-        props: newProps,
-        // props: {
-        //   // myProp: "bar",
-        //   value: utils.isRefVal(this.value)
-        //     ? utils.deepCopy(this.value)
-        //     : this.value, // 这样防止引用地址被组件内部修改
-        //   ...this.config.props
-        //   // clearable: true,
-        // },
+        domProps: domProps, // DOM属性
+
+        props: newProps, // 组件props
         // 事件监听基于 "on"
         // 所以不再支持如 "v-on:keyup.enter" 修饰语
         // 需要手动匹配 KeyCode
@@ -222,7 +231,7 @@ export default {
           // props: {}
         };
       }
-    },
+    }
 
     // emitEvents: {
     //   type: Array,
@@ -236,10 +245,10 @@ export default {
     //   default: null
     // },
 
-    value: {
-      type: [Object, String, Date, Array, Boolean, Number],
-      required: false
-    }
+    // value: {
+    //   type: [Object, String, Date, Array, Boolean, Number],
+    //   required: false
+    // }
   },
 
   data() {
@@ -307,25 +316,30 @@ export default {
      * 创建所需要监听的事件
      */
     createOn() {
+      var hasOwnValue = this.config.hasOwnProperty("value");
       var emitEvents;
       if (this.config.__emitEvents) {
         emitEvents = utils.deepCopy(this.config.__emitEvents);
-        if (!emitEvents.includes(constant.INPUT_EVENT)) {
+        if (hasOwnValue && !emitEvents.includes(constant.INPUT_EVENT)) {
           emitEvents.push(constant.INPUT_EVENT);
         }
       } else {
-        emitEvents = [constant.INPUT_EVENT];
+        if (hasOwnValue) {
+          emitEvents = [constant.INPUT_EVENT];
+        } else {
+          emitEvents = [];
+        }
       }
 
       // emit发出的事件
       var emitOn = {};
       emitEvents.forEach(eventName => {
-        if (eventName == constant.INPUT_EVENT) {
+        if (eventName == constant.INPUT_EVENT && hasOwnValue) {
           emitOn[eventName] = eventData => {
             var eventValue = this.__parseInputEvent(eventData);
-            // console.log("eventValue: ", this.value, eventValue);
-            if (this.value !== eventValue) {
-              this.$emit("input", eventValue);
+            if (this.config.value !== eventValue) {
+              // this.$emit("input", eventValue);
+              this.config.value = eventValue;
               this.eventHandler(eventName, eventValue);
             }
           };

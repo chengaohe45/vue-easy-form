@@ -12,11 +12,9 @@
           @clickActive="clickActiveHandler"
           :index="fieldName"
         >
-          <template v-if="!itemSchema.label.name"
-            ><span>{{
-              itemSchema.label.text ? itemSchema.label.text : fieldName + ""
-            }}</span></template
-          >
+          <span v-if="!itemSchema.label.name">{{
+            itemSchema.label.text ? itemSchema.label.text : fieldName + ""
+          }}</span>
           <span v-else class="es-form-label-box">
             <es-base :config="itemSchema.label"></es-base>
           </span>

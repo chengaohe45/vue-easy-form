@@ -325,16 +325,16 @@ let schemaUtils = {
       }
 
       // 处理一下值
-      if (!newPropItem.hasOwnProperty("value")) {
-        if (newPropItem.component.name === global.defaultCom) {
-          // 设置默认值组件的默认值
-          newPropItem.value = global.defaultVal;
-        } else {
-          newPropItem.value = undefined;
-        }
-      } else {
-        // 值存在，不用理会
-      }
+      // if (!newPropItem.hasOwnProperty("value")) {
+      //   if (newPropItem.component.name === global.defaultCom) {
+      //     // 设置默认值组件的默认值
+      //     newPropItem.value = global.defaultVal;
+      //   } else {
+      //     newPropItem.value = undefined;
+      //   }
+      // } else {
+      //   // 值存在，不用理会
+      // }
 
       if (newPropItem.format) {
         newPropItem.value = formUtils.getFormatValue(
@@ -653,7 +653,7 @@ let schemaUtils = {
           "hdValue",
           "colon",
           "group",
-          "value",
+          // "value",
           "isTrim",
           "help",
           "desc",
@@ -909,7 +909,8 @@ let schemaUtils = {
   /**
    * 解析右栏组件
    */
-  __parseMainComponent: function(component, myPathKey) {
+  __parseMainComponent: function(propItem, myPathKey) {
+    var component = propItem.component;
     var newComponent,
       defaultAlign = false;
     if (utils.isObj(component) && Object.keys(component).length > 0) {
@@ -975,19 +976,38 @@ let schemaUtils = {
 
       newComponent.align = this.__parseAlign(component.align, defaultAlign);
       newComponent.flex = this.__parseFlex(component.flex, component.size);
+
+      // value
+      if (propItem.hasOwnProperty("value")) {
+        newComponent.value = propItem.value;
+      } else if (component.hasOwnProperty("value")) {
+        newComponent.value = component.value;
+      } else {
+        // 自动补充value: 因为是表单组件
+        newComponent.value =
+          component.name === global.defaultCom ? global.defaultVal : undefined;
+      }
     } else if (utils.isStr(component)) {
+      // 要自动补充value
       newComponent = {
         name: component,
         actions: [],
         align: defaultAlign,
-        flex: false
+        flex: false,
+        value: propItem.hasOwnProperty("value")
+          ? propItem.value
+          : global.defaultCom === component
+          ? global.defaultVal
+          : undefined
       };
     } else {
+      // 要自动补充value
       newComponent = {
         name: global.defaultCom,
         actions: [],
         align: defaultAlign,
-        flex: false
+        flex: false,
+        value: global.defaultVal
       };
     }
 
@@ -1542,6 +1562,13 @@ let schemaUtils = {
           if (utils.isObj(value.style) && Object.keys(value.style).length) {
             newCom.style = utils.deepCopy(value.style);
           }
+        }
+
+        // value
+        if (value.hasOwnProperty("value")) {
+          newCom.value = value.value;
+        } else {
+          // 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
         }
       }
 
@@ -2113,20 +2140,20 @@ let schemaUtils = {
         return true;
       }
 
-      if (key == "value") {
-        // 这个比较特殊: 有值就记录下来
-        if (propItem.hasOwnProperty("value")) {
-          newPropItem.value = propItem.value;
-        } else if (
-          utils.isObj(propItem.component) &&
-          propItem.component.hasOwnProperty("value")
-        ) {
-          newPropItem.value = propItem.component.value;
-        } else {
-          // 没有值，无需记录，留给后面判断：因为有默认值的问题
-        }
-        return true;
-      }
+      // if (key == "value") {
+      //   // 这个比较特殊: 有值就记录下来
+      //   if (propItem.hasOwnProperty("value")) {
+      //     newPropItem.value = propItem.value;
+      //   } else if (
+      //     utils.isObj(propItem.component) &&
+      //     propItem.component.hasOwnProperty("value")
+      //   ) {
+      //     newPropItem.value = propItem.component.value;
+      //   } else {
+      //     // 没有值，无需记录，留给后面判断：因为有默认值的问题
+      //   }
+      //   return true;
+      // }
 
       if (key == "title") {
         newPropItem[key] = this.__parseTitle(propItem[key], myPathKey);
@@ -2186,7 +2213,7 @@ let schemaUtils = {
       }
 
       if (key == "component") {
-        var mainComponent = this.__parseMainComponent(propItem[key], myPathKey);
+        var mainComponent = this.__parseMainComponent(propItem, myPathKey);
         newPropItem[key] = mainComponent;
         return true;
       }

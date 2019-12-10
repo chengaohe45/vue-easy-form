@@ -85,7 +85,7 @@ let formUtils = {
       } else {
         tmpValue = value;
       }
-      propItem.value = tmpValue;
+      propItem.component.value = tmpValue;
     } else if (propItem.properties) {
       if (utils.isObj(value)) {
         for (var key in propItem.properties) {
@@ -494,7 +494,7 @@ let formUtils = {
           } else {
             tmpValue = value;
           }
-          targetSchema.value = tmpValue;
+          targetSchema.component.value = tmpValue;
         }
       } else if (targetSchema.properties) {
         if (targetSchema.array) {
@@ -580,13 +580,17 @@ let formUtils = {
         if (formData) {
           if (propItem.format) {
             // 不是最终取值，或没有格式转换
-            return this.getFormatValue(propItem.format, propItem.value, false);
+            return this.getFormatValue(
+              propItem.format,
+              propItem.component.value,
+              false
+            );
           } else {
-            return propItem.value;
+            return propItem.component.value;
           }
         } else {
           // form 内部取值
-          return propItem.value;
+          return propItem.component.value;
         }
       }
     } else if (propItem.properties) {

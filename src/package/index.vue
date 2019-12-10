@@ -800,7 +800,7 @@ export default {
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = this.__checkRules(schema, schema.value, "");
+          checkedResult = this.__checkRules(schema, schema.component.value, "");
           if (checkedResult === true) {
             schema.__invalidMsg = false;
           } else {
@@ -943,7 +943,7 @@ export default {
         }
 
         if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
-          // 这用可以记录是什么导致表单改变
+          // 这个可以记录是什么导致表单改变
           if (handlers.length > 0) {
             handlers.forEach(handler => {
               handler.call(this, options);
