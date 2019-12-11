@@ -499,7 +499,7 @@ $activeBgColor: #fff;
         margin: 0;
         white-space: nowrap;
         padding: 0 $navItemPadding;
-        height: $styleHeight;
+        height: $styleHeight - 1;
         box-sizing: border-box;
         display: inline-block;
         list-style: none;
