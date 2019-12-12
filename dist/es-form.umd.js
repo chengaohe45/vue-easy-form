@@ -4444,7 +4444,7 @@ exports = module.exports = __webpack_require__("2350")(false);
 
 
 // module
-exports.push([module.i, ".es-tabs-nav-box{position:relative;margin:0 0 0 0;padding:0;border-bottom:1px solid #dcdfe6;-webkit-box-sizing:border-box;box-sizing:border-box;height:40px;display:-webkit-box;display:-ms-flexbox;display:flex}.es-tabs-nav-box .es-tabs-scroll-box{margin:0;padding:0;margin-bottom:-1px;overflow:hidden;-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}.es-tabs-nav-box .es-tabs-scroll-box:after,.es-tabs-nav-box .es-tabs-scroll-box:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-tabs-nav-box .es-tabs-scroll-box:after{clear:both}.es-tabs-nav-box .help-box{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;overflow:hidden}.es-tabs-nav-box .es-tabs-scroll-wrap{position:relative;margin:0;padding:0;height:40px;max-width:100%}.es-tabs-nav-box .es-tabs-prev-btn{display:none;position:absolute;height:36px;border-radius:3px;padding:0 3px;left:3px;top:1px;cursor:pointer}.es-tabs-nav-box .es-tabs-prev-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #7b808c transparent transparent;position:relative}.es-tabs-nav-box .es-tabs-prev-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #fbfbfb transparent transparent;margin:0;position:absolute;top:-4px;left:1px}.es-tabs-nav-box .es-tabs-prev-btn:not(.disabled):hover{background:#eee}.es-tabs-nav-box .es-tabs-prev-btn:not(.disabled):hover .es-arrow{border-right-color:#409eff}.es-tabs-nav-box .es-tabs-prev-btn:not(.disabled):hover .es-arrow:before{border-right-color:#eee}.es-tabs-nav-box .es-tabs-prev-btn.disabled .es-arrow{border-right-color:#d5d7dc;cursor:not-allowed}.es-tabs-nav-box .es-tabs-next-btn{display:none;position:absolute;height:36px;border-radius:3px;padding:0 3px;right:3px;top:2px;cursor:pointer}.es-tabs-nav-box .es-tabs-next-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #7b808c;position:relative}.es-tabs-nav-box .es-tabs-next-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #fbfbfb;margin:0;position:absolute;top:-4px;left:-5px}.es-tabs-nav-box .es-tabs-next-btn:not(.disabled):hover{background:#eee}.es-tabs-nav-box .es-tabs-next-btn:not(.disabled):hover .es-arrow{border-left-color:#409eff}.es-tabs-nav-box .es-tabs-next-btn:not(.disabled):hover .es-arrow:before{border-left-color:#eee}.es-tabs-nav-box .es-tabs-next-btn.disabled .es-arrow{border-left-color:#d5d7dc;cursor:not-allowed}.es-tabs-nav-box .es-tabs-scroll-wrap.es-has-toggle .es-tabs-next-btn,.es-tabs-nav-box .es-tabs-scroll-wrap.es-has-toggle .es-tabs-prev-btn{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-tabs-nav-box .es-tabs-nav-wrap{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;height:40px;max-width:100%;position:relative}.es-tabs-nav-box .es-tabs-nav-wrap.es-has-add{padding-right:28px}.es-tabs-nav-box .es-tabs-nav-scroll{overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;border-bottom:none;height:40px}.es-tabs-nav-box .es-tabs-nav{float:left;margin:0 0 0 0;padding:0;list-style:none;white-space:nowrap;-webkit-transition:left .3s;transition:left .3s;z-index:2}.es-tabs-nav-box .es-tabs-nav,.es-tabs-nav-box .es-tabs-nav li{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box}.es-tabs-nav-box .es-tabs-nav li{display:inline-block;border-bottom:1px solid transparent;cursor:default}.es-tabs-nav-box .es-tabs-nav li,.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt{height:40px;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt{margin:0;white-space:nowrap;padding:0 19px;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block;list-style:none;font-size:15px;color:#303133;cursor:pointer;position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;border:1px solid transparent;transition:border-color .1s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);-webkit-transition:border-color .1s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1)}.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt>*{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt.es-error{border-color:#f64a4a;border-radius:2px}.es-tabs-nav-box .es-tabs-nav li.is-active .es-tabs-nav-item-cnt,.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-nav-item-cnt{color:#409eff}.es-tabs-nav-box .es-tabs-nav li.has-close.has-pop .es-tabs-nav-item-cnt,.es-tabs-nav-box .es-tabs-nav li.has-close.is-active .es-tabs-nav-item-cnt,.es-tabs-nav-box .es-tabs-nav li.has-close:hover .es-tabs-nav-item-cnt{padding-left:13px;padding-right:9px}.es-tabs-nav-box .es-tabs-nav li.has-pop .es-tabs-close-box,.es-tabs-nav-box .es-tabs-nav li.is-active .es-tabs-close-box,.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-close-box{width:16px}.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-left-btn,.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-right-btn{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-tabs-nav-box .es-tabs-nav li.is-active{border-bottom-color:#fff}.es-tabs-nav-box.es-type-card .es-tabs-nav li{border-top:1px solid #dcdfe6;border-right:1px solid #dcdfe6}.es-tabs-nav-box.es-type-card .es-tabs-nav li:first-child{border-left:1px solid #dcdfe6;border-top-left-radius:4px}.es-tabs-nav-box.es-type-card .es-tabs-nav li:last-child{border-top-right-radius:4px}.es-tabs-nav-box.es-type-border-card{border-top:1px solid #dcdfe6;border-right:1px solid #dcdfe6;border-left:1px solid #dcdfe6;background:#f5f7fa}.es-tabs-nav-box.es-type-border-card .es-tabs-nav li{border-right:1px solid #dcdfe6;height:39px}.es-tabs-nav-box.es-type-border-card .es-tabs-nav li.is-active{background:#fff}.es-tabs-nav-box.es-type-border-card .es-tabs-nav li .es-tabs-nav-item-cnt{height:39px;line-height:39px}.es-tabs-nav-box.es-type-line .es-tabs-nav li.is-active{border-bottom-width:2px;border-bottom-color:#409eff}.es-tabs-nav-box .es-tabs-add{margin:0;padding:0;font-size:14px;width:18px;height:18px;line-height:16px;border:1px solid #dcdfe6;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:3px;text-align:center;cursor:pointer;position:absolute;right:2px;top:11px}.es-tabs-nav-box .es-tabs-add:before{top:7px;left:3px;width:10px;height:2px}.es-tabs-nav-box .es-tabs-add:after,.es-tabs-nav-box .es-tabs-add:before{content:\"\";display:block;position:absolute;border-radius:3px;background:#7b808c}.es-tabs-nav-box .es-tabs-add:after{top:3px;left:7px;width:2px;height:10px}.es-tabs-nav-box .es-tabs-add.disabled:after,.es-tabs-nav-box .es-tabs-add.disabled:before{background:#d5d7dc}.es-tabs-nav-box .es-tabs-close-box{margin:2px 0 0 0;padding:0;width:0;height:13px;line-height:13px;text-align:right;overflow:hidden;position:relative;-webkit-transition:all .3s cubic-bezier(.645,.045,.355,1);transition:all .3s cubic-bezier(.645,.045,.355,1)}.es-tabs-nav-box .es-tabs-close{margin:0;padding:0;width:13px;height:13px;line-height:16px;border:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:50%;cursor:pointer;outline:none;background-color:#fbfbfb;display:block;position:relative;background:transparent;transform:rotate(45deg);-webkit-transform:rotate(45deg);overflow:hidden;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}.es-tabs-nav-box .es-tabs-close:not(.disabled):hover{background:#c0c4cc!important}.es-tabs-nav-box .es-tabs-close:before{content:\"\";display:block;position:absolute;top:6px;left:2px;width:9px;height:1px;background:#409eff}.es-tabs-nav-box .es-tabs-close:after{content:\"\";display:block;position:absolute;border-radius:3px;top:2px;left:6px;width:1px;height:9px;background:#409eff}.es-tabs-nav-box .es-tabs-close:not(.disabled):hover:after,.es-tabs-nav-box .es-tabs-close:not(.disabled):hover:before{background:#fff}.es-tabs-nav-box .es-tabs-close.disabled:after,.es-tabs-nav-box .es-tabs-close.disabled:before{background:#d5d7dc}.es-tabs-nav-box .es-tabs-close.disabled{cursor:not-allowed}.es-tabs-nav-box .es-tabs-left-btn{display:none;margin:0;padding:0;width:13px;height:13px;line-height:16px;border:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:50%;cursor:pointer;outline:none;background-color:#fbfbfb;position:absolute;left:1px;top:1px}.es-tabs-nav-box .es-tabs-left-btn:not(.disabled):hover{background:#c0c4cc!important}.es-tabs-nav-box .es-tabs-left-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #409eff transparent transparent;position:relative;margin-right:1px}.es-tabs-nav-box .es-tabs-left-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #fbfbfb transparent transparent;margin:0;position:absolute;top:-4px;left:1px}.es-tabs-nav-box .es-tabs-left-btn:not(.disabled):hover .es-arrow{border-right-color:#fff}.es-tabs-nav-box .es-tabs-left-btn:not(.disabled):hover .es-arrow:before{border-right-color:#c0c4cc}.es-tabs-nav-box .es-tabs-left-btn.disabled .es-arrow{border-right-color:#d5d7dc;cursor:not-allowed}.es-tabs-nav-box .es-tabs-right-btn{display:none;margin:0;padding:0;width:13px;height:13px;line-height:16px;border:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:50%;cursor:pointer;outline:none;background-color:#fbfbfb;position:absolute;right:1px;top:1px}.es-tabs-nav-box .es-tabs-right-btn:not(.disabled):hover{background:#c0c4cc!important}.es-tabs-nav-box .es-tabs-right-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #409eff;position:relative;margin-left:1px}.es-tabs-nav-box .es-tabs-right-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #fbfbfb;margin:0;position:absolute;top:-4px;left:-5px}.es-tabs-nav-box .es-tabs-right-btn:not(.disabled):hover .es-arrow{border-left-color:#fff}.es-tabs-nav-box .es-tabs-right-btn:not(.disabled):hover .es-arrow:before{border-left-color:#c0c4cc}.es-tabs-nav-box .es-tabs-right-btn.disabled .es-arrow{border-left-color:#d5d7dc;cursor:not-allowed}", ""]);
+exports.push([module.i, ".es-tabs-nav-box{position:relative;margin:0 0 0 0;padding:0;border-bottom:1px solid #dcdfe6;-webkit-box-sizing:border-box;box-sizing:border-box;height:40px;display:-webkit-box;display:-ms-flexbox;display:flex}.es-tabs-nav-box .es-tabs-scroll-box{margin:0;padding:0;margin-bottom:-1px;overflow:hidden;-webkit-box-flex:1;-ms-flex:1;flex:1;-ms-flex-preferred-size:auto;flex-basis:auto}.es-tabs-nav-box .es-tabs-scroll-box:after,.es-tabs-nav-box .es-tabs-scroll-box:before{content:\".\";display:block;overflow:hidden;visibility:hidden;font-size:0;line-height:0;width:0;height:0}.es-tabs-nav-box .es-tabs-scroll-box:after{clear:both}.es-tabs-nav-box .help-box{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;overflow:hidden}.es-tabs-nav-box .es-tabs-scroll-wrap{position:relative;margin:0;padding:0;height:40px;max-width:100%}.es-tabs-nav-box .es-tabs-prev-btn{display:none;position:absolute;height:36px;border-radius:3px;padding:0 3px;left:3px;top:1px;cursor:pointer}.es-tabs-nav-box .es-tabs-prev-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #7b808c transparent transparent;position:relative}.es-tabs-nav-box .es-tabs-prev-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #fbfbfb transparent transparent;margin:0;position:absolute;top:-4px;left:1px}.es-tabs-nav-box .es-tabs-prev-btn:not(.disabled):hover{background:#eee}.es-tabs-nav-box .es-tabs-prev-btn:not(.disabled):hover .es-arrow{border-right-color:#409eff}.es-tabs-nav-box .es-tabs-prev-btn:not(.disabled):hover .es-arrow:before{border-right-color:#eee}.es-tabs-nav-box .es-tabs-prev-btn.disabled .es-arrow{border-right-color:#d5d7dc;cursor:not-allowed}.es-tabs-nav-box .es-tabs-next-btn{display:none;position:absolute;height:36px;border-radius:3px;padding:0 3px;right:3px;top:2px;cursor:pointer}.es-tabs-nav-box .es-tabs-next-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #7b808c;position:relative}.es-tabs-nav-box .es-tabs-next-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #fbfbfb;margin:0;position:absolute;top:-4px;left:-5px}.es-tabs-nav-box .es-tabs-next-btn:not(.disabled):hover{background:#eee}.es-tabs-nav-box .es-tabs-next-btn:not(.disabled):hover .es-arrow{border-left-color:#409eff}.es-tabs-nav-box .es-tabs-next-btn:not(.disabled):hover .es-arrow:before{border-left-color:#eee}.es-tabs-nav-box .es-tabs-next-btn.disabled .es-arrow{border-left-color:#d5d7dc;cursor:not-allowed}.es-tabs-nav-box .es-tabs-scroll-wrap.es-has-toggle .es-tabs-next-btn,.es-tabs-nav-box .es-tabs-scroll-wrap.es-has-toggle .es-tabs-prev-btn{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-tabs-nav-box .es-tabs-nav-wrap{margin:0;padding:0;-webkit-box-sizing:border-box;box-sizing:border-box;float:left;height:40px;max-width:100%;position:relative}.es-tabs-nav-box .es-tabs-nav-wrap.es-has-add{padding-right:28px}.es-tabs-nav-box .es-tabs-nav-scroll{overflow:hidden;-webkit-box-sizing:border-box;box-sizing:border-box;border-bottom:none;height:40px}.es-tabs-nav-box .es-tabs-nav{float:left;margin:0 0 0 0;padding:0;list-style:none;white-space:nowrap;-webkit-transition:left .3s;transition:left .3s;z-index:2}.es-tabs-nav-box .es-tabs-nav,.es-tabs-nav-box .es-tabs-nav li{position:relative;-webkit-box-sizing:border-box;box-sizing:border-box}.es-tabs-nav-box .es-tabs-nav li{display:inline-block;height:40px;border-bottom:1px solid transparent;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt{margin:0;white-space:nowrap;padding:0 19px;height:39px;-webkit-box-sizing:border-box;box-sizing:border-box;display:inline-block;list-style:none;font-size:15px;color:#303133;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;position:relative;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;border:1px solid transparent;transition:border-color .1s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1);-webkit-transition:border-color .1s cubic-bezier(.645,.045,.355,1),padding .3s cubic-bezier(.645,.045,.355,1)}.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt>*{-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}.es-tabs-nav-box .es-tabs-nav li .es-tabs-nav-item-cnt.es-error{border-color:#f64a4a;border-radius:2px}.es-tabs-nav-box .es-tabs-nav li.is-active .es-tabs-nav-item-cnt,.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-nav-item-cnt{color:#409eff}.es-tabs-nav-box .es-tabs-nav li.has-close.has-pop .es-tabs-nav-item-cnt,.es-tabs-nav-box .es-tabs-nav li.has-close.is-active .es-tabs-nav-item-cnt,.es-tabs-nav-box .es-tabs-nav li.has-close:hover .es-tabs-nav-item-cnt{padding-left:13px;padding-right:9px}.es-tabs-nav-box .es-tabs-nav li.has-pop .es-tabs-close-box,.es-tabs-nav-box .es-tabs-nav li.is-active .es-tabs-close-box,.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-close-box{width:16px}.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-left-btn,.es-tabs-nav-box .es-tabs-nav li:hover .es-tabs-right-btn{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center}.es-tabs-nav-box .es-tabs-nav li.is-active{border-bottom-color:#fff}.es-tabs-nav-box.es-type-card .es-tabs-nav li{border-top:1px solid #dcdfe6;border-right:1px solid #dcdfe6}.es-tabs-nav-box.es-type-card .es-tabs-nav li:first-child{border-left:1px solid #dcdfe6;border-top-left-radius:4px}.es-tabs-nav-box.es-type-card .es-tabs-nav li:last-child{border-top-right-radius:4px}.es-tabs-nav-box.es-type-border-card{border-top:1px solid #dcdfe6;border-right:1px solid #dcdfe6;border-left:1px solid #dcdfe6;background:#f5f7fa}.es-tabs-nav-box.es-type-border-card .es-tabs-nav li{border-right:1px solid #dcdfe6;height:39px}.es-tabs-nav-box.es-type-border-card .es-tabs-nav li.is-active{background:#fff}.es-tabs-nav-box.es-type-border-card .es-tabs-nav li .es-tabs-nav-item-cnt{height:39px;line-height:39px}.es-tabs-nav-box.es-type-line .es-tabs-nav li.is-active{border-bottom-width:2px;border-bottom-color:#409eff}.es-tabs-nav-box .es-tabs-add{margin:0;padding:0;font-size:14px;width:18px;height:18px;line-height:16px;border:1px solid #dcdfe6;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:3px;text-align:center;cursor:pointer;position:absolute;right:2px;top:11px}.es-tabs-nav-box .es-tabs-add:before{top:7px;left:3px;width:10px;height:2px}.es-tabs-nav-box .es-tabs-add:after,.es-tabs-nav-box .es-tabs-add:before{content:\"\";display:block;position:absolute;border-radius:3px;background:#7b808c}.es-tabs-nav-box .es-tabs-add:after{top:3px;left:7px;width:2px;height:10px}.es-tabs-nav-box .es-tabs-add.disabled:after,.es-tabs-nav-box .es-tabs-add.disabled:before{background:#d5d7dc}.es-tabs-nav-box .es-tabs-close-box{margin:2px 0 0 0;padding:0;width:0;height:13px;line-height:13px;text-align:right;overflow:hidden;position:relative;-webkit-transition:all .3s cubic-bezier(.645,.045,.355,1);transition:all .3s cubic-bezier(.645,.045,.355,1)}.es-tabs-nav-box .es-tabs-close{margin:0;padding:0;width:13px;height:13px;line-height:16px;border:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:50%;cursor:pointer;outline:none;background-color:#fbfbfb;display:block;position:relative;background:transparent;transform:rotate(45deg);-webkit-transform:rotate(45deg);overflow:hidden;-webkit-box-flex:0;-ms-flex-positive:0;flex-grow:0;-ms-flex-negative:0;flex-shrink:0;-ms-flex-preferred-size:auto;flex-basis:auto}.es-tabs-nav-box .es-tabs-close:not(.disabled):hover{background:#c0c4cc!important}.es-tabs-nav-box .es-tabs-close:before{content:\"\";display:block;position:absolute;top:6px;left:2px;width:9px;height:1px;background:#409eff}.es-tabs-nav-box .es-tabs-close:after{content:\"\";display:block;position:absolute;border-radius:3px;top:2px;left:6px;width:1px;height:9px;background:#409eff}.es-tabs-nav-box .es-tabs-close:not(.disabled):hover:after,.es-tabs-nav-box .es-tabs-close:not(.disabled):hover:before{background:#fff}.es-tabs-nav-box .es-tabs-close.disabled:after,.es-tabs-nav-box .es-tabs-close.disabled:before{background:#d5d7dc}.es-tabs-nav-box .es-tabs-close.disabled{cursor:not-allowed}.es-tabs-nav-box .es-tabs-left-btn{display:none;margin:0;padding:0;width:13px;height:13px;line-height:16px;border:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:50%;cursor:pointer;outline:none;background-color:#fbfbfb;position:absolute;left:1px;top:1px}.es-tabs-nav-box .es-tabs-left-btn:not(.disabled):hover{background:#c0c4cc!important}.es-tabs-nav-box .es-tabs-left-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #409eff transparent transparent;position:relative;margin-right:1px}.es-tabs-nav-box .es-tabs-left-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 4px 4px 0;border-color:transparent #fbfbfb transparent transparent;margin:0;position:absolute;top:-4px;left:1px}.es-tabs-nav-box .es-tabs-left-btn:not(.disabled):hover .es-arrow{border-right-color:#fff}.es-tabs-nav-box .es-tabs-left-btn:not(.disabled):hover .es-arrow:before{border-right-color:#c0c4cc}.es-tabs-nav-box .es-tabs-left-btn.disabled .es-arrow{border-right-color:#d5d7dc;cursor:not-allowed}.es-tabs-nav-box .es-tabs-right-btn{display:none;margin:0;padding:0;width:13px;height:13px;line-height:16px;border:none;-webkit-box-sizing:border-box;box-sizing:border-box;border-radius:50%;cursor:pointer;outline:none;background-color:#fbfbfb;position:absolute;right:1px;top:1px}.es-tabs-nav-box .es-tabs-right-btn:not(.disabled):hover{background:#c0c4cc!important}.es-tabs-nav-box .es-tabs-right-btn .es-arrow{margin:0;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #409eff;position:relative;margin-left:1px}.es-tabs-nav-box .es-tabs-right-btn .es-arrow:before{content:\"\";display:block;padding:0;width:0;height:0;font-size:0;border-style:solid;border-width:4px 0 4px 4px;border-color:transparent transparent transparent #fbfbfb;margin:0;position:absolute;top:-4px;left:-5px}.es-tabs-nav-box .es-tabs-right-btn:not(.disabled):hover .es-arrow{border-left-color:#fff}.es-tabs-nav-box .es-tabs-right-btn:not(.disabled):hover .es-arrow:before{border-left-color:#c0c4cc}.es-tabs-nav-box .es-tabs-right-btn.disabled .es-arrow{border-left-color:#d5d7dc;cursor:not-allowed}", ""]);
 
 // exports
 
@@ -5315,12 +5315,12 @@ if (typeof window !== 'undefined') {
 var object_keys = __webpack_require__("a4bb");
 var keys_default = /*#__PURE__*/__webpack_require__.n(object_keys);
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=2cd8e27c&
-var packagevue_type_template_id_2cd8e27c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=621bb716&
+var packagevue_type_template_id_621bb716_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=2cd8e27c&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=621bb716&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
@@ -5344,8 +5344,20 @@ var es6_string_includes = __webpack_require__("2fdb");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
 var es6_regexp_split = __webpack_require__("28a5");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=aded4c5c&
-var form_itemvue_type_template_id_aded4c5c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]:_c('es-base',{attrs:{"config":_vm.schema.title}})],2):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody ? "隐藏" : "打开")+"\n    ")]):_vm._e(),(_vm.schema.help)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties || _vm.schema.ui.showBody),expression:"!schema.properties || schema.ui.showBody"}],class:[
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
+var es6_array_iterator = __webpack_require__("cadf");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
+var es6_promise = __webpack_require__("551c");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
+var es6_object_assign = __webpack_require__("f751");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
+var es7_promise_finally = __webpack_require__("097d");
+
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=142de1c2&
+var form_itemvue_type_template_id_142de1c2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]:_c('es-base',{attrs:{"config":_vm.schema.title,"info":_vm.schema.__info}})],2):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody ? "隐藏" : "打开")+"\n    ")]):_vm._e(),(_vm.schema.help)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties || _vm.schema.ui.showBody),expression:"!schema.properties || schema.ui.showBody"}],class:[
       'es-form-body',
       _vm.schema.ui && _vm.schema.ui.hasBorder ? 'es-body-border' : ''
     ],style:(_vm.bodyStyle)},[(!_vm.schema.array)?[(_vm.schema.component)?_c('div',{class:[
@@ -5362,16 +5374,16 @@ var form_itemvue_type_template_id_aded4c5c_render = function () {var _vm=this;va
               _vm.schema.component.flex
                 ? 'es-form-component-' + _vm.schema.component.flex
                 : ''
-            ],attrs:{"config":_vm.schema.component,"emitEvents":_vm.schema.component.__emitEvents,"nativeEvents":_vm.schema.component.__nativeEvents},on:{"trigger":_vm.triggerHandler},model:{value:(_vm.schema.value),callback:function ($$v) {_vm.$set(_vm.schema, "value", $$v)},expression:"schema.value"}})],1),(_vm.schema.unit && !_vm.schema.__inGroups)?[(_vm.schema.unit.name)?_c('div',{staticClass:"es-form-unit"},[_c('es-base',{attrs:{"config":_vm.schema.unit}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.unit.text),expression:"schema.unit.text"}],staticClass:"es-form-unit"},[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")])]:_vm._e(),(_vm.schema.help && !_vm.schema.__inGroups && _vm.showHelpInBody)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()],2):(
+            ],attrs:{"config":_vm.schema.component},on:{"trigger":_vm.triggerHandler}})],1),(_vm.schema.unit && !_vm.schema.__inGroups)?[(_vm.schema.unit.name)?_c('div',{staticClass:"es-form-unit"},[_c('es-base',{attrs:{"config":_vm.schema.unit,"info":_vm.schema.__info}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.unit.text),expression:"schema.unit.text"}],staticClass:"es-form-unit"},[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")])]:_vm._e(),(_vm.schema.help && !_vm.schema.__inGroups && _vm.showHelpInBody)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()],2):(
           _vm.schema.properties && _vm.schema.layout && _vm.schema.layout.name === 'tabs'
-        )?_c('tabs',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refTabs__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):(_vm.schema.properties)?_c('es-object',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refObject__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):_vm._e()]:[(_vm.schema.array.name == 'array')?_c('array-row',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-legend')?_c('array-legend',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-card')?_c('array-card',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarCard__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):(_vm.schema.array.name == 'array-table')?_c('array-table',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTable__",refInFor:true,attrs:{"schema":props.schema,"showHelpInBody":false}})]}}})],null,true)}):(_vm.schema.array && _vm.schema.array.name == 'array-tabs')?_c('array-tabs',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e()],_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error"},[_vm._v("\n      "+_vm._s(_vm.schema.__invalidMsg)+"\n    ")]),(_vm.schema.desc)?_c('div',{staticClass:"es-form-desc"},[(_vm.schema.desc.name)?_c('es-base',{attrs:{"config":_vm.schema.desc}}):[_vm._v("\n        "+_vm._s(_vm.schema.desc.text)+"\n      ")]],2):_vm._e()],2)])}
-var form_itemvue_type_template_id_aded4c5c_staticRenderFns = []
+        )?_c('tabs',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refTabs__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):(_vm.schema.properties)?_c('es-object',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refObject__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):_vm._e()]:[(_vm.schema.array.name == 'array')?_c('array-row',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-legend')?_c('array-legend',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-card')?_c('array-card',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarCard__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):(_vm.schema.array.name == 'array-table')?_c('array-table',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTable__",refInFor:true,attrs:{"schema":props.schema,"showHelpInBody":false}})]}}})],null,true)}):(_vm.schema.array && _vm.schema.array.name == 'array-tabs')?_c('array-tabs',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e()],_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error"},[_vm._v("\n      "+_vm._s(_vm.schema.__invalidMsg)+"\n    ")]),(_vm.schema.desc)?_c('div',{staticClass:"es-form-desc"},[(_vm.schema.desc.name)?_c('es-base',{attrs:{"config":_vm.schema.desc,"info":_vm.schema.__info}}):[_vm._v("\n        "+_vm._s(_vm.schema.desc.text)+"\n      ")]],2):_vm._e()],2)])}
+var form_itemvue_type_template_id_142de1c2_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=aded4c5c&
+// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=142de1c2&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=40c5dce4&
-var objectvue_type_template_id_40c5dce4_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=56aa2349&
+var objectvue_type_template_id_56aa2349_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
         marginTop: fieldSchema.rowSpace + 'px',
         paddingLeft: fieldSchema.offsetLeft + 'px',
         paddingRight: fieldSchema.offsetRight + 'px'
@@ -5397,7 +5409,7 @@ var objectvue_type_template_id_40c5dce4_render = function () {var _vm=this;var _
             ])},[(
                 _vm.schema.properties[fieldKeyName].rules &&
                   _vm.schema.properties[fieldKeyName].rules.required
-              )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!_vm.schema.properties[fieldKeyName].label.name)?[_c('span',[_vm._v(_vm._s(_vm.schema.properties[fieldKeyName].label.text))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].label}})],1),(_vm.schema.properties[fieldKeyName].colon)?_c('span',{staticClass:"es-form-colon"},[_vm._v(":")]):_vm._e()],2):_vm._e(),(_vm.schema.properties[fieldKeyName].__creatable)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'content-' + fieldKeyName,staticClass:"es-form-comp-content",style:([
+              )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!_vm.schema.properties[fieldKeyName].label.name)?[_c('span',[_vm._v(_vm._s(_vm.schema.properties[fieldKeyName].label.text))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].label,"info":_vm.schema.properties[fieldKeyName].__info}})],1),(_vm.schema.properties[fieldKeyName].colon)?_c('span',{staticClass:"es-form-colon"},[_vm._v(":")]):_vm._e()],2):_vm._e(),(_vm.schema.properties[fieldKeyName].__creatable)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'content-' + fieldKeyName,staticClass:"es-form-comp-content",style:([
               {
                 minHeight: _vm.schema.properties[fieldKeyName].rowHeight + 'px',
                 marginLeft:
@@ -5412,7 +5424,7 @@ var objectvue_type_template_id_40c5dce4_render = function () {var _vm=this;var _
                 _vm.schema.properties[fieldKeyName].__creatable
             )?[(_vm.schema.properties[fieldKeyName].unit.name)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'unit-' + fieldKeyName,staticClass:"es-form-unit",style:([
                 { height: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
-              ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].unit}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(
+              ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].unit,"info":_vm.schema.properties[fieldKeyName].__info}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(
                 !_vm.schema.properties[fieldKeyName].hidden &&
                   _vm.schema.properties[fieldKeyName].unit.text
               ),expression:"\n                !schema.properties[fieldKeyName].hidden &&\n                  schema.properties[fieldKeyName].unit.text\n              "}],key:'unit-' + fieldKeyName,staticClass:"es-form-unit",style:([
@@ -5422,7 +5434,7 @@ var objectvue_type_template_id_40c5dce4_render = function () {var _vm=this;var _
                 _vm.schema.properties[fieldKeyName].__creatable
             )?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:'help-' + fieldKeyName,staticClass:"es-form-help",style:([
               { height: _vm.schema.properties[fieldKeyName].rowHeight + 'px' }
-            ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].help}})],1):_vm._e()]:_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:fieldKeyName,class:[
+            ])},[_c('es-base',{attrs:{"config":_vm.schema.properties[fieldKeyName].help,"info":_vm.schema.properties[fieldKeyName].__info}})],1):_vm._e()]:_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties[fieldKeyName].hidden),expression:"!schema.properties[fieldKeyName].hidden"}],key:fieldKeyName,class:[
             'es-form-placeholder',
             'es-col-' + _vm.schema.properties[fieldKeyName].col
           ]})]})],2):(
@@ -5457,15 +5469,15 @@ var objectvue_type_template_id_40c5dce4_render = function () {var _vm=this;var _
                 ]
               : { textAlign: fieldSchema.label.align })},[(fieldSchema.rules && fieldSchema.rules.required)?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!fieldSchema.label.name)?[_c('span',[_vm._v(_vm._s(fieldSchema.direction != "v" || fieldSchema.label.text
                 ? fieldSchema.label.text
-                : " "))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":fieldSchema.label}})],1),(fieldSchema.colon)?_c('span',{staticClass:"es-form-colon"},[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{class:fieldSchema.properties
+                : " "))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":fieldSchema.label,"info":fieldSchema.__info}})],1),(fieldSchema.colon)?_c('span',{staticClass:"es-form-colon"},[_vm._v(":")]):_vm._e()],2):_vm._e(),_c('div',{class:fieldSchema.properties
               ? 'es-form-props-content'
               : 'es-form-comp-content',style:(fieldSchema.direction == 'h'
               ? [{ minHeight: fieldSchema.rowHeight + 'px' }]
               : '')},[_vm._t(fieldName)],2)]):_vm._e()]:(!fieldSchema.__inGroups && !fieldSchema.component)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.hidden),expression:"!fieldSchema.hidden"}],key:fieldName,class:['es-form-object', 'es-col-' + fieldSchema.col],style:({ marginTop: fieldSchema.rowSpace + 'px' })}):_vm._e()]})],2)}
-var objectvue_type_template_id_40c5dce4_staticRenderFns = []
+var objectvue_type_template_id_56aa2349_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=template&id=40c5dce4&
+// CONCATENATED MODULE: ./src/package/layout/object.vue?vue&type=template&id=56aa2349&
 
 // CONCATENATED MODULE: ./src/package/mixins/item-mixin.js
 /* harmony default export */ var item_mixin = ({
@@ -5484,9 +5496,6 @@ var objectvue_type_template_id_40c5dce4_staticRenderFns = []
     }
   }
 });
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
-var es6_number_constructor = __webpack_require__("c5f6");
-
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
 var object_assign = __webpack_require__("5176");
 var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
@@ -5881,23 +5890,7 @@ var utils = {
   }
 };
 /* harmony default export */ var libs_utils = (utils);
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
-var es7_promise_finally = __webpack_require__("097d");
-
 // CONCATENATED MODULE: ./src/package/libs/constant.js
-
-
-
-
 var constant = {
   // HELP_NAME: "es-help", //注册时用的全局名字
   UI_MAX_COL: 24,
@@ -5954,7 +5947,6 @@ var constant = {
 
 
 
-
 /**
  * base.js
  *
@@ -5990,7 +5982,13 @@ var constant = {
       if (configProps.type === libs_constant.TYPE_RADIO) {
         assign_default()(newAttrs, configProps);
 
-        newAttrs.checked = this.value === configProps.value;
+        if (this.config.hasOwnProperty("value")) {
+          // 用户设置了value的情况
+          newAttrs.checked = this.config.value === configProps.value;
+        } else {
+          // 没有用户value
+          newAttrs.checked = configProps.hasOwnProperty("checked") && configProps.checked !== false ? true : false;
+        }
 
         assign_default()(newProps, configProps);
 
@@ -6002,23 +6000,27 @@ var constant = {
       } else {
         var checked = false;
 
-        if (!libs_utils.isUndef(configProps.trueValue)) {
-          // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
-          if (this.value === configProps.trueValue) {
-            checked = true;
+        if (this.config.hasOwnProperty("value")) {
+          if (!libs_utils.isUndef(configProps.trueValue)) {
+            // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
+            if (this.config.value === configProps.trueValue) {
+              checked = true;
+            } else {
+              checked = false;
+            }
+          } else if (!libs_utils.isUndef(configProps.falseValue)) {
+            // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
+            if (this.config.value === configProps.falseValue) {
+              checked = false;
+            } else {
+              checked = true;
+            }
           } else {
-            checked = false;
-          }
-        } else if (!libs_utils.isUndef(configProps.falseValue)) {
-          // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
-          if (this.value === configProps.falseValue) {
-            checked = false;
-          } else {
-            checked = true;
+            // 经测试：当trueValue和falseValue没有指定，checked才为!!this.config.value
+            checked = !!this.config.value;
           }
         } else {
-          // 经测试：当trueValue和falseValue没有指定，checked才为!!this.value
-          checked = !!this.value;
+          checked = configProps.hasOwnProperty("checked") && configProps.checked !== false ? true : false;
         }
 
         assign_default()(newAttrs, configProps);
@@ -6034,7 +6036,13 @@ var constant = {
         domProps.checked = newAttrs.checked;
       }
     } else {
-      var newValue = libs_utils.isRefVal(this.value) ? libs_utils.deepCopy(this.value) : this.value; // 这样防止引用地址被组件内部修改
+      var newValue;
+
+      if (this.config.hasOwnProperty("value")) {
+        newValue = libs_utils.isRefVal(this.config.value) ? libs_utils.deepCopy(this.config.value) : this.config.value; // 这样防止引用地址被组件内部修改
+      } else {
+        newValue = configProps.value;
+      }
 
       if (!libs_constant.FORM_INPUTS.includes(componentName)) {
         assign_default()(newAttrs, configProps);
@@ -6068,29 +6076,17 @@ var constant = {
 
     var vnode = createElement(this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
     {
-      // attrs: this.config.props, //attrs为原生属性
       attrs: newAttrs,
+      //attrs为原生属性
       // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
       // this.config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
       class: this.config.class,
       style: this.config.style,
       // this.config.style必须是一个对象才能有效；原理同上
-      // DOM属性
       domProps: domProps,
-      // domProps: {
-      //   // innerHTML: "baz"
-      //   // value: this.config.value
-      // },
-      // 组件props
+      // DOM属性
       props: newProps,
-      // props: {
-      //   // myProp: "bar",
-      //   value: utils.isRefVal(this.value)
-      //     ? utils.deepCopy(this.value)
-      //     : this.value, // 这样防止引用地址被组件内部修改
-      //   ...this.config.props
-      //   // clearable: true,
-      // },
+      // 组件props
       // 事件监听基于 "on"
       // 所以不再支持如 "v-on:keyup.enter" 修饰语
       // 需要手动匹配 KeyCode
@@ -6158,29 +6154,35 @@ var constant = {
       required: true,
       default: function _default() {
         return {
-          name: "",
-          //lg-element 组件 原生组件
+          name: "" //lg-element 组件 原生组件
           // value: "",
           // attrs: {},
           // style: {},
           // class: {},
-          props: {}
+          // props: {}
+
         };
       }
     },
-    emitEvents: {
-      type: Array,
+    // 当!!this.info为非真时，处理事件会让父级处理
+    info: {
+      type: Object,
       required: false,
-      default: null
-    },
-    nativeEvents: {
-      type: Array,
-      required: false,
-      default: null
-    },
-    value: {
-      type: [Object, String, Date, Array, Boolean, Number],
-      required: false
+      default: undefined // emitEvents: {
+      //   type: Array,
+      //   required: false,
+      //   default: null
+      // },
+      // nativeEvents: {
+      //   type: Array,
+      //   required: false,
+      //   default: null
+      // },
+      // value: {
+      //   type: [Object, String, Date, Array, Boolean, Number],
+      //   required: false
+      // }
+
     }
   },
   data: function data() {
@@ -6197,7 +6199,52 @@ var constant = {
       this.createOn();
     },
     eventHandler: function eventHandler(eventName, eventData) {
-      this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
+      if (!this.info) {
+        // 让父类去处理
+        this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
+      } else {
+        // 一般组件，自己处理
+        var options = {
+          value: libs_utils.deepCopy(this.config.value),
+          event: eventData,
+          pathKey: this.info.pathKey,
+          index: this.info.index,
+          idxChain: this.info.idxChain,
+          target: this.$refs.__comTarget__
+        };
+        var handlers = [];
+        var actions = this.config.actions;
+
+        if (actions) {
+          actions.forEach(function (action) {
+            if (action.trigger && action.trigger.includes(eventName)) {
+              handlers.push(action.handler);
+            }
+          });
+        }
+
+        if (handlers.length > 0) {
+          var thisFrom = this.__getForm();
+
+          thisFrom._handleEvents(handlers, options);
+        }
+      }
+    },
+    __getForm: function __getForm() {
+      var formItem = this.$parent;
+
+      while (formItem) {
+        var type = formItem._getType ? formItem._getType() : "";
+
+        if (type == libs_constant.UI_FORM) {
+          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          return formItem; // 到达表单层
+        } else if (type == libs_constant.UI_ARRAY) {// checkSchema.push(formItem._getSchema());
+        } else {// ... 往上派
+          }
+
+        formItem = formItem.$parent;
+      }
     },
     __parseInputEvent: function __parseInputEvent(eventData) {
       var eventValue;
@@ -6254,30 +6301,35 @@ var constant = {
     createOn: function createOn() {
       var _this = this;
 
+      var hasOwnValue = this.config.hasOwnProperty("value");
       var emitEvents;
 
-      if (this.emitEvents) {
-        emitEvents = libs_utils.deepCopy(this.emitEvents);
+      if (this.config.__emitEvents) {
+        emitEvents = libs_utils.deepCopy(this.config.__emitEvents);
 
-        if (!emitEvents.includes(libs_constant.INPUT_EVENT)) {
+        if (hasOwnValue && !emitEvents.includes(libs_constant.INPUT_EVENT)) {
           emitEvents.push(libs_constant.INPUT_EVENT);
         }
       } else {
-        emitEvents = [libs_constant.INPUT_EVENT];
+        if (hasOwnValue) {
+          emitEvents = [libs_constant.INPUT_EVENT];
+        } else {
+          emitEvents = [];
+        }
       } // emit发出的事件
 
 
       var emitOn = {};
       emitEvents.forEach(function (eventName) {
-        if (eventName == libs_constant.INPUT_EVENT) {
+        if (eventName == libs_constant.INPUT_EVENT && hasOwnValue) {
           emitOn[eventName] = function (eventData) {
-            var eventValue = _this.__parseInputEvent(eventData); // console.log("eventValue: ", this.value, eventValue);
+            var eventValue = _this.__parseInputEvent(eventData);
 
+            if (_this.config.value !== eventValue) {
+              // this.$emit("input", eventValue);
+              _this.config.value = eventValue;
 
-            if (_this.value !== eventValue) {
-              _this.$emit("input", eventValue);
-
-              _this.eventHandler(eventName, eventValue);
+              _this.eventHandler(eventName, eventData);
             }
           };
         } else {
@@ -6289,9 +6341,9 @@ var constant = {
       this.$data.emitOn = keys_default()(emitOn).length > 0 ? emitOn : null; //原生事件
       // emit发出的事件
 
-      if (this.nativeEvents && this.nativeEvents.length > 0) {
+      if (this.config.__nativeEvents && this.config.__nativeEvents.length > 0) {
         var nativeOn = {};
-        var nativeEvents = libs_utils.deepCopy(this.nativeEvents);
+        var nativeEvents = libs_utils.deepCopy(this.config.__nativeEvents);
         nativeEvents.forEach(function (eventName) {
           nativeOn[eventName] = function (eventData) {
             _this.eventHandler(eventName + "." + libs_constant.ADJ_NATIVE, eventData);
@@ -6317,6 +6369,14 @@ var constant = {
   }
 });
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=script&lang=js&
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -6802,8 +6862,8 @@ function normalizeComponent (
 
 var object_component = normalizeComponent(
   layout_objectvue_type_script_lang_js_,
-  objectvue_type_template_id_40c5dce4_render,
-  objectvue_type_template_id_40c5dce4_staticRenderFns,
+  objectvue_type_template_id_56aa2349_render,
+  objectvue_type_template_id_56aa2349_staticRenderFns,
   false,
   null,
   null,
@@ -6812,8 +6872,8 @@ var object_component = normalizeComponent(
 )
 
 /* harmony default export */ var object = (object_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-row.vue?vue&type=template&id=0047e778&
-var array_rowvue_type_template_id_0047e778_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-box"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-row.vue?vue&type=template&id=37b2cb8b&
+var array_rowvue_type_template_id_37b2cb8b_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-box"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
           marginTop: (index > 0 ? _vm.schema.array.rowSpace : 0) + 'px'
         })},[(_vm.schema.array.hasOrder !== false)?_c('div',{staticClass:"es-order-box",style:({
             height: _vm.schema.properties
@@ -6851,14 +6911,14 @@ var array_rowvue_type_template_id_0047e778_render = function () {var _vm=this;va
       height: _vm.schema.properties
         ? _vm.schema.ui.rowHeight + 'px'
         : _vm.schema.rowHeight + 'px'
-    })},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()])}
-var array_rowvue_type_template_id_0047e778_staticRenderFns = []
+    })},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()])}
+var array_rowvue_type_template_id_37b2cb8b_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-row.vue?vue&type=template&id=0047e778&
+// CONCATENATED MODULE: ./src/package/layout/array-row.vue?vue&type=template&id=37b2cb8b&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/tabs.vue?vue&type=template&id=7d20730d&
-var tabsvue_type_template_id_7d20730d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-layout-tabs"},[_c('es-tabs-nav',{attrs:{"type":_vm.schema.layout.type}},[_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return [(!itemSchema.hidden)?_c('es-tabs-nav-item',{key:fieldName,attrs:{"required":itemSchema.rules && itemSchema.rules.required,"is-active":fieldName === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"index":fieldName},on:{"clickActive":_vm.clickActiveHandler}},[(!itemSchema.label.name)?[_c('span',[_vm._v(_vm._s(itemSchema.label.text ? itemSchema.label.text : fieldName + ""))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.label}})],1)],2):_vm._e()]})],2),_c('ul',{staticClass:"es-tabs-body",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/tabs.vue?vue&type=template&id=478ec2f6&
+var tabsvue_type_template_id_478ec2f6_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-layout-tabs"},[_c('es-tabs-nav',{attrs:{"type":_vm.schema.layout.type}},[_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return [(!itemSchema.hidden)?_c('es-tabs-nav-item',{key:fieldName,attrs:{"required":itemSchema.rules && itemSchema.rules.required,"is-active":fieldName === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"index":fieldName},on:{"clickActive":_vm.clickActiveHandler}},[(!itemSchema.label.name)?_c('span',[_vm._v(_vm._s(itemSchema.label.text ? itemSchema.label.text : fieldName + ""))]):_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.label,"info":itemSchema.__info}})],1)]):_vm._e()]})],2),_c('ul',{staticClass:"es-tabs-body",style:({
       padding: _vm.schema.layout.hasBorder
         ? _vm.schema.layout.padding
           ? _vm.schema.layout.padding
@@ -6868,19 +6928,22 @@ var tabsvue_type_template_id_7d20730d_render = function () {var _vm=this;var _h=
         : Math.min(_vm.schema.ui.rowSpace, 10) + 'px 0 0 0',
       'border-width': _vm.schema.layout.hasBorder ? '1px' : '0px'
     })},[_vm._l((_vm.schema.properties),function(itemSchema,fieldName){return [(itemSchema.__creatable)?_c('li',{directives:[{name:"show",rawName:"v-show",value:(fieldName === _vm.schema.__tabsIndex && !itemSchema.hidden),expression:"fieldName === schema.__tabsIndex && !itemSchema.hidden"}],key:fieldName},[_vm._t(fieldName)],2):_vm._e()]})],2)],1)}
-var tabsvue_type_template_id_7d20730d_staticRenderFns = []
+var tabsvue_type_template_id_478ec2f6_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/tabs.vue?vue&type=template&id=7d20730d&
+// CONCATENATED MODULE: ./src/package/layout/tabs.vue?vue&type=template&id=478ec2f6&
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav.vue?vue&type=template&id=6b803b28&
-var tabs_navvue_type_template_id_6b803b28_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.boxClass},[_c('div',{ref:"scrollBox",staticClass:"es-tabs-scroll-box"},[_c('div',{class:['es-tabs-scroll-wrap', _vm.showToggle ? 'es-has-toggle' : ''],style:({ padding: _vm.showToggle ? '0 ' + _vm.toggleZoneWidth + 'px' : '0' })},[_c('div',{class:['es-tabs-nav-wrap', _vm.hasAdd ? 'es-has-add' : '']},[_c('div',{staticClass:"es-tabs-nav-scroll"},[_c('ul',{ref:"scrollWrap",staticClass:"es-tabs-nav",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/tabs-nav.vue?vue&type=template&id=15a1178a&
+var tabs_navvue_type_template_id_15a1178a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{class:_vm.boxClass},[_c('div',{ref:"scrollBox",staticClass:"es-tabs-scroll-box"},[_c('div',{class:['es-tabs-scroll-wrap', _vm.showToggle ? 'es-has-toggle' : ''],style:({ padding: _vm.showToggle ? '0 ' + _vm.toggleZoneWidth + 'px' : '0' })},[_c('div',{class:['es-tabs-nav-wrap', _vm.hasAdd ? 'es-has-add' : '']},[_c('div',{staticClass:"es-tabs-nav-scroll"},[_c('ul',{ref:"scrollWrap",staticClass:"es-tabs-nav",style:({
               left: _vm.navX + 'px'
             })},[_vm._t("default")],2)]),(_vm.hasAdd)?_c('es-tabs-btn',{staticClass:"es-tabs-add es-btn",attrs:{"disabled":_vm.canAdd},on:{"click":_vm.addItemHandler}}):_vm._e()],1),_c('span',{staticClass:"es-tabs-prev-btn",on:{"click":_vm.clickPrevHandler}},[_c('span',{staticClass:"es-arrow"})]),_c('span',{staticClass:"es-tabs-next-btn",on:{"click":_vm.clickNextHandler}},[_c('span',{staticClass:"es-arrow"})])])]),_c('div',{staticClass:"help-box"},[_vm._t("help")],2)])}
-var tabs_navvue_type_template_id_6b803b28_staticRenderFns = []
+var tabs_navvue_type_template_id_15a1178a_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/components/tabs-nav.vue?vue&type=template&id=6b803b28&
+// CONCATENATED MODULE: ./src/package/components/tabs-nav.vue?vue&type=template&id=15a1178a&
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
+var es6_number_constructor = __webpack_require__("c5f6");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.match.js
 var es6_regexp_match = __webpack_require__("4917");
@@ -8268,8 +8331,8 @@ var tabs_navvue_type_style_index_0_lang_scss_ = __webpack_require__("aef7");
 
 var tabs_nav_component = normalizeComponent(
   components_tabs_navvue_type_script_lang_js_,
-  tabs_navvue_type_template_id_6b803b28_render,
-  tabs_navvue_type_template_id_6b803b28_staticRenderFns,
+  tabs_navvue_type_template_id_15a1178a_render,
+  tabs_navvue_type_template_id_15a1178a_staticRenderFns,
   false,
   null,
   null,
@@ -8279,6 +8342,7 @@ var tabs_nav_component = normalizeComponent(
 
 /* harmony default export */ var tabs_nav = (tabs_nav_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/tabs.vue?vue&type=script&lang=js&
+//
 //
 //
 //
@@ -8379,7 +8443,7 @@ var tabs_nav_component = normalizeComponent(
       var form = this.__getForm();
 
       form._toggleUi("tabs", {
-        key: this.schema.__pathKey,
+        key: this.schema.__info.pathKey,
         index: index
       });
     },
@@ -8390,7 +8454,7 @@ var tabs_nav_component = normalizeComponent(
         var type = formItem._getType ? formItem._getType() : "";
 
         if (type == libs_constant.UI_FORM) {
-          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
           return formItem; // 到达表单层
         } else if (type == libs_constant.UI_ARRAY) {// checkSchema.push(formItem._getSchema());
         } else {// ... 往上派
@@ -8420,8 +8484,8 @@ var tabsvue_type_style_index_0_lang_scss_ = __webpack_require__("8744");
 
 var tabs_component = normalizeComponent(
   layout_tabsvue_type_script_lang_js_,
-  tabsvue_type_template_id_7d20730d_render,
-  tabsvue_type_template_id_7d20730d_staticRenderFns,
+  tabsvue_type_template_id_478ec2f6_render,
+  tabsvue_type_template_id_478ec2f6_staticRenderFns,
   false,
   null,
   null,
@@ -8787,7 +8851,6 @@ var formUtils = {
 
     if (propItem.array) {
       if (libs_utils.isArr(value)) {
-        // console.log(propItem.__pathKey, "in...");
         var hasChanged = false;
         var schemaList = propItem.__propSchemaList;
 
@@ -8811,7 +8874,7 @@ var formUtils = {
 
 
         if (hasChanged && !hasIdxChainChanged) {
-          this.resetIndexArr(propItem, propItem.__idxChain, propItem.__pathKey);
+          this.resetIndexArr(propItem, propItem.__info.idxChain, propItem.__info.pathKey);
         }
       } else {
         // 值的格式不区配，不必理会
@@ -8833,7 +8896,7 @@ var formUtils = {
         tmpValue = value;
       }
 
-      propItem.value = tmpValue;
+      propItem.component.value = tmpValue;
     } else if (propItem.properties) {
       if (libs_utils.isObj(value)) {
         for (var key in propItem.properties) {
@@ -8908,12 +8971,12 @@ var formUtils = {
     // console.log(":", pathKey, ":", pathKey);
     if (propItem.array) {
       // 因为__propSchemaList里面的item不会含array
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
       }
 
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
       }
 
       var schemaList = propItem.__propSchemaList;
@@ -8929,35 +8992,47 @@ var formUtils = {
 
 
     if (propItem.component) {
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
       }
 
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
       }
 
-      if (propItem.__index != currentIndex) {
-        propItem.__index = currentIndex;
+      if (propItem.__info.index != currentIndex) {
+        propItem.__info.index = currentIndex;
       }
     } else if (propItem.properties) {
-      if (propItem.__idxChain != idxChain) {
-        propItem.__idxChain = idxChain;
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
       }
 
-      if (propItem.__pathKey != pathKey) {
-        propItem.__pathKey = pathKey;
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
       }
 
-      if (propItem.__index != currentIndex) {
-        propItem.__index = currentIndex;
+      if (propItem.__info.index != currentIndex) {
+        propItem.__info.index = currentIndex;
       }
 
       for (var key in propItem.properties) {
         this.resetIndexArr(propItem.properties[key], idxChain, pathKey + "." + key, fromArray ? currentIndex : -1, // 因为__propSchemaList的构成是[{properties: {}}]
         false);
       }
-    } else {//可能是占位对象
+    } else {
+      //可能是占位对象
+      if (propItem.__info.idxChain != idxChain) {
+        propItem.__info.idxChain = idxChain;
+      }
+
+      if (propItem.__info.pathKey != pathKey) {
+        propItem.__info.pathKey = pathKey;
+      }
+
+      if (propItem.__info.index != currentIndex) {
+        propItem.__info.index = currentIndex;
+      }
     }
   },
 
@@ -9207,7 +9282,7 @@ var formUtils = {
             tmpValue = value;
           }
 
-          targetSchema.value = tmpValue;
+          targetSchema.component.value = tmpValue;
         }
       } else if (targetSchema.properties) {
         if (targetSchema.array) {
@@ -9264,9 +9339,9 @@ var formUtils = {
 
     var parseSources = assign_default()({}, baseParseSources);
 
-    parseSources.index = propItem.__index;
-    parseSources.idxChain = propItem.__idxChain;
-    parseSources.pathKey = propItem.__pathKey;
+    parseSources.index = propItem.__info.index;
+    parseSources.idxChain = propItem.__info.idxChain;
+    parseSources.pathKey = propItem.__info.pathKey;
     var formData = baseParseSources.rootData; // 当false没有值时，证明是表单的内容取值，后不的解析不用执行，提高效率
     // formData有值，说明propItem.hidden都是已经出来的了，不做es转换，省资源
 
@@ -9291,13 +9366,13 @@ var formUtils = {
         if (formData) {
           if (propItem.format) {
             // 不是最终取值，或没有格式转换
-            return this.getFormatValue(propItem.format, propItem.value, false);
+            return this.getFormatValue(propItem.format, propItem.component.value, false);
           } else {
-            return propItem.value;
+            return propItem.component.value;
           }
         } else {
           // form 内部取值
-          return propItem.value;
+          return propItem.component.value;
         }
       }
     } else if (propItem.properties) {
@@ -9439,9 +9514,9 @@ var formUtils = {
 
     var parseSources = assign_default()({}, baseParseSources);
 
-    parseSources.index = propItem.__index;
-    parseSources.idxChain = propItem.__idxChain;
-    parseSources.pathKey = propItem.__pathKey;
+    parseSources.index = propItem.__info.index;
+    parseSources.idxChain = propItem.__info.idxChain;
+    parseSources.pathKey = propItem.__info.pathKey;
 
     if (propItem.component) {
       if (propItem.__rawHidden) {
@@ -9760,9 +9835,9 @@ var formUtils = {
               //正常成员
               var nextParseSources = assign_default()({}, baseParseSources);
 
-              nextParseSources.index = nextPropItem.__index;
-              nextParseSources.idxChain = nextPropItem.__idxChain;
-              nextParseSources.pathKey = nextPropItem.__pathKey;
+              nextParseSources.index = nextPropItem.__info.index;
+              nextParseSources.idxChain = nextPropItem.__info.idxChain;
+              nextParseSources.pathKey = nextPropItem.__info.pathKey;
               isHidden = libs_parse.smartEsValue(nextPropItem.__rawHidden, nextParseSources); // console.log(nextPropItem.col, isHidden);
 
               if (!isHidden) {
@@ -9887,9 +9962,9 @@ var formUtils = {
       if (!propSchema.layout || propSchema.layout.name !== libs_constant.LAYOUT_SPACE) {
         var parseSources = assign_default()({}, baseParseSources);
 
-        parseSources.index = propSchema.__index;
-        parseSources.idxChain = propSchema.__idxChain;
-        parseSources.pathKey = propSchema.__pathKey;
+        parseSources.index = propSchema.__info.index;
+        parseSources.idxChain = propSchema.__info.idxChain;
+        parseSources.pathKey = propSchema.__info.pathKey;
         result = libs_parse.smartEsValue(propSchema.__rawHidden, parseSources); // console.log("fieldKeyName: " + fieldKeyName, result);
       } else {
         //占位空间是不可见的
@@ -10034,7 +10109,7 @@ var formUtils = {
 
         this.schema.__propSchemaList.splice(index, 1);
 
-        form_utils.resetIndexArr(this.schema, this.schema.__idxChain, this.schema.__pathKey);
+        form_utils.resetIndexArr(this.schema, this.schema.__info.idxChain, this.schema.__info.pathKey);
         var eventData = {
           type: "delete",
           index: index,
@@ -10061,7 +10136,7 @@ var formUtils = {
       if (index > 0 && index < this.schema.__propSchemaList.length) {
         this.schema.__propSchemaList.splice(index - 1, 0, this.schema.__propSchemaList.splice(index, 1)[0]);
 
-        form_utils.resetIndexArr(this.schema, this.schema.__idxChain, this.schema.__pathKey);
+        form_utils.resetIndexArr(this.schema, this.schema.__info.idxChain, this.schema.__info.pathKey);
         var eventData = {
           type: "up",
           index: index
@@ -10074,7 +10149,7 @@ var formUtils = {
       if (index >= 0 && index < this.schema.__propSchemaList.length - 1) {
         this.schema.__propSchemaList.splice(index + 1, 0, this.schema.__propSchemaList.splice(index, 1)[0]);
 
-        form_utils.resetIndexArr(this.schema, this.schema.__idxChain, this.schema.__pathKey);
+        form_utils.resetIndexArr(this.schema, this.schema.__info.idxChain, this.schema.__info.pathKey);
         var eventData = {
           type: "down",
           index: index
@@ -10136,7 +10211,7 @@ var formUtils = {
       }
 
       form_utils.addArrayItem(this.schema, insertInfo);
-      form_utils.resetIndexArr(this.schema, this.schema.__idxChain, this.schema.__pathKey);
+      form_utils.resetIndexArr(this.schema, this.schema.__info.idxChain, this.schema.__info.pathKey);
       var newValue = form_utils.getValue(this.schema);
       var curIndex = isIndex ? index : this.schema.__propSchemaList.length - 1;
       var eventData = {
@@ -10153,7 +10228,7 @@ var formUtils = {
         var type = formItem._getType ? formItem._getType() : "";
 
         if (type == libs_constant.UI_FORM) {
-          // formItem._syncUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
           return formItem; // 到达表单层
         } else if (type == libs_constant.UI_ARRAY) {// checkSchema.push(formItem._getSchema());
         } else {// ... 往上派
@@ -10669,7 +10744,6 @@ var edit_bottom_btns_component = normalizeComponent(
 //
 //
 //
-//
 
 
 
@@ -10704,8 +10778,8 @@ var array_rowvue_type_style_index_0_lang_scss_ = __webpack_require__("2d97");
 
 var array_row_component = normalizeComponent(
   layout_array_rowvue_type_script_lang_js_,
-  array_rowvue_type_template_id_0047e778_render,
-  array_rowvue_type_template_id_0047e778_staticRenderFns,
+  array_rowvue_type_template_id_37b2cb8b_render,
+  array_rowvue_type_template_id_37b2cb8b_staticRenderFns,
   false,
   null,
   null,
@@ -10714,16 +10788,16 @@ var array_row_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_row = (array_row_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-legend.vue?vue&type=template&id=3d1dd5fc&
-var array_legendvue_type_template_id_3d1dd5fc_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-legend"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-legend.vue?vue&type=template&id=12c51dec&
+var array_legendvue_type_template_id_12c51dec_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-legend"},[_c('div',{staticClass:"es-form-array-wrap"},[_c('ul',{staticClass:"es-order-list-box"},_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('li',{key:index,staticClass:"list-item",style:({
           marginTop: (index > 0 ? _vm.schema.array.rowSpace : 0) + 'px'
         })},[(_vm.schema.array.hasOrder !== false)?_c('div',{staticClass:"es-order-box",style:({
             height: _vm.schema.properties
               ? _vm.schema.ui.rowHeight + 'px'
               : _vm.schema.rowHeight + 'px'
-          })},[_vm._v("\n          "+_vm._s(index + 1)+".\n        ")]):_vm._e(),_c('div',{staticClass:"es-array-fieldset-box"},[_c('div',{staticClass:"es-array-fieldset"},[_c('div',{staticClass:"es-legend"},[(!itemSchema.subLabel.name)?[_c('span',[_vm._v(_vm._s(itemSchema.subLabel.text
-                    ? itemSchema.subLabel.text
-                    : index + 1 + ""))])]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.subLabel}})],1)],2),(itemSchema.properties)?[(itemSchema.layout && itemSchema.layout.name === 'tabs')?_c('tabs',{tag:"component",attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):_c('es-object',{attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2),(
+          })},[_vm._v("\n          "+_vm._s(index + 1)+".\n        ")]):_vm._e(),_c('div',{staticClass:"es-array-fieldset-box"},[_c('div',{staticClass:"es-array-fieldset"},[_c('div',{staticClass:"es-legend"},[(!itemSchema.subLabel.name)?_c('span',[_vm._v(_vm._s(itemSchema.subLabel.text
+                  ? itemSchema.subLabel.text
+                  : index + 1 + ""))]):_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.subLabel,"info":itemSchema.__info}})],1)]),(itemSchema.properties)?[(itemSchema.layout && itemSchema.layout.name === 'tabs')?_c('tabs',{tag:"component",attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):_c('es-object',{attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2),(
                   _vm.schema.array.hasDelete ||
                     _vm.schema.array.hasSort ||
                     _vm.schema.array.hasCopy
@@ -10760,14 +10834,13 @@ var array_legendvue_type_template_id_3d1dd5fc_render = function () {var _vm=this
       height: _vm.schema.properties
         ? _vm.schema.ui.rowHeight + 'px'
         : _vm.schema.rowHeight + 'px'
-    })},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()])}
-var array_legendvue_type_template_id_3d1dd5fc_staticRenderFns = []
+    })},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()])}
+var array_legendvue_type_template_id_12c51dec_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-legend.vue?vue&type=template&id=3d1dd5fc&
+// CONCATENATED MODULE: ./src/package/layout/array-legend.vue?vue&type=template&id=12c51dec&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-legend.vue?vue&type=script&lang=js&
-//
 //
 //
 //
@@ -11090,8 +11163,8 @@ var array_legendvue_type_style_index_0_lang_scss_ = __webpack_require__("3710");
 
 var array_legend_component = normalizeComponent(
   layout_array_legendvue_type_script_lang_js_,
-  array_legendvue_type_template_id_3d1dd5fc_render,
-  array_legendvue_type_template_id_3d1dd5fc_staticRenderFns,
+  array_legendvue_type_template_id_12c51dec_render,
+  array_legendvue_type_template_id_12c51dec_staticRenderFns,
   false,
   null,
   null,
@@ -11100,8 +11173,8 @@ var array_legend_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_legend = (array_legend_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-card.vue?vue&type=template&id=20e175b2&
-var array_cardvue_type_template_id_20e175b2_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-card"},[_c('ul',{staticClass:"es-order-list-box",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-card.vue?vue&type=template&id=86a8e102&
+var array_cardvue_type_template_id_86a8e102_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-card"},[_c('ul',{staticClass:"es-order-list-box",style:({
       marginBottom:
         _vm.schema.__propSchemaList.length > 0
           ? -Math.floor(_vm.schema.array.rowSpace) + 'px'
@@ -11128,11 +11201,11 @@ var array_cardvue_type_template_id_20e175b2_render = function () {var _vm=this;v
       height: _vm.schema.properties
         ? _vm.schema.ui.rowHeight + 'px'
         : _vm.schema.rowHeight + 'px'
-    })},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()])}
-var array_cardvue_type_template_id_20e175b2_staticRenderFns = []
+    })},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()])}
+var array_cardvue_type_template_id_86a8e102_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-card.vue?vue&type=template&id=20e175b2&
+// CONCATENATED MODULE: ./src/package/layout/array-card.vue?vue&type=template&id=86a8e102&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/edit-abbr-btns.vue?vue&type=template&id=29ab2734&
 var edit_abbr_btnsvue_type_template_id_29ab2734_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-edit-btns"},[_c('div',{staticClass:"btn-list-box"},[_c('span',{ref:"delBtn",staticClass:"edit-selected-box",on:{"click":_vm.clickEditHandler}})]),_c('transition',{attrs:{"name":"es-fade","mode":"out-in","appear":""}},[_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPop),expression:"showPop"}],ref:"pop",staticClass:"es-form-pop-box",style:({
@@ -11572,7 +11645,6 @@ var edit_abbr_btns_component = normalizeComponent(
 //
 //
 //
-//
 
 
 
@@ -11609,8 +11681,8 @@ var array_cardvue_type_style_index_0_lang_scss_ = __webpack_require__("af3d");
 
 var array_card_component = normalizeComponent(
   layout_array_cardvue_type_script_lang_js_,
-  array_cardvue_type_template_id_20e175b2_render,
-  array_cardvue_type_template_id_20e175b2_staticRenderFns,
+  array_cardvue_type_template_id_86a8e102_render,
+  array_cardvue_type_template_id_86a8e102_staticRenderFns,
   false,
   null,
   null,
@@ -11619,8 +11691,8 @@ var array_card_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_card = (array_card_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-table.vue?vue&type=template&id=c5f1ae80&
-var array_tablevue_type_template_id_c5f1ae80_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-table"},[_c('table',{staticClass:"es-table"},[_c('thead',[(_vm.schema.array.hasOrder !== false)?_c('th',{staticClass:"es-order-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        序号\n      ")]):_vm._e(),_vm._l((_vm.schema.properties),function(headerSchema,headerFieldName){return _c('th',{key:headerFieldName,class:['es-col-' + headerSchema.col],style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-table.vue?vue&type=template&id=60cf447d&
+var array_tablevue_type_template_id_60cf447d_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-table"},[_c('table',{staticClass:"es-table"},[_c('thead',[(_vm.schema.array.hasOrder !== false)?_c('th',{staticClass:"es-order-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        序号\n      ")]):_vm._e(),_vm._l((_vm.schema.properties),function(headerSchema,headerFieldName){return _c('th',{key:headerFieldName,class:['es-col-' + headerSchema.col],style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_c('div',{class:[
             'es-form-table-head',
             headerSchema.label.align
               ? 'es-form-component-' + headerSchema.label.align
@@ -11631,7 +11703,7 @@ var array_tablevue_type_template_id_c5f1ae80_render = function () {var _vm=this;
                 headerSchema.rules.required
             )?_c('span',{staticClass:"es-required"},[_vm._v("*")]):_vm._e(),(!headerSchema.label.name)?[_vm._v("\n            "+_vm._s(headerSchema.label.text
                 ? headerSchema.label.text
-                : headerFieldName + "")+"\n          ")]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":headerSchema.label}})],1),(headerSchema.help)?_c('span',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":headerSchema.help}})],1):_vm._e()],2)])}),(_vm.schema.array.hasDelete || _vm.schema.array.hasSort)?_c('th',{staticClass:"es-btn-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        操作\n      ")]):_vm._e()],2),_c('tbody',_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('tr',{key:index},[(_vm.schema.array.hasOrder !== false)?_c('td',{style:({ padding: _vm.schema.array.rowSpace / 2 + 'px' })},[_c('span',{staticClass:"es-order-txt",style:({
+                : headerFieldName + "")+"\n          ")]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":headerSchema.label,"info":headerSchema.__info}})],1),(headerSchema.help)?_c('span',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":headerSchema.help,"info":headerSchema.__info}})],1):_vm._e()],2)])}),(_vm.schema.array.hasDelete || _vm.schema.array.hasSort)?_c('th',{staticClass:"es-btn-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        操作\n      ")]):_vm._e()],2),_c('tbody',_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('tr',{key:index},[(_vm.schema.array.hasOrder !== false)?_c('td',{style:({ padding: _vm.schema.array.rowSpace / 2 + 'px' })},[_c('span',{staticClass:"es-order-txt",style:({
               height: _vm.schema.ui.rowHeight + 'px',
               lineHeight: _vm.schema.ui.rowHeight + 'px'
             })},[_vm._v(_vm._s(index + 1)+".")])]):_vm._e(),_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('td',{key:fieldName,style:({
@@ -11648,10 +11720,10 @@ var array_tablevue_type_template_id_c5f1ae80_render = function () {var _vm=this;
                 _vm.schema.array.fixed <= 0 &&
                 _vm.schema.array.min <= 0,"index":-1,"has-del-warn":_vm.schema.array.hasDelWarn,"can-add":_vm.schema.array.max <= 0 ||
                 _vm.schema.__propSchemaList.length < _vm.schema.array.max},on:{"delItem":_vm.delAllItems,"addItem":_vm.addItem}})],1)])]):_vm._e()])])}
-var array_tablevue_type_template_id_c5f1ae80_staticRenderFns = []
+var array_tablevue_type_template_id_60cf447d_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-table.vue?vue&type=template&id=c5f1ae80&
+// CONCATENATED MODULE: ./src/package/layout/array-table.vue?vue&type=template&id=60cf447d&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object-table.vue?vue&type=template&id=2caff024&
 var object_tablevue_type_template_id_2caff024_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-table-container"},[(_vm.hasRequired && _vm.schema.rules && _vm.schema.rules.required)?_c('span',{staticClass:"es-table-required es-required",style:({
@@ -11971,7 +12043,6 @@ var object_table_component = normalizeComponent(
 //
 //
 //
-//
 
 
 
@@ -12004,8 +12075,8 @@ var array_tablevue_type_style_index_0_lang_scss_ = __webpack_require__("6fe2");
 
 var array_table_component = normalizeComponent(
   layout_array_tablevue_type_script_lang_js_,
-  array_tablevue_type_template_id_c5f1ae80_render,
-  array_tablevue_type_template_id_c5f1ae80_staticRenderFns,
+  array_tablevue_type_template_id_60cf447d_render,
+  array_tablevue_type_template_id_60cf447d_staticRenderFns,
   false,
   null,
   null,
@@ -12014,13 +12085,13 @@ var array_table_component = normalizeComponent(
 )
 
 /* harmony default export */ var array_table = (array_table_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=template&id=75c51b09&
-var array_tabsvue_type_template_id_75c51b09_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-tabs"},[_c('es-tabs-nav',{attrs:{"hasAdd":_vm.schema.array.hasAdd,"canAdd":_vm.schema.array.max > 0 &&
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"1a1ed4be-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=template&id=ab3e9a5e&
+var array_tabsvue_type_template_id_ab3e9a5e_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-tabs"},[_c('es-tabs-nav',{attrs:{"hasAdd":_vm.schema.array.hasAdd,"canAdd":_vm.schema.array.max > 0 &&
         _vm.schema.__propSchemaList.length >= _vm.schema.array.max,"type":_vm.schema.array.type},on:{"addItem":_vm.addItemHandler}},[_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return [_c('es-tabs-nav-item',{key:index,attrs:{"is-active":index === _vm.schema.__tabsIndex,"has-error":itemSchema.__hasError,"has-delete":_vm.schema.array.hasDelete,"has-sort":_vm.schema.array.hasSort,"can-delete":_vm.schema.__propSchemaList.length > _vm.schema.array.min,"fixed":_vm.schema.array.fixed,"is-first":index == 0,"is-last":index == _vm.schema.__propSchemaList.length - 1,"index":index,"has-del-warn":_vm.schema.array.hasDelWarn},on:{"delItem":_vm.delItemHandler,"upItem":_vm.upItem,"downItem":_vm.downItem,"clickActive":_vm.clickActiveHandler}},[(_vm.schema.array.hasOrder)?_c('span',{staticClass:"order-txt"},[_vm._v(_vm._s(index + 1)+".")]):_vm._e(),(!itemSchema.subLabel.name)?[(!(_vm.schema.array.hasOrder && !itemSchema.subLabel.text))?_c('span',[_vm._v("\n            "+_vm._s(itemSchema.subLabel.text
                 ? itemSchema.subLabel.text
                 : _vm.schema.array.hasOrder
                 ? ""
-                : index + 1 + "")+"\n          ")]):_vm._e()]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.subLabel}})],1)],2)]}),(_vm.schema.help && _vm.schema.component)?_c('div',{staticClass:"es-form-help",attrs:{"slot":"help"},slot:"help"},[_c('es-base',{attrs:{"config":_vm.schema.help}})],1):_vm._e()],2),(_vm.schema.__propSchemaList.length)?_c('ul',{staticClass:"es-tabs-body",style:({
+                : index + 1 + "")+"\n          ")]):_vm._e()]:_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":itemSchema.subLabel,"info":itemSchema.__info}})],1)],2)]}),(_vm.schema.help && _vm.schema.component)?_c('div',{staticClass:"es-form-help",attrs:{"slot":"help"},slot:"help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()],2),(_vm.schema.__propSchemaList.length)?_c('ul',{staticClass:"es-tabs-body",style:({
       padding: _vm.schema.array.hasBorder
         ? _vm.schema.array.padding
           ? _vm.schema.array.padding
@@ -12034,16 +12105,14 @@ var array_tabsvue_type_template_id_75c51b09_render = function () {var _vm=this;v
             itemSchema.layout &&
             itemSchema.layout.name === 'tabs'
         )?_c('tabs',{tag:"component",attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema})],2)})],2):(itemSchema.properties)?_c('es-object',{attrs:{"schema":itemSchema}},[_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index})],2)})],2):[_vm._t("default",null,{"schema":itemSchema})]],2)}),0):_vm._e()],1)}
-var array_tabsvue_type_template_id_75c51b09_staticRenderFns = []
+var array_tabsvue_type_template_id_ab3e9a5e_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-tabs.vue?vue&type=template&id=75c51b09&
+// CONCATENATED MODULE: ./src/package/layout/array-tabs.vue?vue&type=template&id=ab3e9a5e&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-tabs.vue?vue&type=script&lang=js&
-
-
-
-
+//
+//
 //
 //
 //
@@ -12212,7 +12281,7 @@ var array_tabsvue_type_template_id_75c51b09_staticRenderFns = []
       var form = this.__getForm();
 
       form._toggleUi("tabs", {
-        key: this.schema.__pathKey,
+        key: this.schema.__info.pathKey,
         index: index
       });
     },
@@ -12231,7 +12300,7 @@ var array_tabsvue_type_template_id_75c51b09_staticRenderFns = []
         var form = this.__getForm();
 
         form._toggleUi("tabs", {
-          key: this.schema.__pathKey,
+          key: this.schema.__info.pathKey,
           index: newIndex
         });
       }
@@ -12242,7 +12311,7 @@ var array_tabsvue_type_template_id_75c51b09_staticRenderFns = []
       var form = this.__getForm();
 
       form._toggleUi("tabs", {
-        key: this.schema.__pathKey,
+        key: this.schema.__info.pathKey,
         index: this.schema.__propSchemaList.length - 1
       });
     }
@@ -12266,8 +12335,8 @@ var array_tabsvue_type_style_index_0_lang_scss_ = __webpack_require__("5100");
 
 var array_tabs_component = normalizeComponent(
   layout_array_tabsvue_type_script_lang_js_,
-  array_tabsvue_type_template_id_75c51b09_render,
-  array_tabsvue_type_template_id_75c51b09_staticRenderFns,
+  array_tabsvue_type_template_id_ab3e9a5e_render,
+  array_tabsvue_type_template_id_ab3e9a5e_staticRenderFns,
   false,
   null,
   null,
@@ -12311,6 +12380,8 @@ var global = {
 
 
 
+//
+//
 //
 //
 //
@@ -12911,7 +12982,7 @@ var global = {
         if (refTarget) {
           targetInfo = {
             target: refTarget.$refs.__comTarget__,
-            sourceKey: this.schema.__pathKey.replace(/\[\d+\]/g, "[i]")
+            sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
           };
         } else {
           targetInfo = null;
@@ -12999,38 +13070,38 @@ var global = {
       var form = this.__getForm();
 
       form._toggleUi("toggle", {
-        key: this.schema.__pathKey
+        key: this.schema.__info.pathKey
       });
     },
     // 只有组件会触发
     triggerHandler: function triggerHandler(eventName, eventData, target) {
       var checkSchema = [this.schema];
       var eventNames = [eventName];
-      var targetValue = this.schema.value;
+      var targetValue = this.schema.component.value;
 
       if (this.schema.isTrim && libs_utils.isStr(targetValue) && (eventName == libs_global.trimEvent || libs_constant.FORM_INPUTS.includes(this.schema.component.name) && eventName == libs_constant.INPUT_CHANGE)) {
         // global.trimEvent暂不会是constant.INPUT_EVENT事件，因为初始化时就不给设置为此值
         var tmpValue = targetValue.trim();
 
         if (tmpValue !== targetValue) {
-          this.schema.value = tmpValue;
+          this.schema.component.value = tmpValue;
           targetValue = tmpValue;
           eventNames.push(libs_constant.INPUT_EVENT); // 值有所改变，同时input一下
         }
       }
 
       var options = {
-        value: targetValue,
+        value: libs_utils.deepCopy(targetValue),
         event: eventData,
-        pathKey: this.schema.__pathKey,
-        index: this.schema.__index,
-        idxChain: this.schema.__idxChain,
+        pathKey: this.schema.__info.pathKey,
+        index: this.schema.__info.index,
+        idxChain: this.schema.__info.idxChain,
         target: target
       };
 
       var form = this.__getForm();
 
-      form._syncUi(checkSchema, eventNames, options);
+      form._syncFormUi(checkSchema, eventNames, options);
     },
 
     /**
@@ -13044,15 +13115,15 @@ var global = {
       var options = {
         value: targetValue,
         event: eventData,
-        pathKey: this.schema.__pathKey,
-        index: this.schema.__index,
-        idxChain: this.schema.__idxChain,
+        pathKey: this.schema.__info.pathKey,
+        index: this.schema.__info.index,
+        idxChain: this.schema.__info.idxChain,
         target: null
       };
 
       var form = this.__getForm();
 
-      form._syncUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
+      form._syncFormUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
 
     },
     __getForm: function __getForm() {
@@ -13089,8 +13160,8 @@ var form_itemvue_type_style_index_0_lang_scss_ = __webpack_require__("fae7");
 
 var form_item_component = normalizeComponent(
   package_form_itemvue_type_script_lang_js_,
-  form_itemvue_type_template_id_aded4c5c_render,
-  form_itemvue_type_template_id_aded4c5c_staticRenderFns,
+  form_itemvue_type_template_id_142de1c2_render,
+  form_itemvue_type_template_id_142de1c2_staticRenderFns,
   false,
   null,
   null,
@@ -13624,6 +13695,11 @@ var schemaUtils = {
       // 占位空间 为什么用恒等，因为会严格判断是否是true/false, 同时也严格要求用户用true/false, 不要用1/0
       propKeys = this.__getPropKeys("none");
       newPropItem = this.__filterKeys(propItem, propKeys, inheritObj, myPathKey);
+      newPropItem.__info = {
+        pathKey: myPathKey,
+        idxChain: "",
+        index: -1
+      };
     } else if (this.__isPropItem(propItem)) {
       if (!this.__existEntityItem(propItem)) {
         throw "属性" + parentKey + "没有具体的子节点(properties全为空)";
@@ -13671,11 +13747,14 @@ var schemaUtils = {
 
       if (newPropItem.title) {
         newPropItem.title.__level = curLevel; //用于字号
-      }
+      } // 记录节点的修改，用于事件
 
-      newPropItem.__pathKey = myPathKey;
-      newPropItem.__idxChain = "";
-      newPropItem.__index = -1;
+
+      newPropItem.__info = {
+        pathKey: myPathKey,
+        idxChain: "",
+        index: -1
+      };
 
       if (isNormalTabs) {
         newPropItem.__tabsIndex = false;
@@ -13774,30 +13853,21 @@ var schemaUtils = {
         console.warn("当属性(" + parentKey + ")为叶子节点时，" + libs_constant.LAYOUT_TABS + "将不起作用");
       } else {
         newPropItem.layout = false;
-      } // 处理一下值
-
-
-      if (!newPropItem.hasOwnProperty("value")) {
-        if (newPropItem.component.name === libs_global.defaultCom) {
-          // 设置默认值组件的默认值
-          newPropItem.value = libs_global.defaultVal;
-        } else {
-          newPropItem.value = undefined;
-        }
-      } else {// 值存在，不用理会
       }
 
       if (newPropItem.format) {
         newPropItem.value = form_utils.getFormatValue(newPropItem.format, newPropItem.value, true);
       }
 
-      var eventOn = this.__listEvent(newPropItem);
+      var eventOn = this.__fetchFormEvent(newPropItem);
 
       newPropItem.component.__emitEvents = eventOn.__emitEvents;
       newPropItem.component.__nativeEvents = eventOn.__nativeEvents;
-      newPropItem.__pathKey = myPathKey;
-      newPropItem.__idxChain = "";
-      newPropItem.__index = -1; // 是否数组(优先级最高)
+      newPropItem.__info = {
+        pathKey: myPathKey,
+        idxChain: "",
+        index: -1
+      }; // 是否数组(优先级最高)
 
       isArray = this.__isArray(propItem.array);
 
@@ -13955,9 +14025,9 @@ var schemaUtils = {
   },
 
   /**
-   * 整理出组件需要监听的外部事件
+   * 整理出"表单"组件需要监听的外部事件
    */
-  __listEvent: function __listEvent(propItem) {
+  __fetchFormEvent: function __fetchFormEvent(propItem) {
     var _this = this;
 
     var emitEvents = [],
@@ -14004,11 +14074,51 @@ var schemaUtils = {
 
 
     if (propItem.component && propItem.component.actions) {
-      var actions = propItem.component.actions;
+      // var actions = propItem.component.actions;
+      // actions.forEach(actionItem => {
+      //   triggerList = actionItem.trigger;
+      //   triggerList.forEach(triggerItem => {
+      //     nativeName = this.__getNativeName(triggerItem);
+      //     if (nativeName) {
+      //       // .native监听
+      //       nativeEvents.push(nativeName);
+      //     } else {
+      //       emitEvents.push(triggerItem);
+      //     }
+      //   });
+      // });
+      var actionInfo = this.__fetchActionEvent(propItem.component.actions);
+
+      if (actionInfo.__emitEvents) {
+        emitEvents = emitEvents.concat(actionInfo.__emitEvents);
+      }
+
+      if (actionInfo.__nativeEvents) {
+        nativeEvents = nativeEvents.concat(actionInfo.__nativeEvents);
+      }
+    }
+
+    return {
+      __emitEvents: emitEvents.length ? libs_utils.unique(emitEvents) : null,
+      __nativeEvents: nativeEvents.length ? libs_utils.unique(nativeEvents) : null
+    };
+  },
+
+  /**
+   * 整理出"表单"组件需要监听的外部事件
+   */
+  __fetchActionEvent: function __fetchActionEvent(actions) {
+    var _this2 = this;
+
+    var emitEvents = [];
+    var nativeEvents = [];
+    var triggerList, nativeName; // 自定义事件
+
+    if (actions) {
       actions.forEach(function (actionItem) {
         triggerList = actionItem.trigger;
         triggerList.forEach(function (triggerItem) {
-          nativeName = _this.__getNativeName(triggerItem);
+          nativeName = _this2.__getNativeName(triggerItem);
 
           if (nativeName) {
             // .native监听
@@ -14057,7 +14167,8 @@ var schemaUtils = {
 
     switch (type) {
       case "component":
-        propKeys = ["label", "rowHeight", "rowSpace", "labelWidth", "offsetLeft", "offsetRight", "hidden", "format", "hdValue", "colon", "group", "value", "isTrim", "help", "desc", "unit", "direction", "col", "rules", "component", "array", "layout", "isTmp"];
+        propKeys = ["label", "rowHeight", "rowSpace", "labelWidth", "offsetLeft", "offsetRight", "hidden", "format", "hdValue", "colon", "group", // "value",
+        "isTrim", "help", "desc", "unit", "direction", "col", "rules", "component", "array", "layout", "isTmp"];
         break;
 
       case "properties":
@@ -14258,7 +14369,8 @@ var schemaUtils = {
   /**
    * 解析右栏组件
    */
-  __parseMainComponent: function __parseMainComponent(component, myPathKey) {
+  __parseMainComponent: function __parseMainComponent(propItem, myPathKey) {
+    var component = propItem.component;
     var newComponent,
         defaultAlign = false;
 
@@ -14322,20 +14434,33 @@ var schemaUtils = {
       }
 
       newComponent.align = this.__parseAlign(component.align, defaultAlign);
-      newComponent.flex = this.__parseFlex(component.flex, component.size);
+      newComponent.flex = this.__parseFlex(component.flex, component.size); // value
+
+      if (propItem.hasOwnProperty("value")) {
+        newComponent.value = propItem.value;
+      } else if (component.hasOwnProperty("value")) {
+        newComponent.value = component.value;
+      } else {
+        // 自动补充value: 因为是表单组件
+        newComponent.value = component.name === libs_global.defaultCom ? libs_global.defaultVal : undefined;
+      }
     } else if (libs_utils.isStr(component)) {
+      // 要自动补充value
       newComponent = {
         name: component,
         actions: [],
         align: defaultAlign,
-        flex: false
+        flex: false,
+        value: propItem.hasOwnProperty("value") ? propItem.value : libs_global.defaultCom === component ? libs_global.defaultVal : undefined
       };
     } else {
+      // 要自动补充value
       newComponent = {
         name: libs_global.defaultCom,
         actions: [],
         align: defaultAlign,
-        flex: false
+        flex: false,
+        value: libs_global.defaultVal
       };
     } // 判断名称是否合法
 
@@ -14473,7 +14598,7 @@ var schemaUtils = {
    * @param {*} myPathKey
    */
   __parseActions: function __parseActions(actions, myPathKey) {
-    var _this2 = this;
+    var _this3 = this;
 
     // 解析是否为特殊写法
     var newActions = [];
@@ -14513,7 +14638,7 @@ var schemaUtils = {
             if (actionInfos && actionInfos.length == 2 && actionInfos[1] == libs_constant.ONLY_SUBMIT) {
               // newActions.push({trigger: actionInfos[0], handler: onlySubmit});
               newAction = {};
-              newTrigger = _this2.__parseTrigger(actionInfos[0]);
+              newTrigger = _this3.__parseTrigger(actionInfos[0]);
               newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [libs_constant.CLICK_EVENT];
               newAction.handler = onlySubmit;
               newActions.push(newAction);
@@ -14523,7 +14648,7 @@ var schemaUtils = {
           }
         } else if (libs_utils.isFunc(tmpAction.handler)) {
           newAction = {};
-          newTrigger = _this2.__parseTrigger(tmpAction.trigger);
+          newTrigger = _this3.__parseTrigger(tmpAction.trigger);
           newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [libs_constant.CLICK_EVENT];
           newAction.handler = tmpAction.handler;
           newActions.push(newAction);
@@ -14541,10 +14666,10 @@ var schemaUtils = {
   /**
    * 解析项Label
    */
-  __parseLabel: function __parseLabel(value) {
+  __parseLabel: function __parseLabel(value, myPathKey) {
     var newValue,
         defaultAlign = false;
-    newValue = this.__parsePropComponent(value, true); // 因为label有点特殊，所以不能为false
+    newValue = this.__parsePropComponent(value, myPathKey, true); // 因为label有点特殊，所以不能为false
 
     if (newValue) {
       newValue.flex = this.__parseFlex(value.flex, value.size);
@@ -14600,8 +14725,8 @@ var schemaUtils = {
   /**
    * 解析title
    */
-  __parseTitle: function __parseTitle(value) {
-    var newValue = this.__parsePropComponent(value);
+  __parseTitle: function __parseTitle(value, myPathKey) {
+    var newValue = this.__parsePropComponent(value, myPathKey);
 
     return newValue;
   },
@@ -14670,7 +14795,7 @@ var schemaUtils = {
    * @param {*} inheritObj 从上一级继承的数据
    */
   __parseInherit: function __parseInherit(propItem, inheritObj) {
-    var _this3 = this;
+    var _this4 = this;
 
     var ui = libs_utils.isObj(propItem.ui) ? propItem.ui : {};
     var keys = ["offsetLeft", "offsetRight", "direction", "colon", ["rowSpace", "boxRowSpace"], ["labelWidth", "boxLabelWidth"], ["rowHeight", "boxRowHeight"]];
@@ -14687,7 +14812,7 @@ var schemaUtils = {
         oldKey = key[1];
       }
 
-      var normalKeyInfo = _this3.__getNormalInfo(newKey);
+      var normalKeyInfo = _this4.__getNormalInfo(newKey);
 
       if (normalKeyInfo) {
         var curValue = ui[newKey];
@@ -14701,7 +14826,7 @@ var schemaUtils = {
         } // console.log("-- tmpUi: ", tmpUi);
 
 
-        newInherit[newKey] = _this3.__parseNormalKey(tmpUi, normalKeyInfo, inheritObj);
+        newInherit[newKey] = _this4.__parseNormalKey(tmpUi, normalKeyInfo, inheritObj);
       } else {
         throw "BoxUi: 程序的key(" + key + ")不对应，请修改";
       }
@@ -14809,7 +14934,7 @@ var schemaUtils = {
   /**
    * 解析帮助
    */
-  __parsePropHelp: function __parsePropHelp(help) {
+  __parsePropHelp: function __parsePropHelp(help, myPathKey) {
     // console.log("help: ", help);
     var gHelp = false;
 
@@ -14822,7 +14947,7 @@ var schemaUtils = {
         gHelp.name = components_help;
       }
 
-      gHelp = this.__parsePropComponent(gHelp);
+      gHelp = this.__parsePropComponent(gHelp, myPathKey);
     } else if (libs_utils.isStr(help)) {
       gHelp = {
         name: components_help,
@@ -14830,7 +14955,7 @@ var schemaUtils = {
           content: help
         }
       };
-      gHelp = this.__parsePropComponent(gHelp);
+      gHelp = this.__parsePropComponent(gHelp, myPathKey);
     } else {
       gHelp = false;
     } // console.log("gHelp: ", gHelp);
@@ -14842,8 +14967,8 @@ var schemaUtils = {
   /**
    * 解析一般组件
    */
-  __parsePropComponent: function __parsePropComponent(value) {
-    var canEmpty = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  __parsePropComponent: function __parsePropComponent(value, myPathKey) {
+    var canEmpty = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
     var newCom;
 
     if (libs_utils.isObj(value) && keys_default()(value).length > 0) {
@@ -14851,9 +14976,10 @@ var schemaUtils = {
       var name = libs_utils.isStr(value.name) && value.name.trim() ? value.name.trim() : value.name;
 
       if (name) {
-        newCom.name = name; // 属性
+        newCom.name = name;
+        newCom.actions = this.__parseActions(value.actions, myPathKey); // 属性
 
-        var propInfo = this.__parseComProps(value.props, ["value", "style", "class"]); // console.log(propInfo);
+        var propInfo = this.__parseComProps(value.props, ["style", "class"]); // console.log(propInfo);
 
 
         if (propInfo.new) {
@@ -14894,6 +15020,12 @@ var schemaUtils = {
           if (libs_utils.isObj(value.style) && keys_default()(value.style).length) {
             newCom.style = libs_utils.deepCopy(value.style);
           }
+        } // value
+
+
+        if (value.hasOwnProperty("value")) {
+          newCom.value = value.value;
+        } else {// 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
         }
       }
 
@@ -14943,6 +15075,11 @@ var schemaUtils = {
     }
 
     newCom.props = newCom.props ? newCom.props : {};
+
+    var eventOn = this.__fetchActionEvent(newCom.actions);
+
+    newCom.__emitEvents = eventOn.__emitEvents;
+    newCom.__nativeEvents = eventOn.__nativeEvents;
     return newCom;
   },
 
@@ -14950,7 +15087,7 @@ var schemaUtils = {
    * 解析规则
    */
   __parsePropRules: function __parsePropRules(rules) {
-    var _this4 = this;
+    var _this5 = this;
 
     var newRules;
 
@@ -14978,7 +15115,7 @@ var schemaUtils = {
       }
 
       rawCheckList.forEach(function (item) {
-        var newItem = _this4.__perfectCheckItem(item);
+        var newItem = _this5.__perfectCheckItem(item);
 
         if (newItem) {
           // 正确
@@ -15049,19 +15186,27 @@ var schemaUtils = {
     var newDirectives = [],
         rawDirectives = [];
 
-    if (libs_utils.isObj(directives)) {
+    if (!libs_utils.isArr(directives)) {
       directives = [directives];
-    } else if (libs_utils.isStr(directives)) {
-      directives = [{
-        name: directives
-      }];
-    } else if (!libs_utils.isArr(directives)) {
-      directives = [];
     }
 
     var hasEsFunc = false; // 转化为数组了
 
-    directives.forEach(function (directive) {
+    directives.forEach(function (directiveItem) {
+      var directive;
+
+      if (libs_utils.isStr(directiveItem)) {
+        directive = {
+          name: directiveItem
+        };
+      } else if (!libs_utils.isObj(directiveItem)) {
+        // 不合法，去掉
+        return false;
+      } else {
+        directive = directiveItem;
+      } // 全部转成对象了
+
+
       var name, value, expression, arg, modifiers;
       name = directive.name;
       var prefix = "v-";
@@ -15287,7 +15432,7 @@ var schemaUtils = {
         hasOrder = libs_utils.isUndef(array.hasOrder) || array.hasOrder ? true : false;
         headRequired = array.name == libs_constant.ARRAY_TABLE && array.headRequired ? true : false; // subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
 
-        subLabel = this.__parsePropComponent(array.subLabel);
+        subLabel = this.__parsePropComponent(array.subLabel, myPathKey);
 
         if (!subLabel) {
           subLabel = {
@@ -15423,70 +15568,72 @@ var schemaUtils = {
    * @param {*} myPathKey
    */
   __filterKeys: function __filterKeys(propItem, propKeys, inheritObj, myPathKey) {
-    var _this5 = this;
+    var _this6 = this;
 
     var newPropItem = {};
     propKeys.forEach(function (key) {
       if (key == "label") {
-        newPropItem[key] = _this5.__parseLabel(propItem[key]);
+        newPropItem[key] = _this6.__parseLabel(propItem[key], myPathKey);
         return true;
-      }
+      } // if (key == "value") {
+      //   // 这个比较特殊: 有值就记录下来
+      //   if (propItem.hasOwnProperty("value")) {
+      //     newPropItem.value = propItem.value;
+      //   } else if (
+      //     utils.isObj(propItem.component) &&
+      //     propItem.component.hasOwnProperty("value")
+      //   ) {
+      //     newPropItem.value = propItem.component.value;
+      //   } else {
+      //     // 没有值，无需记录，留给后面判断：因为有默认值的问题
+      //   }
+      //   return true;
+      // }
 
-      if (key == "value") {
-        // 这个比较特殊: 有值就记录下来
-        if (propItem.hasOwnProperty("value")) {
-          newPropItem.value = propItem.value;
-        } else if (libs_utils.isObj(propItem.component) && propItem.component.hasOwnProperty("value")) {
-          newPropItem.value = propItem.component.value;
-        } else {// 没有值，无需记录，留给后面判断：因为有默认值的问题
-        }
-
-        return true;
-      }
 
       if (key == "title") {
-        newPropItem[key] = _this5.__parseTitle(propItem[key]);
+        newPropItem[key] = _this6.__parseTitle(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "ui") {
-        newPropItem[key] = _this5.__parseBoxUi(propItem.ui);
+        newPropItem[key] = _this6.__parseBoxUi(propItem.ui);
         return true;
       }
 
       if (key == "nextInherit") {
-        newPropItem[key] = _this5.__parseInherit(propItem, inheritObj);
+        newPropItem[key] = _this6.__parseInherit(propItem, inheritObj);
         return true;
       }
 
       if (key == "format") {
-        newPropItem[key] = _this5.__parseFormat(propItem[key]);
+        newPropItem[key] = _this6.__parseFormat(propItem[key]);
         return true;
       }
 
       if (key == "rules") {
-        newPropItem[key] = _this5.__parsePropRules(propItem[key]);
+        newPropItem[key] = _this6.__parsePropRules(propItem[key]);
         newPropItem.__invalidMsg = false;
         return true;
       }
 
       if (key == "help") {
-        newPropItem[key] = _this5.__parsePropHelp(propItem[key]);
+        newPropItem[key] = _this6.__parsePropHelp(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "desc") {
-        newPropItem[key] = _this5.__parsePropComponent(propItem[key]);
+        newPropItem[key] = _this6.__parsePropComponent(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "unit") {
-        newPropItem[key] = _this5.__parsePropComponent(propItem[key]);
+        newPropItem[key] = _this6.__parsePropComponent(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "array") {
-        var arrayAttr = _this5.__parsePropArray(propItem[key], propItem, myPathKey);
+        var arrayAttr = _this6.__parsePropArray(propItem[key], propItem, myPathKey);
 
         newPropItem[key] = arrayAttr;
 
@@ -15498,21 +15645,21 @@ var schemaUtils = {
       }
 
       if (key == "layout") {
-        newPropItem[key] = _this5.__parsePropLayout(propItem[key]);
+        newPropItem[key] = _this6.__parsePropLayout(propItem[key]);
         return true;
       }
 
       if (key == "component") {
-        var mainComponent = _this5.__parseMainComponent(propItem[key], myPathKey);
+        var mainComponent = _this6.__parseMainComponent(propItem, myPathKey);
 
         newPropItem[key] = mainComponent;
         return true;
       }
 
-      var normalKeyInfo = _this5.__getNormalInfo(key);
+      var normalKeyInfo = _this6.__getNormalInfo(key);
 
       if (normalKeyInfo) {
-        newPropItem[key] = _this5.__parseNormalKey(propItem, normalKeyInfo, inheritObj);
+        newPropItem[key] = _this6.__parseNormalKey(propItem, normalKeyInfo, inheritObj);
       } else {
         throw "程序的key(" + key + ")不对应，请修改";
       }
@@ -16112,6 +16259,10 @@ var console_component = normalizeComponent(
 
 
 
+
+
+
+
 //
 //
 //
@@ -16579,13 +16730,15 @@ var console_component = normalizeComponent(
 
     /**
      * 对外调用，取值
+     * 实时取值，表单存在的值;也是getRootData的别名
      */
     getValue: function getValue() {
-      return libs_utils.deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+      return libs_utils.deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
      * 对外调用，取值
+     * 实时取值，表单存在的值;也是getValue的别名
      */
     getRootData: function getRootData() {
       return libs_utils.deepCopy(this._esFormData);
@@ -16593,9 +16746,10 @@ var console_component = normalizeComponent(
 
     /**
      * 对外调用，取值
+     * 实时取值，用户提交所需要的值，不包括隐藏的或临时的；也就是v-model
      */
     getFormValue: function getFormValue() {
-      return libs_utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取同的数据就不一致了
+      return libs_utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -16692,9 +16846,9 @@ var console_component = normalizeComponent(
             global: this.global ? this.global : {},
             // 防止null情况
             rootData: this._esFormData,
-            index: itemSchema.__index,
-            idxChain: itemSchema.__idxChain,
-            pathKey: itemSchema.__pathKey,
+            index: itemSchema.__info.index,
+            idxChain: itemSchema.__info.idxChain,
+            pathKey: itemSchema.__info.pathKey,
             rootSchema: rootSchema,
             isHidden: this._esHiddenFunc
           };
@@ -16797,7 +16951,6 @@ var console_component = normalizeComponent(
     },
     __checkProp: function __checkProp(schema, rootSchema) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
-      // console.log("idxChain ==  schema.__idxChain", idxChain, '|', schema.__idxChain);
       var isValid = true; //是否隐藏，隐藏就不用检查有效性了
 
       var isHidden = schema.hidden; // 省资源，不做es转
@@ -16886,7 +17039,7 @@ var console_component = normalizeComponent(
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = this.__checkRules(schema, schema.value, "");
+          checkedResult = this.__checkRules(schema, schema.component.value, "");
 
           if (checkedResult === true) {
             schema.__invalidMsg = false;
@@ -16976,15 +17129,18 @@ var console_component = normalizeComponent(
         form_utils.setValue(schema, form_utils.perfectTileValue(schema, libs_utils.deepCopy(value)));
       }
     },
-    _syncUi: function _syncUi(checkSchemas, eventNames, options) {
+
+    /**
+     * 当表单组件发生改变时：处理事件，同步项
+     */
+    _syncFormUi: function _syncFormUi(checkSchemas, eventNames, options) {
       var _this4 = this;
 
-      var sourcePathKey = checkSchemas[0].__pathKey; // checkSchemas必有值
+      var sourcePathKey = checkSchemas[0].__info.pathKey; // checkSchemas必有值
 
       if (eventNames.includes(libs_constant.INPUT_EVENT)) {
         // 需要同步
         this.__syncValue(sourcePathKey); // 第一个就是触发源
-        // tmpResultValue =this._esResultValue;
 
       }
 
@@ -16995,9 +17151,9 @@ var console_component = normalizeComponent(
           global: this.global ? this.global : {},
           // 防止null情况
           rootData: this._esFormData,
-          index: inputSchema.__index,
-          idxChain: inputSchema.__idxChain,
-          pathKey: inputSchema.__pathKey,
+          index: inputSchema.__info.index,
+          idxChain: inputSchema.__info.idxChain,
+          pathKey: inputSchema.__info.pathKey,
           rootSchema: this.$data.formSchema,
           isHidden: this._esHiddenFunc
         }; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
@@ -17025,7 +17181,7 @@ var console_component = normalizeComponent(
         }
 
         if (handlers.length > 0 || eventNames.includes(libs_constant.INPUT_EVENT)) {
-          // 这用可以记录是什么导致表单改变
+          // 这个可以记录是什么导致表单改变
           if (handlers.length > 0) {
             handlers.forEach(function (handler) {
               handler.call(_this4, options);
@@ -17044,6 +17200,17 @@ var console_component = normalizeComponent(
         options = null;
         handlers = null;
       }
+    },
+
+    /**
+     * 执行事件：一般用于非组件表单，只是执行事件
+     */
+    _handleEvents: function _handleEvents(handlers, options) {
+      var _this5 = this;
+
+      handlers.forEach(function (handler) {
+        handler.call(_this5, options);
+      });
     },
     _toggleUi: function _toggleUi(type, data) {
       switch (type) {
@@ -17152,27 +17319,17 @@ var console_component = normalizeComponent(
           if (!triggers || libs_utils.isInter(checkTriggers, triggers)) {
             checkFun = checkItem.handler;
             hadChecked = true;
-            var result = true; // if (checkFun.__esFuncName === constant.ES_FUNC_NAME) {
-            //   if (!newParseSources) {
-            //     newParseSources = {};
-            //     newParseSources = Object.assign(newParseSources, parseSources);
-            //     newParseSources.idxChains = parseSources.idxChain
-            //       ? parseSources.idxChain.split(",")
-            //       : [];
-            //     delete newParseSources.idxChain;
-            //   }
-            //   result = checkFun(newParseSources);
-            // } else {
+            var result = true;
 
             if (!newOptions) {
               newOptions = {};
               newOptions.value = value;
-              newOptions.pathKey = schema.__pathKey;
-              newOptions.idxChain = schema.__idxChain;
-              newOptions.index = schema.__index;
+              newOptions.pathKey = schema.__info.pathKey;
+              newOptions.idxChain = schema.__info.idxChain;
+              newOptions.index = schema.__info.index;
             }
 
-            result = checkFun.call(this, newOptions); // }
+            result = checkFun.call(this, newOptions);
 
             if (result !== true) {
               if (libs_utils.isStr(result)) {
@@ -17308,7 +17465,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = normalizeComponent(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_2cd8e27c_render,
+  packagevue_type_template_id_621bb716_render,
   staticRenderFns,
   false,
   null,
@@ -17355,7 +17512,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ var src_package_0 = ({
-  version: "1.5.3",
+  version: "1.5.4",
   install: package_install,
   esForm: src_package,
   check: package_check
