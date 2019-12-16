@@ -91,7 +91,7 @@
     </div>
 
     <div
-      v-if="schema.help && schema.component"
+      v-if="schema.help && !schema.help.hidden && schema.component"
       class="es-form-help"
       :style="{
         height: schema.properties

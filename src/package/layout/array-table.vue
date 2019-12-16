@@ -18,7 +18,7 @@
           <div
             :class="[
               'es-form-table-head',
-              headerSchema.label.align
+              headerSchema.label && headerSchema.label.align
                 ? 'es-form-component-' + headerSchema.label.align
                 : ''
             ]"
@@ -32,20 +32,29 @@
               class="es-required"
               >*</span
             >
-            <template v-if="!headerSchema.label.name">
-              {{
-                headerSchema.label.text
-                  ? headerSchema.label.text
-                  : headerFieldName + ""
-              }}
+            <!-- headerSchema.label.hidden为true: 也补充key -->
+            <template v-if="headerSchema.label && !headerSchema.label.hidden">
+              <template v-if="!headerSchema.label.name">
+                {{
+                  headerSchema.label.text
+                    ? headerSchema.label.text
+                    : headerFieldName + ""
+                }}
+              </template>
+              <span v-else class="es-form-label-box">
+                <es-base
+                  :config="headerSchema.label"
+                  :info="headerSchema.__info"
+                ></es-base>
+              </span>
             </template>
-            <span v-else class="es-form-label-box">
-              <es-base
-                :config="headerSchema.label"
-                :info="headerSchema.__info"
-              ></es-base>
-            </span>
-            <span v-if="headerSchema.help" class="es-form-help">
+            <template v-else>
+              {{ headerFieldName + "" }}
+            </template>
+            <span
+              v-if="headerSchema.help && !schema.help.hidden"
+              class="es-form-help"
+            >
               <es-base
                 :config="headerSchema.help"
                 :info="headerSchema.__info"

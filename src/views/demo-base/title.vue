@@ -89,6 +89,7 @@ export default {
                 color: "es: {{$root}}.simulateColor"
               }
             },
+            help: "我在这里",
             label: false,
             properties: {
               whitelist: {

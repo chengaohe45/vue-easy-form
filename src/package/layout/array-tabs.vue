@@ -30,6 +30,7 @@
           <span class="order-txt" v-if="schema.array.hasOrder"
             >{{ index + 1 }}.</span
           >
+          <!-- itemSchema.subLabel一定为一个对象-->
           <template v-if="!itemSchema.subLabel.name">
             <span v-if="!(schema.array.hasOrder && !itemSchema.subLabel.text)">
               {{
@@ -51,7 +52,7 @@
       </template>
 
       <div
-        v-if="schema.help && schema.component"
+        v-if="schema.help && !schema.help.hidden && schema.component"
         class="es-form-help"
         slot="help"
       >

@@ -5,7 +5,7 @@
       :class="['es-form-header', schema.ui ? 'es-form-' + schema.ui.type : '']"
     >
       <div
-        v-if="schema.title"
+        v-if="schema.title && !schema.title.hidden"
         :class="['es-form-title', 'es-title-l' + schema.title.__level]"
       >
         <template v-if="!schema.title.name">
@@ -21,7 +21,7 @@
       >
         {{ schema.ui.showBody ? "隐藏" : "打开" }}
       </div>
-      <div v-if="schema.help" class="es-form-help">
+      <div v-if="schema.help && !schema.help.hidden" class="es-form-help">
         <es-base :config="schema.help" :info="schema.__info"></es-base>
       </div>
     </div>
@@ -66,7 +66,9 @@
             >
             </es-base>
           </div>
-          <template v-if="schema.unit && !schema.__inGroups">
+          <template
+            v-if="schema.unit && !schema.unit.hidden && !schema.__inGroups"
+          >
             <div v-if="schema.unit.name" class="es-form-unit">
               <es-base :config="schema.unit" :info="schema.__info"></es-base>
             </div>
@@ -75,7 +77,12 @@
             </div>
           </template>
           <div
-            v-if="schema.help && !schema.__inGroups && showHelpInBody"
+            v-if="
+              schema.help &&
+                !schema.help.hidden &&
+                !schema.__inGroups &&
+                showHelpInBody
+            "
             class="es-form-help"
           >
             <es-base :config="schema.help" :info="schema.__info"></es-base>
@@ -287,16 +294,14 @@
       </div>
 
       <!-- 描述信息，可以html -->
-      <div v-if="schema.desc" class="es-form-desc">
-        <es-base
-          v-if="schema.desc.name"
-          :config="schema.desc"
-          :info="schema.__info"
-        ></es-base>
-        <template v-else>
+      <template v-if="schema.desc && !schema.desc.hidden">
+        <div v-if="schema.desc.name" class="es-form-desc">
+          <es-base :config="schema.desc" :info="schema.__info"></es-base>
+        </div>
+        <div v-else v-show="schema.desc.text" class="es-form-desc">
           {{ schema.desc.text }}
-        </template>
-      </div>
+        </div>
+      </template>
     </div>
   </div>
 </template>
@@ -551,7 +556,9 @@ export default {
   computed: {
     needHeader() {
       return this.schema.properties &&
-        (this.schema.title || this.schema.ui.__hasToggle || this.schema.help)
+        ((this.schema.title && !this.schema.title.hidden) ||
+          this.schema.ui.__hasToggle ||
+          this.schema.help)
         ? true
         : false; // 是否有头部
     },

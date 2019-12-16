@@ -245,7 +245,7 @@ let schemaUtils = {
             (newPropItem.array &&
               newPropItem.array.name == constant.ARRAY_TABLE)
           ) {
-            if (nextPropItem.label.text === false) {
+            if (!nextPropItem.label) {
               console.warn(
                 "当属性(" +
                   parentKey +
@@ -1216,24 +1216,24 @@ let schemaUtils = {
    * 解析项Label
    */
   __parseLabel: function(value, myPathKey) {
-    var newValue,
+    var newLabel,
       defaultAlign = false;
-    newValue = this.__parsePropComponent(value, myPathKey, true);
+    newLabel = this.__parsePropComponent(value, myPathKey, true);
 
     // 因为label有点特殊，所以不能为false
-    if (newValue) {
-      newValue.flex = this.__parseFlex(value.flex, value.size);
-      newValue.align = this.__parseAlign(value.align, defaultAlign);
+    if (newLabel) {
+      newLabel.flex = this.__parseFlex(value.flex, value.size);
+      newLabel.align = this.__parseAlign(value.align, defaultAlign);
     } else {
-      newValue = {
-        text: false,
-        __rawText: false,
-        flex: false,
-        align: defaultAlign
-      };
+      // newLabel = {
+      //   text: false,
+      //   __rawText: false,
+      //   flex: false,
+      //   align: defaultAlign
+      // };
     }
 
-    return newValue;
+    return newLabel;
   },
 
   /**
@@ -1502,30 +1502,30 @@ let schemaUtils = {
    * 解析一般组件
    */
   __parsePropComponent: function(value, myPathKey, canEmpty = false) {
-    var newCom;
+    var newComponent;
     if (utils.isObj(value) && Object.keys(value).length > 0) {
-      newCom = {};
+      newComponent = {};
       var name =
         utils.isStr(value.name) && value.name.trim()
           ? value.name.trim()
           : value.name;
       if (name) {
-        newCom.name = name;
-        newCom.actions = this.__parseActions(value.actions, myPathKey);
+        newComponent.name = name;
+        newComponent.actions = this.__parseActions(value.actions, myPathKey);
 
         // 属性
         var propInfo = this.__parseComProps(value.props, ["style", "class"]);
         // console.log(propInfo);
         if (propInfo.new) {
-          newCom.props = propInfo.new;
+          newComponent.props = propInfo.new;
         }
 
         if (propInfo.raw) {
-          newCom.__rawProps = propInfo.raw;
+          newComponent.__rawProps = propInfo.raw;
         }
 
         if (propInfo.staticNames) {
-          newCom.__staticPropNames = propInfo.staticNames;
+          newComponent.__staticPropNames = propInfo.staticNames;
         }
 
         // 指令
@@ -1534,88 +1534,101 @@ let schemaUtils = {
         );
 
         if (directiveInfo.new) {
-          newCom.directives = directiveInfo.new;
+          newComponent.directives = directiveInfo.new;
         }
 
         if (directiveInfo.raw) {
-          newCom.__rawDirectives = directiveInfo.raw;
+          newComponent.__rawDirectives = directiveInfo.raw;
         }
 
         // 只有在name有值时有效
         if (parse.isEsOrFunc(value.class)) {
-          newCom.class = null;
-          newCom.__rawClass = parse.newEsFuncion(value.class);
+          newComponent.class = null;
+          newComponent.__rawClass = parse.newEsFuncion(value.class);
         } else {
-          newCom.class = utils.deepCopy(value.class);
+          newComponent.class = utils.deepCopy(value.class);
         }
 
         if (parse.isEsOrFunc(value.style)) {
-          newCom.style = null;
-          newCom.__rawStyle = parse.newEsFuncion(value.style);
+          newComponent.style = null;
+          newComponent.__rawStyle = parse.newEsFuncion(value.style);
         } else {
           if (utils.isObj(value.style) && Object.keys(value.style).length) {
-            newCom.style = utils.deepCopy(value.style);
+            newComponent.style = utils.deepCopy(value.style);
           }
         }
 
         // value
         if (value.hasOwnProperty("value")) {
-          newCom.value = value.value;
+          newComponent.value = value.value;
         } else {
           // 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
         }
       }
 
-      var text;
-      if (utils.isStr(value.text)) {
-        text = value.text.trim();
-        text = text || canEmpty ? text : false;
-        // newCom.text = text;
-      } else if (utils.isFunc(value.text)) {
-        text = value.text;
+      if (parse.isEsOrFunc(value.text)) {
+        newComponent.text = value.text;
+        newComponent.__rawText = parse.newEsFuncion(value.text);
+      } else if (utils.isStr(value.text)) {
+        newComponent.text = value.text.trim();
       } else {
-        if (!name) {
-          // 不符合要求，说明为空
-          // 说明为空
-          return false;
-        }
-        text = false;
+        newComponent.text = undefined;
       }
-      newCom.text = text;
+      if (!newComponent.text && !name && !canEmpty) {
+        // 不符合要求，说明为空
+        return false;
+      }
 
-      newCom.__rawText = parse.newEsFuncion(text);
-
-      // return newCom;
+      if (parse.isEsOrFunc(value.hidden)) {
+        newComponent.hidden = false;
+        newComponent.__rawHidden = parse.newEsFuncion(value.hidden);
+      } else {
+        newComponent.hidden = !!value.hidden;
+      }
     } else if (utils.isStr(value)) {
       value = value.trim();
       if (value || canEmpty) {
-        newCom = { text: value, __rawText: parse.newEsFuncion(value) };
+        if (parse.isEsOrFunc(value)) {
+          newComponent = {
+            text: value,
+            __rawText: parse.newEsFuncion(value),
+            hidden: false
+          };
+        } else {
+          newComponent = {
+            text: value,
+            hidden: false
+          };
+        }
       } else {
         return false;
       }
-      // return newCom;
     } else if (utils.isFunc(value)) {
-      newCom = { text: value, __rawText: value };
+      newComponent = {
+        text: value,
+        __rawText: value,
+        hidden: false
+      };
     } else {
       return false;
     }
 
     // 判断名称是否合法
     if (
-      newCom &&
-      utils.isStr(newCom.name) &&
-      !utils.validateComponentName(newCom.name)
+      newComponent &&
+      utils.isStr(newComponent.name) &&
+      !utils.validateComponentName(newComponent.name)
     ) {
-      throw "组件名(" + newCom.name + ")存在html非法字符";
+      throw "组件名(" + newComponent.name + ")存在html非法字符";
     }
 
-    newCom.props = newCom.props ? newCom.props : {};
+    newComponent.props = newComponent.props ? newComponent.props : {};
 
-    var eventOn = this.__fetchActionEvent(newCom.actions);
-    newCom.__emitEvents = eventOn.__emitEvents;
-    newCom.__nativeEvents = eventOn.__nativeEvents;
+    var eventOn = this.__fetchActionEvent(newComponent.actions);
+    newComponent.__emitEvents = eventOn.__emitEvents;
+    newComponent.__nativeEvents = eventOn.__nativeEvents;
 
-    return newCom;
+    return newComponent;
   },
 
   /**
@@ -1956,16 +1969,20 @@ let schemaUtils = {
           array.name == constant.ARRAY_TABLE && array.headRequired
             ? true
             : false;
-        // subLabel = utils.isStr(array.subLabel) ? array.subLabel : false;
 
         subLabel = this.__parsePropComponent(array.subLabel, myPathKey);
         if (!subLabel) {
           subLabel = {
-            text: false,
-            __rawText: false
-            // size: false,
-            // align: defaultAlign
+            text: false
           };
+        } else {
+          // 删除隐藏属性：暂没有用途
+          if (subLabel.hasOwnProperty("hidden")) {
+            delete subLabel.hidden;
+          }
+          if (subLabel.hasOwnProperty("__rawHidden")) {
+            delete subLabel.__rawHidden;
+          }
         }
 
         hasDelWarn =
@@ -2133,21 +2150,6 @@ let schemaUtils = {
         newPropItem[key] = this.__parseLabel(propItem[key], myPathKey);
         return true;
       }
-
-      // if (key == "value") {
-      //   // 这个比较特殊: 有值就记录下来
-      //   if (propItem.hasOwnProperty("value")) {
-      //     newPropItem.value = propItem.value;
-      //   } else if (
-      //     utils.isObj(propItem.component) &&
-      //     propItem.component.hasOwnProperty("value")
-      //   ) {
-      //     newPropItem.value = propItem.component.value;
-      //   } else {
-      //     // 没有值，无需记录，留给后面判断：因为有默认值的问题
-      //   }
-      //   return true;
-      // }
 
       if (key == "title") {
         newPropItem[key] = this.__parseTitle(propItem[key], myPathKey);

@@ -752,7 +752,7 @@ let formUtils = {
    */
   analyzeUiProps(propItem, baseParseSources) {
     var sum = 0;
-    var isHidden, isRequired, text, listLen, schemaList, i;
+    var isHidden, isRequired, listLen, schemaList, i;
 
     var parseSources = Object.assign({}, baseParseSources);
     parseSources.index = propItem.__info.index;
@@ -779,42 +779,18 @@ let formUtils = {
       }
 
       if (propItem.label) {
-        if (!propItem.label.name && propItem.label.__rawText) {
-          // false或为空都不用执行 properies array下propItem.label
-          text = parse.smartEsValue(propItem.label.__rawText, parseSources);
-          if (propItem.label.text != text) {
-            propItem.label.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.label, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.label, parseSources);
       }
 
       if (propItem.desc) {
-        if (!propItem.desc.name && propItem.desc.__rawText) {
-          // false或为空都不用执行 propItem.desc
-          text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
-          if (propItem.desc.text != text) {
-            propItem.desc.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.desc, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.desc, parseSources);
       }
 
       if (propItem.unit) {
-        if (!propItem.unit.name && propItem.unit.__rawText) {
-          // false或为空都不用执行 propItem.unit
-          text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
-          if (propItem.unit.text != text) {
-            propItem.unit.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.unit, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.unit, parseSources);
       }
 
       if (propItem.help) {
@@ -891,55 +867,23 @@ let formUtils = {
       }
 
       if (propItem.title) {
-        if (!propItem.title.name && propItem.title.__rawText) {
-          // false或为空都不用执行 properies array下propItem.title
-          text = parse.smartEsValue(propItem.title.__rawText, parseSources);
-          if (propItem.title.text != text) {
-            propItem.title.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.title, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.title, parseSources);
       }
 
       if (propItem.label) {
-        if (!propItem.label.name && propItem.label.__rawText) {
-          // false或为空都不用执行 properies array下propItem.label
-          text = parse.smartEsValue(propItem.label.__rawText, parseSources);
-          if (propItem.label.text != text) {
-            propItem.label.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.label, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.label, parseSources);
       }
 
       if (propItem.desc) {
-        if (!propItem.desc.name && propItem.desc.__rawText) {
-          // false或为空都不用执行 propItem.desc
-          text = parse.smartEsValue(propItem.desc.__rawText, parseSources);
-          if (propItem.desc.text != text) {
-            propItem.desc.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.desc, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.desc, parseSources);
       }
 
       if (propItem.unit) {
-        if (!propItem.unit.name && propItem.unit.__rawText) {
-          // false或为空都不用执行 propItem.unit
-          text = parse.smartEsValue(propItem.unit.__rawText, parseSources);
-          if (propItem.unit.text != text) {
-            propItem.unit.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.unit, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.unit, parseSources);
       }
 
       if (propItem.help) {
@@ -948,15 +892,8 @@ let formUtils = {
       }
 
       if (propItem.subLabel) {
-        if (!propItem.subLabel.name && propItem.subLabel.__rawText) {
-          text = parse.smartEsValue(propItem.subLabel.__rawText, parseSources);
-          if (propItem.subLabel.text != text) {
-            propItem.subLabel.text = text;
-          }
-        } else {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.subLabel, parseSources);
-        }
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.subLabel, parseSources);
       }
 
       if (propItem.array) {
@@ -1131,36 +1068,68 @@ let formUtils = {
     }
   },
 
+  /**
+   * 运行时解析组件：比如label, desc, component, help, title, unit
+   * @param {*} component
+   * @param {*} parseSources
+   */
   __esParseComponent(component, parseSources) {
-    var text, style, className, value;
+    var isHidden, text, style, className, value;
 
-    // 解析属性
-    if (component.__rawProps) {
-      var curProps = component.props;
-      var rawProps = component.__rawProps;
-      var staticPropNames = component.__staticPropNames;
-      staticPropNames = staticPropNames ? staticPropNames : [];
-      for (var key in rawProps) {
-        if (!staticPropNames.includes(key)) {
-          text = parse.smartEsValue(rawProps[key], parseSources);
-        } else {
-          text = rawProps[key];
-        }
-        if (curProps[key] !== text) {
-          curProps[key] = text;
-        }
+    // 项组件是没有此值的
+    if (component.__rawHidden) {
+      isHidden = parse.smartEsValue(component.__rawHidden, parseSources);
+      if (component.hidden != isHidden) {
+        component.hidden = isHidden;
       }
     }
 
-    // 解析指令
-    if (component.__rawDirectives) {
-      var curDirectives = component.directives;
-      var rawDirectives = component.__rawDirectives;
-      for (var i = 0; i < rawDirectives.length; i++) {
-        var rawDirective = rawDirectives[i];
-        value = parse.smartEsValue(rawDirective.value, parseSources);
-        if (value !== curDirectives[i].value) {
-          curDirectives[i].value = value;
+    // 正常组件：有以下属性要解析
+    if (component.name) {
+      // 解析属性
+      if (component.__rawProps) {
+        var curProps = component.props;
+        var rawProps = component.__rawProps;
+        var staticPropNames = component.__staticPropNames;
+        staticPropNames = staticPropNames ? staticPropNames : [];
+        for (var key in rawProps) {
+          if (!staticPropNames.includes(key)) {
+            text = parse.smartEsValue(rawProps[key], parseSources);
+          } else {
+            text = rawProps[key];
+          }
+          if (curProps[key] !== text) {
+            curProps[key] = text;
+          }
+        }
+      }
+
+      // 解析指令
+      if (component.__rawDirectives) {
+        var curDirectives = component.directives;
+        var rawDirectives = component.__rawDirectives;
+        for (var i = 0; i < rawDirectives.length; i++) {
+          var rawDirective = rawDirectives[i];
+          value = parse.smartEsValue(rawDirective.value, parseSources);
+          if (value !== curDirectives[i].value) {
+            curDirectives[i].value = value;
+          }
+        }
+      }
+
+      // 解析style
+      if (component.__rawStyle) {
+        style = parse.smartEsValue(component.__rawStyle, parseSources);
+        if (style !== component.style) {
+          component.style = style;
+        }
+      }
+
+      // 解析class
+      if (component.__rawClass) {
+        className = parse.smartEsValue(component.__rawClass, parseSources);
+        if (className !== component.class) {
+          component.class = className;
         }
       }
     }
@@ -1168,24 +1137,9 @@ let formUtils = {
     // 解析text
     if (component.__rawText) {
       text = parse.smartEsValue(component.__rawText, parseSources);
+      text = utils.isStr(text) ? text : undefined;
       if (text !== component.text) {
         component.text = text;
-      }
-    }
-
-    // 解析style
-    if (component.__rawStyle) {
-      style = parse.smartEsValue(component.__rawStyle, parseSources);
-      if (style !== component.style) {
-        component.style = style;
-      }
-    }
-
-    // 解析class
-    if (component.__rawClass) {
-      className = parse.smartEsValue(component.__rawClass, parseSources);
-      if (className !== component.class) {
-        component.class = className;
       }
     }
   },

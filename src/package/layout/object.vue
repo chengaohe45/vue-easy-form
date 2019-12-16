@@ -16,11 +16,12 @@
         <template v-for="fieldKeyName in fieldSchema.__groups">
           <template v-if="schema.properties[fieldKeyName].component">
             <label
-              v-show="!schema.properties[fieldKeyName].hidden"
               v-if="
                 schema.properties[fieldKeyName].__creatable &&
-                  schema.properties[fieldKeyName].label.text !== false
+                  schema.properties[fieldKeyName].label &&
+                  !schema.properties[fieldKeyName].label.hidden
               "
+              v-show="!schema.properties[fieldKeyName].hidden"
               :style="[
                 {
                   height: schema.properties[fieldKeyName].rowHeight + 'px',
@@ -50,7 +51,6 @@
                 class="es-required"
                 >*</span
               >
-              <!-- {{ schema.properties[fieldKeyName].label.text }} -->
               <template v-if="!schema.properties[fieldKeyName].label.name">
                 <span>{{ schema.properties[fieldKeyName].label.text }}</span>
               </template>
@@ -75,7 +75,8 @@
                 {
                   minHeight: schema.properties[fieldKeyName].rowHeight + 'px',
                   marginLeft:
-                    schema.properties[fieldKeyName].label.text === false
+                    !schema.properties[fieldKeyName].label ||
+                    schema.properties[fieldKeyName].label.hidden
                       ? schema.properties[fieldKeyName].offsetLeft + 'px'
                       : false,
                   marginRight:
@@ -91,6 +92,7 @@
             <template
               v-if="
                 schema.properties[fieldKeyName].unit &&
+                  !schema.properties[fieldKeyName].unit.hidden &&
                   schema.properties[fieldKeyName].__creatable
               "
             >
@@ -128,6 +130,7 @@
               :key="'help-' + fieldKeyName"
               v-if="
                 schema.properties[fieldKeyName].help &&
+                  !schema.properties[fieldKeyName].help.hidden &&
                   schema.properties[fieldKeyName].__creatable
               "
               class="es-form-help"
@@ -177,7 +180,7 @@
         >
           <!-- 一般的控件 -->
           <label
-            v-if="fieldSchema.label.text !== false"
+            v-if="fieldSchema.label && !fieldSchema.label.hidden"
             :class="[
               'es-form-label',
               fieldSchema.label.flex
@@ -207,7 +210,6 @@
               class="es-required"
               >*</span
             >
-            <!-- {{ fieldSchema.label.text }} -->
             <template v-if="!fieldSchema.label.name">
               <span>{{
                 fieldSchema.direction != "v" || fieldSchema.label.text

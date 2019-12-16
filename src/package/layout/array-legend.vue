@@ -24,6 +24,7 @@
           <div class="es-array-fieldset-box">
             <div class="es-array-fieldset">
               <div class="es-legend">
+                <!-- itemSchema.subLabel一定为一个对象-->
                 <span v-if="!itemSchema.subLabel.name">{{
                   itemSchema.subLabel.text
                     ? itemSchema.subLabel.text
@@ -183,7 +184,7 @@
       </div>
     </div>
     <div
-      v-if="schema.help && schema.component"
+      v-if="schema.help && !schema.help.hidden && schema.component"
       class="es-form-help"
       :style="{
         height: schema.properties

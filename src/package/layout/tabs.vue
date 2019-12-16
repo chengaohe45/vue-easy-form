@@ -12,15 +12,19 @@
           @clickActive="clickActiveHandler"
           :index="fieldName"
         >
-          <span v-if="!itemSchema.label.name">{{
-            itemSchema.label.text ? itemSchema.label.text : fieldName + ""
-          }}</span>
-          <span v-else class="es-form-label-box">
-            <es-base
-              :config="itemSchema.label"
-              :info="itemSchema.__info"
-            ></es-base>
-          </span>
+          <!-- itemSchema.label.hidden为true: 也补充key -->
+          <template v-if="itemSchema.label && !itemSchema.label.hidden">
+            <span v-if="!itemSchema.label.name">{{
+              itemSchema.label.text ? itemSchema.label.text : fieldName + ""
+            }}</span>
+            <span v-else class="es-form-label-box">
+              <es-base
+                :config="itemSchema.label"
+                :info="itemSchema.__info"
+              ></es-base>
+            </span>
+          </template>
+          <span v-else>{{ fieldName + "" }}</span>
         </es-tabs-nav-item>
       </template>
     </es-tabs-nav>
