@@ -19,7 +19,7 @@ export default {
           isOpen: {
             label: "是否打开",
             component: "el-switch",
-            value: true
+            value: false
           },
           test1: {
             layout: {
@@ -170,7 +170,8 @@ export default {
               bak: {
                 label: {
                   name: "div",
-                  text: "备用"
+                  text: "备用",
+                  help: "我在label中"
                 },
                 rules: {
                   required: "es: {{$hidden(test1.base)}}"
@@ -274,7 +275,10 @@ export default {
             label: "",
             properties: {
               base: {
-                label: "基本信息",
+                label: {
+                  text: "基本信息",
+                  help: "我在label中"
+                },
                 properties: {
                   startTime: {
                     label: "上线时间",

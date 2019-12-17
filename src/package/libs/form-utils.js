@@ -781,6 +781,10 @@ let formUtils = {
       if (propItem.label) {
         // 解析组件内的属性
         this.__esParseComponent(propItem.label, parseSources);
+        if (propItem.label.help) {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.label.help, parseSources);
+        }
       }
 
       if (propItem.desc) {
@@ -869,11 +873,21 @@ let formUtils = {
       if (propItem.title) {
         // 解析组件内的属性
         this.__esParseComponent(propItem.title, parseSources);
+
+        if (propItem.title.help) {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.title.help, parseSources);
+        }
       }
 
       if (propItem.label) {
         // 解析组件内的属性
         this.__esParseComponent(propItem.label, parseSources);
+
+        if (propItem.label.help) {
+          // 解析组件内的属性
+          this.__esParseComponent(propItem.label.help, parseSources);
+        }
       }
 
       if (propItem.desc) {

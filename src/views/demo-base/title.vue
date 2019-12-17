@@ -61,7 +61,8 @@ export default {
               hasBorder: true
             },
             title: {
-              text: "投放地区"
+              text: "投放地区",
+              help: "我在title里面"
             },
             label: false,
             properties: {
@@ -89,7 +90,7 @@ export default {
                 color: "es: {{$root}}.simulateColor"
               }
             },
-            help: "我在这里",
+            help: "我在title外里",
             label: false,
             properties: {
               whitelist: {

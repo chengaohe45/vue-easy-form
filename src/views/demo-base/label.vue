@@ -29,7 +29,10 @@ export default {
         },
 
         isOpen: {
-          label: "开关",
+          label: {
+            text: "开关"
+            // help: "我在label里面"
+          },
           component: "el-switch",
           value: true
         },
@@ -62,8 +65,15 @@ export default {
         },
 
         textLabel: {
+          colon: true,
           label: {
-            text: "text写法"
+            text: "text写法",
+            help: {
+              hidden: "es: !{{$root}}.isOpen",
+              props: {
+                content: "我在label里面"
+              }
+            }
           },
           component: {
             name: "el-input",
@@ -126,7 +136,13 @@ export default {
         alignLabel2: {
           label: {
             text: "中",
-            align: "center"
+            align: "center",
+            help: {
+              hidden: "es:!{{$root}}.isOpen",
+              props: {
+                content: "我在label里面"
+              }
+            }
           },
           col: 8,
           direction: "v",

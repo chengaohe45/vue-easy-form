@@ -6,7 +6,7 @@
 
 <style lang="scss">
 .title-box {
-  margin: 0 0 0 10px;
+  margin: 0 0 0 6px;
   padding: 0 0 2px 10px;
   font-size: 20px;
   line-height: 22px;

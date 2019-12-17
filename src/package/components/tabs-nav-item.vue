@@ -10,7 +10,7 @@
       :class="{ 'es-tabs-nav-item-cnt': true, 'es-error': hasError }"
       @click="clickCntHandler"
     >
-      <span v-if="required" class="es-required">*</span>
+      <!-- <span v-if="required" class="es-required">*</span> -->
       <div>
         <slot></slot>
       </div>
@@ -114,12 +114,12 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    },
-    required: {
-      type: Boolean,
-      required: false,
-      default: false
     }
+    // required: {
+    //   type: Boolean,
+    //   required: false,
+    //   default: false
+    // }
   },
 
   methods: {

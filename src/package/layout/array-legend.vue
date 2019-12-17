@@ -25,11 +25,14 @@
             <div class="es-array-fieldset">
               <div class="es-legend">
                 <!-- itemSchema.subLabel一定为一个对象-->
-                <span v-if="!itemSchema.subLabel.name">{{
-                  itemSchema.subLabel.text
-                    ? itemSchema.subLabel.text
-                    : index + 1 + ""
-                }}</span>
+                <span
+                  v-if="!itemSchema.subLabel.name || itemSchema.subLabel.hidden"
+                  >{{
+                    itemSchema.subLabel.text && !itemSchema.subLabel.hidden
+                      ? itemSchema.subLabel.text
+                      : index + 1 + ""
+                  }}</span
+                >
                 <span v-else class="es-form-label-box">
                   <es-base
                     :config="itemSchema.subLabel"

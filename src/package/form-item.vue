@@ -8,10 +8,16 @@
         v-if="schema.title && !schema.title.hidden"
         :class="['es-form-title', 'es-title-l' + schema.title.__level]"
       >
-        <template v-if="!schema.title.name">
+        <span v-if="!schema.title.name">
           {{ schema.title.text }}
-        </template>
+        </span>
         <es-base v-else :config="schema.title" :info="schema.__info"></es-base>
+        <div
+          class="es-form-label-help"
+          v-if="schema.title.help && !schema.title.help.hidden"
+        >
+          <es-base :config="schema.title.help" :info="schema.__info"></es-base>
+        </div>
       </div>
       <div v-else class="es-form-title es-title-empty">&nbsp;</div>
       <div
@@ -77,12 +83,7 @@
             </div>
           </template>
           <div
-            v-if="
-              schema.help &&
-                !schema.help.hidden &&
-                !schema.__inGroups &&
-                showHelpInBody
-            "
+            v-if="schema.help && !schema.help.hidden && !schema.__inGroups"
             class="es-form-help"
           >
             <es-base :config="schema.help" :info="schema.__info"></es-base>
@@ -244,7 +245,6 @@
               ref="__refArrarTable__"
               :schema="props.schema"
               :key="fieldName"
-              :showHelpInBody="false"
             ></form-item>
           </template>
 
@@ -390,6 +390,9 @@
   .es-form-title {
     @include flex-full;
     text-align: left;
+
+    @include display-flex;
+    align-items: center;
   }
 
   .es-title-empty {
@@ -434,6 +437,11 @@
 
   .es-form-component-right {
     justify-content: flex-end !important;
+  }
+
+  .es-tabs-item-label {
+    @include flex-fixed;
+    @include display-center;
   }
 
   .es-form-label-box {
@@ -488,6 +496,12 @@
     color: #b3b5b9;
     font-size: 13px;
     line-height: 16px;
+  }
+
+  .es-form-label-help {
+    margin: 0 0 0 3px;
+    @include flex-fixed;
+    // @include display-center;
   }
 
   .es-form-help {
@@ -556,7 +570,11 @@ export default {
   computed: {
     needHeader() {
       return this.schema.properties &&
-        ((this.schema.title && !this.schema.title.hidden) ||
+        ((this.schema.title &&
+          !this.schema.title.hidden &&
+          (this.schema.title.name ||
+            this.schema.title.text ||
+            (this.schema.title.help && this.schema.title.help.hidden))) ||
           this.schema.ui.__hasToggle ||
           this.schema.help)
         ? true
@@ -564,13 +582,15 @@ export default {
     },
 
     bodyStyle() {
-      var style = null;
-      if (this.needHeader) {
-        // 是否有头部
-        //是properties且有头部
-        var hasBorder = this.schema.ui.hasBorder
+      //是properties且有头部
+      var hasBorder =
+        this.schema.ui && this.schema.ui.hasBorder
           ? this.schema.ui.hasBorder
           : false;
+
+      var style = null;
+      // 是否有头部
+      if (this.needHeader) {
         if (hasBorder) {
           style = {
             padding: this.schema.ui.padding
@@ -585,7 +605,13 @@ export default {
           }; //无边框时的样式
         }
       } else {
-        style = null;
+        if (hasBorder) {
+          style = {
+            padding: this.schema.ui.padding
+              ? this.schema.ui.padding
+              : Math.min(this.schema.ui.rowSpace, 10) + "px"
+          }; //有边框时的样式
+        }
       }
       return style;
     }

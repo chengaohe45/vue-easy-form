@@ -31,10 +31,19 @@
             >{{ index + 1 }}.</span
           >
           <!-- itemSchema.subLabel一定为一个对象-->
-          <template v-if="!itemSchema.subLabel.name">
-            <span v-if="!(schema.array.hasOrder && !itemSchema.subLabel.text)">
+          <template
+            v-if="!itemSchema.subLabel.name || itemSchema.subLabel.hidden"
+          >
+            <span
+              v-if="
+                !(
+                  schema.array.hasOrder &&
+                  (!itemSchema.subLabel.text || itemSchema.subLabel.hidden)
+                )
+              "
+            >
               {{
-                itemSchema.subLabel.text
+                itemSchema.subLabel.text && !itemSchema.subLabel.hidden
                   ? itemSchema.subLabel.text
                   : schema.array.hasOrder
                   ? ""

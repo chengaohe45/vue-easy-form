@@ -69,7 +69,8 @@ export default {
                 label: {
                   name: "div",
                   text: "学科名",
-                  align: "left"
+                  align: "left",
+                  help: "我在label里面：学科名"
                 },
                 component: {
                   name: "el-input",
@@ -83,22 +84,23 @@ export default {
                   required: true,
                   emptyMsg: "请输入学科名"
                 },
-                help: "帮帮"
+                help: "我在外面：一般都不会这样写，这里只是演示而已"
               },
               code: {
                 value: "100",
                 // direction: "v",
                 col: 8,
                 label: {
-                  text: "代号"
+                  text: "代号",
+                  help: "我在label里面：代号"
                 },
                 component: {
                   name: "el-input",
                   props: {
                     size: "small"
                   }
-                },
-                help: "帮帮我吧"
+                }
+                // help: "帮帮我吧"
               }
             },
             desc: "提示： 最多只能添加5条数据"

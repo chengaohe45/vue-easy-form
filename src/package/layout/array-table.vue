@@ -34,16 +34,27 @@
             >
             <!-- headerSchema.label.hidden为true: 也补充key -->
             <template v-if="headerSchema.label && !headerSchema.label.hidden">
-              <template v-if="!headerSchema.label.name">
+              <span v-if="!headerSchema.label.name">
                 {{
                   headerSchema.label.text
                     ? headerSchema.label.text
                     : headerFieldName + ""
                 }}
-              </template>
+              </span>
               <span v-else class="es-form-label-box">
                 <es-base
                   :config="headerSchema.label"
+                  :info="headerSchema.__info"
+                ></es-base>
+              </span>
+              <span
+                class="es-form-label-help"
+                v-if="
+                  headerSchema.label.help && !headerSchema.label.help.hidden
+                "
+              >
+                <es-base
+                  :config="headerSchema.label.help"
                   :info="headerSchema.__info"
                 ></es-base>
               </span>
@@ -51,7 +62,7 @@
             <template v-else>
               {{ headerFieldName + "" }}
             </template>
-            <span
+            <!-- <span
               v-if="headerSchema.help && !schema.help.hidden"
               class="es-form-help"
             >
@@ -59,7 +70,7 @@
                 :config="headerSchema.help"
                 :info="headerSchema.__info"
               ></es-base>
-            </span>
+            </span> -->
           </div>
         </th>
         <th

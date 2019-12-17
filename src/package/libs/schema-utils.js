@@ -367,6 +367,7 @@ let schemaUtils = {
 
         if (newPropItem.array.name == constant.ARRAY_TABS) {
           newPropItem.__tabsIndex = false;
+          newPropItem.__hasError = false; // 用来做复制
         }
 
         newPropItem.__propSchemaList = [];
@@ -1224,6 +1225,7 @@ let schemaUtils = {
     if (newLabel) {
       newLabel.flex = this.__parseFlex(value.flex, value.size);
       newLabel.align = this.__parseAlign(value.align, defaultAlign);
+      newLabel.help = this.__parsePropHelp(value.help, myPathKey);
     } else {
       // newLabel = {
       //   text: false,
@@ -1274,6 +1276,9 @@ let schemaUtils = {
    */
   __parseTitle: function(value, myPathKey) {
     var newValue = this.__parsePropComponent(value, myPathKey);
+    if (newValue) {
+      newValue.help = this.__parsePropHelp(value.help, myPathKey);
+    }
     return newValue;
   },
 
@@ -1972,17 +1977,11 @@ let schemaUtils = {
 
         subLabel = this.__parsePropComponent(array.subLabel, myPathKey);
         if (!subLabel) {
+          // 不可以为false, 因为必须要显示
           subLabel = {
+            hidden: false,
             text: false
           };
-        } else {
-          // 删除隐藏属性：暂没有用途
-          if (subLabel.hasOwnProperty("hidden")) {
-            delete subLabel.hidden;
-          }
-          if (subLabel.hasOwnProperty("__rawHidden")) {
-            delete subLabel.__rawHidden;
-          }
         }
 
         hasDelWarn =

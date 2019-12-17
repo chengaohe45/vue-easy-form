@@ -26,18 +26,21 @@
                 {
                   height: schema.properties[fieldKeyName].rowHeight + 'px',
                   lineHeight: schema.properties[fieldKeyName].rowHeight + 'px',
-                  marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px',
-                  textAlign: schema.properties[fieldKeyName].label.align
+                  marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px'
                 },
                 schema.properties[fieldKeyName].label.flex
                   ? ''
                   : { width: schema.properties[fieldKeyName].labelWidth + 'px' }
               ]"
               :class="[
-                'es-form-label',
+                'es-form-label-col',
                 schema.properties[fieldKeyName].label.flex
                   ? 'es-form-label-' +
                     schema.properties[fieldKeyName].label.flex
+                  : '',
+                schema.properties[fieldKeyName].label.align
+                  ? 'es-form-label-' +
+                    schema.properties[fieldKeyName].label.align
                   : ''
               ]"
               :key="'label-' + fieldKeyName"
@@ -57,6 +60,18 @@
               <span v-else class="es-form-label-box">
                 <es-base
                   :config="schema.properties[fieldKeyName].label"
+                  :info="schema.properties[fieldKeyName].__info"
+                ></es-base>
+              </span>
+              <span
+                class="es-form-label-help"
+                v-if="
+                  schema.properties[fieldKeyName].label.help &&
+                    !schema.properties[fieldKeyName].label.help.hidden
+                "
+              >
+                <es-base
+                  :config="schema.properties[fieldKeyName].label.help"
                   :info="schema.properties[fieldKeyName].__info"
                 ></es-base>
               </span>
@@ -182,9 +197,12 @@
           <label
             v-if="fieldSchema.label && !fieldSchema.label.hidden"
             :class="[
-              'es-form-label',
+              'es-form-label-col',
               fieldSchema.label.flex
                 ? 'es-form-label-' + fieldSchema.label.flex
+                : '',
+              fieldSchema.label.align
+                ? 'es-form-label-' + fieldSchema.label.align
                 : ''
             ]"
             :style="
@@ -192,17 +210,15 @@
                 ? [
                     {
                       height: fieldSchema.rowHeight + 'px',
-                      lineHeight: fieldSchema.rowHeight + 'px',
-                      textAlign: fieldSchema.label.align
+                      lineHeight: fieldSchema.rowHeight + 'px'
                     },
                     fieldSchema.label.flex
-                      ? { textAlign: fieldSchema.label.align }
+                      ? {}
                       : {
-                          width: fieldSchema.labelWidth + 'px',
-                          textAlign: fieldSchema.label.align
+                          width: fieldSchema.labelWidth + 'px'
                         }
                   ]
-                : { textAlign: fieldSchema.label.align }
+                : {}
             "
           >
             <span
@@ -220,6 +236,15 @@
             <span v-else class="es-form-label-box">
               <es-base
                 :config="fieldSchema.label"
+                :info="fieldSchema.__info"
+              ></es-base>
+            </span>
+            <span
+              class="es-form-label-help"
+              v-if="fieldSchema.label.help && !fieldSchema.label.help.hidden"
+            >
+              <es-base
+                :config="fieldSchema.label.help"
                 :info="fieldSchema.__info"
               ></es-base>
             </span>
@@ -301,7 +326,7 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     align-items: stretch;
   }
 
-  .es-form-label {
+  .es-form-label-col {
     @include flex-fixed;
     @include border-box;
     width: 115px;
@@ -309,13 +334,28 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     text-align: right;
     line-height: 1.2;
     white-space: nowrap;
+    @include display-flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+
+  .es-form-label-left {
+    justify-content: flex-start;
+  }
+
+  .es-form-label-center {
+    justify-content: center;
+  }
+
+  .es-form-label-right {
+    justify-content: flex-end;
   }
 
   .es-form-colon {
     margin-left: 3px;
   }
 
-  .es-form-v > .es-form-label {
+  .es-form-v > .es-form-label-col {
     text-align: left;
     width: auto;
     // height: 26px;

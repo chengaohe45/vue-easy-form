@@ -13,18 +13,34 @@
           :index="fieldName"
         >
           <!-- itemSchema.label.hidden为true: 也补充key -->
-          <template v-if="itemSchema.label && !itemSchema.label.hidden">
-            <span v-if="!itemSchema.label.name">{{
-              itemSchema.label.text ? itemSchema.label.text : fieldName + ""
-            }}</span>
-            <span v-else class="es-form-label-box">
-              <es-base
-                :config="itemSchema.label"
-                :info="itemSchema.__info"
-              ></es-base>
-            </span>
-          </template>
-          <span v-else>{{ fieldName + "" }}</span>
+          <div class="es-tabs-item-label">
+            <span
+              v-if="itemSchema.rules && itemSchema.rules.required"
+              class="es-required"
+              >*</span
+            >
+            <template v-if="itemSchema.label && !itemSchema.label.hidden">
+              <span v-if="!itemSchema.label.name">{{
+                itemSchema.label.text ? itemSchema.label.text : fieldName + ""
+              }}</span>
+              <span v-else class="es-form-label-box">
+                <es-base
+                  :config="itemSchema.label"
+                  :info="itemSchema.__info"
+                ></es-base>
+              </span>
+              <span
+                class="es-form-label-help"
+                v-if="itemSchema.label.help && !itemSchema.label.help.hidden"
+              >
+                <es-base
+                  :config="itemSchema.label.help"
+                  :info="itemSchema.__info"
+                ></es-base>
+              </span>
+            </template>
+            <span v-else>{{ fieldName + "" }}</span>
+          </div>
         </es-tabs-nav-item>
       </template>
     </es-tabs-nav>
