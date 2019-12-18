@@ -198,6 +198,7 @@
             v-if="fieldSchema.label && !fieldSchema.label.hidden"
             :class="[
               'es-form-label-col',
+              fieldSchema.direction == 'v' ? 'es-form-label-col-v' : '',
               fieldSchema.label.flex
                 ? 'es-form-label-' + fieldSchema.label.flex
                 : '',
@@ -310,11 +311,6 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     justify-content: flex-start;
     align-items: flex-start;
     padding: 0;
-    // margin-top: 20px;
-
-    // &:last-child {
-    //   margin-bottom: 0;
-    // }
   }
 
   .es-form-none {
@@ -339,6 +335,14 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     justify-content: flex-end;
   }
 
+  .es-form-label-col-v {
+    text-align: left;
+    justify-content: flex-start;
+    width: auto;
+    line-height: 20px;
+    padding: 4px 3px;
+  }
+
   .es-form-label-left {
     justify-content: flex-start;
   }
@@ -353,17 +357,6 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
 
   .es-form-colon {
     margin-left: 3px;
-  }
-
-  .es-form-v > .es-form-label-col {
-    text-align: left;
-    width: auto;
-    // height: 26px;
-    line-height: 20px;
-    padding: 4px 3px;
-    // padding-right: 4px;
-    // padding-top: 6px;
-    // padding-bottom: 6px;
   }
 
   .es-form-label-full {

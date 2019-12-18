@@ -1,5 +1,7 @@
 <template>
-  <span class="com-label"> 组件写法<i class="el-icon-star-on star"></i> </span>
+  <span class="com-label"
+    >组件写法<i class="el-icon-star-on star" :style="{ color: color }"></i
+  ></span>
 </template>
 
 <script>
@@ -8,7 +10,13 @@ export default {
     return {};
   },
 
-  props: {},
+  props: {
+    color: {
+      type: String,
+      required: false,
+      default: "#67c23a"
+    }
+  },
 
   created() {},
 

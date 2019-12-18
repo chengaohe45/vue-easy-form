@@ -24,33 +24,21 @@ export default {
 
       formSchema: {
         properties: {
-          startAge: {
-            label: "适合人群",
-            group: "date",
+          // 写法一
+          age: {
+            label: "年龄",
             col: 12,
             component: {
               name: "el-input-number",
               flex: "full"
             },
-            value: 15
-            // unit: "es: {{$root}}.startAge > 15 ? '岁' : ''"
-          },
-          endAge: {
-            label: {
-              text: "到",
-              flex: "self"
-            },
-            group: "date",
-            col: 12,
-            component: {
-              name: "el-input-number",
-              flex: "full"
-            },
-            value: 20,
+            value: 15,
             unit: "岁"
           },
-          esType: {
-            label: "es方法",
+
+          // 写法二
+          esUnit: {
+            label: "切换单位",
             component: {
               name: "el-slider",
               props: {
@@ -59,10 +47,14 @@ export default {
               }
             },
             value: 50,
-            // col: 12,
-            unit: "es: '单位' + {{$root.esType}}"
+            unit: {
+              // hidden: false,   // 是否隐藏unit
+              text: "es: '单位' + {{$root.esUnit}}"
+            }
           },
-          comType: {
+
+          // 写法三：组件写法
+          comUnit: {
             label: "组件方法",
             component: {
               name: "el-slider",
@@ -72,23 +64,13 @@ export default {
               }
             },
             value: 80,
-            // col: 12,
             unit: {
+              // hidden: false,   // 是否隐藏unit
               name: unit,
               props: {
-                num: "es: {{$root.comType}}"
+                num: "es: {{$root.comUnit}}"
               }
             }
-            // unit: {
-            //   name: "el-button",
-            //   text: "123",
-            //   actions: {
-            //     trigger: "click",
-            //     handler: data => {
-            //       console.log("data: ", data);
-            //     }
-            //   }
-            // }
           }
         }
       }

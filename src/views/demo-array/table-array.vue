@@ -58,7 +58,12 @@ export default {
               min: 3,
               max: 5,
               headRequired: true,
-              value: [{ name: "语文", code: 123 }, { name: "数学", code: 123 }]
+              value: [
+                { name: "语文", code: "1" },
+                { name: "数学", code: "2" },
+                { name: "英语", code: "3" },
+                { name: "政治", code: "4" }
+              ]
             },
 
             properties: {
@@ -69,8 +74,8 @@ export default {
                 label: {
                   name: "div",
                   text: "学科名",
-                  align: "left",
-                  help: "我在label里面：学科名"
+                  align: "left"
+                  // help: "我在label里面：学科名"
                 },
                 component: {
                   name: "el-input",
@@ -84,7 +89,12 @@ export default {
                   required: true,
                   emptyMsg: "请输入学科名"
                 },
-                help: "我在外面：一般都不会这样写，这里只是演示而已"
+                help: {
+                  hidden: "es: {{$index}}%2",
+                  props: {
+                    content: "我在外面：间隔演示帮助"
+                  }
+                }
               },
               code: {
                 value: "100",

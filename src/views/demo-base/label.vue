@@ -85,7 +85,9 @@ export default {
         comLabel: {
           label: {
             name: label,
-            props: {}
+            props: {
+              color: "es: {{$root}}.isOpen ? '' : '#909399'"
+            }
           },
           component: {
             name: "el-input",
