@@ -1,9 +1,6 @@
 .DS_Store
 node_modules
 # /dist
-docs/.vuepress/dist
-docs/.vuepress/demo
-docs/.vuepress/.gitignore
 package-lock.json
 
 # local env files

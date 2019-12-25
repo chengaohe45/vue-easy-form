@@ -1,5 +1,5 @@
 // const apiMocker = require("webpack-api-mocker");
-// const path = require("path");
+const path = require("path");
 // const mocker = path.resolve(__dirname, "./mock/data.js");
 
 // vue.config.js 配置说明 (这个file是peter我加的)
@@ -77,6 +77,16 @@ module.exports = {
         }
       };
     }
+
+    var otherAlias = {};
+    otherAlias["vue-easy-form"] = path.resolve(
+      __dirname,
+      "./src/package/index.js"
+    );
+    if (!config.resolve.alias) {
+      config.resolve.alias = {};
+    }
+    Object.assign(config.resolve.alias, otherAlias);
   },
   css: {
     extract: false // 是否内联css
