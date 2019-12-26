@@ -140,11 +140,6 @@
       }
     }
 
-    .el-slider {
-      margin-left: 12px;
-      margin-right: 12px;
-    }
-
   }
 </style>
 
@@ -173,6 +168,11 @@
         type: String,
         required: false,
         default: "https://chengaohe45.github.io/vue-easy-form-docs/dist/"
+      },
+      open: {
+        type: Boolean,
+        required: false,
+        default: false
       }
     },
 
@@ -189,6 +189,7 @@
 
 
     created() {
+      this.$data.isExpanded = this.open;
       // console.log(utils.deepCopy(this.$slots));
       // 看是否存在：因为可能经过了vuepress编辑，文本找散了
       var result = this.getSchema();

@@ -46,8 +46,8 @@ module.exports = {
             'base/form-value',
             'base/array',
             'base/auto-match',
-            'base/schema',
-            'base/rules'
+            'base/rules',
+            'base/schema'
           ]
         },
         {

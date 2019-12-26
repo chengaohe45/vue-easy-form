@@ -62,21 +62,27 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/static/css/mixins.scss";
 .help-box {
-  display: inline-block;
+  @include display-center;
+  line-height: normal;
   .help-btn {
+    @include display-center;
+    line-height: normal;
     user-select: none;
     outline: none;
     color: inherit;
+    text-decoration: none !important;
     &:hover {
       color: #409eff;
+      text-decoration: none;
     }
   }
 
   .help-icon {
     outline: none;
     user-select: none;
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 

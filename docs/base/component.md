@@ -5,54 +5,63 @@
 - `string`： 全局组件名
 - `object`： 一个对象，见[组件写法](./com-format.md)
 
-## 实例
-```html
-<es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
-```
+### 实例
+<ClientOnly>
+  <demo-block>
 
-## 写法
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
 
-```js
-data() {
-    return {
-      formValue: {
-      },
-      formSchema: {
+  <script>
+    export default {
+      data() {
+        return {
 
-        // 写法一
-        advName: {
-          label: "广告名称",
-          component: "el-input",  // 全局组件名；不写的话，采用系统默认的
-          value: "首页位置"
-        },
-        
-        // 写法二：组件写法
-        target: {
-          label: "投放目标",
-          component: {
-            name: "el-input",
-            props: {
-              placeholder: "请输入投放目标"
+          formValue: {},
+
+          formSchema: {
+
+            // 写法一
+            advName: {
+              label: "广告名称",
+              component: "el-input",  // 全局组件名；不写的话，采用系统默认的
+              value: "首页位置"
             },
-            text: "新建",  // 一般用于文本显示：如<el-button>新建</el-button>
-            align: "left",      // left, center, right
-            ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
-            flex: "full",      // 这个一般用于分组
-            // actions: [],       // 见下面
-            // value: "首页位置"   // 组件的默认值
-          },
-          value: "中年人"   // 组件的默认值也可写在这里，优先级高于component.value
-        }
-
+            
+            // 写法二：组件写法
+            target: {
+              label: "投放目标",
+              component: {
+                name: "el-input",
+                props: {
+                  placeholder: "请输入投放目标"
+                },
+                text: "新建",  // 一般用于文本显示：如<el-button>新建</el-button>
+                align: "left",      // left, center, right
+                ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
+                flex: "full",      // 这个一般用于分组
+                // actions: [],       // 见下面
+                // value: "首页位置"   // 组件的默认值
+              },
+              value: "中年人"   // 组件的默认值也可写在这里，优先级高于component.value
+            }
+          }
+        };
       }
     };
-  }
-```
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
 
-### flex值
-- `''`： 默认为没有设置，component的长度根据自身情况自动取值
-- `full`： 项中有多少点多少。此值一般用于component
-- `self`： label的文本占多宽就多宽。此值一般用于label
+### 组件详解
+
+| 属性名 | 说明 | 类型 | 可选值| 默认值
+| -- | -- | -- | -- | -- 
+| align | 文本的方向 | string | `left`、`center`、`right` | --
+| flex | component的长度控制 | string | `""`：component的长度根据自身情况自动取值<br><br>`full`： 项中有多少点多少。此值一般用于component<br><br>`self`： label的文本占多宽就多宽。此值一般用于label | --
+| ref | vue组件的ref | string | -- | --
+| 其它 | 跟[组件写法](./com-format.md)一样 | -- | -- | --
 
 ### value值
 - 通常在编写项（如：advName）时，component直接写成组件名，所以value写在外面（跟component同级）也是可以的
@@ -63,49 +72,71 @@ data() {
 :::
 
 
-## 项组件事件
+### actions组件事件
 字段：component.actions；配置格式见[组件写法->组件事件](./com-format.md#组件事件)
 
-### 事件示例
-```js
-data() {
-    return {
-      formValue: {
-        // name: "默认小花"
-      },
-      formSchema: {
-        isGood: {
-          label: "",    // 占位置，但不显示文字
-          component: {
-            name: "el-checkbox",
-            text: "是否好人",
-            actions: {
-              trigger: "change",
-              // options => {value, event, pathKey, index, idxChain,target}
-              handler: function(options) {
-                console.log("this对象: ", this);
-                console.log('options: ', options);
-              }
-            }
-          },
-          value: true,
-          col: 12
-        },
-        desc: {
-          label: "es: {{$root}}.isGood ? '好人描述' : '描述'",
-          component: {
-            name: "el-input",
-            props: {
-              placeholder: "es: {{$root}}.isGood ? '好人描述要讲多点' : '一般描述啦'"
+<ClientOnly>
+  <demo-block>
+
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
+  <script>
+    export default {
+      data() {
+        return {
+
+          formValue: {},
+
+          formSchema: {
+            isGood: {
+              label: "",    // 占位置，但不显示文字
+              component: {
+                name: "el-checkbox",
+                text: "是否好人",
+                actions: {
+                  trigger: "change",
+                  // options => {value, event, pathKey, index, idxChain,target}
+                  handler: function(options) {
+                    // console.log("this对象: ", this);
+                    console.log('options: ', options);
+                    if (options.value) {
+                      this.$message({
+                        message: '恭喜你，这是一条好人消息',
+                        type: 'success'
+                      });
+                    } else {
+                      this.$message({
+                        message: '警告哦，这是一条坏人消息',
+                        type: 'warning'
+                      });
+                    }
+                  }
+                }
+              },
+              value: true,
+              col: 12
             },
-            ref: "desc"
-          },
-          value: ""
-        }
-      },
+            desc: {
+              label: "es: {{$root}}.isGood ? '好人描述' : '描述'",
+              component: {
+                name: "el-input",
+                props: {
+                  placeholder: "es: {{$root}}.isGood ? '好人描述要讲多点' : '一般描述啦'"
+                },
+                ref: "desc"
+              },
+              value: ""
+            }
+          }
+        };
+      }
     };
-  }
-```
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
+
 函数handler返回的参数options包含的信息有：
 - `value`： 当前项组件的值，表单的值可以通过this取出
 - `event`： 事件本身所携带的信息, 如keyup.native,可以从这里提取键值；若是$emit事件，则value等于event

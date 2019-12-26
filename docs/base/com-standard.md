@@ -2,30 +2,98 @@
 `es/函数写法`也就是平常所说的`动态解析`。它是监听各类`数据源`的变化，解析出对应的属性值。
 ## es写法
 es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大括号（如：<span v-pre>`{{$root}}`</span>）包括起来，再按照一定的规则解析出来的js语句。实例见[es写法实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/es-function)
-```js
-name: {
-  label: "姓名",
-  component: {
-    name: "el-input",
-    props: {
-      disabled: "es: {{$root}}.isOpen",   // 数据源用两个大括号包住
-      placeholder: "开关打开我就不可写"
-    }
-  },
-  value: ""
-},
-level: {
-  label: "es级别",
-  hidden: "es: {{$hidden('name')}}",  // $hidden是一个函数
-  component: {
-    name: "el-input",
-    props: {
-      placeholder: "name隐藏我就跟着隐藏"
-    }
-  },
-  value: ""
-}
-```
+
+<ClientOnly>
+  <demo-block>
+
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
+  <script>
+    export default {
+      data() {
+        return {
+
+          formValue: {},
+
+          formSchema: {
+            ui: {
+              rowSpace: 20
+            },
+            properties: {
+              isOpen: {
+                label: "开关切换",
+                component: "el-switch",
+                value: false
+              },
+
+              esMethod: {
+                ui: {
+                  type: "bg",
+                  hasBorder: true,
+                  rowSpace: 10
+                },
+                title: {
+                  text: "es写法"
+                },
+                label: false,
+                properties: {
+                  name: {
+                    label: "姓名",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        disabled: "es: {{$root}}.isOpen", // es写法：数据源用两个大括号包住
+                        placeholder: "开关打开我就不可写"
+                      }
+                    },
+                    value: ""
+                  },
+                  level1: {
+                    label: "es级别1",
+                    hidden: "es: {{$root}}.isOpen", // es写法：数据源用两个大括号包住
+                    component: {
+                      name: "el-input",
+                      props: {
+                        placeholder: "开关打开我就隐藏"
+                      }
+                    },
+                    value: ""
+                  },
+                  level2: {
+                    label: "es级别2",
+                    hidden: "es: {{$hidden('esMethod[\"level1\"]')}}",  // $hidden是一个函数
+                    component: {
+                      name: "el-input",
+                      props: {
+                        placeholder: "es级别1隐藏我就跟着隐藏"
+                      }
+                    },
+                    value: ""
+                  },
+                  level3: {
+                    label: "es级别3",
+                    hidden: "es: {{$hidden('esMethod.level2')}}", // $hidden是一个函数
+                    component: {
+                      name: "el-input",
+                      props: {
+                        placeholder: "es级别2隐藏我就跟着隐藏"
+                      }
+                    },
+                    value: ""
+                  }
+                }
+              }
+            }
+          }
+        };
+      }
+    };
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
+
 支持es有4个`数据源`，这4个值共同影响整个es的解析：
 - `rootData`： 整个表单的[根值/rootData](./explain.md#根值). root在es语法中的写法是<span v-pre>`{{$root}}`</span>
 - `global`： 从表单中传入，用于外部对表单影响, 不设置则默认为`空对象`; global在es语法中的写法是<span v-pre>`{{$global}}`</span>
@@ -36,35 +104,108 @@ level: {
 
 ## 函数写法
 属性直接写成一个函数，再传入相应的参数(数据源)进行动态解析. 实例见[函数写法实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/es-function)
-```js
-name: {
-  label: "姓名",
-  component: {
-    name: "el-input",
-    props: {
-      disabled: function(options) { // 直接写成一个函数
-        return options.rootData.isOpen;
-      },
-      placeholder: "开关打开我就不可写"
-    }
-  },
-  value: ""
-},
-level: {
-  label: "es级别",
-  hidden: function(options) { // 直接写成一个函数
-    var $hidden = options.$hidden;
-    return $hidden("name");
-  },
-  component: {
-    name: "el-input",
-    props: {
-      placeholder: "name隐藏我就跟着隐藏"
-    }
-  },
-  value: ""
-}
-```
+
+<ClientOnly>
+  <demo-block>
+
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
+  <script>
+    export default {
+      data() {
+        return {
+
+          formValue: {},
+
+          formSchema: {
+            ui: {
+              rowSpace: 20
+            },
+            properties: {
+              isOpen: {
+                label: "开关切换",
+                component: "el-switch",
+                value: false
+              },
+
+              funcMethod: {
+                ui: {
+                  type: "bg",
+                  rowSpace: 10,
+                  hasBorder: true
+                },
+                title: {
+                  text: "函数写法"
+                },
+                label: false,
+                properties: {
+                  name: {
+                    label: "姓名",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        disabled: function(options) { // 直接写成一个函数
+                          return options.rootData.isOpen;
+                        },
+                        placeholder: "开关打开我就不可写"
+                      }
+                    },
+                    value: ""
+                  },
+                  level1: {
+                    label: "函数级别1",
+                    hidden: function(options) { // 直接写成一个函数
+                      return options.rootData.isOpen;
+                    },
+                    component: {
+                      name: "el-input",
+                      props: {
+                        placeholder: "开关打开我就隐藏"
+                      }
+                    },
+                    value: ""
+                  },
+                  level2: {
+                    label: "函数级别2",
+                    hidden: function(options) { // 直接写成一个函数
+                      var $hidden = options.$hidden;
+                      return $hidden("funcMethod.level1");
+                    },
+                    component: {
+                      name: "el-input",
+                      props: {
+                        placeholder: "函数级别1隐藏我就跟着隐藏"
+                      }
+                    },
+                    value: ""
+                  },
+                  level3: {
+                    label: "函数级别3",
+                    hidden: function(options) { // 直接写成一个函数
+                      var $hidden = options.$hidden;
+                      return $hidden("funcMethod.level2");
+                    },
+                    component: {
+                      name: "el-input",
+                      props: {
+                        placeholder: "函数级别2隐藏我就跟着隐藏"
+                      }
+                    },
+                    value: ""
+                  }
+                }
+              }
+            }
+          }
+        };
+      }
+    };
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
+
 运用函数构造Vue属性，options所携带的信息：
 - `global`：form属性的global
 - `rootData`：表单的原始值（隐藏的项值也会取出）

@@ -7,16 +7,13 @@
 - `string`： 标题；支持[动态解析](./com-standard.md)
 - `object`： 一个对象，见[组件写法](./com-format.md)
 
-## 实例
-```html
-<es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
-```
-
-## 写法
+### 实例
 <ClientOnly>
   <demo-block>
 
   ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
   <script>
     export default {
       data() {
@@ -96,6 +93,13 @@
   ```
   </demo-block>
 </ClientOnly>
+
+### 组件详解
+
+| 属性名 | 说明 | 类型 | 可选值| 默认值
+| -- | -- | -- | -- | -- 
+| hidden | 控制组件是否隐藏, 支持[动态解析](./com-standard.md) | boolean | -- | false
+| 其它 | 跟[组件写法](./com-format.md)一样 | -- | -- | --
 
 title和[ui属性](./settings.md#ui属性)都只有在properties中有效
 
