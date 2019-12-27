@@ -1,4 +1,4 @@
-# 组件写法
+# 组件格式
 从一个Object开始，按一定的格式配置引入相应的Vue组件；目前支持组件化的属性有：[项标签label](./label.md)、[描述desc](./desc.md)、[帮助help](./help.md)、[单元unit](./unit.md)、[标题title](./title.md)、[项组件component](./component.md)，当然，这些属性都有自己特殊的写法，具体的写法见`可组件化属性详解`。
 ## 配置格式
 ``` js

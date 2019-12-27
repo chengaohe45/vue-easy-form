@@ -37,17 +37,23 @@ module.exports = {
           children: [
             '',
             'base/install',
+            'base/quickstart',
             'base/settings',
             'base/explain',
             'base/com-format',
             'base/com-standard',
-            'base/console',
+            'base/console'
+          ]
+        },
+        {
+          title: '基础属性详解',
+          collapsable: false,
+          children: [
             'base/form',
             'base/form-value',
-            'base/array',
             'base/auto-match',
             'base/rules',
-            'base/schema'
+            'base/array'
           ]
         },
         {

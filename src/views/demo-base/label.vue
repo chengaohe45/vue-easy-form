@@ -22,23 +22,19 @@ export default {
       docsHref: "/vue-easy-form-docs/dist/base/label.html",
 
       formSchema: {
-        name: {
-          label: "广告名称",
-          component: "el-input",
-          value: "首页位置"
-        },
+        // 写法一
+        name: "广告名称", // 直接写在属性上，component将会取系统默认的
 
+        // 写法二
         isOpen: {
-          label: {
-            text: "开关"
-            // help: "我在label里面"
-          },
+          label: "状态", // 直接写label，相当于label: {text: "状态"}
           component: "el-switch",
           value: true
         },
 
+        // 写法三
         esLabel: {
-          label: "es: {{$root}}.isOpen ? '广告标签(开)' : '广告标签(关)'",
+          label: "es: {{$root}}.isOpen ? '广告标签(开)' : '广告标签(关)'", // es写法
           component: {
             name: "el-input",
             props: {
@@ -49,27 +45,15 @@ export default {
           value: ""
         },
 
-        funcLabel: {
-          label: function(data) {
-            var rootData = data.rootData;
-            return rootData.isOpen ? "广告标签(开)" : "广告标签(关)";
-          },
-          component: {
-            name: "el-input",
-            props: {
-              placeholder: "切换开关试试: 函数写法"
-            }
-          },
-          rules: true,
-          value: ""
-        },
-
+        // 写法四：text写法, 没有name
         textLabel: {
-          colon: true,
+          colon: true, // 冒号
           label: {
+            hidden: "es: !{{$root}}.isOpen", // 控制label是否隐藏
             text: "text写法",
             help: {
-              hidden: "es: !{{$root}}.isOpen",
+              // label中的帮助
+              // hidden: "es: !{{$root}}.isOpen", // 控制help是否隐藏
               props: {
                 content: "我在label里面"
               }
@@ -77,42 +61,44 @@ export default {
           },
           component: {
             name: "el-input",
-            props: {}
+            props: {
+              placeholder:
+                "es: {{$root}}.isOpen ? '切换开关试试: label显示' : '切换开关试试: label隐藏'"
+            }
           },
           value: ""
         },
 
+        // 写法五：组件写法
         comLabel: {
           label: {
-            name: label,
+            name: "g-label", // g-label是自定义全局组件；也可以是import导入的局部组件
             props: {
               color: "es: {{$root}}.isOpen ? '' : '#909399'"
             }
           },
-          component: {
-            name: "el-input",
-            props: {}
-          },
+          component: "el-input",
           value: ""
         },
 
+        // 以下是其它属性，见注释
         spaceLabel: {
-          label: "",
+          label: "", // label设置为空, 说明是占空间位置
           component: {
             name: "el-input",
             props: {
-              placeholder: "设置为空, 说明是占空间位置"
+              placeholder: "label设置为空, 说明是占空间位置"
             }
           },
           value: ""
         },
 
         falseLabel: {
-          label: false,
+          label: false, // label设置为false, 说明是不占空间位置
           component: {
             name: "el-input",
             props: {
-              placeholder: "设置为false, 说明是不占空间位置"
+              placeholder: "label设置为false, 说明是不占空间位置"
             }
           },
           value: ""
@@ -121,15 +107,15 @@ export default {
         alignLabel1: {
           label: {
             text: "左",
-            align: "left"
+            align: "left" // 文本靠左
           },
           col: 8,
-          direction: "v",
-          offsetRight: 4,
+          direction: "v", // 上下排版
+          offsetRight: 4, // 项右边偏移量
           component: {
             name: "el-input",
             props: {
-              placeholder: "label设置了align"
+              placeholder: "label设置了align=left"
             }
           },
           value: ""
@@ -138,7 +124,7 @@ export default {
         alignLabel2: {
           label: {
             text: "中",
-            align: "center",
+            align: "center", // 文本居中
             help: {
               hidden: "es:!{{$root}}.isOpen",
               props: {
@@ -147,13 +133,13 @@ export default {
             }
           },
           col: 8,
-          direction: "v",
-          offsetLeft: 2,
-          offsetRight: 2,
+          direction: "v", // 上下排版
+          offsetLeft: 2, // 项左边偏移量
+          offsetRight: 2, // 项右边偏移量
           component: {
             name: "el-input",
             props: {
-              placeholder: "label设置了align"
+              placeholder: "label设置了align=center"
             }
           },
           value: ""
@@ -161,15 +147,15 @@ export default {
         alignLabel3: {
           label: {
             text: "右",
-            align: "right"
+            align: "right" // 文本靠右
           },
           col: 8,
-          direction: "v",
-          offsetLeft: 4,
+          direction: "v", // 上下排版
+          offsetLeft: 4, // 项左边偏移量
           component: {
             name: "el-input",
             props: {
-              placeholder: "label设置了align"
+              placeholder: "label设置了align=right"
             }
           },
           value: ""
@@ -177,12 +163,13 @@ export default {
 
         start: {
           label: "从",
+          labelWidth: 50, // 可自定义设置label的宽度
           group: "date",
           col: 12,
           component: {
             name: "el-input",
             props: {
-              placeholder: "label没有设置flex=self; 说明占labelWidth宽"
+              placeholder: "label没有设置flex, 说明占labelWidth宽"
             }
           },
           value: ""
@@ -190,14 +177,14 @@ export default {
         end: {
           label: {
             text: "到",
-            flex: "self"
+            flex: "self" // 长度就是我本身
           },
           group: "date",
           col: 12,
           component: {
             name: "el-input",
             props: {
-              placeholder: "label设置flex=self; 说明文字是多宽就多宽"
+              placeholder: "label设置flex=self, 说明文字是多宽就多宽"
             }
           },
           value: ""

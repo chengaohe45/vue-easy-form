@@ -21,7 +21,7 @@ gComponent.register();
 Vue.use(elementUI);
 Vue.use(esForm, {
   rowHeight: 40,
-  rowSpace: 10,
+  rowSpace: 12,
   labelWidth: 100,
   offsetLeft: 0,
   offsetRight: 0,

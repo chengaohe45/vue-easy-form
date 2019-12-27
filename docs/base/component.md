@@ -3,7 +3,7 @@
 字段：`component`<br/>
 值类型有：
 - `string`： 全局组件名
-- `object`： 一个对象，见[组件写法](./com-format.md)
+- `object`： 一个对象，见[组件格式](./com-format.md)
 
 ### 实例
 <ClientOnly>
@@ -22,7 +22,7 @@
           formSchema: {
 
             // 写法一
-            advName: {
+            name: {
               label: "广告名称",
               component: "el-input",  // 全局组件名；不写的话，采用系统默认的
               value: "首页位置"
@@ -36,15 +36,46 @@
                 props: {
                   placeholder: "请输入投放目标"
                 },
-                text: "新建",  // 一般用于文本显示：如<el-button>新建</el-button>
-                align: "left",      // left, center, right
-                ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
-                flex: "full",      // 这个一般用于分组
+                // ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
                 // actions: [],       // 见下面
                 // value: "首页位置"   // 组件的默认值
               },
               value: "中年人"   // 组件的默认值也可写在这里，优先级高于component.value
+            },
+
+            // 以下是其它属性，见注释
+            color: {
+              label: {
+                text: "主题颜色",
+                align: "center"   // 广本居中
+              },
+              direction: "v", // 上下排版
+              component: {
+                name: "el-color-picker",
+                flex: "self",   // 设置了flex=self是为了项组件区域的宽度就是组件的宽度
+                align: "center" // 组件居中
+              },
+              value: "#67C23A",
+              desc: {
+                name: "div",
+                style: {
+                  textAlign: "center"
+                },
+                text: "设置了flex=self是为了项组件区域的宽度就是组件的宽度"
+              }
+            },
+
+            pv: {
+              label: "浏览量",
+              component: {
+                name: "el-input-number",
+                flex: "full"  // 设置了flex=full是为了使组件的宽度占满整个项区域
+              },
+              value: 0,
+              col: 18,
+              desc: "设置了flex=full是为了使组件的宽度占满整个项组件区域"
             }
+
           }
         };
       }
@@ -61,7 +92,7 @@
 | align | 文本的方向 | string | `left`、`center`、`right` | --
 | flex | component的长度控制 | string | `""`：component的长度根据自身情况自动取值<br><br>`full`： 项中有多少点多少。此值一般用于component<br><br>`self`： label的文本占多宽就多宽。此值一般用于label | --
 | ref | vue组件的ref | string | -- | --
-| 其它 | 跟[组件写法](./com-format.md)一样 | -- | -- | --
+| 其它 | 跟[组件格式](./com-format.md)一样 | -- | -- | --
 
 ### value值
 - 通常在编写项（如：advName）时，component直接写成组件名，所以value写在外面（跟component同级）也是可以的
