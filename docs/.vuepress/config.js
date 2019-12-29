@@ -49,6 +49,7 @@ module.exports = {
           title: '基础属性详解',
           collapsable: false,
           children: [
+            'base/d-col-group',
             'base/form',
             'base/form-value',
             'base/auto-match',
