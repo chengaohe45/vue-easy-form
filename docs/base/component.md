@@ -47,7 +47,7 @@
             color: {
               label: {
                 text: "主题颜色",
-                align: "center"   // 广本居中
+                align: "center"   // 文本居中
               },
               direction: "v", // 上下排版
               component: {

@@ -50,6 +50,7 @@ module.exports = {
           collapsable: false,
           children: [
             'base/d-col-group',
+            'base/ui',
             'base/form',
             'base/form-value',
             'base/auto-match',
