@@ -51,6 +51,9 @@ module.exports = {
           children: [
             'base/d-col-group',
             'base/ui',
+            'base/hidden',
+            'base/properties',
+            'base/tabs',
             'base/form',
             'base/form-value',
             'base/auto-match',

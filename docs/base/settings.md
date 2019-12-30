@@ -41,7 +41,7 @@
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
 | showBody | 隐藏/打开切换按钮 | boolean | -- | -- | 不设置没有按钮；设置有按钮，此值代表最先是否显示body
-| type | 整个块的布局类型 | string | `bg`, `block`, `bg-block` | -- | `block`就是前面有一竖
+| type | 整个块的布局类型 | string | "bg"<br/>"block"<br/>"bg-block"<br/>""| -- | `block`就是前面有一竖
 | hasBorder | 内容区是否有边框 | boolean | -- | false | --
 | padding | 内容区的内边距 | number<br/>string<br/>array | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px', `数组`：[20, 10]
 
