@@ -31,7 +31,58 @@
 </template>
 
 <style lang="scss">
+
+  // 覆盖一下样式，因为被vuepress>table影响了
+  .el-date-table {
+    margin: 0;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+
+    td {
+      border: none;
+    }
+
+    th {
+      border: none;
+      border-bottom-width: 1px;
+    }
+
+    tr:nth-child(2n) {
+      background-color: transparent;
+    }
+  }
+
+.es-form-array-table {
+  
+  table {
+    margin: 0;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+  }
+
+  td {
+      border: none;
+      border-top-width: 1px;
+      border-right-width: 1px;
+    }
+
+    th {
+      border: none;
+      border-top-width: 1px;
+      border-right-width: 1px;
+    }
+
+  tr:nth-child(2n) {
+    background-color: transparent;
+  }
+}
+
   .demo-block {
+    
     margin-top: 20px;
     position: relative;
     z-index: 100;
@@ -44,6 +95,9 @@
     .demo-form-box {
       padding: 20px;
       border-bottom: 1px solid #eaeefb;
+
+      font-family: "Helvetica Neue",Helvetica,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","\5FAE\8F6F\96C5\9ED1",Arial,sans-serif;
+      
     }
 
     // .demo-higlight pre code{

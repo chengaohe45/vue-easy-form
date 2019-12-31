@@ -37,151 +37,102 @@ propName: {
 
           formSchema: {
             ui: {
-              labelWidth: 90,
-              colon: true
-            },
-            layout: {
-              name: "tabs",   // tabs布局
-              type: "bg",     // /tabs是有背景类型
-              padding: "20px 10px"
+              colon: true,
+              rowSpace: 20
             },
             properties: {
-
-              // 一级：广告信息
-              base: {
-                label: "基本信息",
-                properties: {
-
-                  name: {
-                    label: "广告名称",
-                    component: "el-input",
-                    value: "首页",
-                  },
-
-                  style: {
-                    title: "样式设置",
-                    label: false,
-                    layout: {
-                      name: "tabs",
-                      type: "card"  // tabs是卡片类型
-                    },
-                    ui: {
-                      labelWidth: 60
-                    },
-                    rowSpace: 20,
-                    properties: {
-                      background: {
-                        label: "背景",
-                        properties: {
-                          color: {
-                            label: "颜色",
-                            component: "el-color-picker",
-                            value: "#B9C2B6",
-                          },
-                          image: {
-                            label: "图片",
-                            component: "el-input",
-                            value: "",
-                          }
-                        }
-                      },
-
-                      font: {
-                        label: "字体",
-                        properties: {
-                          color: {
-                            label: "颜色",
-                            component: "el-color-picker",
-                            value: "#67C23A",
-                          },
-                          size: {
-                            label: "大小",
-                            component: {
-                              name: "el-input-number",
-                              flex: "self"
-                            },
-                            unit: "px",
-                            value: 14,
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              },
-              
-              // 一级：更多
-              target: {   // 块项
-                label: "投放目标",
-                layout: {
-                  name: "tabs",
-                  type: "line",   // tabs是下划线类型
-                  hasBorder: false
+              id: {
+                label: "id",
+                component: {
+                  name: "span",
+                  text: "2"
                 },
-                ui: {
-                  labelWidth: 60
-                },
-
-                properties: {
-
-                  district: {
-                    label: "地区",
-                    properties: {
-                      province: {
-                        label: "省份",
-                        component: "el-input",
-                        value: "",
-                      },
-                      city: {
-                        label: "城市",
-                        component: "el-input",
-                        value: "",
-                      }
-                    }
-                  },
-
-                  person: {
-                    label: "人群",
-                    component: {
-                      name: "el-input",
-                      props: {
-                        placeholder: "请输入人群的ID"
-                      }
-                    },
-                    value: ""
-                  },
-
-                  whitelist: {
-                    label: "白名单",
-                    component: {
-                      name: "el-input",
-                      props: {
-                        type: "textarea",
-                        rows: 3
-                      }
-                    },
-                    value: "xiaoming.lo"
-                  }
-
-                }
+                value: 2,
+                hidden: true,   // 隐藏
+                hdValue: null   // null代表保持取出value值
               },
 
-              // 一级：作者
-              author: {   // 组件项
-                label: {
-                  text: "作者",
-                  help: "我在label里面"
-                },
+              name: {
+                label: "广告名称",
                 component: {
                   name: "el-input",
                   props: {
-                    placeholder: "请输入作者的名称"
+                    placeholder: "我的上面有一个广告ID,只不过隐藏了"
                   }
                 },
-                value: "",
-                rules: true
-              }
+                value: ""
+              },
 
+              type: {
+                label: "广告类型",
+                component: {
+                  name: "div",
+                  text: "热点（我是一个临时值）"
+                },
+                isTmp: true,  // 临时值，只界面显示
+                rowHeight: 20,
+                value: "热点"
+              },
+
+              status: {
+                label: "状态",
+                component: {
+                  name: "el-switch",
+                  props: {
+                    activeText: "开",
+                    inactiveText: "关"
+                  }
+                },
+                rowHeight: 22,
+                value: true,
+                desc: "切换开关试试"
+              },
+
+              duration: {
+                hidden: "es: !{{$root}}.status",
+                label: "投放时段",
+                component: {
+                  name: "el-date-picker",
+                  props: {
+                    type: "datetimerange",
+                    rangeSeparator: "至",
+                    startPlaceholder: "开始日期",
+                    endPlaceholder: "结束日期",
+                    valueFormat: "yyyy-MM-dd hh:mm:ss"
+                  },
+                  flex: "full"
+                },
+                col: 22,
+                value: []
+              },
+
+              area: {
+                hidden: "es: !{{$root}}.status",
+                hdValue: {
+                  province: "省份的隐藏默认值",
+                  city: "城市的隐藏默认值"
+                },
+                label: "投放区域",
+                col: 22,
+                ui: {
+                  colon: false,
+                  labelWidth: 60
+                },
+                properties: {
+                  province: {
+                    label: "省份",
+                    component: "el-input",
+                    col: 12,
+                    value: ""
+                  },
+                  city: {
+                    label: "城市",
+                    component: "el-input",
+                    col: 12,
+                    value: ""
+                  }
+                }
+              }
             }
           }
         };

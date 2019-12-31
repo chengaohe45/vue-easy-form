@@ -1,67 +1,366 @@
 # 数组
 
-属性array
-
-## 实例
-```html
-<es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
-```
-
-```js
-data() {
-    return {
-      formValue: {
-        // name: "默认小花"
-      },
-      formSchema: {
-        name: {
-          label: "名称",
-          array: {
-            name: "array-card",
-            hasOrder: true,
-            hasDelete: true,  // 是否有删除按钮，默认为true
-            hasSort: false,   // 是否有排序按钮，默认为false
-            hasAdd: true,     // 是否有添加按钮(下边的添加按钮)，默认为true
-            hasCopy: true,    // 是否有拷贝添加按钮(每一行的添加按钮)，默认为false
-            hasDelWarn: true,
-            fixed: 1,       // 若第一条数据存在，则固定位置，不可移动
-            max: 5,         // 不写或小于等于0代表不限制
-            value: ["名称1", "名称2", "名称3"],   // 数组的默认值
-            insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
-              console.log(this.getValue(), options);
-              return "1";
-            },
-            rules: true,  // 验证，跟平时一样的写法。trigger只有 input、change
-            actions: {  // 事件，跟平时一样的写法。trigger只有 input、change
-              trigger: "input",
-              handler: function(options) {
-                console.log("test array input2:", options);
-              }
-            },
-            rowSpace: 20
-          },
-          component: {
-            name: "el-input",
-            props: {
-              clearable: true,
-              disabled: data => {
-                // console.log("data: ", data);
-                return data.index % 2 ? true : false;
-              }
-            },
-            ref: "testRef"
-          },
-          // col: 15,
-          value: "小明",
-          rules: "es: {{$root}}.isRequired",
-          // unit: "px",
-          desc: "名称就是这样子",
-          help: "帮助就是这样子"
-        }
-      },
-    };
+字段（见`行高亮`）：
+```js {4,33}
+propName: {
+  label: false,   // 块properties的label一般都设置为false
+  title: "标题",
+  array: {  // 以下是array设置：块项作为数组
+    name: "array-tabs",   // 数组类型
+    hasOrder: true,   // 是否有序号
+    hasDelete: true,  // 是否有删除按钮，默认为true
+    hasSort: false,   // 是否有排序按钮，默认为false
+    hasAdd: true,     // 是否有添加按钮(下边的添加按钮)，默认为true
+    hasCopy: true,    // 是否有拷贝添加按钮(每一行的添加按钮)，默认为false
+    hasDelWarn: true, // 是否有删除提示
+    fixed: 1,         // 若第一条数据存在，则固定位置，不可移动
+    max: 5,           // 不写或小于等于0代表不限制
+    value: [{name: "小天"}],   // 数组的默认值
+    insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
+      console.log(this.getValue(), options);
+      return {name: "小天"};
+    },
+    rules: true,  // 验证，跟平时一样的写法。trigger只有 input、change
+    actions: {    // 事件，跟平时一样的写法。trigger只有 input、change
+      trigger: "input",
+      handler: function(options) {
+        console.log("test array input:", options);
+      }
+    },
+    rowSpace: 20
   },
+  properties: {
+    name: {
+      label: "名称",
+      component: "el-input",
+      value: "天天",
+      array: "array-card"   // 组件项作为数组
+    }
+    // ... 其它项
+  }
+}
 ```
+
+### 实例1
+功能：`行数组`、`列表数组`、`insertValue`
+
+<ClientOnly>
+  <demo-block>
+
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
+  <script>
+    export default {
+      data() {
+        return {
+
+          formValue: {},
+
+          formSchema: {
+            ui: {
+              colon: true,
+              rowSpace: 20
+            },
+            properties: {
+              
+              name: {
+                label: "我的姓名",
+                component: "el-input",
+                value: "小明"
+              },
+
+              courses: {
+                title: "我的课程",
+                label: false,
+                ui: {
+                  rowHeight: 32,
+                  labelWidth: 80
+                },
+                array: {
+                  name: "array",
+                  hasOrder: false,
+                  hasDelete: true,
+                  hasSort: true,
+                  hasAdd: true,
+                  hasCopy: true,
+                  hasDelWarn: true,
+                  hasAdd: true,
+                  rowSpace: 12,
+                  value: [
+                    { subject: "语文", code: "1" },
+                    { subject: "数学", code: "2" }
+                  ],
+                  insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
+                    if (options.type === "copy") {  // 只做拷贝
+                      var targetValue = options.oldValues[options.position - 1];
+                      targetValue.subject = "拷贝后的修改值";
+                      return targetValue;
+                    }
+                  }
+                },
+
+                properties: {
+                  subject: {
+                    value: "默认名",
+                    col: 12,
+                    label: "学科名",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        size: "small"
+                      }
+                    }
+                  },
+                  code: {
+                    col: 12,
+                    label: "代号",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        disabled: "es:!{{$root.courses[i].subject}}",
+                        size: "small"
+                      }
+                    },
+                    value: "默认代号"
+                  }
+                }
+              },
+
+              experiences: {
+                title: "求学经历",
+                label: false,
+                ui: {
+                  rowHeight: 32
+                },
+                array: {
+                  name: "array-table",
+                  // hasOrder: true,
+                  // hasDelete: true,
+                  hasSort: true,
+                  hasAdd: true,
+                  // hasCopy: true,
+                  hasDelWarn: false,
+                  // hasAdd: false,
+                  fixed: 1,
+                  min: 2,
+                  max: 5,
+                  headRequired: true,
+                  value: [
+                    { school: "四中", address: "广州" },
+                    { school: "交大", address: "上海" },
+                    { school: "清华", address: "北京" }
+                  ]
+                },
+
+                properties: {
+                  school: {
+                    col: 8,
+                    label: {
+                      name: "div",
+                      text: "学校名",
+                      align: "left"
+                    },
+                    component: {
+                      name: "el-input",
+                      props: {
+                        size: "small"
+                      }
+                    },
+                    rules: {
+                      required: true,
+                      emptyMsg: "请输入学校名"
+                    },
+                    help: {
+                      hidden: "es: {{$index}} !== 0",
+                      props: {
+                        content: "我在外面-演示帮助: 第1条固定（fixed为1）"
+                      }
+                    },
+                    value: "默认名"
+                  },
+                  address: {
+                    col: 12,
+                    label: {
+                      text: "地址",
+                      help: "我在label里面：代号"
+                    },
+                    component: {
+                      name: "el-input",
+                      props: {
+                        size: "small"
+                      }
+                    },
+                    value: "默认地址"
+                  }
+                },
+                desc: "提示： 最多只能添加5条数据"
+              }
+
+            }
+          }
+        };
+      }
+    };
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
+
+### 实例2
+功能：`tabs数组`、`legend数组`、`subLabel`
+
+<ClientOnly>
+  <demo-block>
+
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
+  <script>
+    export default {
+      data() {
+        return {
+
+          formValue: {},
+
+          formSchema: {
+            ui: {
+              colon: true,
+              rowSpace: 20
+            },
+            properties: {
+              
+              name: {
+                label: "我的姓名",
+                component: "el-input",
+                value: "小明"
+              },
+
+              classmates: {
+                title: "我的同学",
+                label: false,
+                ui: {
+                  rowHeight: 32,
+                  labelWidth: 80,
+                  rowSpace: 12,
+                  offsetRight: 130
+                },
+                array: {
+                  name: "array-legend",
+                  hasOrder: false,
+                  hasDelete: true,
+                  hasSort: true,
+                  hasAdd: true,
+                  hasCopy: true,
+                  hasDelWarn: true,
+                  hasAdd: true,
+                  rowSpace: 12,
+                  value: [
+                    { name: "大宝", code: "1" },
+                    { name: "小宝", code: "2" }
+                  ],
+                  insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
+                    if (options.type === "copy") {  // 只做拷贝
+                      var targetValue = options.oldValues[options.position - 1];
+                      targetValue.name = "拷贝后的修改值";
+                      return targetValue;
+                    }
+                  }
+                },
+
+                properties: {
+                  name: {
+                    value: "默认名",
+                    col: 24,
+                    label: "同学名",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        size: "small"
+                      }
+                    }
+                  },
+                  code: {
+                    col: 24,
+                    label: "学号",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        disabled: "es:!{{$root.classmates[i].name}}",
+                        size: "small"
+                      }
+                    },
+                    value: "默认代号"
+                  }
+                }
+              },
+
+              teachers: {
+                title: "我的老师",
+                label: false,
+                ui: {
+                  rowHeight: 32
+                },
+                array: {
+                  name: "array-tabs",
+                  hasOrder: false,
+                  // hasDelete: true,
+                  hasSort: true,
+                  hasAdd: true,
+                  // hasCopy: true,
+                  hasDelWarn: true,
+                  // hasAdd: false,
+                  fixed: 1,
+                  min: 2,
+                  max: 10,
+                  subLabel: "es: '老师' + ({{$index}}  + 1)",
+                  value: [
+                    { name: "高老师", address: "广州" },
+                    { name: "文老师", address: "北京" },
+                    { name: "邵老师", address: "深圳" }
+                  ]
+                },
+
+                properties: {
+                  name: {
+                    col: 12,
+                    label: "名称",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        size: "small"
+                      }
+                    },
+                    rules: {
+                      required: true,
+                      emptyMsg: "请输入名称"
+                    },
+                    value: "默认名"
+                  },
+                  address: {
+                    col: 12,
+                    label: "地址",
+                    component: {
+                      name: "el-input",
+                      props: {
+                        size: "small"
+                      }
+                    },
+                    value: "默认地址"
+                  }
+                },
+                desc: "提示： 最多只能添加10条数据"
+              }
+
+            }
+          }
+        };
+      }
+    };
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
 
 ## 配置属性
 
@@ -69,7 +368,7 @@ data() {
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
-| name | 哪种分组 | string/object | "array"、<br />"array-table"、<br />"array-tabs"、<br />"array-legend"、<br />"array-card"、<br />"array-tabs" | "array" | 
+| name | 哪种分组 | string/object | "array"<br /><span style="white-space:nowrap">"array-table"</span><br /><span style="white-space:nowrap">"array-tabs"</span><br /><span style="white-space:nowrap">"array-legend"</span><br /><span style="white-space:nowrap">"array-card"</span> | "array" | 
 | hasSort | 是否有排序按钮 | boolean | -- | false | 
 | hasDelete | 是否有删除按钮 | boolean | -- | true |
 | hasAdd | 是否有添加按钮 | boolean | -- | true | 
@@ -79,7 +378,7 @@ data() {
 | max | 最多多少条 | number | >=0 | 0 | 0 代表无限制；<br/>大于min
 | minMsg | 小于最小条数时提示 | string | -- | `长度不能小于(min)` | min>0时有效
 | maxMsg | 大于最小条数时提示 | string | -- | `长度不能大于(max)` | max>0时有效
-| hasOrder | 可排序 | boolean | -- | true | --
+| hasOrder | 是否有序号 | boolean | -- | true | --
 | hasDelWarn | 删除提示 | boolean | -- | true | 删除时是否有提示
 | headRequired | “星号”的位置 | boolean | -- | true | 当name为`array`无效，为`array-table`有效；<br />当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示；<br />注意：required的值不能受properties里面的属性影响
 | type | 头部类型 | string | `line`,<br />`card`,<br />`bg` | 'card' | `array-tabs`时有效
