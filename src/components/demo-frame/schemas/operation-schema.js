@@ -40,13 +40,13 @@ export default {
         emptyMsg: "值不能为空"
       },
       desc:
-        "es: {{$root.key}} ? '对应的值(字符串两边记得加上双引号，如：\"你好\")': '必须是一个Object(可复制下面的值来试试)'",
+        "es: {{$root.key}} ? '对应的值(字符串两边记得加上双引号，如：\"你好\")': (!{{$global}}.fromDoc ? '必须是一个Object(可复制下面的值来试试)' : '必须是一个Object')",
       help: {
         props: {
           content:
-            "此值会用eval解析, 所以输入要符合格式。<br/>点击可查看值设值",
+            "es: !{{$global}}.fromDoc ? '此值会用eval解析, 所以输入要符合格式。<br/>点击可查看值设值' : '此值会用eval解析, 所以输入要符合格式。'",
           href:
-            "https://chengaohe45.github.io/vue-easy-form-docs/dist/base/form-value.html#设值"
+            "es: !{{$global}}.fromDoc ? 'https://chengaohe45.github.io/vue-easy-form-docs/dist/base/value.html#设值' : ''"
         }
       }
     }

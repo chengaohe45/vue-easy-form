@@ -54,11 +54,12 @@ module.exports = {
             'base/hidden',
             'base/properties',
             'base/tabs',
-            'base/form',
-            'base/form-value',
-            'base/auto-match',
             'base/rules',
-            'base/array'
+            'base/array',
+            'base/value',
+            'base/format',
+            'base/auto-match',
+            'base/form'
           ]
         },
         {

@@ -2,13 +2,13 @@
 `动态解析`也就是平常所说的`es写法`或`函数写法`。它是监听各类`数据源`的变化，解析出对应的属性值。
 
 ## es写法
-es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大括号（如：<span v-pre>`{{$root}}`</span>）包括起来，再按照一定的规则解析出来的js语句。实例见[es写法实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/es-function)
+es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大括号（如：<span v-pre>`{{$root}}`</span>）包括起来，再按照一定的规则解析出来的js语句。
 
 <ClientOnly>
-  <demo-block>
+  <demo-block :canOperate="true">
 
   ```html
-  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+  <es-form ref="form" :schema="formSchema" :global="formGlobal" v-model="formValue"></es-form>
 
   <script>
     export default {
@@ -16,6 +16,10 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
         return {
 
           formValue: {},
+
+          formGlobal: {
+            status: true
+          },
 
           formSchema: {
             ui: {
@@ -44,8 +48,8 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
                     component: {
                       name: "el-input",
                       props: {
-                        disabled: "es: {{$root}}.isOpen", // es写法：数据源用两个大括号包住
-                        placeholder: "开关打开我就不可写"
+                        disabled: "es: !{{$global}}.status", // es写法：数据源用两个大括号包住
+                        placeholder: "我受global.status的影响"
                       }
                     },
                     value: ""
@@ -104,13 +108,13 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
 [数组es写法](./array.md#数组es写法)
 
 ## 函数写法
-属性直接写成一个函数，再传入相应的参数(数据源)进行动态解析. 实例见[函数写法实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/es-function)
+属性直接写成一个函数，再传入相应的参数(数据源)进行动态解析. 
 
 <ClientOnly>
   <demo-block>
 
   ```html
-  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+  <es-form ref="form" :schema="formSchema" :global="formGlobal" v-model="formValue"></es-form>
 
   <script>
     export default {
@@ -118,6 +122,10 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
         return {
 
           formValue: {},
+
+          formGlobal: {
+            status: true
+          },
 
           formSchema: {
             ui: {
@@ -147,9 +155,9 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
                       name: "el-input",
                       props: {
                         disabled: function(options) { // 直接写成一个函数
-                          return options.rootData.isOpen;
+                          return !options.global.status;
                         },
-                        placeholder: "开关打开我就不可写"
+                        placeholder: "我受global.status的影响"
                       }
                     },
                     value: ""

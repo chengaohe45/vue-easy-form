@@ -1,6 +1,6 @@
 # 表单属性/事件/方法
 
-## 实例
+### 实例
 ```html
 <es-form ref="form" 
     v-model="formValue"
@@ -17,7 +17,7 @@
 
 | 事件名称 | 类型 | 默认值 | 说明
 | -- | -- | -- | -- 
-| value/v-model | Object | {} | 绑定值(表单值)
+| value/<span style="white-space:nowrap">v-model</span> | Object | {} | 绑定值(表单值)
 | schema | Object | {} | 具体的表单配置
 | global | Object | {} | 外部值；和rootData共同影响项隐藏等
 | hasConsole | boolean | -- | 是否有调试控制台；当设置true或false时，优先级会高于全局的hasConsole,不设置则取全局的hasConsole
@@ -26,7 +26,7 @@
 
 | 事件名称 | 说明 | 回调参数 | 备注
 | -- | -- | -- | -- 
-| inited | 表单初始化完成时触发 | (formValue) | schema改变时（[非深度监听](https://cn.vuejs.org/v2/api/#watch)），表单会重新初始化，inited会再次调用(`inited未完成之前，用户行为事件（change、submit）暂不会触发，其它事件（input）不受影响`)
+| inited | <span style="white-space:nowrap">表单初始化</span>完成时触发 | (formValue) | schema改变时（[非深度监听](https://cn.vuejs.org/v2/api/#watch)），表单会重新初始化，inited会再次调用(`inited未完成之前，用户行为事件（change、submit）暂不会触发，其它事件（input）不受影响`)
 | input | 表单的值有改变时触发 | (formValue, keyPath) | -- 
 | change | 表单组件改变时触发 | (formValue, keyPath, eventData) | setValue不会触发
 | submit | 提交表单 | (formValue) | form.submit(); 组件事件(@enterSubmit; @submit)会触发

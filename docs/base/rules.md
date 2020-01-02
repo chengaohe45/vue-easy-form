@@ -26,7 +26,7 @@ handler => options包含的属性：
 ### 实例
 
 <ClientOnly>
-  <demo-block>
+  <demo-block :canOperate="true">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>

@@ -26,7 +26,7 @@
 | unit | 对项进行补充 | string | -- | -- | 如：px；支持es或组件化<br/>支持[动态解析](./com-standard.md)
 | desc | 对项进行描述 | string | -- | 全局 | 支持[动态解析](./com-standard.md)
 | help | 对项设置帮助 [写法](./help.md) | string<br/>object | -- | -- | 支持[动态解析](./com-standard.md)
-| array | properties或组件是数组，[写法](./array.md) | string<br/>object | -- | -- | 
+| array | 此项为数组 [写法](./array.md) | string<br/>object | -- | -- | 根节点无效
 | isTmp | 临时值 | boolean | -- | false | 表单不输出此项值,但可作为表单内部使用
 | layout | 布局 | object<br/>string | "space" "tabs" or Object | false | `区分大小写`<br />`space`: 是一个占位符<br />`tabs`:下一级为tabs布局[写法](#layout属性)
 | `properties` | 下一级 | object | -- | -- | 下一级，重复上面的配置

@@ -2,7 +2,7 @@
 - `autoMatch`： `true`
 
 `自动匹配就是把所有的二级的项在输出时提升为一级。`
-应用场景：一般用于表单结构和接口字段不一致时匹配。比如：现需要保存一个页面信息，后台需要保存接口的字段只需要一级{pageName, fontSize, fontColor, backgroundImage, backgroundColor), 但对产品设计来说，可能需要把字体和背景按各自模块区分，页面结构才更加清晰。（见[自动匹配实例](https://chengaohe45.github.io/vue-easy-form-docs/demo/#/auto-match)）
+应用场景：一般用于表单结构和接口字段不一致时匹配。比如：现需要保存一个页面信息，后台需要保存接口的字段只需要一级{pageName, fontSize, fontColor, backgroundImage, backgroundColor), 但对产品设计来说，可能需要把字体和背景按各自模块区分，页面结构才更加清晰。
 
 ### 实例
 可打开`调试面版`查看输出结果，`formValue`全部都平级了
