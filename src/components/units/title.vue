@@ -1,16 +1,21 @@
 <template>
-  <h2 class="title-box" :style="{ borderColor: color, color: color }">
-    {{ text }}
-  </h2>
+  <span class="title-box" :style="{ borderColor: color, color: color }">
+    <i class="el-icon-notebook-1 icon"></i>{{ text }}
+  </span>
 </template>
 
 <style lang="scss">
 .title-box {
-  margin: 0 0 0 6px;
-  padding: 0 0 2px 10px;
-  font-size: 20px;
-  line-height: 22px;
-  border-left: 3px solid #333;
+  margin: 0 0 0 0;
+  padding: 0 0 0 0;
+  font-size: 18px;
+  line-height: 24px;
+  white-space: nowrap;
+
+  .icon {
+    color: #67c23a;
+    margin-right: 3px;
+  }
 }
 </style>
 

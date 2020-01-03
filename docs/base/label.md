@@ -4,12 +4,12 @@
 值类型有：
 - `false`： 默认值，label隐藏，空间不存在的
 - `''`： 空值 但label空间是存在的
-- `string`： 项label文字；支持[动态解析](./com-standard.md)
+- `string`： 项label文字；支持[动态解析](./parse.md)
 - `object`： 一个对象，见[组件格式](./com-format.md)
 
 ### 实例
 <ClientOnly>
-  <demo-block>
+  <demo-block hash="#/label">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -202,7 +202,7 @@
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值
 | -- | -- | -- | -- | -- 
-| hidden | 控制组件是否隐藏, 支持[动态解析](./com-standard.md) | boolean | -- | false
+| hidden | 控制组件是否隐藏, 支持[动态解析](./parse.md) | boolean | -- | false
 | align | 文本的方向 | string | `left`、`center`、`right` | --
 | flex | label的长度控制 | string | `""`： label的长度将会是labelWidth<br><br>`full`： 项中有多少点多少。此值一般用于component<br><br>`self`： label的文本占多宽就多宽。此值一般用于label | ""
 | 其它 | 跟[组件格式](./com-format.md)一样 | -- | -- | --

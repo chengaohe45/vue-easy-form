@@ -1,12 +1,7 @@
 <template>
   <demo-frame :title="title" :formSchema="formSchema">
     <div slot="details">
-      当项设置为null、undefined、false时; 此项是不显示的;
-      这样写的目的是为了提高可读性
-      <div class="sys-danger">
-        场景：新增和编辑可能用到同一个页面，编辑时可能某些项是不需要的，但是新增是需要填写的；写法如：someAttr:
-        this.$route.params.id ? false : {正常的组件}
-      </div>
+      当项设置为null、undefined、false时，说明此项是不显示的
     </div>
   </demo-frame>
 </template>

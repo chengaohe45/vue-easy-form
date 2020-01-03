@@ -168,8 +168,7 @@ export default {
             value.render &&
             value.staticRenderFns
           ) {
-            var vueKey =
-              "[Vue对象" + ++uniqIndex + "(不要修改,运行时自会替换)]";
+            var vueKey = "[import导入的局部组件" + ++uniqIndex + "]";
             var myVues = this._esMyVues ? this._esMyVues : {};
             myVues[vueKey] = value;
             this._esMyVues = myVues;

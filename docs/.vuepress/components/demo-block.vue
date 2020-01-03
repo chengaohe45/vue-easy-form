@@ -61,7 +61,7 @@
       <transition name="text-slide">
         <span class="txt" v-show="hovering">{{ controlText }}</span>
       </transition>
-      <el-tooltip effect="dark" content="前往codepen.io" placement="right">
+      <el-tooltip v-if="!hash" effect="dark" content="前往codepen.io运行" placement="right">
         <transition name="text-slide">
           <el-button
             v-show="hovering || isExpanded"
@@ -73,16 +73,17 @@
           </el-button>
         </transition>
       </el-tooltip>
-
-      <!-- <transition name="text-slide">
-        <a v-show="hovering || isExpanded"
-          @click.stop
-          target="_blank"
-          :href="href"
-          class="txt control-button">
-          在线运行
-        </a>
-      </transition> -->
+      <el-tooltip v-else effect="dark" content="存在自定义组件，只能前往实例运行" placement="right">
+        <transition name="text-slide">
+          <a v-show="hovering || isExpanded"
+            @click.stop
+            target="_blank"
+            :href="'https://chengaohe45.github.io/vue-easy-form-docs/dist/' + hash"
+            class="control-link">
+            在线运行
+          </a>
+        </transition>
+      </el-tooltip>
     </div>
   </div>
 </template>
@@ -122,10 +123,10 @@
     },
     
     props: {
-      href: {
+      hash: {
         type: String,
         required: false,
-        default: "https://chengaohe45.github.io/vue-easy-form-docs/dist/"
+        default: undefined
       },
       canOperate: {
         type: Boolean,
@@ -289,9 +290,9 @@
       },
 
       goCodepen() {
-
         var useScript = 'Vue.use(window["esForm"], { // 进行全局配置' + 
-            '\n   rowSpace: 12, // 默认为20' + 
+            '\n   rowSpace: 12, // 系统默认为20' + 
+            '\n   defaultCom: "el-input", // 默认组件改为el-input' + 
             '\n   trimDoms: ["input", "textarea", "el-input"], ' +
             '\n   hasConsole: true  // 打开控制台' + 
             '\n});'
@@ -470,22 +471,46 @@
       }
       
       .control-button {
-        line-height: 20px;
+        // line-height: 20px;
         position: absolute;
-        top: 4px;
+        top: 6px;
         right: 10px;
         font-size: 14px;
         padding-left: 3px;
         padding-right: 3px;
         color: #409EFF;
         text-decoration: none;
-        border-bottom: 1px solid transparent;
+        // border-bottom: 1px solid transparent;
 
-        // &:hover {
-        //   text-decoration: none;
-        //   border-bottom-color: #409EFF;
-        // }
+        &:hover {
+          text-decoration: none;
+          // border-bottom-color: #409EFF;
+        }
       }
+
+      .control-link {
+        line-height: 34px;
+        position: absolute;
+        top: 6px;
+        right: 10px;
+        font-size: 14px;
+        padding-left: 3px;
+        padding-right: 3px;
+        color: #409EFF;
+        text-decoration: none;
+        display: inline-block;
+        // border-bottom: 1px solid transparent;
+        outline: 0;
+        margin: 0;
+        -webkit-transition: .1s;
+        transition: .1s;
+
+        &:hover {
+          text-decoration: none;
+          // border-bottom-color: #409EFF;
+        }
+      }
+
     }
 
     .demo-form-op-box {

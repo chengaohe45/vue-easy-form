@@ -112,6 +112,5 @@
   </demo-block>
 </ClientOnly>
 
-[schema的具体写法](./schema.md)
 
 

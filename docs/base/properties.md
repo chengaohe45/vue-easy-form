@@ -147,5 +147,11 @@ propName: {
   </demo-block>
 </ClientOnly>
 
+### 子属性
+当properties的子属性（如name）设置为`null`、`undefined`、`false`时，说明此项是不显示的; 这样写的目的是为了提高代码的可读性。
+> `场景`：新增和编辑可能用到同一个页面，编辑时可能某些项是不需要的，但是新增是需要填写的；写法如：name: this.$route.params.id ? false : {正常的组件}
 
+::: warning 注意
+当`properties`和`component`同时存在, `component`将失效。
+:::
 

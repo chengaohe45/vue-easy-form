@@ -4,12 +4,12 @@
 
 值类型有：
 - `false`： 默认值，没有标题
-- `string`： 标题；支持[动态解析](./com-standard.md)
+- `string`： 标题；支持[动态解析](./parse.md)
 - `object`： 一个对象，见[组件格式](./com-format.md)
 
 ### 实例
 <ClientOnly>
-  <demo-block>
+  <demo-block hash="#/title">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -61,9 +61,10 @@
               },
               title: {
                 // hidden: false, // 控制title是否隐藏，支持动态解析
-                name: "span", // 可以为自定义的组件
-                props: {},
-                text: "自定义-组件化写法",
+                name: "g-title", // 可以为自定义的组件
+                props: {
+                  text: "自定义标题"
+                },
                 help: "我在title里面"
               },
               label: false,
@@ -98,7 +99,7 @@
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值
 | -- | -- | -- | -- | -- 
-| hidden | 控制组件是否隐藏, 支持[动态解析](./com-standard.md) | boolean | -- | false
+| hidden | 控制组件是否隐藏, 支持[动态解析](./parse.md) | boolean | -- | false
 | 其它 | 跟[组件格式](./com-format.md)一样 | -- | -- | --
 
 title和[ui属性](./settings.md#ui属性)都只有在properties中有效

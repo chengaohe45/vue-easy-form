@@ -153,10 +153,10 @@ propName: {
 - `null`: 此项的值是什么照样取出；若是properties，则其子节点也要设置为null；
 - `其它值`: 取出此值，如值为hdValue为5，则取出为5
 
-::: warning
+::: warning 注意
 1. `隐藏`包括本节点的hidden为true或祖先节点存在hidden为true；
 2. `临时值`的优先级比`hdValue`大，当同时符合条件时（为临时值、hidden为true且hdValue非undefined），也不会取出此项值。
-2. `临时值`只是值不输出而已，它和`hdValue`一样，并不影响[根值](./explain.md#根值)的动态解析。
+3. `临时值`只是值不输出而已，它和`hdValue`一样，并不影响[根值](./explain.md#根值)的动态解析。
 :::
 
 

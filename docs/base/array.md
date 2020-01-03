@@ -42,10 +42,10 @@ propName: {
 ```
 
 ### 实例1
-功能：`行数组`、`列表数组`、`insertValue`、`动态解析`
+功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`
 
 <ClientOnly>
-  <demo-block>
+  <demo-block :canOperate="true">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -86,12 +86,31 @@ propName: {
                   hasAdd: true,
                   hasCopy: true,
                   hasDelWarn: true,
-                  hasAdd: true,
                   rowSpace: 12,
                   value: [
-                    { subject: "语文", code: "1" },
-                    { subject: "数学", code: "2" }
+                    { subject: "语文", code: "1" }
                   ],
+                  rules: {  // 默认
+                    required: true,
+                    emptyMsg: "课程不能为空",
+                    checks: {
+                      trigger: "",  // 不写就是提交时再验证
+                      handler: function(data) {
+                        var list = data.value;  // 列表的值
+                        for (var i = 0; i < list.length; i++) {
+                          var item = list[i];
+                          if (!item.subject) {
+                            return "课程名不能为空";
+                          } else if (!item.code) {
+                            return "代号不能为空";
+                          } else if (item.subject.indexOf("默认") >= 0 || item.code.indexOf("默认") >= 0) {
+                            return '课程名和代号都不能存在"默认"两字';
+                          }
+                        }
+                        return true;
+                      }
+                    }
+                  },  
                   insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
                     if (options.type === "copy") {  // 只做拷贝
                       var targetValue = options.oldValues[options.position - 1];
@@ -213,7 +232,7 @@ propName: {
 功能：`tabs数组`、`legend数组`、`卡片数组`、`subLabel`、`动态解析`
 
 <ClientOnly>
-  <demo-block>
+  <demo-block :canOperate="true">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -256,7 +275,6 @@ propName: {
                   hasAdd: true,
                   hasCopy: true,
                   hasDelWarn: true,
-                  hasAdd: true,
                   rowSpace: 12,
                   value: [
                     { name: "大宝", code: "1" },
@@ -413,7 +431,7 @@ propName: {
 ### 数组事件
 
 属性array.actions写法跟项组件事件一样，具体见[项组件事件](./component.html#组件事件)<br>
-> 注：数组事件是没有target信息的，其trigger只有 input、change
+> 注：数组事件是没有target信息的，其trigger只有 input、change；trigger为空或其它字符串则是提交（[form.checkAll()](./form.md#表单方法)）时再验证。
 
 ### 数组验证
 
@@ -428,7 +446,7 @@ propName: {
 `[i]`必须写在大括号内
 :::
 
-（普通的）[es写法](./com-standard.md#es写法)
+（普通的）[es写法](./parse.md#es写法)
 
 ### 配置属性
 
@@ -453,7 +471,7 @@ propName: {
 | rowSpace | 每一行的间隔 | number | >=0 | undefined | 当为`undefined`, 继承父类的rowSpace
 | insertValue | 插入时的值 | function/其它的值 | -- | 添加或拷贝时各自的默认值 | 
 | hasBorder | 是否有边框 | boolean | true/false | true |
-| subLabel | tabs头部名称 | number | >=0 | 0 | <span style="white-space:nowrap">`array-tab`</span>和<span style="white-space:nowrap">`array-legend`</span>时有效，其余情况无效; 支持[组件化](./com-format.md)和[动态解析](./com-standard.md)
+| subLabel | tabs头部名称 | number | >=0 | 0 | <span style="white-space:nowrap">`array-tab`</span>和<span style="white-space:nowrap">`array-legend`</span>时有效，其余情况无效; 支持[组件化](./com-format.md)和[动态解析](./parse.md)
 | actions | 数组事件 | array/object | trigger只有:<br> input<br>change | -- | 跟[项组件事件写法](./component.html#组件事件)一样，就是返回信息少了`target`
 | rules | 数组验证 | boolean/object | trigger只有:<br> input<br>change | -- | 跟[项组件验证写法](./rules.html)一样
 | value | 数组的默认值 | array | -- | -- | --

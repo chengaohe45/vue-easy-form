@@ -3,43 +3,28 @@
 // import homePage from "../views/home/index";
 
 // 基础属性
-import labelForm from "../views/demo-base/label";
-import componentForm from "../views/demo-base/component";
-import simpleForm from "../views/demo-base/simple";
-import standardForm from "../views/demo-base/standard";
-import comUnitForm from "../views/demo-base/unit";
-import comDescForm from "../views/demo-base/desc";
-import comHelpForm from "../views/demo-base/help";
-import comTitleForm from "../views/demo-base/title";
-import esFuncForm from "../views/demo-base/es-function";
-import formatForm from "../views/demo-base/format";
-import actionsForm from "../views/demo-base/actions";
-import rulesForm from "../views/demo-base/rules";
-
-// 布局
-import directionForm from "../views/demo-layout/direction";
-import colForm from "../views/demo-layout/col";
-import uiForm from "../views/demo-layout/ui";
-import groupForm from "../views/demo-layout/group";
-import pholderForm from "../views/demo-layout/pholder";
-import propertiesForm from "../views/demo-layout/properties";
-import propertiesTabsForm from "../views/demo-layout/properties-tabs";
+import labelForm from "../views/demo/label";
+import componentForm from "../views/demo/component";
+import simpleForm from "../views/demo/simple";
+import standardForm from "../views/demo/standard";
+import comUnitForm from "../views/demo/unit";
+import comDescForm from "../views/demo/desc";
+import comHelpForm from "../views/demo/help";
+import comTitleForm from "../views/demo/title";
+import propertiesForm from "../views/demo/properties";
+import propertiesTabsForm from "../views/demo/tabs";
+import exampleForm from "../views/demo/example";
 
 // 数组
-import rowArrForm from "../views/demo-array/row-array";
-import legendArrForm from "../views/demo-array/legend-array";
-import tabArrForm from "../views/demo-array/table-array";
-import tabsArrForm from "../views/demo-array/tabs-array";
-
-// 事件/方法
-import valueForm from "../views/demo-event/value";
-import refForm from "../views/demo-event/ref";
-import exampleForm from "../views/demo-event/example";
-import autoMatchForm from "../views/demo-event/auto-match";
+import rowArrForm from "../views/demo/array-row";
+import legendArrForm from "../views/demo/array-legend";
+import tabArrForm from "../views/demo/array-table";
+import tabsArrForm from "../views/demo/array-tabs";
+import cardArrForm from "../views/demo/array-card";
 
 import notFound from "../views/notfound/index";
 
-// import testForm from "../views/demo-base/test";
+// import testForm from "../views/demo/test";
 
 let navKeys2 = ["icon", "name"];
 let navKeys3 = ["icon", "name", "link", "path"];
@@ -83,15 +68,8 @@ let notFoundItem = {
 let navList = [
   {
     icon: "el-icon-menu",
-    name: "基础属性详解",
+    name: "属性详解",
     children: [
-      // {
-      //   icon: "",
-      //   name: "测试页面",
-      //   link: "/test",
-      //   path: "/test",
-      //   component: testForm
-      // },
       {
         icon: "",
         name: "简单写法",
@@ -109,128 +87,66 @@ let navList = [
       },
       {
         icon: "",
-        name: "项标签",
+        name: "项标签/label",
         link: "/label",
         path: "/label",
         component: labelForm
       },
       {
         icon: "",
-        name: "项组件",
+        name: "项组件/component",
         link: "/component",
         path: "/component",
         component: componentForm
       },
       {
         icon: "",
-        name: "项组件事件",
-        link: "/actions",
-        path: "/actions",
-        component: actionsForm
-      },
-      {
-        icon: "",
-        name: "项组件验证",
-        link: "/rules",
-        path: "/rules",
-        component: rulesForm
-      },
-      {
-        icon: "",
-        name: "项组件值转换",
-        link: "/format",
-        path: "/format",
-        component: formatForm
-      },
-      {
-        icon: "",
-        name: "单位",
+        name: "单位/unit",
         link: "/unit",
         path: "/unit",
         component: comUnitForm
       },
       {
         icon: "",
-        name: "描述",
+        name: "描述/desc",
         link: "/desc",
         path: "/desc",
         component: comDescForm
       },
       {
         icon: "",
-        name: "帮助",
+        name: "帮助/help",
         link: "/help",
         path: "/help",
         component: comHelpForm
       },
       {
         icon: "",
-        name: "标题",
+        name: "标题/title",
         link: "/title",
         path: "/title",
         component: comTitleForm
       },
       {
         icon: "",
-        name: "es/函数化写法",
-        link: "/es-function",
-        path: "/es-function",
-        component: esFuncForm
-      }
-    ]
-  },
-  {
-    icon: "el-icon-menu",
-    name: "表单布局",
-    children: [
-      {
-        icon: "",
-        name: "项排列设置",
-        link: "/direction",
-        path: "/direction",
-        component: directionForm
-      },
-      {
-        icon: "",
-        name: "项长度设置",
-        link: "/col",
-        path: "/col",
-        component: colForm
-      },
-      {
-        icon: "",
-        name: "界面调整设置",
-        link: "/ui",
-        path: "/ui",
-        component: uiForm
-      },
-      {
-        icon: "",
-        name: "分组设置",
-        link: "/group",
-        path: "/group",
-        component: groupForm
-      },
-      {
-        icon: "",
-        name: "占位空间",
-        link: "/pholder",
-        path: "/pholder",
-        component: pholderForm
-      },
-      {
-        icon: "",
-        name: "子属性(块布局)",
-        link: "/properies",
-        path: "/properies",
+        name: "块布局/properties",
+        link: "/properties",
+        path: "/properties",
         component: propertiesForm
       },
       {
         icon: "",
-        name: "子属性(tabs布局)",
-        link: "/prop-tabs",
-        path: "/prop-tabs",
+        name: "tabs布局/layout",
+        link: "/tabs",
+        path: "/tabs",
         component: propertiesTabsForm
+      },
+      {
+        icon: "",
+        name: "综合例子",
+        link: "/example",
+        path: "/example",
+        component: exampleForm
       }
     ]
   },
@@ -265,55 +181,16 @@ let navList = [
         link: "/tabs-array",
         path: "/tabs-array",
         component: tabsArrForm
-      }
-    ]
-  },
-  {
-    icon: "el-icon-menu",
-    name: "表单事件/方法",
-    children: [
-      {
-        icon: "",
-        name: "引用",
-        link: "/ref",
-        path: "/ref",
-        component: refForm
       },
-
       {
         icon: "",
-        name: "value/值",
-        link: "/value",
-        path: "/value",
-        component: valueForm
-      },
-
-      {
-        icon: "",
-        name: "自动匹配",
-        link: "/auto-match",
-        path: "/auto-match",
-        component: autoMatchForm
-      },
-
-      {
-        icon: "",
-        name: "综合例子",
-        link: "/example",
-        path: "/example",
-        component: exampleForm
+        name: "卡片数组",
+        link: "/card-array",
+        path: "/card-array",
+        component: cardArrForm
       }
     ]
   }
-  // {
-  //   icon: "el-icon-edit",
-  //   name: "试一试",
-  //   link:
-  //     "/try" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
-  //   path: "/try" /* 用于路由, 要跟link保持一致 */,
-  //   component: tryForm /* 对应的模块 */
-  // }
-  // <!-- Don"t touch me - modules-->
 ];
 
 //暂时只有一层，这个结构修改，取

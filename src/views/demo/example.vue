@@ -44,7 +44,7 @@ export default {
               ref: "testRef"
             }
           },
-          region: {
+          regions: {
             value: "",
             label: "活动区域",
             component: {

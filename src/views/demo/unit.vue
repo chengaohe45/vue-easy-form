@@ -6,15 +6,12 @@
     :docsTitle="docsTitle"
     :docsHref="docsHref"
   >
-    <div slot="details">
-      <div>字段unit: 对组件进行补充，一般用于单位</div>
-    </div>
   </demo-frame>
 </template>
 
 <script>
 import demoFrame from "@/components/demo-frame/index.vue";
-import unit from "./components/unit";
+import unit from "@/components/units/unit";
 export default {
   data() {
     return {

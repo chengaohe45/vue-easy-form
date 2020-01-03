@@ -7,7 +7,7 @@
 
 ### 实例
 <ClientOnly>
-  <demo-block>
+  <demo-block hash="#/component">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -65,17 +65,22 @@
               }
             },
 
-            pv: {
-              label: "浏览量",
+            regions: {
+              label: "投放区域",
               component: {
-                name: "el-input-number",
+                name: "g-select", // g-select是自定义全局组件；也可以是import导入的局部组件
+                props: {
+                  placeholder: "请选择活动区域",
+                  clearable: true,
+                  multiple: true,
+                  options: [{ text: "广东", id: "广东id" }, { text: "北京", id: "北京id" }]
+                },
                 flex: "full"  // 设置了flex=full是为了使组件的宽度占满整个项区域
               },
-              value: 0,
+              value: [],
               col: 18,
               desc: "设置了flex=full是为了使组件的宽度占满整个项组件区域"
             }
-
           }
         };
       }

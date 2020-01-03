@@ -23,85 +23,73 @@ export default {
 
       formSchema: {
         ui: {
-          direction: "v"
+          colon: true,
+          rowSpace: 20
         },
         properties: {
           name: {
-            label: "名称",
-            component: {
-              name: "el-input"
-              // ref: "subject"
-            },
-            value: "小明",
-            col: 12
+            label: "我的姓名",
+            component: "el-input",
+            value: "小明"
           },
-          courses: {
-            layout: "tabs",
-            ui: {
-              rowHeight: 32,
-              showBody: true
-            },
-            title: {
-              text: "我的课程"
-            },
+          // table数组
+          experiences: {
+            title: "求学经历",
             label: false,
+            ui: {
+              rowHeight: 32
+            },
             array: {
+              // 数组配置
               name: "array-table",
               // hasOrder: true,
               // hasDelete: true,
-              // hasSort: true,
+              hasSort: true,
               hasAdd: true,
               // hasCopy: true,
-              hasDelWarn: true,
+              hasDelWarn: false,
               // hasAdd: false,
               fixed: 1,
-              min: 3,
+              min: 2,
               max: 5,
               headRequired: true,
               value: [
-                { name: "语文", code: "1" },
-                { name: "数学", code: "2" },
-                { name: "英语", code: "3" },
-                { name: "政治", code: "4" }
+                { school: "四中", address: "广州" },
+                { school: "交大", address: "上海" },
+                { school: "清华", address: "北京" }
               ]
             },
 
             properties: {
-              name: {
-                value: "默认名",
-                direction: "h",
+              school: {
                 col: 8,
                 label: {
                   name: "div",
-                  text: "学科名",
+                  text: "学校名",
                   align: "left"
-                  // help: "我在label里面：学科名"
                 },
                 component: {
                   name: "el-input",
                   props: {
-                    disabled: "es:!{{$root.courses[i].code}}",
                     size: "small"
-                  },
-                  ref: "subject"
+                  }
                 },
                 rules: {
                   required: true,
-                  emptyMsg: "请输入学科名"
+                  emptyMsg: "请输入学校名"
                 },
                 help: {
-                  hidden: "es: {{$index}}%2",
+                  hidden: "es: {{$index}} !== 0",
                   props: {
-                    content: "我在外面：间隔演示帮助"
+                    content: "我在外面-演示帮助: 第1条固定（fixed为1）"
                   }
-                }
+                },
+                value: "默认名"
               },
-              code: {
-                value: "100",
-                // direction: "v",
-                col: 8,
+              address: {
+                col: 12,
                 label: {
-                  text: "代号",
+                  text: "地址",
                   help: "我在label里面：代号"
                 },
                 component: {
@@ -109,8 +97,8 @@ export default {
                   props: {
                     size: "small"
                   }
-                }
-                // help: "帮帮我吧"
+                },
+                value: "默认地址"
               }
             },
             desc: "提示： 最多只能添加5条数据"

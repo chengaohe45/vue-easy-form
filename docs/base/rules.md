@@ -120,7 +120,7 @@ handler => options包含的属性：
                       var value = data.value;
                       return value > 10;
                     },
-                    trigger: "change"
+                    trigger: ""   // 为空，则是提交时再验证
                   },
                   errMsg: "年龄不能小于10"
                 },
@@ -158,6 +158,9 @@ handler => options包含的属性：
   ```
   </demo-block>
 </ClientOnly>
+
+### trigger
+trigger是指验证时机，当其为`空字符串`时则是提交（[form.checkAll()](./form.md#表单方法)）时再验证。
 
 ### 空值
 - `空值有哪些`: `undefined`, `null`, 空对象`{}`, 空数组`[]`, 空字符串`''`

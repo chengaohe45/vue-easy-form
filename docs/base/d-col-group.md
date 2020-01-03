@@ -123,7 +123,7 @@ propName: {
 当设置layout为"space"，只有以下配置是`有效`的：
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
-| hidden | 是否隐藏此项 | boolean | -- | false | 支持[动态解析](./com-standard.md)
+| hidden | 是否隐藏此项 | boolean | -- | false | 支持[动态解析](./parse.md)
 | col | 列数(宽度) | number | 1到24 | 24 | 一行分24列
 | group | 项与项进行分组 | string | -- | -- | --
 

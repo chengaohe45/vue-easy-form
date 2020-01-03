@@ -24,8 +24,10 @@
       </div>
       <div class="demo-details-content" v-show="openDetails">
         <div>
-          <strong>表单写法:</strong> &lt;es-form ref="form" :schema="formSchema"
-          v-model="formValue"&gt;&lt;/es-form&gt;
+          <strong>注意</strong>: 配置中可能存在<span class="danger"
+            >import导入的局部组件</span
+          >，为了使配置能够正常运行，<span class="danger">不要修改临时名称</span
+          >，运行schema时会自动替换成局部组件。
         </div>
         <div class="details-content">
           <slot name="details" class="details"></slot>
@@ -355,6 +357,10 @@ export default {
   padding: 10px 10px 0;
   box-sizing: border-box;
   font-size: 14px;
+
+  .danger {
+    color: #f56c6c;
+  }
 
   .demo-form-header {
     .demo-details-header {

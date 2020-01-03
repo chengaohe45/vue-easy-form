@@ -42,7 +42,7 @@
 - `actions`: [组件事件](#组件事件)；`类型`：对象/数组；`非必填`
 - `directives`: 指令；`类型`：字符串/对象/数组；`非必填`；索引`directives`可简写为`v`
 
-> 动态解析是指支持[es写法](./com-standard.md#es写法)或[函数写法](./com-standard.md#函数写法) 
+> 动态解析是指支持[es写法](./parse.md#es写法)或[函数写法](./parse.md#函数写法) 
 
 ::: warning 注意
 `没有this指针` 当props里的的属性（如：disabled）写成一个函数时，this并不指向表单的。

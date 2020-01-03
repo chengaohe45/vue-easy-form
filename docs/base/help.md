@@ -3,12 +3,12 @@
 
 字段：`help`<br/>
 值类型有：
-- `string`： 提示的内容，支持html；会直接调用系统默认的help组件；支持[动态解析](./com-standard.md)
+- `string`： 提示的内容，支持html；会直接调用系统默认的help组件；支持[动态解析](./parse.md)
 - `object`： 一个对象，见[组件格式](./com-format.md)
 
 ### 实例：写法/位置
 <ClientOnly>
-  <demo-block>
+  <demo-block hash="#/help">
 
   ```html
   <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -109,11 +109,11 @@
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值
 | -- | -- | -- | -- | -- 
-| hidden | 控制组件是否隐藏, 支持[动态解析](./com-standard.md) | boolean | -- | false
+| hidden | 控制组件是否隐藏, 支持[动态解析](./parse.md) | boolean | -- | false
 | 其它 | 跟[组件格式](./com-format.md)一样 | -- | -- | --
 
 ### `系统帮助组件`属性详解
-也就是help.props, 支持[动态解析](./com-standard.md)
+也就是help.props, 支持[动态解析](./parse.md)
 | 属性名 | 说明 | 类型 | 可选值| 默认值
 | -- | -- | -- | -- | -- 
 | content | tooltip提示的内容，支持html | string | -- | ""

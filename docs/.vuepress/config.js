@@ -41,7 +41,7 @@ module.exports = {
             'base/settings',
             'base/explain',
             'base/com-format',
-            'base/com-standard',
+            'base/parse',
             'base/console'
           ]
         },

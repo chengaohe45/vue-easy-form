@@ -2,12 +2,12 @@
 
 字段：`desc`<br/>
 值类型有：
-- `string`： 描述的内容；支持[动态解析](./com-standard.md)
+- `string`： 描述的内容；支持[动态解析](./parse.md)
 - `object`： 一个对象，见[组件格式](./com-format.md)
 
 ### 实例
 <ClientOnly>
-  <demo-block>
+  <demo-block hash="#/desc">
 
   ```html
     <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
@@ -70,5 +70,5 @@
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值
 | -- | -- | -- | -- | -- 
-| hidden | 控制组件是否隐藏, 支持[动态解析](./com-standard.md) | boolean | -- | false
+| hidden | 控制组件是否隐藏, 支持[动态解析](./parse.md) | boolean | -- | false
 | 其它 | 跟[组件格式](./com-format.md)一样 | -- | -- | --

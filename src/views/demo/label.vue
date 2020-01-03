@@ -5,15 +5,12 @@
     :docsTitle="docsTitle"
     :docsHref="docsHref"
   >
-    <div slot="details">
-      字段label
-    </div>
   </demo-frame>
 </template>
 
 <script>
 import demoFrame from "@/components/demo-frame/index.vue";
-import label from "./components/label";
+import label from "@/components/units/label";
 export default {
   data() {
     return {
@@ -72,7 +69,7 @@ export default {
         // 写法五：组件写法
         comLabel: {
           label: {
-            name: "g-label", // g-label是自定义全局组件；也可以是import导入的局部组件
+            name: label, // label是import导入的局部组件
             props: {
               color: "es: {{$root}}.isOpen ? '' : '#909399'"
             }

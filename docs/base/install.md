@@ -64,5 +64,5 @@ Vue.use(esForm,
 | direction | "h" | 竖排还是横排
 | defaultCom | "input" | 当配置时，不写component.name时用这个
 | defaultVal | "" | 对defaultCom的补充，当组件为defaultCom时且没有设置默认值，则取此值；<br />`注：此值对其它组件不补充`
-| trimDoms | ["input", "textarea", "el-input"] | 指出哪些表单元素需要去掉左右两边空格
+| trimDoms | <span style="white-space:nowrap">["input", "textarea", "el-input"]</span> | 指出哪些表单元素需要去掉左右两边空格
 | hasConsole | false | 所有的表单是否有调试控制台; 若想设置`单个表单`，可在`对应的表单`中设置hasConsole
