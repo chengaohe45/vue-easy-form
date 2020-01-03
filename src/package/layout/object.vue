@@ -340,7 +340,7 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     justify-content: flex-start;
     width: auto;
     line-height: 20px;
-    padding: 4px 3px;
+    padding: 2px 3px;
   }
 
   .es-form-label-left {

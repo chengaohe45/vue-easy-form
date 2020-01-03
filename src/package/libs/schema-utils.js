@@ -333,9 +333,9 @@ let schemaUtils = {
       }
 
       if (newPropItem.format) {
-        newPropItem.value = formUtils.getFormatValue(
+        newPropItem.component.value = formUtils.getFormatValue(
           newPropItem.format,
-          newPropItem.value,
+          newPropItem.component.value,
           true
         );
       }

@@ -1,9 +1,11 @@
 <template>
-  <div class="console-box" :style="{ zIndex: boxZIndex }">
+  <div class="es-console-box" :style="{ zIndex: boxZIndex }">
     <button class="console-btn" @click="clickHandler">C</button>
     <div
-      class="console-panel"
-      v-if="showPanel"
+      class="es-console-panel"
+      v-if="hadShow"
+      v-show="showPanel"
+      ref="panel"
       :style="{
         right: positions.right + 'px',
         top: positions.top + 'px',
@@ -14,7 +16,7 @@
         <h2 class="panel-title">esForm调试面板</h2>
       </div>
       <div class="console-close" @click="showPanel = false">Close</div>
-      <div class="panel-body">
+      <div class="panel-body" v-if="showPanel">
         <div class="question-box">
           <a
             href="https://chengaohe45.github.io/vue-easy-form-docs/dist/base/console.html"
@@ -50,7 +52,7 @@
 
 <style lang="scss">
 @import "../static/css/mixins.scss";
-.console-box {
+.es-console-box {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -87,104 +89,103 @@
       border-color: #79bbff;
     }
   }
+}
+.es-console-panel {
+  position: fixed;
+  right: 20px;
+  top: 20px;
+  border: 1px solid #b3d8ff;
+  border-radius: 5px;
+  background: #fff;
+  text-align: left;
+  overflow: hidden;
+  width: 400px;
 
-  .console-panel {
-    position: fixed;
-    right: 20px;
-    top: 20px;
-    border: 1px solid #b3d8ff;
-    border-radius: 5px;
-    background: #fff;
-    text-align: left;
-    overflow: hidden;
-    width: 400px;
+  .console-header {
+    background: #ecf5ff;
+    // background: -webkit-linear-gradient(top, #409EFF, #ecf5ff);
 
-    .console-header {
-      background: #ecf5ff;
-      // background: -webkit-linear-gradient(top, #409EFF, #ecf5ff);
+    cursor: move;
 
+    // @include display-center;
+
+    .panel-title {
       cursor: move;
 
-      // @include display-center;
+      margin: 0;
+      padding: 0 0 0 10px;
+      line-height: 40px;
+      font-size: 16px;
+      font-weight: bold;
 
-      .panel-title {
-        cursor: move;
-
-        margin: 0;
-        padding: 0 0 0 10px;
-        line-height: 40px;
-        font-size: 16px;
-        font-weight: bold;
-
-        // @include flex-full;
-      }
-
-      * {
-        cursor: "move";
-      }
+      // @include flex-full;
     }
 
-    .console-close {
-      position: absolute;
-      top: 12px;
-      right: 10px;
-      color: #409eff;
-      cursor: pointer;
-      line-height: 18px;
+    * {
+      cursor: "move";
+    }
+  }
+
+  .console-close {
+    position: absolute;
+    top: 12px;
+    right: 10px;
+    color: #409eff;
+    cursor: pointer;
+    line-height: 18px;
+    font-size: 14px;
+    user-select: none;
+
+    &:hover {
+      color: #66b1ff;
+      text-decoration: underline;
+    }
+  }
+
+  .panel-body {
+    margin: 0;
+    padding: 0px 10px 10px 10px;
+
+    .subtitle {
+      margin: 6px 0 0 5px;
+      padding: 0;
+      line-height: 20px;
       font-size: 14px;
-      user-select: none;
+      font-weight: 600;
+    }
+
+    .question-box {
+      margin-top: 10px;
+    }
+
+    .question {
+      margin: 0 5px;
+      text-decoration: none;
+      color: #409eff;
+      outline: none;
+      padding: 0;
+      line-height: 15px;
+      font-size: 13px;
+      font-weight: 500;
 
       &:hover {
-        color: #66b1ff;
-        text-decoration: underline;
+        border-bottom: 1px solid #409eff;
       }
     }
 
-    .panel-body {
-      margin: 0;
-      padding: 0px 10px 10px 10px;
-
-      .subtitle {
-        margin: 6px 0 0 5px;
-        padding: 0;
-        line-height: 20px;
-        font-size: 14px;
-        font-weight: 600;
-      }
-
-      .question-box {
-        margin-top: 10px;
-      }
-
-      .question {
-        margin: 0 5px;
-        text-decoration: none;
-        color: #409eff;
-        outline: none;
-        padding: 0;
-        line-height: 15px;
-        font-size: 13px;
-        font-weight: 500;
-
-        &:hover {
-          border-bottom: 1px solid #409eff;
-        }
-      }
-
-      .value-box {
-        border: 1px solid #dcdfe6;
-        height: 150px;
-        border-radius: 3px;
-        padding: 5px;
-        overflow: auto;
-        width: 100%;
-        min-width: 100%;
-        max-width: 100%;
-        outline: none;
-        box-sizing: border-box;
-        font-size: 13px;
-        line-height: 20px;
-      }
+    .value-box {
+      border: 1px solid #dcdfe6;
+      height: 150px;
+      border-radius: 3px;
+      padding: 5px;
+      overflow: auto;
+      width: 100%;
+      min-width: 100%;
+      max-width: 100%;
+      outline: none;
+      box-sizing: border-box;
+      font-size: 13px;
+      line-height: 20px;
     }
   }
 }
@@ -197,6 +198,8 @@ import utils from "../libs/utils";
 export default {
   data() {
     return {
+      hadShow: false, // 是否打开过panel
+
       showPanel: false,
 
       boxZIndex: false,
@@ -304,6 +307,13 @@ export default {
       }
 
       this.$data.showPanel = !this.$data.showPanel;
+
+      if (this.$data.showPanel && !this.$data.hadShow) {
+        this.$data.hadShow = true;
+        this.$nextTick(() => {
+          this.addPopDom();
+        });
+      }
     },
 
     startDragHandler(event) {
@@ -353,11 +363,26 @@ export default {
       }
       // console.log(valueStr, value);
       return value;
+    },
+
+    addPopDom() {
+      if (!this.$data.popDom && this.$refs.panel) {
+        this.$data.popDom = this.$refs.panel;
+        document.body.appendChild(this.$data.popDom);
+      }
+    },
+
+    removePopDom() {
+      if (this.$data.popDom) {
+        document.body.removeChild(this.$data.popDom);
+        this.$data.popDom = null;
+      }
     }
   },
 
   beforeDestroy() {
     this._esStartPoint = null;
+    this.removePopDom();
   }
 };
 </script>

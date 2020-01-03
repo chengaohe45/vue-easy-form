@@ -20,26 +20,26 @@
       >
         <div
           v-if="
-            schema.array.hasDelete ||
+            schema.array.hasOrder ||
+              schema.array.hasDelete ||
               schema.array.hasSort ||
               schema.array.hasCopy
           "
           class="es-btn-box"
         >
-          <div
-            class="es-array-row-head"
-            v-if="
-              schema.array.hasOrder ||
-                schema.array.hasDelete ||
-                schema.array.hasSort ||
-                schema.array.hasCopy
-            "
-          >
+          <div class="es-array-row-head">
             <span class="order-txt" v-if="schema.array.hasOrder"
               >{{ index + 1 }}.</span
             >
             <span class="order-full"></span>
-            <span class="head-edit-wrap">
+            <span
+              class="head-edit-wrap"
+              v-if="
+                schema.array.hasDelete ||
+                  schema.array.hasSort ||
+                  schema.array.hasCopy
+              "
+            >
               <edit-btns
                 :has-delete="schema.array.hasDelete"
                 :has-sort="schema.array.hasSort"

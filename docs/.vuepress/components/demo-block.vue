@@ -131,7 +131,7 @@
       canOperate: {
         type: Boolean,
         required: false,
-        default: false
+        default: true
       },
       open: {
         type: Boolean,
@@ -392,8 +392,6 @@
   .demo-block {
     
     margin-top: 20px;
-    position: relative;
-    z-index: 100;
     font-size: 14px;
     border: solid 1px #ebebeb;
     border-radius: 3px;
