@@ -78,7 +78,7 @@
           <a v-show="hovering || isExpanded"
             @click.stop
             target="_blank"
-            :href="'https://chengaohe45.github.io/vue-easy-form-docs/dist/' + hash"
+            :href="'https://chengaohe45.github.io/vue-easy-form-docs/demo/' + hash"
             class="control-link">
             在线运行
           </a>
@@ -131,7 +131,7 @@
       canOperate: {
         type: Boolean,
         required: false,
-        default: true
+        default: false
       },
       open: {
         type: Boolean,
