@@ -35,15 +35,19 @@
 
             formSchema: {
               // 写法一
-              age: {
-                label: "年龄",
+              birthYear: {
+                label: "出生年份",
                 col: 12,
                 component: {
-                  name: "el-input-number",
+                  name: "el-date-picker",
+                  props: {
+                    type: "year",
+                    valueFormat: "yyyy"
+                  },
                   flex: "full"
                 },
-                value: 15,
-                unit: "岁"    // 也可以直接写动态解析，如es语句
+                value: "2000",
+                unit: "年"
               },
 
               // 写法二

@@ -340,54 +340,6 @@
 
 <style lang="scss">
   @import "@/static/css/mixins.scss";
-  // 覆盖一下样式，因为被vuepress>table影响了
-  .el-date-table {
-    margin: 0;
-    display: table;
-    border-collapse: separate;
-    border-spacing: 0;
-    border: none;
-
-    td {
-      border: none;
-    }
-
-    th {
-      border: none;
-      border-bottom-width: 1px;
-    }
-
-    tr:nth-child(2n) {
-      background-color: transparent;
-    }
-  }
-
-  .es-form-array-table {
-    
-    table {
-      margin: 0;
-      display: table;
-      border-collapse: separate;
-      border-spacing: 0;
-      border: none;
-    }
-
-    td {
-        border: none;
-        border-top-width: 1px;
-        border-right-width: 1px;
-      }
-
-      th {
-        border: none;
-        border-top-width: 1px;
-        border-right-width: 1px;
-      }
-
-    tr:nth-child(2n) {
-      background-color: transparent;
-    }
-  }
 
   .demo-block {
     

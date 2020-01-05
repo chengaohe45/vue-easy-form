@@ -22,15 +22,19 @@ export default {
       formSchema: {
         properties: {
           // 写法一
-          age: {
-            label: "年龄",
+          birthYear: {
+            label: "出生年份",
             col: 12,
             component: {
-              name: "el-input-number",
+              name: "el-date-picker",
+              props: {
+                type: "year",
+                valueFormat: "yyyy"
+              },
               flex: "full"
             },
-            value: 15,
-            unit: "岁"
+            value: "2000",
+            unit: "年"
           },
 
           // 写法二
