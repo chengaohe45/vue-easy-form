@@ -698,7 +698,8 @@ export default {
 
       this.$nextTick(() => {
         this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-        this.$emit("inited", utils.deepCopy(this._esResultValue));
+        // this.$emit("inited", utils.deepCopy(this._esResultValue));
+        this.__execEmit("inited", [utils.deepCopy(this._esResultValue)]);
       });
     },
 
@@ -857,7 +858,8 @@ export default {
         this.$nextTick(() => {
           this.$data._esLockSubmit = false;
           if (this.$data.isInited) {
-            this.$emit("submit", utils.deepCopy(this._esResultValue));
+            // this.$emit("submit", utils.deepCopy(this._esResultValue));
+            this.__execEmit("submit", [utils.deepCopy(this._esResultValue)]);
           } else {
             console.warn("表单还未初始化完成，无法派发submit事件");
           }
@@ -952,11 +954,15 @@ export default {
           }
 
           if (eventNames.includes(constant.INPUT_EVENT)) {
-            this.$emit(
-              "change",
+            // this.$emit(
+            //   "change",
+            //   utils.deepCopy(this._esResultValue),
+            //   sourcePathKey
+            // );
+            this.__execEmit("change", [
               utils.deepCopy(this._esResultValue),
               sourcePathKey
-            );
+            ]);
           }
         }
 
@@ -1010,11 +1016,15 @@ export default {
 
       this._esResultValue = resultValue;
 
-      this.$emit(
-        "input",
+      // this.$emit(
+      //   "input",
+      //   utils.deepCopy(resultValue),
+      //   sourcePathKey ? sourcePathKey : false
+      // );
+      this.__execEmit("input", [
         utils.deepCopy(resultValue),
         sourcePathKey ? sourcePathKey : false
-      );
+      ]);
 
       if (this.$data.canConsole) {
         this.$data.csRootData = utils.deepCopy(formData);
@@ -1181,6 +1191,30 @@ export default {
       // newParseSources = null;
       newOptions = null;
       return errMsg;
+    },
+
+    __execEmit(eventName, params) {
+      var handlers = [];
+      var actions = this.$data.formSchema.actions;
+      if (actions) {
+        var eventNames = [eventName];
+        actions.forEach(action => {
+          if (utils.isInter(action.trigger, eventNames)) {
+            handlers.push(action.handler);
+          }
+        });
+      }
+
+      if (handlers.length > 0) {
+        // schema中存在表单事件，不需要往上派发
+        handlers.forEach(handler => {
+          handler.apply(this, params);
+        });
+      } else {
+        // 往上派发
+        params.unshift(eventName);
+        this.$emit.apply(this, params);
+      }
     }
   },
 

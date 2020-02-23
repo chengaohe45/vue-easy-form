@@ -47,6 +47,7 @@ let schemaUtils = {
     if (utils.isObj(schema)) {
       var tmpSchema = utils.deepCopy(schema);
       var rootObj = tmpSchema;
+      var rootActions;
       if (!utils.isObj(tmpSchema.properties)) {
         rootObj = {};
         rootObj.title = false;
@@ -55,9 +56,11 @@ let schemaUtils = {
 
         // 根节点有效的属性
         autoMatch = false;
+        rootActions = null;
       } else {
         // 根节点有效的属性
         autoMatch = rootObj.autoMatch === true ? true : false;
+        rootActions = this.__parseActions(rootObj.actions, "根");
       }
 
       // 基础设置，最外层的一些东西固定
@@ -77,6 +80,7 @@ let schemaUtils = {
 
       //根节点有效的属性
       rootObj.autoMatch = autoMatch;
+      rootObj.actions = rootActions;
       this.__checkForTile(rootObj);
       return rootObj;
     } else {
@@ -947,10 +951,14 @@ let schemaUtils = {
         newComponent.__rawDirectives = directiveInfo.raw;
       }
 
-      if (utils.isStr(component.text) || utils.isFunc(component.text)) {
-        newComponent.text = component.text;
-        if (parse.isEsOrFunc(component.text)) {
-          newComponent.__rawText = parse.newEsFuncion(component.text);
+      var rawText = component.text;
+      if (!utils.isFunc(rawText)) {
+        rawText = utils.toComText(rawText); // 转换为文本
+      }
+      if (rawText) {
+        newComponent.text = rawText;
+        if (parse.isEsOrFunc(rawText)) {
+          newComponent.__rawText = parse.newEsFuncion(rawText);
         }
       }
 
@@ -1507,13 +1515,14 @@ let schemaUtils = {
    * 解析一般组件
    */
   __parsePropComponent: function(value, myPathKey, canEmpty = false) {
-    var newComponent;
+    var newComponent, rawText;
     if (utils.isObj(value) && Object.keys(value).length > 0) {
       newComponent = {};
       var name =
         utils.isStr(value.name) && value.name.trim()
           ? value.name.trim()
           : value.name;
+      rawText = value.text;
       if (name) {
         newComponent.name = name;
         newComponent.actions = this.__parseActions(value.actions, myPathKey);
@@ -1569,15 +1578,23 @@ let schemaUtils = {
         } else {
           // 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
         }
+
+        if (!utils.isFunc(rawText)) {
+          rawText = utils.toComText(rawText); // 转换为文本
+        }
+      } else {
+        if (!utils.isFunc(rawText)) {
+          rawText = utils.toNormalText(rawText); // 转换为文本
+        }
       }
 
-      if (parse.isEsOrFunc(value.text)) {
-        newComponent.text = value.text;
-        newComponent.__rawText = parse.newEsFuncion(value.text);
-      } else if (utils.isStr(value.text)) {
-        newComponent.text = value.text.trim();
+      if (rawText) {
+        newComponent.text = rawText;
+        if (parse.isEsOrFunc(rawText)) {
+          newComponent.__rawText = parse.newEsFuncion(rawText);
+        }
       } else {
-        newComponent.text = undefined;
+        newComponent.text = rawText;
       }
       if (!newComponent.text && !name && !canEmpty) {
         // 不符合要求，说明为空
@@ -1590,8 +1607,8 @@ let schemaUtils = {
       } else {
         newComponent.hidden = !!value.hidden;
       }
-    } else if (utils.isStr(value)) {
-      value = value.trim();
+    } else if (utils.isNormalText(value)) {
+      value = utils.toNormalText(value);
       if (value || canEmpty) {
         if (parse.isEsOrFunc(value)) {
           newComponent = {

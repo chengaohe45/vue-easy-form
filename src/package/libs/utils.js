@@ -216,6 +216,52 @@ let utils = {
   },
 
   /**
+   * 切换组件的text为字符串：支持string, number, boolean；
+   * 与toNormalText相比，范围要大于或等于
+   * @param {*} value
+   */
+  toComText(value) {
+    var newValue;
+    if (this.isStr(value)) {
+      newValue = value.trim();
+      newValue = newValue ? newValue : undefined;
+    } else if (this.isNum(value) || this.isBool(value)) {
+      newValue = value + "";
+    } else {
+      newValue = undefined;
+    }
+    return newValue;
+  },
+
+  /**
+   * 切换一般的text为字符串：只支持string, number, 因为有些组件对布尔型有特殊作用
+   * @param {*} value
+   */
+  toNormalText(value) {
+    var newValue;
+    if (this.isStr(value)) {
+      newValue = value.trim();
+      newValue = newValue ? newValue : undefined;
+    } else if (this.isNum(value)) {
+      newValue = value + "";
+    } else {
+      newValue = undefined;
+    }
+    return newValue;
+  },
+
+  /* 与toNormalText是对应的 */
+  isNormalText(value) {
+    if (this.isStr(value)) {
+      return true;
+    } else if (this.isNum(value)) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+
+  /**
    * 随机产生一定长度的字符串：只有数字和字母
    * @param {*} min 最小长度，默认为10，必须大于0
    * @param {*} max 最大长度，默认为10，必须大于0

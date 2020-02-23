@@ -1146,14 +1146,23 @@ let formUtils = {
           component.class = className;
         }
       }
-    }
 
-    // 解析text
-    if (component.__rawText) {
-      text = parse.smartEsValue(component.__rawText, parseSources);
-      text = utils.isStr(text) ? text : undefined;
-      if (text !== component.text) {
-        component.text = text;
+      // 有name, toComText解析text
+      if (component.__rawText) {
+        text = parse.smartEsValue(component.__rawText, parseSources);
+        text = utils.toComText(text);
+        if (text !== component.text) {
+          component.text = text;
+        }
+      }
+    } else {
+      // 没name, toNormalText解析text
+      if (component.__rawText) {
+        text = parse.smartEsValue(component.__rawText, parseSources);
+        text = utils.toNormalText(text);
+        if (text !== component.text) {
+          component.text = text;
+        }
       }
     }
   },
