@@ -1301,6 +1301,8 @@ let schemaUtils = {
       if (utils.isBool(ui.showBody)) {
         newUi.__hasToggle = true; // 有切换按钮
         newUi.showBody = ui.showBody;
+        // 只有__hasToggle为true时toggleTexts才有用
+        newUi.toggleTexts = this.__parseToggleTexts(ui.toggleTexts);
       } else {
         newUi.__hasToggle = false; // 无切换按钮
         newUi.showBody = true;
@@ -1341,6 +1343,24 @@ let schemaUtils = {
     }
 
     return newUi;
+  },
+
+  __parseToggleTexts(texts) {
+    var newTexts = false;
+    if (utils.isArr(texts) && texts.length == 2) {
+      var text1 = utils.isStr(texts[0]) ? texts[0] : "";
+      var text2 = utils.isStr(texts[1]) ? texts[1] : "";
+      text1 = text1.trim();
+      text2 = text2.trim();
+      if (text1 && text2) {
+        newTexts = [text1, text2];
+      }
+    }
+
+    if (!newTexts) {
+      newTexts = ["打开", "隐藏"]; // 没有就取默认值
+    }
+    return newTexts;
   },
 
   /**

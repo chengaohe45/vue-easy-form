@@ -1,11 +1,12 @@
 # 块布局/标题
 
 字段（见`行高亮`）：
-```js {4,5,6,7,13,14}
+```js {4,5,6,7,8,14,15}
 propName: {
   ui: { // 块（properties）的ui配置
     
     showBody: true,     // 隐藏/打开切换按钮；不设置则没有切换按钮
+    toggleTexts: ["打开", "隐藏"],  // 切换按钮不同状态显示的文字
     type: "",           // 整个块的布局类型；值："bg","block","bg-block"或空值
     hasBorder: false,   // 内容区是否有边框
     padding: undefined, // 内容区的内边距；若没有设置，则根据type和hasBorder的值进行自动取值
@@ -118,6 +119,7 @@ propName: {
                 ui: {
                   type: "block",    // 块标题类型
                   showBody: false,  // 有切换按钮，初始化时是隐藏状态
+                  toggleTexts: ["打开更多设置", "隐藏更多设置"],  // 切换按钮不同状态显示的文字
                   hasBorder: true   // 有边框
                 },
                 title: "更多设置",

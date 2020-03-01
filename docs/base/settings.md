@@ -37,6 +37,7 @@
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
 | showBody | 隐藏/打开切换按钮 | boolean | -- | -- | `不设置`代表没有切换按钮；<br/>`设置`说明有切换按钮，值代表最先是否显示body
+| toggleTexts | 切换按钮不同状态显示的文字 | array | -- | ["打开", "隐藏"] | 数组长度必须是2，且内容是字符串
 | type | 整个块的布局类型 | string | <span style="white-space:nowrap">"bg"</span><br/><span style="white-space:nowrap">"block"</span><br/><span style="white-space:nowrap">"bg-block"</span><br/>""| -- | `block`就是前面有一竖
 | hasBorder | 内容区是否有边框 | boolean | -- | false | --
 | padding | 内容区的内边距 | number<br/>string<br/>array | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px', `数组`：[20, 10]

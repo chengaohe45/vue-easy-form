@@ -51,6 +51,7 @@ export default {
         more: {
           ui: {
             showBody: true,
+            toggleTexts: ["打开此项", "隐藏此项"],
             hasBorder: true,
             padding: 20,
             rowSpace: 10,

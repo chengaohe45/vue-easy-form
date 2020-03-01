@@ -25,7 +25,11 @@
         class="es-more-btn"
         @click="toggleBody"
       >
-        {{ schema.ui.showBody ? "隐藏" : "打开" }}
+        {{
+          schema.ui.showBody
+            ? schema.ui.toggleTexts[1]
+            : schema.ui.toggleTexts[0]
+        }}
       </div>
       <div v-if="schema.help && !schema.help.hidden" class="es-form-help">
         <es-base :config="schema.help" :info="schema.__info"></es-base>
