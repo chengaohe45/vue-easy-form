@@ -518,6 +518,23 @@ export default {
       }
     },
 
+    /**
+     * 清除错误信息
+     * @param pathKey 指定清除哪一个，若不写则全部清除
+     * @param clearNext 当pathKey有值时，子级及以下是否清除
+     */
+    clearErrMsg(pathKey, clearNext) {
+      if (pathKey && utils.isStr(pathKey)) {
+        formUtils.clearErrMsgByKey(
+          this.$data.formSchema,
+          formUtils.perfectTileValue(this.$data.formSchema, pathKey),
+          clearNext ? true : false
+        );
+      } else {
+        formUtils.clearErrMsg(this.$data.formSchema);
+      }
+    },
+
     /* 
     判断某项是否处于隐藏 
     注：此函数有容灾处理，一定要执行到最后，不能中途退出

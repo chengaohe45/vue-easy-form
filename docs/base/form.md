@@ -65,7 +65,7 @@
 | 属性名 | 说明 | 参数 | 备注
 | -- | -- | -- | -- 
 | getRef | 取元素或组件 | (name, idxChain) | 类似于ref；若项组件在表单数组中，则返回来的是一个数组[见下面详解](#getref)；<br />`注意：`隐藏的项是不会取出的
-| checkAll | 检查表单是否有错 | 空 | true/false
+| checkAll | 检查表单是否有错 | 空 | 返回true/false
 | submit | 触发submit事件 | 空 | --
 | isHidden | 判断某项是否隐藏 | ([pathKey](./explain.md#项组件路径)) | --
 | getGlobal | 取表单的全局数据 | 空 | 应用表单传入来的global
@@ -75,6 +75,7 @@
 | getFormValue | 取表单值 | 空 | 实时取值，用户提交所需要的值，不包括隐藏的或临时的；也就是v-model
 | getTabsIndex | 取某一个tabs的索引 | ([pathKey](./explain.md#项组件路径)) | 返回当前tabs的索引，不是tabs返回false；（支持普通或数组tabs）
 | setTabsIndex | 设某一个tabs的索引 | ([pathKey](./explain.md#项组件路径), index) |  设置当前tabs的索引；（支持普通或数组tabs）
+| clearErrMsg | 清除错误信息 | ([pathKey](./explain.md#项组件路径), clearNext) |  1. 当pathKey没有值时则清除所有，clearNext无效；<br/>2. 当pathKey有值时，则是清除某一项，clearNext是对pathKey的补充，是否一起清除此项的后代
 | reset | 重置表单值 | 空 | -- 
 
 

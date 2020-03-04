@@ -962,24 +962,26 @@ let schemaUtils = {
         }
       }
 
-      if (parse.isEsOrFunc(component.class)) {
-        newComponent.class = null;
-        newComponent.__rawClass = parse.newEsFuncion(component.class);
-      } else {
-        newComponent.class = utils.deepCopy(component.class);
-      }
+      // if (parse.isEsOrFunc(component.class)) {
+      //   newComponent.class = null;
+      //   newComponent.__rawClass = parse.newEsFuncion(component.class);
+      // } else {
+      //   newComponent.class = utils.deepCopy(component.class);
+      // }
 
-      if (parse.isEsOrFunc(component.style)) {
-        newComponent.style = null;
-        newComponent.__rawStyle = parse.newEsFuncion(component.style);
-      } else {
-        if (
-          utils.isObj(component.style) &&
-          Object.keys(component.style).length
-        ) {
-          newComponent.style = utils.deepCopy(component.style);
-        }
-      }
+      // if (parse.isEsOrFunc(component.style)) {
+      //   newComponent.style = null;
+      //   newComponent.__rawStyle = parse.newEsFuncion(component.style);
+      // } else {
+      //   if (
+      //     utils.isObj(component.style) &&
+      //     Object.keys(component.style).length
+      //   ) {
+      //     newComponent.style = utils.deepCopy(component.style);
+      //   }
+      // }
+      // 提取class和style
+      Object.assign(newComponent, this.__parseClassStyle(component));
 
       newComponent.align = this.__parseAlign(component.align, defaultAlign);
       newComponent.flex = this.__parseFlex(component.flex, component.size);
@@ -1103,6 +1105,33 @@ let schemaUtils = {
       raw: rawProps,
       staticNames: staticNames.length ? staticNames : false
     };
+  },
+
+  /**
+   * 提取出class和style
+   * @param {*} item
+   * @returns {class和style}
+   */
+  __parseClassStyle(item) {
+    var newItem = {};
+    if (parse.isEsOrFunc(item.class)) {
+      newItem.class = null;
+      newItem.__rawClass = parse.newEsFuncion(item.class);
+    } else {
+      if (item.class) {
+        newItem.class = utils.deepCopy(item.class);
+      }
+    }
+
+    if (parse.isEsOrFunc(item.style)) {
+      newItem.style = null;
+      newItem.__rawStyle = parse.newEsFuncion(item.style);
+    } else {
+      if (utils.isObj(item.style) && Object.keys(item.style).length) {
+        newItem.style = utils.deepCopy(item.style);
+      }
+    }
+    return newItem;
   },
 
   /**
@@ -1576,21 +1605,23 @@ let schemaUtils = {
         }
 
         // 只有在name有值时有效
-        if (parse.isEsOrFunc(value.class)) {
-          newComponent.class = null;
-          newComponent.__rawClass = parse.newEsFuncion(value.class);
-        } else {
-          newComponent.class = utils.deepCopy(value.class);
-        }
+        // if (parse.isEsOrFunc(value.class)) {
+        //   newComponent.class = null;
+        //   newComponent.__rawClass = parse.newEsFuncion(value.class);
+        // } else {
+        //   newComponent.class = utils.deepCopy(value.class);
+        // }
 
-        if (parse.isEsOrFunc(value.style)) {
-          newComponent.style = null;
-          newComponent.__rawStyle = parse.newEsFuncion(value.style);
-        } else {
-          if (utils.isObj(value.style) && Object.keys(value.style).length) {
-            newComponent.style = utils.deepCopy(value.style);
-          }
-        }
+        // if (parse.isEsOrFunc(value.style)) {
+        //   newComponent.style = null;
+        //   newComponent.__rawStyle = parse.newEsFuncion(value.style);
+        // } else {
+        //   if (utils.isObj(value.style) && Object.keys(value.style).length) {
+        //     newComponent.style = utils.deepCopy(value.style);
+        //   }
+        // }
+        // 提取class和style
+        Object.assign(newComponent, this.__parseClassStyle(value));
 
         // value
         if (value.hasOwnProperty("value")) {
@@ -1677,13 +1708,12 @@ let schemaUtils = {
    * 解析规则
    */
   __parsePropRules: function(rules) {
-    var newRules;
+    var tmpRawRequired = false,
+      tmpCheckList = [];
     if (utils.isObj(rules)) {
       if (rules.check) {
         console.warn("rules.check已经舍弃了，请使用rules.checks");
       }
-
-      newRules = {};
 
       var rawCheckList;
       if (rules.checks) {
@@ -1692,7 +1722,7 @@ let schemaUtils = {
         console.warn("rules.check已经舍弃了，请使用rules.checks");
         rawCheckList = rules.check;
       }
-      var tmpCheckList = [];
+
       if (!rawCheckList) {
         rawCheckList = [];
       } else if (!utils.isArr(rawCheckList)) {
@@ -1705,54 +1735,56 @@ let schemaUtils = {
           tmpCheckList.push(newItem);
         }
       });
-      if (tmpCheckList.length > 0) {
-        newRules.checks = tmpCheckList;
-      }
+
+      // 取出required
       if (parse.isEsOrFunc(rules.required)) {
-        newRules.required = false; // 让以后解析
-        newRules.__rawRequired = parse.newEsFuncion(rules.required);
+        tmpRawRequired = parse.newEsFuncion(rules.required);
       } else if (utils.isBool(rules.required)) {
-        newRules.required = rules.required;
-        newRules.__rawRequired = rules.required;
+        tmpRawRequired = rules.required;
       } else {
-        newRules.required = false;
-        newRules.__rawRequired = false;
+        tmpRawRequired = false;
       }
     } else if (utils.isBool(rules)) {
-      newRules = {
-        required: rules,
-        __rawRequired: rules
-      };
+      tmpRawRequired = rules;
     } else if (parse.isEsOrFunc(rules)) {
-      newRules = {
-        required: false,
-        __rawRequired: parse.newEsFuncion(rules)
-      };
+      tmpRawRequired = parse.newEsFuncion(rules);
     } else {
       return false;
     }
 
-    if (
-      newRules.__rawRequired ||
-      (newRules.checks && newRules.checks.length > 0)
-    ) {
+    // 当不是必须的和没有检查，等价于rules为false
+    if (tmpRawRequired || tmpCheckList.length > 0) {
+      var newRules = {};
+
       var emptyMsg, errMsg;
 
-      if (newRules.__rawRequired) {
+      // 为true或为函数
+      if (tmpRawRequired) {
         // 有为空检查
         if (utils.isStr(rules.emptyMsg)) {
           emptyMsg = rules.emptyMsg.trim();
         }
         newRules.emptyMsg = emptyMsg ? emptyMsg : "不能为空";
       }
+      // 是动态，记录下来
+      if (utils.isFunc(tmpRawRequired)) {
+        newRules.required = false; // 会动态解析
+        newRules.__rawRequired = tmpRawRequired;
+      } else {
+        newRules.required = tmpRawRequired;
+      }
 
-      if (newRules.checks && newRules.checks.length > 0) {
+      if (tmpCheckList.length > 0) {
+        newRules.checks = tmpCheckList;
         // 有非空检查
         if (utils.isStr(rules.errMsg)) {
           errMsg = rules.errMsg.trim();
         }
         newRules.errMsg = errMsg ? errMsg : "格式不对";
       }
+
+      // 提取class和style
+      Object.assign(newRules, this.__parseClassStyle(rules));
 
       return newRules;
     } else {

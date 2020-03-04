@@ -529,6 +529,67 @@ let formUtils = {
   },
 
   /**
+   * 指定某一个属性进行清除
+   * @param {Object} schema
+   * @param {String} pathKey "age、more1[0].name"
+   * @param {Boolean} clearNext 是否清除子级及以下
+   */
+  clearErrMsgByKey: function(schema, pathKey, clearNext) {
+    var targetSchema = this.__getSchemaByKey(schema, pathKey);
+    if (targetSchema) {
+      if (!clearNext) {
+        if (targetSchema.__invalidMsg) {
+          targetSchema.__invalidMsg = false;
+        }
+
+        if (targetSchema.__hasError) {
+          targetSchema.__hasError = false;
+        }
+      } else {
+        // 清除自已和所有的后代
+        this.clearErrMsg(targetSchema);
+      }
+    } else {
+      // 路径不对或没有错误信息：不用理会
+    }
+  },
+
+  /**
+   * 清除当前propItem
+   * @param {*} propItem
+   */
+  clearErrMsg: function(propItem) {
+    // 无论是哪一种，统一判断
+    if (propItem.__invalidMsg) {
+      propItem.__invalidMsg = false;
+    }
+
+    if (propItem.__hasError) {
+      propItem.__hasError = false;
+    }
+
+    // 是数组，清空数组
+    if (propItem.array) {
+      var schemaList = propItem.__propSchemaList || [];
+      schemaList.forEach(schema => {
+        this.clearErrMsg(schema);
+      });
+    }
+
+    // 不是数据组了
+    if (propItem.component) {
+      // ...
+    } else if (propItem.properties) {
+      for (var key in propItem.properties) {
+        // 清除下一级
+        this.clearErrMsg(propItem.properties[key]);
+      }
+    } else {
+      //可能是占位对象
+    }
+  },
+
+  /**
    * 表单内部的结果
    */
   getValue: function(propItem) {
@@ -752,7 +813,7 @@ let formUtils = {
    */
   analyzeUiProps(propItem, baseParseSources) {
     var sum = 0;
-    var isHidden, isRequired, listLen, schemaList, i;
+    var isHidden, listLen, schemaList, i;
 
     var parseSources = Object.assign({}, baseParseSources);
     parseSources.index = propItem.__info.index;
@@ -832,17 +893,14 @@ let formUtils = {
             }
           }
         }
+
+        if (propItem.array.rules) {
+          this.__esParseRules(propItem.array.rules, parseSources);
+        }
       } else {
         /* 一般组件 */
-        if (propItem.rules && propItem.rules.__rawRequired) {
-          // false或为空都不用执行
-          isRequired = parse.smartEsValue(
-            propItem.rules.__rawRequired,
-            parseSources
-          );
-          if (propItem.rules.required != isRequired) {
-            propItem.rules.required = isRequired;
-          }
+        if (propItem.rules) {
+          this.__esParseRules(propItem.rules, parseSources);
         }
 
         // 解析组件内的属性
@@ -1199,6 +1257,37 @@ let formUtils = {
       }
     }
     return result;
+  },
+
+  /**
+   * 运行时解析rules
+   * @param {*} rules
+   * @param {*} parseSources
+   */
+  __esParseRules(rules, parseSources) {
+    // 是否必须
+    if (rules.__rawRequired) {
+      var isRequired = parse.smartEsValue(rules.__rawRequired, parseSources);
+      if (rules.required != isRequired) {
+        rules.required = isRequired;
+      }
+    }
+
+    // 解析style
+    if (rules.__rawStyle) {
+      var style = parse.smartEsValue(rules.__rawStyle, parseSources);
+      if (style !== rules.style) {
+        rules.style = style;
+      }
+    }
+
+    // 解析class
+    if (rules.__rawClass) {
+      var className = parse.smartEsValue(rules.__rawClass, parseSources);
+      if (className !== rules.class) {
+        rules.class = className;
+      }
+    }
   },
 
   /**

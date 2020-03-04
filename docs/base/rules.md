@@ -14,7 +14,10 @@ rules: {
       return true;
     }
   },
-  errMsg: "格式不对" // checks后的错误信息提示；默认值：格式不对
+  errMsg: "格式不对", // checks后的错误信息提示；默认值：格式不对
+  // class和style是错误信息的样式补充，支持动态解析：一般用于表单数组的错误信息
+  class: undefined, // vue中class接受的类型：字符串，对象，数组
+  style: undefined  // 类型：对象
 }
 ```
 handler => options包含的属性：

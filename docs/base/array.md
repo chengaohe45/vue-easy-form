@@ -109,7 +109,8 @@ propName: {
                         }
                         return true;
                       }
-                    }
+                    },
+                    style: {marginLeft: "80px"}
                   },  
                   insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
                     if (options.type === "copy") {  // 只做拷贝
