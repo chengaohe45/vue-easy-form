@@ -274,15 +274,17 @@ export default {
       this.createOn();
     },
 
-    eventHandler(eventName, eventData) {
+    eventHandler(eventName, args) {
+      args = args ? args : [];
       if (!this.info) {
         // 让父类去处理
-        this.$emit("trigger", eventName, eventData, this.$refs.__comTarget__);
+        this.$emit("trigger", eventName, args, this.$refs.__comTarget__);
       } else {
         // 一般组件，自己处理
         var options = {
           value: utils.deepCopy(this.config.value),
-          event: eventData,
+          event: args[0],
+          args: args,
           pathKey: this.info.pathKey,
           index: this.info.index,
           idxChain: this.info.idxChain,
@@ -367,6 +369,8 @@ export default {
      * 创建所需要监听的事件
      */
     createOn() {
+      var _thisVm = this;
+
       var hasOwnValue = this.config.hasOwnProperty("value");
       var emitEvents;
       if (this.config.__emitEvents) {
@@ -386,17 +390,16 @@ export default {
       var emitOn = {};
       emitEvents.forEach(eventName => {
         if (eventName == constant.INPUT_EVENT && hasOwnValue) {
-          emitOn[eventName] = eventData => {
-            var eventValue = this.__parseInputEvent(eventData);
-            if (this.config.value !== eventValue) {
-              // this.$emit("input", eventValue);
-              this.config.value = eventValue;
-              this.eventHandler(eventName, eventData);
+          emitOn[eventName] = function(eventData) {
+            var eventValue = _thisVm.__parseInputEvent(eventData);
+            if (_thisVm.config.value !== eventValue) {
+              _thisVm.config.value = eventValue;
+              _thisVm.eventHandler(eventName, arguments);
             }
           };
         } else {
-          emitOn[eventName] = eventData => {
-            this.eventHandler(eventName, eventData);
+          emitOn[eventName] = function() {
+            _thisVm.eventHandler(eventName, arguments);
           };
         }
       });
@@ -409,8 +412,11 @@ export default {
         var nativeOn = {};
         var nativeEvents = utils.deepCopy(this.config.__nativeEvents);
         nativeEvents.forEach(eventName => {
-          nativeOn[eventName] = eventData => {
-            this.eventHandler(eventName + "." + constant.ADJ_NATIVE, eventData);
+          nativeOn[eventName] = function() {
+            _thisVm.eventHandler(
+              eventName + "." + constant.ADJ_NATIVE,
+              arguments
+            );
           };
         });
 
@@ -418,6 +424,10 @@ export default {
           Object.keys(nativeOn).length > 0 ? nativeOn : null;
       } else {
         this.$data.nativeOn = null;
+      }
+
+      if (!this.$data.emitOn && !this.$data.nativeOn) {
+        _thisVm = undefined; // 没有关联清除
       }
     }
   },

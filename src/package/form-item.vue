@@ -767,7 +767,8 @@ export default {
     },
 
     // 只有组件会触发
-    triggerHandler(eventName, eventData, target) {
+    triggerHandler(eventName, args, target) {
+      var eventData = args[0];
       var checkSchema = [this.schema];
       var eventNames = [eventName];
       var targetValue = this.schema.component.value;
@@ -791,6 +792,7 @@ export default {
       var options = {
         value: utils.deepCopy(targetValue),
         event: eventData,
+        args: args,
         pathKey: this.schema.__info.pathKey,
         index: this.schema.__info.index,
         idxChain: this.schema.__info.idxChain,
@@ -813,6 +815,7 @@ export default {
       var options = {
         value: targetValue,
         event: eventData,
+        args: [eventData],
         pathKey: this.schema.__info.pathKey,
         index: this.schema.__info.index,
         idxChain: this.schema.__info.idxChain,

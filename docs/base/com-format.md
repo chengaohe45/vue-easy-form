@@ -118,7 +118,8 @@ actions: [标准写法或简写组成的数组]
 ```
 函数handler返回的参数options包含的信息有：
 - `value`： 当前项组件的值，表单的值可以通过this取出
-- `event`： 事件本身所携带的信息, 如keyup.native,可以从这里提取键值；若是$emit事件，则value等于event
+- `args`<Badge text="1.6.2"/>： 事件本身所携带的信息(就是函数的局部变量`arguments`)；如`keyup.native`,可以从这里提取键值；
+- `event`： 事件本身所携带的第一个信息, 也就是`args[0]`
 - `target`： 当前项组件(若是`数组事件`，这个为`null`)
 - `pathKey`： 需要检查的组件的路径
 - `idxChain`： 需要检查的组件所要数组所组成的id 如: 1,2
