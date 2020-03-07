@@ -1,6 +1,6 @@
 const path = require("path");
 module.exports = {
-  title: 'esForm文档',
+  title: 'vue-easy-form文档',
   description: '后台自动化平台',
   base: "/vue-easy-form-docs/dist/",
   dest: "../vue-easy-form-docs/dist/",
