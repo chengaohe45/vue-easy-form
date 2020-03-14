@@ -103,7 +103,7 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
 - `rootData`： 整个表单的[根值/rootData](./explain.md#根值). root在es语法中的写法是<span v-pre>`{{$root}}`</span>
 - `global`： 从表单中传入，用于外部对表单影响, 不设置则默认为`空对象`; global在es语法中的写法是<span v-pre>`{{$global}}`</span>
 - `index`：数组中孩子节点(非孙子节点))项所在的索引，其它节点(非孩子)节点此值是-1. index在es语法中的写法是<span v-pre>`{{$index}}`</span>
-- `hidden`： 用于判断某一项是否隐藏的`函数`. hidden在es语法中的写法是<span v-pre>`{{$hidden(base.target)}}`</span>; 括号中是路径；此函数也是表单方法[isHidden](./form.md#表单方法)
+- `hidden`： 用于判断某一项是否隐藏的`函数`. hidden在es语法中的写法是<span v-pre>`{{$hidden('base.target')}}`</span>; 括号中是路径；此函数也是表单方法[isHidden](./form.md#表单方法)
 
 [数组es写法](./array.md#数组es写法)
 
@@ -218,6 +218,7 @@ es语法: `es:`为前缀的字符串，[数据源](./explain.md#es语法)以大�
 运用函数构造Vue属性，options所携带的信息：
 - `global`：form属性的global
 - `rootData`：表单的原始值（隐藏的项值也会取出）
+- `root`<Badge text="1.7.0"/>：也就是`rootData`，为了跟<span v-pre>`{{$root}}`</span>保持一致
 - `pathKey`：项组件的路径
 - `idxChain`： 项组件所要数组所组成的id 如: 1,2
 - `index`：项组件处于数组的子节点(非孙子)时的索引，其余的返回-1

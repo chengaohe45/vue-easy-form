@@ -609,7 +609,6 @@ export default {
             tmpParentPathKey == pathKey
               ? targetSchema
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
-          // if (itemSchema) {
           var parseSources = {
             global: this.global ? this.global : {}, // 防止null情况
             rootData: this._esFormData,
@@ -626,18 +625,10 @@ export default {
           } else {
             // 父节点是显示的，继续
           }
-          // } else {
-          //   console.warn(
-          //     "无法匹配" + tmpParentPathKey + "(系统则认为hidden为false)"
-          //   );
-          //   curHiddenValue = false;
-          //   break;
-          // }
         }
       }
 
       this._esHiddenLevel--;
-      // console.log("this._esHiddenLevel: ", this._esHiddenLevel);
 
       // 全部都没有隐藏
       return curHiddenValue;

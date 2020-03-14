@@ -24,17 +24,6 @@ let parse = {
     }
   },
 
-  // isStaticKey(key) {
-  //   var prefixs = constant.PREFIX_STATIC_FUNC;
-  //   for (var i = 0; i < prefixs.length; i++) {
-  //     var prefix = prefixs[i];
-  //     if (key.indexOf(prefix) === 0) {
-  //       return true;
-  //     }
-  //   }
-  //   return false;
-  // },
-
   getStaticKey(key) {
     var prefixs = constant.PREFIX_STATIC_FUNC;
     for (var i = 0; i < prefixs.length; i++) {
@@ -96,19 +85,20 @@ let parse = {
         // es: 转过来的函数
         options = {
           global: parseSources.global,
-          rootData: parseSources.rootData,
+          root: parseSources.rootData,
           idxChains: parseSources.idxChain
             ? parseSources.idxChain.split(",")
             : [],
           index: parseSources.index,
-          rootSchema: parseSources.rootSchema,
+          // rootSchema: parseSources.rootSchema,
           isHidden: parseSources.isHidden
         };
       } else {
         // 自定义函数
         options = {
           global: parseSources.global,
-          rootData: parseSources.rootData,
+          rootData: parseSources.rootData, // 兼容1.7.0以前，不包括1.7.0
+          root: parseSources.rootData,
           idxChain: parseSources.idxChain,
           index: parseSources.index,
           pathKey: parseSources.pathKey,
@@ -140,17 +130,12 @@ let parse = {
         },
         {
           symbol: "$root",
-          paramKey: "rootData"
+          paramKey: "root"
         },
         {
           symbol: "$index",
           paramKey: "index"
         }
-
-        /* other paramKey */
-        // isHidden
-        // rootSchema
-        // idxChains
       ];
 
       scriptTxt = scriptTxt.substring(expPrefix.length);
@@ -194,8 +179,7 @@ let parse = {
           }
         });
         hiddenPathKey = chainPiecesTempVal;
-        hiddenFunTxt =
-          `${constant.ES_OPTIONS}` + ".isHidden('" + hiddenPathKey + "')"; // 后面会进行解析替换
+        hiddenFunTxt = "$hidden('" + hiddenPathKey + "')"; // 后面会进行解析替换
 
         newScriptTxt +=
           scriptTxt.slice(
@@ -230,13 +214,22 @@ let parse = {
         options.forEach(item => {
           tempVal = tempVal.replace(
             new RegExp(`\\{{\\s*\\${item.symbol}(\\.\\S*)?\\s*}}`),
-            `${constant.ES_OPTIONS}['${item.paramKey}']$1`
+            `$${item.paramKey}$1`
           );
         });
         newScriptTxt = newScriptTxt.replace(mItem, tempVal);
       });
+
+      let prefixScript = "";
+      options.forEach(item => {
+        prefixScript += `var $${item.paramKey} = ${constant.ES_OPTIONS}.${
+          item.paramKey
+        }; `;
+      });
+      prefixScript += `var $hidden = ${constant.ES_OPTIONS}.isHidden; `;
+      newScriptTxt = prefixScript + " return (" + newScriptTxt + ");";
+
       // console.log("newScriptTxt: ", newScriptTxt);
-      newScriptTxt = "return (" + newScriptTxt + ");";
 
       result = new Function(constant.ES_OPTIONS, newScriptTxt);
       result.__esFuncName = constant.ES_FUNC_NAME;
