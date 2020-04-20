@@ -1765,6 +1765,9 @@ let schemaUtils = {
           emptyMsg = rules.emptyMsg.trim();
         }
         newRules.emptyMsg = emptyMsg ? emptyMsg : "不能为空";
+        if (utils.isFunc(rules.emptyMethod)) {
+          newRules.emptyMethod = rules.emptyMethod;
+        }
       }
       // 是动态，记录下来
       if (utils.isFunc(tmpRawRequired)) {

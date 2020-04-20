@@ -1093,10 +1093,27 @@ export default {
         }
       }
 
+      var newOptions, checkResult;
       var isRequired = rules.required;
       if (isRequired) {
         //空要检查
-        if (formUtils.isEmpty(value)) {
+        if (rules.emptyMethod) {
+          if (!newOptions) {
+            newOptions = {};
+            newOptions.value = value;
+            newOptions.pathKey = schema.__info.pathKey;
+            newOptions.idxChain = schema.__info.idxChain;
+            newOptions.index = schema.__info.index;
+          }
+          checkResult = rules.emptyMethod.call(this, newOptions);
+          if (checkResult === true) {
+            return rules.emptyMsg;
+          } else if (utils.isStr(checkResult)) {
+            return checkResult.trim() || rules.emptyMsg;
+          } else {
+            // 不为空；往下走
+          }
+        } else if (formUtils.isEmpty(value)) {
           return rules.emptyMsg;
         }
       } else if (!isRequired && formUtils.isEmpty(value)) {
@@ -1106,7 +1123,7 @@ export default {
       //非空情况
       var checkList = rules.checks;
       var errMsg = true;
-      var checkFun, newOptions;
+      var checkFun;
       // var newParseSources;
 
       if (checkList && checkList.length > 0) {
