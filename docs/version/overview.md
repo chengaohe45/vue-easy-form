@@ -1,5 +1,8 @@
 # 版本总览
 
+# 1.6.3（2020.04.21）
+- 增加规则空值自定义：[emptyMethod](../base/rules.md)
+
 # 1.6.2（2020.03.07）
 - 增加表单方法：[clearErrMsg](../base/form.md#表单方法)
 - 优化规则设置：增加错误提示信息的[class和style](../base/rules.md)配置
