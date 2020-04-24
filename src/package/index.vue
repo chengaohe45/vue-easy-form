@@ -43,6 +43,7 @@ $btnDisableColor: #d5d7dc;
     color: $g_errorColor;
     vertical-align: middle;
     margin-right: 3px;
+    font-weight: normal;
   }
 
   .es-form-unit {
@@ -69,6 +70,7 @@ $btnDisableColor: #d5d7dc;
   position: relative;
   white-space: nowrap;
   font-size: 0;
+  text-align: center;
 }
 
 .es-btn {
@@ -1064,9 +1066,11 @@ export default {
      */
     __checkRules: function(schema, value, triggers) {
       var rules, fromArray;
-      if (schema.array && schema.array.rules) {
-        rules = schema.array.rules;
-        fromArray = true;
+      if (schema.array) {
+        if (schema.array.rules) {
+          rules = schema.array.rules;
+          fromArray = true;
+        }
       } else {
         rules = schema.rules;
         fromArray = false;

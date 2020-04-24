@@ -1746,8 +1746,10 @@ let schemaUtils = {
       }
     } else if (utils.isBool(rules)) {
       tmpRawRequired = rules;
+      rules = {};
     } else if (parse.isEsOrFunc(rules)) {
       tmpRawRequired = parse.newEsFuncion(rules);
+      rules = {};
     } else {
       return false;
     }
@@ -1768,6 +1770,10 @@ let schemaUtils = {
         if (utils.isFunc(rules.emptyMethod)) {
           newRules.emptyMethod = rules.emptyMethod;
         }
+
+        newRules.showRequired = utils.isBool(rules.showRequired)
+          ? rules.showRequired
+          : true;
       }
       // 是动态，记录下来
       if (utils.isFunc(tmpRawRequired)) {

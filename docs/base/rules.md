@@ -5,6 +5,7 @@
 rules: {
   required: true,   // 默认为false，支持动态解析
   emptyMsg: "不能为空",  // 为空的错误提示；默认值：不能为空
+  showRequired: true,   // v1.6.4；是否显示星号，当required为true有用；常用于数组内容，可能太多"星号"不好看
   emptyMethod: function(options) { // v1.6.3；代替系统的空值检查函数：检查此值是否为空
     // 默认是不存在的，不设置则会取系统默认的空值检查函数，见下面“空值”
     // 返回true或字符串则表示为空；若返回值为字符串，则是提示的信息，否则取‘emptyMsg’

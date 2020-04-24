@@ -26,6 +26,14 @@
               <div class="es-legend">
                 <!-- itemSchema.subLabel一定为一个对象-->
                 <span
+                  v-if="
+                    itemSchema.rules &&
+                      itemSchema.rules.required &&
+                      itemSchema.rules.showRequired
+                  "
+                  ><span class="es-required">*</span></span
+                >
+                <span
                   v-if="!itemSchema.subLabel.name || itemSchema.subLabel.hidden"
                   >{{
                     itemSchema.subLabel.text && !itemSchema.subLabel.hidden
@@ -254,6 +262,7 @@
       font-weight: 500;
       padding: 0 10px;
       border-radius: 10px;
+      white-space: nowrap;
     }
 
     .es-single-pannel {

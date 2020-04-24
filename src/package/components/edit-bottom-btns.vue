@@ -51,7 +51,7 @@
 <style lang="scss">
 .es-form-bottom-btns {
   position: relative;
-  display: inline-block;
+  // display: inline-block;
 }
 </style>
 
