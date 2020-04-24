@@ -37,7 +37,7 @@
 - `style`: 内联样式；`类型`：对象；`非必填`
 - `class`: 样式类；`类型`：字符串/对象/数组；要符合[Vue Class](https://cn.vuejs.org/v2/guide/class-and-style.html)写法；`非必填`
 - `props`: 组件属性；`类型`：对象；`非必填`
-- `text`: 组件文本；`类型`：字符串、数值、布尔；`非必填`
+- `text`: 组件文本；`类型`：字符串、数值<badge text="1.6.0" />、布尔<badge text="1.6.0" />；`非必填`
 - `value`: [组件的值](#value配置)（与v-model实行双向绑定）；`类型`：任何；`非必填`
 - `actions`: [组件事件](#组件事件)；`类型`：对象/数组；`非必填`
 - `directives`: 指令；`类型`：字符串/对象/数组；`非必填`；索引`directives`可简写为`v`

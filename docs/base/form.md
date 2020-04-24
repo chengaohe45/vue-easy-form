@@ -21,7 +21,7 @@
 				formValue: {},
 				formSchema: {
 					ui: {},
-					actions: {	// 表单事件在schema配置, 多个可写成数组
+					actions: {	// v1.6.0；表单事件在schema配置, 多个可写成数组
 						trigger: "inited",
 						handler: function(formValue) {}
 					},
@@ -53,7 +53,7 @@
 | change | 表单组件改变时触发 | (formValue, keyPath, eventData) | setValue不会触发
 | submit | 提交表单 | (formValue) | form.submit(); 组件事件(@enterSubmit; @submit)会触发
 ::: warning 注意
-1. 表单事件写法有两种：在元素中直接配置、在schema的actions中配置；两者选其一；
+1. 表单事件写法有两种：在`元素中直接配置`、在`schema的actions中配置`<badge text="1.6.0" />；两者选其一；
 2. 若两者都存在，当事件触发时，actions存在此事件，则只会触发actions的配置，在元素中配置的事件则失效，这样避免重复触发；
 3. 两种写法的所返回的参数是一样（见上面），跟[组件事件的参数](../base/component.md#actions组件事件)不同，但写法跟[组件事件的写法](../base/com-format.md#组件事件)一样；
 4. actions函数的this指针是指向此表单。
@@ -75,7 +75,7 @@
 | getFormValue | 取表单值 | 空 | 实时取值，用户提交所需要的值，不包括隐藏的或临时的；也就是v-model
 | getTabsIndex | 取某一个tabs的索引 | ([pathKey](./explain.md#项组件路径)) | 返回当前tabs的索引，不是tabs返回false；（支持普通或数组tabs）
 | setTabsIndex | 设某一个tabs的索引 | ([pathKey](./explain.md#项组件路径), index) |  设置当前tabs的索引；（支持普通或数组tabs）
-| clearErrMsg | 清除错误信息 | ([pathKey](./explain.md#项组件路径), clearNext) |  1. 当pathKey没有值时则清除所有，clearNext无效；<br/>2. 当pathKey有值时，则是清除某一项，clearNext是对pathKey的补充，是否一起清除此项的后代
+| <span style="white-space: nowrap;">clearErrMsg<badge text="1.6.2" /></span> | 清除错误信息 | ([pathKey](./explain.md#项组件路径), clearNext) |  1. 当pathKey没有值时则清除所有，clearNext无效；<br/>2. 当pathKey有值时，则是清除某一项，clearNext是对pathKey的补充，是否一起清除此项的后代
 | reset | 重置表单值 | 空 | -- 
 
 

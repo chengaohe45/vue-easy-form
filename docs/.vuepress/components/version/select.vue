@@ -110,7 +110,6 @@ export default {
 
 <style lang="scss">
 .version-select-box {
-  margin: 10px 0;
   width: 140px;
 }
 </style>

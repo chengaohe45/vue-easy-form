@@ -5,7 +5,7 @@
 rules: {
   required: true,   // 默认为false，支持动态解析
   emptyMsg: "不能为空",  // 为空的错误提示；默认值：不能为空
-  emptyMethod: function(options) { // 1.6.3；代替系统的空值检查函数：检查此值是否为空
+  emptyMethod: function(options) { // v1.6.3；代替系统的空值检查函数：检查此值是否为空
     // 默认是不存在的，不设置则会取系统默认的空值检查函数，见下面“空值”
     // 返回true或字符串则表示为空；若返回值为字符串，则是提示的信息，否则取‘emptyMsg’
     // 其它代表不为空
@@ -22,8 +22,8 @@ rules: {
   },
   errMsg: "格式不对", // checks后的错误信息提示；默认值：格式不对
   // class和style是错误信息的样式补充，支持动态解析：一般用于表单数组的错误信息
-  class: undefined, // vue中class接受的类型：字符串，对象，数组
-  style: undefined  // 类型：对象
+  class: undefined, // v1.6.2；vue中class接受的类型：字符串，对象，数组
+  style: undefined  // v1.6.2；类型：对象
 }
 ```
 handler => options包含的属性：

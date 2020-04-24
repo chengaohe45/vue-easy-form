@@ -5,7 +5,7 @@
 </div>
 
 ## 文档版本选择
-<div style="min-height: 34px;">
+<div style="margin: 10px 0; min-height: 34px;">
 <ClientOnly>
   <version-select></version-select>
 </ClientOnly>
