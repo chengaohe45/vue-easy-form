@@ -1,7 +1,12 @@
 <template>
   <div class="es-form-table-container">
     <span
-      v-if="hasRequired && schema.rules && schema.rules.required"
+      v-if="
+        hasRequired &&
+          schema.rules &&
+          schema.rules.required &&
+          schema.rules.showRequired
+      "
       class="es-table-required es-required"
       :style="{
         height: schema.rowHeight + 'px',

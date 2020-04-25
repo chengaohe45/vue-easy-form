@@ -20,7 +20,10 @@
       >
         <div
           v-if="
-            schema.array.hasOrder ||
+            (itemSchema.rules &&
+              itemSchema.rules.required &&
+              itemSchema.rules.showRequired) ||
+              schema.array.hasOrder ||
               schema.array.hasDelete ||
               schema.array.hasSort ||
               schema.array.hasCopy
@@ -29,8 +32,26 @@
         >
           <div class="es-array-row-head">
             <span class="order-txt" v-if="schema.array.hasOrder"
+              ><span
+                v-if="
+                  itemSchema.rules &&
+                    itemSchema.rules.required &&
+                    itemSchema.rules.showRequired
+                "
+                class="es-required"
+                >*</span
               >{{ index + 1 }}.</span
             >
+            <span
+              class="order-txt"
+              v-else-if="
+                itemSchema.rules &&
+                  itemSchema.rules.required &&
+                  itemSchema.rules.showRequired
+              "
+            >
+              <span class="es-required">*</span>
+            </span>
             <span class="order-full"></span>
             <span
               class="head-edit-wrap"

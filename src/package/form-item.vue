@@ -293,23 +293,28 @@
       </template>
 
       <!-- 验证错误信息：优化考虑数组: 对于项来说，它没有rules；对于component来说，两者可能都存在，但array.rules才是外面的，用来判断数组 -->
-      <div
-        v-if="(schema.array && schema.array.rules) || schema.rules"
-        v-show="schema.__invalidMsg"
-        class="es-form-error"
-        :class="
-          schema.array && schema.array.rules
-            ? schema.array.rules.class
-            : schema.rules.class
-        "
-        :style="
-          schema.array && schema.array.rules
-            ? schema.array.rules.style
-            : schema.rules.style
-        "
-      >
-        {{ schema.__invalidMsg }}
-      </div>
+      <template v-if="!schema.array">
+        <div
+          v-if="schema.rules"
+          v-show="schema.__invalidMsg"
+          class="es-form-error"
+          :class="schema.rules.class"
+          :style="schema.rules.style"
+        >
+          {{ schema.__invalidMsg }}
+        </div>
+      </template>
+      <template v-else>
+        <div
+          v-if="schema.array.rules"
+          v-show="schema.__invalidMsg"
+          class="es-form-error"
+          :class="schema.array.rules.class"
+          :style="schema.array.rules.style"
+        >
+          {{ schema.__invalidMsg }}
+        </div>
+      </template>
 
       <!-- 描述信息，可以html -->
       <template v-if="schema.desc && !schema.desc.hidden">

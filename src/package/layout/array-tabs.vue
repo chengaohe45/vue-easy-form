@@ -27,6 +27,15 @@
           @downItem="downItem"
           @clickActive="clickActiveHandler"
         >
+          <span
+            class="order-txt"
+            v-if="
+              itemSchema.rules &&
+                itemSchema.rules.required &&
+                itemSchema.rules.showRequired
+            "
+            ><span class="es-required">*</span></span
+          >
           <span class="order-txt" v-if="schema.array.hasOrder"
             >{{ index + 1 }}.</span
           >
@@ -41,8 +50,7 @@
                   (!itemSchema.subLabel.text || itemSchema.subLabel.hidden)
                 )
               "
-            >
-              {{
+              >{{
                 itemSchema.subLabel.text && !itemSchema.subLabel.hidden
                   ? itemSchema.subLabel.text
                   : schema.array.hasOrder

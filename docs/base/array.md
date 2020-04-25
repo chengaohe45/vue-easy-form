@@ -15,6 +15,7 @@ propName: {
     hasDelWarn: true, // 是否有删除提示
     fixed: 1,         // 若第一条数据存在，则固定位置，不可移动
     max: 5,           // 不写或小于等于0代表不限制
+    headRequired: false,      // 星号是否显示在头部。只在array-table有效
     value: [{name: "小天"}],   // 数组的默认值
     insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
       console.log(this.getValue(), options);

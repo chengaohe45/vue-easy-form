@@ -27,7 +27,8 @@
               v-if="
                 schema.array.headRequired &&
                   headerSchema.rules &&
-                  headerSchema.rules.required
+                  headerSchema.rules.required &&
+                  headerSchema.rules.showRequired
               "
               class="es-required"
               >*</span

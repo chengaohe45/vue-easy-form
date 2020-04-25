@@ -19,7 +19,32 @@
                 : schema.rowHeight + 'px'
             }"
           >
-            {{ index + 1 }}.
+            <span
+              v-if="
+                itemSchema.rules &&
+                  itemSchema.rules.required &&
+                  itemSchema.rules.showRequired
+              "
+              class="es-required"
+              >*</span
+            ><template v-if="schema.array.hasOrder !== false"
+              >{{ index + 1 }}.</template
+            >
+          </div>
+          <div
+            v-else-if="
+              itemSchema.rules &&
+                itemSchema.rules.required &&
+                itemSchema.rules.showRequired
+            "
+            class="es-order-box-required"
+            :style="{
+              height: schema.properties
+                ? schema.ui.rowHeight + 'px'
+                : schema.rowHeight + 'px'
+            }"
+          >
+            <span class="es-required">*</span>
           </div>
           <div class="es-array-row-body">
             <component
@@ -167,6 +192,18 @@
     text-align: center;
     @include display-center;
     @include flex-fixed;
+  }
+
+  .es-order-box-required {
+    width: 14px;
+    // line-height: 40px;
+    text-align: center;
+    @include display-center;
+    @include flex-fixed;
+
+    .es-required {
+      margin-right: 0px;
+    }
   }
 
   .es-array-row-body {

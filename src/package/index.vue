@@ -43,6 +43,7 @@ $btnDisableColor: #d5d7dc;
     color: $g_errorColor;
     vertical-align: middle;
     margin-right: 3px;
+    font-weight: normal;
   }
 
   .es-form-unit {
@@ -69,6 +70,7 @@ $btnDisableColor: #d5d7dc;
   position: relative;
   white-space: nowrap;
   font-size: 0;
+  text-align: center;
 }
 
 .es-btn {
@@ -1055,9 +1057,11 @@ export default {
      */
     __checkRules: function(schema, value, triggers) {
       var rules, fromArray;
-      if (schema.array && schema.array.rules) {
-        rules = schema.array.rules;
-        fromArray = true;
+      if (schema.array) {
+        if (schema.array.rules) {
+          rules = schema.array.rules;
+          fromArray = true;
+        }
       } else {
         rules = schema.rules;
         fromArray = false;
@@ -1084,10 +1088,27 @@ export default {
         }
       }
 
+      var newOptions, checkResult;
       var isRequired = rules.required;
       if (isRequired) {
         //空要检查
-        if (formUtils.isEmpty(value)) {
+        if (rules.emptyMethod) {
+          if (!newOptions) {
+            newOptions = {};
+            newOptions.value = value;
+            newOptions.pathKey = schema.__info.pathKey;
+            newOptions.idxChain = schema.__info.idxChain;
+            newOptions.index = schema.__info.index;
+          }
+          checkResult = rules.emptyMethod.call(this, newOptions);
+          if (checkResult === true) {
+            return rules.emptyMsg;
+          } else if (utils.isStr(checkResult)) {
+            return checkResult.trim() || rules.emptyMsg;
+          } else {
+            // 不为空；往下走
+          }
+        } else if (formUtils.isEmpty(value)) {
           return rules.emptyMsg;
         }
       } else if (!isRequired && formUtils.isEmpty(value)) {
@@ -1097,7 +1118,7 @@ export default {
       //非空情况
       var checkList = rules.checks;
       var errMsg = true;
-      var checkFun, newOptions;
+      var checkFun;
       // var newParseSources;
 
       if (checkList && checkList.length > 0) {

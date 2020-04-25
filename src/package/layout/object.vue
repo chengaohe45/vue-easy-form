@@ -48,8 +48,14 @@
               <!-- 必填标识 -->
               <span
                 v-if="
-                  schema.properties[fieldKeyName].rules &&
-                    schema.properties[fieldKeyName].rules.required
+                  (schema.properties[fieldKeyName].array &&
+                    schema.properties[fieldKeyName].array.rules &&
+                    schema.properties[fieldKeyName].array.rules.required &&
+                    schema.properties[fieldKeyName].array.rules.showRequired) ||
+                    (schema.properties[fieldKeyName].rules &&
+                      !schema.properties[fieldKeyName].array &&
+                      schema.properties[fieldKeyName].rules.required &&
+                      schema.properties[fieldKeyName].rules.showRequired)
                 "
                 class="es-required"
                 >*</span
@@ -223,7 +229,16 @@
             "
           >
             <span
-              v-if="fieldSchema.rules && fieldSchema.rules.required"
+              v-if="
+                (fieldSchema.array &&
+                  fieldSchema.array.rules &&
+                  fieldSchema.array.rules.required &&
+                  fieldSchema.array.rules.showRequired) ||
+                  (fieldSchema.rules &&
+                    !fieldSchema.array &&
+                    fieldSchema.rules.required &&
+                    fieldSchema.rules.showRequired)
+              "
               class="es-required"
               >*</span
             >
