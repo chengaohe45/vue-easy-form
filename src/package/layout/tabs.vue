@@ -6,7 +6,6 @@
         <es-tabs-nav-item
           v-if="!itemSchema.hidden"
           :key="fieldName"
-          :required="itemSchema.rules && itemSchema.rules.required"
           :is-active="fieldName === schema.__tabsIndex"
           :has-error="itemSchema.__hasError"
           @clickActive="clickActiveHandler"
@@ -15,7 +14,16 @@
           <!-- itemSchema.label.hidden为true: 也补充key -->
           <div class="es-tabs-item-label">
             <span
-              v-if="itemSchema.rules && itemSchema.rules.required"
+              v-if="
+                (itemSchema.array &&
+                  itemSchema.array.rules &&
+                  itemSchema.array.rules.required &&
+                  itemSchema.array.rules.showRequired) ||
+                  (itemSchema.rules &&
+                    !itemSchema.array &&
+                    itemSchema.rules.required &&
+                    itemSchema.rules.showRequired)
+              "
               class="es-required"
               >*</span
             >
