@@ -53,7 +53,7 @@ export default {
               fixed: 1,
               min: 2,
               max: 10,
-              subLabel: "es: '老师' + ({{$index}}  + 1)",
+              subLabel: "es: '老师' + ($index  + 1)",
               value: [
                 { name: "高老师", address: "广州" },
                 { name: "文老师", address: "北京" },

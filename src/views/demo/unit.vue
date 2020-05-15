@@ -50,7 +50,7 @@ export default {
             value: 50,
             unit: {
               // hidden: false,   // 是否隐藏unit
-              text: "es: '单位' + {{$root.esUnit}}"
+              text: "es: '单位' + $root.esUnit"
             }
           },
 
@@ -69,7 +69,7 @@ export default {
               // hidden: false,   // 是否隐藏unit
               name: unit,
               props: {
-                num: "es: {{$root.comUnit}}"
+                num: "es: $root.comUnit"
               }
             }
           }

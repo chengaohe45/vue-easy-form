@@ -79,7 +79,7 @@ export default {
                   emptyMsg: "请输入学校名"
                 },
                 help: {
-                  hidden: "es: {{$index}} !== 0",
+                  hidden: "es: $index !== 0",
                   props: {
                     content: "我在外面-演示帮助: 第1条固定（fixed为1）"
                   }
