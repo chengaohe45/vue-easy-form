@@ -52,7 +52,8 @@
                     component: {
                       name: "el-input",
                       props: {
-                        disabled: "es: !$global.status", // es写法：数据源用两个大括号包住
+                        // es写法：数据源$global，v1.7.0(不含)以下则用两个大括号包住（如: {{$global}}）
+                        disabled: "es: !$global.status",
                         placeholder: "我受global.status的影响"
                       }
                     },
@@ -60,7 +61,8 @@
                   },
                   level1: {
                     label: "es级别1",
-                    hidden: "es: $root.isOpen", // es写法：数据源用两个大括号包住
+                    // es写法：数据源$root，v1.7.0(不含)以下则用两个大括号包住（如: {{$root}}）
+                    hidden: "es: $root.isOpen",
                     component: {
                       name: "el-input",
                       props: {
@@ -71,6 +73,7 @@
                   },
                   level2: {
                     label: "es级别2",
+                    // es写法：数据源$hidden，v1.7.0(不含)以下则用两个大括号包住（如: {{$hidden}}）
                     hidden: "es: $hidden('esMethod[\"level1\"]')",  // $hidden是一个函数
                     component: {
                       name: "el-input",
