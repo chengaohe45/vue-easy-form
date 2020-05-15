@@ -86,7 +86,7 @@ handler => options包含的属性：
                 value: "",
                 col: 18,
                 rules: {
-                  required: "es: {{$root}}.isOpen",   // es写法
+                  required: "es: $root.isOpen",   // es写法
                   // emptyMethod: function(data) {   // 函数写法
                   //   return !data.value.trim();
                   // },

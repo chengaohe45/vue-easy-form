@@ -195,7 +195,7 @@ propName: {
                       emptyMsg: "请输入学校名"
                     },
                     help: {
-                      hidden: "es: {{$index}} !== 0",
+                      hidden: "es: $index !== 0",
                       props: {
                         content: "我在外面-演示帮助: 第1条固定（fixed为1）"
                       }
@@ -337,7 +337,7 @@ propName: {
                   fixed: 1,
                   min: 2,
                   max: 10,
-                  subLabel: "es: '老师' + ({{$index}}  + 1)",
+                  subLabel: "es: '老师' + ($index + 1)",
                   value: [
                     { name: "高老师", address: "广州" },
                     { name: "文老师", address: "北京" },

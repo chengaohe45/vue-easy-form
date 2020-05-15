@@ -154,11 +154,11 @@
               col: 12
             },
             desc: {
-              label: "es: {{$root}}.isGood ? '好人描述' : '描述'",
+              label: "es: $root.isGood ? '好人描述' : '描述'",
               component: {
                 name: "el-input",
                 props: {
-                  placeholder: "es: {{$root}}.isGood ? '好人描述要讲多点' : '一般描述啦'"
+                  placeholder: "es: $root.isGood ? '好人描述要讲多点' : '一般描述啦'"
                 },
                 ref: "desc"
               },

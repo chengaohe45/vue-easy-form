@@ -89,7 +89,7 @@ propName: {
               },
 
               duration: {
-                hidden: "es: !{{$root}}.status",
+                hidden: "es: !$root.status",
                 label: "投放时段",
                 component: {
                   name: "el-date-picker",
@@ -107,7 +107,7 @@ propName: {
               },
 
               area: {
-                hidden: "es: !{{$root}}.status",
+                hidden: "es: !$root.status",
                 hdValue: {
                   province: "省份的隐藏默认值",
                   city: "城市的隐藏默认值"

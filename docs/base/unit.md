@@ -63,7 +63,7 @@
                 value: 50,
                 unit: {
                   // hidden: false,   // 控制unit是否隐藏，支持动态解析
-                  text: "es: '单位' + {{$root.esUnit}}"
+                  text: "es: '单位' + $root.esUnit"
                 }
               },
 
@@ -82,7 +82,7 @@
                   // hidden: false, // 控制unit是否隐藏，支持动态解析
                   name: "g-unit", // g-unit是自定义全局组件；也可以是import导入的局部组件
                   props: {
-                    num: "es: {{$root.comUnit}}"
+                    num: "es: $root.comUnit"
                   }
                 }
               }

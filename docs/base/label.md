@@ -34,7 +34,7 @@
 
             // 写法三
             esLabel: {
-              label: "es: {{$root}}.isOpen ? '广告标签(开)' : '广告标签(关)'", // es写法
+              label: "es: $root.isOpen ? '广告标签(开)' : '广告标签(关)'", // es写法
               component: {
                 name: "el-input",
                 props: {
@@ -49,11 +49,11 @@
             textLabel: {
               colon: true, // 冒号
               label: {
-                hidden: "es: !{{$root}}.isOpen", // 控制label是否隐藏
+                hidden: "es: !$root.isOpen", // 控制label是否隐藏
                 text: "text写法",
                 help: {
                   // label中的帮助
-                  // hidden: "es: !{{$root}}.isOpen", // 控制help是否隐藏
+                  // hidden: "es: !$root.isOpen", // 控制help是否隐藏
                   props: {
                     content: "我在label里面"
                   }
@@ -63,7 +63,7 @@
                 name: "el-input",
                 props: {
                   placeholder:
-                    "es: {{$root}}.isOpen ? '切换开关试试: label显示' : '切换开关试试: label隐藏'"
+                    "es: $root.isOpen ? '切换开关试试: label显示' : '切换开关试试: label隐藏'"
                 }
               },
               value: ""
@@ -74,7 +74,7 @@
               label: {
                 name: "g-label", // g-label是自定义全局组件；也可以是import导入的局部组件
                 props: {
-                  color: "es: {{$root}}.isOpen ? '' : '#909399'"
+                  color: "es: $root.isOpen ? '' : '#909399'"
                 }
               },
               component: "el-input",
@@ -126,7 +126,7 @@
                 text: "中",
                 align: "center", // 文本居中
                 help: {
-                  hidden: "es:!{{$root}}.isOpen",
+                  hidden: "es:!$root.isOpen",
                   props: {
                     content: "我在label里面"
                   }

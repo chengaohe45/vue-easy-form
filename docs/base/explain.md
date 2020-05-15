@@ -32,15 +32,15 @@ base.target["name"]
 
 ## es语法
 es语法就一条`es:`为前缀的字符串，再按照一定的规则解析出来的js语句。<br />
-如：<br /><span v-pre>`es: {{$root}}.isJson ? 'JSON格式' : 'XML格式'`</span><br />
-说明：字符串以es:开头，用表单根数据代替<span v-pre>{{$root}}</span>, 最终变为<br />
+如：<br /><span v-pre>`es: $root.isJson ? 'JSON格式' : 'XML格式'`</span><br />
+说明：字符串以es:开头，用表单根数据代替<span v-pre>$root</span>, 最终变为<br />
 `rootData.isJson ? 'JSON格式' : 'XML格式'`<br />
 
 支持es有4个数据源，这4个值共同影响整个es的解析：
-1. `rootData`： 整个表单的`根值/rootData`. root在es语法中的写法是<span v-pre>`{{$root}}`</span>
-2. `global`： 从表单中传入，用于外部对表单影响, 不设置则默认为`空对象`; global在es语法中的写法是<span v-pre>`{{$global}}`</span>
-3. `index`：数组中孩子节点(非孙子节点))项所在的索引，其它节点(非孩子)节点此值是-1. index在es语法中的写法是<span v-pre>`{{$index}}`</span>
-4. `hidden`： 用于判断某一项是否隐藏. hidden在es语法中的写法是<span v-pre>`{{$hidden(base.target)}}`</span>; 括号中是路径
+1. `rootData`： 整个表单的`根值/rootData`. root在es语法中的写法是<span v-pre>`$root`</span>
+2. `global`： 从表单中传入，用于外部对表单影响, 不设置则默认为`空对象`; global在es语法中的写法是<span v-pre>`$global`</span>
+3. `index`：数组中孩子节点(非孙子节点))项所在的索引，其它节点(非孩子)节点此值是-1. index在es语法中的写法是<span v-pre>`$index`</span>
+4. `hidden`： 用于判断某一项是否隐藏. hidden在es语法中的写法是<span v-pre>`$hidden("base.target")`</span>; 括号中是路径
 
 [es写法](./parse.md#es写法)
 

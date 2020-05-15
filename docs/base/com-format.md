@@ -8,7 +8,7 @@
   style: { color: "#000" }, // 内联样式，一个对象；支持动态解析
   class: "box1 box2", // 样式类；支持动态解析
   props: { // 属性: 以下全都支持动态解析
-    disabled: "es: {{$item}}.status ? true : false",  // 动态解析：es语法
+    disabled: "es: $root.status ? true : false",  // 动态解析：es语法
     type: function(options) {  // 动态解析：函数写法
       return options.rootData.status ? 'primary' : 'success';
     },

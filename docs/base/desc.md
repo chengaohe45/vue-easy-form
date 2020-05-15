@@ -42,7 +42,7 @@
                 value: "",
                 desc: {
                   // hidden: false,   // 控制desc是否隐藏，支持动态解析
-                  text: "es: {{$root}}.isJson ? 'JSON格式' : 'XML格式'" // es语句
+                  text: "es: $root.isJson ? 'JSON格式' : 'XML格式'" // es语句
                 }
               },
 
@@ -52,7 +52,7 @@
                 component: "el-input",
                 value: "",
                 desc: {
-                  hidden: "es: !{{$root}}.isJson", // es语句, 控制desc是否隐藏
+                  hidden: "es: !$root.isJson", // es语句, 控制desc是否隐藏
                   name: "g-desc", // g-desc是自定义全局组件；也可以是import导入的局部组件
                   props: {}
                 }
