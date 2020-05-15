@@ -469,7 +469,7 @@ propName: {
 | hasOrder | 是否有序号 | boolean | -- | true | --
 | hasDelWarn | 删除提示 | boolean | -- | true | 删除时是否有提示
 | headRequired | “星号”的位置 | boolean | -- | true | 只在`array-table`有效；<br />当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示
-| type | 头部类型 | string | `line`,<br />`card`,<br />`bg` | 'card' | `array-tabs`时有效；效果跟[tabs布局](./tabs.md)一样
+| type | 头部类型 | string | `line`,<br />`card`,<br />`bg` | card | `array-tabs`时有效；效果跟[tabs布局](./tabs.md)一样
 | rowSpace | 每一行的间隔 | number | >=0 | undefined | 当为`undefined`, 继承父类的rowSpace
 | insertValue | 插入时的值 | function/其它的值 | -- | 添加或拷贝时各自的默认值 | 
 | hasBorder | 是否有边框 | boolean | true/false | true |

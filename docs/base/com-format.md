@@ -10,7 +10,7 @@
   props: { // 属性: 以下全都支持动态解析
     disabled: "es: $root.status ? true : false",  // 动态解析：es语法
     type: function(options) {  // 动态解析：函数写法
-      return options.rootData.status ? 'primary' : 'success';
+      return options.rootData.status ? "primary" : "success";
     },
     size: "mini", // 固定值
   },

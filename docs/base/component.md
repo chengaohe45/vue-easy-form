@@ -36,7 +36,7 @@
                 props: {
                   placeholder: "请输入投放目标"
                 },
-                // ref: "testRef",   // 索引值，可以通过 form.getRef('testRef')取出
+                // ref: "testRef",   // 索引值，可以通过 form.getRef("testRef")取出
                 // actions: [],       // 见下面
                 // value: "首页位置"   // 组件的默认值
               },
@@ -135,16 +135,16 @@
                   // options => {value, event, pathKey, index, idxChain,target}
                   handler: function(options) {
                     // console.log("this对象: ", this);
-                    console.log('options: ', options);
+                    console.log("options: ", options);
                     if (options.value) {
                       this.$message({
-                        message: '恭喜你，这是一条好人消息',
-                        type: 'success'
+                        message: "恭喜你，这是一条好人消息",
+                        type: "success"
                       });
                     } else {
                       this.$message({
-                        message: '警告哦，这是一条坏人消息',
-                        type: 'warning'
+                        message: "警告哦，这是一条坏人消息",
+                        type: "warning"
                       });
                     }
                   }

@@ -40,7 +40,7 @@
 | <span style="white-space: nowrap;">toggleTexts<badge text="1.6.2" /></span> | 切换按钮不同状态显示的文字 | array | -- | ["打开", "隐藏"] | 数组长度必须是2，且内容是字符串
 | type | 整个块的布局类型 | string | <span style="white-space:nowrap">"bg"</span><br/><span style="white-space:nowrap">"block"</span><br/><span style="white-space:nowrap">"bg-block"</span><br/>""| -- | `block`就是前面有一竖
 | hasBorder | 内容区是否有边框 | boolean | -- | false | --
-| padding | 内容区的内边距 | number<br/>string<br/>array | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px', `数组`：[20, 10]
+| padding | 内容区的内边距 | number<br/>string<br/>array | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`："20px 10px", `数组`：[20, 10]
 | rowHeight | 项的行高 | number | -- | 上一级 | 会影响下一级
 | rowSpace | 与上一次项(行)之间的间隔 | number | -- | 上一级 | 会影响下一级
 | labelWidth | 项label的宽度 | number | -- | 上一级 | 会影响下一级
@@ -64,6 +64,6 @@ layout有两种作用：
 | name | 类型 | string | space<br/>tabs | -- | --
 | type | 布局类型 | string | bg<br/>card<br/>line | card | --
 | hasBorder | 内容区是否有边框 | boolean | -- | false | --
-| padding | 内容区的内边距 | number/string | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`：'20px 10px' <br>`数组`：[20, 10]
+| padding | 内容区的内边距 | number/string | -- | -- | `不设置`：根据实际情况调整<br/>`整数`：20 <br> `字符串`："20px 10px" <br>`数组`：[20, 10]
 
 注：`当name为space时，其余的属性是无效的，不用设置也可`

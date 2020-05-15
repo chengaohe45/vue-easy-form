@@ -172,5 +172,5 @@ handler => options包含的属性：
 trigger是指验证时机，当其为`空字符串`时则是提交（[form.checkAll()](./form.md#表单方法)）时再验证。
 
 ### 空值
-- `空值有哪些`: 当不设置`emptyMethod`，则系统认为这些都为空值：`undefined`, `null`, 空对象`{}`, 空数组`[]`, 空字符串`''`
+- `空值有哪些`: 当不设置`emptyMethod`，则系统认为这些都为空值：`undefined`, `null`, 空对象`{}`, 空数组`[]`, 空字符串`""`
 >`rules.required`和`rules.checks`是一个互补的关系，`rules.required`是检查`空值`；`rules.checks`是检查`有值`(也就是说空值是不会进入检查)，系统的检查顺序是：先判断是否有值，有值的话再执行`rules.checks`。应用场景如：当输入一个手机号码，要么不输入，要么输入正确；若想手机号码不可为空，此需要设置rules.required为true。

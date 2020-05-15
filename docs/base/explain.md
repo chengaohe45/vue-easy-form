@@ -15,7 +15,7 @@ formValue: 表单中用户所需要的值（一般不包含隐藏的值、临时
 
 ## 索引链
 idxChain: 指出`表单项组件`所处于数组的位置<br>
-如：base.student[0].courses[1].name, 如索引链为'0,1'; 当父节点或祖先节点不是数据时，则`表单项组件`为`空字符`
+如：base.student[0].courses[1].name, 如索引链为"0,1"; 当父节点或祖先节点不是数组时，则`表单项组件`为`空字符`
 > 应用场景：[项组件事件](./component.md#组件事件)、[项组件验证](./rules.md)、[数组事件](./array.md#数组事件)所携带的信息会返回此值
 
 
@@ -32,9 +32,9 @@ base.target["name"]
 
 ## es语法
 es语法就一条`es:`为前缀的字符串，再按照一定的规则解析出来的js语句。<br />
-如：<br /><span v-pre>`es: $root.isJson ? 'JSON格式' : 'XML格式'`</span><br />
+如：<br /><span v-pre>`es: $root.isJson ? "JSON格式" : "XML格式"`</span><br />
 说明：字符串以es:开头，用表单根数据代替<span v-pre>$root</span>, 最终变为<br />
-`rootData.isJson ? 'JSON格式' : 'XML格式'`<br />
+`rootData.isJson ? "JSON格式" : "XML格式"`<br />
 
 支持es有4个数据源，这4个值共同影响整个es的解析：
 1. `rootData`： 整个表单的`根值/rootData`. root在es语法中的写法是<span v-pre>`$root`</span>

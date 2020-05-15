@@ -107,7 +107,7 @@
 - `rootData`： 整个表单的[根值/rootData](./explain.md#根值)；root在es语法中的写法是<span v-pre>`$root`</span>
 - `global`： 从表单中传入，用于外部对表单影响, 不设置则默认为`空对象`；global在es语法中的写法是<span v-pre>`$global`</span>
 - `index`：数组中孩子节点(非孙子节点)项所在的索引，其它节点(非孩子)节点此值是-1；index在es语法中的写法是<span v-pre>`$index`</span>
-- `hidden`： 用于判断某一项是否隐藏的`函数`；hidden在es语法中的写法是<span v-pre>`$hidden('base.target')`</span>; 括号中是路径；此函数也是表单方法[isHidden](./form.md#表单方法)
+- `hidden`： 用于判断某一项是否隐藏的`函数`；hidden在es语法中的写法是<span v-pre>`$hidden("base.target")`</span>; 括号中是路径；此函数也是表单方法[isHidden](./form.md#表单方法)
 
 [数组es写法](./array.md#数组es写法)
 
@@ -226,7 +226,7 @@
 - `pathKey`：项组件的路径
 - `idxChain`： 项组件所要数组所组成的id 如: 1,2
 - `index`：项组件处于数组的子节点(非孙子)时的索引，其余的返回-1
-- `$hidden`：函数。判断某项是否处于隐藏，这个函数会自动匹配所处于哪个表单，所以参数只需要传入一个pathKey。如: $hidden('base.name')
+- `$hidden`：函数。判断某项是否处于隐藏，这个函数会自动匹配所处于哪个表单，所以参数只需要传入一个pathKey。如: $hidden("base.name")
 
 > `es写法`完全可以用`函数写法`代替; 它们都有自身的优势：`es写法`比较简洁，特别是三目运算符中；而`函数写法`比较灵活，运用于比较复杂的逻辑。
 

@@ -3,7 +3,7 @@
 字段：`label`<br/>
 值类型有：
 - `false`： 默认值，label隐藏，空间不存在的
-- `''`： 空值 但label空间是存在的
+- `""`： 空值 但label空间是存在的
 - `string`： 项label文字；支持[动态解析](./parse.md)
 - `object`： 一个对象，见[组件格式](./com-format.md)
 
