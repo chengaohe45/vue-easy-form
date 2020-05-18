@@ -26,7 +26,7 @@ module.exports = {
   title: "vue-easy-form（当前版本:" + urlVersion + suffixVersion + "）",
   description: '后台自动化平台',
   base: baseUrl,
-  dest: "../vue-easy-form-docs/dist/",
+  dest: "../vue-easy-form-docs/" + (isLatest ? "dist/" : (urlVersion + "/")),
   themeConfig: {
     // lastUpdated: '最后更新',
     nav: [
