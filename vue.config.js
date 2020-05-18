@@ -64,10 +64,10 @@ module.exports = {
           amd: "vue"
         },
         "element-ui": {
-          root: "ElementUI",
-          commonjs2: "ElementUI",
-          commonjs: "ElementUI",
-          amd: "ElementUI"
+          root: "ELEMENT",
+          commonjs2: "ELEMENT",
+          commonjs: "ELEMENT",
+          amd: "ELEMENT"
         },
         axios: {
           root: "axios",
