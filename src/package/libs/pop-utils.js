@@ -461,14 +461,12 @@ let popUtils = {
   },
 
   getAttrValue(element, attrName) {
-    // console.log("element", element);
     var value = 0;
     if (element.nodeType == 1) {
       var valueStr = window
         .getComputedStyle(element)
         .getPropertyValue(attrName);
       // valueStr = "px";
-      // console.log("element", valueStr);
       valueStr = valueStr + "";
       var reg = /^\d+$/i;
       var txtArr = valueStr.match(reg);
@@ -476,7 +474,6 @@ let popUtils = {
         value = Number(txtArr[0]);
       }
     }
-    // console.log(valueStr, value);
     return value;
   }
 };

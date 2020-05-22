@@ -5,7 +5,6 @@ let esRules = {
    * @return {Boolean}       [description]
    */
   isMobile: function(value) {
-    // console.log("isMobile: ", arguments);
     var reg = /^1[3-9]\d{9}$/;
     if (!reg.test(value)) {
       return false;

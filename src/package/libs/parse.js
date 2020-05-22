@@ -9,6 +9,7 @@
 
 import utils from "./utils";
 import constant from "./constant";
+import global from "./global";
 
 let parse = {
   /**
@@ -93,6 +94,27 @@ let parse = {
           // rootSchema: parseSources.rootSchema,
           isHidden: parseSources.isHidden
         };
+        var rawScript = scriptTxt[constant.KEY_ES_RAW_SCRIPT];
+        if (!rawScript) {
+          // 一般用于生产环境
+          return scriptTxt(options);
+        } else {
+          // 一般用于开发环境
+          try {
+            return scriptTxt(options);
+          } catch (error) {
+            var newError;
+            if (Object.prototype.toString.call(error) === "[object Error]") {
+              error.message =
+                error.message + "\n错误语句 >> " + rawScript + "\n";
+              newError = error;
+            } else {
+              console.error(error);
+              newError = new Error(rawScript + " 解析有误");
+            }
+            throw newError;
+          }
+        }
       } else {
         // 自定义函数
         options = {
@@ -104,9 +126,9 @@ let parse = {
           pathKey: parseSources.pathKey,
           $hidden: parseSources.isHidden
         };
-      }
 
-      return scriptTxt(options);
+        return scriptTxt(options);
+      }
     } else if (!parse.isEsScript(scriptTxt)) {
       return scriptTxt;
     } else {
@@ -116,13 +138,14 @@ let parse = {
 
   /**
    * 将es转换成为Function
-   * @param {*} scriptTxt
+   * @param {*} rawScriptTxt
    * @param {*} expPrefix
    */
-  newEsFuncion(scriptTxt, expPrefix = "es:") {
+  newEsFuncion(rawScriptTxt, expPrefix = "es:") {
     let result;
 
-    if (parse.isEsScript(scriptTxt)) {
+    if (parse.isEsScript(rawScriptTxt)) {
+      var scriptTxt = rawScriptTxt;
       var options = [
         {
           symbol: "$global",
@@ -195,9 +218,7 @@ let parse = {
       const matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
       matchs.forEach(mItem => {
         // mItem值："{{$root.persons[i].age}}"
-        // console.log("1 mItem: ", mItem);
         var tmpItem = parse.chainPathKey(mItem, "[i]");
-        // console.log("2 tmpItem: ", tmpItem);
         let tempVal = "";
         //找出[i],按顺序说明出处
         let pieces = tmpItem.split("[i]");
@@ -229,12 +250,14 @@ let parse = {
       prefixScript += `var $hidden = ${constant.ES_OPTIONS}.isHidden; `;
       newScriptTxt = prefixScript + " return (" + newScriptTxt + ");";
 
-      // console.log("newScriptTxt: ", newScriptTxt);
-
       result = new Function(constant.ES_OPTIONS, newScriptTxt);
       result.__esFuncName = constant.ES_FUNC_NAME;
+      if (global.productionTip) {
+        // 当es解析出错时，需要打印详细的错误信息
+        result[constant.KEY_ES_RAW_SCRIPT] = rawScriptTxt;
+      }
     } else {
-      result = scriptTxt;
+      result = rawScriptTxt;
     }
 
     return result;
