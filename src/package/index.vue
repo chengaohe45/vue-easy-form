@@ -3,7 +3,7 @@
     <form-item ref="formFrame" :schema="formSchema"></form-item>
     <consolePanel
       v-if="canConsole"
-      :rootData="csRootData"
+      :rootValue="csRootValue"
       :formValue="csFormValue"
     ></consolePanel>
   </div>
@@ -378,18 +378,19 @@ export default {
 
   data() {
     return {
+      id: utils.newId(),
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
       _esOriginalValue: null,
       _esHiddenFunc: null,
-      _esResultValue: null,
-      _esFormData: null,
+      _esFormValue: null,
+      _esRootValue: null,
       _esLockSubmit: false // 开始是false,
       _esWarns: []
       */
 
       canConsole: true,
-      csRootData: null, // 用于console, 只有当canConsole为true时才有值
+      csRootValue: null, // 用于console, 只有当canConsole为true时才有值
       csFormValue: null,
 
       formSchema: {}, // $data有这个值说明是es-form
@@ -478,7 +479,7 @@ export default {
      * 实时取值，表单存在的值;也是getRootData的别名
      */
     getValue() {
-      return utils.deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
+      return utils.deepCopy(this._esRootValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -486,7 +487,7 @@ export default {
      * 实时取值，表单存在的值;也是getValue的别名
      */
     getRootData() {
-      return utils.deepCopy(this._esFormData);
+      return utils.deepCopy(this._esRootValue);
     },
 
     /**
@@ -494,7 +495,7 @@ export default {
      * 实时取值，用户提交所需要的值，不包括隐藏的或临时的；也就是v-model
      */
     getFormValue() {
-      return utils.deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
+      return utils.deepCopy(this._esFormValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -613,7 +614,7 @@ export default {
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
           var parseSources = {
             global: this.global ? this.global : {}, // 防止null情况
-            rootData: this._esFormData,
+            rootData: this._esRootValue,
             index: itemSchema.__info.index,
             idxChain: itemSchema.__info.idxChain,
             pathKey: itemSchema.__info.pathKey,
@@ -698,18 +699,18 @@ export default {
 
     __initUi(schema) {
       this.$data.isInited = false;
-      var tmpSchema = schemaUtils.completeSchema(schema);
+      var tmpSchema = schemaUtils.completeSchema(schema, this.$data.id);
       //将value的值同步到schema中
       this.__setValue(tmpSchema, this.value);
       //进行初始化
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
-      this._esOriginalValue = utils.deepCopy(this._esFormData);
+      this._esOriginalValue = utils.deepCopy(this._esRootValue);
 
       this.$nextTick(() => {
         this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-        // this.$emit("inited", utils.deepCopy(this._esResultValue));
-        this.__execEmit("inited", [utils.deepCopy(this._esResultValue)]);
+        // this.$emit("inited", utils.deepCopy(this._esFormValue));
+        this.__execEmit("inited", [utils.deepCopy(this._esFormValue)]);
       });
     },
 
@@ -868,8 +869,8 @@ export default {
         this.$nextTick(() => {
           this.$data._esLockSubmit = false;
           if (this.$data.isInited) {
-            // this.$emit("submit", utils.deepCopy(this._esResultValue));
-            this.__execEmit("submit", [utils.deepCopy(this._esResultValue)]);
+            // this.$emit("submit", utils.deepCopy(this._esFormValue));
+            this.__execEmit("submit", [utils.deepCopy(this._esFormValue)]);
           } else {
             console.warn("表单还未初始化完成，无法派发submit事件");
           }
@@ -918,7 +919,7 @@ export default {
         // 验证当前的输入框
         var parseSources = {
           global: this.global ? this.global : {}, // 防止null情况
-          rootData: this._esFormData,
+          rootData: this._esRootValue,
           index: inputSchema.__info.index,
           idxChain: inputSchema.__info.idxChain,
           pathKey: inputSchema.__info.pathKey,
@@ -966,11 +967,11 @@ export default {
           if (eventNames.includes(constant.INPUT_EVENT)) {
             // this.$emit(
             //   "change",
-            //   utils.deepCopy(this._esResultValue),
+            //   utils.deepCopy(this._esFormValue),
             //   sourcePathKey
             // );
             this.__execEmit("change", [
-              utils.deepCopy(this._esResultValue),
+              utils.deepCopy(this._esFormValue),
               sourcePathKey
             ]);
           }
@@ -1008,41 +1009,42 @@ export default {
 
     __syncValue(sourcePathKey) {
       // 不单只是执行actions
-      var formData = formUtils.getValue(this.$data.formSchema);
-      this._esFormData = formData;
+      var rootValue = formUtils.getValue(this.$data.formSchema);
+      this._esRootValue = rootValue;
 
       var baseParseSources = {
         global: this.global ? this.global : {}, // 防止null情况
-        rootData: this._esFormData,
+        rootData: this._esRootValue,
         rootSchema: this.$data.formSchema,
         isHidden: this._esHiddenFunc
       };
 
       formUtils.analyzeUiProps(this.$data.formSchema, baseParseSources);
-      var resultValue = formUtils.getResultValue(
+      var formValue = formUtils.getFormValue(
         this.$data.formSchema,
         baseParseSources
       );
 
-      this._esResultValue = resultValue;
+      // 缓存，以便多次调用
+      this._esFormValue = formValue;
 
       // this.$emit(
       //   "input",
-      //   utils.deepCopy(resultValue),
+      //   utils.deepCopy(formValue),
       //   sourcePathKey ? sourcePathKey : false
       // );
       this.__execEmit("input", [
-        utils.deepCopy(resultValue),
+        utils.deepCopy(formValue),
         sourcePathKey ? sourcePathKey : false
       ]);
 
       if (this.$data.canConsole) {
-        this.$data.csRootData = utils.deepCopy(formData);
-        this.$data.csFormValue = utils.deepCopy(resultValue);
+        this.$data.csRootValue = utils.deepCopy(rootValue);
+        this.$data.csFormValue = utils.deepCopy(formValue);
       }
 
       baseParseSources = null;
-      resultValue = null;
+      formValue = null;
     },
 
     /**
@@ -1261,7 +1263,7 @@ export default {
     //watch是异步监听的，而$emit("input"...)是同步的
     value: {
       handler(newVal) {
-        if (JSON.stringify(newVal) !== JSON.stringify(this._esResultValue)) {
+        if (JSON.stringify(newVal) !== JSON.stringify(this._esFormValue)) {
           this.__setValue(this.$data.formSchema, newVal);
           this.__syncValue();
         } else {
@@ -1301,8 +1303,8 @@ export default {
   beforeDestroy() {
     this._esOriginalValue = null;
     this._esHiddenFunc = null;
-    this._esResultValue = null;
-    this._esFormData = null;
+    this._esFormValue = null;
+    this._esRootValue = null;
   }
 };
 </script>

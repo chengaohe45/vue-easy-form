@@ -1,6 +1,7 @@
 // import constant from "./constant";
 
 let utils = {
+  __id: 0,
   /**
    * unicode letters used for parsing html tags, component names and property paths.
    * using https://www.w3.org/TR/html53/semantics-scripting.html#potentialcustomelementname
@@ -15,6 +16,11 @@ let utils = {
       "^[a-zA-Z][\\-\\.0-9_" + this.unicodeRegExp.source + "]*$"
     );
     return reg.test(name);
+  },
+
+  newId(prefix) {
+    ++this.__id;
+    return prefix ? prefix + this.__id : this.__id;
   },
 
   /**

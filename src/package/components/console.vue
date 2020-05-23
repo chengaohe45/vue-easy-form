@@ -28,23 +28,27 @@
             href="https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#根值"
             target="_blank"
             class="question"
-            >什么是根数据?</a
+            >什么是根值?</a
           >
           <a
             href="https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#表单值"
             target="_blank"
             class="question"
-            >什么是表单数据?</a
+            >什么是表单值?</a
           >
         </div>
-        <h3 class="subtitle">根数据(rootData) => getValue取出</h3>
-        <textarea class="value-box" readonly="readonly"
-          >{{ toJson(rootData) }}
-        </textarea>
-        <h3 class="subtitle">表单数据(formValue) => getFormValue取出</h3>
-        <textarea class="value-box" readonly="readonly"
-          >{{ toJson(formValue) }}
-        </textarea>
+        <h3 class="subtitle">根值(rootValue) => getValue取出</h3>
+        <textarea
+          class="value-box"
+          readonly="readonly"
+          :value="toJson(rootValue)"
+        ></textarea>
+        <h3 class="subtitle">表单值(formValue) => getFormValue取出</h3>
+        <textarea
+          class="value-box"
+          readonly="readonly"
+          :value="toJson(formValue)"
+        ></textarea>
       </div>
     </div>
   </div>
@@ -224,7 +228,7 @@ export default {
   },
 
   props: {
-    rootData: {
+    rootValue: {
       type: Object,
       required: false,
       default: () => {

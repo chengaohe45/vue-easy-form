@@ -597,18 +597,18 @@ let formUtils = {
   },
 
   /**
-   * 表单的最终结果
+   * 表单的最终结果(也就是表单值，非根值)
    * @param {*} schema  perfect后的schema
    * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
    * @param {*} globalData 表单的全局数据
    * @param {*} formData 表单的内部值
    */
-  getResultValue(schema, baseParseSources) {
+  getFormValue(schema, baseParseSources) {
     if (utils.isObj(baseParseSources.rootData)) {
       var resultValue = this.__getValue(schema, baseParseSources);
       return this.__tileResultValue(schema, resultValue);
     } else {
-      throw "getResultValue： formData 必须是一个对象";
+      throw "getFormValue： formData 必须是一个对象";
     }
   },
 

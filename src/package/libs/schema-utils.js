@@ -17,6 +17,8 @@ import esHelp from "../components/help.vue";
 
 import { enterSubmit, onlySubmit } from "./submit";
 
+let m_currentFormId = undefined; // 应用于completeSchema,记录当前的解析是在哪个表单中
+
 let schemaUtils = {
   /**
    * 用于检查rawSchema是否符合要求
@@ -31,7 +33,7 @@ let schemaUtils = {
     return true;
   },
   /**
-   * 把原始的schema转化为标准的schema
+   * 解析计划表schema的入口：把原始的schema转化为标准的schema
    * 解析原则：
    * 对于一个对象{}来说
    * type === 'space'时，说明是占位空间，即使有component或properties, 也认为是占位空间，且解析时会把两个属性去掉
@@ -39,9 +41,12 @@ let schemaUtils = {
    * else: 是component，即使没有component也会用系统的默认值
    * 结论 >> 最后的输出是：
    * type === 'space'、component、properties只有一个会输出；也是就if (item.layout.name === 'space')、if (item.component)、if (item.properties)中，只有一个为真
+   * @param {*} schema  原始的计划表
+   * @param {*} esFormId 哪个esFormId（应用于有jsx或是函数的组件）
    */
-  completeSchema: function(schema) {
+  completeSchema: function(schema, esFormId) {
     // const constant.ARRAY_TABLE = "array-table";
+    m_currentFormId = esFormId;
 
     var autoMatch;
     if (utils.isObj(schema)) {
@@ -82,8 +87,10 @@ let schemaUtils = {
       rootObj.autoMatch = autoMatch;
       rootObj.actions = rootActions;
       this.__checkForTile(rootObj);
+      m_currentFormId = undefined; // 任务完成
       return rootObj;
     } else {
+      m_currentFormId = undefined;
       throw "根schema是一个Object类型";
     }
   },
