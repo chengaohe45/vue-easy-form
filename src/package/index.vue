@@ -356,6 +356,8 @@ import constant from "./libs/constant.js";
 
 import consolePanel from "./components/console.vue";
 
+import dataCache from "./libs/data-cache";
+
 export default {
   /* ====================== 生命周期 ====================== */
   created() {
@@ -367,7 +369,12 @@ export default {
     this._esLockSubmit = false;
 
     var hiddenFunc = this.isHidden;
-    this._esHiddenFunc = hiddenFunc.bind(this); // 用于作隐藏解析
+    dataCache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
+
+    dataCache.setGlobal(
+      this.$data.id,
+      this.global ? utils.deepCopy(this.global) : {}
+    );
 
     this.__initUi(this.schema);
   },
@@ -378,13 +385,11 @@ export default {
 
   data() {
     return {
-      id: utils.newId(),
+      id: utils.newUid("es"),
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
       _esOriginalValue: null,
-      _esHiddenFunc: null,
       _esFormValue: null,
-      _esRootValue: null,
       _esLockSubmit: false // 开始是false,
       _esWarns: []
       */
@@ -479,7 +484,7 @@ export default {
      * 实时取值，表单存在的值;也是getRootData的别名
      */
     getValue() {
-      return utils.deepCopy(this._esRootValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
+      return utils.deepCopy(dataCache.getRoot(this.$data.id)); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -487,7 +492,7 @@ export default {
      * 实时取值，表单存在的值;也是getValue的别名
      */
     getRootData() {
-      return utils.deepCopy(this._esRootValue);
+      return utils.deepCopy(dataCache.getRoot(this.$data.id));
     },
 
     /**
@@ -614,12 +619,12 @@ export default {
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
           var parseSources = {
             global: this.global ? this.global : {}, // 防止null情况
-            rootData: this._esRootValue,
+            rootData: dataCache.getRoot(this.$data.id),
             index: itemSchema.__info.index,
             idxChain: itemSchema.__info.idxChain,
             pathKey: itemSchema.__info.pathKey,
             rootSchema: rootSchema,
-            isHidden: this._esHiddenFunc
+            isHidden: dataCache.getHiddenFunc(this.$data.id)
           };
 
           if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
@@ -705,7 +710,7 @@ export default {
       //进行初始化
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
-      this._esOriginalValue = utils.deepCopy(this._esRootValue);
+      this._esOriginalValue = utils.deepCopy(dataCache.getRoot(this.$data.id));
 
       this.$nextTick(() => {
         this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
@@ -919,12 +924,12 @@ export default {
         // 验证当前的输入框
         var parseSources = {
           global: this.global ? this.global : {}, // 防止null情况
-          rootData: this._esRootValue,
+          rootData: dataCache.getRoot(this.$data.id),
           index: inputSchema.__info.index,
           idxChain: inputSchema.__info.idxChain,
           pathKey: inputSchema.__info.pathKey,
           rootSchema: this.$data.formSchema,
-          isHidden: this._esHiddenFunc
+          isHidden: dataCache.getHiddenFunc(this.$data.id)
         };
         // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
         var checkedResult = this.__checkRules(
@@ -1010,13 +1015,14 @@ export default {
     __syncValue(sourcePathKey) {
       // 不单只是执行actions
       var rootValue = formUtils.getValue(this.$data.formSchema);
-      this._esRootValue = rootValue;
+
+      dataCache.setRoot(this.$data.id, rootValue);
 
       var baseParseSources = {
         global: this.global ? this.global : {}, // 防止null情况
-        rootData: this._esRootValue,
+        rootData: rootValue,
         rootSchema: this.$data.formSchema,
-        isHidden: this._esHiddenFunc
+        isHidden: dataCache.getHiddenFunc(this.$data.id)
       };
 
       formUtils.analyzeUiProps(this.$data.formSchema, baseParseSources);
@@ -1279,6 +1285,10 @@ export default {
        */
       handler(newVal, oldVal) {
         // console.log("newValue: ", newVal, oldVal, this.global);
+        dataCache.setGlobal(
+          this.$data.id,
+          newVal ? utils.deepCopy(newVal) : {}
+        );
         if (utils.isObj(newVal)) {
           // undefined也就变为{default}, 从而下入这里
           if (newVal === oldVal) {
@@ -1302,9 +1312,8 @@ export default {
 
   beforeDestroy() {
     this._esOriginalValue = null;
-    this._esHiddenFunc = null;
     this._esFormValue = null;
-    this._esRootValue = null;
+    dataCache.remove(this.$data.id);
   }
 };
 </script>

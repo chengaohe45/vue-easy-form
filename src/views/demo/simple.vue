@@ -19,7 +19,16 @@ export default {
       formSchema: {
         name: {
           label: "广告名称",
-          component: "el-input",
+          component: {
+            name: "g-slot",
+            scopedSlots: {
+              default: (data, scoped) => {
+                // console.log("default: ", data, scoped);
+                return [<span>{scoped.color}</span>, 12344556];
+              },
+              test: [123, 890]
+            }
+          },
           value: "首页位置"
         },
         author: "作者名称"

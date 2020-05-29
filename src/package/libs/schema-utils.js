@@ -923,7 +923,10 @@ let schemaUtils = {
     var component = propItem.component;
     var newComponent,
       defaultAlign = false;
-    if (utils.isObj(component) && Object.keys(component).length > 0) {
+    // 根据vue源代码, VNode是不会被劫持的
+    if (utils.isVNode(component)) {
+      newComponent = component;
+    } else if (utils.isObj(component) && Object.keys(component).length > 0) {
       newComponent = {};
       newComponent.name = component.name ? component.name : global.defaultCom;
       newComponent.actions = this.__parseActions(component.actions, myPathKey);
@@ -969,29 +972,18 @@ let schemaUtils = {
         }
       }
 
-      // if (parse.isEsOrFunc(component.class)) {
-      //   newComponent.class = null;
-      //   newComponent.__rawClass = parse.newEsFuncion(component.class);
-      // } else {
-      //   newComponent.class = utils.deepCopy(component.class);
-      // }
-
-      // if (parse.isEsOrFunc(component.style)) {
-      //   newComponent.style = null;
-      //   newComponent.__rawStyle = parse.newEsFuncion(component.style);
-      // } else {
-      //   if (
-      //     utils.isObj(component.style) &&
-      //     Object.keys(component.style).length
-      //   ) {
-      //     newComponent.style = utils.deepCopy(component.style);
-      //   }
-      // }
       // 提取class和style
       Object.assign(newComponent, this.__parseClassStyle(component));
 
       newComponent.align = this.__parseAlign(component.align, defaultAlign);
       newComponent.flex = this.__parseFlex(component.flex, component.size);
+      var scopedSlots = this.__parseScopedSlots(
+        component.scopedSlots,
+        myPathKey
+      );
+      if (scopedSlots) {
+        newComponent.scopedSlots = scopedSlots;
+      }
 
       // value
       if (propItem.hasOwnProperty("value")) {
@@ -1003,6 +995,8 @@ let schemaUtils = {
         newComponent.value =
           component.name === global.defaultCom ? global.defaultVal : undefined;
       }
+    } else if (utils.isFunc(component)) {
+      newComponent = component;
     } else if (utils.isStr(component)) {
       // 要自动补充value
       newComponent = {
@@ -1038,6 +1032,85 @@ let schemaUtils = {
     newComponent.props = newComponent.props ? newComponent.props : {};
 
     return newComponent;
+  },
+
+  /**
+   * 解析scopedSlots
+   */
+  __parseScopedSlots: function(scopedSlots, myPathKey) {
+    var newScopedSlots = {};
+    var newSlots;
+    // 根据vue源代码, VNode是不会被劫持的
+    if (utils.isArr(scopedSlots)) {
+      newSlots = this.__checkSlotArr(scopedSlots, "scopedSlots", myPathKey);
+      if (newSlots.length) {
+        newScopedSlots.default = newSlots;
+      }
+    } else if (utils.isSlotType(scopedSlots)) {
+      newScopedSlots.default = scopedSlots;
+    } else if (
+      utils.isObj(scopedSlots) &&
+      Object.keys(scopedSlots).length > 0
+    ) {
+      for (var key in scopedSlots) {
+        var value = scopedSlots[key];
+        if (utils.isArr(value)) {
+          newSlots = this.__checkSlotArr(value, key, myPathKey);
+          if (newSlots.length) {
+            newScopedSlots[key] = newSlots;
+          }
+        } else if (utils.isSlotType(value)) {
+          newScopedSlots[key] = value;
+        } else {
+          if (!(utils.isUndef(value) || utils.isNull(value))) {
+            console.warn(
+              "插糟（" +
+                myPathKey +
+                " > " +
+                key +
+                "）的值不合法，将忽略（值必须是虚拟节点、函数、数字、字符串、布尔型）"
+            );
+          }
+        }
+      }
+    } else {
+      if (!(utils.isUndef(scopedSlots) || utils.isNull(scopedSlots))) {
+        console.warn(
+          "插糟（" +
+            myPathKey +
+            " > " +
+            key +
+            "）的值不合法，将忽略（值必须是虚拟节点、函数、数字、字符串、布尔型）"
+        );
+      }
+    }
+    return Object.keys(newScopedSlots).length > 0 ? newScopedSlots : undefined;
+  },
+
+  __checkSlotArr(slots, key, myPathKey) {
+    var newSlots = [];
+    slots.forEach(function(slot, index) {
+      if (utils.isFunc(slot)) {
+        throw "插糟（" +
+          myPathKey +
+          " > " +
+          key +
+          "）的数组不能存在函数，但可以用函数返回数组";
+      } else if (utils.isSlotType(slot)) {
+        newSlots.push(slot);
+      } else {
+        console.warn(
+          "插糟（" +
+            myPathKey +
+            " > " +
+            key +
+            "）中的数组存在(第" +
+            (index + 1) +
+            "个)不合法的，将忽略（数组中的值必须是虚拟节点、数字、字符串、布尔型）"
+        );
+      }
+    });
+    return newSlots;
   },
 
   /**

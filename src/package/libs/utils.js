@@ -1,7 +1,12 @@
 // import constant from "./constant";
 
 let utils = {
-  __id: 0,
+  __Vue: null,
+  __key: 0,
+
+  initVue(Vue) {
+    this.__Vue = Vue;
+  },
   /**
    * unicode letters used for parsing html tags, component names and property paths.
    * using https://www.w3.org/TR/html53/semantics-scripting.html#potentialcustomelementname
@@ -18,9 +23,9 @@ let utils = {
     return reg.test(name);
   },
 
-  newId(prefix) {
-    ++this.__id;
-    return prefix ? prefix + this.__id : this.__id;
+  newUid: function(prefix) {
+    utils.__key++;
+    return prefix ? prefix + "_" + utils.__key : utils.__key;
   },
 
   /**
@@ -99,6 +104,44 @@ let utils = {
 
   isObj(value) {
     return utils.type(value) === "object";
+  },
+
+  /**
+   * 是否是scopedSlot支持的类型
+   * @param {*} value
+   */
+  isSlotType(value) {
+    return (
+      this.isVNode(value) ||
+      this.isFunc(value) ||
+      this.isStr(value) ||
+      this.isNum(value) ||
+      this.isBool(value) ||
+      false
+    );
+  },
+
+  /**
+   * 是否scopedSlot为空
+   * @param {*} value
+   */
+  isSlotUndef(value) {
+    return this.isUndef(value) || this.isNull(value) || false;
+  },
+
+  isVNode(value) {
+    var VNode = this.__VNode;
+    if (!VNode) {
+      var Vue = this.__Vue;
+      var instance = new Vue();
+      var vnode = instance.$createElement("span", "");
+      VNode = vnode.constructor;
+      this.__VNode = VNode;
+
+      vnode = null;
+      instance = null;
+    }
+    return value instanceof VNode;
   },
 
   isVueObj(value) {

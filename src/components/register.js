@@ -6,6 +6,7 @@ import label from "./units/label";
 import title from "./units/title";
 import select from "./units/select";
 
+import slot from "./units/slot";
 let all = {
   register() {
     Vue.component("g-help", help);
@@ -14,6 +15,7 @@ let all = {
     Vue.component("g-label", label);
     Vue.component("g-title", title);
     Vue.component("g-select", select);
+    Vue.component("g-slot", slot);
   }
 };
 

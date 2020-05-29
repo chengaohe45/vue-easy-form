@@ -11,9 +11,8 @@ const install = function(Vue, globalOpts = {}) {
   /* istanbul ignore if */
   if (install.installed) return;
 
-  // if (Object.keys(extendRules).length > 0) {
-  //   Object.assign(esRules, extendRules);
-  // }
+  // 保存外部传入来的Vue(如用来判断vnode)
+  esUtils.initVue(Vue);
 
   if (Object.keys(globalOpts).length > 0) {
     esUtils.mergeGlobal(esGlobal, globalOpts);
