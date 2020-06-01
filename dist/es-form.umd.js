@@ -2191,6 +2191,12 @@ var schemaUtils = {
    * @param {*} key
    */
   __isRightKey: function __isRightKey(key) {
+    var illReg = /^[+-]?\d+$/;
+
+    if (illReg.test(key)) {
+      throw "属性不能是数字(如-1, 1, +1)";
+    }
+
     var illChars = ["[", "]", ".", "{", "}", "(", ")"];
 
     for (var i = 0; i < illChars.length; i++) {
@@ -7211,100 +7217,118 @@ var parse = {
     var result;
 
     if (parse.isEsScript(scriptTxt)) {
-      var options = [{
-        symbol: "$global",
-        paramKey: "global"
-      }, {
-        symbol: "$root",
-        paramKey: "root"
-      }, {
-        symbol: "$index",
-        paramKey: "index"
-      }];
-      scriptTxt = scriptTxt.substring(expPrefix.length);
-      scriptTxt = scriptTxt.trim(); // 与isEsScript判断一致
-      // 解析$hidden
+      var options;
 
-      var hiddenPatt = /\{{(\s*\$hidden\()(.+?)(\)\s*}})/gi;
-      var hiddenResult = null;
-      var hiddenTargetPiece = "";
-      var hiddenPathKey = "";
-      var hiddenFunTxt = "";
-      var newScriptTxt = "";
-      var curSliceIndex = 0; // let hasHiddenFun = false;
+      (function () {
+        // 索引链变量名，以免用户调用
+        var varIdxChains = "__esIdxChains" + Math.floor(Math.random() * 99);
+        options = [{
+          symbol: "$global",
+          paramKey: "global"
+        }, {
+          symbol: "$root",
+          paramKey: "root"
+        }, {
+          symbol: "$index",
+          paramKey: "index"
+        }];
+        scriptTxt = scriptTxt.substring(expPrefix.length);
+        scriptTxt = scriptTxt.trim(); // 与isEsScript判断一致
+        // 解析$hidden
 
-      hiddenResult = hiddenPatt.exec(scriptTxt);
+        var hiddenPatt = /\{{(\s*\$hidden\()(.+?)(\)\s*}})/gi;
+        var hiddenResult = null;
+        var hiddenTargetPiece = "";
+        var hiddenPathKey = "";
+        var hiddenFunTxt = "";
+        var newScriptTxt = "";
+        var curSliceIndex = 0; // let hasHiddenFun = false;
 
-      var _loop = function _loop() {
-        // hasHiddenFun = true; // 有隐藏函数
-        //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
-        hiddenTargetPiece = hiddenResult[0];
-        hiddenPathKey = hiddenResult[2]; // 去掉单双引号和$root若存在
-
-        hiddenPathKey = hiddenPathKey.trim();
-        hiddenPathKey = hiddenPathKey.replace(/^('|")|('|")$/g, "");
-        hiddenPathKey = hiddenPathKey.trim(); //去掉$root;若存在
-
-        hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
-        hiddenPathKey = parse.chainPathKey(hiddenPathKey, "[i]");
-        var chainPieces = hiddenPathKey.split("[i]");
-        var chainPiecesLen = chainPieces.length;
-        var chainPiecesTempVal = "";
-        chainPieces.forEach(function (piece, index) {
-          if (index < chainPiecesLen - 1) {
-            chainPiecesTempVal += piece + "[' + (".concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".idxChains[") + index + "]) + ']";
-          } else {
-            chainPiecesTempVal += piece;
-          }
-        });
-        hiddenPathKey = chainPiecesTempVal;
-        hiddenFunTxt = "$hidden('" + hiddenPathKey + "')"; // 后面会进行解析替换
-
-        newScriptTxt += scriptTxt.slice(curSliceIndex, hiddenPatt.lastIndex - hiddenTargetPiece.length) + hiddenFunTxt;
-        curSliceIndex = hiddenPatt.lastIndex;
         hiddenResult = hiddenPatt.exec(scriptTxt);
-      };
 
-      while (hiddenResult) {
-        _loop();
-      }
+        var _loop = function _loop() {
+          // hasHiddenFun = true; // 有隐藏函数
+          //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
+          hiddenTargetPiece = hiddenResult[0];
+          hiddenPathKey = hiddenResult[2]; // 去掉单双引号和$root若存在
 
-      newScriptTxt += scriptTxt.slice(curSliceIndex); // 最后的片段
-      // 假设val为：es: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
+          hiddenPathKey = hiddenPathKey.trim();
+          hiddenPathKey = hiddenPathKey.replace(/^('|")|('|")$/g, "");
+          hiddenPathKey = hiddenPathKey.trim(); //去掉$root;若存在
 
-      var matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
+          hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
+          hiddenPathKey = parse.chainPathKey(hiddenPathKey, _constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].IDX_CHAIN_KEY);
+          var chainPieces = hiddenPathKey.split(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].IDX_CHAIN_KEY);
+          var chainPiecesLen = chainPieces.length;
+          var chainPiecesTempVal = "";
+          chainPieces.forEach(function (piece, index) {
+            if (index < chainPiecesLen - 1) {
+              chainPiecesTempVal += piece + "[' + (".concat(varIdxChains, "[") + index + "]) + ']";
+            } else {
+              chainPiecesTempVal += piece;
+            }
+          });
+          hiddenPathKey = chainPiecesTempVal;
+          hiddenFunTxt = "$hidden('" + hiddenPathKey + "')"; // 后面会进行解析替换
 
-      matchs.forEach(function (mItem) {
-        // mItem值："{{$root.persons[i].age}}"
-        // console.log("1 mItem: ", mItem);
-        var tmpItem = parse.chainPathKey(mItem, "[i]"); // console.log("2 tmpItem: ", tmpItem);
+          newScriptTxt += scriptTxt.slice(curSliceIndex, hiddenPatt.lastIndex - hiddenTargetPiece.length) + hiddenFunTxt;
+          curSliceIndex = hiddenPatt.lastIndex;
+          hiddenResult = hiddenPatt.exec(scriptTxt);
+        };
 
-        var tempVal = ""; //找出[i],按顺序说明出处
+        while (hiddenResult) {
+          _loop();
+        }
 
-        var pieces = tmpItem.split("[i]");
-        var piecesLen = pieces.length;
-        pieces.forEach(function (piece, index) {
-          if (index < piecesLen - 1) {
-            tempVal += piece + "[(".concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".idxChains[") + index + "])]";
+        newScriptTxt += scriptTxt.slice(curSliceIndex); // 最后的片段
+        // 假设val为：es: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
+
+        var matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
+
+        matchs.forEach(function (mItem) {
+          // mItem值："{{$root.persons[i].age}}"
+          // console.log("1 mItem: ", mItem);
+          var tmpItem;
+          var tempVal;
+
+          if (mItem.indexOf(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].IDX_CHAIN_KEY) > 0) {
+            // 数组的，不再转换：让用户自己控制，表达式更加强大
+            tmpItem = mItem;
+            tempVal = ""; //找出[i],按顺序说明出处
+
+            var pieces = tmpItem.split(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].IDX_CHAIN_KEY);
+            var piecesLen = pieces.length;
+            pieces.forEach(function (piece, index) {
+              if (index < piecesLen - 1) {
+                tempVal += piece + "[" + varIdxChains + "[" + index + "]]";
+              } else {
+                tempVal += piece;
+              }
+            }); //替换数据源: 去掉左右两边的分隔符
+
+            tempVal = tempVal.replace(/^{{|}}$/g, ""); // console.log("tempVal1: ", tempVal);
           } else {
-            tempVal += piece;
+            // 一般表达式，旧式写法，就按旧的来,不做改动
+            tempVal = parse.chainPathKey(mItem, _constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].IDX_CHAIN_KEY); //替换数据源
+
+            options.forEach(function (item) {
+              tempVal = tempVal.replace(new RegExp("\\{{\\s*\\".concat(item.symbol, "(\\.\\S*)?\\s*}}")), "$".concat(item.paramKey, "$1"));
+            }); // console.log("tempVal2: ", tempVal);
           }
-        }); //替换数据源
 
-        options.forEach(function (item) {
-          tempVal = tempVal.replace(new RegExp("\\{{\\s*\\".concat(item.symbol, "(\\.\\S*)?\\s*}}")), "$".concat(item.paramKey, "$1"));
+          newScriptTxt = newScriptTxt.replace(mItem, tempVal);
         });
-        newScriptTxt = newScriptTxt.replace(mItem, tempVal);
-      });
-      var prefixScript = "";
-      options.forEach(function (item) {
-        prefixScript += "var $".concat(item.paramKey, " = ").concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".").concat(item.paramKey, "; ");
-      });
-      prefixScript += "var $hidden = ".concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".isHidden; ");
-      newScriptTxt = prefixScript + " return (" + newScriptTxt + ");"; // console.log("newScriptTxt: ", newScriptTxt);
+        var prefixScript = "";
+        options.forEach(function (item) {
+          prefixScript += "var $".concat(item.paramKey, " = ").concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".").concat(item.paramKey, "; ");
+        });
+        prefixScript += "var ".concat(varIdxChains, " = ").concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".idxChains; ");
+        prefixScript += "var $hidden = ".concat(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, ".isHidden; ");
+        newScriptTxt = prefixScript + " return (" + newScriptTxt + ");"; // console.log("newScriptTxt: ", newScriptTxt);
 
-      result = new Function(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, newScriptTxt);
-      result.__esFuncName = _constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_FUNC_NAME;
+        result = new Function(_constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_OPTIONS, newScriptTxt);
+        result.__esFuncName = _constant__WEBPACK_IMPORTED_MODULE_6__[/* default */ "a"].ES_FUNC_NAME;
+      })();
     } else {
       result = scriptTxt;
     }
@@ -7978,7 +8002,9 @@ var constant = {
   // 对于props里面的属性，以PRE_STATIC_FUNC开头的且是函数，则说明是静态，不解析
   // 原生的表单组件，主要是用来过滤空格
   FORM_INPUTS: ["input", "textarea"],
-  INPUT_CHANGE: "change"
+  INPUT_CHANGE: "change",
+  IDX_CHAIN_KEY: "[i]" // 数组链的代替字符，不可随便改
+
 };
 /* harmony default export */ __webpack_exports__["a"] = (constant);
 
@@ -8898,7 +8924,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.7.0" : "??",
+  version: typeof process != "undefined" ? "1.7.1" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
