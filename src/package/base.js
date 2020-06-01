@@ -9,6 +9,7 @@
 
 import utils from "./libs/utils.js";
 import constant from "./libs/constant.js";
+import dataCache from "./libs/data-cache.js";
 // import { throws } from "assert";
 
 ("use strict");
@@ -251,6 +252,12 @@ export default {
       }
     }
 
+    // 这个不能删除：vue机制，主要是为了执行this.config.__refreshIndex；当表单改变时，同步更新页面
+    if (this.config.__refreshIndex && this.__slotUpdateTime) {
+      // 永远都不会进入这，因为__slotUpdateTime没有值的
+      this.__slotUpdateTime++;
+    }
+
     return vnode;
   },
   // inheritAttrs: false,
@@ -273,8 +280,15 @@ export default {
     // 当!!this.info为非真时，处理事件会让父级处理
     info: {
       type: Object,
-      required: false,
+      required: true,
       default: undefined
+    },
+
+    /* 是否是主组件：也就是右边的组件；当为真时，处理事件会让父级处理 */
+    isMain: {
+      type: Boolean,
+      required: false,
+      default: false
     }
 
     // emitEvents: {
@@ -315,8 +329,8 @@ export default {
 
     eventHandler(eventName, args) {
       args = args ? args : [];
-      if (!this.info) {
-        // 让父类去处理
+      if (this.isMain) {
+        // 主组件：让父类去处理
         this.$emit("trigger", eventName, args, this.$refs.__comTarget__);
       } else {
         // 一般组件，自己处理
@@ -484,9 +498,20 @@ export default {
     },
 
     newSlotFunc(slotValue) {
+      var vm = this;
       return function(scoped) {
         if (utils.isFunc(slotValue)) {
-          return slotValue({}, scoped);
+          var options = {
+            global: dataCache.getGlobal(vm.config.__formId),
+            rootData: dataCache.getRoot(vm.config.__formId), // 兼容1.7.0以前，不包括1.7.0
+            root: dataCache.getRoot(vm.config.__formId),
+            idxChain: vm.info.idxChain,
+            index: vm.info.index,
+            pathKey: vm.info.pathKey,
+            $hidden: dataCache.getHiddenFunc(vm.config.__formId)
+          };
+
+          return slotValue(options, scoped);
         } else {
           return slotValue;
         }

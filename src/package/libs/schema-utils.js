@@ -924,9 +924,10 @@ let schemaUtils = {
     var newComponent,
       defaultAlign = false;
     // 根据vue源代码, VNode是不会被劫持的
-    if (utils.isVNode(component)) {
-      newComponent = component;
-    } else if (utils.isObj(component) && Object.keys(component).length > 0) {
+    // if (utils.isVNode(component)) {
+    //   newComponent = component;
+    // } else
+    if (utils.isObj(component) && Object.keys(component).length > 0) {
       newComponent = {};
       newComponent.name = component.name ? component.name : global.defaultCom;
       newComponent.actions = this.__parseActions(component.actions, myPathKey);
@@ -977,12 +978,14 @@ let schemaUtils = {
 
       newComponent.align = this.__parseAlign(component.align, defaultAlign);
       newComponent.flex = this.__parseFlex(component.flex, component.size);
-      var scopedSlots = this.__parseScopedSlots(
-        component.scopedSlots,
-        myPathKey
-      );
-      if (scopedSlots) {
-        newComponent.scopedSlots = scopedSlots;
+      var slotInfo = this.__parseScopedSlots(component.scopedSlots, myPathKey);
+      if (slotInfo) {
+        if (slotInfo.hasRuntime) {
+          // 需要检测
+          newComponent.__formId = m_currentFormId;
+          newComponent.__refreshIndex = 0;
+        }
+        newComponent.scopedSlots = slotInfo.scopedSlots;
       }
 
       // value
@@ -995,8 +998,8 @@ let schemaUtils = {
         newComponent.value =
           component.name === global.defaultCom ? global.defaultVal : undefined;
       }
-    } else if (utils.isFunc(component)) {
-      newComponent = component;
+      // } else if (utils.isFunc(component)) {
+      //   newComponent = component;
     } else if (utils.isStr(component)) {
       // 要自动补充value
       newComponent = {
@@ -1040,6 +1043,8 @@ let schemaUtils = {
   __parseScopedSlots: function(scopedSlots, myPathKey) {
     var newScopedSlots = {};
     var newSlots;
+
+    var hasRuntime = false;
     // 根据vue源代码, VNode是不会被劫持的
     if (utils.isArr(scopedSlots)) {
       newSlots = this.__checkSlotArr(scopedSlots, "scopedSlots", myPathKey);
@@ -1048,6 +1053,9 @@ let schemaUtils = {
       }
     } else if (utils.isSlotType(scopedSlots)) {
       newScopedSlots.default = scopedSlots;
+      if (utils.isFunc(scopedSlots)) {
+        hasRuntime = true;
+      }
     } else if (
       utils.isObj(scopedSlots) &&
       Object.keys(scopedSlots).length > 0
@@ -1061,6 +1069,9 @@ let schemaUtils = {
           }
         } else if (utils.isSlotType(value)) {
           newScopedSlots[key] = value;
+          if (utils.isFunc(value)) {
+            hasRuntime = true;
+          }
         } else {
           if (!(utils.isUndef(value) || utils.isNull(value))) {
             console.warn(
@@ -1084,7 +1095,9 @@ let schemaUtils = {
         );
       }
     }
-    return Object.keys(newScopedSlots).length > 0 ? newScopedSlots : undefined;
+    return Object.keys(newScopedSlots).length > 0
+      ? { scopedSlots: newScopedSlots, hasRuntime: hasRuntime }
+      : undefined;
   },
 
   __checkSlotArr(slots, key, myPathKey) {
@@ -1684,24 +1697,18 @@ let schemaUtils = {
           newComponent.__rawDirectives = directiveInfo.raw;
         }
 
-        // 只有在name有值时有效
-        // if (parse.isEsOrFunc(value.class)) {
-        //   newComponent.class = null;
-        //   newComponent.__rawClass = parse.newEsFuncion(value.class);
-        // } else {
-        //   newComponent.class = utils.deepCopy(value.class);
-        // }
-
-        // if (parse.isEsOrFunc(value.style)) {
-        //   newComponent.style = null;
-        //   newComponent.__rawStyle = parse.newEsFuncion(value.style);
-        // } else {
-        //   if (utils.isObj(value.style) && Object.keys(value.style).length) {
-        //     newComponent.style = utils.deepCopy(value.style);
-        //   }
-        // }
         // 提取class和style
         Object.assign(newComponent, this.__parseClassStyle(value));
+
+        var slotInfo = this.__parseScopedSlots(value.scopedSlots, myPathKey);
+        if (slotInfo) {
+          if (slotInfo.hasRuntime) {
+            // 需要检测
+            newComponent.__formId = m_currentFormId;
+            newComponent.__refreshIndex = 0;
+          }
+          newComponent.scopedSlots = slotInfo.scopedSlots;
+        }
 
         // value
         if (value.hasOwnProperty("value")) {

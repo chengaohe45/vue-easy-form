@@ -1,5 +1,6 @@
 <template>
   <div>
+    <el-input></el-input>
     <slot :color="color">?</slot>
     <slot name="test">!</slot>
   </div>
@@ -17,6 +18,11 @@ export default {
       required: false,
       default: "#67c23a"
     }
+    // ts: {
+    //   type: String,
+    //   required: false,
+    //   default: "false"
+    // }
   },
 
   created() {

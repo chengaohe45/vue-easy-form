@@ -20,16 +20,68 @@ export default {
         name: {
           label: "广告名称",
           component: {
-            name: "g-slot",
+            name: "el-select",
+            // text: " es: $root.author",
             scopedSlots: {
               default: (data, scoped) => {
                 // console.log("default: ", data, scoped);
-                return [<span>{scoped.color}</span>, 12344556];
-              },
-              test: [123, 890]
+                var cities = [
+                  {
+                    value: "Beijing",
+                    label: "北京"
+                  },
+                  {
+                    value: "Shanghai",
+                    label: "上海"
+                  },
+                  {
+                    value: "Nanjing",
+                    label: "南京"
+                  },
+                  {
+                    value: "Chengdu",
+                    label: "成都"
+                  },
+                  {
+                    value: "Shenzhen",
+                    label: "深圳"
+                  },
+                  {
+                    value: "Guangzhou",
+                    label: "广州"
+                  }
+                ];
+
+                var options = [];
+                cities.forEach(item => {
+                  options.push(
+                    <el-option
+                      key={item.value}
+                      label={item.label}
+                      value={item.value}
+                    >
+                      <span style="float: left">{item.label}</span>
+                      <span style="float: right; color: #8492a6; font-size: 13px">
+                        {item.value}
+                      </span>
+                    </el-option>
+                  );
+                });
+                return options;
+              }
+              // test: [123, 890]
             }
           },
-          value: "首页位置"
+          desc: {
+            name: "g-slot",
+            scopedSlots: {
+              default: (data, scoped) => {
+                console.log(data, scoped);
+                return [<span>{scoped.color}</span>, data.root.author];
+              }
+            }
+          },
+          value: "Shanghai"
         },
         author: "作者名称"
       }

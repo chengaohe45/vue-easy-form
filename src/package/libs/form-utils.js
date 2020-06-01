@@ -1148,6 +1148,12 @@ let formUtils = {
   __esParseComponent(component, parseSources) {
     var isHidden, text, style, className, value;
 
+    if (component.hasOwnProperty("__refreshIndex")) {
+      component.__refreshIndex++;
+      if (component.__refreshIndex > 10000) {
+        component.__refreshIndex = 1;
+      }
+    }
     // 项组件是没有此值的
     if (component.__rawHidden) {
       isHidden = parse.smartEsValue(component.__rawHidden, parseSources);

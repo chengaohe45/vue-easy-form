@@ -63,7 +63,6 @@
                 : ''
             ]"
           >
-            <!-- 表单组件不要写info属性: 当info为undefined，处理事件会让上一级处理 -->
             <es-base
               :ref="schema.component.ref"
               :class="[
@@ -71,6 +70,8 @@
                   ? 'es-form-component-' + schema.component.flex
                   : ''
               ]"
+              :info="schema.__info"
+              :is-main="true"
               :config="schema.component"
               @trigger="triggerHandler"
             >
