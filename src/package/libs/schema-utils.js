@@ -988,7 +988,6 @@ let schemaUtils = {
       if (slotInfo) {
         if (slotInfo.hasRuntime) {
           // 需要检测
-          newComponent.__formId = m_currentFormId;
           newComponent.__refreshIndex = 0;
         }
         newComponent.scopedSlots = slotInfo.scopedSlots;
@@ -1037,7 +1036,7 @@ let schemaUtils = {
     ) {
       throw "组件名(" + newComponent.name + ")存在html非法字符";
     }
-
+    newComponent.__formId = m_currentFormId;
     newComponent.props = newComponent.props ? newComponent.props : {};
 
     return newComponent;
@@ -1710,7 +1709,7 @@ let schemaUtils = {
         if (slotInfo) {
           if (slotInfo.hasRuntime) {
             // 需要检测
-            newComponent.__formId = m_currentFormId;
+
             newComponent.__refreshIndex = 0;
           }
           newComponent.scopedSlots = slotInfo.scopedSlots;
@@ -1788,6 +1787,7 @@ let schemaUtils = {
       throw "组件名(" + newComponent.name + ")存在html非法字符";
     }
 
+    newComponent.__formId = m_currentFormId;
     newComponent.props = newComponent.props ? newComponent.props : {};
 
     var eventOn = this.__fetchActionEvent(newComponent.actions);

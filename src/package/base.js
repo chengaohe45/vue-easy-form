@@ -235,7 +235,17 @@ export default {
 
       configProps = null;
     } else {
-      vnode = this.config({ global: this.global, source: this.item });
+      var options = {
+        global: dataCache.getGlobal(this.config.__formId),
+        rootData: dataCache.getRoot(this.config.__formId), // 兼容1.7.0以前，不包括1.7.0
+        root: dataCache.getRoot(this.config.__formId),
+        idxChain: this.info.idxChain,
+        index: this.info.index,
+        pathKey: this.info.pathKey,
+        $hidden: dataCache.getHiddenFunc(this.config.__formId)
+      };
+
+      vnode = this.config(options);
       if (!utils.isVNode(vnode)) {
         if (
           utils.isStr(vnode) ||

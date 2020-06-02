@@ -129,6 +129,18 @@ let utils = {
     return this.isUndef(value) || this.isNull(value) || false;
   },
 
+  /**
+   * 判断是否一个Vue实例：包括Vue或VueComponent实例
+   * @param {*} value
+   */
+  isVue(value) {
+    return value instanceof this.__Vue;
+  },
+
+  /**
+   * 判断是否一个虚拟节点
+   * @param {*} value
+   */
   isVNode(value) {
     var VNode = this.__VNode;
     if (!VNode) {
@@ -184,7 +196,17 @@ let utils = {
   __deepCopy: function(data, rawRefs, newRefs) {
     var type = utils.type(data);
     var newData, rawIndex;
-    if (type == "array") {
+    if (this.isVNode(data) || this.isVue(data)) {
+      // 虚拟节点，vue组件实例，不用深度拷贝
+      rawIndex = rawRefs.indexOf(data);
+      // console.log("__deepCopy vnode");
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+        newRefs.push(data);
+      }
+      return data;
+    } else if (type == "array") {
       rawIndex = rawRefs.indexOf(data);
       if (rawIndex < 0) {
         newData = [];
@@ -221,6 +243,71 @@ let utils = {
       }
     } else {
       return data;
+    }
+  },
+
+  /**
+   * [deepFreeze 深冻结的数据是object和array]
+   * @param  {[type]} data [description]
+   * @return {[type]}   [description]
+   */
+  deepFreeze: function(data) {
+    var rawRefs = [];
+    var newRefs = [];
+    var newData = this.__deepFreeze(data, rawRefs, newRefs);
+    rawRefs = null;
+    newRefs = null;
+    return newData;
+  },
+
+  /**
+   * [deepFreeze 深冻结的数据是object和array]
+   * @param  {[type]} data [description]
+   * @return {[Array]}   [rawRefs] 记录原始的object and array
+   * rawRefs作用防止数据中某个地方存在循环的问题
+   */
+  __deepFreeze: function(data, rawRefs) {
+    var type = utils.type(data);
+    var rawIndex;
+    if (this.isVNode(data) || this.isVue(data)) {
+      // 虚拟节点，vue组件实例，不用冻结
+      rawIndex = rawRefs.indexOf(data);
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+      }
+    } else if (type == "array") {
+      rawIndex = rawRefs.indexOf(data);
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+
+        // 冻结这一层
+        Object.freeze(data);
+
+        for (var i = 0; i < data.length; ++i) {
+          this.__deepFreeze(data[i], rawRefs); // 继续走下一级
+        }
+      } else {
+        // 已经存在的数据，则说明已经处理过，无需处理了
+      }
+    } else if (type === "object") {
+      rawIndex = rawRefs.indexOf(data);
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+
+        // 冻结这一层
+        Object.freeze(data);
+
+        for (var key in data) {
+          this.__deepFreeze(data[key], rawRefs);
+        }
+      } else {
+        // 已经存在的数据，则说明已经处理过，无需处理了
+      }
+    } else {
+      // 其它类型，无需要理会
     }
   },
 
