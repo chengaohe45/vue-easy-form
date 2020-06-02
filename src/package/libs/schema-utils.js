@@ -2034,6 +2034,8 @@ let schemaUtils = {
       var type = null;
       var hasBorder = true;
       var insertValue = undefined;
+      var delMsg = "确定删除吗？";
+      var delAllMsg = "确定删除所有吗？";
       if (utils.isStr(array)) {
         newArray.name = array;
       } else if (!utils.isObj(array)) {
@@ -2068,6 +2070,12 @@ let schemaUtils = {
 
         hasDelWarn =
           utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
+        if (utils.isStr(array.delMsg) && array.delMsg.trim()) {
+          delMsg = array.delMsg.trim();
+        }
+        if (utils.isStr(array.delAllMsg) && array.delAllMsg.trim()) {
+          delAllMsg = array.delAllMsg.trim();
+        }
 
         value = utils.isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
@@ -2120,6 +2128,8 @@ let schemaUtils = {
         newArray.hasSort = hasSort;
         newArray.hasDelete = hasDelete;
         newArray.hasDelWarn = hasDelWarn;
+        newArray.delMsg = delMsg;
+        newArray.delAllMsg = delAllMsg;
         newArray.hasAdd = hasAdd;
         newArray.hasCopy = hasCopy;
         newArray.min = min;

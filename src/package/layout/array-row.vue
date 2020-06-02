@@ -101,6 +101,7 @@
                 schema.array.max <= 0 ||
                   schema.__propSchemaList.length < schema.array.max
               "
+              :del-msg="schema.array.delMsg"
               :has-add="schema.array.hasCopy"
               @copyItem="copyItem"
               @delItem="delItem"
@@ -141,6 +142,7 @@
             schema.array.max <= 0 ||
               schema.__propSchemaList.length < schema.array.max
           "
+          :del-msg="schema.array.delAllMsg"
           :index="-1"
           :has-del-warn="schema.array.hasDelWarn"
           @delItem="delAllItems"

@@ -40,7 +40,9 @@
         @click.prevent.stop
       >
         <div class="es-form-pop-content">
-          <div>确定删除吗？</div>
+          <div>
+            <span class="content">{{ delMsg }}</span>
+          </div>
           <div class="es-btn-row">
             <div class="es-btn-group">
               <es-btn class="es-btn" @click="clickPopConfirm">

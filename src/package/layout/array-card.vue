@@ -74,6 +74,7 @@
                   schema.array.max <= 0 ||
                     schema.__propSchemaList.length < schema.array.max
                 "
+                :del-msg="schema.array.delMsg"
                 :has-add="schema.array.hasCopy"
                 @copyItem="copyItem"
                 @delItem="delItem"

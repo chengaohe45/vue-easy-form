@@ -996,6 +996,10 @@ let formUtils = {
             }
           }
         }
+
+        if (propItem.array.rules) {
+          this.__esParseRules(propItem.array.rules, parseSources);
+        }
       } else {
         var nextPropItem, key;
         if (propItem.layout && propItem.layout.name == constant.LAYOUT_TABS) {

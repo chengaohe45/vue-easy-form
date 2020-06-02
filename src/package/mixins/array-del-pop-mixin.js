@@ -45,6 +45,11 @@ export default {
       type: [Number, String],
       required: false,
       default: -1 // 设置为-1；低于索引值
+    },
+    delMsg: {
+      type: [Boolean, String, Number],
+      required: false,
+      default: "确定删除吗？"
     }
   },
 
@@ -89,7 +94,7 @@ export default {
     },
 
     clickDeletBtn() {
-      if (this.canPop && this.hasDelWarn) {
+      if (this.canPop && this.hasDelWarn && this.delMsg) {
         this.showPopHandler();
       } else {
         // 没有警告
