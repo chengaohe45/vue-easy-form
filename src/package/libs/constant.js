@@ -40,7 +40,9 @@ let constant = {
 
   // 原生的表单组件，主要是用来过滤空格
   FORM_INPUTS: ["input", "textarea"],
-  INPUT_CHANGE: "change"
+  INPUT_CHANGE: "change",
+
+  IDX_CHAIN_KEY: "[i]" // 数组链的代替字符，不可随便改
 };
 
 export default constant;

@@ -123,6 +123,8 @@ let parse = {
     let result;
 
     if (parse.isEsScript(scriptTxt)) {
+      // 索引链变量名，以免用户调用
+      const varIdxChains = "__esIdxChains" + Math.floor(Math.random() * 99);
       var options = [
         {
           symbol: "$global",
@@ -163,17 +165,17 @@ let parse = {
         hiddenPathKey = hiddenPathKey.trim();
         //去掉$root;若存在
         hiddenPathKey = hiddenPathKey.replace(/^\$root(\.)?/g, "");
-        hiddenPathKey = parse.chainPathKey(hiddenPathKey, "[i]");
-        let chainPieces = hiddenPathKey.split("[i]");
+        hiddenPathKey = parse.chainPathKey(
+          hiddenPathKey,
+          constant.IDX_CHAIN_KEY
+        );
+        let chainPieces = hiddenPathKey.split(constant.IDX_CHAIN_KEY);
         let chainPiecesLen = chainPieces.length;
         let chainPiecesTempVal = "";
         chainPieces.forEach((piece, index) => {
           if (index < chainPiecesLen - 1) {
             chainPiecesTempVal +=
-              piece +
-              `[' + (${constant.ES_OPTIONS}.idxChains[` +
-              index +
-              "]) + ']";
+              piece + `[' + (${varIdxChains}[` + index + "]) + ']";
           } else {
             chainPiecesTempVal += piece;
           }
@@ -196,27 +198,37 @@ let parse = {
       matchs.forEach(mItem => {
         // mItem值："{{$root.persons[i].age}}"
         // console.log("1 mItem: ", mItem);
-        var tmpItem = parse.chainPathKey(mItem, "[i]");
-        // console.log("2 tmpItem: ", tmpItem);
-        let tempVal = "";
-        //找出[i],按顺序说明出处
-        let pieces = tmpItem.split("[i]");
-        let piecesLen = pieces.length;
-        pieces.forEach((piece, index) => {
-          if (index < piecesLen - 1) {
-            tempVal +=
-              piece + `[(${constant.ES_OPTIONS}.idxChains[` + index + "])]";
-          } else {
-            tempVal += piece;
-          }
-        });
-        //替换数据源
-        options.forEach(item => {
-          tempVal = tempVal.replace(
-            new RegExp(`\\{{\\s*\\${item.symbol}(\\.\\S*)?\\s*}}`),
-            `$${item.paramKey}$1`
-          );
-        });
+        let tmpItem;
+        let tempVal;
+        if (mItem.indexOf(constant.IDX_CHAIN_KEY) > 0) {
+          // 数组的，不再转换：让用户自己控制，表达式更加强大
+          tmpItem = mItem;
+          tempVal = "";
+          //找出[i],按顺序说明出处
+          let pieces = tmpItem.split(constant.IDX_CHAIN_KEY);
+          let piecesLen = pieces.length;
+          pieces.forEach((piece, index) => {
+            if (index < piecesLen - 1) {
+              tempVal += piece + "[" + varIdxChains + "[" + index + "]]";
+            } else {
+              tempVal += piece;
+            }
+          });
+          //替换数据源: 去掉左右两边的分隔符
+          tempVal = tempVal.replace(/^{{|}}$/g, "");
+          // console.log("tempVal1: ", tempVal);
+        } else {
+          // 一般表达式，旧式写法，就按旧的来,不做改动
+          tempVal = parse.chainPathKey(mItem, constant.IDX_CHAIN_KEY);
+          //替换数据源
+          options.forEach(item => {
+            tempVal = tempVal.replace(
+              new RegExp(`\\{{\\s*\\${item.symbol}(\\.\\S*)?\\s*}}`),
+              `$${item.paramKey}$1`
+            );
+          });
+          // console.log("tempVal2: ", tempVal);
+        }
         newScriptTxt = newScriptTxt.replace(mItem, tempVal);
       });
 
@@ -226,6 +238,9 @@ let parse = {
           item.paramKey
         }; `;
       });
+      prefixScript += `var ${varIdxChains} = ${
+        constant.ES_OPTIONS
+      }.idxChains; `;
       prefixScript += `var $hidden = ${constant.ES_OPTIONS}.isHidden; `;
       newScriptTxt = prefixScript + " return (" + newScriptTxt + ");";
 

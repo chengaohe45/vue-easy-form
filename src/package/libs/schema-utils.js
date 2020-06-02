@@ -500,6 +500,10 @@ let schemaUtils = {
    * @param {*} key
    */
   __isRightKey(key) {
+    var illReg = /^[+-]?\d+$/;
+    if (illReg.test(key)) {
+      throw "属性不能是数字(如-1, 1, +1)";
+    }
     var illChars = ["[", "]", ".", "{", "}", "(", ")"];
     for (var i = 0; i < illChars.length; i++) {
       if (key.indexOf(illChars[i]) >= 0) {
