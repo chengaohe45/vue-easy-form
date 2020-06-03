@@ -2036,6 +2036,7 @@ let schemaUtils = {
       var insertValue = undefined;
       var delMsg;
       var delAllMsg;
+      var before = false;
 
       if (utils.isStr(array)) {
         newArray.name = array;
@@ -2101,6 +2102,7 @@ let schemaUtils = {
           };
         }
 
+        before = utils.isFunc(array.before) ? array.before : false;
         value = utils.isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
         actions = this.__parseActions(array.actions, myPathKey);
@@ -2163,6 +2165,7 @@ let schemaUtils = {
         newArray.headRequired = headRequired;
         newArray.value = value;
         newArray.rules = rules;
+        newArray.before = before;
         newArray.actions = actions;
         newArray.rowSpace = rowSpace;
 
