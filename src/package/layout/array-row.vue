@@ -101,12 +101,13 @@
                 schema.array.max <= 0 ||
                   schema.__propSchemaList.length < schema.array.max
               "
-              :del-msg="schema.array.delMsg"
               :has-add="schema.array.hasCopy"
               @copyItem="copyItem"
               @delItem="delItem"
               @upItem="upItem"
               @downItem="downItem"
+              :del-msg="itemSchema.delMsg"
+              :info="itemSchema.__info"
             ></edit-btns>
           </div>
         </li>
@@ -142,11 +143,12 @@
             schema.array.max <= 0 ||
               schema.__propSchemaList.length < schema.array.max
           "
-          :del-msg="schema.array.delAllMsg"
           :index="-1"
           :has-del-warn="schema.array.hasDelWarn"
           @delItem="delAllItems"
           @addItem="addItem"
+          :del-msg="schema.array.delAllMsg"
+          :info="schema.__info"
         ></edit-bottom-btns>
       </div>
     </div>

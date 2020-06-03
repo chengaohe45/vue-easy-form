@@ -26,8 +26,9 @@
         @click.prevent.stop
       >
         <div class="es-form-pop-content">
-          <div>
-            <span class="content">{{ delMsg }}</span>
+          <div class="content-box">
+            <span class="content" v-if="!delMsg.name">{{ delMsg.text }}</span>
+            <es-base v-else :config="delMsg" :info="info"></es-base>
           </div>
           <div class="es-btn-row">
             <div class="es-btn-group">
@@ -60,6 +61,7 @@
 <script>
 import arrayDelPopMixin from "../mixins/array-del-pop-mixin";
 import esBtn from "./btn.vue";
+import esBase from "../base";
 
 export default {
   mixins: [arrayDelPopMixin],
@@ -67,7 +69,8 @@ export default {
     return {};
   },
   components: {
-    esBtn
+    esBtn,
+    esBase
   },
   props: {
     canDelete: {

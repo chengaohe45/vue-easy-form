@@ -2034,8 +2034,9 @@ let schemaUtils = {
       var type = null;
       var hasBorder = true;
       var insertValue = undefined;
-      var delMsg = "确定删除吗？";
-      var delAllMsg = "确定删除所有吗？";
+      var delMsg;
+      var delAllMsg;
+
       if (utils.isStr(array)) {
         newArray.name = array;
       } else if (!utils.isObj(array)) {
@@ -2070,11 +2071,34 @@ let schemaUtils = {
 
         hasDelWarn =
           utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
-        if (utils.isStr(array.delMsg) && array.delMsg.trim()) {
-          delMsg = array.delMsg.trim();
+
+        if (array.hasOwnProperty("delMsg")) {
+          delMsg = array.delMsg;
+        } else {
+          delMsg = "确定删除吗？";
         }
-        if (utils.isStr(array.delAllMsg) && array.delAllMsg.trim()) {
-          delAllMsg = array.delAllMsg.trim();
+        delMsg = this.__parsePropComponent(delMsg, myPathKey + "（数组）");
+        if (!delMsg) {
+          delMsg = {
+            hidden: false,
+            text: false
+          };
+        }
+
+        if (array.hasOwnProperty("delAllMsg")) {
+          delAllMsg = array.delAllMsg;
+        } else {
+          delAllMsg = "确定删除所有吗？";
+        }
+        delAllMsg = this.__parsePropComponent(
+          delAllMsg,
+          myPathKey + "（数组）"
+        );
+        if (!delAllMsg) {
+          delAllMsg = {
+            hidden: false,
+            text: false
+          };
         }
 
         value = utils.isArr(array.value) ? array.value : [];
@@ -2178,6 +2202,28 @@ let schemaUtils = {
       return false;
     }
   },
+
+  /**
+   * 判断该组件是否需要动态解析，还是纯文本
+   * @param {*} component
+   */
+  // __needParseCom(component) {
+  //   if (component) {
+  //     if (component.name) {
+  //       // 是一个组件，要动态解析
+  //       return true;
+  //     }
+
+  //     for (var key in component) {
+  //       var value = component[key];
+  //       if (utils.isFunc(value)) {
+  //         // 有动态解析
+  //         return true;
+  //       }
+  //     }
+  //   }
+  //   return false;
+  // },
 
   /**
    * 验证函数标准化

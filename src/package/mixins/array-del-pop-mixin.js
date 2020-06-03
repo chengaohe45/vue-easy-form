@@ -47,9 +47,18 @@ export default {
       default: -1 // 设置为-1；低于索引值
     },
     delMsg: {
-      type: [Boolean, String, Number],
+      type: Object,
       required: false,
-      default: "确定删除吗？"
+      default: () => {
+        return {};
+      }
+    },
+    info: {
+      type: Object,
+      required: true,
+      default: () => {
+        return {};
+      }
     }
   },
 
@@ -94,7 +103,11 @@ export default {
     },
 
     clickDeletBtn() {
-      if (this.canPop && this.hasDelWarn && this.delMsg) {
+      if (
+        this.canPop &&
+        this.hasDelWarn &&
+        (!this.delMsg.hidden && (this.delMsg.name || this.delMsg.text))
+      ) {
         this.showPopHandler();
       } else {
         // 没有警告

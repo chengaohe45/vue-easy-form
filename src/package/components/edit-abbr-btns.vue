@@ -49,7 +49,10 @@
           </div>
         </div>
         <div class="es-form-pop-content" v-else>
-          <div>确定删除吗？</div>
+          <div class="content-box">
+            <span class="content" v-if="!delMsg.name">{{ delMsg.text }}</span>
+            <es-base v-else :config="delMsg" :info="info"></es-base>
+          </div>
           <div class="es-btn-row">
             <div class="es-btn-group">
               <es-btn class="es-btn" @click="clickPopConfirm">
@@ -170,7 +173,10 @@ export default {
 
     /* 重载 */
     clickDeletBtn() {
-      if (this.hasDelWarn) {
+      if (
+        this.hasDelWarn &&
+        (!this.delMsg.hidden && (this.delMsg.name || this.delMsg.text))
+      ) {
         // this.showPopHandler();
         this.$data.showBtn = false;
         this.$nextTick(() => {
