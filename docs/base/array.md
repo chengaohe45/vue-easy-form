@@ -28,6 +28,9 @@ propName: {
         console.log("test array input:", options);
       }
     },
+    delMsg: "确定删除吗？",
+    delAllMsg: "确定删除所有吗？",
+    before: function(done, data) { done() },  // 操作前调用的钩子，done(false)表示不执行下一步
     rowSpace: 20
   },
   properties: {
@@ -477,4 +480,7 @@ propName: {
 | actions | 数组事件 | array/object | trigger只有:<br> input<br>change | -- | 跟[项组件事件写法](./component.html#组件事件)一样，就是返回信息少了`target`
 | rules | 数组验证 | boolean/object | trigger只有:<br> input<br>change | -- | 跟[项组件验证写法](./rules.html)一样
 | value | 数组的默认值 | array | -- | -- | --
+| delMsg | 单个删除提示 | string/function/object | -- | `确定删除吗？` | 可[动态解析](./parse.md)
+| delAllMsg | 全部删除提示 | string/function/object | -- | `确定删除所有吗？` | 可[动态解析](./parse.md)
+| before | 操作前调用的钩子 | function(done, data) | -- | -- | 1. 执行操作时（`增加`, `复制`, `删除`, `上移`, `下移`,  `全删`）都会调用，用户可根据返回参数的`data.event.type`来判断是哪种操作<br>2. `done`是一个函数，要执行done()来告诉系统进行下一步操作，done(false)表示系统将停止下来，取消所需要执行的操作。
 
