@@ -46,7 +46,7 @@ propName: {
 ```
 
 ### 实例1
-功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`
+功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`、`delMsg`、`delAllMsg`、`before`
 
 <ClientOnly>
   <demo-block :canOperate="true">
@@ -91,6 +91,12 @@ propName: {
                   hasCopy: true,
                   hasDelWarn: true,
                   rowSpace: 12,
+                  delMsg: "es: {{$root.courses[i].subject}} ? '有名字，才会提示，确定删除？':''", // 动态写法
+                  delAllMsg: {  // 组件写法
+                    hidden: false,  // 可以通过hidden控制是否显示
+                    name: "span",   // 组件名，可以自定义
+                    text: "删除所有课程？"
+                  },
                   value: [
                     { subject: "语文", code: "1" }
                   ],
@@ -167,6 +173,22 @@ propName: {
                   hasAdd: true,
                   // hasCopy: true,
                   hasDelWarn: false,
+                  before: function(done, data) {    // before钩子
+                    console.log("before演示", data);
+                    if (data.event.type === "delete" || data.event.type === "deleteAll") {  // 只过滤删除操作
+                      this.$confirm("before演示, 是否继续删除?", "提示", {
+                        confirmButtonText: "确定",
+                        cancelButtonText: "取消",
+                        type: "warning"
+                      }).then(() => {
+                        done();      // 继续下一步
+                      }).catch(() => {
+                        done(false); // 取消下一步
+                      });
+                    } else {
+                      done();
+                    }
+                  },
                   // hasAdd: false,
                   fixed: 1,
                   min: 2,
