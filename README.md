@@ -12,6 +12,8 @@ vue-easy-form：简称esForm，是一个独立、不依赖第三方类库的vue�
 ### Node 版本要求
 [Node.js](https://nodejs.org/en/) >= 8.11; 若需要升级；可使用[nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 进行多个 Node 版本管理。
 
+
+### 项目信息
 [esForm文档](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
 [esForm源码](https://github.com/chengaohe45/vue-easy-form)
 
