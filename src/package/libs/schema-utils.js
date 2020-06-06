@@ -494,13 +494,15 @@ let schemaUtils = {
    */
   __isRightKey(key) {
     var illReg = /^[+-]?\d+$/;
-    if (illReg.test(key)) {
-      throw "属性不能是数字(如-1, 1, +1)";
+    if (key.trim() === "") {
+      throw "表单项的属性名不能为空值";
+    } else if (illReg.test(key)) {
+      throw "表单项的属性名不能是数字(如-1, 1, +1)";
     }
     var illChars = ["[", "]", ".", "{", "}", "(", ")"];
     for (var i = 0; i < illChars.length; i++) {
       if (key.indexOf(illChars[i]) >= 0) {
-        throw "属性不能出现以下的危险字符：" + illChars.join(" ");
+        throw "表单项的属性名不能出现以下的危险字符：" + illChars.join(" ");
       }
     }
     return true;
