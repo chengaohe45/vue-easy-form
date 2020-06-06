@@ -52,20 +52,6 @@ export default {
               hasDelWarn: true,
               rowSpace: 12,
               value: [{ subject: "语文", code: "1" }],
-              // delMsg: function(data) {
-              //   if (data.root.courses[data.index].subject) {
-              //     return "确定要删除吗";
-              //   } else {
-              //     return false;
-              //   }
-              // },
-              // delMsg: "es: {{$root.courses[i].subject}} ? '确定要删除吗?' : ''",
-              delAllMsg: {
-                hidden: "es: {{$root.name}} ? false : true",
-                // name: "span",
-                text:
-                  "es: {{$root.name}} ? '确定要删除吗确定要删除吗确定要删除吗确定要删除吗确定要删除吗确定要删除吗?' : ''"
-              },
               rules: {
                 // 默认
                 required: true,
