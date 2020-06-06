@@ -247,6 +247,41 @@ let utils = {
   },
 
   /**
+   * 处理可以有回调的钩子函数：主要是before、after
+   * @param {*} handle 句柄
+   * @param {*} context 上下文对象（指出来自哪里）
+   * @param {*} data 句柄所需要的数据
+   * @param {*} callback 回调
+   */
+  execCbHook(handle, context, data, callback) {
+    var hasExecuted = false; // 保存程序只执行一次
+    if (handle) {
+      var done = function(result) {
+        if (!hasExecuted) {
+          hasExecuted = true;
+        } else {
+          // 已经执行过，无需要再执行
+          console.warn("done只能执行一次，不能执行多次；第二次执行done将无效");
+          return false;
+        }
+        if (callback) {
+          callback.call(context, result);
+        }
+        context = null;
+      };
+      handle.call(context, done, this.deepCopy(data));
+      data = null;
+      done = null;
+    } else {
+      if (callback) {
+        callback.call(context);
+      }
+      data = null;
+      context = null;
+    }
+  },
+
+  /**
    * [deepFreeze 深冻结的数据是object和array]
    * @param  {[type]} data [description]
    * @return {[type]}   [description]

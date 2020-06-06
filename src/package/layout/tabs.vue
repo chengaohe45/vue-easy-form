@@ -10,6 +10,7 @@
           :has-error="itemSchema.__hasError"
           @clickActive="clickActiveHandler"
           :index="fieldName"
+          :info="itemSchema.__info"
         >
           <!-- itemSchema.label.hidden为true: 也补充key -->
           <div class="es-tabs-item-label">

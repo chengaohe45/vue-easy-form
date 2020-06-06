@@ -26,6 +26,8 @@
           @upItem="upItem"
           @downItem="downItem"
           @clickActive="clickActiveHandler"
+          :del-msg="itemSchema.delMsg"
+          :info="itemSchema.__info"
         >
           <span
             class="order-txt"

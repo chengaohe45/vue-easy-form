@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import esTabsNavItem from "./tabs-nav-item";
+// import esTabsNavItem from "./tabs-nav-item";
 import esTabsBtn from "./tabs-btn.vue";
 
 import tabsObserver from "../libs/tabs-observer.js";
@@ -48,7 +48,7 @@ export default {
   // mixins: [itemMixin, arrayMixins],
   components: {
     // esObject,
-    esTabsNavItem,
+    // esTabsNavItem,
     esTabsBtn
   },
 

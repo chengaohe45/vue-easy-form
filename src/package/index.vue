@@ -303,14 +303,23 @@ $btnDisableColor: #d5d7dc;
     border-radius: 4px;
     border: 1px solid $g_borderColor;
     padding: 10px 10px 10px 10px;
-    max-width: 160px;
+    max-width: 300px;
     color: #606266;
-    line-height: 1.4;
+    line-height: 24px;
     text-align: justify;
     font-size: 14px;
     box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     font-size: 13px;
     text-align: center;
+
+    .content-box {
+      padding: 3px 3px;
+    }
+
+    .content {
+      display: inline-block;
+      text-align: left;
+    }
   }
 
   .es-form-pop-content.es-thin {

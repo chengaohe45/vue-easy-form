@@ -106,6 +106,8 @@
                       @delItem="delItem"
                       @upItem="upItem"
                       @downItem="downItem"
+                      :del-msg="itemSchema.delMsg"
+                      :info="itemSchema.__info"
                     ></edit-btns>
                   </div>
                 </div>
@@ -148,6 +150,8 @@
                       @delItem="delItem"
                       @upItem="upItem"
                       @downItem="downItem"
+                      :del-msg="itemSchema.delMsg"
+                      :info="itemSchema.__info"
                     ></edit-btns>
                   </div>
                 </div>
@@ -191,6 +195,8 @@
           :has-del-warn="schema.array.hasDelWarn"
           @delItem="delAllItems"
           @addItem="addItem"
+          :del-msg="schema.array.delAllMsg"
+          :info="schema.__info"
         ></edit-bottom-btns>
       </div>
     </div>

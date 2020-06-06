@@ -13,6 +13,12 @@
 
 ## 当前版本记录
 
+### 1.7.3
+- 增加数组删除提示框可自定义：增加[delMsg](../base/array.md#配置属性), [delAllMsg](../base/array.md#配置属性)
+- 增加数组操作钩子：增加[before](../base/array.md#配置属性)钩子
+- 优化块组件验证：修复required无动态解析问题
+- 优化组件数组头部显示：修复subLabel无动态解析问题
+
 ### 1.7.1
 - 优化[动态解析](../base/parse.md)：优化[数组es写法](../base/array.md#数组es写法)
 

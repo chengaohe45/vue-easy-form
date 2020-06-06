@@ -152,6 +152,9 @@ let formUtils = {
       newItem.array = false;
     }
 
+    // 取出delMsg给每一项
+    newItem.delMsg = utils.deepCopy(schema.array.delMsg);
+
     if (insertInfo) {
       this.__setValue(newItem, insertInfo.value);
       if (schema.__propSchemaList.length <= insertInfo.position) {
@@ -863,6 +866,16 @@ let formUtils = {
         this.__esParseComponent(propItem.help, parseSources);
       }
 
+      if (propItem.subLabel) {
+        // 解析组件内的属性
+        this.__esParseComponent(propItem.subLabel, parseSources);
+      }
+
+      if (propItem.delMsg) {
+        // 解析数组组件内的属性
+        this.__esParseComponent(propItem.delMsg, parseSources);
+      }
+
       if (propItem.array) {
         // 数组
         schemaList = propItem.__propSchemaList;
@@ -897,6 +910,10 @@ let formUtils = {
         if (propItem.array.rules) {
           this.__esParseRules(propItem.array.rules, parseSources);
         }
+
+        if (propItem.array.delAllMsg) {
+          this.__esParseComponent(propItem.array.delAllMsg, parseSources);
+        }
       } else {
         /* 一般组件 */
         if (propItem.rules) {
@@ -909,11 +926,8 @@ let formUtils = {
     } else if (propItem.properties) {
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = parse.smartEsValue(
-          // propItem.__propSchemaList里面是没有hidden的，不过此写法不影响，smartEsValue前后都是undefined
-          propItem.__rawHidden,
-          parseSources
-        );
+        isHidden = parse.smartEsValue(propItem.__rawHidden, parseSources);
+
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
         }
@@ -968,6 +982,11 @@ let formUtils = {
         this.__esParseComponent(propItem.subLabel, parseSources);
       }
 
+      if (propItem.delMsg) {
+        // 解析数组组件内的属性
+        this.__esParseComponent(propItem.delMsg, parseSources);
+      }
+
       if (propItem.array) {
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
@@ -995,6 +1014,14 @@ let formUtils = {
               propItem.__tabsIndex = false;
             }
           }
+        }
+
+        if (propItem.array.rules) {
+          this.__esParseRules(propItem.array.rules, parseSources);
+        }
+
+        if (propItem.array.delAllMsg) {
+          this.__esParseComponent(propItem.array.delAllMsg, parseSources);
         }
       } else {
         var nextPropItem, key;

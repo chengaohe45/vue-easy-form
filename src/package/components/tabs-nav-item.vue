@@ -34,7 +34,12 @@
             @click.prevent.stop
           >
             <div class="es-form-pop-content">
-              <div>确定删除吗？</div>
+              <div class="content-box">
+                <span class="content" v-if="!delMsg.name">{{
+                  delMsg.text
+                }}</span>
+                <es-base v-else :config="delMsg" :info="info"></es-base>
+              </div>
               <div class="es-btn-row">
                 <div class="es-btn-group">
                   <es-btn class="es-btn" @click="clickPopConfirm">
@@ -114,12 +119,12 @@ export default {
       type: Boolean,
       required: false,
       default: false
+    },
+    info: {
+      type: Object,
+      required: true
+      // default: false
     }
-    // required: {
-    //   type: Boolean,
-    //   required: false,
-    //   default: false
-    // }
   },
 
   methods: {

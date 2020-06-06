@@ -79,6 +79,8 @@
                 @delItem="delItem"
                 @upItem="upItem"
                 @downItem="downItem"
+                :del-msg="itemSchema.delMsg"
+                :info="itemSchema.__info"
               ></edit-btns>
               <!-- <span class="edit-selected-box"></span> -->
             </span>
@@ -227,7 +229,7 @@ import tabs from "./tabs";
 import itemMixin from "../mixins/item-mixin";
 import arrayMixins from "../mixins/array-mixin.js";
 import editBtns from "../components/edit-abbr-btns";
-import editBottomBtns from "../components/edit-bottom-btns";
+// import editBottomBtns from "../components/edit-bottom-btns";
 import esBase from "../base";
 import esBtn from "../components/btn.vue";
 
@@ -236,7 +238,7 @@ export default {
   components: {
     esObject,
     editBtns,
-    editBottomBtns,
+    // editBottomBtns,
     tabs,
     esBase,
     esBtn
