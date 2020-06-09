@@ -87,7 +87,8 @@ module.exports = {
             'base/value',
             'base/format',
             'base/auto-match',
-            'base/form'
+            'base/form',
+            'base/scopedSlots'
           ]
         },
         {

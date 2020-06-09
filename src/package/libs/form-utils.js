@@ -1246,6 +1246,24 @@ let formUtils = {
           component.text = text;
         }
       }
+
+      // 解析scopedSlots
+      if (component.scopedSlots) {
+        var scopedSlots = component.scopedSlots;
+        for (var slotName in scopedSlots) {
+          var values = scopedSlots[slotName];
+          if (!utils.isArr(value)) {
+            values = [values];
+          }
+          values.forEach(value => {
+            if (!utils.isVNode(value) && utils.isObj(value)) {
+              // 是组件，解析
+              this.__esParseComponent(value, parseSources);
+            }
+          });
+          values = null;
+        }
+      }
     } else {
       // 没name, toNormalText解析text
       if (component.__rawText) {

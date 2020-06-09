@@ -668,7 +668,7 @@ export default {
         var refTarget = this.$refs[name];
         if (refTarget) {
           targetInfo = {
-            target: refTarget.$refs.__comTarget__,
+            target: refTarget.$refs[constant.COM_TARGET_REF],
             sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
           };
         } else {

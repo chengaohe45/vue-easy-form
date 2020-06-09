@@ -10,265 +10,18 @@
 import utils from "./libs/utils.js";
 import constant from "./libs/constant.js";
 import dataCache from "./libs/data-cache.js";
-// import { throws } from "assert";
+import { parseComponent } from "./libs/component-utils";
 
 ("use strict");
 
 export default {
   render: function(createElement) {
-    var vnode;
-    // 根据vue源代码, VNode是不会被劫持的
-    if (utils.isVNode(this.config)) {
-      vnode = this.config;
-    } else if (utils.isObj(this.config)) {
-      if (!this.config.name) {
-        console.error("错误的config: ", this.config);
-        throw "es-base config.name必须存在";
-      }
-
-      // 防止props不存在
-      var configProps = this.config.props ? this.config.props : {};
-
-      // 计算出props, attrs
-      var newProps = {};
-      var newAttrs = {};
-      var domProps = {};
-
-      var directives = this.config.directives
-        ? utils.deepCopy(this.config.directives)
-        : []; // false, 不是数组也没有事
-
-      var componentName = this.config.name.toLowerCase
-        ? this.config.name.toLowerCase()
-        : this.config.name;
-      if (
-        componentName === constant.TAG_INPUT && // 不区分大小写
-        (configProps.type === constant.TYPE_RADIO ||
-          configProps.type === constant.TYPE_CHECKBOX)
-      ) {
-        if (configProps.type === constant.TYPE_RADIO) {
-          Object.assign(newAttrs, configProps);
-          if (this.config.hasOwnProperty("value")) {
-            // 用户设置了value的情况
-            newAttrs.checked = this.config.value === configProps.value;
-          } else {
-            // 没有用户value
-            newAttrs.checked =
-              configProps.hasOwnProperty("checked") &&
-              configProps.checked !== false
-                ? true
-                : false;
-          }
-
-          Object.assign(newProps, configProps);
-          if (newProps.hasOwnProperty("checked")) {
-            delete newProps.checked;
-          }
-
-          domProps.checked = newAttrs.checked;
-        } else {
-          var checked = false;
-          if (this.config.hasOwnProperty("value")) {
-            if (!utils.isUndef(configProps.trueValue)) {
-              // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
-              if (this.config.value === configProps.trueValue) {
-                checked = true;
-              } else {
-                checked = false;
-              }
-            } else if (!utils.isUndef(configProps.falseValue)) {
-              // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
-              if (this.config.value === configProps.falseValue) {
-                checked = false;
-              } else {
-                checked = true;
-              }
-            } else {
-              // 经测试：当trueValue和falseValue没有指定，checked才为!!this.config.value
-              checked = !!this.config.value;
-            }
-          } else {
-            checked =
-              configProps.hasOwnProperty("checked") &&
-              configProps.checked !== false
-                ? true
-                : false;
-          }
-          Object.assign(newAttrs, configProps);
-          newAttrs.checked = checked;
-
-          Object.assign(newProps, configProps);
-          if (newProps.hasOwnProperty("checked")) {
-            delete newProps.checked;
-          }
-
-          domProps.checked = newAttrs.checked;
-        }
-      } else {
-        var newValue;
-        if (this.config.hasOwnProperty("value")) {
-          newValue = utils.isRefVal(this.config.value)
-            ? utils.deepCopy(this.config.value)
-            : this.config.value; // 这样防止引用地址被组件内部修改
-        } else {
-          newValue = configProps.value;
-        }
-        if (!constant.FORM_INPUTS.includes(componentName)) {
-          Object.assign(newAttrs, configProps);
-          if (newAttrs.hasOwnProperty("value")) {
-            delete newAttrs.value;
-          }
-          Object.assign(newProps, configProps);
-          newProps.value = newValue;
-        } else {
-          Object.assign(newAttrs, configProps);
-          if (newAttrs.hasOwnProperty("value")) {
-            delete newAttrs.value;
-          }
-
-          Object.assign(newProps, configProps);
-          if (newProps.hasOwnProperty("value")) {
-            delete newProps.value;
-          }
-
-          // 经测试（value）：
-          // textarea必须要在domProps才能显示；
-          // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
-          domProps.value = newValue;
-        }
-      }
-
-      vnode = createElement(
-        this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
-        {
-          attrs: newAttrs, //attrs为原生属性
-
-          // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
-          // this.config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
-          class: this.config.class,
-          style: this.config.style, // this.config.style必须是一个对象才能有效；原理同上
-
-          domProps: domProps, // DOM属性
-
-          props: newProps, // 组件props
-          // 事件监听基于 "on"
-          // 所以不再支持如 "v-on:keyup.enter" 修饰语
-          // 需要手动匹配 KeyCode
-          on: this.$data.emitOn,
-
-          // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
-          nativeOn: this.$data.nativeOn,
-
-          // 自定义指令。注意事项：不能对绑定的旧值设值
-          // Vue 会为您持续追踪
-          // directives: [
-          //   // {
-          //   // 	name: "my-custom-directive",
-          //   // 	value: "2",
-          //   // 	expression: "1 + 1",
-          //   // 	arg: "foo",
-          //   // 	modifiers: {
-          //   // 		bar: true
-          //   // 	}
-          //   // }
-          // ],
-          directives: directives,
-          // Scoped slots in the form of
-          scopedSlots: this.$data.scopedSlots,
-          // { name: props => VNode | Array<VNode> }
-          // scopedSlots: {
-          //   // 必须是一个函数
-          //   // default: props => createElement("span", "test3")   // OK
-          //   // default: 123   // no
-          //   // default: props => 12345 // ok 界面输出123
-          //   // default: props => false // ok 界面输出false
-          //   default: function() {
-          //     console.log(this);
-          //   },
-          //   // default: props => [1, 2], // ok 界面输出12
-          //   // default: props => {
-          //   //   return { a: 1, b: 2 };
-          //   // }, // ok 界面输出undefined
-          //   // default: props => null    // 界面没有输出，说明返回null代表没有插糟（如<slot>?</slot>这样问号会存在于界面）
-          //   // default: props => undefined // 界面没有输出，说明返回undefined代表没有插糟（如<slot>?</slot>这样问号会存在于界面）
-          //   test: props => [22, 11]
-          // },
-          // 如果组件是其他组件的子组件，需为插槽指定名称
-          // slot: "name-of-slot",
-          // 其他特殊顶层属性
-          // key: "myKey",
-          ref: "__comTarget__"
-        },
-        // [createElement('span', "test")]
-        // ["test2"]
-        // "测试{{config.value}}" // 子组件中的阵列
-        this.config.text
-      );
-
-      // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
-      var componentOptions = vnode.componentOptions;
-      var dataAttrs = {};
-      var comProps =
-        componentOptions && componentOptions.Ctor.options.props
-          ? componentOptions.Ctor.options.props
-          : false;
-      if (
-        comProps &&
-        Object.keys(comProps).length &&
-        Object.keys(configProps).length
-      ) {
-        var comPropsKeys = Object.keys(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-        for (var key in configProps) {
-          if (!comPropsKeys.includes(key)) {
-            dataAttrs[key] = configProps[key];
-          }
-        }
-        if (vnode.data) {
-          vnode.data.attrs = dataAttrs;
-        }
-      }
-
-      newAttrs = null;
-      newProps = null;
-      domProps = null;
-      directives = null;
-
-      configProps = null;
-    } else {
-      var options = {
-        global: dataCache.getGlobal(this.config.__formId),
-        rootData: dataCache.getRoot(this.config.__formId), // 兼容1.7.0以前，不包括1.7.0
-        root: dataCache.getRoot(this.config.__formId),
-        idxChain: this.info.idxChain,
-        index: this.info.index,
-        pathKey: this.info.pathKey,
-        $hidden: dataCache.getHiddenFunc(this.config.__formId)
-      };
-
-      vnode = this.config(options);
-      if (!utils.isVNode(vnode)) {
-        if (
-          utils.isStr(vnode) ||
-          utils.isUndef(vnode) ||
-          utils.isNum(vnode) ||
-          utils.isBool(vnode) ||
-          utils.isNull(vnode)
-        ) {
-          vnode = createElement("span", vnode); // 经验证，这样写没有问题：vnode不用加""
-        } else {
-          console.error("错误的config: ", this.config);
-          throw "es-base config当是一个函数时，其返回值必须是一个虚拟节点或字符串";
-        }
-      }
-    }
-
-    // 这个不能删除：vue机制，主要是为了执行this.config.__refreshIndex；当表单改变时，同步更新页面
-    if (this.config.__refreshIndex && this.__slotUpdateTime) {
-      // 永远都不会进入这，因为__slotUpdateTime没有值的
-      this.__slotUpdateTime++;
-    }
-
-    return vnode;
+    return this.renderUi(
+      createElement,
+      this.config,
+      false,
+      constant.COM_TARGET_REF
+    );
   },
   // inheritAttrs: false,
   props: {
@@ -300,23 +53,6 @@ export default {
       required: false,
       default: false
     }
-
-    // emitEvents: {
-    //   type: Array,
-    //   required: false,
-    //   default: null
-    // },
-
-    // nativeEvents: {
-    //   type: Array,
-    //   required: false,
-    //   default: null
-    // },
-
-    // value: {
-    //   type: [Object, String, Date, Array, Boolean, Number],
-    //   required: false
-    // }
   },
 
   data() {
@@ -332,6 +68,13 @@ export default {
   },
 
   methods: {
+    initUi() {
+      var ref = constant.COM_TARGET_REF;
+      this.$data.emitOn = this.createEmitOn(this.config, this.isMain, ref);
+      this.$data.nativeOn = this.createNativeOn(this.config, this.isMain, ref);
+      this.$data.scopedSlots = this.createScopedSlots(this.config, ref);
+    },
+
     /**
      * 渲染函数
      * @param {*} createElement 创建VNode的函数
@@ -339,7 +82,7 @@ export default {
      * @param {*} isSlotCom     是否插糟的组件，因为事件不一样，插糟数据也不一样
      * @returns VNode
      */
-    renderUi(createElement, config, isSlotCom) {
+    renderUi(createElement, config, isSlotCom, ref) {
       var vnode;
       // 根据vue源代码, VNode是不会被劫持的
       if (utils.isVNode(config)) {
@@ -462,6 +205,23 @@ export default {
           }
         }
 
+        let emitOn, nativeOn, scopedSlots, tmpRef;
+        if (!isSlotCom) {
+          // 内容组件，非插糟组件: 因为常用，所以计算好
+          emitOn = this.$data.emitOn;
+          nativeOn = this.$data.nativeOn;
+          scopedSlots = this.$data.scopedSlots;
+        } else {
+          // 很少用，且scopedSlots有可能包含函数，必须实时解析
+          emitOn = this.createEmitOn(config, false, ref);
+          nativeOn = this.createNativeOn(config, false, ref);
+          scopedSlots = this.createScopedSlots(config, ref);
+        }
+        // COM_TARGET_REF时ref必须存在，因为要搜索
+        if (ref === constant.COM_TARGET_REF || emitOn || nativeOn) {
+          tmpRef = ref;
+        }
+
         vnode = createElement(
           config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
           {
@@ -478,17 +238,17 @@ export default {
             // 事件监听基于 "on"
             // 所以不再支持如 "v-on:keyup.enter" 修饰语
             // 需要手动匹配 KeyCode
-            on: this.$data.emitOn,
+            on: emitOn,
 
             // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
-            nativeOn: this.$data.nativeOn,
+            nativeOn: nativeOn,
 
             // 自定义指令。注意事项：不能对绑定的旧值设值
             // Vue 会为您持续追踪
             directives: directives,
             // Scoped slots in the form of
-            scopedSlots: this.$data.scopedSlots,
-            ref: "__comTarget__"
+            scopedSlots: scopedSlots,
+            ref: tmpRef
           },
           config.text
         );
@@ -522,7 +282,7 @@ export default {
         directives = null;
 
         configProps = null;
-      } else {
+      } else if (utils.isFunc(config)) {
         var options = {
           global: dataCache.getGlobal(this.config.__formId), // 直接取组件__formId，插糟是没有__formId的
           rootData: dataCache.getRoot(this.config.__formId), // 兼容1.7.0以前，不包括1.7.0
@@ -535,23 +295,24 @@ export default {
 
         vnode = config(options);
         if (!utils.isVNode(vnode)) {
-          if (
-            utils.isStr(vnode) ||
-            utils.isUndef(vnode) ||
-            utils.isNum(vnode) ||
-            utils.isBool(vnode) ||
-            utils.isNull(vnode)
-          ) {
-            vnode = createElement("span", vnode); // 经验证，这样写没有问题：vnode不用加""
-          } else {
-            console.error("错误的config: ", config);
-            throw "es-base config当是一个函数时，其返回值必须是一个虚拟节点或字符串";
-          }
+          vnode = this.renderUi(createElement, vnode, isSlotCom, ref);
         }
+        options = null;
+      } else if (
+        utils.isStr(vnode) ||
+        utils.isUndef(vnode) ||
+        utils.isNum(vnode) ||
+        utils.isBool(vnode) ||
+        utils.isNull(vnode)
+      ) {
+        vnode = createElement("span", vnode); // 经验证，这样写没有问题：vnode不用加""
+      } else {
+        console.error("错误的config: ", config);
+        throw "es-base config当是一个函数时，其返回值必须是一个虚拟节点或字符串";
       }
 
-      // 这个不能删除：vue机制，主要是为了执行this.config.__refreshIndex；当表单改变时，同步更新页面
-      if (this.config.__refreshIndex && this.__slotUpdateTime) {
+      // 这个不能删除：vue机制，主要是为了执行config.__refreshIndex；当表单改变时，同步更新页面
+      if (config && config.__refreshIndex && this.__slotUpdateTime) {
         // 永远都不会进入这，因为__slotUpdateTime没有值的
         this.__slotUpdateTime++;
       }
@@ -559,31 +320,26 @@ export default {
       return vnode;
     },
 
-    initUi() {
-      this.$data.emitOn = this.createEmitOn(this.config);
-      this.$data.nativeOn = this.createNativeOn(this.config);
-      this.$data.scopedSlots = this.createScopedSlots(this.config);
-    },
-
-    eventHandler(eventName, args) {
+    eventHandler(config, eventName, args, isMain, ref) {
       args = args ? args : [];
-      if (this.isMain) {
+      // console.log("this.$refs", this.$refs);
+      if (isMain) {
         // 主组件：让父类去处理
-        this.$emit("trigger", eventName, args, this.$refs.__comTarget__);
+        this.$emit("trigger", eventName, args, this.$refs[ref]);
       } else {
         // 一般组件，自己处理
         var options = {
-          value: utils.deepCopy(this.config.value),
+          value: utils.deepCopy(config.value),
           event: args[0],
           args: args,
           pathKey: this.info.pathKey,
           index: this.info.index,
           idxChain: this.info.idxChain,
-          target: this.$refs.__comTarget__
+          target: this.$refs[ref]
         };
 
         var handlers = [];
-        var actions = this.config.actions;
+        var actions = config.actions;
         if (actions) {
           actions.forEach(action => {
             if (action.trigger && action.trigger.includes(eventName)) {
@@ -615,7 +371,7 @@ export default {
       }
     },
 
-    __parseInputEvent(eventData) {
+    __parseInputEvent(config, eventData) {
       var eventValue;
       if (eventData && eventData.target && eventData.target.nodeName) {
         var tagName = eventData.target.tagName;
@@ -624,7 +380,7 @@ export default {
           var configProps;
           if (nodeType === constant.TYPE_RADIO) {
             // 防止props不存在
-            configProps = this.config.props ? this.config.props : {};
+            configProps = config.props ? config.props : {};
             if (eventData.target.checked) {
               eventValue = configProps.value;
             } else {
@@ -632,7 +388,7 @@ export default {
             }
           } else if (nodeType === constant.TYPE_CHECKBOX) {
             // 防止props不存在
-            configProps = this.config.props ? this.config.props : {};
+            configProps = config.props ? config.props : {};
             if (eventData.target.checked) {
               eventValue = true;
               if (!utils.isUndef(configProps.trueValue)) {
@@ -659,7 +415,7 @@ export default {
     /**
      * 创建emit派发所需要监听的事件
      */
-    createEmitOn(config) {
+    createEmitOn(config, isMain, ref) {
       var _thisVm = this;
 
       var hasOwnValue = config.hasOwnProperty("value");
@@ -682,15 +438,15 @@ export default {
       emitEvents.forEach(eventName => {
         if (eventName == constant.INPUT_EVENT && hasOwnValue) {
           emitOn[eventName] = function(eventData) {
-            var eventValue = _thisVm.__parseInputEvent(eventData);
-            if (_thisVm.config.value !== eventValue) {
-              _thisVm.config.value = eventValue;
-              _thisVm.eventHandler(eventName, arguments);
+            var eventValue = _thisVm.__parseInputEvent(config, eventData);
+            if (config.value !== eventValue) {
+              config.value = eventValue;
+              _thisVm.eventHandler(config, eventName, arguments, isMain, ref);
             }
           };
         } else {
           emitOn[eventName] = function() {
-            _thisVm.eventHandler(eventName, arguments);
+            _thisVm.eventHandler(config, eventName, arguments, isMain, ref);
           };
         }
       });
@@ -706,7 +462,7 @@ export default {
     /**
      * 创建原生事件所需要监听的事件
      */
-    createNativeOn(config) {
+    createNativeOn(config, isMain, ref) {
       // emit发出的事件
       if (config.__nativeEvents && config.__nativeEvents.length > 0) {
         var _thisVm = this;
@@ -715,8 +471,11 @@ export default {
         nativeEvents.forEach(eventName => {
           nativeOn[eventName] = function() {
             _thisVm.eventHandler(
+              config,
               eventName + "." + constant.ADJ_NATIVE,
-              arguments
+              arguments,
+              isMain,
+              ref
             );
           };
         });
@@ -732,12 +491,12 @@ export default {
       }
     },
 
-    createScopedSlots(config) {
+    createScopedSlots(config, pref) {
       var scopedSlots = config.scopedSlots;
       if (scopedSlots) {
         var newScopedSlots = {};
         for (var key in scopedSlots) {
-          newScopedSlots[key] = this.newSlotFunc(scopedSlots[key]);
+          newScopedSlots[key] = this.newSlotFunc(key, scopedSlots[key], pref);
         }
         return newScopedSlots;
       } else {
@@ -745,9 +504,10 @@ export default {
       }
     },
 
-    newSlotFunc(slotValue) {
+    newSlotFunc(key, slotValue, pref) {
       var vm = this;
       return function(scoped) {
+        var vnodes;
         if (utils.isFunc(slotValue)) {
           var options = {
             global: dataCache.getGlobal(vm.config.__formId),
@@ -759,10 +519,52 @@ export default {
             $hidden: dataCache.getHiddenFunc(vm.config.__formId)
           };
 
-          return slotValue(options, scoped);
+          vnodes = slotValue(options, scoped);
+          if (!utils.isArr(vnodes)) {
+            vnodes = [vnodes];
+          }
+          var tmpVNodes = [];
+          vnodes.forEach(function(vnode) {
+            if (!utils.isVNode(vnode) && utils.isObj(vnode)) {
+              var newComponent = parseComponent(
+                vnode,
+                vm.info.pathKey + "> scopeSlots(function返回值) > " + key,
+                true,
+                false
+              );
+              if (newComponent) {
+                tmpVNodes.push(newComponent);
+              }
+            } else {
+              tmpVNodes.push(vnode);
+            }
+          });
+          vnodes = tmpVNodes;
         } else {
-          return slotValue;
+          vnodes = [slotValue];
         }
+
+        var newVNode,
+          newVNodes = [];
+        vnodes.forEach(function(vnode, index) {
+          if (!utils.isVNode(vnode) && utils.isObj(vnode)) {
+            newVNode = vm.renderUi(
+              vm.$createElement,
+              vnode,
+              true,
+              pref + "_" + index
+            );
+            newVNodes.push(newVNode);
+          } else {
+            newVNodes.push(vnode);
+          }
+        });
+
+        if (newVNodes.length <= 0) {
+          newVNodes = undefined;
+        }
+
+        return newVNodes;
       };
     }
   },
@@ -776,7 +578,6 @@ export default {
   watch: {
     config: {
       handler: function(/* newVal, oldVal */) {
-        // console.log("base.config here...");
         this.initUi();
       },
       deep: false

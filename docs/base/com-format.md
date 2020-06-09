@@ -30,6 +30,14 @@
     modifiers: {      // 一个包含修饰符的对象
       bar: true
     }
+  },
+
+  scopedSlots: {  // 插糟：键值对写法
+    default: {  // 自定义组件
+      name: "el-tag",
+      text: "123"
+    },
+    otherSlot: "123"  // 字符串，数值，布尔，函数等
   }
 }
 ```
@@ -41,6 +49,7 @@
 - `value`: [组件的值](#value配置)（与v-model实行双向绑定）；`类型`：任何；`非必填`
 - `actions`: [组件事件](#组件事件)；`类型`：对象/数组；`非必填`
 - `directives`: 指令；`类型`：字符串/对象/数组；`非必填`；索引`directives`可简写为`v`
+- `scopedSlots`: [组件插糟](./scopedSlots.md)<badge text="1.7.6" />；`类型`：字符串/布尔/数值/对象
 
 > 动态解析是指支持[es写法](./parse.md#es写法)或[函数写法](./parse.md#函数写法) 
 

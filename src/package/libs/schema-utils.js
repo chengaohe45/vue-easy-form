@@ -15,7 +15,18 @@ import schemaRules from "./schema-rules";
 import formUtils from "./form-utils";
 import esHelp from "../components/help.vue";
 
-import { enterSubmit, onlySubmit } from "./submit";
+// 解析组件的方法
+import {
+  parseMainComponent,
+  parsePropComponent,
+  parseClassStyle,
+  parseActions,
+  parseTrigger,
+  fetchActionEvent,
+  getNativeName,
+  parseAlign,
+  parseFlex
+} from "./component-utils";
 
 let m_currentFormId = undefined; // 应用于completeSchema,记录当前的解析是在哪个表单中
 
@@ -65,7 +76,7 @@ let schemaUtils = {
       } else {
         // 根节点有效的属性
         autoMatch = rootObj.autoMatch === true ? true : false;
-        rootActions = this.__parseActions(rootObj.actions, "根");
+        rootActions = parseActions(rootObj.actions, "根");
       }
 
       // 基础设置，最外层的一些东西固定
@@ -455,47 +466,6 @@ let schemaUtils = {
   },
 
   /**
-   * 解析触发事件
-   * @param {*} trigger
-   * 1. 事件字件串或者以空格隔开的事件所组成的字符串，如"click" or "click change"
-   * 2. 事件组成的数组
-   * @returns 返回数据组，没有时返回一个null
-   */
-  __parseTrigger: function(trigger) {
-    var tmpTriggers;
-    if (utils.isArr(trigger) || utils.isStr(trigger)) {
-      if (utils.isStr(trigger)) {
-        trigger = trigger.trim();
-        tmpTriggers = trigger.split(/\s+/);
-      } else {
-        tmpTriggers = [];
-        trigger.forEach(item => {
-          if (utils.isStr(item)) {
-            item = item.trim();
-            tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
-          }
-        });
-      }
-
-      tmpTriggers = tmpTriggers.map(item => {
-        if (!item) {
-          // 为空，直接写默认事件
-          return constant.CLICK_EVENT;
-        } else if (item.indexOf(".") === 0) {
-          // 只有修改，前面加默认事件
-          return constant.CLICK_EVENT + item;
-        } else {
-          // 合法
-          return item;
-        }
-      });
-    } else {
-      tmpTriggers = null;
-    }
-    return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
-  },
-
-  /**
    * 判断属性是否合法
    * @param {*} key
    */
@@ -533,7 +503,7 @@ let schemaUtils = {
           // 有检查
           triggerList = checkItem.trigger;
           triggerList.forEach(triggerItem => {
-            nativeName = this.__getNativeName(triggerItem);
+            nativeName = getNativeName(triggerItem);
             if (nativeName) {
               // .native监听
               nativeEvents.push(nativeName);
@@ -559,7 +529,7 @@ let schemaUtils = {
         ? constant.INPUT_CHANGE
         : global.trimEvent;
       // 要去掉左右两边的空格，添此触发事件
-      nativeName = this.__getNativeName(curTrimEvent);
+      nativeName = getNativeName(curTrimEvent);
       if (nativeName) {
         // .native监听
         nativeEvents.push(nativeName);
@@ -570,21 +540,7 @@ let schemaUtils = {
 
     // 自定义事件
     if (propItem.component && propItem.component.actions) {
-      // var actions = propItem.component.actions;
-      // actions.forEach(actionItem => {
-      //   triggerList = actionItem.trigger;
-      //   triggerList.forEach(triggerItem => {
-      //     nativeName = this.__getNativeName(triggerItem);
-      //     if (nativeName) {
-      //       // .native监听
-      //       nativeEvents.push(nativeName);
-      //     } else {
-      //       emitEvents.push(triggerItem);
-      //     }
-      //   });
-      // });
-
-      var actionInfo = this.__fetchActionEvent(propItem.component.actions);
+      var actionInfo = fetchActionEvent(propItem.component.actions);
       if (actionInfo.__emitEvents) {
         emitEvents = emitEvents.concat(actionInfo.__emitEvents);
       }
@@ -598,55 +554,6 @@ let schemaUtils = {
       __emitEvents: emitEvents.length ? utils.unique(emitEvents) : null,
       __nativeEvents: nativeEvents.length ? utils.unique(nativeEvents) : null
     };
-  },
-
-  /**
-   * 整理出"表单"组件需要监听的外部事件
-   */
-  __fetchActionEvent: function(actions) {
-    var emitEvents = [];
-    var nativeEvents = [];
-    var triggerList, nativeName;
-    // 自定义事件
-    if (actions) {
-      actions.forEach(actionItem => {
-        triggerList = actionItem.trigger;
-        triggerList.forEach(triggerItem => {
-          nativeName = this.__getNativeName(triggerItem);
-          if (nativeName) {
-            // .native监听
-            nativeEvents.push(nativeName);
-          } else {
-            emitEvents.push(triggerItem);
-          }
-        });
-      });
-    }
-
-    return {
-      __emitEvents: emitEvents.length ? utils.unique(emitEvents) : null,
-      __nativeEvents: nativeEvents.length ? utils.unique(nativeEvents) : null
-    };
-  },
-
-  /**
-   * 提取是否为.native事件
-   * @param {*} eventName
-   */
-  __getNativeName(eventName) {
-    var dotNative = "." + constant.ADJ_NATIVE;
-    var lastIndex = eventName.lastIndexOf(dotNative);
-    if (lastIndex != -1 && eventName.substr(lastIndex) === dotNative) {
-      // .native监听
-      var nativeName = eventName.substr(0, lastIndex);
-      if (nativeName) {
-        return nativeName;
-      } else {
-        return false; //因为eventName是经过处理的,不会出现点在前面，所以不会进入这里
-      }
-    } else {
-      return false;
-    }
   },
 
   /**
@@ -923,316 +830,6 @@ let schemaUtils = {
   },
 
   /**
-   * 解析右栏组件
-   */
-  __parseMainComponent: function(propItem, myPathKey) {
-    var component = propItem.component;
-    var newComponent,
-      defaultAlign = false;
-    // 根据vue源代码, VNode是不会被劫持的
-    // if (utils.isVNode(component)) {
-    //   newComponent = component;
-    // } else
-    if (utils.isObj(component) && Object.keys(component).length > 0) {
-      newComponent = {};
-      newComponent.name = component.name ? component.name : global.defaultCom;
-      newComponent.actions = this.__parseActions(component.actions, myPathKey);
-      var ref = utils.isStr(component.ref) ? component.ref.trim() : null;
-      if (ref) {
-        newComponent.ref = ref;
-      }
-
-      var propInfo = this.__parseComProps(component.props, ["style", "class"]);
-      if (propInfo.new) {
-        newComponent.props = propInfo.new;
-      }
-
-      if (propInfo.raw) {
-        newComponent.__rawProps = propInfo.raw;
-      }
-
-      if (propInfo.staticNames) {
-        newComponent.__staticPropNames = propInfo.staticNames;
-      }
-
-      // 指令
-      var directiveInfo = this.__parseDirectives(
-        utils.isUndef(component.directives) ? component.v : component.directives
-      );
-
-      if (directiveInfo.new) {
-        newComponent.directives = directiveInfo.new;
-      }
-
-      if (directiveInfo.raw) {
-        newComponent.__rawDirectives = directiveInfo.raw;
-      }
-
-      var rawText = component.text;
-      if (!utils.isFunc(rawText)) {
-        rawText = utils.toComText(rawText); // 转换为文本
-      }
-      if (rawText) {
-        newComponent.text = rawText;
-        if (parse.isEsOrFunc(rawText)) {
-          newComponent.__rawText = parse.newEsFuncion(rawText);
-        }
-      }
-
-      // 提取class和style
-      Object.assign(newComponent, this.__parseClassStyle(component));
-
-      newComponent.align = this.__parseAlign(component.align, defaultAlign);
-      newComponent.flex = this.__parseFlex(component.flex, component.size);
-      var slotInfo = this.__parseScopedSlots(component.scopedSlots, myPathKey);
-      if (slotInfo) {
-        if (slotInfo.hasRuntime) {
-          // 需要检测
-          newComponent.__refreshIndex = 0;
-        }
-        newComponent.scopedSlots = slotInfo.scopedSlots;
-      }
-
-      // value
-      if (propItem.hasOwnProperty("value")) {
-        newComponent.value = propItem.value;
-      } else if (component.hasOwnProperty("value")) {
-        newComponent.value = component.value;
-      } else {
-        // 自动补充value: 因为是表单组件
-        newComponent.value =
-          component.name === global.defaultCom ? global.defaultVal : undefined;
-      }
-      // } else if (utils.isFunc(component)) {
-      //   newComponent = component;
-    } else if (utils.isStr(component)) {
-      // 要自动补充value
-      newComponent = {
-        name: component,
-        actions: [],
-        align: defaultAlign,
-        flex: false,
-        value: propItem.hasOwnProperty("value")
-          ? propItem.value
-          : global.defaultCom === component
-          ? global.defaultVal
-          : undefined
-      };
-    } else {
-      // 要自动补充value
-      newComponent = {
-        name: global.defaultCom,
-        actions: [],
-        align: defaultAlign,
-        flex: false,
-        value: global.defaultVal
-      };
-    }
-
-    // 判断名称是否合法
-    if (
-      utils.isStr(newComponent.name) &&
-      !utils.validateComponentName(newComponent.name)
-    ) {
-      throw "组件名(" + newComponent.name + ")存在html非法字符";
-    }
-    newComponent.__formId = m_currentFormId;
-    newComponent.props = newComponent.props ? newComponent.props : {};
-
-    return newComponent;
-  },
-
-  /**
-   * 解析scopedSlots
-   */
-  __parseScopedSlots: function(scopedSlots, myPathKey) {
-    var newScopedSlots = {};
-    var newSlots;
-
-    var hasRuntime = false;
-    // 根据vue源代码, VNode是不会被劫持的
-    if (utils.isArr(scopedSlots)) {
-      newSlots = this.__checkSlotArr(scopedSlots, "scopedSlots", myPathKey);
-      if (newSlots.length) {
-        newScopedSlots.default = newSlots;
-      }
-    } else if (utils.isSlotType(scopedSlots)) {
-      newScopedSlots.default = scopedSlots;
-      if (utils.isFunc(scopedSlots)) {
-        hasRuntime = true;
-      }
-    } else if (
-      utils.isObj(scopedSlots) &&
-      Object.keys(scopedSlots).length > 0
-    ) {
-      for (var key in scopedSlots) {
-        var value = scopedSlots[key];
-        if (utils.isArr(value)) {
-          newSlots = this.__checkSlotArr(value, key, myPathKey);
-          if (newSlots.length) {
-            newScopedSlots[key] = newSlots;
-          }
-        } else if (utils.isSlotType(value)) {
-          newScopedSlots[key] = value;
-          if (utils.isFunc(value)) {
-            hasRuntime = true;
-          }
-        } else {
-          if (!(utils.isUndef(value) || utils.isNull(value))) {
-            console.warn(
-              "插糟（" +
-                myPathKey +
-                " > " +
-                key +
-                "）的值不合法，将忽略（值必须是虚拟节点、函数、数字、字符串、布尔型）"
-            );
-          }
-        }
-      }
-    } else {
-      if (!(utils.isUndef(scopedSlots) || utils.isNull(scopedSlots))) {
-        console.warn(
-          "插糟（" +
-            myPathKey +
-            " > " +
-            key +
-            "）的值不合法，将忽略（值必须是虚拟节点、函数、数字、字符串、布尔型）"
-        );
-      }
-    }
-    return Object.keys(newScopedSlots).length > 0
-      ? { scopedSlots: newScopedSlots, hasRuntime: hasRuntime }
-      : undefined;
-  },
-
-  __checkSlotArr(slots, key, myPathKey) {
-    var newSlots = [];
-    slots.forEach(function(slot, index) {
-      if (utils.isFunc(slot)) {
-        throw "插糟（" +
-          myPathKey +
-          " > " +
-          key +
-          "）的数组不能存在函数，但可以用函数返回数组";
-      } else if (utils.isSlotType(slot)) {
-        newSlots.push(slot);
-      } else {
-        console.warn(
-          "插糟（" +
-            myPathKey +
-            " > " +
-            key +
-            "）中的数组存在(第" +
-            (index + 1) +
-            "个)不合法的，将忽略（数组中的值必须是虚拟节点、数字、字符串、布尔型）"
-        );
-      }
-    });
-    return newSlots;
-  },
-
-  /**
-   * 解析组件属性
-   */
-  __parseComProps(props, excludeKeys) {
-    var newProps = {},
-      rawProps = {};
-    var staticNames = [];
-
-    if (!utils.isObj(props)) {
-      props = {};
-    }
-
-    var hasEsFunc = false;
-
-    // var PREFIXS = constant.PREFIX_STATIC_FUNC;
-
-    var realKey, newRealKey;
-    var staticKey, isStatic;
-    var value, newValue;
-    for (var key in props) {
-      realKey = key; // 会保留空格的
-      staticKey = parse.getStaticKey(realKey); // 取静态key,不是返回false
-      // console.log(staticKey);
-      isStatic = staticKey !== false ? true : false;
-      if (isStatic) {
-        realKey = staticKey;
-      }
-
-      if (!realKey.trim()) {
-        // 全空，不必理会
-        break;
-      }
-
-      newRealKey = utils.vueCamelCase(realKey);
-      if (excludeKeys.includes(newRealKey)) {
-        // 存在不能包括的属性，不必理会
-        break;
-      }
-
-      value = props[key];
-      if (!isStatic && parse.isEsOrFunc(props[key])) {
-        // 不是静态且需要转化
-        hasEsFunc = true;
-        newValue = parse.newEsFuncion(value);
-        newProps[newRealKey] = newValue;
-        rawProps[newRealKey] = newValue;
-      } else if (!isStatic || !utils.isFunc(value)) {
-        // 不是静态或是（静态，其值不是函数），保持原样
-        newProps[newRealKey] = value;
-        rawProps[newRealKey] = value;
-      } else {
-        // 是静态属性、值是函数
-        newProps[newRealKey] = value;
-        rawProps[newRealKey] = value; // 保持前缀，因为解析需要用到；为什么要这样
-        staticNames.push(newRealKey); // 记录下来
-      }
-    }
-
-    if (hasEsFunc) {
-      for (var tmpkey in newProps) {
-        newProps[tmpkey] = null;
-      }
-    } else {
-      rawProps = {};
-    }
-
-    rawProps = Object.keys(rawProps).length > 0 ? rawProps : false;
-    return {
-      new: newProps,
-      raw: rawProps,
-      staticNames: staticNames.length ? staticNames : false
-    };
-  },
-
-  /**
-   * 提取出class和style
-   * @param {*} item
-   * @returns {class和style}
-   */
-  __parseClassStyle(item) {
-    var newItem = {};
-    if (parse.isEsOrFunc(item.class)) {
-      newItem.class = null;
-      newItem.__rawClass = parse.newEsFuncion(item.class);
-    } else {
-      if (item.class) {
-        newItem.class = utils.deepCopy(item.class);
-      }
-    }
-
-    if (parse.isEsOrFunc(item.style)) {
-      newItem.style = null;
-      newItem.__rawStyle = parse.newEsFuncion(item.style);
-    } else {
-      if (utils.isObj(item.style) && Object.keys(item.style).length) {
-        newItem.style = utils.deepCopy(item.style);
-      }
-    }
-    return newItem;
-  },
-
-  /**
    * 进出的值的格式转换
    * @param {*} format
    */
@@ -1269,97 +866,17 @@ let schemaUtils = {
   },
 
   /**
-   * 解析/标准化项组件的事件
-   * @param {*} actions
-   * @param {*} myPathKey
-   */
-  __parseActions(actions, myPathKey) {
-    // 解析是否为特殊写法
-    var newActions = [];
-    if (
-      (utils.isObj(actions) && Object.keys(actions).length > 0) ||
-      (utils.isArr(actions) && actions.length > 0) ||
-      utils.isFunc(actions) ||
-      utils.isStr(actions)
-    ) {
-      var tmpActions;
-      if (utils.isFunc(actions)) {
-        tmpActions = [{ trigger: constant.CLICK_EVENT, handler: actions }];
-      } else if (utils.isObj(actions)) {
-        tmpActions = [actions];
-      } else if (utils.isStr(actions)) {
-        tmpActions = [actions];
-      } else {
-        // 就是数组了
-        tmpActions = actions;
-      }
-      tmpActions.forEach(tmpAction => {
-        var newTrigger, newAction;
-        if (utils.isStr(tmpAction)) {
-          tmpAction = tmpAction.trim();
-          if (tmpAction == constant.ENTER_SUBMIT) {
-            // keyup.native提交事件
-            newActions.push({
-              trigger: [constant.KEYUP_NATIVE],
-              handler: enterSubmit
-            });
-          } else {
-            var actionInfos = tmpAction.split(/\s*=\s*/);
-            if (
-              actionInfos &&
-              actionInfos.length == 2 &&
-              actionInfos[1] == constant.ONLY_SUBMIT
-            ) {
-              // newActions.push({trigger: actionInfos[0], handler: onlySubmit});
-              newAction = {};
-              newTrigger = this.__parseTrigger(actionInfos[0]);
-              newAction.trigger =
-                newTrigger && newTrigger.length > 0
-                  ? newTrigger
-                  : [constant.CLICK_EVENT];
-              newAction.handler = onlySubmit;
-              newActions.push(newAction);
-            } else {
-              console.warn(
-                "key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行."
-              );
-            }
-          }
-        } else if (utils.isFunc(tmpAction.handler)) {
-          newAction = {};
-          newTrigger = this.__parseTrigger(tmpAction.trigger);
-          newAction.trigger =
-            newTrigger && newTrigger.length > 0
-              ? newTrigger
-              : [constant.CLICK_EVENT];
-          newAction.handler = tmpAction.handler;
-          newActions.push(newAction);
-        } else {
-          // 非法写，不是函数，去掉它
-          console.warn(
-            "key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行"
-          );
-        }
-      });
-    } else {
-      // console.warn("key(" + myPathKey + ")component事件类型不合法.");
-    }
-
-    return newActions.length > 0 ? newActions : null;
-  },
-
-  /**
    * 解析项Label
    */
   __parseLabel: function(value, myPathKey) {
     var newLabel,
       defaultAlign = false;
-    newLabel = this.__parsePropComponent(value, myPathKey, true);
+    newLabel = parsePropComponent(value, m_currentFormId, myPathKey, true);
 
     // 因为label有点特殊，所以不能为false
     if (newLabel) {
-      newLabel.flex = this.__parseFlex(value.flex, value.size);
-      newLabel.align = this.__parseAlign(value.align, defaultAlign);
+      newLabel.flex = parseFlex(value.flex, value.size);
+      newLabel.align = parseAlign(value.align, defaultAlign);
       newLabel.help = this.__parsePropHelp(value.help, myPathKey);
     } else {
       // newLabel = {
@@ -1374,43 +891,10 @@ let schemaUtils = {
   },
 
   /**
-   * 解析项label和项组件的在弹性布局中的占位情况
-   */
-  __parseFlex(flex, size) {
-    var flexs = ["self", "full"];
-    if (flexs.includes(flex)) {
-      return flex;
-    }
-
-    // 兼容一下之前的东西
-    var sizes = ["fixed", "auto"];
-    var sizeIndex = sizes.indexOf(size);
-    if (sizeIndex >= 0) {
-      console.warn(
-        'label.size and component.size ["fixed", "auto"]已经舍弃了，请使用flex ["self", "full"]'
-      );
-      return flexs[sizeIndex];
-    }
-
-    return false;
-  },
-
-  /**
-   * 解析项label和项组件的对齐方式
-   */
-  __parseAlign(align, defaultVal = "left") {
-    var aligns = ["left", "center", "right"];
-    if (aligns.includes(align)) {
-      return align;
-    }
-    return defaultVal;
-  },
-
-  /**
    * 解析title
    */
   __parseTitle: function(value, myPathKey) {
-    var newValue = this.__parsePropComponent(value, myPathKey);
+    var newValue = parsePropComponent(value, m_currentFormId, myPathKey);
     if (newValue) {
       newValue.help = this.__parsePropHelp(value.help, myPathKey);
     }
@@ -1647,154 +1131,15 @@ let schemaUtils = {
       if (!gHelp.name) {
         gHelp.name = esHelp;
       }
-      gHelp = this.__parsePropComponent(gHelp, myPathKey);
+      gHelp = parsePropComponent(gHelp, m_currentFormId, myPathKey);
     } else if (utils.isStr(help)) {
       gHelp = { name: esHelp, props: { content: help } };
-      gHelp = this.__parsePropComponent(gHelp, myPathKey);
+      gHelp = parsePropComponent(gHelp, m_currentFormId, myPathKey);
     } else {
       gHelp = false;
     }
     // console.log("gHelp: ", gHelp);
     return gHelp;
-  },
-
-  /**
-   * 解析一般组件
-   */
-  __parsePropComponent: function(value, myPathKey, canEmpty = false) {
-    var newComponent, rawText;
-    if (utils.isObj(value) && Object.keys(value).length > 0) {
-      newComponent = {};
-      var name =
-        utils.isStr(value.name) && value.name.trim()
-          ? value.name.trim()
-          : value.name;
-      rawText = value.text;
-      if (name) {
-        newComponent.name = name;
-        newComponent.actions = this.__parseActions(value.actions, myPathKey);
-
-        // 属性
-        var propInfo = this.__parseComProps(value.props, ["style", "class"]);
-        // console.log(propInfo);
-        if (propInfo.new) {
-          newComponent.props = propInfo.new;
-        }
-
-        if (propInfo.raw) {
-          newComponent.__rawProps = propInfo.raw;
-        }
-
-        if (propInfo.staticNames) {
-          newComponent.__staticPropNames = propInfo.staticNames;
-        }
-
-        // 指令
-        var directiveInfo = this.__parseDirectives(
-          utils.isUndef(value.directives) ? value.v : value.directives
-        );
-
-        if (directiveInfo.new) {
-          newComponent.directives = directiveInfo.new;
-        }
-
-        if (directiveInfo.raw) {
-          newComponent.__rawDirectives = directiveInfo.raw;
-        }
-
-        // 提取class和style
-        Object.assign(newComponent, this.__parseClassStyle(value));
-
-        var slotInfo = this.__parseScopedSlots(value.scopedSlots, myPathKey);
-        if (slotInfo) {
-          if (slotInfo.hasRuntime) {
-            // 需要检测
-
-            newComponent.__refreshIndex = 0;
-          }
-          newComponent.scopedSlots = slotInfo.scopedSlots;
-        }
-
-        // value
-        if (value.hasOwnProperty("value")) {
-          newComponent.value = value.value;
-        } else {
-          // 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
-        }
-
-        if (!utils.isFunc(rawText)) {
-          rawText = utils.toComText(rawText); // 转换为文本
-        }
-      } else {
-        if (!utils.isFunc(rawText)) {
-          rawText = utils.toNormalText(rawText); // 转换为文本
-        }
-      }
-
-      if (rawText) {
-        newComponent.text = rawText;
-        if (parse.isEsOrFunc(rawText)) {
-          newComponent.__rawText = parse.newEsFuncion(rawText);
-        }
-      } else {
-        newComponent.text = rawText;
-      }
-      if (!newComponent.text && !name && !canEmpty) {
-        // 不符合要求，说明为空
-        return false;
-      }
-
-      if (parse.isEsOrFunc(value.hidden)) {
-        newComponent.hidden = false;
-        newComponent.__rawHidden = parse.newEsFuncion(value.hidden);
-      } else {
-        newComponent.hidden = !!value.hidden;
-      }
-    } else if (utils.isNormalText(value)) {
-      value = utils.toNormalText(value);
-      if (value || canEmpty) {
-        if (parse.isEsOrFunc(value)) {
-          newComponent = {
-            text: value,
-            __rawText: parse.newEsFuncion(value),
-            hidden: false
-          };
-        } else {
-          newComponent = {
-            text: value,
-            hidden: false
-          };
-        }
-      } else {
-        return false;
-      }
-    } else if (utils.isFunc(value)) {
-      newComponent = {
-        text: value,
-        __rawText: value,
-        hidden: false
-      };
-    } else {
-      return false;
-    }
-
-    // 判断名称是否合法
-    if (
-      newComponent &&
-      utils.isStr(newComponent.name) &&
-      !utils.validateComponentName(newComponent.name)
-    ) {
-      throw "组件名(" + newComponent.name + ")存在html非法字符";
-    }
-
-    newComponent.__formId = m_currentFormId;
-    newComponent.props = newComponent.props ? newComponent.props : {};
-
-    var eventOn = this.__fetchActionEvent(newComponent.actions);
-    newComponent.__emitEvents = eventOn.__emitEvents;
-    newComponent.__nativeEvents = eventOn.__nativeEvents;
-
-    return newComponent;
   },
 
   /**
@@ -1886,97 +1231,12 @@ let schemaUtils = {
       }
 
       // 提取class和style
-      Object.assign(newRules, this.__parseClassStyle(rules));
+      Object.assign(newRules, parseClassStyle(rules));
 
       return newRules;
     } else {
       return false;
     }
-  },
-
-  /**
-   * 解析指令
-   */
-  __parseDirectives: function(directives) {
-    var newDirectives = [],
-      rawDirectives = [];
-    if (!utils.isArr(directives)) {
-      directives = [directives];
-    }
-
-    var hasEsFunc = false;
-
-    // 转化为数组了
-    directives.forEach(directiveItem => {
-      var directive;
-      if (utils.isStr(directiveItem)) {
-        directive = { name: directiveItem };
-      } else if (!utils.isObj(directiveItem)) {
-        // 不合法，去掉
-        return false;
-      } else {
-        directive = directiveItem;
-      }
-
-      // 全部转成对象了
-      var name, value, expression, arg, modifiers;
-      name = directive.name;
-      var prefix = "v-";
-      if (utils.isStr(name)) {
-        name = name.trim();
-        if (name.indexOf(prefix) === 0) {
-          name = name.substr(prefix.length);
-        }
-      } else {
-        name = false;
-      }
-
-      // 指令名合法
-      if (name) {
-        expression = utils.isStr(directive.expression)
-          ? directive.expression.trim()
-          : undefined;
-        expression = expression ? expression : undefined;
-
-        arg = utils.isStr(directive.arg) ? directive.arg.trim() : undefined;
-        arg = arg ? arg : undefined;
-
-        modifiers = utils.isObj(directive.modifiers)
-          ? utils.deepCopy(directive.modifiers)
-          : {};
-
-        if (parse.isEsOrFunc(directive.value)) {
-          hasEsFunc = true;
-          value = parse.newEsFuncion(directive.value);
-        } else {
-          value = utils.deepCopy(directive.value);
-        }
-
-        var rawDirective = {
-          name: name,
-          value: value,
-          expression: expression,
-          arg: arg,
-          modifiers: modifiers
-        };
-        rawDirectives.push(rawDirective);
-      }
-    });
-
-    if (hasEsFunc) {
-      rawDirectives.forEach(rawDirective => {
-        var newDirective = {};
-        Object.assign(newDirective, rawDirective);
-        newDirective.value = null;
-        newDirectives.push(newDirective);
-      });
-    } else {
-      newDirectives = rawDirectives;
-      rawDirectives = false;
-    }
-
-    newDirectives = newDirectives.length > 0 ? newDirectives : false;
-    return { new: newDirectives, raw: rawDirectives };
   },
 
   /**
@@ -2150,7 +1410,11 @@ let schemaUtils = {
             ? true
             : false;
 
-        subLabel = this.__parsePropComponent(array.subLabel, myPathKey);
+        subLabel = parsePropComponent(
+          array.subLabel,
+          m_currentFormId,
+          myPathKey
+        );
         if (!subLabel) {
           // 不可以为false, 因为必须要显示
           subLabel = {
@@ -2167,7 +1431,11 @@ let schemaUtils = {
         } else {
           delMsg = "确定删除吗？";
         }
-        delMsg = this.__parsePropComponent(delMsg, myPathKey + "（数组）");
+        delMsg = parsePropComponent(
+          delMsg,
+          m_currentFormId,
+          myPathKey + "（数组）"
+        );
         if (!delMsg) {
           delMsg = {
             hidden: false,
@@ -2180,8 +1448,9 @@ let schemaUtils = {
         } else {
           delAllMsg = "确定删除所有吗？";
         }
-        delAllMsg = this.__parsePropComponent(
+        delAllMsg = parsePropComponent(
           delAllMsg,
+          m_currentFormId,
           myPathKey + "（数组）"
         );
         if (!delAllMsg) {
@@ -2194,7 +1463,7 @@ let schemaUtils = {
         before = utils.isFunc(array.before) ? array.before : false;
         value = utils.isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
-        actions = this.__parseActions(array.actions, myPathKey);
+        actions = parseActions(array.actions, myPathKey);
         rowSpace = utils.isNum(array.rowSpace) ? array.rowSpace : undefined;
         type = utils.isStr(array.type) ? array.type : false;
         hasBorder = utils.isBool(array.hasBorder) ? array.hasBorder : true;
@@ -2296,28 +1565,6 @@ let schemaUtils = {
   },
 
   /**
-   * 判断该组件是否需要动态解析，还是纯文本
-   * @param {*} component
-   */
-  // __needParseCom(component) {
-  //   if (component) {
-  //     if (component.name) {
-  //       // 是一个组件，要动态解析
-  //       return true;
-  //     }
-
-  //     for (var key in component) {
-  //       var value = component[key];
-  //       if (utils.isFunc(value)) {
-  //         // 有动态解析
-  //         return true;
-  //       }
-  //     }
-  //   }
-  //   return false;
-  // },
-
-  /**
    * 验证函数标准化
    */
   __perfectCheckItem: function(item) {
@@ -2344,7 +1591,7 @@ let schemaUtils = {
         throw "rules.check.name已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       }
 
-      var newTrigger = this.__parseTrigger(item.trigger);
+      var newTrigger = parseTrigger(item.trigger);
       newTrigger =
         newTrigger && newTrigger.length
           ? utils.unique(newTrigger)
@@ -2410,12 +1657,20 @@ let schemaUtils = {
         return true;
       }
       if (key == "desc") {
-        newPropItem[key] = this.__parsePropComponent(propItem[key], myPathKey);
+        newPropItem[key] = parsePropComponent(
+          propItem[key],
+          m_currentFormId,
+          myPathKey
+        );
         return true;
       }
 
       if (key == "unit") {
-        newPropItem[key] = this.__parsePropComponent(propItem[key], myPathKey);
+        newPropItem[key] = parsePropComponent(
+          propItem[key],
+          m_currentFormId,
+          myPathKey
+        );
         return true;
       }
 
@@ -2438,7 +1693,11 @@ let schemaUtils = {
       }
 
       if (key == "component") {
-        var mainComponent = this.__parseMainComponent(propItem, myPathKey);
+        var mainComponent = parseMainComponent(
+          propItem,
+          m_currentFormId,
+          myPathKey
+        );
         newPropItem[key] = mainComponent;
         return true;
       }

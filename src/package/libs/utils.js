@@ -107,21 +107,6 @@ let utils = {
   },
 
   /**
-   * 是否是scopedSlot支持的类型
-   * @param {*} value
-   */
-  isSlotType(value) {
-    return (
-      this.isVNode(value) ||
-      this.isFunc(value) ||
-      this.isStr(value) ||
-      this.isNum(value) ||
-      this.isBool(value) ||
-      false
-    );
-  },
-
-  /**
    * 是否scopedSlot为空
    * @param {*} value
    */
@@ -597,7 +582,16 @@ let utils = {
               break;
             case "defaultCom":
               if (value && utils.isStr(value) && value.trim()) {
-                global[key] = value.trim();
+                var defaltName = value.trim();
+                if (utils.validateComponentName(defaltName)) {
+                  global[key] = defaltName;
+                } else {
+                  console.warn(
+                    "mergeGlobal: key(" +
+                      key +
+                      ")的值有误(组件名存在html非法字符)；此默认值将不重设"
+                  );
+                }
               } else {
                 console.warn(
                   "mergeGlobal: key(" +

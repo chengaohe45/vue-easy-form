@@ -42,7 +42,9 @@ let constant = {
   FORM_INPUTS: ["input", "textarea"],
   INPUT_CHANGE: "change",
 
-  IDX_CHAIN_KEY: "[i]" // 数组链的代替字符，不可随便改
+  IDX_CHAIN_KEY: "[i]", // 数组链的代替字符，不可随便改
+
+  COM_TARGET_REF: "__comTarget__"
 };
 
 export default constant;
