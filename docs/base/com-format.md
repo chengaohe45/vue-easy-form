@@ -32,7 +32,7 @@
     }
   },
 
-  scopedSlots: {  // 插糟：键值对写法
+  scopedSlots: {  // 插糟：键值对写法：具体见“组件插糟”
     default: {  // 自定义组件
       name: "el-tag",
       text: "123"

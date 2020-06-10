@@ -69,6 +69,7 @@ module.exports = {
             'base/settings',
             'base/explain',
             'base/com-format',
+            'base/scopedSlots',
             'base/parse',
             'base/console'
           ]
@@ -87,8 +88,7 @@ module.exports = {
             'base/value',
             'base/format',
             'base/auto-match',
-            'base/form',
-            'base/scopedSlots'
+            'base/form'
           ]
         },
         {

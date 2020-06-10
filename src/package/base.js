@@ -312,7 +312,12 @@ export default {
       }
 
       // 这个不能删除：vue机制，主要是为了执行config.__refreshIndex；当表单改变时，同步更新页面
-      if (config && config.__refreshIndex && this.__slotUpdateTime) {
+      if (
+        !isSlotCom &&
+        config &&
+        config.__refreshIndex &&
+        this.__slotUpdateTime
+      ) {
         // 永远都不会进入这，因为__slotUpdateTime没有值的
         this.__slotUpdateTime++;
       }
@@ -518,7 +523,7 @@ export default {
             pathKey: vm.info.pathKey,
             $hidden: dataCache.getHiddenFunc(vm.config.__formId)
           };
-
+          scoped = scoped ? scoped : {};
           vnodes = slotValue(options, scoped);
           if (!utils.isArr(vnodes)) {
             vnodes = [vnodes];
@@ -548,13 +553,15 @@ export default {
           newVNodes = [];
         vnodes.forEach(function(vnode, index) {
           if (!utils.isVNode(vnode) && utils.isObj(vnode)) {
-            newVNode = vm.renderUi(
-              vm.$createElement,
-              vnode,
-              true,
-              pref + "_" + index
-            );
-            newVNodes.push(newVNode);
+            if (!vnode.hidden) {
+              newVNode = vm.renderUi(
+                vm.$createElement,
+                vnode,
+                true,
+                pref + "_" + index
+              );
+              newVNodes.push(newVNode);
+            }
           } else {
             newVNodes.push(vnode);
           }

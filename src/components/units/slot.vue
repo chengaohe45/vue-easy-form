@@ -1,8 +1,7 @@
+<!-- slot.vue -->
 <template>
   <div>
-    <el-input></el-input>
-    <slot :color="color">?</slot>
-    <slot name="test">!</slot>
+    <slot>没有插糟</slot>
   </div>
 </template>
 
@@ -11,31 +10,6 @@ export default {
   data() {
     return {};
   },
-
-  props: {
-    color: {
-      type: String,
-      required: false,
-      default: "#67c23a"
-    }
-    // ts: {
-    //   type: String,
-    //   required: false,
-    //   default: "false"
-    // }
-  },
-
-  created() {
-    window.testSlot = this;
-  },
-
-  computed: {},
-
-  mounted() {},
-
-  methods: {},
-  components: {}
+  props: {}
 };
 </script>
-
-<style lang="scss"></style>

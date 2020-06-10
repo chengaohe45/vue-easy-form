@@ -4,6 +4,20 @@
     max-width: 880px;
 }
 
+.divider-line {
+    margin: 0; 
+    padding: 0; 
+    border-top: 1px solid #47494c;
+}
+
+.divider-line + .extra-class {
+    border-radius: 0;
+}
+
+.divider-line + .extra-class > pre{
+    border-radius: 0;
+}
+
 // 覆盖一下样式，因为被vuepress>table影响了
 .el-year-table {
 display: table;
