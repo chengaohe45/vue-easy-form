@@ -39,7 +39,7 @@
   import './entry';
   import utils from '@/libs/utils';
   import packageJson from '@/../package.json';
-  import operateSchema from "@/components/demo-frame/schemas/operation-schema.js";
+  // import operateSchema from "@/components/demo-frame/schemas/operation-schema.js";
 
   export default {
     data() {
