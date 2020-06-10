@@ -5,6 +5,7 @@
 // 基础属性
 import labelForm from "../views/demo/label";
 import componentForm from "../views/demo/component";
+import scopedSlotsForm from "../views/demo/scopedSlots";
 import simpleForm from "../views/demo/simple";
 import standardForm from "../views/demo/standard";
 import comUnitForm from "../views/demo/unit";
@@ -140,6 +141,13 @@ let navList = [
         link: "/tabs",
         path: "/tabs",
         component: propertiesTabsForm
+      },
+      {
+        icon: "",
+        name: "组件插糟",
+        link: "/scopedSlots",
+        path: "/scopedSlots",
+        component: scopedSlotsForm
       },
       {
         icon: "",
