@@ -123,18 +123,18 @@ export function parsePropComponent(value, formId, myPathKey, canEmpty = false) {
       }
     }
 
-    if (rawText) {
-      newComponent.text = rawText;
-      if (parse.isEsOrFunc(rawText)) {
-        newComponent.__rawText = parse.newEsFuncion(rawText);
-      }
-    } else {
-      newComponent.text = rawText;
-    }
-    if (!newComponent.text && !name && !canEmpty) {
-      // 不符合要求，说明为空
-      return false;
-    }
+    // if (rawText) {
+    //   newComponent.text = rawText;
+    //   if (parse.isEsOrFunc(rawText)) {
+    //     newComponent.__rawText = parse.newEsFuncion(rawText);
+    //   }
+    // } else {
+    //   newComponent.text = rawText;
+    // }
+    // if (!newComponent.text && !name && !canEmpty) {
+    //   // 不符合要求，说明为空
+    //   return false;
+    // }
 
     if (parse.isEsOrFunc(value.hidden)) {
       newComponent.hidden = false;
@@ -263,7 +263,7 @@ export function parseComponent(
       }
 
       var rawText = component.text;
-      if (needParse && utils.isFunc(rawText)) {
+      if (needParse && parse.isEsOrFunc(rawText)) {
         newComponent.text = rawText;
         if (parse.isEsOrFunc(rawText)) {
           newComponent.__rawText = parse.newEsFuncion(rawText);
