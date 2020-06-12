@@ -17,7 +17,7 @@
       <transition name="text-slide">
         <span class="txt" v-show="hovering">{{ controlText }}</span>
       </transition>
-      <el-tooltip effect="dark" content="存在自定义组件，只能前往实例运行" placement="right">
+      <el-tooltip effect="dark" content="存在自定义组件，可往实例运行" placement="right">
         <transition name="text-slide">
           <a v-show="hovering || isExpanded"
             @click.stop

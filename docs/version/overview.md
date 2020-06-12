@@ -13,6 +13,9 @@
 
 ## 当前版本记录
 
+### 1.7.4
+- 优化[组件格式](../base/com-format.md)：增加[组件插槽](../base/scopedSlots.md)
+
 ### 1.7.3
 - 增加数组删除提示框可自定义：增加[delMsg](../base/array.md#配置属性), [delAllMsg](../base/array.md#配置属性)
 - 增加数组操作钩子：增加[before](../base/array.md#配置属性)钩子

@@ -1,4 +1,4 @@
-# 组件插糟
+# 组件插槽
 
 字段：`scopedSlots`
 
@@ -17,7 +17,7 @@
   scopedSlots: [];  // 内容可为字符串，数值，布尔，组件对象，但不能是函数（可以用函数返回数组）
 
   // 写法三：对象（键值对）：指出匹配哪个slotName
-  scopedSlots: {  // 插糟：键值对写法：具体见“组件插糟”
+  scopedSlots: {  // 插槽：键值对写法：具体见“组件插槽”
 
     default: {  // 自定义组件，支持动态解析：scopedSlots必须指定slotName
       // hidden: false,   // 控制是否隐藏
@@ -48,7 +48,7 @@
       return [];
 
       // 返回null，undefined
-      return undefined; // 说明此插糟为空
+      return undefined; // 说明此插槽为空
     }
   }
 

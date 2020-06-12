@@ -15,8 +15,8 @@ import demoSlot from "@/components/units/slot.vue";
 export default {
   data() {
     return {
-      title: "组件插糟",
-      docsTitle: "组件插糟配置文档",
+      title: "组件插槽",
+      docsTitle: "组件插槽配置文档",
       docsHref: "/vue-easy-form-docs/dist/base/scopedSlots.html",
 
       formSchema: {
@@ -65,6 +65,7 @@ export default {
               }
             }
           },
+          desc: "切换后选择项的显示会有变化",
           value: "SH"
         },
 
@@ -83,7 +84,7 @@ export default {
                 props: {
                   disableTransitions: true
                 },
-                text: "有插糟"
+                text: "有插槽"
               }
             }
           },

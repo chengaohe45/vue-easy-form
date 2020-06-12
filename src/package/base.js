@@ -79,7 +79,7 @@ export default {
      * 渲染函数
      * @param {*} createElement 创建VNode的函数
      * @param {*} config        组件设置
-     * @param {*} isSlotCom     是否插糟的组件，因为事件不一样，插糟数据也不一样
+     * @param {*} isSlotCom     是否插槽的组件，因为事件不一样，插槽数据也不一样
      * @returns VNode
      */
     renderUi(createElement, config, isSlotCom, ref) {
@@ -207,7 +207,7 @@ export default {
 
         let emitOn, nativeOn, scopedSlots, tmpRef;
         if (!isSlotCom) {
-          // 内容组件，非插糟组件: 因为常用，所以计算好
+          // 内容组件，非插槽组件: 因为常用，所以计算好
           emitOn = this.$data.emitOn;
           nativeOn = this.$data.nativeOn;
           scopedSlots = this.$data.scopedSlots;
@@ -284,7 +284,7 @@ export default {
         configProps = null;
       } else if (utils.isFunc(config)) {
         var options = {
-          global: dataCache.getGlobal(this.config.__formId), // 直接取组件__formId，插糟是没有__formId的
+          global: dataCache.getGlobal(this.config.__formId), // 直接取组件__formId，插槽是没有__formId的
           rootData: dataCache.getRoot(this.config.__formId), // 兼容1.7.0以前，不包括1.7.0
           root: dataCache.getRoot(this.config.__formId),
           idxChain: this.info.idxChain,

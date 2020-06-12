@@ -1,7 +1,7 @@
 <!-- slot.vue -->
 <template>
   <div>
-    <slot>没有插糟</slot>
+    <slot>没有插槽</slot>
   </div>
 </template>
 

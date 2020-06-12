@@ -48,6 +48,7 @@
                 }
               }
             },
+            desc: "切换后选择项的显示会有变化",
             value: "SH"
           },
 
@@ -65,7 +66,7 @@
                   props: {
                     disableTransitions: true
                   },
-                  text: "有插糟"
+                  text: "有插槽"
                 }
               }
             },

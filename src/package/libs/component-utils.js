@@ -710,7 +710,7 @@ function parseScopedSlots(scopedSlots, myPathKey, needParse = true) {
   if (utils.isVNode(scopedSlots)) {
     // 要先判断VNode，因为VNode也属于Object
     console.warn(
-      "插糟暂不支持直接配置虚拟节点，虚拟节点必须用函数包含并返回。此配置将忽略！"
+      "插槽暂不支持直接配置虚拟节点，虚拟节点必须用函数包含并返回。此配置将忽略！"
     );
   } else if (utils.isArr(scopedSlots)) {
     newSlots = checkSlotArr(scopedSlots, "scopedSlots", myPathKey);
@@ -748,7 +748,7 @@ function parseScopedSlots(scopedSlots, myPathKey, needParse = true) {
       } else {
         if (!(utils.isUndef(value) || utils.isNull(value))) {
           console.warn(
-            "插糟（" +
+            "插槽（" +
               myPathKey +
               " > " +
               key +
@@ -760,7 +760,7 @@ function parseScopedSlots(scopedSlots, myPathKey, needParse = true) {
   } else {
     if (!(utils.isUndef(scopedSlots) || utils.isNull(scopedSlots))) {
       console.warn(
-        "插糟（" +
+        "插槽（" +
           myPathKey +
           " > " +
           key +
@@ -777,9 +777,9 @@ function checkSlotArr(slots, key, myPathKey) {
   var newSlots = [];
   slots.forEach(function(slot, index) {
     if (utils.isVNode()) {
-      console.warn("插糟暂不支持直接配置，请用函数包含并返回。此配置将忽略。");
+      console.warn("插槽暂不支持直接配置，请用函数包含并返回。此配置将忽略。");
     } else if (utils.isFunc(slot)) {
-      throw "插糟（" +
+      throw "插槽（" +
         myPathKey +
         " > " +
         key +
@@ -800,7 +800,7 @@ function checkSlotArr(slots, key, myPathKey) {
       }
     } else {
       console.warn(
-        "插糟（" +
+        "插槽（" +
           myPathKey +
           " > " +
           key +

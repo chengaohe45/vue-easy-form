@@ -144,7 +144,7 @@ let navList = [
       },
       {
         icon: "",
-        name: "组件插糟",
+        name: "组件插槽",
         link: "/scopedSlots",
         path: "/scopedSlots",
         component: scopedSlotsForm
