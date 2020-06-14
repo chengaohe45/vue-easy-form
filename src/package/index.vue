@@ -397,7 +397,8 @@ export default {
       id: utils.newUid("es"),
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
-      _esOriginalValue: null,
+      _esOriginalSchemaValue: null,   // schema里面的初始值，不包括formValue
+      _esOriginalRootValue: null,     // schema里面的初始值和formValue结合组成的初始值
       _esFormValue: null,
       _esLockSubmit: false // 开始是false,
       _esWarns: []
@@ -694,9 +695,12 @@ export default {
     /**
      * 对外调用，重置值
      */
-    reset() {
-      // console.log(this._esOriginalValue);
-      this.setValue(this._esOriginalValue);
+    reset(onlySchema) {
+      if (true !== onlySchema) {
+        this.setValue(this._esOriginalRootValue);
+      } else {
+        this.setValue(this._esOriginalSchemaValue);
+      }
       //去年所有的错误提示
       formUtils.clearErrorMsg(this.$data.formSchema);
     },
@@ -714,12 +718,15 @@ export default {
     __initUi(schema) {
       this.$data.isInited = false;
       var tmpSchema = schemaUtils.completeSchema(schema, this.$data.id);
+      // 取出schema中的值，用于重置
+      this._esOriginalSchemaValue = utils.deepCopy(formUtils.getValue(tmpSchema));
       //将value的值同步到schema中
       this.__setValue(tmpSchema, this.value);
       //进行初始化
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
-      this._esOriginalValue = utils.deepCopy(dataCache.getRoot(this.$data.id));
+      // 取出第一次设置的值，用于重置
+      this._esOriginalRootValue = utils.deepCopy(dataCache.getRoot(this.$data.id));
 
       this.$nextTick(() => {
         this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
@@ -1320,7 +1327,8 @@ export default {
   },
 
   beforeDestroy() {
-    this._esOriginalValue = null;
+    this._esOriginalRootValue = null;
+    this._esOriginalSchemaValue = null;
     this._esFormValue = null;
     dataCache.remove(this.$data.id);
   }
