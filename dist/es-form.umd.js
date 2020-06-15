@@ -331,6 +331,13 @@ exports.push([module.i, ".es-form-array-tabs{overflow:hidden}.es-form-array-tabs
 
 /***/ }),
 
+/***/ "15b8":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__("e1b7");
+
+/***/ }),
+
 /***/ "1654":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1300,15 +1307,18 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.fixed.js
 var es6_string_fixed = __webpack_require__("d263");
 
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+var object_assign = __webpack_require__("5176");
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.number.constructor.js
 var es6_number_constructor = __webpack_require__("c5f6");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.match.js
 var es6_regexp_match = __webpack_require__("4917");
 
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("5176");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/array/is-array.js
 var is_array = __webpack_require__("a745");
@@ -1358,9 +1368,6 @@ var es6_string_includes = __webpack_require__("2fdb");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
-var es6_regexp_split = __webpack_require__("28a5");
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js
 var object_keys = __webpack_require__("a4bb");
@@ -1713,7 +1720,7 @@ var componentNormalizer = __webpack_require__("2877");
 
 /* normalize component */
 
-var help_component = Object(componentNormalizer["a" /* default */])(
+var component = Object(componentNormalizer["a" /* default */])(
   components_helpvue_type_script_lang_js_,
   render,
   staticRenderFns,
@@ -1724,29 +1731,9 @@ var help_component = Object(componentNormalizer["a" /* default */])(
   
 )
 
-/* harmony default export */ var components_help = (help_component.exports);
-// CONCATENATED MODULE: ./src/package/libs/submit.js
-/* 应用于表单组件函数，不能作为其它用途：因为this代表的是表单 */
-var onlySubmit = function onlySubmit() {
-  this.submit();
-};
-/**
- * 应用于表单组件函数，不能作为其它用途：因为this代表的是表单, event代表的是keyup事件
- * 参数就是组件事件所对就的参数
- * @param {*} value 当前组件的值
- * @param {*} key 组件的源key
- * @param {*} event 事件所携带的事件
- */
-
-
-var enterSubmit = function enterSubmit(options) {
-  // console.log("value: ", value);
-  // console.log("key: ", key);
-  if (options.event && options.event.keyCode === 13) {
-    this.submit();
-  }
-};
-
+/* harmony default export */ var components_help = (component.exports);
+// EXTERNAL MODULE: ./src/package/libs/component-utils.js + 1 modules
+var component_utils = __webpack_require__("45ac");
 
 // CONCATENATED MODULE: ./src/package/libs/schema-utils.js
 
@@ -1776,7 +1763,10 @@ var enterSubmit = function enterSubmit(options) {
 
 
 
+ // 解析组件的方法
 
+
+var m_currentFormId = undefined; // 应用于completeSchema,记录当前的解析是在哪个表单中
 
 var schemaUtils = {
   /**
@@ -1794,7 +1784,7 @@ var schemaUtils = {
   },
 
   /**
-   * 把原始的schema转化为标准的schema
+   * 解析计划表schema的入口：把原始的schema转化为标准的schema
    * 解析原则：
    * 对于一个对象{}来说
    * type === 'space'时，说明是占位空间，即使有component或properties, 也认为是占位空间，且解析时会把两个属性去掉
@@ -1802,9 +1792,12 @@ var schemaUtils = {
    * else: 是component，即使没有component也会用系统的默认值
    * 结论 >> 最后的输出是：
    * type === 'space'、component、properties只有一个会输出；也是就if (item.layout.name === 'space')、if (item.component)、if (item.properties)中，只有一个为真
+   * @param {*} schema  原始的计划表
+   * @param {*} esFormId 哪个esFormId（应用于有jsx或是函数的组件）
    */
-  completeSchema: function completeSchema(schema) {
+  completeSchema: function completeSchema(schema, esFormId) {
     // const constant.ARRAY_TABLE = "array-table";
+    m_currentFormId = esFormId;
     var autoMatch;
 
     if (utils["a" /* default */].isObj(schema)) {
@@ -1823,7 +1816,7 @@ var schemaUtils = {
       } else {
         // 根节点有效的属性
         autoMatch = rootObj.autoMatch === true ? true : false;
-        rootActions = this.__parseActions(rootObj.actions, "根");
+        rootActions = Object(component_utils["c" /* parseActions */])(rootObj.actions, "根");
       } // 基础设置，最外层的一些东西固定
 
 
@@ -1848,8 +1841,11 @@ var schemaUtils = {
 
       this.__checkForTile(rootObj);
 
+      m_currentFormId = undefined; // 任务完成
+
       return rootObj;
     } else {
+      m_currentFormId = undefined;
       throw "根schema是一个Object类型";
     }
   },
@@ -2144,49 +2140,6 @@ var schemaUtils = {
   },
 
   /**
-   * 解析触发事件
-   * @param {*} trigger
-   * 1. 事件字件串或者以空格隔开的事件所组成的字符串，如"click" or "click change"
-   * 2. 事件组成的数组
-   * @returns 返回数据组，没有时返回一个null
-   */
-  __parseTrigger: function __parseTrigger(trigger) {
-    var tmpTriggers;
-
-    if (utils["a" /* default */].isArr(trigger) || utils["a" /* default */].isStr(trigger)) {
-      if (utils["a" /* default */].isStr(trigger)) {
-        trigger = trigger.trim();
-        tmpTriggers = trigger.split(/\s+/);
-      } else {
-        tmpTriggers = [];
-        trigger.forEach(function (item) {
-          if (utils["a" /* default */].isStr(item)) {
-            item = item.trim();
-            tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
-          }
-        });
-      }
-
-      tmpTriggers = tmpTriggers.map(function (item) {
-        if (!item) {
-          // 为空，直接写默认事件
-          return constant["a" /* default */].CLICK_EVENT;
-        } else if (item.indexOf(".") === 0) {
-          // 只有修改，前面加默认事件
-          return constant["a" /* default */].CLICK_EVENT + item;
-        } else {
-          // 合法
-          return item;
-        }
-      });
-    } else {
-      tmpTriggers = null;
-    }
-
-    return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
-  },
-
-  /**
    * 判断属性是否合法
    * @param {*} key
    */
@@ -2214,8 +2167,6 @@ var schemaUtils = {
    * 整理出"表单"组件需要监听的外部事件
    */
   __fetchFormEvent: function __fetchFormEvent(propItem) {
-    var _this = this;
-
     var emitEvents = [],
         nativeEvents = [],
         triggerList,
@@ -2230,7 +2181,7 @@ var schemaUtils = {
           // 有检查
           triggerList = checkItem.trigger;
           triggerList.forEach(function (triggerItem) {
-            nativeName = _this.__getNativeName(triggerItem);
+            nativeName = Object(component_utils["b" /* getNativeName */])(triggerItem);
 
             if (nativeName) {
               // .native监听
@@ -2248,7 +2199,7 @@ var schemaUtils = {
       var componentName = propItem.component.name.toLowerCase ? propItem.component.name.toLowerCase() : propItem.component.name;
       var curTrimEvent = constant["a" /* default */].FORM_INPUTS.includes(componentName) ? constant["a" /* default */].INPUT_CHANGE : global["a" /* default */].trimEvent; // 要去掉左右两边的空格，添此触发事件
 
-      nativeName = this.__getNativeName(curTrimEvent);
+      nativeName = Object(component_utils["b" /* getNativeName */])(curTrimEvent);
 
       if (nativeName) {
         // .native监听
@@ -2260,20 +2211,7 @@ var schemaUtils = {
 
 
     if (propItem.component && propItem.component.actions) {
-      // var actions = propItem.component.actions;
-      // actions.forEach(actionItem => {
-      //   triggerList = actionItem.trigger;
-      //   triggerList.forEach(triggerItem => {
-      //     nativeName = this.__getNativeName(triggerItem);
-      //     if (nativeName) {
-      //       // .native监听
-      //       nativeEvents.push(nativeName);
-      //     } else {
-      //       emitEvents.push(triggerItem);
-      //     }
-      //   });
-      // });
-      var actionInfo = this.__fetchActionEvent(propItem.component.actions);
+      var actionInfo = Object(component_utils["a" /* fetchActionEvent */])(propItem.component.actions);
 
       if (actionInfo.__emitEvents) {
         emitEvents = emitEvents.concat(actionInfo.__emitEvents);
@@ -2288,60 +2226,6 @@ var schemaUtils = {
       __emitEvents: emitEvents.length ? utils["a" /* default */].unique(emitEvents) : null,
       __nativeEvents: nativeEvents.length ? utils["a" /* default */].unique(nativeEvents) : null
     };
-  },
-
-  /**
-   * 整理出"表单"组件需要监听的外部事件
-   */
-  __fetchActionEvent: function __fetchActionEvent(actions) {
-    var _this2 = this;
-
-    var emitEvents = [];
-    var nativeEvents = [];
-    var triggerList, nativeName; // 自定义事件
-
-    if (actions) {
-      actions.forEach(function (actionItem) {
-        triggerList = actionItem.trigger;
-        triggerList.forEach(function (triggerItem) {
-          nativeName = _this2.__getNativeName(triggerItem);
-
-          if (nativeName) {
-            // .native监听
-            nativeEvents.push(nativeName);
-          } else {
-            emitEvents.push(triggerItem);
-          }
-        });
-      });
-    }
-
-    return {
-      __emitEvents: emitEvents.length ? utils["a" /* default */].unique(emitEvents) : null,
-      __nativeEvents: nativeEvents.length ? utils["a" /* default */].unique(nativeEvents) : null
-    };
-  },
-
-  /**
-   * 提取是否为.native事件
-   * @param {*} eventName
-   */
-  __getNativeName: function __getNativeName(eventName) {
-    var dotNative = "." + constant["a" /* default */].ADJ_NATIVE;
-    var lastIndex = eventName.lastIndexOf(dotNative);
-
-    if (lastIndex != -1 && eventName.substr(lastIndex) === dotNative) {
-      // .native监听
-      var nativeName = eventName.substr(0, lastIndex);
-
-      if (nativeName) {
-        return nativeName;
-      } else {
-        return false; //因为eventName是经过处理的,不会出现点在前面，所以不会进入这里
-      }
-    } else {
-      return false;
-    }
   },
 
   /**
@@ -2553,231 +2437,6 @@ var schemaUtils = {
   },
 
   /**
-   * 解析右栏组件
-   */
-  __parseMainComponent: function __parseMainComponent(propItem, myPathKey) {
-    var component = propItem.component;
-    var newComponent,
-        defaultAlign = false;
-
-    if (utils["a" /* default */].isObj(component) && keys_default()(component).length > 0) {
-      newComponent = {};
-      newComponent.name = component.name ? component.name : global["a" /* default */].defaultCom;
-      newComponent.actions = this.__parseActions(component.actions, myPathKey);
-      var ref = utils["a" /* default */].isStr(component.ref) ? component.ref.trim() : null;
-
-      if (ref) {
-        newComponent.ref = ref;
-      }
-
-      var propInfo = this.__parseComProps(component.props, ["style", "class"]);
-
-      if (propInfo.new) {
-        newComponent.props = propInfo.new;
-      }
-
-      if (propInfo.raw) {
-        newComponent.__rawProps = propInfo.raw;
-      }
-
-      if (propInfo.staticNames) {
-        newComponent.__staticPropNames = propInfo.staticNames;
-      } // 指令
-
-
-      var directiveInfo = this.__parseDirectives(utils["a" /* default */].isUndef(component.directives) ? component.v : component.directives);
-
-      if (directiveInfo.new) {
-        newComponent.directives = directiveInfo.new;
-      }
-
-      if (directiveInfo.raw) {
-        newComponent.__rawDirectives = directiveInfo.raw;
-      }
-
-      var rawText = component.text;
-
-      if (!utils["a" /* default */].isFunc(rawText)) {
-        rawText = utils["a" /* default */].toComText(rawText); // 转换为文本
-      }
-
-      if (rawText) {
-        newComponent.text = rawText;
-
-        if (parse["a" /* default */].isEsOrFunc(rawText)) {
-          newComponent.__rawText = parse["a" /* default */].newEsFuncion(rawText);
-        }
-      } // if (parse.isEsOrFunc(component.class)) {
-      //   newComponent.class = null;
-      //   newComponent.__rawClass = parse.newEsFuncion(component.class);
-      // } else {
-      //   newComponent.class = utils.deepCopy(component.class);
-      // }
-      // if (parse.isEsOrFunc(component.style)) {
-      //   newComponent.style = null;
-      //   newComponent.__rawStyle = parse.newEsFuncion(component.style);
-      // } else {
-      //   if (
-      //     utils.isObj(component.style) &&
-      //     Object.keys(component.style).length
-      //   ) {
-      //     newComponent.style = utils.deepCopy(component.style);
-      //   }
-      // }
-      // 提取class和style
-
-
-      assign_default()(newComponent, this.__parseClassStyle(component));
-
-      newComponent.align = this.__parseAlign(component.align, defaultAlign);
-      newComponent.flex = this.__parseFlex(component.flex, component.size); // value
-
-      if (propItem.hasOwnProperty("value")) {
-        newComponent.value = propItem.value;
-      } else if (component.hasOwnProperty("value")) {
-        newComponent.value = component.value;
-      } else {
-        // 自动补充value: 因为是表单组件
-        newComponent.value = component.name === global["a" /* default */].defaultCom ? global["a" /* default */].defaultVal : undefined;
-      }
-    } else if (utils["a" /* default */].isStr(component)) {
-      // 要自动补充value
-      newComponent = {
-        name: component,
-        actions: [],
-        align: defaultAlign,
-        flex: false,
-        value: propItem.hasOwnProperty("value") ? propItem.value : global["a" /* default */].defaultCom === component ? global["a" /* default */].defaultVal : undefined
-      };
-    } else {
-      // 要自动补充value
-      newComponent = {
-        name: global["a" /* default */].defaultCom,
-        actions: [],
-        align: defaultAlign,
-        flex: false,
-        value: global["a" /* default */].defaultVal
-      };
-    } // 判断名称是否合法
-
-
-    if (utils["a" /* default */].isStr(newComponent.name) && !utils["a" /* default */].validateComponentName(newComponent.name)) {
-      throw "组件名(" + newComponent.name + ")存在html非法字符";
-    }
-
-    newComponent.props = newComponent.props ? newComponent.props : {};
-    return newComponent;
-  },
-
-  /**
-   * 解析组件属性
-   */
-  __parseComProps: function __parseComProps(props, excludeKeys) {
-    var newProps = {},
-        rawProps = {};
-    var staticNames = [];
-
-    if (!utils["a" /* default */].isObj(props)) {
-      props = {};
-    }
-
-    var hasEsFunc = false; // var PREFIXS = constant.PREFIX_STATIC_FUNC;
-
-    var realKey, newRealKey;
-    var staticKey, isStatic;
-    var value, newValue;
-
-    for (var key in props) {
-      realKey = key; // 会保留空格的
-
-      staticKey = parse["a" /* default */].getStaticKey(realKey); // 取静态key,不是返回false
-      // console.log(staticKey);
-
-      isStatic = staticKey !== false ? true : false;
-
-      if (isStatic) {
-        realKey = staticKey;
-      }
-
-      if (!realKey.trim()) {
-        // 全空，不必理会
-        break;
-      }
-
-      newRealKey = utils["a" /* default */].vueCamelCase(realKey);
-
-      if (excludeKeys.includes(newRealKey)) {
-        // 存在不能包括的属性，不必理会
-        break;
-      }
-
-      value = props[key];
-
-      if (!isStatic && parse["a" /* default */].isEsOrFunc(props[key])) {
-        // 不是静态且需要转化
-        hasEsFunc = true;
-        newValue = parse["a" /* default */].newEsFuncion(value);
-        newProps[newRealKey] = newValue;
-        rawProps[newRealKey] = newValue;
-      } else if (!isStatic || !utils["a" /* default */].isFunc(value)) {
-        // 不是静态或是（静态，其值不是函数），保持原样
-        newProps[newRealKey] = value;
-        rawProps[newRealKey] = value;
-      } else {
-        // 是静态属性、值是函数
-        newProps[newRealKey] = value;
-        rawProps[newRealKey] = value; // 保持前缀，因为解析需要用到；为什么要这样
-
-        staticNames.push(newRealKey); // 记录下来
-      }
-    }
-
-    if (hasEsFunc) {
-      for (var tmpkey in newProps) {
-        newProps[tmpkey] = null;
-      }
-    } else {
-      rawProps = {};
-    }
-
-    rawProps = keys_default()(rawProps).length > 0 ? rawProps : false;
-    return {
-      new: newProps,
-      raw: rawProps,
-      staticNames: staticNames.length ? staticNames : false
-    };
-  },
-
-  /**
-   * 提取出class和style
-   * @param {*} item
-   * @returns {class和style}
-   */
-  __parseClassStyle: function __parseClassStyle(item) {
-    var newItem = {};
-
-    if (parse["a" /* default */].isEsOrFunc(item.class)) {
-      newItem.class = null;
-      newItem.__rawClass = parse["a" /* default */].newEsFuncion(item.class);
-    } else {
-      if (item.class) {
-        newItem.class = utils["a" /* default */].deepCopy(item.class);
-      }
-    }
-
-    if (parse["a" /* default */].isEsOrFunc(item.style)) {
-      newItem.style = null;
-      newItem.__rawStyle = parse["a" /* default */].newEsFuncion(item.style);
-    } else {
-      if (utils["a" /* default */].isObj(item.style) && keys_default()(item.style).length) {
-        newItem.style = utils["a" /* default */].deepCopy(item.style);
-      }
-    }
-
-    return newItem;
-  },
-
-  /**
    * 进出的值的格式转换
    * @param {*} format
    */
@@ -2818,87 +2477,16 @@ var schemaUtils = {
   },
 
   /**
-   * 解析/标准化项组件的事件
-   * @param {*} actions
-   * @param {*} myPathKey
-   */
-  __parseActions: function __parseActions(actions, myPathKey) {
-    var _this3 = this;
-
-    // 解析是否为特殊写法
-    var newActions = [];
-
-    if (utils["a" /* default */].isObj(actions) && keys_default()(actions).length > 0 || utils["a" /* default */].isArr(actions) && actions.length > 0 || utils["a" /* default */].isFunc(actions) || utils["a" /* default */].isStr(actions)) {
-      var tmpActions;
-
-      if (utils["a" /* default */].isFunc(actions)) {
-        tmpActions = [{
-          trigger: constant["a" /* default */].CLICK_EVENT,
-          handler: actions
-        }];
-      } else if (utils["a" /* default */].isObj(actions)) {
-        tmpActions = [actions];
-      } else if (utils["a" /* default */].isStr(actions)) {
-        tmpActions = [actions];
-      } else {
-        // 就是数组了
-        tmpActions = actions;
-      }
-
-      tmpActions.forEach(function (tmpAction) {
-        var newTrigger, newAction;
-
-        if (utils["a" /* default */].isStr(tmpAction)) {
-          tmpAction = tmpAction.trim();
-
-          if (tmpAction == constant["a" /* default */].ENTER_SUBMIT) {
-            // keyup.native提交事件
-            newActions.push({
-              trigger: [constant["a" /* default */].KEYUP_NATIVE],
-              handler: enterSubmit
-            });
-          } else {
-            var actionInfos = tmpAction.split(/\s*=\s*/);
-
-            if (actionInfos && actionInfos.length == 2 && actionInfos[1] == constant["a" /* default */].ONLY_SUBMIT) {
-              // newActions.push({trigger: actionInfos[0], handler: onlySubmit});
-              newAction = {};
-              newTrigger = _this3.__parseTrigger(actionInfos[0]);
-              newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [constant["a" /* default */].CLICK_EVENT];
-              newAction.handler = onlySubmit;
-              newActions.push(newAction);
-            } else {
-              console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行.");
-            }
-          }
-        } else if (utils["a" /* default */].isFunc(tmpAction.handler)) {
-          newAction = {};
-          newTrigger = _this3.__parseTrigger(tmpAction.trigger);
-          newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [constant["a" /* default */].CLICK_EVENT];
-          newAction.handler = tmpAction.handler;
-          newActions.push(newAction);
-        } else {
-          // 非法写，不是函数，去掉它
-          console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行");
-        }
-      });
-    } else {// console.warn("key(" + myPathKey + ")component事件类型不合法.");
-    }
-
-    return newActions.length > 0 ? newActions : null;
-  },
-
-  /**
    * 解析项Label
    */
   __parseLabel: function __parseLabel(value, myPathKey) {
     var newLabel,
         defaultAlign = false;
-    newLabel = this.__parsePropComponent(value, myPathKey, true); // 因为label有点特殊，所以不能为false
+    newLabel = Object(component_utils["i" /* parsePropComponent */])(value, m_currentFormId, myPathKey, true); // 因为label有点特殊，所以不能为false
 
     if (newLabel) {
-      newLabel.flex = this.__parseFlex(value.flex, value.size);
-      newLabel.align = this.__parseAlign(value.align, defaultAlign);
+      newLabel.flex = Object(component_utils["g" /* parseFlex */])(value.flex, value.size);
+      newLabel.align = Object(component_utils["d" /* parseAlign */])(value.align, defaultAlign);
       newLabel.help = this.__parsePropHelp(value.help, myPathKey);
     } else {// newLabel = {
       //   text: false,
@@ -2912,46 +2500,10 @@ var schemaUtils = {
   },
 
   /**
-   * 解析项label和项组件的在弹性布局中的占位情况
-   */
-  __parseFlex: function __parseFlex(flex, size) {
-    var flexs = ["self", "full"];
-
-    if (flexs.includes(flex)) {
-      return flex;
-    } // 兼容一下之前的东西
-
-
-    var sizes = ["fixed", "auto"];
-    var sizeIndex = sizes.indexOf(size);
-
-    if (sizeIndex >= 0) {
-      console.warn('label.size and component.size ["fixed", "auto"]已经舍弃了，请使用flex ["self", "full"]');
-      return flexs[sizeIndex];
-    }
-
-    return false;
-  },
-
-  /**
-   * 解析项label和项组件的对齐方式
-   */
-  __parseAlign: function __parseAlign(align) {
-    var defaultVal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "left";
-    var aligns = ["left", "center", "right"];
-
-    if (aligns.includes(align)) {
-      return align;
-    }
-
-    return defaultVal;
-  },
-
-  /**
    * 解析title
    */
   __parseTitle: function __parseTitle(value, myPathKey) {
-    var newValue = this.__parsePropComponent(value, myPathKey);
+    var newValue = Object(component_utils["i" /* parsePropComponent */])(value, m_currentFormId, myPathKey);
 
     if (newValue) {
       newValue.help = this.__parsePropHelp(value.help, myPathKey);
@@ -3046,7 +2598,7 @@ var schemaUtils = {
    * @param {*} inheritObj 从上一级继承的数据
    */
   __parseInherit: function __parseInherit(propItem, inheritObj) {
-    var _this4 = this;
+    var _this = this;
 
     var ui = utils["a" /* default */].isObj(propItem.ui) ? propItem.ui : {};
     var keys = ["offsetLeft", "offsetRight", "direction", "colon", ["rowSpace", "boxRowSpace"], ["labelWidth", "boxLabelWidth"], ["rowHeight", "boxRowHeight"]];
@@ -3063,7 +2615,7 @@ var schemaUtils = {
         oldKey = key[1];
       }
 
-      var normalKeyInfo = _this4.__getNormalInfo(newKey);
+      var normalKeyInfo = _this.__getNormalInfo(newKey);
 
       if (normalKeyInfo) {
         var curValue = ui[newKey];
@@ -3077,7 +2629,7 @@ var schemaUtils = {
         } // console.log("-- tmpUi: ", tmpUi);
 
 
-        newInherit[newKey] = _this4.__parseNormalKey(tmpUi, normalKeyInfo, inheritObj);
+        newInherit[newKey] = _this.__parseNormalKey(tmpUi, normalKeyInfo, inheritObj);
       } else {
         throw "BoxUi: 程序的key(" + key + ")不对应，请修改";
       }
@@ -3198,7 +2750,7 @@ var schemaUtils = {
         gHelp.name = components_help;
       }
 
-      gHelp = this.__parsePropComponent(gHelp, myPathKey);
+      gHelp = Object(component_utils["i" /* parsePropComponent */])(gHelp, m_currentFormId, myPathKey);
     } else if (utils["a" /* default */].isStr(help)) {
       gHelp = {
         name: components_help,
@@ -3206,7 +2758,7 @@ var schemaUtils = {
           content: help
         }
       };
-      gHelp = this.__parsePropComponent(gHelp, myPathKey);
+      gHelp = Object(component_utils["i" /* parsePropComponent */])(gHelp, m_currentFormId, myPathKey);
     } else {
       gHelp = false;
     } // console.log("gHelp: ", gHelp);
@@ -3216,149 +2768,10 @@ var schemaUtils = {
   },
 
   /**
-   * 解析一般组件
-   */
-  __parsePropComponent: function __parsePropComponent(value, myPathKey) {
-    var canEmpty = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-    var newComponent, rawText;
-
-    if (utils["a" /* default */].isObj(value) && keys_default()(value).length > 0) {
-      newComponent = {};
-      var name = utils["a" /* default */].isStr(value.name) && value.name.trim() ? value.name.trim() : value.name;
-      rawText = value.text;
-
-      if (name) {
-        newComponent.name = name;
-        newComponent.actions = this.__parseActions(value.actions, myPathKey); // 属性
-
-        var propInfo = this.__parseComProps(value.props, ["style", "class"]); // console.log(propInfo);
-
-
-        if (propInfo.new) {
-          newComponent.props = propInfo.new;
-        }
-
-        if (propInfo.raw) {
-          newComponent.__rawProps = propInfo.raw;
-        }
-
-        if (propInfo.staticNames) {
-          newComponent.__staticPropNames = propInfo.staticNames;
-        } // 指令
-
-
-        var directiveInfo = this.__parseDirectives(utils["a" /* default */].isUndef(value.directives) ? value.v : value.directives);
-
-        if (directiveInfo.new) {
-          newComponent.directives = directiveInfo.new;
-        }
-
-        if (directiveInfo.raw) {
-          newComponent.__rawDirectives = directiveInfo.raw;
-        } // 只有在name有值时有效
-        // if (parse.isEsOrFunc(value.class)) {
-        //   newComponent.class = null;
-        //   newComponent.__rawClass = parse.newEsFuncion(value.class);
-        // } else {
-        //   newComponent.class = utils.deepCopy(value.class);
-        // }
-        // if (parse.isEsOrFunc(value.style)) {
-        //   newComponent.style = null;
-        //   newComponent.__rawStyle = parse.newEsFuncion(value.style);
-        // } else {
-        //   if (utils.isObj(value.style) && Object.keys(value.style).length) {
-        //     newComponent.style = utils.deepCopy(value.style);
-        //   }
-        // }
-        // 提取class和style
-
-
-        assign_default()(newComponent, this.__parseClassStyle(value)); // value
-
-
-        if (value.hasOwnProperty("value")) {
-          newComponent.value = value.value;
-        } else {// 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
-        }
-
-        if (!utils["a" /* default */].isFunc(rawText)) {
-          rawText = utils["a" /* default */].toComText(rawText); // 转换为文本
-        }
-      } else {
-        if (!utils["a" /* default */].isFunc(rawText)) {
-          rawText = utils["a" /* default */].toNormalText(rawText); // 转换为文本
-        }
-      }
-
-      if (rawText) {
-        newComponent.text = rawText;
-
-        if (parse["a" /* default */].isEsOrFunc(rawText)) {
-          newComponent.__rawText = parse["a" /* default */].newEsFuncion(rawText);
-        }
-      } else {
-        newComponent.text = rawText;
-      }
-
-      if (!newComponent.text && !name && !canEmpty) {
-        // 不符合要求，说明为空
-        return false;
-      }
-
-      if (parse["a" /* default */].isEsOrFunc(value.hidden)) {
-        newComponent.hidden = false;
-        newComponent.__rawHidden = parse["a" /* default */].newEsFuncion(value.hidden);
-      } else {
-        newComponent.hidden = !!value.hidden;
-      }
-    } else if (utils["a" /* default */].isNormalText(value)) {
-      value = utils["a" /* default */].toNormalText(value);
-
-      if (value || canEmpty) {
-        if (parse["a" /* default */].isEsOrFunc(value)) {
-          newComponent = {
-            text: value,
-            __rawText: parse["a" /* default */].newEsFuncion(value),
-            hidden: false
-          };
-        } else {
-          newComponent = {
-            text: value,
-            hidden: false
-          };
-        }
-      } else {
-        return false;
-      }
-    } else if (utils["a" /* default */].isFunc(value)) {
-      newComponent = {
-        text: value,
-        __rawText: value,
-        hidden: false
-      };
-    } else {
-      return false;
-    } // 判断名称是否合法
-
-
-    if (newComponent && utils["a" /* default */].isStr(newComponent.name) && !utils["a" /* default */].validateComponentName(newComponent.name)) {
-      throw "组件名(" + newComponent.name + ")存在html非法字符";
-    }
-
-    newComponent.props = newComponent.props ? newComponent.props : {};
-
-    var eventOn = this.__fetchActionEvent(newComponent.actions);
-
-    newComponent.__emitEvents = eventOn.__emitEvents;
-    newComponent.__nativeEvents = eventOn.__nativeEvents;
-    return newComponent;
-  },
-
-  /**
    * 解析规则
    */
   __parsePropRules: function __parsePropRules(rules) {
-    var _this5 = this;
+    var _this2 = this;
 
     var tmpRawRequired = false,
         tmpCheckList = [];
@@ -3384,7 +2797,7 @@ var schemaUtils = {
       }
 
       rawCheckList.forEach(function (item) {
-        var newItem = _this5.__perfectCheckItem(item);
+        var newItem = _this2.__perfectCheckItem(item);
 
         if (newItem) {
           // 正确
@@ -3449,101 +2862,12 @@ var schemaUtils = {
       } // 提取class和style
 
 
-      assign_default()(newRules, this.__parseClassStyle(rules));
+      assign_default()(newRules, Object(component_utils["e" /* parseClassStyle */])(rules));
 
       return newRules;
     } else {
       return false;
     }
-  },
-
-  /**
-   * 解析指令
-   */
-  __parseDirectives: function __parseDirectives(directives) {
-    var newDirectives = [],
-        rawDirectives = [];
-
-    if (!utils["a" /* default */].isArr(directives)) {
-      directives = [directives];
-    }
-
-    var hasEsFunc = false; // 转化为数组了
-
-    directives.forEach(function (directiveItem) {
-      var directive;
-
-      if (utils["a" /* default */].isStr(directiveItem)) {
-        directive = {
-          name: directiveItem
-        };
-      } else if (!utils["a" /* default */].isObj(directiveItem)) {
-        // 不合法，去掉
-        return false;
-      } else {
-        directive = directiveItem;
-      } // 全部转成对象了
-
-
-      var name, value, expression, arg, modifiers;
-      name = directive.name;
-      var prefix = "v-";
-
-      if (utils["a" /* default */].isStr(name)) {
-        name = name.trim();
-
-        if (name.indexOf(prefix) === 0) {
-          name = name.substr(prefix.length);
-        }
-      } else {
-        name = false;
-      } // 指令名合法
-
-
-      if (name) {
-        expression = utils["a" /* default */].isStr(directive.expression) ? directive.expression.trim() : undefined;
-        expression = expression ? expression : undefined;
-        arg = utils["a" /* default */].isStr(directive.arg) ? directive.arg.trim() : undefined;
-        arg = arg ? arg : undefined;
-        modifiers = utils["a" /* default */].isObj(directive.modifiers) ? utils["a" /* default */].deepCopy(directive.modifiers) : {};
-
-        if (parse["a" /* default */].isEsOrFunc(directive.value)) {
-          hasEsFunc = true;
-          value = parse["a" /* default */].newEsFuncion(directive.value);
-        } else {
-          value = utils["a" /* default */].deepCopy(directive.value);
-        }
-
-        var rawDirective = {
-          name: name,
-          value: value,
-          expression: expression,
-          arg: arg,
-          modifiers: modifiers
-        };
-        rawDirectives.push(rawDirective);
-      }
-    });
-
-    if (hasEsFunc) {
-      rawDirectives.forEach(function (rawDirective) {
-        var newDirective = {};
-
-        assign_default()(newDirective, rawDirective);
-
-        newDirective.value = null;
-        newDirectives.push(newDirective);
-      });
-    } else {
-      newDirectives = rawDirectives;
-      rawDirectives = false;
-    }
-
-    newDirectives = newDirectives.length > 0 ? newDirectives : false;
-    return {
-      new: newDirectives,
-      raw: rawDirectives
-    };
   },
 
   /**
@@ -3712,7 +3036,7 @@ var schemaUtils = {
         fixed = utils["a" /* default */].isNum(array.fixed) && array.fixed > 0 ? array.fixed : 0;
         hasOrder = utils["a" /* default */].isUndef(array.hasOrder) || array.hasOrder ? true : false;
         headRequired = array.name == constant["a" /* default */].ARRAY_TABLE && array.headRequired ? true : false;
-        subLabel = this.__parsePropComponent(array.subLabel, myPathKey);
+        subLabel = Object(component_utils["i" /* parsePropComponent */])(array.subLabel, m_currentFormId, myPathKey);
 
         if (!subLabel) {
           // 不可以为false, 因为必须要显示
@@ -3730,7 +3054,7 @@ var schemaUtils = {
           delMsg = "确定删除吗？";
         }
 
-        delMsg = this.__parsePropComponent(delMsg, myPathKey + "（数组）");
+        delMsg = Object(component_utils["i" /* parsePropComponent */])(delMsg, m_currentFormId, myPathKey + "（数组）");
 
         if (!delMsg) {
           delMsg = {
@@ -3745,7 +3069,7 @@ var schemaUtils = {
           delAllMsg = "确定删除所有吗？";
         }
 
-        delAllMsg = this.__parsePropComponent(delAllMsg, myPathKey + "（数组）");
+        delAllMsg = Object(component_utils["i" /* parsePropComponent */])(delAllMsg, m_currentFormId, myPathKey + "（数组）");
 
         if (!delAllMsg) {
           delAllMsg = {
@@ -3757,7 +3081,7 @@ var schemaUtils = {
         before = utils["a" /* default */].isFunc(array.before) ? array.before : false;
         value = utils["a" /* default */].isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
-        actions = this.__parseActions(array.actions, myPathKey);
+        actions = Object(component_utils["c" /* parseActions */])(array.actions, myPathKey);
         rowSpace = utils["a" /* default */].isNum(array.rowSpace) ? array.rowSpace : undefined;
         type = utils["a" /* default */].isStr(array.type) ? array.type : false;
         hasBorder = utils["a" /* default */].isBool(array.hasBorder) ? array.hasBorder : true;
@@ -3833,27 +3157,6 @@ var schemaUtils = {
   },
 
   /**
-   * 判断该组件是否需要动态解析，还是纯文本
-   * @param {*} component
-   */
-  // __needParseCom(component) {
-  //   if (component) {
-  //     if (component.name) {
-  //       // 是一个组件，要动态解析
-  //       return true;
-  //     }
-  //     for (var key in component) {
-  //       var value = component[key];
-  //       if (utils.isFunc(value)) {
-  //         // 有动态解析
-  //         return true;
-  //       }
-  //     }
-  //   }
-  //   return false;
-  // },
-
-  /**
    * 验证函数标准化
    */
   __perfectCheckItem: function __perfectCheckItem(item) {
@@ -3881,8 +3184,7 @@ var schemaUtils = {
         throw "rules.check.name已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       }
 
-      var newTrigger = this.__parseTrigger(item.trigger);
-
+      var newTrigger = Object(component_utils["j" /* parseTrigger */])(item.trigger);
       newTrigger = newTrigger && newTrigger.length ? utils["a" /* default */].unique(newTrigger) : [constant["a" /* default */].INPUT_EVENT];
       var newItem = {
         handler: handler,
@@ -3903,58 +3205,58 @@ var schemaUtils = {
    * @param {*} myPathKey
    */
   __filterKeys: function __filterKeys(propItem, propKeys, inheritObj, myPathKey) {
-    var _this6 = this;
+    var _this3 = this;
 
     var newPropItem = {};
     propKeys.forEach(function (key) {
       if (key == "label") {
-        newPropItem[key] = _this6.__parseLabel(propItem[key], myPathKey);
+        newPropItem[key] = _this3.__parseLabel(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "title") {
-        newPropItem[key] = _this6.__parseTitle(propItem[key], myPathKey);
+        newPropItem[key] = _this3.__parseTitle(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "ui") {
-        newPropItem[key] = _this6.__parseBoxUi(propItem.ui);
+        newPropItem[key] = _this3.__parseBoxUi(propItem.ui);
         return true;
       }
 
       if (key == "nextInherit") {
-        newPropItem[key] = _this6.__parseInherit(propItem, inheritObj);
+        newPropItem[key] = _this3.__parseInherit(propItem, inheritObj);
         return true;
       }
 
       if (key == "format") {
-        newPropItem[key] = _this6.__parseFormat(propItem[key]);
+        newPropItem[key] = _this3.__parseFormat(propItem[key]);
         return true;
       }
 
       if (key == "rules") {
-        newPropItem[key] = _this6.__parsePropRules(propItem[key]);
+        newPropItem[key] = _this3.__parsePropRules(propItem[key]);
         newPropItem.__invalidMsg = false;
         return true;
       }
 
       if (key == "help") {
-        newPropItem[key] = _this6.__parsePropHelp(propItem[key], myPathKey);
+        newPropItem[key] = _this3.__parsePropHelp(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "desc") {
-        newPropItem[key] = _this6.__parsePropComponent(propItem[key], myPathKey);
+        newPropItem[key] = Object(component_utils["i" /* parsePropComponent */])(propItem[key], m_currentFormId, myPathKey);
         return true;
       }
 
       if (key == "unit") {
-        newPropItem[key] = _this6.__parsePropComponent(propItem[key], myPathKey);
+        newPropItem[key] = Object(component_utils["i" /* parsePropComponent */])(propItem[key], m_currentFormId, myPathKey);
         return true;
       }
 
       if (key == "array") {
-        var arrayAttr = _this6.__parsePropArray(propItem[key], propItem, myPathKey);
+        var arrayAttr = _this3.__parsePropArray(propItem[key], propItem, myPathKey);
 
         newPropItem[key] = arrayAttr;
 
@@ -3966,21 +3268,20 @@ var schemaUtils = {
       }
 
       if (key == "layout") {
-        newPropItem[key] = _this6.__parsePropLayout(propItem[key]);
+        newPropItem[key] = _this3.__parsePropLayout(propItem[key]);
         return true;
       }
 
       if (key == "component") {
-        var mainComponent = _this6.__parseMainComponent(propItem, myPathKey);
-
+        var mainComponent = Object(component_utils["h" /* parseMainComponent */])(propItem, m_currentFormId, myPathKey);
         newPropItem[key] = mainComponent;
         return true;
       }
 
-      var normalKeyInfo = _this6.__getNormalInfo(key);
+      var normalKeyInfo = _this3.__getNormalInfo(key);
 
       if (normalKeyInfo) {
-        newPropItem[key] = _this6.__parseNormalKey(propItem, normalKeyInfo, inheritObj);
+        newPropItem[key] = _this3.__parseNormalKey(propItem, normalKeyInfo, inheritObj);
       } else {
         throw "程序的key(" + key + ")不对应，请修改";
       }
@@ -4335,12 +3636,12 @@ __webpack_require__("7a56")('RegExp');
 "use strict";
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("4917");
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("28a5");
@@ -4349,8 +3650,8 @@ __webpack_require__("7a56")('RegExp');
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("6762");
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _parse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("5f60");
 /* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("890a");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("4513");
@@ -4380,7 +3681,7 @@ var formUtils = {
    * 判断值是否为空, 以下几种情况都认为是空值
    */
   isEmpty: function isEmpty(value) {
-    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
       return true;
     }
 
@@ -4748,7 +4049,7 @@ var formUtils = {
           if (arrayItemKeys) {
             realKey = arrayItemKeys[1];
 
-            var realIndex = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
+            var realIndex = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
 
 
             curPropItem = curProperties[realKey]; //取出下级继续扫描
@@ -4930,19 +4231,19 @@ var formUtils = {
   },
 
   /**
-   * 表单的最终结果
+   * 表单的最终结果(也就是表单值，非根值)
    * @param {*} schema  perfect后的schema
    * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
    * @param {*} globalData 表单的全局数据
    * @param {*} formData 表单的内部值
    */
-  getResultValue: function getResultValue(schema, baseParseSources) {
+  getFormValue: function getFormValue(schema, baseParseSources) {
     if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(baseParseSources.rootData)) {
       var resultValue = this.__getValue(schema, baseParseSources);
 
       return this.__tileResultValue(schema, resultValue);
     } else {
-      throw "getResultValue： formData 必须是一个对象";
+      throw "getFormValue： formData 必须是一个对象";
     }
   },
 
@@ -4957,7 +4258,7 @@ var formUtils = {
     var baseParseSources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var isParentHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -5132,7 +4433,7 @@ var formUtils = {
     var sum = 0;
     var isHidden, listLen, schemaList, i;
 
-    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -5422,7 +4723,7 @@ var formUtils = {
               }
             } else {
               //正常成员
-              var nextParseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+              var nextParseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
               nextParseSources.index = nextPropItem.__info.index;
               nextParseSources.idxChain = nextPropItem.__info.idxChain;
@@ -5476,7 +4777,18 @@ var formUtils = {
    * @param {*} parseSources
    */
   __esParseComponent: function __esParseComponent(component, parseSources) {
-    var isHidden, text, style, className, value; // 项组件是没有此值的
+    var _this2 = this;
+
+    var isHidden, text, style, className, value;
+
+    if (component.hasOwnProperty("__refreshIndex")) {
+      component.__refreshIndex++;
+
+      if (component.__refreshIndex > 10000) {
+        component.__refreshIndex = 1;
+      }
+    } // 项组件是没有此值的
+
 
     if (component.__rawHidden) {
       isHidden = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(component.__rawHidden, parseSources);
@@ -5549,6 +4861,27 @@ var formUtils = {
         if (text !== component.text) {
           component.text = text;
         }
+      } // 解析scopedSlots
+
+
+      if (component.scopedSlots) {
+        var scopedSlots = component.scopedSlots;
+
+        for (var slotName in scopedSlots) {
+          var values = scopedSlots[slotName];
+
+          if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value)) {
+            values = [values];
+          }
+
+          values.forEach(function (value) {
+            if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isVNode(value) && _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value)) {
+              // 是组件，解析
+              _this2.__esParseComponent(value, parseSources);
+            }
+          });
+          values = null;
+        }
       }
     } else {
       // 没name, toNormalText解析text
@@ -5578,7 +4911,7 @@ var formUtils = {
       var propSchema = propItem.properties[fieldKeyName];
 
       if (!propSchema.layout || propSchema.layout.name !== _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_SPACE) {
-        var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+        var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
         parseSources.index = propSchema.__info.index;
         parseSources.idxChain = propSchema.__info.idxChain;
@@ -5725,7 +5058,7 @@ var formUtils = {
         var nextSchema = firstPropSchema[key];
 
         if (nextSchema.properties && !nextSchema.array) {
-          newValue = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
+          newValue = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
         } else {
           newValue[key] = value[key];
         }
@@ -5837,16 +5170,19 @@ exports.features = {};
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("6b54");
-/* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("a481");
-/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("3b2b");
-/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("6b54");
+/* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("a481");
+/* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("3b2b");
+/* harmony import */ var core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_constructor__WEBPACK_IMPORTED_MODULE_7__);
+
 
 
 
@@ -5856,6 +5192,12 @@ exports.features = {};
 
 // import constant from "./constant";
 var utils = {
+  __Vue: null,
+  __key: 0,
+  initVue: function initVue(Vue) {
+    this.__Vue = Vue;
+  },
+
   /**
    * unicode letters used for parsing html tags, component names and property paths.
    * using https://www.w3.org/TR/html53/semantics-scripting.html#potentialcustomelementname
@@ -5867,6 +5209,10 @@ var utils = {
   validateComponentName: function validateComponentName(name) {
     var reg = new RegExp("^[a-zA-Z][\\-\\.0-9_" + this.unicodeRegExp.source + "]*$");
     return reg.test(name);
+  },
+  newUid: function newUid(prefix) {
+    utils.__key++;
+    return prefix ? prefix + "_" + utils.__key : utils.__key;
   },
 
   /**
@@ -5937,6 +5283,42 @@ var utils = {
   isObj: function isObj(value) {
     return utils.type(value) === "object";
   },
+
+  /**
+   * 是否scopedSlot为空
+   * @param {*} value
+   */
+  isSlotUndef: function isSlotUndef(value) {
+    return this.isUndef(value) || this.isNull(value) || false;
+  },
+
+  /**
+   * 判断是否一个Vue实例：包括Vue或VueComponent实例
+   * @param {*} value
+   */
+  isVue: function isVue(value) {
+    return value instanceof this.__Vue;
+  },
+
+  /**
+   * 判断是否一个虚拟节点
+   * @param {*} value
+   */
+  isVNode: function isVNode(value) {
+    var VNode = this.__VNode;
+
+    if (!VNode) {
+      var Vue = this.__Vue;
+      var instance = new Vue();
+      var vnode = instance.$createElement("span", "");
+      VNode = vnode.constructor;
+      this.__VNode = VNode;
+      vnode = null;
+      instance = null;
+    }
+
+    return value instanceof VNode;
+  },
   isVueObj: function isVueObj(value) {
     if (this.isObj(value)) {
       if (value.template || value.staticRenderFns && value.__file) {
@@ -5979,7 +5361,18 @@ var utils = {
     var type = utils.type(data);
     var newData, rawIndex;
 
-    if (type == "array") {
+    if (this.isVNode(data) || this.isVue(data)) {
+      // 虚拟节点，vue组件实例，不用深度拷贝
+      rawIndex = rawRefs.indexOf(data); // console.log("__deepCopy vnode");
+
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+        newRefs.push(data);
+      }
+
+      return data;
+    } else if (type == "array") {
       rawIndex = rawRefs.indexOf(data);
 
       if (rawIndex < 0) {
@@ -6061,6 +5454,73 @@ var utils = {
   },
 
   /**
+   * [deepFreeze 深冻结的数据是object和array]
+   * @param  {[type]} data [description]
+   * @return {[type]}   [description]
+   */
+  deepFreeze: function deepFreeze(data) {
+    var rawRefs = [];
+    var newRefs = [];
+
+    var newData = this.__deepFreeze(data, rawRefs, newRefs);
+
+    rawRefs = null;
+    newRefs = null;
+    return newData;
+  },
+
+  /**
+   * [deepFreeze 深冻结的数据是object和array]
+   * @param  {[type]} data [description]
+   * @return {[Array]}   [rawRefs] 记录原始的object and array
+   * rawRefs作用防止数据中某个地方存在循环的问题
+   */
+  __deepFreeze: function __deepFreeze(data, rawRefs) {
+    var type = utils.type(data);
+    var rawIndex;
+
+    if (this.isVNode(data) || this.isVue(data)) {
+      // 虚拟节点，vue组件实例，不用冻结
+      rawIndex = rawRefs.indexOf(data);
+
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data);
+      }
+    } else if (type == "array") {
+      rawIndex = rawRefs.indexOf(data);
+
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data); // 冻结这一层
+
+        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+
+        for (var i = 0; i < data.length; ++i) {
+          this.__deepFreeze(data[i], rawRefs); // 继续走下一级
+
+        }
+      } else {// 已经存在的数据，则说明已经处理过，无需处理了
+        }
+    } else if (type === "object") {
+      rawIndex = rawRefs.indexOf(data);
+
+      if (rawIndex < 0) {
+        // 一对一保存; 先保存索引地址，下一级的deep可能会用到
+        rawRefs.push(data); // 冻结这一层
+
+        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+
+        for (var key in data) {
+          this.__deepFreeze(data[key], rawRefs);
+        }
+      } else {// 已经存在的数据，则说明已经处理过，无需处理了
+      }
+    } else {// 其它类型，无需要理会
+      }
+  },
+
+  /**
    * 数组去重
    * @param {Array} arr
    */
@@ -6072,7 +5532,7 @@ var utils = {
       arr.forEach(function (item) {
         tmpObj[item] = 1;
       });
-      newArr = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
+      newArr = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
     }
 
     return newArr;
@@ -6248,7 +5708,13 @@ var utils = {
 
             case "defaultCom":
               if (value && utils.isStr(value) && value.trim()) {
-                global[key] = value.trim();
+                var defaltName = value.trim();
+
+                if (utils.validateComponentName(defaltName)) {
+                  global[key] = defaltName;
+                } else {
+                  console.warn("mergeGlobal: key(" + key + ")的值有误(组件名存在html非法字符)；此默认值将不重设");
+                }
               } else {
                 console.warn("mergeGlobal: key(" + key + ")的值有误(1. 不能为空; 2. 是字符串)；此默认值将不重设");
               }
@@ -6333,6 +5799,898 @@ module.exports = function (it) {
   return isNaN(it = +it) ? 0 : (it > 0 ? floor : ceil)(it);
 };
 
+
+/***/ }),
+
+/***/ "45ac":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.string.includes.js
+var es6_string_includes = __webpack_require__("2fdb");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.array.includes.js
+var es7_array_includes = __webpack_require__("6762");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
+var es6_regexp_split = __webpack_require__("28a5");
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
+var web_dom_iterable = __webpack_require__("ac6a");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+var object_assign = __webpack_require__("5176");
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
+
+// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
+var es6_function_name = __webpack_require__("7f7f");
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/keys.js
+var keys = __webpack_require__("a4bb");
+var keys_default = /*#__PURE__*/__webpack_require__.n(keys);
+
+// EXTERNAL MODULE: ./src/package/libs/utils.js
+var utils = __webpack_require__("4513");
+
+// EXTERNAL MODULE: ./src/package/libs/constant.js
+var constant = __webpack_require__("890a");
+
+// CONCATENATED MODULE: ./src/package/libs/submit.js
+/* 应用于表单组件函数，不能作为其它用途：因为this代表的是表单 */
+var onlySubmit = function onlySubmit() {
+  this.submit();
+};
+/**
+ * 应用于表单组件函数，不能作为其它用途：因为this代表的是表单, event代表的是keyup事件
+ * 参数就是组件事件所对就的参数
+ * @param {*} value 当前组件的值
+ * @param {*} key 组件的源key
+ * @param {*} event 事件所携带的事件
+ */
+
+
+var enterSubmit = function enterSubmit(options) {
+  // console.log("value: ", value);
+  // console.log("key: ", key);
+  if (options.event && options.event.keyCode === 13) {
+    this.submit();
+  }
+};
+
+
+// EXTERNAL MODULE: ./src/package/libs/parse.js
+var parse = __webpack_require__("5f60");
+
+// EXTERNAL MODULE: ./src/package/libs/global.js
+var global = __webpack_require__("394e");
+
+// CONCATENATED MODULE: ./src/package/libs/component-utils.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "h", function() { return parseMainComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "i", function() { return parsePropComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "f", function() { return parseComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "c", function() { return parseActions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "j", function() { return parseTrigger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "e", function() { return parseClassStyle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return fetchActionEvent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return getNativeName; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "d", function() { return parseAlign; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "g", function() { return parseFlex; });
+
+
+
+
+
+
+
+
+/**
+ * component-utils.js
+ *
+ * Copyright (c) 2020 chengaohe All rights reserved.
+ *
+ * 解析表单所需要的组件
+ */
+
+
+
+
+
+"use strict";
+/**
+ * 解析主组件：如也就是右栏的组件
+ */
+
+
+function parseMainComponent(propItem, formId, myPathKey) {
+  var component = propItem.component;
+  var newComponent,
+      defaultAlign = false;
+
+  if (utils["a" /* default */].isVNode(component)) {
+    throw myPathKey + " > 主组件暂不支持直接配置虚拟节点";
+  } else if (utils["a" /* default */].isObj(component) && keys_default()(component).length > 0) {
+    if (!component.name) {
+      component = assign_default()({}, component, {
+        name: global["a" /* default */].defaultCom
+      }); // 补上组件name
+    }
+
+    newComponent = parseComponent(component, myPathKey); // 主组特有配置
+
+    var ref = utils["a" /* default */].isStr(component.ref) ? component.ref.trim() : null;
+
+    if (ref) {
+      newComponent.ref = ref;
+    }
+
+    newComponent.align = parseAlign(component.align, defaultAlign);
+    newComponent.flex = parseFlex(component.flex, component.size); // value
+
+    if (propItem.hasOwnProperty("value")) {
+      newComponent.value = propItem.value;
+    } else if (component.hasOwnProperty("value")) {
+      newComponent.value = component.value;
+    } else {
+      // 自动补充value: 因为是表单组件
+      newComponent.value = component.name === global["a" /* default */].defaultCom ? global["a" /* default */].defaultVal : undefined;
+    }
+  } else if (utils["a" /* default */].isStr(component)) {
+    // 要自动补充value
+    newComponent = {
+      name: component,
+      actions: [],
+      align: defaultAlign,
+      flex: false,
+      value: propItem.hasOwnProperty("value") ? propItem.value : global["a" /* default */].defaultCom === component ? global["a" /* default */].defaultVal : undefined
+    };
+  } else {
+    // 要自动补充value
+    newComponent = {
+      name: global["a" /* default */].defaultCom,
+      actions: [],
+      align: defaultAlign,
+      flex: false,
+      value: global["a" /* default */].defaultVal
+    };
+  } // 判断名称是否合法
+  // if (
+  //   utils.isStr(newComponent.name) &&
+  //   !utils.validateComponentName(newComponent.name)
+  // ) {
+  //   throw "组件名(" + newComponent.name + ")存在html非法字符";
+  // }
+
+
+  newComponent.__formId = formId; // newComponent.props = newComponent.props ? newComponent.props : {};
+
+  return newComponent;
+}
+/**
+ * 解析一般属性组件：如label, desc
+ */
+
+function parsePropComponent(value, formId, myPathKey) {
+  var canEmpty = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
+  var newComponent;
+
+  if (utils["a" /* default */].isVNode(value)) {
+    throw myPathKey + " > 组件暂不支持直接配置虚拟节点";
+  } else if (utils["a" /* default */].isObj(value) && keys_default()(value).length > 0) {
+    newComponent = {};
+    var name = utils["a" /* default */].isStr(value.name) ? value.name.trim() : value.name;
+
+    if (name) {
+      newComponent = parseComponent(value, myPathKey);
+
+      if (!newComponent) {
+        return false;
+      }
+    } else {
+      var rawText = value.text;
+
+      if (!utils["a" /* default */].isFunc(rawText)) {
+        rawText = utils["a" /* default */].toNormalText(rawText); // 转换为文本
+      }
+
+      if (rawText || canEmpty) {
+        // 如label可为空
+        var tmpValue = assign_default()({}, value, {
+          name: "span"
+        });
+
+        newComponent = parseComponent(tmpValue, myPathKey);
+        tmpValue = null;
+
+        if (newComponent) {
+          if (newComponent.hasOwnProperty("name")) {
+            delete newComponent.name; // 本来就没有或为空，删除它
+          }
+        } else {
+          return false;
+        }
+      } else {
+        return false;
+      }
+    } // if (rawText) {
+    //   newComponent.text = rawText;
+    //   if (parse.isEsOrFunc(rawText)) {
+    //     newComponent.__rawText = parse.newEsFuncion(rawText);
+    //   }
+    // } else {
+    //   newComponent.text = rawText;
+    // }
+    // if (!newComponent.text && !name && !canEmpty) {
+    //   // 不符合要求，说明为空
+    //   return false;
+    // }
+
+
+    if (parse["a" /* default */].isEsOrFunc(value.hidden)) {
+      newComponent.hidden = false;
+      newComponent.__rawHidden = parse["a" /* default */].newEsFuncion(value.hidden);
+    } else {
+      newComponent.hidden = !!value.hidden;
+    }
+  } else if (utils["a" /* default */].isNormalText(value)) {
+    value = utils["a" /* default */].toNormalText(value);
+
+    if (value || canEmpty) {
+      if (parse["a" /* default */].isEsOrFunc(value)) {
+        newComponent = {
+          text: value,
+          __rawText: parse["a" /* default */].newEsFuncion(value),
+          hidden: false
+        };
+      } else {
+        newComponent = {
+          text: value,
+          hidden: false
+        };
+      }
+    } else {
+      return false;
+    }
+  } else if (utils["a" /* default */].isFunc(value)) {
+    newComponent = {
+      text: value,
+      __rawText: value,
+      hidden: false
+    };
+  } else {
+    return false;
+  }
+
+  newComponent.__formId = formId;
+  return newComponent;
+}
+/**
+ * 解析标准组件：一个要是一个对象{name: xx}
+ * @param {*} component
+ * @param {*} myPathKey
+ * @param {*} canNone 当格式不合法时返回false(现在只有名字为空时返回false)。默认为false
+ * @param {*} needParse 是否需要解析，静态是不需要动态解析的。默认为true
+ * @returns {Object} 标准对象写法
+ */
+
+function parseComponent(component, myPathKey) {
+  var canNone = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var needParse = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+  if (utils["a" /* default */].isObj(component) && component.name) {
+    var newComponent = {};
+    var name = utils["a" /* default */].isStr(component.name) ? component.name.trim() : component.name;
+
+    if (name) {
+      if (utils["a" /* default */].isStr(name) && !utils["a" /* default */].validateComponentName(name)) {
+        throw "组件名(" + " > " + name + ")存在html非法字符";
+      }
+
+      newComponent.name = name;
+      newComponent.actions = parseActions(component.actions, myPathKey); // 属性
+
+      var propInfo = parseComProps(component.props, ["style", "class"], needParse); // console.log(propInfo);
+
+      if (propInfo.new) {
+        newComponent.props = propInfo.new;
+      }
+
+      if (propInfo.raw) {
+        newComponent.__rawProps = propInfo.raw;
+      }
+
+      if (propInfo.staticNames) {
+        newComponent.__staticPropNames = propInfo.staticNames;
+      } // 指令
+
+
+      var directiveInfo = parseDirectives(utils["a" /* default */].isUndef(component.directives) ? component.v : component.directives, needParse);
+
+      if (directiveInfo.new) {
+        newComponent.directives = directiveInfo.new;
+      }
+
+      if (directiveInfo.raw) {
+        newComponent.__rawDirectives = directiveInfo.raw;
+      } // 提取class和style
+
+
+      assign_default()(newComponent, parseClassStyle(component, needParse));
+
+      var slotInfo = parseScopedSlots(component.scopedSlots, myPathKey, needParse);
+
+      if (slotInfo) {
+        if (slotInfo.hasRuntime) {
+          // 需要检测
+          newComponent.__refreshIndex = 0;
+        }
+
+        newComponent.scopedSlots = slotInfo.scopedSlots;
+      } // value
+
+
+      if (component.hasOwnProperty("value")) {
+        newComponent.value = component.value;
+      } else {// 无value, 证明不用双向绑定：这个不同于项组件的value, 人家会自动补充，这里没有
+      }
+
+      var rawText = component.text;
+
+      if (needParse && parse["a" /* default */].isEsOrFunc(rawText)) {
+        newComponent.text = rawText;
+
+        if (parse["a" /* default */].isEsOrFunc(rawText)) {
+          newComponent.__rawText = parse["a" /* default */].newEsFuncion(rawText);
+        }
+      } else {
+        newComponent.text = utils["a" /* default */].toComText(rawText);
+      }
+    } else {
+      if (!canNone) {
+        throw myPathKey + "组件格式不正确，必须是一个对象，且name必须存在.";
+      } else {
+        return false;
+      }
+    }
+
+    if (needParse && parse["a" /* default */].isEsOrFunc(component.hidden)) {
+      newComponent.hidden = false;
+      newComponent.__rawHidden = parse["a" /* default */].newEsFuncion(component.hidden);
+    } else {
+      newComponent.hidden = !!component.hidden;
+    }
+  } else {
+    if (!canNone) {
+      throw myPathKey + "组件格式不正确，必须是一个对象，且name必须存在";
+    } else {
+      return false;
+    }
+  }
+
+  newComponent.props = newComponent.props ? newComponent.props : {}; // 提取出所需要的监听事件（可以再次改造，如主组件去掉左中两边空格的事件就要重新改造合并）
+
+  var eventOn = fetchActionEvent(newComponent.actions);
+  newComponent.__emitEvents = eventOn.__emitEvents;
+  newComponent.__nativeEvents = eventOn.__nativeEvents;
+  return newComponent;
+}
+/**
+ * 解析/标准化项组件的事件
+ * @param {*} actions
+ * @param {*} myPathKey
+ */
+
+function parseActions(actions, myPathKey) {
+  // 解析是否为特殊写法
+  var newActions = [];
+
+  if (utils["a" /* default */].isObj(actions) && keys_default()(actions).length > 0 || utils["a" /* default */].isArr(actions) && actions.length > 0 || utils["a" /* default */].isFunc(actions) || utils["a" /* default */].isStr(actions)) {
+    var tmpActions;
+
+    if (utils["a" /* default */].isFunc(actions)) {
+      tmpActions = [{
+        trigger: constant["a" /* default */].CLICK_EVENT,
+        handler: actions
+      }];
+    } else if (utils["a" /* default */].isObj(actions)) {
+      tmpActions = [actions];
+    } else if (utils["a" /* default */].isStr(actions)) {
+      tmpActions = [actions];
+    } else {
+      // 就是数组了
+      tmpActions = actions;
+    }
+
+    tmpActions.forEach(function (tmpAction) {
+      var newTrigger, newAction;
+
+      if (utils["a" /* default */].isStr(tmpAction)) {
+        tmpAction = tmpAction.trim();
+
+        if (tmpAction == constant["a" /* default */].ENTER_SUBMIT) {
+          // keyup.native提交事件
+          newActions.push({
+            trigger: [constant["a" /* default */].KEYUP_NATIVE],
+            handler: enterSubmit
+          });
+        } else {
+          var actionInfos = tmpAction.split(/\s*=\s*/);
+
+          if (actionInfos && actionInfos.length == 2 && actionInfos[1] == constant["a" /* default */].ONLY_SUBMIT) {
+            // newActions.push({trigger: actionInfos[0], handler: onlySubmit});
+            newAction = {};
+            newTrigger = parseTrigger(actionInfos[0]);
+            newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [constant["a" /* default */].CLICK_EVENT];
+            newAction.handler = onlySubmit;
+            newActions.push(newAction);
+          } else {
+            console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行.");
+          }
+        }
+      } else if (utils["a" /* default */].isFunc(tmpAction.handler)) {
+        newAction = {};
+        newTrigger = parseTrigger(tmpAction.trigger);
+        newAction.trigger = newTrigger && newTrigger.length > 0 ? newTrigger : [constant["a" /* default */].CLICK_EVENT];
+        newAction.handler = tmpAction.handler;
+        newActions.push(newAction);
+      } else {
+        // 非法写，不是函数，去掉它
+        console.warn("key(" + myPathKey + ")存在不合法的事件，将过滤去掉，不会执行");
+      }
+    });
+  } else {// console.warn("key(" + myPathKey + ")component事件类型不合法.");
+  }
+
+  return newActions.length > 0 ? newActions : null;
+}
+/**
+ * 解析触发事件
+ * @param {*} trigger
+ * 1. 事件字件串或者以空格隔开的事件所组成的字符串，如"click" or "click change"
+ * 2. 事件组成的数组
+ * @returns 返回数据组，没有时返回一个null
+ */
+
+function parseTrigger(trigger) {
+  var tmpTriggers;
+
+  if (utils["a" /* default */].isArr(trigger) || utils["a" /* default */].isStr(trigger)) {
+    if (utils["a" /* default */].isStr(trigger)) {
+      trigger = trigger.trim();
+      tmpTriggers = trigger.split(/\s+/);
+    } else {
+      tmpTriggers = [];
+      trigger.forEach(function (item) {
+        if (utils["a" /* default */].isStr(item)) {
+          item = item.trim();
+          tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
+        }
+      });
+    }
+
+    tmpTriggers = tmpTriggers.map(function (item) {
+      if (!item) {
+        // 为空，直接写默认事件
+        return constant["a" /* default */].CLICK_EVENT;
+      } else if (item.indexOf(".") === 0) {
+        // 只有修改，前面加默认事件
+        return constant["a" /* default */].CLICK_EVENT + item;
+      } else {
+        // 合法
+        return item;
+      }
+    });
+  } else {
+    tmpTriggers = null;
+  }
+
+  return tmpTriggers && tmpTriggers.length > 0 ? tmpTriggers : null;
+}
+/**
+ * 提取出class和style
+ * @param {*} item
+ * @returns {class和style}
+ */
+
+function parseClassStyle(item) {
+  var needParse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var newItem = {};
+
+  if (needParse && parse["a" /* default */].isEsOrFunc(item.class)) {
+    newItem.class = null;
+    newItem.__rawClass = parse["a" /* default */].newEsFuncion(item.class);
+  } else {
+    if (item.class) {
+      newItem.class = utils["a" /* default */].deepCopy(item.class);
+    }
+  }
+
+  if (needParse && parse["a" /* default */].isEsOrFunc(item.style)) {
+    newItem.style = null;
+    newItem.__rawStyle = parse["a" /* default */].newEsFuncion(item.style);
+  } else {
+    if (utils["a" /* default */].isObj(item.style) && keys_default()(item.style).length) {
+      newItem.style = utils["a" /* default */].deepCopy(item.style);
+    }
+  }
+
+  return newItem;
+}
+/**
+ * 整理出"表单"组件需要监听的外部事件
+ */
+
+function fetchActionEvent(actions) {
+  var emitEvents = [];
+  var nativeEvents = [];
+  var triggerList, nativeName; // 自定义事件
+
+  if (actions) {
+    actions.forEach(function (actionItem) {
+      triggerList = actionItem.trigger;
+      triggerList.forEach(function (triggerItem) {
+        nativeName = getNativeName(triggerItem);
+
+        if (nativeName) {
+          // .native监听
+          nativeEvents.push(nativeName);
+        } else {
+          emitEvents.push(triggerItem);
+        }
+      });
+    });
+  }
+
+  return {
+    __emitEvents: emitEvents.length ? utils["a" /* default */].unique(emitEvents) : null,
+    __nativeEvents: nativeEvents.length ? utils["a" /* default */].unique(nativeEvents) : null
+  };
+}
+/**
+ * 提取是否为.native事件
+ * @param {*} eventName
+ */
+
+function getNativeName(eventName) {
+  var dotNative = "." + constant["a" /* default */].ADJ_NATIVE;
+  var lastIndex = eventName.lastIndexOf(dotNative);
+
+  if (lastIndex != -1 && eventName.substr(lastIndex) === dotNative) {
+    // .native监听
+    var nativeName = eventName.substr(0, lastIndex);
+
+    if (nativeName) {
+      return nativeName;
+    } else {
+      return false; //因为eventName是经过处理的,不会出现点在前面，所以不会进入这里
+    }
+  } else {
+    return false;
+  }
+}
+/**
+ * 解析项label和项组件的对齐方式
+ */
+
+function parseAlign(align) {
+  var defaultVal = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "left";
+  var aligns = ["left", "center", "right"];
+
+  if (aligns.includes(align)) {
+    return align;
+  }
+
+  return defaultVal;
+}
+/**
+ * 解析项label和项组件的在弹性布局中的占位情况
+ */
+
+function parseFlex(flex, size) {
+  var flexs = ["self", "full"];
+
+  if (flexs.includes(flex)) {
+    return flex;
+  } // 兼容一下之前的东西
+
+
+  var sizes = ["fixed", "auto"];
+  var sizeIndex = sizes.indexOf(size);
+
+  if (sizeIndex >= 0) {
+    console.warn('label.size and component.size ["fixed", "auto"]已经舍弃了，请使用flex ["self", "full"]');
+    return flexs[sizeIndex];
+  }
+
+  return false;
+}
+/**
+ * 解析组件属性
+ */
+
+function parseComProps(props, excludeKeys) {
+  var needParse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var newProps = {},
+      rawProps = {};
+  var staticNames = [];
+
+  if (!utils["a" /* default */].isObj(props)) {
+    props = {};
+  }
+
+  var hasEsFunc = false; // var PREFIXS = constant.PREFIX_STATIC_FUNC;
+
+  var realKey, newRealKey;
+  var staticKey, isStatic;
+  var value, newValue;
+
+  for (var key in props) {
+    realKey = key; // 会保留空格的
+
+    staticKey = needParse ? parse["a" /* default */].getStaticKey(realKey) : false; // 取静态key,不是返回false
+    // console.log(staticKey);
+
+    isStatic = staticKey !== false ? true : false;
+
+    if (isStatic) {
+      realKey = staticKey;
+    }
+
+    if (!realKey.trim()) {
+      // 全空，不必理会
+      break;
+    }
+
+    newRealKey = utils["a" /* default */].vueCamelCase(realKey);
+
+    if (excludeKeys.includes(newRealKey)) {
+      // 存在不能包括的属性，不必理会
+      break;
+    }
+
+    value = props[key];
+
+    if (needParse) {
+      if (!isStatic && parse["a" /* default */].isEsOrFunc(props[key])) {
+        // 不是静态且需要转化
+        hasEsFunc = true;
+        newValue = parse["a" /* default */].newEsFuncion(value);
+        newProps[newRealKey] = newValue;
+        rawProps[newRealKey] = newValue;
+      } else if (!isStatic || !utils["a" /* default */].isFunc(value)) {
+        // 不是静态或是（静态，其值不是函数），保持原样
+        newProps[newRealKey] = value;
+        rawProps[newRealKey] = value;
+      } else {
+        // 是静态属性、值是函数
+        newProps[newRealKey] = value;
+        rawProps[newRealKey] = value; // 保持前缀，因为解析需要用到；为什么要这样
+
+        staticNames.push(newRealKey); // 记录下来
+      }
+    } else {
+      // 无需要解析
+      newProps[newRealKey] = value;
+      rawProps[newRealKey] = value;
+    }
+  }
+
+  if (hasEsFunc) {
+    for (var tmpkey in newProps) {
+      newProps[tmpkey] = null;
+    }
+  } else {
+    rawProps = {};
+  }
+
+  rawProps = keys_default()(rawProps).length > 0 ? rawProps : false;
+  return {
+    new: newProps,
+    raw: rawProps,
+    staticNames: staticNames.length ? staticNames : false
+  };
+}
+/**
+ * 解析指令
+ */
+
+
+function parseDirectives(directives) {
+  var needParse = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var newDirectives = [],
+      rawDirectives = [];
+
+  if (!utils["a" /* default */].isArr(directives)) {
+    directives = [directives];
+  }
+
+  var hasEsFunc = false; // 转化为数组了
+
+  directives.forEach(function (directiveItem) {
+    var directive;
+
+    if (utils["a" /* default */].isStr(directiveItem)) {
+      directive = {
+        name: directiveItem
+      };
+    } else if (!utils["a" /* default */].isObj(directiveItem)) {
+      // 不合法，去掉
+      return false;
+    } else {
+      directive = directiveItem;
+    } // 全部转成对象了
+
+
+    var name, value, expression, arg, modifiers;
+    name = directive.name;
+    var prefix = "v-";
+
+    if (utils["a" /* default */].isStr(name)) {
+      name = name.trim();
+
+      if (name.indexOf(prefix) === 0) {
+        name = name.substr(prefix.length);
+      }
+    } else {
+      name = false;
+    } // 指令名合法
+
+
+    if (name) {
+      expression = utils["a" /* default */].isStr(directive.expression) ? directive.expression.trim() : undefined;
+      expression = expression ? expression : undefined;
+      arg = utils["a" /* default */].isStr(directive.arg) ? directive.arg.trim() : undefined;
+      arg = arg ? arg : undefined;
+      modifiers = utils["a" /* default */].isObj(directive.modifiers) ? utils["a" /* default */].deepCopy(directive.modifiers) : {};
+
+      if (needParse && parse["a" /* default */].isEsOrFunc(directive.value)) {
+        hasEsFunc = true;
+        value = parse["a" /* default */].newEsFuncion(directive.value);
+      } else {
+        value = utils["a" /* default */].deepCopy(directive.value);
+      }
+
+      var rawDirective = {
+        name: name,
+        value: value,
+        expression: expression,
+        arg: arg,
+        modifiers: modifiers
+      };
+      rawDirectives.push(rawDirective);
+    }
+  });
+
+  if (hasEsFunc) {
+    rawDirectives.forEach(function (rawDirective) {
+      var newDirective = {};
+
+      assign_default()(newDirective, rawDirective);
+
+      newDirective.value = null;
+      newDirectives.push(newDirective);
+    });
+  } else {
+    newDirectives = rawDirectives;
+    rawDirectives = false;
+  }
+
+  newDirectives = newDirectives.length > 0 ? newDirectives : false;
+  return {
+    new: newDirectives,
+    raw: rawDirectives
+  };
+}
+/**
+ * 解析scopedSlots
+ */
+
+
+function parseScopedSlots(scopedSlots, myPathKey) {
+  var needParse = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var newScopedSlots = {};
+  var newSlots;
+  var hasRuntime = false; // 根据vue源代码, VNode是不会被劫持的
+
+  if (utils["a" /* default */].isVNode(scopedSlots)) {
+    // 要先判断VNode，因为VNode也属于Object
+    console.warn("插槽暂不支持直接配置虚拟节点，虚拟节点必须用函数包含并返回。此配置将忽略！");
+  } else if (utils["a" /* default */].isArr(scopedSlots)) {
+    newSlots = checkSlotArr(scopedSlots, "scopedSlots", myPathKey);
+
+    if (newSlots.length) {
+      newScopedSlots.default = newSlots;
+    }
+  } else if (!utils["a" /* default */].isObj(scopedSlots) && isSlotType(scopedSlots)) {
+    newScopedSlots.default = scopedSlots;
+
+    if (utils["a" /* default */].isFunc(scopedSlots)) {
+      hasRuntime = true;
+    }
+  } else if (utils["a" /* default */].isObj(scopedSlots) && keys_default()(scopedSlots).length > 0) {
+    for (var key in scopedSlots) {
+      var value = scopedSlots[key];
+
+      if (utils["a" /* default */].isArr(value)) {
+        newSlots = checkSlotArr(value, key, myPathKey);
+
+        if (newSlots.length) {
+          newScopedSlots[key] = newSlots;
+        }
+      } else if (isSlotType(value)) {
+        if (utils["a" /* default */].isObj(value)) {
+          newScopedSlots[key] = parseComponent(value, myPathKey + " > scopedSlots > " + key, true, needParse);
+        } else {
+          newScopedSlots[key] = value;
+        }
+
+        if (utils["a" /* default */].isFunc(value)) {
+          hasRuntime = true;
+        }
+      } else {
+        if (!(utils["a" /* default */].isUndef(value) || utils["a" /* default */].isNull(value))) {
+          console.warn("插槽（" + myPathKey + " > " + key + "）的值不合法，将忽略（值必须是虚拟节点、函数、数字、字符串、布尔型）");
+        }
+      }
+    }
+  } else {
+    if (!(utils["a" /* default */].isUndef(scopedSlots) || utils["a" /* default */].isNull(scopedSlots))) {
+      console.warn("插槽（" + myPathKey + " > " + key + "）的值不合法，将忽略（值必须是虚拟节点、函数、数字、字符串、布尔型）");
+    }
+  }
+
+  return keys_default()(newScopedSlots).length > 0 ? {
+    scopedSlots: newScopedSlots,
+    hasRuntime: hasRuntime
+  } : undefined;
+}
+
+function checkSlotArr(slots, key, myPathKey) {
+  var newSlots = [];
+  slots.forEach(function (slot, index) {
+    if (utils["a" /* default */].isVNode()) {
+      console.warn("插槽暂不支持直接配置，请用函数包含并返回。此配置将忽略。");
+    } else if (utils["a" /* default */].isFunc(slot)) {
+      throw "插槽（" + myPathKey + " > " + key + "）的数组不能存在函数，但可以用函数返回数组";
+    } else if (isSlotType(slot)) {
+      if (utils["a" /* default */].isObj(slot)) {
+        // 是一个标准的配置型组件
+        var newComponent = parseComponent(slot, myPathKey + " > scopedSlots > " + key, true);
+
+        if (newComponent) {
+          newSlots.push(newComponent);
+        }
+      } else {
+        newSlots.push(slot);
+      }
+    } else {
+      console.warn("插槽（" + myPathKey + " > " + key + "）中的数组存在(第" + (index + 1) + "个)不合法的，将忽略（数组中的值必须是虚拟节点、数字、字符串、布尔型）");
+    }
+  });
+  return newSlots;
+}
+/**
+ * 是否是scopedSlot支持的类型
+ * @param {*} value
+ */
+
+
+function isSlotType(value) {
+  var isValidName = false;
+
+  if (utils["a" /* default */].isObj(value)) {
+    // 判断对象是否正常的组件配置
+    var name = utils["a" /* default */].isStr(value.name) ? value.name.trim() : value.name;
+
+    if (name) {
+      isValidName = true;
+    } else {
+      isValidName = false;
+    }
+  }
+
+  return isValidName || utils["a" /* default */].isFunc(value) || utils["a" /* default */].isStr(value) || utils["a" /* default */].isNum(value) || utils["a" /* default */].isBool(value) || false;
+}
 
 /***/ }),
 
@@ -6891,6 +7249,22 @@ if (PATCH) {
 }
 
 module.exports = patchedExec;
+
+
+/***/ }),
+
+/***/ "522e":
+/***/ (function(module, exports, __webpack_require__) {
+
+// 19.1.2.5 Object.freeze(O)
+var isObject = __webpack_require__("f772");
+var meta = __webpack_require__("ebfd").onFreeze;
+
+__webpack_require__("ce7e")('freeze', function ($freeze) {
+  return function freeze(it) {
+    return $freeze && isObject(it) ? $freeze(meta(it)) : it;
+  };
+});
 
 
 /***/ }),
@@ -8133,8 +8507,9 @@ var constant = {
   // 原生的表单组件，主要是用来过滤空格
   FORM_INPUTS: ["input", "textarea"],
   INPUT_CHANGE: "change",
-  IDX_CHAIN_KEY: "[i]" // 数组链的代替字符，不可随便改
-
+  IDX_CHAIN_KEY: "[i]",
+  // 数组链的代替字符，不可随便改
+  COM_TARGET_REF: "__comTarget__"
 };
 /* harmony default export */ __webpack_exports__["a"] = (constant);
 
@@ -9012,8 +9387,8 @@ exports.push([module.i, ".es-tabs-nav-box{position:relative;margin:0 0 0 0;paddi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d23b");
 /* harmony import */ var _libs_schema_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("34bc");
 /* harmony import */ var _libs_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("4513");
@@ -9030,11 +9405,11 @@ var install = function install(Vue) {
   var globalOpts = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
   /* istanbul ignore if */
-  if (install.installed) return; // if (Object.keys(extendRules).length > 0) {
-  //   Object.assign(esRules, extendRules);
-  // }
+  if (install.installed) return; // 保存外部传入来的Vue(如用来判断vnode)
 
-  if (E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
+  _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].initVue(Vue);
+
+  if (_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
     _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].mergeGlobal(_libs_global_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"], globalOpts); // console.log(esGlobal);
   } // Vue.component(esConstant.HELP_NAME, esHelp);
   // Vue.component("es-base", esBase);
@@ -9054,7 +9429,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.7.3" : "??",
+  version: typeof process != "undefined" ? "1.7.4" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
@@ -9423,12 +9798,12 @@ module.exports = function (KEY, exec) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=5025f237&
-var packagevue_type_template_id_5025f237_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootData":_vm.csRootData,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=19b0aeee&
+var packagevue_type_template_id_19b0aeee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=5025f237&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=19b0aeee&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
@@ -9456,8 +9831,8 @@ var es6_string_includes = __webpack_require__("2fdb");
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
 var es6_regexp_split = __webpack_require__("28a5");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=1a940b94&
-var form_itemvue_type_template_id_1a940b94_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title && !_vm.schema.title.hidden)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?_c('span',[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]):_c('es-base',{attrs:{"config":_vm.schema.title,"info":_vm.schema.__info}}),(_vm.schema.title.help && !_vm.schema.title.help.hidden)?_c('div',{staticClass:"es-form-label-help"},[_c('es-base',{attrs:{"config":_vm.schema.title.help,"info":_vm.schema.__info}})],1):_vm._e()],1):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=7fd7d2ce&
+var form_itemvue_type_template_id_7fd7d2ce_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title && !_vm.schema.title.hidden)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?_c('span',[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]):_c('es-base',{attrs:{"config":_vm.schema.title,"info":_vm.schema.__info}}),(_vm.schema.title.help && !_vm.schema.title.help.hidden)?_c('div',{staticClass:"es-form-label-help"},[_c('es-base',{attrs:{"config":_vm.schema.title.help,"info":_vm.schema.__info}})],1):_vm._e()],1):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody
           ? _vm.schema.ui.toggleTexts[1]
           : _vm.schema.ui.toggleTexts[0])+"\n    ")]):_vm._e(),(_vm.schema.help && !_vm.schema.help.hidden)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()]):_vm._e(),_c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.properties || _vm.schema.ui.showBody),expression:"!schema.properties || schema.ui.showBody"}],class:[
       'es-form-body',
@@ -9476,13 +9851,13 @@ var form_itemvue_type_template_id_1a940b94_render = function () {var _vm=this;va
               _vm.schema.component.flex
                 ? 'es-form-component-' + _vm.schema.component.flex
                 : ''
-            ],attrs:{"config":_vm.schema.component},on:{"trigger":_vm.triggerHandler}})],1),(_vm.schema.unit && !_vm.schema.unit.hidden && !_vm.schema.__inGroups)?[(_vm.schema.unit.name)?_c('div',{staticClass:"es-form-unit"},[_c('es-base',{attrs:{"config":_vm.schema.unit,"info":_vm.schema.__info}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.unit.text),expression:"schema.unit.text"}],staticClass:"es-form-unit"},[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")])]:_vm._e(),(_vm.schema.help && !_vm.schema.help.hidden && !_vm.schema.__inGroups)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()],2):(
+            ],attrs:{"info":_vm.schema.__info,"is-main":true,"config":_vm.schema.component},on:{"trigger":_vm.triggerHandler}})],1),(_vm.schema.unit && !_vm.schema.unit.hidden && !_vm.schema.__inGroups)?[(_vm.schema.unit.name)?_c('div',{staticClass:"es-form-unit"},[_c('es-base',{attrs:{"config":_vm.schema.unit,"info":_vm.schema.__info}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.unit.text),expression:"schema.unit.text"}],staticClass:"es-form-unit"},[_vm._v("\n            "+_vm._s(_vm.schema.unit.text)+"\n          ")])]:_vm._e(),(_vm.schema.help && !_vm.schema.help.hidden && !_vm.schema.__inGroups)?_c('div',{staticClass:"es-form-help"},[_c('es-base',{attrs:{"config":_vm.schema.help,"info":_vm.schema.__info}})],1):_vm._e()],2):(
           _vm.schema.properties && _vm.schema.layout && _vm.schema.layout.name === 'tabs'
         )?_c('tabs',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refTabs__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):(_vm.schema.properties)?_c('es-object',{tag:"component",attrs:{"schema":_vm.schema}},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return _c('template',{slot:fieldName},[_c('form-item',{key:fieldName,ref:!fieldSchema.hidden ? '__refObject__' : undefined,refInFor:true,attrs:{"schema":fieldSchema}})],1)})],2):_vm._e()]:[(_vm.schema.array.name == 'array')?_c('array-row',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarRow__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-legend')?_c('array-legend',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarLegend__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e(),(_vm.schema.array.name == 'array-card')?_c('array-card',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarCard__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):(_vm.schema.array.name == 'array-table')?_c('array-table',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTable__",refInFor:true,attrs:{"schema":props.schema}})]}}})],null,true)}):(_vm.schema.array && _vm.schema.array.name == 'array-tabs')?_c('array-tabs',{tag:"component",attrs:{"schema":_vm.schema},on:{"input":_vm.formArrayInput},scopedSlots:_vm._u([_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return {key:fieldName,fn:function(props){return [_c('form-item',{key:fieldName,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})]}}}),{key:"default",fn:function(props){return (_vm.schema.component)?_c('div',{staticClass:"es-form-component-list"},_vm._l((1),function(key){return _c('form-item',{key:key,ref:"__refArrarTabs__",refInFor:true,attrs:{"schema":props.schema}})}),1):_vm._e()}}],null,true)}):_vm._e()],(!_vm.schema.array)?[(_vm.schema.rules)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error",class:_vm.schema.rules.class,style:(_vm.schema.rules.style)},[_vm._v("\n        "+_vm._s(_vm.schema.__invalidMsg)+"\n      ")]):_vm._e()]:[(_vm.schema.array.rules)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.__invalidMsg),expression:"schema.__invalidMsg"}],staticClass:"es-form-error",class:_vm.schema.array.rules.class,style:(_vm.schema.array.rules.style)},[_vm._v("\n        "+_vm._s(_vm.schema.__invalidMsg)+"\n      ")]):_vm._e()],(_vm.schema.desc && !_vm.schema.desc.hidden)?[(_vm.schema.desc.name)?_c('div',{staticClass:"es-form-desc"},[_c('es-base',{attrs:{"config":_vm.schema.desc,"info":_vm.schema.__info}})],1):_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.schema.desc.text),expression:"schema.desc.text"}],staticClass:"es-form-desc"},[_vm._v("\n        "+_vm._s(_vm.schema.desc.text)+"\n      ")])]:_vm._e()],2)])}
-var form_itemvue_type_template_id_1a940b94_staticRenderFns = []
+var form_itemvue_type_template_id_7fd7d2ce_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=1a940b94&
+// CONCATENATED MODULE: ./src/package/form-item.vue?vue&type=template&id=7fd7d2ce&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object.vue?vue&type=template&id=5e0b4fea&
 var objectvue_type_template_id_5e0b4fea_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-container"},[_vm._l((_vm.schema.properties),function(fieldSchema,fieldName){return [(fieldSchema.__groups)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(!fieldSchema.__hiddenGroup),expression:"!fieldSchema.__hiddenGroup"}],key:'groups-' + fieldName,class:['es-form-object', 'es-col-' + fieldSchema.__groupCol],style:({
@@ -9629,6 +10004,69 @@ var utils = __webpack_require__("4513");
 // EXTERNAL MODULE: ./src/package/libs/constant.js
 var constant = __webpack_require__("890a");
 
+// CONCATENATED MODULE: ./src/package/libs/data-cache.js
+/**
+ * data-cache.js
+ *
+ * Copyright (c) 2020 chengaohe All rights reserved.
+ *
+ * 用于记录表单数据
+ *
+ */
+// import utils from "./utils";
+// import constant from "./constant";
+var formDataMap = {};
+window.formDataMap = formDataMap;
+var dataCache = {
+  __getData: function __getData(formId) {
+    if (!formDataMap[formId]) {
+      formDataMap[formId] = {};
+    }
+
+    return formDataMap[formId];
+  },
+  getRoot: function getRoot(formId, defaultValue) {
+    var data = this.__getData(formId);
+
+    return data.root ? data.root : defaultValue;
+  },
+  setRoot: function setRoot(formId, value) {
+    var data = this.__getData(formId);
+
+    data.root = value;
+  },
+  getGlobal: function getGlobal(formId, defaultValue) {
+    var data = this.__getData(formId);
+
+    return data.global ? data.global : defaultValue;
+  },
+  setGlobal: function setGlobal(formId, value) {
+    var data = this.__getData(formId);
+
+    data.global = value;
+  },
+  getHiddenFunc: function getHiddenFunc(formId) {
+    var data = this.__getData(formId);
+
+    return data.hiddenFunc;
+  },
+  setHiddenFunc: function setHiddenFunc(formId, value) {
+    var data = this.__getData(formId);
+
+    data.hiddenFunc = value;
+  },
+  remove: function remove(formId) {
+    if (formDataMap.hasOwnProperty(formId)) {
+      formDataMap[formId].hiddenFunc = null;
+      delete formDataMap[formId];
+    }
+  }
+};
+window.dataCache = dataCache;
+/* harmony default export */ var data_cache = (dataCache);
+// EXTERNAL MODULE: ./src/package/libs/component-utils.js + 1 modules
+var component_utils = __webpack_require__("45ac");
+
 // CONCATENATED MODULE: ./src/package/base.js
 
 
@@ -9646,196 +10084,14 @@ var constant = __webpack_require__("890a");
  *
  */
 
- // import { throws } from "assert";
+
+
 
 "use strict";
 
 /* harmony default export */ var base = ({
   render: function render(createElement) {
-    if (!this.config.name) {
-      console.error("错误的config: ", this.config);
-      throw "es-base config.name必须存在";
-    } // 防止props不存在
-
-
-    var configProps = this.config.props ? this.config.props : {}; // 计算出props, attrs
-
-    var newProps = {};
-    var newAttrs = {};
-    var domProps = {};
-    var directives = this.config.directives ? utils["a" /* default */].deepCopy(this.config.directives) : []; // false, 不是数组也没有事
-
-    var componentName = this.config.name.toLowerCase ? this.config.name.toLowerCase() : this.config.name;
-
-    if (componentName === constant["a" /* default */].TAG_INPUT && ( // 不区分大小写
-    configProps.type === constant["a" /* default */].TYPE_RADIO || configProps.type === constant["a" /* default */].TYPE_CHECKBOX)) {
-      if (configProps.type === constant["a" /* default */].TYPE_RADIO) {
-        assign_default()(newAttrs, configProps);
-
-        if (this.config.hasOwnProperty("value")) {
-          // 用户设置了value的情况
-          newAttrs.checked = this.config.value === configProps.value;
-        } else {
-          // 没有用户value
-          newAttrs.checked = configProps.hasOwnProperty("checked") && configProps.checked !== false ? true : false;
-        }
-
-        assign_default()(newProps, configProps);
-
-        if (newProps.hasOwnProperty("checked")) {
-          delete newProps.checked;
-        }
-
-        domProps.checked = newAttrs.checked;
-      } else {
-        var checked = false;
-
-        if (this.config.hasOwnProperty("value")) {
-          if (!utils["a" /* default */].isUndef(configProps.trueValue)) {
-            // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
-            if (this.config.value === configProps.trueValue) {
-              checked = true;
-            } else {
-              checked = false;
-            }
-          } else if (!utils["a" /* default */].isUndef(configProps.falseValue)) {
-            // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
-            if (this.config.value === configProps.falseValue) {
-              checked = false;
-            } else {
-              checked = true;
-            }
-          } else {
-            // 经测试：当trueValue和falseValue没有指定，checked才为!!this.config.value
-            checked = !!this.config.value;
-          }
-        } else {
-          checked = configProps.hasOwnProperty("checked") && configProps.checked !== false ? true : false;
-        }
-
-        assign_default()(newAttrs, configProps);
-
-        newAttrs.checked = checked;
-
-        assign_default()(newProps, configProps);
-
-        if (newProps.hasOwnProperty("checked")) {
-          delete newProps.checked;
-        }
-
-        domProps.checked = newAttrs.checked;
-      }
-    } else {
-      var newValue;
-
-      if (this.config.hasOwnProperty("value")) {
-        newValue = utils["a" /* default */].isRefVal(this.config.value) ? utils["a" /* default */].deepCopy(this.config.value) : this.config.value; // 这样防止引用地址被组件内部修改
-      } else {
-        newValue = configProps.value;
-      }
-
-      if (!constant["a" /* default */].FORM_INPUTS.includes(componentName)) {
-        assign_default()(newAttrs, configProps);
-
-        if (newAttrs.hasOwnProperty("value")) {
-          delete newAttrs.value;
-        }
-
-        assign_default()(newProps, configProps);
-
-        newProps.value = newValue;
-      } else {
-        assign_default()(newAttrs, configProps);
-
-        if (newAttrs.hasOwnProperty("value")) {
-          delete newAttrs.value;
-        }
-
-        assign_default()(newProps, configProps);
-
-        if (newProps.hasOwnProperty("value")) {
-          delete newProps.value;
-        } // 经测试（value）：
-        // textarea必须要在domProps才能显示；
-        // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
-
-
-        domProps.value = newValue;
-      }
-    }
-
-    var vnode = createElement(this.config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
-    {
-      attrs: newAttrs,
-      //attrs为原生属性
-      // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
-      // this.config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
-      class: this.config.class,
-      style: this.config.style,
-      // this.config.style必须是一个对象才能有效；原理同上
-      domProps: domProps,
-      // DOM属性
-      props: newProps,
-      // 组件props
-      // 事件监听基于 "on"
-      // 所以不再支持如 "v-on:keyup.enter" 修饰语
-      // 需要手动匹配 KeyCode
-      on: this.$data.emitOn,
-      // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
-      nativeOn: this.$data.nativeOn,
-      // 自定义指令。注意事项：不能对绑定的旧值设值
-      // Vue 会为您持续追踪
-      // directives: [
-      //   // {
-      //   // 	name: "my-custom-directive",
-      //   // 	value: "2",
-      //   // 	expression: "1 + 1",
-      //   // 	arg: "foo",
-      //   // 	modifiers: {
-      //   // 		bar: true
-      //   // 	}
-      //   // }
-      // ],
-      directives: directives,
-      // Scoped slots in the form of
-      // { name: props => VNode | Array<VNode> }
-      scopedSlots: {// default: props => createElement('span', props.text + "test3")
-      },
-      // 如果组件是其他组件的子组件，需为插槽指定名称
-      // slot: "name-of-slot",
-      // 其他特殊顶层属性
-      // key: "myKey",
-      ref: "__comTarget__"
-    }, // [createElement('span', "test")]
-    // ["test2"]
-    // "测试{{config.value}}" // 子组件中的阵列
-    this.config.text); // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
-
-    var componentOptions = vnode.componentOptions;
-    var dataAttrs = {};
-    var comProps = componentOptions && componentOptions.Ctor.options.props ? componentOptions.Ctor.options.props : false;
-
-    if (comProps && keys_default()(comProps).length && keys_default()(configProps).length) {
-      var comPropsKeys = keys_default()(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-
-
-      for (var key in configProps) {
-        if (!comPropsKeys.includes(key)) {
-          dataAttrs[key] = configProps[key];
-        }
-      }
-
-      if (vnode.data) {
-        vnode.data.attrs = dataAttrs;
-      }
-    }
-
-    newAttrs = null;
-    newProps = null;
-    domProps = null;
-    directives = null;
-    configProps = null;
-    return vnode;
+    return this.renderUi(createElement, this.config, false, constant["a" /* default */].COM_TARGET_REF);
   },
   // inheritAttrs: false,
   props: {
@@ -9857,28 +10113,22 @@ var constant = __webpack_require__("890a");
     // 当!!this.info为非真时，处理事件会让父级处理
     info: {
       type: Object,
-      required: false,
-      default: undefined // emitEvents: {
-      //   type: Array,
-      //   required: false,
-      //   default: null
-      // },
-      // nativeEvents: {
-      //   type: Array,
-      //   required: false,
-      //   default: null
-      // },
-      // value: {
-      //   type: [Object, String, Date, Array, Boolean, Number],
-      //   required: false
-      // }
+      required: true,
+      default: undefined
+    },
 
+    /* 是否是主组件：也就是右边的组件；当为真时，处理事件会让父级处理 */
+    isMain: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data: function data() {
     return {
       emitOn: null,
-      nativeOn: null
+      nativeOn: null,
+      scopedSlots: undefined
     };
   },
   created: function created() {
@@ -9886,27 +10136,260 @@ var constant = __webpack_require__("890a");
   },
   methods: {
     initUi: function initUi() {
-      this.createOn();
+      var ref = constant["a" /* default */].COM_TARGET_REF;
+      this.$data.emitOn = this.createEmitOn(this.config, this.isMain, ref);
+      this.$data.nativeOn = this.createNativeOn(this.config, this.isMain, ref);
+      this.$data.scopedSlots = this.createScopedSlots(this.config, ref);
     },
-    eventHandler: function eventHandler(eventName, args) {
-      args = args ? args : [];
 
-      if (!this.info) {
-        // 让父类去处理
-        this.$emit("trigger", eventName, args, this.$refs.__comTarget__);
+    /**
+     * 渲染函数
+     * @param {*} createElement 创建VNode的函数
+     * @param {*} config        组件设置
+     * @param {*} isSlotCom     是否插槽的组件，因为事件不一样，插槽数据也不一样
+     * @returns VNode
+     */
+    renderUi: function renderUi(createElement, config, isSlotCom, ref) {
+      var vnode; // 根据vue源代码, VNode是不会被劫持的
+
+      if (utils["a" /* default */].isVNode(config)) {
+        vnode = config;
+      } else if (utils["a" /* default */].isObj(config)) {
+        if (!config.name) {
+          console.error("错误的config: ", config);
+          throw "es-base config.name必须存在";
+        } // 防止props不存在
+
+
+        var configProps = config.props ? config.props : {}; // 计算出props, attrs
+
+        var newProps = {};
+        var newAttrs = {};
+        var domProps = {};
+        var directives = config.directives ? utils["a" /* default */].deepCopy(config.directives) : []; // false, 不是数组也没有事
+
+        var componentName = config.name.toLowerCase ? config.name.toLowerCase() : config.name;
+
+        if (componentName === constant["a" /* default */].TAG_INPUT && ( // 不区分大小写
+        configProps.type === constant["a" /* default */].TYPE_RADIO || configProps.type === constant["a" /* default */].TYPE_CHECKBOX)) {
+          if (configProps.type === constant["a" /* default */].TYPE_RADIO) {
+            assign_default()(newAttrs, configProps);
+
+            if (config.hasOwnProperty("value")) {
+              // 用户设置了value的情况
+              newAttrs.checked = config.value === configProps.value;
+            } else {
+              // 没有用户value
+              newAttrs.checked = configProps.hasOwnProperty("checked") && configProps.checked !== false ? true : false;
+            }
+
+            assign_default()(newProps, configProps);
+
+            if (newProps.hasOwnProperty("checked")) {
+              delete newProps.checked;
+            }
+
+            domProps.checked = newAttrs.checked;
+          } else {
+            var checked = false;
+
+            if (config.hasOwnProperty("value")) {
+              if (!utils["a" /* default */].isUndef(configProps.trueValue)) {
+                // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
+                if (config.value === configProps.trueValue) {
+                  checked = true;
+                } else {
+                  checked = false;
+                }
+              } else if (!utils["a" /* default */].isUndef(configProps.falseValue)) {
+                // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
+                if (config.value === configProps.falseValue) {
+                  checked = false;
+                } else {
+                  checked = true;
+                }
+              } else {
+                // 经测试：当trueValue和falseValue没有指定，checked才为!!config.value
+                checked = !!config.value;
+              }
+            } else {
+              checked = configProps.hasOwnProperty("checked") && configProps.checked !== false ? true : false;
+            }
+
+            assign_default()(newAttrs, configProps);
+
+            newAttrs.checked = checked;
+
+            assign_default()(newProps, configProps);
+
+            if (newProps.hasOwnProperty("checked")) {
+              delete newProps.checked;
+            }
+
+            domProps.checked = newAttrs.checked;
+          }
+        } else {
+          var newValue;
+
+          if (config.hasOwnProperty("value")) {
+            newValue = utils["a" /* default */].isRefVal(config.value) ? utils["a" /* default */].deepCopy(config.value) : config.value; // 这样防止引用地址被组件内部修改
+          } else {
+            newValue = configProps.value;
+          }
+
+          if (!constant["a" /* default */].FORM_INPUTS.includes(componentName)) {
+            assign_default()(newAttrs, configProps);
+
+            if (newAttrs.hasOwnProperty("value")) {
+              delete newAttrs.value;
+            }
+
+            assign_default()(newProps, configProps);
+
+            newProps.value = newValue;
+          } else {
+            assign_default()(newAttrs, configProps);
+
+            if (newAttrs.hasOwnProperty("value")) {
+              delete newAttrs.value;
+            }
+
+            assign_default()(newProps, configProps);
+
+            if (newProps.hasOwnProperty("value")) {
+              delete newProps.value;
+            } // 经测试（value）：
+            // textarea必须要在domProps才能显示；
+            // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
+
+
+            domProps.value = newValue;
+          }
+        }
+
+        var emitOn, nativeOn, scopedSlots, tmpRef;
+
+        if (!isSlotCom) {
+          // 内容组件，非插槽组件: 因为常用，所以计算好
+          emitOn = this.$data.emitOn;
+          nativeOn = this.$data.nativeOn;
+          scopedSlots = this.$data.scopedSlots;
+        } else {
+          // 很少用，且scopedSlots有可能包含函数，必须实时解析
+          emitOn = this.createEmitOn(config, false, ref);
+          nativeOn = this.createNativeOn(config, false, ref);
+          scopedSlots = this.createScopedSlots(config, ref);
+        } // COM_TARGET_REF时ref必须存在，因为要搜索
+
+
+        if (ref === constant["a" /* default */].COM_TARGET_REF || emitOn || nativeOn) {
+          tmpRef = ref;
+        }
+
+        vnode = createElement(config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
+        {
+          attrs: newAttrs,
+          //attrs为原生属性
+          // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
+          // config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
+          class: config.class,
+          style: config.style,
+          // config.style必须是一个对象才能有效；原理同上
+          domProps: domProps,
+          // DOM属性
+          props: newProps,
+          // 组件props
+          // 事件监听基于 "on"
+          // 所以不再支持如 "v-on:keyup.enter" 修饰语
+          // 需要手动匹配 KeyCode
+          on: emitOn,
+          // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
+          nativeOn: nativeOn,
+          // 自定义指令。注意事项：不能对绑定的旧值设值
+          // Vue 会为您持续追踪
+          directives: directives,
+          // Scoped slots in the form of
+          scopedSlots: scopedSlots,
+          ref: tmpRef
+        }, config.text); // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
+
+        var componentOptions = vnode.componentOptions;
+        var dataAttrs = {};
+        var comProps = componentOptions && componentOptions.Ctor.options.props ? componentOptions.Ctor.options.props : false;
+
+        if (comProps && keys_default()(comProps).length && keys_default()(configProps).length) {
+          var comPropsKeys = keys_default()(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
+
+
+          for (var key in configProps) {
+            if (!comPropsKeys.includes(key)) {
+              dataAttrs[key] = configProps[key];
+            }
+          }
+
+          if (vnode.data) {
+            vnode.data.attrs = dataAttrs;
+          }
+        }
+
+        newAttrs = null;
+        newProps = null;
+        domProps = null;
+        directives = null;
+        configProps = null;
+      } else if (utils["a" /* default */].isFunc(config)) {
+        var options = {
+          global: data_cache.getGlobal(this.config.__formId),
+          // 直接取组件__formId，插槽是没有__formId的
+          rootData: data_cache.getRoot(this.config.__formId),
+          // 兼容1.7.0以前，不包括1.7.0
+          root: data_cache.getRoot(this.config.__formId),
+          idxChain: this.info.idxChain,
+          index: this.info.index,
+          pathKey: this.info.pathKey,
+          $hidden: data_cache.getHiddenFunc(this.config.__formId)
+        };
+        vnode = config(options);
+
+        if (!utils["a" /* default */].isVNode(vnode)) {
+          vnode = this.renderUi(createElement, vnode, isSlotCom, ref);
+        }
+
+        options = null;
+      } else if (utils["a" /* default */].isStr(vnode) || utils["a" /* default */].isUndef(vnode) || utils["a" /* default */].isNum(vnode) || utils["a" /* default */].isBool(vnode) || utils["a" /* default */].isNull(vnode)) {
+        vnode = createElement("span", vnode); // 经验证，这样写没有问题：vnode不用加""
+      } else {
+        console.error("错误的config: ", config);
+        throw "es-base config当是一个函数时，其返回值必须是一个虚拟节点或字符串";
+      } // 这个不能删除：vue机制，主要是为了执行config.__refreshIndex；当表单改变时，同步更新页面
+
+
+      if (!isSlotCom && config && config.__refreshIndex && this.__slotUpdateTime) {
+        // 永远都不会进入这，因为__slotUpdateTime没有值的
+        this.__slotUpdateTime++;
+      }
+
+      return vnode;
+    },
+    eventHandler: function eventHandler(config, eventName, args, isMain, ref) {
+      args = args ? args : []; // console.log("this.$refs", this.$refs);
+
+      if (isMain) {
+        // 主组件：让父类去处理
+        this.$emit("trigger", eventName, args, this.$refs[ref]);
       } else {
         // 一般组件，自己处理
         var options = {
-          value: utils["a" /* default */].deepCopy(this.config.value),
+          value: utils["a" /* default */].deepCopy(config.value),
           event: args[0],
           args: args,
           pathKey: this.info.pathKey,
           index: this.info.index,
           idxChain: this.info.idxChain,
-          target: this.$refs.__comTarget__
+          target: this.$refs[ref]
         };
         var handlers = [];
-        var actions = this.config.actions;
+        var actions = config.actions;
 
         if (actions) {
           actions.forEach(function (action) {
@@ -9939,7 +10422,7 @@ var constant = __webpack_require__("890a");
         formItem = formItem.$parent;
       }
     },
-    __parseInputEvent: function __parseInputEvent(eventData) {
+    __parseInputEvent: function __parseInputEvent(config, eventData) {
       var eventValue;
 
       if (eventData && eventData.target && eventData.target.nodeName) {
@@ -9951,7 +10434,7 @@ var constant = __webpack_require__("890a");
 
           if (nodeType === constant["a" /* default */].TYPE_RADIO) {
             // 防止props不存在
-            configProps = this.config.props ? this.config.props : {};
+            configProps = config.props ? config.props : {};
 
             if (eventData.target.checked) {
               eventValue = configProps.value;
@@ -9960,7 +10443,7 @@ var constant = __webpack_require__("890a");
             }
           } else if (nodeType === constant["a" /* default */].TYPE_CHECKBOX) {
             // 防止props不存在
-            configProps = this.config.props ? this.config.props : {};
+            configProps = config.props ? config.props : {};
 
             if (eventData.target.checked) {
               eventValue = true;
@@ -9989,16 +10472,16 @@ var constant = __webpack_require__("890a");
     },
 
     /**
-     * 创建所需要监听的事件
+     * 创建emit派发所需要监听的事件
      */
-    createOn: function createOn() {
+    createEmitOn: function createEmitOn(config, isMain, ref) {
       var _thisVm = this;
 
-      var hasOwnValue = this.config.hasOwnProperty("value");
+      var hasOwnValue = config.hasOwnProperty("value");
       var emitEvents;
 
-      if (this.config.__emitEvents) {
-        emitEvents = utils["a" /* default */].deepCopy(this.config.__emitEvents);
+      if (config.__emitEvents) {
+        emitEvents = utils["a" /* default */].deepCopy(config.__emitEvents);
 
         if (hasOwnValue && !emitEvents.includes(constant["a" /* default */].INPUT_EVENT)) {
           emitEvents.push(constant["a" /* default */].INPUT_EVENT);
@@ -10016,48 +10499,142 @@ var constant = __webpack_require__("890a");
       emitEvents.forEach(function (eventName) {
         if (eventName == constant["a" /* default */].INPUT_EVENT && hasOwnValue) {
           emitOn[eventName] = function (eventData) {
-            var eventValue = _thisVm.__parseInputEvent(eventData);
+            var eventValue = _thisVm.__parseInputEvent(config, eventData);
 
-            if (_thisVm.config.value !== eventValue) {
-              _thisVm.config.value = eventValue;
+            if (config.value !== eventValue) {
+              config.value = eventValue;
 
-              _thisVm.eventHandler(eventName, arguments);
+              _thisVm.eventHandler(config, eventName, arguments, isMain, ref);
             }
           };
         } else {
           emitOn[eventName] = function () {
-            _thisVm.eventHandler(eventName, arguments);
+            _thisVm.eventHandler(config, eventName, arguments, isMain, ref);
           };
         }
       });
-      this.$data.emitOn = keys_default()(emitOn).length > 0 ? emitOn : null; //原生事件
-      // emit发出的事件
 
-      if (this.config.__nativeEvents && this.config.__nativeEvents.length > 0) {
+      if (keys_default()(emitOn).length > 0) {
+        return emitOn;
+      } else {
+        _thisVm = undefined; // 没有关联清除
+
+        return null;
+      }
+    },
+
+    /**
+     * 创建原生事件所需要监听的事件
+     */
+    createNativeOn: function createNativeOn(config, isMain, ref) {
+      // emit发出的事件
+      if (config.__nativeEvents && config.__nativeEvents.length > 0) {
+        var _thisVm = this;
+
         var nativeOn = {};
-        var nativeEvents = utils["a" /* default */].deepCopy(this.config.__nativeEvents);
+        var nativeEvents = utils["a" /* default */].deepCopy(config.__nativeEvents);
         nativeEvents.forEach(function (eventName) {
           nativeOn[eventName] = function () {
-            _thisVm.eventHandler(eventName + "." + constant["a" /* default */].ADJ_NATIVE, arguments);
+            _thisVm.eventHandler(config, eventName + "." + constant["a" /* default */].ADJ_NATIVE, arguments, isMain, ref);
           };
         });
-        this.$data.nativeOn = keys_default()(nativeOn).length > 0 ? nativeOn : null;
-      } else {
-        this.$data.nativeOn = null;
-      }
 
-      if (!this.$data.emitOn && !this.$data.nativeOn) {
-        _thisVm = undefined; // 没有关联清除
+        if (keys_default()(nativeOn).length > 0) {
+          return nativeOn;
+        } else {
+          _thisVm = undefined;
+          return null;
+        }
+      } else {
+        return null;
       }
+    },
+    createScopedSlots: function createScopedSlots(config, pref) {
+      var scopedSlots = config.scopedSlots;
+
+      if (scopedSlots) {
+        var newScopedSlots = {};
+
+        for (var key in scopedSlots) {
+          newScopedSlots[key] = this.newSlotFunc(key, scopedSlots[key], pref);
+        }
+
+        return newScopedSlots;
+      } else {
+        return undefined;
+      }
+    },
+    newSlotFunc: function newSlotFunc(key, slotValue, pref) {
+      var vm = this;
+      return function (scoped) {
+        var vnodes;
+
+        if (utils["a" /* default */].isFunc(slotValue)) {
+          var options = {
+            global: data_cache.getGlobal(vm.config.__formId),
+            rootData: data_cache.getRoot(vm.config.__formId),
+            // 兼容1.7.0以前，不包括1.7.0
+            root: data_cache.getRoot(vm.config.__formId),
+            idxChain: vm.info.idxChain,
+            index: vm.info.index,
+            pathKey: vm.info.pathKey,
+            $hidden: data_cache.getHiddenFunc(vm.config.__formId)
+          };
+          scoped = scoped ? scoped : {};
+          vnodes = slotValue(options, scoped);
+
+          if (!utils["a" /* default */].isArr(vnodes)) {
+            vnodes = [vnodes];
+          }
+
+          var tmpVNodes = [];
+          vnodes.forEach(function (vnode) {
+            if (!utils["a" /* default */].isVNode(vnode) && utils["a" /* default */].isObj(vnode)) {
+              var newComponent = Object(component_utils["f" /* parseComponent */])(vnode, vm.info.pathKey + "> scopeSlots(function返回值) > " + key, true, false);
+
+              if (newComponent) {
+                tmpVNodes.push(newComponent);
+              }
+            } else {
+              tmpVNodes.push(vnode);
+            }
+          });
+          vnodes = tmpVNodes;
+        } else {
+          vnodes = [slotValue];
+        }
+
+        var newVNode,
+            newVNodes = [];
+        vnodes.forEach(function (vnode, index) {
+          if (!utils["a" /* default */].isVNode(vnode) && utils["a" /* default */].isObj(vnode)) {
+            if (!vnode.hidden) {
+              newVNode = vm.renderUi(vm.$createElement, vnode, true, pref + "_" + index);
+              newVNodes.push(newVNode);
+            }
+          } else {
+            newVNodes.push(vnode);
+          }
+        });
+
+        if (newVNodes.length <= 0) {
+          newVNodes = undefined;
+        }
+
+        return newVNodes;
+      };
     }
   },
-  destroyed: function destroyed() {},
+  destroyed: function destroyed() {
+    this.$data.emitOn = null;
+    this.$data.nativeOn = null;
+    this.$data.scopedSlots = null;
+  },
   watch: {
     config: {
       handler: function handler()
       /* newVal, oldVal */
       {
-        // console.log("base.config here...");
         this.initUi();
       },
       deep: false
@@ -14930,6 +15507,7 @@ var global = __webpack_require__("394e");
 //
 //
 //
+//
 
 
 
@@ -15023,7 +15601,7 @@ var global = __webpack_require__("394e");
 
         if (refTarget) {
           targetInfo = {
-            target: refTarget.$refs.__comTarget__,
+            target: refTarget.$refs[constant["a" /* default */].COM_TARGET_REF],
             sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
           };
         } else {
@@ -15205,8 +15783,8 @@ var form_itemvue_type_style_index_0_lang_scss_ = __webpack_require__("fae7");
 
 var form_item_component = Object(componentNormalizer["a" /* default */])(
   package_form_itemvue_type_script_lang_js_,
-  form_itemvue_type_template_id_1a940b94_render,
-  form_itemvue_type_template_id_1a940b94_staticRenderFns,
+  form_itemvue_type_template_id_7fd7d2ce_render,
+  form_itemvue_type_template_id_7fd7d2ce_staticRenderFns,
   false,
   null,
   null,
@@ -15215,22 +15793,22 @@ var form_item_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var form_item = (form_item_component.exports);
-// EXTERNAL MODULE: ./src/package/libs/schema-utils.js + 11 modules
+// EXTERNAL MODULE: ./src/package/libs/schema-utils.js + 10 modules
 var schema_utils = __webpack_require__("34bc");
 
 // EXTERNAL MODULE: ./src/package/libs/parse.js
 var parse = __webpack_require__("5f60");
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/console.vue?vue&type=template&id=3cc14b3c&
-var consolevue_type_template_id_3cc14b3c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-console-box",style:({ zIndex: _vm.boxZIndex })},[_c('button',{staticClass:"console-btn",on:{"click":_vm.clickHandler}},[_vm._v("C")]),(_vm.hadShow)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPanel),expression:"showPanel"}],ref:"panel",staticClass:"es-console-panel",style:({
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/components/console.vue?vue&type=template&id=5937f053&
+var consolevue_type_template_id_5937f053_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-console-box",style:({ zIndex: _vm.boxZIndex })},[_c('button',{staticClass:"console-btn",on:{"click":_vm.clickHandler}},[_vm._v("C")]),(_vm.hadShow)?_c('div',{directives:[{name:"show",rawName:"v-show",value:(_vm.showPanel),expression:"showPanel"}],ref:"panel",staticClass:"es-console-panel",style:({
       right: _vm.positions.right + 'px',
       top: _vm.positions.top + 'px',
       zIndex: _vm.positions.zIndex
-    })},[_c('div',{staticClass:"console-header",on:{"mousedown":_vm.startDragHandler}},[_c('h2',{staticClass:"panel-title"},[_vm._v("esForm调试面板")])]),_c('div',{staticClass:"console-close",on:{"click":function($event){_vm.showPanel = false}}},[_vm._v("Close")]),(_vm.showPanel)?_c('div',{staticClass:"panel-body"},[_vm._m(0),_c('h3',{staticClass:"subtitle"},[_vm._v("根数据(rootData) => getValue取出")]),_c('textarea',{staticClass:"value-box",attrs:{"readonly":"readonly"}},[_vm._v(_vm._s(_vm.toJson(_vm.rootData))+"\n      ")]),_c('h3',{staticClass:"subtitle"},[_vm._v("表单数据(formValue) => getFormValue取出")]),_c('textarea',{staticClass:"value-box",attrs:{"readonly":"readonly"}},[_vm._v(_vm._s(_vm.toJson(_vm.formValue))+"\n      ")])]):_vm._e()]):_vm._e()])}
-var consolevue_type_template_id_3cc14b3c_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"question-box"},[_c('a',{staticClass:"question",attrs:{"href":"https://chengaohe45.github.io/vue-easy-form-docs/dist/base/console.html","target":"_blank"}},[_vm._v("如何打开面板?")]),_c('a',{staticClass:"question",attrs:{"href":"https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#根值","target":"_blank"}},[_vm._v("什么是根数据?")]),_c('a',{staticClass:"question",attrs:{"href":"https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#表单值","target":"_blank"}},[_vm._v("什么是表单数据?")])])}]
+    })},[_c('div',{staticClass:"console-header",on:{"mousedown":_vm.startDragHandler}},[_c('h2',{staticClass:"panel-title"},[_vm._v("esForm调试面板")])]),_c('div',{staticClass:"console-close",on:{"click":function($event){_vm.showPanel = false}}},[_vm._v("Close")]),(_vm.showPanel)?_c('div',{staticClass:"panel-body"},[_vm._m(0),_c('h3',{staticClass:"subtitle"},[_vm._v("根值(rootValue) => getValue取出")]),_c('textarea',{staticClass:"value-box",attrs:{"readonly":"readonly"},domProps:{"value":_vm.toJson(_vm.rootValue)}}),_c('h3',{staticClass:"subtitle"},[_vm._v("表单值(formValue) => getFormValue取出")]),_c('textarea',{staticClass:"value-box",attrs:{"readonly":"readonly"},domProps:{"value":_vm.toJson(_vm.formValue)}})]):_vm._e()]):_vm._e()])}
+var consolevue_type_template_id_5937f053_staticRenderFns = [function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"question-box"},[_c('a',{staticClass:"question",attrs:{"href":"https://chengaohe45.github.io/vue-easy-form-docs/dist/base/console.html","target":"_blank"}},[_vm._v("如何打开面板?")]),_c('a',{staticClass:"question",attrs:{"href":"https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#根值","target":"_blank"}},[_vm._v("什么是根值?")]),_c('a',{staticClass:"question",attrs:{"href":"https://chengaohe45.github.io/vue-easy-form-docs/dist/base/explain.html#表单值","target":"_blank"}},[_vm._v("什么是表单值?")])])}]
 
 
-// CONCATENATED MODULE: ./src/package/components/console.vue?vue&type=template&id=3cc14b3c&
+// CONCATENATED MODULE: ./src/package/components/console.vue?vue&type=template&id=5937f053&
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.constructor.js
 var es6_regexp_constructor = __webpack_require__("3b2b");
@@ -15506,6 +16084,10 @@ function esDrag(event, callback) {
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ var consolevue_type_script_lang_js_ = ({
@@ -15531,7 +16113,7 @@ function esDrag(event, callback) {
     this.$data.boxZIndex = this.getMaxZIndex() + 1;
   },
   props: {
-    rootData: {
+    rootValue: {
       type: Object,
       required: false,
       default: function _default() {
@@ -15702,8 +16284,8 @@ var consolevue_type_style_index_0_lang_scss_ = __webpack_require__("5bb4");
 
 var console_component = Object(componentNormalizer["a" /* default */])(
   components_consolevue_type_script_lang_js_,
-  consolevue_type_template_id_3cc14b3c_render,
-  consolevue_type_template_id_3cc14b3c_staticRenderFns,
+  consolevue_type_template_id_5937f053_render,
+  consolevue_type_template_id_5937f053_staticRenderFns,
   false,
   null,
   null,
@@ -16085,6 +16667,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
 
 
+
 /* harmony default export */ var packagevue_type_script_lang_js_ = ({
   /* ====================== 生命周期 ====================== */
   created: function created() {
@@ -16093,7 +16676,9 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
     this._esLockSubmit = false;
     var hiddenFunc = this.isHidden;
-    this._esHiddenFunc = hiddenFunc.bind(this); // 用于作隐藏解析
+    data_cache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
+
+    data_cache.setGlobal(this.$data.id, this.global ? utils["a" /* default */].deepCopy(this.global) : {});
 
     this.__initUi(this.schema);
   },
@@ -16101,17 +16686,17 @@ var console_component = Object(componentNormalizer["a" /* default */])(
   destroyed: function destroyed() {},
   data: function data() {
     return {
+      id: utils["a" /* default */].newUid("es"),
+
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
       _esOriginalValue: null,
-      _esHiddenFunc: null,
-      _esResultValue: null,
-      _esFormData: null,
+      _esFormValue: null,
       _esLockSubmit: false // 开始是false,
       _esWarns: []
       */
       canConsole: true,
-      csRootData: null,
+      csRootValue: null,
       // 用于console, 只有当canConsole为true时才有值
       csFormValue: null,
       formSchema: {},
@@ -16202,7 +16787,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
      * 实时取值，表单存在的值;也是getRootData的别名
      */
     getValue: function getValue() {
-      return utils["a" /* default */].deepCopy(this._esFormData); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
+      return utils["a" /* default */].deepCopy(data_cache.getRoot(this.$data.id)); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -16210,7 +16795,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
      * 实时取值，表单存在的值;也是getValue的别名
      */
     getRootData: function getRootData() {
-      return utils["a" /* default */].deepCopy(this._esFormData);
+      return utils["a" /* default */].deepCopy(data_cache.getRoot(this.$data.id));
     },
 
     /**
@@ -16218,7 +16803,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
      * 实时取值，用户提交所需要的值，不包括隐藏的或临时的；也就是v-model
      */
     getFormValue: function getFormValue() {
-      return utils["a" /* default */].deepCopy(this._esResultValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
+      return utils["a" /* default */].deepCopy(this._esFormValue); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -16326,12 +16911,12 @@ var console_component = Object(componentNormalizer["a" /* default */])(
           var parseSources = {
             global: this.global ? this.global : {},
             // 防止null情况
-            rootData: this._esFormData,
+            rootData: data_cache.getRoot(this.$data.id),
             index: itemSchema.__info.index,
             idxChain: itemSchema.__info.idxChain,
             pathKey: itemSchema.__info.pathKey,
             rootSchema: rootSchema,
-            isHidden: this._esHiddenFunc
+            isHidden: data_cache.getHiddenFunc(this.$data.id)
           };
 
           if (parse["a" /* default */].smartEsValue(itemSchema.__rawHidden, parseSources)) {
@@ -16406,7 +16991,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
       var _this2 = this;
 
       this.$data.isInited = false;
-      var tmpSchema = schema_utils["a" /* default */].completeSchema(schema); //将value的值同步到schema中
+      var tmpSchema = schema_utils["a" /* default */].completeSchema(schema, this.$data.id); //将value的值同步到schema中
 
       this.__setValue(tmpSchema, this.value); //进行初始化
 
@@ -16415,12 +17000,12 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
       this.__syncValue();
 
-      this._esOriginalValue = utils["a" /* default */].deepCopy(this._esFormData);
+      this._esOriginalValue = utils["a" /* default */].deepCopy(data_cache.getRoot(this.$data.id));
       this.$nextTick(function () {
         _this2.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
-        // this.$emit("inited", utils.deepCopy(this._esResultValue));
+        // this.$emit("inited", utils.deepCopy(this._esFormValue));
 
-        _this2.__execEmit("inited", [utils["a" /* default */].deepCopy(_this2._esResultValue)]);
+        _this2.__execEmit("inited", [utils["a" /* default */].deepCopy(_this2._esFormValue)]);
       });
     },
     __checkProp: function __checkProp(schema, rootSchema) {
@@ -16577,8 +17162,8 @@ var console_component = Object(componentNormalizer["a" /* default */])(
           _this3.$data._esLockSubmit = false;
 
           if (_this3.$data.isInited) {
-            // this.$emit("submit", utils.deepCopy(this._esResultValue));
-            _this3.__execEmit("submit", [utils["a" /* default */].deepCopy(_this3._esResultValue)]);
+            // this.$emit("submit", utils.deepCopy(this._esFormValue));
+            _this3.__execEmit("submit", [utils["a" /* default */].deepCopy(_this3._esFormValue)]);
           } else {
             console.warn("表单还未初始化完成，无法派发submit事件");
           }
@@ -16625,12 +17210,12 @@ var console_component = Object(componentNormalizer["a" /* default */])(
         var parseSources = {
           global: this.global ? this.global : {},
           // 防止null情况
-          rootData: this._esFormData,
+          rootData: data_cache.getRoot(this.$data.id),
           index: inputSchema.__info.index,
           idxChain: inputSchema.__info.idxChain,
           pathKey: inputSchema.__info.pathKey,
           rootSchema: this.$data.formSchema,
-          isHidden: this._esHiddenFunc
+          isHidden: data_cache.getHiddenFunc(this.$data.id)
         }; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
 
         var checkedResult = this.__checkRules(inputSchema, options.value, eventNames, parseSources);
@@ -16666,10 +17251,10 @@ var console_component = Object(componentNormalizer["a" /* default */])(
           if (eventNames.includes(constant["a" /* default */].INPUT_EVENT)) {
             // this.$emit(
             //   "change",
-            //   utils.deepCopy(this._esResultValue),
+            //   utils.deepCopy(this._esFormValue),
             //   sourcePathKey
             // );
-            this.__execEmit("change", [utils["a" /* default */].deepCopy(this._esResultValue), sourcePathKey]);
+            this.__execEmit("change", [utils["a" /* default */].deepCopy(this._esFormValue), sourcePathKey]);
           }
         }
         /* 释放内存 */
@@ -16712,32 +17297,33 @@ var console_component = Object(componentNormalizer["a" /* default */])(
     },
     __syncValue: function __syncValue(sourcePathKey) {
       // 不单只是执行actions
-      var formData = form_utils["a" /* default */].getValue(this.$data.formSchema);
-      this._esFormData = formData;
+      var rootValue = form_utils["a" /* default */].getValue(this.$data.formSchema);
+      data_cache.setRoot(this.$data.id, rootValue);
       var baseParseSources = {
         global: this.global ? this.global : {},
         // 防止null情况
-        rootData: this._esFormData,
+        rootData: rootValue,
         rootSchema: this.$data.formSchema,
-        isHidden: this._esHiddenFunc
+        isHidden: data_cache.getHiddenFunc(this.$data.id)
       };
       form_utils["a" /* default */].analyzeUiProps(this.$data.formSchema, baseParseSources);
-      var resultValue = form_utils["a" /* default */].getResultValue(this.$data.formSchema, baseParseSources);
-      this._esResultValue = resultValue; // this.$emit(
+      var formValue = form_utils["a" /* default */].getFormValue(this.$data.formSchema, baseParseSources); // 缓存，以便多次调用
+
+      this._esFormValue = formValue; // this.$emit(
       //   "input",
-      //   utils.deepCopy(resultValue),
+      //   utils.deepCopy(formValue),
       //   sourcePathKey ? sourcePathKey : false
       // );
 
-      this.__execEmit("input", [utils["a" /* default */].deepCopy(resultValue), sourcePathKey ? sourcePathKey : false]);
+      this.__execEmit("input", [utils["a" /* default */].deepCopy(formValue), sourcePathKey ? sourcePathKey : false]);
 
       if (this.$data.canConsole) {
-        this.$data.csRootData = utils["a" /* default */].deepCopy(formData);
-        this.$data.csFormValue = utils["a" /* default */].deepCopy(resultValue);
+        this.$data.csRootValue = utils["a" /* default */].deepCopy(rootValue);
+        this.$data.csFormValue = utils["a" /* default */].deepCopy(formValue);
       }
 
       baseParseSources = null;
-      resultValue = null;
+      formValue = null;
     },
 
     /**
@@ -16938,7 +17524,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
     //watch是异步监听的，而$emit("input"...)是同步的
     value: {
       handler: function handler(newVal) {
-        if (stringify_default()(newVal) !== stringify_default()(this._esResultValue)) {
+        if (stringify_default()(newVal) !== stringify_default()(this._esFormValue)) {
           this.__setValue(this.$data.formSchema, newVal);
 
           this.__syncValue();
@@ -16953,6 +17539,8 @@ var console_component = Object(componentNormalizer["a" /* default */])(
        */
       handler: function handler(newVal, oldVal) {
         // console.log("newValue: ", newVal, oldVal, this.global);
+        data_cache.setGlobal(this.$data.id, newVal ? utils["a" /* default */].deepCopy(newVal) : {});
+
         if (utils["a" /* default */].isObj(newVal)) {
           // undefined也就变为{default}, 从而下入这里
           if (newVal === oldVal) {
@@ -16975,9 +17563,8 @@ var console_component = Object(componentNormalizer["a" /* default */])(
   },
   beforeDestroy: function beforeDestroy() {
     this._esOriginalValue = null;
-    this._esHiddenFunc = null;
-    this._esResultValue = null;
-    this._esFormData = null;
+    this._esFormValue = null;
+    data_cache.remove(this.$data.id);
   }
 });
 // CONCATENATED MODULE: ./src/package/index.vue?vue&type=script&lang=js&
@@ -16996,7 +17583,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = Object(componentNormalizer["a" /* default */])(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_5025f237_render,
+  packagevue_type_template_id_19b0aeee_render,
   staticRenderFns,
   false,
   null,
@@ -17877,6 +18464,15 @@ module.exports = (
 
 /***/ }),
 
+/***/ "e1b7":
+/***/ (function(module, exports, __webpack_require__) {
+
+__webpack_require__("522e");
+module.exports = __webpack_require__("584a").Object.freeze;
+
+
+/***/ }),
+
 /***/ "e36a":
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17998,6 +18594,66 @@ module.exports = function (O, D) {
   var C = anObject(O).constructor;
   var S;
   return C === undefined || (S = anObject(C)[SPECIES]) == undefined ? D : aFunction(S);
+};
+
+
+/***/ }),
+
+/***/ "ebfd":
+/***/ (function(module, exports, __webpack_require__) {
+
+var META = __webpack_require__("62a0")('meta');
+var isObject = __webpack_require__("f772");
+var has = __webpack_require__("07e3");
+var setDesc = __webpack_require__("d9f6").f;
+var id = 0;
+var isExtensible = Object.isExtensible || function () {
+  return true;
+};
+var FREEZE = !__webpack_require__("294c")(function () {
+  return isExtensible(Object.preventExtensions({}));
+});
+var setMeta = function (it) {
+  setDesc(it, META, { value: {
+    i: 'O' + ++id, // object ID
+    w: {}          // weak collections IDs
+  } });
+};
+var fastKey = function (it, create) {
+  // return primitive with prefix
+  if (!isObject(it)) return typeof it == 'symbol' ? it : (typeof it == 'string' ? 'S' : 'P') + it;
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return 'F';
+    // not necessary to add metadata
+    if (!create) return 'E';
+    // add missing metadata
+    setMeta(it);
+  // return object ID
+  } return it[META].i;
+};
+var getWeak = function (it, create) {
+  if (!has(it, META)) {
+    // can't set metadata to uncaught frozen object
+    if (!isExtensible(it)) return true;
+    // not necessary to add metadata
+    if (!create) return false;
+    // add missing metadata
+    setMeta(it);
+  // return hash weak collections IDs
+  } return it[META].w;
+};
+// add metadata on freeze-family methods calling
+var onFreeze = function (it) {
+  if (FREEZE && meta.NEED && isExtensible(it) && !has(it, META)) setMeta(it);
+  return it;
+};
+var meta = module.exports = {
+  KEY: META,
+  NEED: false,
+  fastKey: fastKey,
+  getWeak: getWeak,
+  onFreeze: onFreeze
 };
 
 
