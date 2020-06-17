@@ -76,7 +76,7 @@
 | getTabsIndex | 取某一个tabs的索引 | ([pathKey](./explain.md#项组件路径)) | 返回当前tabs的索引，不是tabs返回false；（支持普通或数组tabs）
 | setTabsIndex | 设某一个tabs的索引 | ([pathKey](./explain.md#项组件路径), index) |  设置当前tabs的索引；（支持普通或数组tabs）
 | <span style="white-space: nowrap;">clearErrMsg<badge text="1.6.2" /></span> | 清除错误信息 | ([pathKey](./explain.md#项组件路径), clearNext) |  1. 当pathKey没有值时则清除所有，clearNext无效；<br/>2. 当pathKey有值时，则是清除某一项，clearNext是对pathKey的补充，是否一起清除此项的后代
-| reset | 重置表单值 | 空 | -- 
+| reset | 重置表单值 | (onlySchema) | onlySchema为<badge text="1.7.5" />添加；默认为`false`<br/>`false`：重置的值为`schema配置`和`formValue`初始化时结合的值；<br/>`true`：重置的值为仅为`schema配置`初始化时的值
 
 
 ### getRef
