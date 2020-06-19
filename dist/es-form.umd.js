@@ -9429,7 +9429,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.7.4" : "??",
+  version: typeof process != "undefined" ? "1.7.5" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
@@ -9798,12 +9798,12 @@ module.exports = function (KEY, exec) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=19b0aeee&
-var packagevue_type_template_id_19b0aeee_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=6b3fbaac&
+var packagevue_type_template_id_6b3fbaac_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=19b0aeee&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=6b3fbaac&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
@@ -10015,8 +10015,8 @@ var constant = __webpack_require__("890a");
  */
 // import utils from "./utils";
 // import constant from "./constant";
-var formDataMap = {};
-window.formDataMap = formDataMap;
+var formDataMap = {}; // window.formDataMap = formDataMap;
+
 var dataCache = {
   __getData: function __getData(formId) {
     if (!formDataMap[formId]) {
@@ -10061,8 +10061,8 @@ var dataCache = {
       delete formDataMap[formId];
     }
   }
-};
-window.dataCache = dataCache;
+}; // window.dataCache = dataCache;
+
 /* harmony default export */ var data_cache = (dataCache);
 // EXTERNAL MODULE: ./src/package/libs/component-utils.js + 1 modules
 var component_utils = __webpack_require__("45ac");
@@ -16690,7 +16690,8 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
-      _esOriginalValue: null,
+      _esOriginalSchemaValue: null,   // schema里面的初始值，不包括formValue
+      _esOriginalRootValue: null,     // schema里面的初始值和formValue结合组成的初始值
       _esFormValue: null,
       _esLockSubmit: false // 开始是false,
       _esWarns: []
@@ -16971,9 +16972,13 @@ var console_component = Object(componentNormalizer["a" /* default */])(
     /**
      * 对外调用，重置值
      */
-    reset: function reset() {
-      // console.log(this._esOriginalValue);
-      this.setValue(this._esOriginalValue); //去年所有的错误提示
+    reset: function reset(onlySchema) {
+      if (true !== onlySchema) {
+        this.setValue(this._esOriginalRootValue);
+      } else {
+        this.setValue(this._esOriginalSchemaValue);
+      } //去年所有的错误提示
+
 
       form_utils["a" /* default */].clearErrorMsg(this.$data.formSchema);
     },
@@ -16991,16 +16996,19 @@ var console_component = Object(componentNormalizer["a" /* default */])(
       var _this2 = this;
 
       this.$data.isInited = false;
-      var tmpSchema = schema_utils["a" /* default */].completeSchema(schema, this.$data.id); //将value的值同步到schema中
+      var tmpSchema = schema_utils["a" /* default */].completeSchema(schema, this.$data.id); // 取出schema中的值，用于重置
+
+      this._esOriginalSchemaValue = utils["a" /* default */].deepCopy(form_utils["a" /* default */].getValue(tmpSchema)); //将value的值同步到schema中
 
       this.__setValue(tmpSchema, this.value); //进行初始化
 
 
       this.$data.formSchema = tmpSchema;
 
-      this.__syncValue();
+      this.__syncValue(); // 取出第一次设置的值，用于重置
 
-      this._esOriginalValue = utils["a" /* default */].deepCopy(data_cache.getRoot(this.$data.id));
+
+      this._esOriginalRootValue = utils["a" /* default */].deepCopy(data_cache.getRoot(this.$data.id));
       this.$nextTick(function () {
         _this2.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
         // this.$emit("inited", utils.deepCopy(this._esFormValue));
@@ -17562,7 +17570,8 @@ var console_component = Object(componentNormalizer["a" /* default */])(
     }
   },
   beforeDestroy: function beforeDestroy() {
-    this._esOriginalValue = null;
+    this._esOriginalRootValue = null;
+    this._esOriginalSchemaValue = null;
     this._esFormValue = null;
     data_cache.remove(this.$data.id);
   }
@@ -17583,7 +17592,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = Object(componentNormalizer["a" /* default */])(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_19b0aeee_render,
+  packagevue_type_template_id_6b3fbaac_render,
   staticRenderFns,
   false,
   null,

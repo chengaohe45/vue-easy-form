@@ -11,7 +11,7 @@
 // import constant from "./constant";
 
 var formDataMap = {};
-window.formDataMap = formDataMap;
+// window.formDataMap = formDataMap;
 let dataCache = {
   __getData(formId) {
     if (!formDataMap[formId]) {
@@ -57,6 +57,6 @@ let dataCache = {
     }
   }
 };
-window.dataCache = dataCache;
+// window.dataCache = dataCache;
 
 export default dataCache;
