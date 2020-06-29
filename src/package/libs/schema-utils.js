@@ -1386,6 +1386,7 @@ let schemaUtils = {
       var delMsg;
       var delAllMsg;
       var before = false;
+      var btnType = false;
 
       if (utils.isStr(array)) {
         newArray.name = array;
@@ -1466,6 +1467,8 @@ let schemaUtils = {
         actions = parseActions(array.actions, myPathKey);
         rowSpace = utils.isNum(array.rowSpace) ? array.rowSpace : undefined;
         type = utils.isStr(array.type) ? array.type : false;
+        var btnTypes = ["icon"];
+        btnType = btnTypes.includes(array.btnType) ? array.btnType : false;
         hasBorder = utils.isBool(array.hasBorder) ? array.hasBorder : true;
         insertValue = utils.isUndef(array.insertValue)
           ? undefined
@@ -1516,6 +1519,7 @@ let schemaUtils = {
         newArray.delAllMsg = delAllMsg;
         newArray.hasAdd = hasAdd;
         newArray.hasCopy = hasCopy;
+        newArray.btnType = btnType;
         newArray.min = min;
         newArray.max = max >= min ? max : 0;
         newArray.fixed = fixed;

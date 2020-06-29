@@ -2,7 +2,7 @@
   <div class="es-form-edit-btns">
     <div class="btn-list-box">
       <span
-        class="edit-selected-box"
+        :class="'es-addr-btns-box' + (size ? ' ' + size : '')"
         ref="delBtn"
         @click="clickEditHandler"
       ></span>
@@ -37,14 +37,19 @@
               @click="upItem"
               v-if="hasSort"
             >
-              <div class="es-triangle-border-up es-left"></div>
+              <div v-if="isHArrow" class="es-triangle-border-up es-left"></div>
+              <div v-else class="es-triangle-border-up"></div>
             </es-btn>
             <es-btn
               :disabled="isLast || index < fixed"
               @click="downItem"
               v-if="hasSort"
             >
-              <div class="es-triangle-border-down es-right"></div>
+              <div
+                v-if="isHArrow"
+                class="es-triangle-border-down es-right"
+              ></div>
+              <div v-else class="es-triangle-border-down"></div>
             </es-btn>
           </div>
         </div>
@@ -136,6 +141,16 @@ export default {
       default: true
     },
     hasAdd: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    size: {
+      type: String,
+      required: false,
+      default: ""
+    },
+    isHArrow: {
       type: Boolean,
       required: false,
       default: false

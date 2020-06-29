@@ -16,6 +16,7 @@ propName: {
     fixed: 1,         // 若第一条数据存在，则固定位置，不可移动
     max: 5,           // 不写或小于等于0代表不限制
     headRequired: false,      // 星号是否显示在头部。只在array-table有效
+    btnType: false,   // 操作按钮的显示类型：值有 "icon"
     value: [{name: "小天"}],   // 数组的默认值
     insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
       console.log(this.getValue(), options);
@@ -46,7 +47,7 @@ propName: {
 ```
 
 ### 实例1
-功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`、`delMsg`、`delAllMsg`、`before`
+功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`、`delMsg`、`delAllMsg`、`btnType`、`before`
 
 <ClientOnly>
   <demo-block :canOperate="true">
@@ -173,6 +174,7 @@ propName: {
                   hasAdd: true,
                   // hasCopy: true,
                   hasDelWarn: false,
+                  btnType: "icon",
                   before: function(done, data) {    // before钩子
                     console.log("before演示", data);
                     if (data.event.type === "delete" || data.event.type === "deleteAll") {  // 只过滤删除操作
@@ -493,6 +495,7 @@ propName: {
 | maxMsg | 大于最小条数时提示 | string | -- | `长度不能大于(max)` | max>0时有效
 | hasOrder | 是否有序号 | boolean | -- | true | --
 | hasDelWarn | 删除提示 | boolean | -- | true | 删除时是否有提示
+| btnType | 操作按钮显示类型 | string | `icon` | false | 只有在"array"<br /><span style="white-space:nowrap">"array-table"</span><br /><span style="white-space:nowrap">"array-legend"</span>这三种风格中`icon`才有效
 | headRequired | “星号”的位置 | boolean | -- | true | 只在`array-table`有效；<br />当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示
 | type | 头部类型 | string | `line`,<br />`card`,<br />`bg` | card | `array-tabs`时有效；效果跟[tabs布局](./tabs.md)一样
 | rowSpace | 每一行的间隔 | number | >=0 | undefined | 当为`undefined`, 继承父类的rowSpace

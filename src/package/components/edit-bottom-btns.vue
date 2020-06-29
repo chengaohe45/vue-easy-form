@@ -7,10 +7,10 @@
         @click="clickDeletBtn"
         v-if="hasDelete"
       >
-        删除所有
+        <div class="es-circle-delete"></div>
       </es-btn>
       <es-btn :disabled="!canAdd" @click="addItem" v-if="hasAdd">
-        添加
+        <div class="es-normal-plus"></div>
       </es-btn>
     </div>
     <transition name="es-fade" mode="out-in" appear v-if="canPop">
@@ -55,6 +55,10 @@
 .es-form-bottom-btns {
   position: relative;
   // display: inline-block;
+  .es-btn {
+    padding-left: 13px;
+    padding-right: 13px;
+  }
 }
 </style>
 

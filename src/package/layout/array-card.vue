@@ -61,7 +61,7 @@
                   schema.array.hasCopy
               "
             >
-              <edit-btns
+              <edit-abbr-btns
                 :has-delete="schema.array.hasDelete"
                 :has-sort="schema.array.hasSort"
                 :can-delete="schema.__propSchemaList.length > schema.array.min"
@@ -81,8 +81,9 @@
                 @downItem="downItem"
                 :del-msg="itemSchema.delMsg"
                 :info="itemSchema.__info"
-              ></edit-btns>
-              <!-- <span class="edit-selected-box"></span> -->
+                size="small"
+                :isHArrow="true"
+              ></edit-abbr-btns>
             </span>
           </div>
         </div>
@@ -130,7 +131,6 @@
 <style lang="scss">
 @import "../static/css/mixins.scss";
 
-$editBoxWidth: 20px;
 .es-form-array-card {
   // margin-bottom: -20px;
   @include clear;
@@ -176,36 +176,6 @@ $editBoxWidth: 20px;
 
     .head-edit-wrap {
       @include display-center;
-      .edit-selected-box {
-        margin: 0 0 0 5px;
-        @include flex-fixed;
-        display: block;
-        border-radius: 50%;
-        border: 1px solid #dcdfe6;
-        width: $editBoxWidth;
-        height: $editBoxWidth;
-        // line-height: 1px;
-        text-align: center;
-        cursor: pointer;
-        user-select: none;
-        @include display-center;
-        overflow: hidden;
-
-        &:hover {
-          background-color: #ecf5ff;
-        }
-
-        &::before {
-          content: "···";
-          display: block;
-          text-align: center;
-          width: $editBoxWidth;
-          height: 16px;
-          line-height: 16px;
-          @include flex-fixed;
-          color: #606266;
-        }
-      }
     }
   }
 
@@ -220,6 +190,10 @@ $editBoxWidth: 20px;
     user-select: none;
     cursor: pointer;
   }
+
+  .es-addr-btns-box {
+    margin-left: 5px;
+  }
 }
 </style>
 
@@ -228,7 +202,7 @@ import esObject from "./object";
 import tabs from "./tabs";
 import itemMixin from "../mixins/item-mixin";
 import arrayMixins from "../mixins/array-mixin.js";
-import editBtns from "../components/edit-abbr-btns";
+import editAbbrBtns from "../components/edit-abbr-btns";
 // import editBottomBtns from "../components/edit-bottom-btns";
 import esBase from "../base";
 import esBtn from "../components/btn.vue";
@@ -237,7 +211,7 @@ export default {
   mixins: [itemMixin, arrayMixins],
   components: {
     esObject,
-    editBtns,
+    editAbbrBtns,
     // editBottomBtns,
     tabs,
     esBase,

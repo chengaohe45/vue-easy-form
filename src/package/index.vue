@@ -31,6 +31,9 @@ $addBtnColor: #7b808c;
 $activeBtnColor: #409eff;
 $btnDisableColor: #d5d7dc;
 
+$editBoxWidth: 24px;
+$editBoxSmallWidth: 20px;
+
 .es-form {
   // margin: 20px 15px;
   position: relative;
@@ -133,6 +136,45 @@ $btnDisableColor: #d5d7dc;
 .es-btn-group .es-btn:last-child:not(:first-child) {
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.es-addr-btns-box {
+  margin: 0;
+  @include flex-fixed;
+  display: block;
+  border-radius: 50%;
+  border: 1px solid #dcdfe6;
+  width: $editBoxWidth;
+  height: $editBoxWidth;
+  // line-height: 1px;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+  @include display-center;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #ecf5ff;
+  }
+
+  &::before {
+    content: "···";
+    display: block;
+    text-align: center;
+    width: $editBoxWidth;
+    height: 16px;
+    line-height: 16px;
+    @include flex-fixed;
+    color: #606266;
+  }
+}
+
+.es-addr-btns-box.small {
+  width: $editBoxSmallWidth;
+  height: $editBoxSmallWidth;
+  &::before {
+    width: $editBoxSmallWidth;
+  }
 }
 
 .es-plus-btn {
@@ -719,14 +761,18 @@ export default {
       this.$data.isInited = false;
       var tmpSchema = schemaUtils.completeSchema(schema, this.$data.id);
       // 取出schema中的值，用于重置
-      this._esOriginalSchemaValue = utils.deepCopy(formUtils.getValue(tmpSchema));
+      this._esOriginalSchemaValue = utils.deepCopy(
+        formUtils.getValue(tmpSchema)
+      );
       //将value的值同步到schema中
       this.__setValue(tmpSchema, this.value);
       //进行初始化
       this.$data.formSchema = tmpSchema;
       this.__syncValue();
       // 取出第一次设置的值，用于重置
-      this._esOriginalRootValue = utils.deepCopy(dataCache.getRoot(this.$data.id));
+      this._esOriginalRootValue = utils.deepCopy(
+        dataCache.getRoot(this.$data.id)
+      );
 
       this.$nextTick(() => {
         this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好

@@ -129,6 +129,7 @@
               :style="{ height: schema.ui.rowHeight + 'px' }"
             >
               <edit-btns
+                v-if="schema.array.btnType !== 'icon'"
                 :has-delete="schema.array.hasDelete"
                 :has-sort="schema.array.hasSort"
                 :can-delete="schema.__propSchemaList.length > schema.array.min"
@@ -149,6 +150,28 @@
                 :del-msg="itemSchema.delMsg"
                 :info="itemSchema.__info"
               ></edit-btns>
+              <edit-abbr-btns
+                v-else
+                :has-delete="schema.array.hasDelete"
+                :has-sort="schema.array.hasSort"
+                :can-delete="schema.__propSchemaList.length > schema.array.min"
+                :fixed="schema.array.fixed"
+                :is-first="index == 0"
+                :is-last="index == schema.__propSchemaList.length - 1"
+                :index="index"
+                :has-del-warn="schema.array.hasDelWarn"
+                :can-add="
+                  schema.array.max <= 0 ||
+                    schema.__propSchemaList.length < schema.array.max
+                "
+                :has-add="schema.array.hasCopy"
+                @copyItem="copyItem"
+                @delItem="delItem"
+                @upItem="upItem"
+                @downItem="downItem"
+                :del-msg="itemSchema.delMsg"
+                :info="itemSchema.__info"
+              ></edit-abbr-btns>
             </div>
           </td>
         </tr>
@@ -261,6 +284,7 @@ import esObjectTable from "./object-table";
 import itemMixin from "../mixins/item-mixin";
 import arrayMixins from "../mixins/array-mixin.js";
 import editBtns from "../components/edit-btns";
+import editAbbrBtns from "../components/edit-abbr-btns";
 import editBottomBtns from "../components/edit-bottom-btns";
 import esBase from "../base";
 
@@ -270,6 +294,7 @@ export default {
     esBase,
     esObjectTable,
     editBtns,
+    editAbbrBtns,
     editBottomBtns
   },
   methods: {}
