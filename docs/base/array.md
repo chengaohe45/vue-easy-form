@@ -16,7 +16,7 @@ propName: {
     fixed: 1,         // 若第一条数据存在，则固定位置，不可移动
     max: 5,           // 不写或小于等于0代表不限制
     headRequired: false,      // 星号是否显示在头部。只在array-table有效
-    btnType: false,   // 操作按钮的显示类型：值有 "icon"
+    btnType: false,   // v1.7.6; 操作按钮的显示类型：值有 "icon"
     value: [{name: "小天"}],   // 数组的默认值
     insertValue: function(options) {    // 插入(添加/拷贝)时对插入值的处理
       console.log(this.getValue(), options);
@@ -483,8 +483,8 @@ propName: {
 
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
-| name | 哪种分组 | string/object | "array"<br /><span style="white-space:nowrap">"array-table"</span><br /><span style="white-space:nowrap">"array-tabs"</span><br /><span style="white-space:nowrap">"array-legend"</span><br /><span style="white-space:nowrap">"array-card"</span> | "array" | "array-table"不支持组件项（叶子节点）<br />"array-card"只支持组件项（叶子节点）
-| hasSort | 是否有排序按钮 | boolean | -- | false | 
+| name | 哪种分组 | string<br />object | "array"<br /><span style="white-space:nowrap">"array-table"</span><br /><span style="white-space:nowrap">"array-tabs"</span><br /><span style="white-space:nowrap">"array-legend"</span><br /><span style="white-space:nowrap">"array-card"</span> | "array" | "array-table"不支持组件项（叶子节点）<br />"array-card"只支持组件项（叶子节点）
+| hasSort | <span style="white-space:nowrap">是否有排序按钮</span> | boolean | -- | false | 
 | hasDelete | 是否有删除按钮 | boolean | -- | true |
 | hasAdd | 是否有添加按钮 | boolean | -- | true | 
 | hasCopy | 是否有复制按钮 | boolean | -- | false | array-tabs不支持拷贝功能
@@ -495,17 +495,17 @@ propName: {
 | maxMsg | 大于最小条数时提示 | string | -- | `长度不能大于(max)` | max>0时有效
 | hasOrder | 是否有序号 | boolean | -- | true | --
 | hasDelWarn | 删除提示 | boolean | -- | true | 删除时是否有提示
-| btnType | 操作按钮显示类型 | string | `icon` | false | 只有在"array"<br /><span style="white-space:nowrap">"array-table"</span><br /><span style="white-space:nowrap">"array-legend"</span>这三种风格中`icon`才有效
+| btnType | <badge text="1.7.6" /><br />操作按钮显示类型 | string | `icon` | false | 只有在"array"<br /><span style="white-space:nowrap">"array-table"</span><br /><span style="white-space:nowrap">"array-legend"</span>这三种风格中`icon`才有效
 | headRequired | “星号”的位置 | boolean | -- | true | 只在`array-table`有效；<br />当设置为true时，“星号”在table头部显示，而不是在内容区随组件显示
 | type | 头部类型 | string | `line`,<br />`card`,<br />`bg` | card | `array-tabs`时有效；效果跟[tabs布局](./tabs.md)一样
 | rowSpace | 每一行的间隔 | number | >=0 | undefined | 当为`undefined`, 继承父类的rowSpace
-| insertValue | 插入时的值 | function/其它的值 | -- | 添加或拷贝时各自的默认值 | 
+| insertValue | 插入时的值 | function<br />其它的值 | -- | 添加或拷贝时各自的默认值 | 
 | hasBorder | 是否有边框 | boolean | true/false | true |
 | subLabel | tabs头部名称 | number | >=0 | 0 | <span style="white-space:nowrap">`array-tab`</span>和<span style="white-space:nowrap">`array-legend`</span>时有效，其余情况无效; 支持[组件化](./com-format.md)和[动态解析](./parse.md)
-| actions | 数组事件 | array/object | trigger只有:<br> input<br>change | -- | 跟[项组件事件写法](./component.html#组件事件)一样，就是返回信息少了`target`
-| rules | 数组验证 | boolean/object | trigger只有:<br> input<br>change | -- | 跟[项组件验证写法](./rules.html)一样
+| actions | 数组事件 | array<br />object | trigger只有:<br> input<br>change | -- | 跟[项组件事件写法](./component.html#组件事件)一样，就是返回信息少了`target`
+| rules | 数组验证 | boolean<br />object | trigger只有:<br> input<br>change | -- | 跟[项组件验证写法](./rules.html)一样
 | value | 数组的默认值 | array | -- | -- | --
-| delMsg | 单个删除提示 | string/function/object | -- | `确定删除吗？` | 可[动态解析](./parse.md)
-| delAllMsg | 全部删除提示 | string/function/object | -- | `确定删除所有吗？` | 可[动态解析](./parse.md)
-| before | 操作前调用的钩子 | function(done, data) | -- | -- | 1. 执行操作时（`增加`, `复制`, `删除`, `上移`, `下移`,  `全删`）都会调用，用户可根据返回参数的`data.event.type`来判断是哪种操作<br>2. `done`是一个函数，要执行done()来告诉系统进行下一步操作，done(false)表示系统将停止下来，取消所需要执行的操作。
+| delMsg | <badge text="1.7.3" /><br />单个删除提示 | string<br />function<br />object | -- | `确定删除吗？` | 可[动态解析](./parse.md)
+| delAllMsg | <badge text="1.7.3" /><br />全部删除提示 | string<br />function<br />object | -- | `确定删除所有吗？` | 可[动态解析](./parse.md)
+| before | <badge text="1.7.3" /><br />操作前调用的钩子 | function<br />参数：(done, data) | -- | -- | 1. 执行操作时（`增加`, `复制`, `删除`, `上移`, `下移`,  `全删`）都会调用，用户可根据返回参数的`data.event.type`来判断是哪种操作<br>2. `done`是一个函数，要执行done()来告诉系统进行下一步操作，done(false)表示系统将停止下来，取消所需要执行的操作。
 
