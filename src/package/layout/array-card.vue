@@ -80,6 +80,7 @@
                 @upItem="upItem"
                 @downItem="downItem"
                 :del-msg="itemSchema.delMsg"
+                :del-warn-btns="itemSchema.delWarnBtns"
                 :info="itemSchema.__info"
                 size="small"
                 :isHArrow="true"

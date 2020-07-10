@@ -154,6 +154,7 @@ let formUtils = {
 
     // 取出delMsg给每一项
     newItem.delMsg = utils.deepCopy(schema.array.delMsg);
+    newItem.delWarnBtns = utils.deepCopy(schema.array.delWarnBtns);
 
     if (insertInfo) {
       this.__setValue(newItem, insertInfo.value);

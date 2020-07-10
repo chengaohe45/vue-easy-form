@@ -108,6 +108,7 @@
                       @upItem="upItem"
                       @downItem="downItem"
                       :del-msg="itemSchema.delMsg"
+                      :del-warn-btns="itemSchema.delWarnBtns"
                       :info="itemSchema.__info"
                     ></edit-btns>
                     <edit-abbr-btns
@@ -132,6 +133,7 @@
                       @upItem="upItem"
                       @downItem="downItem"
                       :del-msg="itemSchema.delMsg"
+                      :del-warn-btns="itemSchema.delWarnBtns"
                       :info="itemSchema.__info"
                     ></edit-abbr-btns>
                   </div>
@@ -177,6 +179,7 @@
                       @upItem="upItem"
                       @downItem="downItem"
                       :del-msg="itemSchema.delMsg"
+                      :del-warn-btns="itemSchema.delWarnBtns"
                       :info="itemSchema.__info"
                     ></edit-btns>
                     <edit-abbr-btns
@@ -201,6 +204,7 @@
                       @upItem="upItem"
                       @downItem="downItem"
                       :del-msg="itemSchema.delMsg"
+                      :del-warn-btns="itemSchema.delWarnBtns"
                       :info="itemSchema.__info"
                     ></edit-abbr-btns>
                   </div>
@@ -246,6 +250,7 @@
           @delItem="delAllItems"
           @addItem="addItem"
           :del-msg="schema.array.delAllMsg"
+          :del-warn-btns="schema.array.delWarnBtns"
           :info="schema.__info"
         ></edit-bottom-btns>
       </div>

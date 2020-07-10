@@ -913,7 +913,10 @@ let schemaUtils = {
         newUi.__hasToggle = true; // 有切换按钮
         newUi.showBody = ui.showBody;
         // 只有__hasToggle为true时toggleTexts才有用
-        newUi.toggleTexts = this.__parseToggleTexts(ui.toggleTexts);
+        newUi.toggleTexts = this.__parseMulTexts(ui.toggleTexts, [
+          "打开",
+          "隐藏"
+        ]);
       } else {
         newUi.__hasToggle = false; // 无切换按钮
         newUi.showBody = true;
@@ -956,22 +959,31 @@ let schemaUtils = {
     return newUi;
   },
 
-  __parseToggleTexts(texts) {
-    var newTexts = false;
-    if (utils.isArr(texts) && texts.length == 2) {
-      var text1 = utils.isStr(texts[0]) ? texts[0] : "";
-      var text2 = utils.isStr(texts[1]) ? texts[1] : "";
-      text1 = text1.trim();
-      text2 = text2.trim();
-      if (text1 && text2) {
-        newTexts = [text1, text2];
+  /**
+   * 过滤多个文本
+   * @param {*} texts 数组
+   * @param {*} defaultTexts 默认值。数组
+   */
+  __parseMulTexts(texts, defaultTexts) {
+    if (utils.isArr(defaultTexts) && defaultTexts.length > 0) {
+      var newTexts = [];
+      if (utils.isArr(texts) && texts.length == defaultTexts.length) {
+        texts.forEach(function(text) {
+          text = utils.isStr(text) ? text.trim() : "";
+          if (text) {
+            newTexts.push(text);
+          }
+        });
       }
-    }
 
-    if (!newTexts) {
-      newTexts = ["打开", "隐藏"]; // 没有就取默认值
+      // 值不合法，采用默认值
+      if (newTexts.length < defaultTexts.length) {
+        newTexts = defaultTexts; // 没有就取默认值
+      }
+      return newTexts;
+    } else {
+      throw new Error("__parseMulTexts参数不对：默认文本一定要是数组");
     }
-    return newTexts;
   },
 
   /**
@@ -1385,6 +1397,7 @@ let schemaUtils = {
       var insertValue = undefined;
       var delMsg;
       var delAllMsg;
+      var delWarnBtns;
       var before = false;
       var btnType = false;
 
@@ -1461,6 +1474,8 @@ let schemaUtils = {
           };
         }
 
+        delWarnBtns = this.__parseMulTexts(array.delWarnBtns, ["确定", "取消"]);
+
         before = utils.isFunc(array.before) ? array.before : false;
         value = utils.isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
@@ -1517,6 +1532,7 @@ let schemaUtils = {
         newArray.hasDelWarn = hasDelWarn;
         newArray.delMsg = delMsg;
         newArray.delAllMsg = delAllMsg;
+        newArray.delWarnBtns = delWarnBtns;
         newArray.hasAdd = hasAdd;
         newArray.hasCopy = hasCopy;
         newArray.btnType = btnType;

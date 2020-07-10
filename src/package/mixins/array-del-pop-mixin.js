@@ -53,6 +53,13 @@ export default {
         return {};
       }
     },
+    delWarnBtns: {
+      type: Array,
+      required: false,
+      default: () => {
+        return [];
+      }
+    },
     info: {
       type: Object,
       required: true,

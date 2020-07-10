@@ -43,10 +43,10 @@
               <div class="es-btn-row">
                 <div class="es-btn-group">
                   <es-btn class="es-btn" @click="clickPopConfirm">
-                    确定
+                    {{ delWarnBtns[0] }}
                   </es-btn>
                   <es-btn class="es-btn" @click="closePop">
-                    取消
+                    {{ delWarnBtns[1] }}
                   </es-btn>
                 </div>
               </div>

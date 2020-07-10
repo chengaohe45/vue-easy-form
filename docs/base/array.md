@@ -31,6 +31,7 @@ propName: {
     },
     delMsg: "确定删除吗？",
     delAllMsg: "确定删除所有吗？",
+    delWarnBtns: ["确定", "取消"],  // 删除警告框按钮的文本
     before: function(done, data) { done() },  // 操作前调用的钩子，done(false)表示不执行下一步
     rowSpace: 20
   },
@@ -47,7 +48,7 @@ propName: {
 ```
 
 ### 实例1
-功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`、`delMsg`、`delAllMsg`、`btnType`、`before`
+功能：`行数组`、`列表数组`、`insertValue`、`rules`、`动态解析`、`delMsg`、`delAllMsg`、`btnType`、`before`、`delWarnBtns`
 
 <ClientOnly>
   <demo-block :canOperate="true">
@@ -92,12 +93,13 @@ propName: {
                   hasCopy: true,
                   hasDelWarn: true,
                   rowSpace: 12,
-                  delMsg: "es: {{$root.courses[i].subject}} ? '有名字，才会提示，确定删除？':''", // 动态写法
+                  delMsg: "es: {{$root.courses[i].subject}} ? '有名字，才会提示，是否继续删除？':''", // 动态写法
                   delAllMsg: {  // 组件写法
                     hidden: false,  // 可以通过hidden控制是否显示
                     name: "span",   // 组件名，可以自定义
-                    text: "删除所有课程？"
+                    text: "删除所有课程，是否继续？"
                   },
+                  delWarnBtns: ["继续", "取消"],
                   value: [
                     { subject: "语文", code: "1" }
                   ],
@@ -507,5 +509,6 @@ propName: {
 | value | 数组的默认值 | array | -- | -- | --
 | delMsg | <badge text="1.7.3" /><br />单个删除提示 | string<br />function<br />object | -- | `确定删除吗？` | 可[动态解析](./parse.md)
 | delAllMsg | <badge text="1.7.3" /><br />全部删除提示 | string<br />function<br />object | -- | `确定删除所有吗？` | 可[动态解析](./parse.md)
+| delWarnBtns | <badge text="1.7.7" /><br />删除警告框按钮的文本 | array | -- | ["确定", "取消"] | 数组必须是两个字符串组成
 | before | <badge text="1.7.3" /><br />操作前调用的钩子 | function<br />参数：(done, data) | -- | -- | 1. 执行操作时（`增加`, `复制`, `删除`, `上移`, `下移`,  `全删`）都会调用，用户可根据返回参数的`data.event.type`来判断是哪种操作<br>2. `done`是一个函数，要执行done()来告诉系统进行下一步操作，done(false)表示系统将停止下来，取消所需要执行的操作。
 
