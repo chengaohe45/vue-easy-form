@@ -12,6 +12,37 @@
         formValue: {},
 
         schema: {
+          
+          type: {
+            label: "类型",
+            component: {
+              name: "el-select",
+              scopedSlots: {
+                default: (data, scoped) => {  // 函数写法：返回jsx: 无动态控制
+                  var types = [
+                    { value: 1, label: "一级" },
+                    { value: 2, label: "二级" }
+                  ];
+
+                  var options = [];
+                  types.forEach(item => {
+                    options.push(
+                      <el-option
+                        key={item.value}
+                        label={item.label}
+                        value={item.value}
+                      >
+                        {item.label}
+                      </el-option>
+                    );
+                  });
+                  return options;
+                }
+              }
+            },
+            value: null
+          },
+
           status: {
             label: "切换试试",
             component: {
@@ -19,12 +50,13 @@
             },
             value: true
           },
+
           city: {
             label: "地址",
             component: {
               name: "el-select",
               scopedSlots: {
-                default: (data, scoped) => {  // 函数写法：返回jsx
+                default: (data, scoped) => {  // 函数写法：返回jsx: 有动态控制
                   var cities = [
                     { value: "BJ", label: "北京" },
                     { value: "SH", label: "上海" }
