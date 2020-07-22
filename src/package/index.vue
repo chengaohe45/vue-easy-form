@@ -1,11 +1,7 @@
 <template>
   <div class="es-form">
     <form-item ref="formFrame" :schema="formSchema"></form-item>
-    <consolePanel
-      v-if="canConsole"
-      :rootValue="csRootValue"
-      :formValue="csFormValue"
-    ></consolePanel>
+    <consolePanel v-if="canConsole" :rootValue="csRootValue" :formValue="csFormValue"></consolePanel>
   </div>
 </template>
 
@@ -1026,9 +1022,11 @@ export default {
         if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
           // 这个可以记录是什么导致表单改变
           if (handlers.length > 0) {
+            var infoData = Object.assign({ instance: this }, options);
             handlers.forEach(handler => {
-              handler.call(this, options);
+              handler.call(this, infoData);
             });
+            infoData = null;
           }
 
           if (eventNames.includes(constant.INPUT_EVENT)) {
@@ -1056,9 +1054,11 @@ export default {
      * 执行事件：一般用于非组件表单，只是执行事件
      */
     _handleEvents(handlers, options) {
+      var infoData = Object.assign({ instance: this }, options);
       handlers.forEach(handler => {
-        handler.call(this, options);
+        handler.call(this, infoData);
       });
+      infoData = null;
     },
 
     _toggleUi(type, data) {
@@ -1169,6 +1169,7 @@ export default {
             newOptions.pathKey = schema.__info.pathKey;
             newOptions.idxChain = schema.__info.idxChain;
             newOptions.index = schema.__info.index;
+            newOptions.instance = this;
           }
           checkResult = rules.emptyMethod.call(this, newOptions);
           if (checkResult === true) {
@@ -1209,6 +1210,7 @@ export default {
               newOptions.pathKey = schema.__info.pathKey;
               newOptions.idxChain = schema.__info.idxChain;
               newOptions.index = schema.__info.index;
+              newOptions.instance = this;
             }
             result = checkFun.call(this, newOptions);
 

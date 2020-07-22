@@ -37,8 +37,8 @@ export default {
         };
 
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
           var form = this.__getForm();
+          var data = this.__createHookData(oldValues, eventData, form);
           utils.execCbHook(this.schema.array.before, form, data, result => {
             if (result !== false) {
               this.__doDelItem(index, eventData);
@@ -77,8 +77,8 @@ export default {
         };
 
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
           var form = this.__getForm();
+          var data = this.__createHookData(oldValues, eventData, form);
           utils.execCbHook(this.schema.array.before, form, data, result => {
             if (result !== false) {
               this.__doDelAllItems(eventData);
@@ -107,8 +107,8 @@ export default {
         var oldValues = formUtils.getValue(this.schema);
         var eventData = { type: ARR_OP_TYPE_MOVE_UP, index: index };
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
           var form = this.__getForm();
+          var data = this.__createHookData(oldValues, eventData, form);
           utils.execCbHook(this.schema.array.before, form, data, result => {
             if (result !== false) {
               this.__doUpItem(index, eventData);
@@ -146,8 +146,8 @@ export default {
         var oldValues = formUtils.getValue(this.schema);
         var eventData = { type: ARR_OP_TYPE_MOVE_DOWN, index: index };
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
           var form = this.__getForm();
+          var data = this.__createHookData(oldValues, eventData, form);
           utils.execCbHook(this.schema.array.before, form, data, result => {
             if (result !== false) {
               this.__doDownItem(index, eventData);
@@ -189,8 +189,8 @@ export default {
         index: curIndex // 比change少了个data，因为刚开始有可能不知初始值是什么，所以统一不做
       };
       if (this.schema.array.before) {
-        var data = this.__createHookData(oldValues, eventData);
         var form = this.__getForm();
+        var data = this.__createHookData(oldValues, eventData, form);
         utils.execCbHook(this.schema.array.before, form, data, result => {
           if (result !== false) {
             this.__doAddItem(index);
@@ -223,7 +223,8 @@ export default {
           var options = {
             oldValues: oldValues,
             position: position,
-            type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD
+            type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD,
+            instance: thisFrom
           };
           var newDefaultValue = insertValue.call(thisFrom, options);
           options = null;
@@ -272,7 +273,7 @@ export default {
       this.$emit("input", newValue, eventData); //同步更新的
     },
 
-    __createHookData(value, eventData) {
+    __createHookData(value, eventData, formInstance) {
       return {
         value: value,
         event: eventData,
@@ -280,7 +281,8 @@ export default {
         pathKey: this.schema.__info.pathKey,
         index: this.schema.__info.index,
         idxChain: this.schema.__info.idxChain,
-        target: null
+        target: null,
+        instance: formInstance
       };
     },
 

@@ -1,11 +1,5 @@
 <template>
-  <demo-frame
-    :title="title"
-    :formSchema="formSchema"
-    :docsTitle="docsTitle"
-    :docsHref="docsHref"
-  >
-  </demo-frame>
+  <demo-frame :title="title" :formSchema="formSchema" :docsTitle="docsTitle" :docsHref="docsHref"></demo-frame>
 </template>
 
 <script>
@@ -20,7 +14,6 @@ export default {
       docsHref: "/vue-easy-form-docs/dist/base/scopedSlots.html",
 
       formSchema: {
-        
         type: {
           label: "类型",
           component: {
