@@ -132,7 +132,7 @@
                 text: "是否好人",
                 actions: {
                   trigger: "change",
-                  // options => {value, event, pathKey, index, idxChain,target}
+                  // options => {value, event, pathKey, index, idxChain, target, instance}
                   handler: function(options) {
                     // console.log("this对象: ", this);
                     console.log("options: ", options);
@@ -181,4 +181,5 @@
 - `pathKey`： 需要检查的组件的路径
 - `idxChain`： 需要检查的组件所要数组所组成的id 如: 1,2
 - `index`：组件处于数组的子节点(非孙子)时的索引，其余的返回-1
+- `instance`<badge text="1.7.8" />：表单实例（当handler为箭头函数，若需要可用instance取出表单实例使用）
 > 注：[数组事件](./array.html#数组事件)是没有target信息的

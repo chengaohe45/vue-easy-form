@@ -15,7 +15,7 @@ rules: {
   // checks可以是以下写成的数组 如 checks: [{...}, {...}]
   checks: {    // handler函数(非箭头函数时): this指向form
     trigger: "change",  // 检查的时机，多个时可写成"input change"或["change", "input"]
-    handler: function(options) { // options => {value, pathKey, idxChain, index}
+    handler: function(options) { // options => {value, pathKey, idxChain, index, instance}
       // 返回true表示验证通过；其它值都认为验证不通过
       // 若返回值为字符串，则是提示的信息，否则取‘errMsg’
       return true;
@@ -27,11 +27,12 @@ rules: {
   style: undefined  // v1.6.2；类型：对象
 }
 ```
-handler => options包含的属性：
+handler(或emptyMethod) => options包含的属性：
 - `value`： 需要检查的组件的值，表单的值可以通过this取出
 - `pathKey`： 需要检查的组件的路径
 - `idxChain`： 需要检查的组件所要数组所组成的id 如: 1,2
 - `index`：组件处于数组的子节点(非孙子)时的索引，其余的返回-1
+- `instance`<badge text="1.7.8" />：表单实例（当handler为箭头函数，若需要可用instance取出表单实例使用）
 
 ### 实例
 
@@ -107,7 +108,7 @@ handler => options包含的属性：
                 col: 18,
                 rules: {
                   checks: {
-                    // options: {value, pathKey, idxChain, index}
+                    // options: {value, pathKey, idxChain, index, instance}
                     handler: function(options) {
                       console.log("options: ", options);
                       var reg = /^1\d{10}$/;

@@ -55,7 +55,7 @@
 ::: warning 注意
 1. 表单事件写法有两种：在`元素中直接配置`、在`schema的actions中配置`<badge text="1.6.0" />；最好两者选其一；
 2. 若写法上两者都存在：
-	- `input`事件比较特殊，因为涉及到`v-modal`的双向绑定，所以两者都会触发；
+	- `input`事件比较特殊，因为涉及到`v-model`的双向绑定，所以两者都会触发；
 	- 其它事件（如`inited`、`change`、`submit`）只会触发一种：当actions存在此事件，则只会触发actions的配置函数，在元素中配置的事件则失效，这样避免重复触发；
 3. 两种写法的所返回的参数是一样（见上面），跟[组件事件的参数](../base/component.md#actions组件事件)不同，但写法跟[组件事件的写法](../base/com-format.md#组件事件)一样；
 4. actions函数的this指针是指向此表单。

@@ -13,6 +13,10 @@
 
 ## 当前版本记录
 
+### 1.7.8
+- 组件[事件](../base/com-format.md#组件事件)和组件[验证](../base/rules.md)返回表单实例，这样在箭头函数中用法更灵活；
+- 修复[在schema的actions中，直接配置input事件](../base/form.md)，导致v-model无法同步的问题；
+
 ### 1.7.7
 - 优化[数组](../base/array.md#实例1)：增加[delWarnBtns](../base/array.md#配置属性)，控制`删除警告框按钮的文本`
 

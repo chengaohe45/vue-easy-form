@@ -133,7 +133,8 @@ actions: [标准写法或简写组成的数组]
 - `pathKey`： 需要检查的组件的路径
 - `idxChain`： 需要检查的组件所要数组所组成的id 如: 1,2
 - `index`：组件处于数组的子节点(非孙子)时的索引，其余的返回-1
-> handler函数的this指针指向表单，这样可以方便取出其它组件(如`this.getRef("xxxx")`)，从而做联动等功能
+- `instance`<badge text="1.7.8" />：表单实例（当handler为箭头函数，若需要可用instance取出表单实例使用）
+> handler函数的this指针指向当前的表单实例（`instance`也是当前的表单实例），这样可以方便取出其它组件(如`this.getRef("xxxx")`)，从而做联动等功能
 
 ### 当props里面的某属性是的类型是函数怎么办？
 

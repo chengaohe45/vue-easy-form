@@ -457,6 +457,7 @@ propName: {
     - `oldValues`： 插入前，当前数组的值
     - `position`： 插入的位置，从0开始计算
     - `type`： "copy" or "add"
+    - `instance`<badge text="1.7.8" />：表单实例（当handler为箭头函数，若需要可用instance取出表单实例使用）
 2. 类型为`其它的值`时：即插入固定值
 
 ### 数组事件
