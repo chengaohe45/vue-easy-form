@@ -2,7 +2,7 @@
 
 ### 实例
 ```html
-<!-- 表单事件可以在元素中配置，也可以在schema中配置触发，接收的参数一样；注：两者选其一 -->
+<!-- 表单事件可以在元素中配置，也可以在schema中配置触发，接收的参数一样 -->
 <es-form ref="form" 
     v-model="formValue"
     :schema="formSchema" 
@@ -53,11 +53,12 @@
 | change | 表单组件改变时触发 | (formValue, keyPath, eventData) | setValue不会触发
 | submit | 提交表单 | (formValue) | form.submit(); 组件事件(@enterSubmit; @submit)会触发
 ::: warning 注意
-1. 表单事件写法有两种：在`元素中直接配置`、在`schema的actions中配置`<badge text="1.6.0" />；两者选其一；
-2. 若两者都存在，当事件触发时，actions存在此事件，则只会触发actions的配置，在元素中配置的事件则失效，这样避免重复触发；
+1. 表单事件写法有两种，最好根据自已的应用场景，两者选其一：
+	- 写法一：在`元素中直接配置`
+	- 写法二：在schema的`actions中配置`<badge text="1.6.0" />
+2. 若写法上两者都存在，两者都会触发：先触发`actions中配置`的事件，再触发`元素中直接配置`的事件；
 3. 两种写法的所返回的参数是一样（见上面），跟[组件事件的参数](../base/component.md#actions组件事件)不同，但写法跟[组件事件的写法](../base/com-format.md#组件事件)一样；
 4. actions函数的this指针是指向此表单。
-> 场景：当两种写法都存在，inited事件触发，若actions存在inited事件，则触发actions中的inited事件；若actions不存在inited事件（就算actions还存在其它事件，比如change事件），则也会触发`元素中配置`的inited事件
 :::
 
 ## 表单方法
