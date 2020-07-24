@@ -1311,17 +1311,11 @@ export default {
         handlers.forEach(handler => {
           handler.apply(this, params);
         });
-        if (eventName === constant.INPUT_EVENT) {
-          // input事件特殊，要往上派发
-          // 往上派发
-          params.unshift(eventName);
-          this.$emit.apply(this, params);
-        }
-      } else {
-        // 往上派发
-        params.unshift(eventName);
-        this.$emit.apply(this, params);
       }
+
+      // 往上派发
+      params.unshift(eventName);
+      this.$emit.apply(this, params);
     }
   },
 
