@@ -3644,12 +3644,12 @@ __webpack_require__("7a56")('RegExp');
 "use strict";
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("4917");
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("28a5");
@@ -3658,8 +3658,8 @@ __webpack_require__("7a56")('RegExp');
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("6762");
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _parse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("5f60");
 /* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("890a");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("4513");
@@ -3689,7 +3689,7 @@ var formUtils = {
    * 判断值是否为空, 以下几种情况都认为是空值
    */
   isEmpty: function isEmpty(value) {
-    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
       return true;
     }
 
@@ -4058,7 +4058,7 @@ var formUtils = {
           if (arrayItemKeys) {
             realKey = arrayItemKeys[1];
 
-            var realIndex = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
+            var realIndex = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
 
 
             curPropItem = curProperties[realKey]; //取出下级继续扫描
@@ -4267,7 +4267,7 @@ var formUtils = {
     var baseParseSources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var isParentHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -4442,7 +4442,7 @@ var formUtils = {
     var sum = 0;
     var isHidden, listLen, schemaList, i;
 
-    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -4732,7 +4732,7 @@ var formUtils = {
               }
             } else {
               //正常成员
-              var nextParseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+              var nextParseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
               nextParseSources.index = nextPropItem.__info.index;
               nextParseSources.idxChain = nextPropItem.__info.idxChain;
@@ -4920,7 +4920,7 @@ var formUtils = {
       var propSchema = propItem.properties[fieldKeyName];
 
       if (!propSchema.layout || propSchema.layout.name !== _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_SPACE) {
-        var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+        var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
         parseSources.index = propSchema.__info.index;
         parseSources.idxChain = propSchema.__info.idxChain;
@@ -5067,7 +5067,7 @@ var formUtils = {
         var nextSchema = firstPropSchema[key];
 
         if (nextSchema.properties && !nextSchema.array) {
-          newValue = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
+          newValue = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
         } else {
           newValue[key] = value[key];
         }
@@ -5179,12 +5179,12 @@ exports.features = {};
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("6b54");
 /* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("a481");
@@ -5503,7 +5503,7 @@ var utils = {
         // 一对一保存; 先保存索引地址，下一级的deep可能会用到
         rawRefs.push(data); // 冻结这一层
 
-        E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
 
         for (var i = 0; i < data.length; ++i) {
           this.__deepFreeze(data[i], rawRefs); // 继续走下一级
@@ -5518,7 +5518,7 @@ var utils = {
         // 一对一保存; 先保存索引地址，下一级的deep可能会用到
         rawRefs.push(data); // 冻结这一层
 
-        E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
 
         for (var key in data) {
           this.__deepFreeze(data[key], rawRefs);
@@ -5541,7 +5541,7 @@ var utils = {
       arr.forEach(function (item) {
         tmpObj[item] = 1;
       });
-      newArr = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
+      newArr = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
     }
 
     return newArr;
@@ -9396,8 +9396,8 @@ exports.push([module.i, ".es-tabs-nav-box{position:relative;margin:0 0 0 0;paddi
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d23b");
 /* harmony import */ var _libs_schema_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("34bc");
 /* harmony import */ var _libs_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("4513");
@@ -9418,7 +9418,7 @@ var install = function install(Vue) {
 
   _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].initVue(Vue);
 
-  if (E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
+  if (_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
     _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].mergeGlobal(_libs_global_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"], globalOpts); // console.log(esGlobal);
   } // Vue.component(esConstant.HELP_NAME, esHelp);
   // Vue.component("es-base", esBase);
@@ -9438,7 +9438,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.7.7" : "??",
+  version: typeof process != "undefined" ? "1.7.8" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
@@ -9807,16 +9807,20 @@ module.exports = function (KEY, exec) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=6b95cc9a&
-var packagevue_type_template_id_6b95cc9a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=4df1347c&
+var packagevue_type_template_id_4df1347c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=6b95cc9a&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=4df1347c&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
 var stringify_default = /*#__PURE__*/__webpack_require__.n(stringify);
+
+// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
+var object_assign = __webpack_require__("5176");
+var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/web.dom.iterable.js
 var web_dom_iterable = __webpack_require__("ac6a");
@@ -10003,10 +10007,6 @@ var objectvue_type_template_id_5e0b4fea_staticRenderFns = []
     }
   }
 });
-// EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/object/assign.js
-var object_assign = __webpack_require__("5176");
-var assign_default = /*#__PURE__*/__webpack_require__.n(object_assign);
-
 // EXTERNAL MODULE: ./src/package/libs/utils.js
 var utils = __webpack_require__("4513");
 
@@ -12419,9 +12419,9 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
         };
 
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
-
           var form = this.__getForm();
+
+          var data = this.__createHookData(oldValues, eventData, form);
 
           utils["a" /* default */].execCbHook(this.schema.array.before, form, data, function (result) {
             if (result !== false) {
@@ -12457,9 +12457,9 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
         };
 
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
-
           var form = this.__getForm();
+
+          var data = this.__createHookData(oldValues, eventData, form);
 
           utils["a" /* default */].execCbHook(this.schema.array.before, form, data, function (result) {
             if (result !== false) {
@@ -12492,9 +12492,9 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
         };
 
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
-
           var form = this.__getForm();
+
+          var data = this.__createHookData(oldValues, eventData, form);
 
           utils["a" /* default */].execCbHook(this.schema.array.before, form, data, function (result) {
             if (result !== false) {
@@ -12529,9 +12529,9 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
         };
 
         if (this.schema.array.before) {
-          var data = this.__createHookData(oldValues, eventData);
-
           var form = this.__getForm();
+
+          var data = this.__createHookData(oldValues, eventData, form);
 
           utils["a" /* default */].execCbHook(this.schema.array.before, form, data, function (result) {
             if (result !== false) {
@@ -12569,9 +12569,9 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
       };
 
       if (this.schema.array.before) {
-        var data = this.__createHookData(oldValues, eventData);
-
         var form = this.__getForm();
+
+        var data = this.__createHookData(oldValues, eventData, form);
 
         utils["a" /* default */].execCbHook(this.schema.array.before, form, data, function (result) {
           if (result !== false) {
@@ -12603,7 +12603,8 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
           var options = {
             oldValues: oldValues,
             position: position,
-            type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD
+            type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD,
+            instance: thisFrom
           };
           var newDefaultValue = insertValue.call(thisFrom, options);
           options = null;
@@ -12649,7 +12650,7 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
       };
       this.$emit("input", newValue, eventData); //同步更新的
     },
-    __createHookData: function __createHookData(value, eventData) {
+    __createHookData: function __createHookData(value, eventData, formInstance) {
       return {
         value: value,
         event: eventData,
@@ -12657,7 +12658,8 @@ var ARR_OP_TYPE_MOVE_DOWN = "down"; // down
         pathKey: this.schema.__info.pathKey,
         index: this.schema.__info.index,
         idxChain: this.schema.__info.idxChain,
-        target: null
+        target: null,
+        instance: formInstance
       };
     },
     __getForm: function __getForm() {
@@ -16431,10 +16433,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
 
 
-//
-//
-//
-//
+
 //
 //
 //
@@ -17421,9 +17420,14 @@ var console_component = Object(componentNormalizer["a" /* default */])(
         if (handlers.length > 0 || eventNames.includes(constant["a" /* default */].INPUT_EVENT)) {
           // 这个可以记录是什么导致表单改变
           if (handlers.length > 0) {
+            var infoData = assign_default()({
+              instance: this
+            }, options);
+
             handlers.forEach(function (handler) {
-              handler.call(_this4, options);
+              handler.call(_this4, infoData);
             });
+            infoData = null;
           }
 
           if (eventNames.includes(constant["a" /* default */].INPUT_EVENT)) {
@@ -17451,9 +17455,14 @@ var console_component = Object(componentNormalizer["a" /* default */])(
     _handleEvents: function _handleEvents(handlers, options) {
       var _this5 = this;
 
+      var infoData = assign_default()({
+        instance: this
+      }, options);
+
       handlers.forEach(function (handler) {
-        handler.call(_this5, options);
+        handler.call(_this5, infoData);
       });
+      infoData = null;
     },
     _toggleUi: function _toggleUi(type, data) {
       switch (type) {
@@ -17488,12 +17497,12 @@ var console_component = Object(componentNormalizer["a" /* default */])(
       var formValue = form_utils["a" /* default */].getFormValue(this.$data.formSchema, baseParseSources); // 缓存，以便多次调用
 
       this._esFormValue = formValue; // this.$emit(
-      //   "input",
+      //   constant.INPUT_EVENT,
       //   utils.deepCopy(formValue),
       //   sourcePathKey ? sourcePathKey : false
       // );
 
-      this.__execEmit("input", [utils["a" /* default */].deepCopy(formValue), sourcePathKey ? sourcePathKey : false]);
+      this.__execEmit(constant["a" /* default */].INPUT_EVENT, [utils["a" /* default */].deepCopy(formValue), sourcePathKey ? sourcePathKey : false]);
 
       if (this.$data.canConsole) {
         this.$data.csRootValue = utils["a" /* default */].deepCopy(rootValue);
@@ -17554,6 +17563,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
             newOptions.pathKey = schema.__info.pathKey;
             newOptions.idxChain = schema.__info.idxChain;
             newOptions.index = schema.__info.index;
+            newOptions.instance = this;
           }
 
           checkResult = rules.emptyMethod.call(this, newOptions);
@@ -17596,6 +17606,7 @@ var console_component = Object(componentNormalizer["a" /* default */])(
               newOptions.pathKey = schema.__info.pathKey;
               newOptions.idxChain = schema.__info.idxChain;
               newOptions.index = schema.__info.index;
+              newOptions.instance = this;
             }
 
             result = checkFun.call(this, newOptions);
@@ -17682,11 +17693,11 @@ var console_component = Object(componentNormalizer["a" /* default */])(
         handlers.forEach(function (handler) {
           handler.apply(_this6, params);
         });
-      } else {
-        // 往上派发
-        params.unshift(eventName);
-        this.$emit.apply(this, params);
-      }
+      } // 往上派发
+
+
+      params.unshift(eventName);
+      this.$emit.apply(this, params);
     }
   },
   watch: {
@@ -17762,7 +17773,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = Object(componentNormalizer["a" /* default */])(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_6b95cc9a_render,
+  packagevue_type_template_id_4df1347c_render,
   staticRenderFns,
   false,
   null,
