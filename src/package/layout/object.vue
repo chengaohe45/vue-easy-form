@@ -90,7 +90,9 @@
             <div
               v-if="schema.properties[fieldKeyName].__creatable"
               v-show="!schema.properties[fieldKeyName].hidden"
-              class="es-form-comp-content"
+              :class="['es-form-comp-content', schema.properties[fieldKeyName].component && schema.properties[fieldKeyName].component.flex
+                  ? 'es-form-group-' + schema.properties[fieldKeyName].component.flex
+                  : '']"
               :key="'content-' + fieldKeyName"
               :style="[
                 {
@@ -408,9 +410,15 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     overflow: hidden;
   }
 
-  // .es-form-group-content {
-  //   align-items: flex-start;
-  // }
+  .es-form-group-full {
+    @include flex-full;
+    width: auto;
+  }
+
+  .es-form-group-self {
+    @include flex-fixed;
+    width: auto;
+  }
 
   .es-form-placeholder-txt {
     @include flex-full;
