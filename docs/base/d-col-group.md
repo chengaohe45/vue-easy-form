@@ -135,4 +135,71 @@ propName: {
 3. 对组件`component`有效，对块`properties`是无效的。
 :::
 
+### 分组实例
+实例中的分组`输入框组件`是不相同的：一个是日历输入框，一个是文本输入框，若自动分配剩余空间，它们的长度将会是不一样的；为了使它们的对剩余的空间分配置的长度是一样，必须要为这两个组件设置相同的原始长度值。
+
+<ClientOnly>
+  <demo-block>
+
+  ```html
+  <es-form ref="form" :schema="formSchema" v-model="formValue"></es-form>
+
+  <script>
+    export default {
+      data() {
+        return {
+
+          formValue: {},
+
+          formSchema: {
+            name: {
+              label: "广告名称",
+              component: {
+                name: "el-input",
+                props: {
+                  placeholder: "不写col，默认占满24列"
+                }
+              },
+              // col: 24, // 不写col，默认占满24列
+              value: ""
+            },
+
+            
+            startTime: {
+              label: {
+                name: "div",
+                text: "有效年份"
+              },
+              group: "date",  // startTime和endTime是相邻的且group是相同的
+              col: 16,  // 这个分组的长度是startTime和endTime相加
+              component: {
+                name: "el-date-picker",
+                flex: "full",
+                style: { width: '180px'}  // 因为是不同输入组件，设置相同的长度可按相同比例分配剩余空间
+              },
+              value: ""
+            },
+            endTime: {
+              label: {
+                text: "到",
+                flex: "self"
+              },
+              group: "date",  // startTime和endTime是相邻的且group是相同的
+              col: 8,   // 这个分组的长度是startTime和endTime相加
+              component: {
+                name: "el-input",
+                flex: "full",
+                style: { width: '180px'}  // 因为是不同输入组件，设置相同的长度可按相同比例分配剩余空间
+              },
+              unit: "年",
+              value: "",
+            }
+          }
+        };
+      }
+    };
+  </script>
+  ```
+  </demo-block>
+</ClientOnly>
 
