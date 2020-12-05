@@ -146,6 +146,7 @@ export default {
             test3: {
               // hidden: true,
               array: {
+                name: "array-table",
                 value: [{ test21: "21", test22: "22" }],
                 hasSort: true,
                 hasCopy: true,
@@ -351,7 +352,7 @@ export default {
     clickHandler() {
       // console.log("value:", value, arguments);
       // this.$emit("add-item", 123);
-      console.log("result:", this.$refs.form.getRef("test", true, "0,0"));
+      console.log("result:", this.$refs.form.getRef("test", true));
     }
   },
   components: {

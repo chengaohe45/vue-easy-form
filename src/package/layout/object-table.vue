@@ -1,5 +1,5 @@
 <template>
-  <div class="es-form-table-container">
+  <div class="es-form-table-container" v-show="!schema.hidden">
     <span
       v-if="
         hasRequired &&
