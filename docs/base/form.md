@@ -65,7 +65,7 @@
 
 | 属性名 | 说明 | 参数 | 备注
 | -- | -- | -- | -- 
-| getRef | 取元素或组件 | (name, idxChain) | 类似于ref；若项组件在表单数组中，则返回来的是一个数组[见下面详解](#getref)；<br />`注意：`隐藏的项是不会取出的
+| getRef | 取元素或组件 | (name, hasEmpty, idxChain) | 类似于ref；若项组件在表单数组中，则返回来的是一个数组[见下面详解](#getref)；<br />`注意：`隐藏的项是不会取出的<br />`hasEmpty`为<badge text="1.8.0" />添加
 | checkAll | 检查表单是否有错 | 空 | 返回true/false
 | submit | 触发submit事件 | 空 | --
 | isHidden | 判断某项是否隐藏 | ([pathKey](./explain.md#项组件路径)) | --
@@ -77,15 +77,18 @@
 | getTabsIndex | 取某一个tabs的索引 | ([pathKey](./explain.md#项组件路径)) | 返回当前tabs的索引，不是tabs返回false；（支持普通或数组tabs）
 | setTabsIndex | 设某一个tabs的索引 | ([pathKey](./explain.md#项组件路径), index) |  设置当前tabs的索引；（支持普通或数组tabs）
 | <span style="white-space: nowrap;">clearErrMsg<badge text="1.6.2" /></span> | 清除错误信息 | ([pathKey](./explain.md#项组件路径), clearNext) |  1. 当pathKey没有值时则清除所有，clearNext无效；<br/>2. 当pathKey有值时，则是清除某一项，clearNext是对pathKey的补充，是否一起清除此项的后代
-| reset | 重置表单值 | (onlySchema) | onlySchema为<badge text="1.7.5" />添加；默认为`false`<br/>`false`：重置的值为`schema配置`和`formValue`初始化时结合的值；<br/>`true`：重置的值为仅为`schema配置`初始化时的值
+| reset | 重置表单值 | (onlySchema) | `onlySchema`为<badge text="1.7.5" />添加；默认为`false`<br/>`false`：重置的值为`schema配置`和`formValue`初始化时结合的值；<br/>`true`：重置的值为仅为`schema配置`初始化时的值
 
 
 ### getRef
-写法：form.getRef(name, idxChain)<br>
+写法：form.getRef(name, hasEmpty, idxChain)<br>
 参数：
 - `name` 必填；在[项组件](./component.html)中设置的ref名称
-- `idxChain` 选填；项组件所在的[索引链](./explain.md#索引链)，用于`数组`; 具体作用是当取出是数组的时候，可以用idxChain指出来出是哪一个
+- `hasEmpty` 选填；用于`数组`，默认为`false`<badge text="1.8.0" />; 当返回值是数组时，数组中是否可返回空值
+- `idxChain` 选填；用于`数组`; 项组件所在的[索引链](./explain.md#索引链); 具体作用是当取出是数组的时候，可以用idxChain指出来出是哪一个
 ::: warning 注意
-注意：隐藏的项（也就是属性hidden为true, 包括自身或父类隐藏）是不会取出来
+注意：隐藏的项（也就是属性hidden为true, 包括自身或父类隐藏）
+1. 返回值为非数组情况下：`隐藏的项`不会取出来；
+2. 返回值为数组情况下：当`hasEmpty`为`false`时，则`null`（`隐藏的项`）值不会返回；当`hasEmpty`为`true`，则`null`会返回；
 :::
 [项组件actions的具体写法](./component.html#组件事件)

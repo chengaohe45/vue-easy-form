@@ -670,7 +670,7 @@ export default {
       return this.schema;
     },
 
-    getRef(name, showAll) {
+    getRef(name, hasEmpty) {
       function filterTarget(targets) {
         var copyTargets = [];
         targets.forEach(function(target) {
@@ -690,7 +690,7 @@ export default {
       var info = this.__getLastRefs(name, ignoreKeys);
       var refTarget = info && info.target ? info.target : null;
       // console.log("ignoreKeys: ", ignoreKeys);
-      if (utils.isArr(refTarget) && !showAll) {
+      if (utils.isArr(refTarget) && !hasEmpty) {
         // 去掉null(为了以后的扩展，才这样返回)
         refTarget = filterTarget(refTarget);
       }

@@ -498,16 +498,16 @@ export default {
   methods: {
     /**
      * @param name 索引值
-     * @param showAll 是否过滤空值，true为不需要
+     * @param hasEmpty 是否过滤空值，true为不需要
      * @param idxChain 组件所在的位置 如: 1,2 或 0
      */
-    getRef(name, showAll, idxChain) {
-      if (utils.isNum(showAll) || utils.isStr(showAll)) {
-        idxChain = showAll;
-        showAll = false;
+    getRef(name, hasEmpty, idxChain) {
+      if (utils.isNum(hasEmpty) || utils.isStr(hasEmpty)) {
+        idxChain = hasEmpty;
+        hasEmpty = false;
       }
       // var start = +new Date();
-      var ref = this.$refs.formFrame.getRef(name, showAll);
+      var ref = this.$refs.formFrame.getRef(name, hasEmpty);
       // console.log("ref: ", ref);
       if (ref && utils.isArr(ref)) {
         if (utils.isNum(idxChain)) {
