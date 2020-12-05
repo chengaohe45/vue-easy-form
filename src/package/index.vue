@@ -498,11 +498,16 @@ export default {
   methods: {
     /**
      * @param name 索引值
+     * @param showAll 是否过滤空值，true为不需要
      * @param idxChain 组件所在的位置 如: 1,2 或 0
      */
-    getRef(name, idxChain) {
+    getRef(name, showAll, idxChain) {
+      if (utils.isNum(showAll) || utils.isStr(showAll)) {
+        idxChain = showAll;
+        showAll = false;
+      }
       // var start = +new Date();
-      var ref = this.$refs.formFrame.getRef(name);
+      var ref = this.$refs.formFrame.getRef(name, showAll);
       // console.log("ref: ", ref);
       if (ref && utils.isArr(ref)) {
         if (utils.isNum(idxChain)) {

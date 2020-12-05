@@ -113,6 +113,7 @@
                 :name="fieldName"
                 :schema="fieldSchema"
                 :index="index"
+                :refName="fieldName + '_' + index"
               ></slot>
             </es-object-table>
           </td>

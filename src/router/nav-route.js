@@ -1,6 +1,6 @@
 /* 设置注意：当:router="true"时，点击切换页面，会先判断:route="{path: subItem.link || ""}"有没有值，再判断它的:index */
 
-// import homePage from "../views/home/index";
+import homePage from "../views/home/index";
 
 // 基础属性
 import labelForm from "../views/demo/label";
@@ -40,15 +40,15 @@ let pathKeys = ["path", "component", "alias"];
 // };
 
 /* home跟navList都会添加到左边菜单 */
-// let homeItem = {
-//   icon: "el-icon-setting",
-//   name: "首页",
-//   link:
-//     "/home" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
-//   path: "/home" /* 用于路由, 要跟link保持一致 */,
-//   alias: "/",
-//   component: homePage /* 对应的模块 */
-// };
+let homeItem = {
+  icon: "el-icon-setting",
+  name: "首页",
+  link:
+    "/home" /* 用于点击链接; 若没有这个，说明是一个大模块，下面还有其它子页面;若存在就只有他自己，比如：home */,
+  path: "/home" /* 用于路由, 要跟link保持一致 */,
+  // alias: "/",
+  component: homePage /* 对应的模块 */
+};
 
 let notFoundItem = {
   icon: "" /* 不需要，因为不在左边菜单上 */,
@@ -262,6 +262,10 @@ function scan(curNavList) {
 //   return false;
 // }
 
+function isDev() {
+  return typeof process != "undefined" && process.env.NODE_ENV === "development";
+}
+
 let navRoute = {
   // getHomePath() {
   //   return homeItem.path;
@@ -272,7 +276,9 @@ let navRoute = {
     let newNavList = [];
 
     //put in home page
-    // newNavList.push(fetch(homeItem, navKeys3));
+    if (isDev()) {
+      newNavList.push(fetch(homeItem, navKeys3));
+    }
 
     navList.forEach(item => {
       if (item.path) {
@@ -297,7 +303,10 @@ let navRoute = {
   /* 取出页面注册 */
   getPages() {
     let newPageList = [];
-    // newPageList.push(fetch(homeItem, pathKeys));
+    if (isDev()) {
+      newPageList.push(fetch(homeItem, pathKeys));
+    }
+    
     //导航菜单，可能存在多级
     newPageList.push(...scan(navList));
     //其它页面

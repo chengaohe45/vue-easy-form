@@ -89,7 +89,7 @@
           </div>
         </div>
         <div class="es-array-row-body">
-          <slot :schema="itemSchema"></slot>
+          <slot :schema="itemSchema" :refName="index + ''"></slot>
         </div>
       </li>
     </ul>

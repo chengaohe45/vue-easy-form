@@ -108,8 +108,9 @@
             :slot="fieldName"
           >
             <form-item
-              :ref="!fieldSchema.hidden ? '__refTabs__' : undefined"
+              :ref="fieldSchema.__hasRef && (!fieldSchema.hidden) ? REF_FORM_ITEM : undefined"
               :schema="fieldSchema"
+              :refName="fieldName"
               :key="fieldName"
             ></form-item>
           </template>
@@ -126,8 +127,9 @@
             :slot="fieldName"
           >
             <form-item
-              :ref="!fieldSchema.hidden ? '__refObject__' : undefined"
+              :ref="fieldSchema.__hasRef && (!fieldSchema.hidden) ? REF_FORM_ITEM : undefined"
               :schema="fieldSchema"
+              :refName="fieldName"
               :key="fieldName"
             ></form-item>
           </template>
@@ -150,8 +152,9 @@
             slot-scope="props"
           >
             <form-item
-              ref="__refArrarRow__"
+              :ref="fieldSchema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
               :key="fieldName"
             ></form-item>
           </template>
@@ -166,8 +169,9 @@
             <form-item
               v-for="key in 1"
               :key="key"
-              ref="__refArrarRow__"
+              :ref="schema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
             ></form-item>
           </div>
         </component>
@@ -186,8 +190,9 @@
             slot-scope="props"
           >
             <form-item
-              ref="__refArrarLegend__"
+              :ref="fieldSchema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
               :key="fieldName"
             ></form-item>
           </template>
@@ -202,8 +207,9 @@
             <form-item
               v-for="key in 1"
               :key="key"
-              ref="__refArrarLegend__"
+              :ref="schema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
             ></form-item>
           </div>
         </component>
@@ -227,8 +233,9 @@
             <form-item
               v-for="key in 1"
               :key="key"
-              ref="__refArrarCard__"
+              :ref="schema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
             ></form-item>
           </div>
         </component>
@@ -247,8 +254,9 @@
             slot-scope="props"
           >
             <form-item
-              ref="__refArrarTable__"
+              :ref="fieldSchema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
               :key="fieldName"
             ></form-item>
           </template>
@@ -270,8 +278,9 @@
             slot-scope="props"
           >
             <form-item
-              ref="__refArrarTabs__"
+              :ref="fieldSchema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
               :key="fieldName"
             ></form-item>
           </template>
@@ -286,8 +295,9 @@
             <form-item
               v-for="key in 1"
               :key="key"
-              ref="__refArrarTabs__"
+              :ref="schema.__hasRef ? REF_FORM_ITEM : undefined"
               :schema="props.schema"
+              :refName="props.refName"
             ></form-item>
           </div>
         </component>
@@ -571,11 +581,19 @@ export default {
 
   data() {
     return {
+      REF_FORM_ITEM: "REF_FORM_ITEM"
       // unwatch: false,
       // showBody: true,
       // isChanged: false,
       // triggerList: []
     };
+  },
+
+  props: {
+    refName: { // 此值用来记录当前ref的索引，用来区分哪个组件（因为取出来是一个数组）
+      type: String,
+      default: ""
+    }
   },
 
   components: {
@@ -652,120 +670,219 @@ export default {
       return this.schema;
     },
 
-    getRef(name) {
+    getRef(name, showAll) {
+      function filterTarget(targets) {
+        var copyTargets = [];
+        targets.forEach(function(target) {
+          if (utils.isArr(target)) {
+            var nextCopyTarget = filterTarget(target);
+            if (nextCopyTarget) {
+              copyTargets.push(nextCopyTarget);
+            }
+          } else if (target) {
+            copyTargets.push(target);
+          }
+        });
+        return copyTargets.length > 0 ? copyTargets : null;
+      }
+
       var ignoreKeys = [];
-      var info = this.__getRef(name, ignoreKeys);
-      var ref = info && info.target ? info.target : null;
+      var info = this.__getLastRefs(name, ignoreKeys);
+      var refTarget = info && info.target ? info.target : null;
       // console.log("ignoreKeys: ", ignoreKeys);
+      if (utils.isArr(refTarget) && !showAll) {
+        // 去掉null(为了以后的扩展，才这样返回)
+        refTarget = filterTarget(refTarget);
+      }
       ignoreKeys = null;
-      return ref;
+      return refTarget;
     },
 
-    __getRef(name, ignoreKeys) {
-      var targetInfo;
-      if (this.schema.component && !this.schema.array) {
-        // 是叶子节点，直接取出
-        var refTarget = this.$refs[name];
-        if (refTarget) {
-          targetInfo = {
-            target: refTarget.$refs[constant.COM_TARGET_REF],
-            sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
-          };
-        } else {
-          targetInfo = null;
-        }
+    __getRefStatKey() {
+      if (this.schema.hidden) {
+        return "";  // 返回空值，说明此组件是隐藏了，用户根据此状态判断
       } else {
-        targetInfo = this.__getLastRefs(name, ignoreKeys);
+        return this.refName;
       }
-      return targetInfo;
     },
 
     /* 取出最后的，跟vue ref保持一致；也就是后面的会代表前面的 */
     __getLastRefs(name, ignoreKeys) {
-      var __objectRef__ = "__refObject__";
-      var __tabsRef__ = "__refTabs__";
-      var sysRefIds = [
-        __objectRef__,
-        __tabsRef__,
-        "__refArrarCard__",
-        "__refArrarRow__",
-        "__refArrarLegend__",
-        "__refArrarTable__",
-        "__refArrarTabs__"
-      ];
+      var refRecord;
 
-      var refTargets = null;
-      for (var key in this.$refs) {
-        // 这样扫描是为了按顺序正确取出
-        if (sysRefIds.includes(key)) {
-          var tmpTargets = this.__getTargetRefs(key, name, ignoreKeys);
-          if (tmpTargets) {
-            refTargets = tmpTargets; // 后面的代替前面的，跟原生vue ref保持一致
-          }
-        } else {
-          // 不是系统所需要的，不需要理会；不过一般不会运行到这
-        }
-      }
-      // console.log(">>>>>>>>>>>>>>>>>end\n\n\n");
-      return refTargets;
-    },
+      var newTargetInfo, nextTargetInfo, props, key;
 
-    __getTargetRefs(refName, name, ignoreKeys) {
-      var __objectRef__ = "__refObject__";
-      var __tabsRef__ = "__refTabs__";
-      var curRefObj,
-        nextTargetInfo,
-        newTargetInfo = null;
-      curRefObj = this.$refs[refName];
-      // console.log("curRefObj: ", curRefObj);
-      if (curRefObj) {
-        curRefObj.forEach(item => {
-          nextTargetInfo = item.__getRef(name, ignoreKeys);
-          if (nextTargetInfo) {
-            newTargetInfo = newTargetInfo ? newTargetInfo : {};
-
-            if (!ignoreKeys.includes(nextTargetInfo.sourceKey)) {
-              // 不是忽略的pathkey
-
-              if (refName === __objectRef__ || refName === __tabsRef__) {
-                // 不是数组，取最后一个
-                if (
-                  newTargetInfo.sourceKey &&
-                  !ignoreKeys.includes(newTargetInfo.sourceKey)
-                ) {
-                  ignoreKeys.push(newTargetInfo.sourceKey);
-                }
-                newTargetInfo = nextTargetInfo;
-              } else {
-                // 是数组，合并成数组
-                if (newTargetInfo.sourceKey == nextTargetInfo.sourceKey) {
-                  // 一样的路径，说明是目标对象
-                  var curTarget = newTargetInfo.target
-                    ? newTargetInfo.target
-                    : [];
-                  curTarget.push(nextTargetInfo.target);
-                  newTargetInfo.target = curTarget;
-                } else {
+      if (!this.schema.array) {
+        // 非数组
+        if (this.schema.properties) {
+          refRecord = this.__createRefRecord(this.$refs[this.REF_FORM_ITEM]);
+          props = this.schema.properties;
+          for (key in props) {
+            if (refRecord[key]) {
+              nextTargetInfo = refRecord[key].__getLastRefs(
+                name,
+                ignoreKeys
+              );
+              if (nextTargetInfo) {
+                if (!ignoreKeys.includes(nextTargetInfo.sourceKey)) {
                   if (
-                    newTargetInfo.sourceKey &&
+                    newTargetInfo &&
                     !ignoreKeys.includes(newTargetInfo.sourceKey)
                   ) {
                     ignoreKeys.push(newTargetInfo.sourceKey);
                   }
-                  newTargetInfo = {
-                    target: [nextTargetInfo.target],
-                    sourceKey: nextTargetInfo.sourceKey
-                  };
+                  newTargetInfo = nextTargetInfo; // 后面的代替前面的，跟原生vue ref保持一致
                 }
               }
-            } else {
-              // 不用理会，之前已经出现过
             }
+          }
+        } else {
+          // 组件/叶子节点，直接取出
+          var refTarget = this.$refs[name];
+          if (refTarget) {
+            newTargetInfo = {
+              target: refTarget.$refs[constant.COM_TARGET_REF],
+              sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
+            };
+          } else {
+            newTargetInfo = null;
+          }
+        }
+      } else {
+        refRecord = this.__createRefRecord(this.$refs[this.REF_FORM_ITEM]);
+        // 数组
+        if (this.schema.properties) {
+          var standardRecord = this.__parseArrRecord(refRecord);
+          props = this.schema.properties;
+          for (key in props) {
+            var arrayRecord = standardRecord[key];
+            if (arrayRecord) {
+              var nextTargetInfos = [];
+              this.schema.__propSchemaList.forEach(function(item, index) {
+                if (arrayRecord[index]) {
+                  var tmpNextTargetInfo = arrayRecord[index].__getLastRefs(
+                    name,
+                    ignoreKeys
+                  );
+                  if (
+                    !tmpNextTargetInfo ||
+                    ignoreKeys.includes(tmpNextTargetInfo.sourceKey)
+                  ) {
+                    nextTargetInfos.push(null); // 占位，把个数补充完整
+                  } else {
+                    nextTargetInfos.push(tmpNextTargetInfo);
+                  }
+                } else {
+                  nextTargetInfos.push(null); // 占位，把个数补充完整
+                }
+              });
+
+              // 取最后一个
+              var lastSourceKey;
+              nextTargetInfos.forEach(function(nextTargetInfo) {
+                if (nextTargetInfo) {
+                  lastSourceKey = nextTargetInfo.sourceKey;
+                }
+              });
+              if (lastSourceKey) {
+                // 存在目标组件
+                if (
+                  newTargetInfo &&
+                  !ignoreKeys.includes(newTargetInfo.sourceKey)
+                ) {
+                  ignoreKeys.push(newTargetInfo.sourceKey);
+                }
+
+                var tmpTargets = [];
+                nextTargetInfos.forEach(function(nextTargetInfo) {
+                  if (
+                    nextTargetInfo &&
+                    nextTargetInfo.sourceKey === lastSourceKey
+                  ) {
+                    var target = nextTargetInfo.target;
+                    // if (utils.isArr(target)) {
+                    //   tmpTargets = tmpTargets.concat(target);
+                    // } else {
+                    tmpTargets.push(target);
+                    // }
+                  } else {
+                    tmpTargets.push(null); // 占位，把个数补充完整
+                  }
+                });
+                newTargetInfo = {
+                  target: tmpTargets,
+                  sourceKey: lastSourceKey
+                }; // 后面的代替前面的，跟原生vue ref保持一致
+              }
+            }
+          }
+        } else if (this.schema.component) {
+          // 组件组成的数组
+          newTargetInfo = { target: [], sourceKey: "" };
+          this.schema.__propSchemaList.forEach((item, index) => {
+            if (refRecord[index]) {
+              var tmpTargetInfo = refRecord[index].__getLastRefs(
+                name,
+                ignoreKeys
+              );
+              if (tmpTargetInfo) {
+                newTargetInfo.target.push(tmpTargetInfo.target);
+                newTargetInfo.sourceKey = tmpTargetInfo.sourceKey;
+              } else {
+                newTargetInfo.target.push(null); // 占位，把个数补充完整
+              }
+            } else {
+              newTargetInfo.target.push(null); // 占位，把个数补充完整
+            }
+          });
+          var hasTarget = newTargetInfo.target.some(function(item) {
+            return !!item;
+          });
+          if (!hasTarget) {
+            newTargetInfo = null;
+          } else if (
+            !newTargetInfo.sourceKey ||
+            ignoreKeys.includes(newTargetInfo.sourceKey)
+          ) {
+            newTargetInfo = null;
+          }
+        } else {
+          newTargetInfo = null;
+        }
+      }
+      return newTargetInfo;
+    },
+
+    __parseArrRecord(arrayRecord) {
+      var newRecord = {};
+      for (var key in arrayRecord) {
+        if (arrayRecord[key]) {
+          var sperator = "_";
+          var lastPosition = key.lastIndexOf(sperator);
+          var refName = key.substr(0, lastPosition);
+          var index = key.substr(lastPosition + 1);
+          if (!newRecord[refName]) {
+            newRecord[refName] = {};
+          }
+          newRecord[refName][index] = arrayRecord[key];
+        }
+      }
+      return newRecord;
+    },
+
+    __createRefRecord(comRefs) {
+      var refRecord = {};
+      if (comRefs) {
+        comRefs.forEach(function(formItem) {
+          var refStatKey = formItem.__getRefStatKey();
+          if (refStatKey !== "") {
+            refRecord[refStatKey] = formItem;
           }
         });
       }
-      return newTargetInfo && newTargetInfo.target ? newTargetInfo : null;
+      return refRecord;
     },
+    
 
     toggleBody() {
       var form = this.__getForm();
