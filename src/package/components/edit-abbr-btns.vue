@@ -91,11 +91,13 @@
 <script>
 import arrayDelPopMixin from "../mixins/array-del-pop-mixin";
 import esBtn from "./btn.vue";
+import esBase from "../base";
 
 export default {
   mixins: [arrayDelPopMixin],
   components: {
-    esBtn
+    esBtn,
+    esBase
   },
   data() {
     return {

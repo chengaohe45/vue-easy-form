@@ -83,6 +83,7 @@
 import arrayEditItemMixin from "../mixins/array-edit-item-mixin";
 import arrayDelPopMixin from "../mixins/array-del-pop-mixin";
 import esBtn from "./btn.vue";
+import esBase from "../base";
 import esTabsBtn from "./tabs-btn.vue";
 // import utils from "../libs/utils";
 
@@ -90,7 +91,8 @@ export default {
   mixins: [arrayEditItemMixin, arrayDelPopMixin],
   components: {
     esBtn,
-    esTabsBtn
+    esTabsBtn,
+    esBase
   },
   data() {
     return {

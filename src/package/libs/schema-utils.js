@@ -213,6 +213,7 @@ let schemaUtils = {
 
       //递归，取出下一级的数据
       var newProperties = {};
+      var hasChildRef = false;
       for (var key in propItem.properties) {
         if (!this.__isRightKey(key)) {
           console.warn("属性" + key + "存在危险字符，会导致程序出错");
@@ -289,12 +290,18 @@ let schemaUtils = {
           }
 
           newProperties[key] = nextPropItem;
+          if (nextPropItem.__hasRef) {
+            hasChildRef = true;
+          }
         }
       }
       if (Object.keys(newProperties).length <= 0) {
         throw "properties不能为空，或其属性全部为空(null/undefined/false)";
       }
       newPropItem.properties = newProperties;
+      if (hasChildRef) {
+        newPropItem.__hasRef = hasChildRef;
+      }
 
       // 当是列表数组时，重新计算列宽，使其点100%
       if (newPropItem.array && newPropItem.array.name == constant.ARRAY_TABLE) {
@@ -1719,6 +1726,9 @@ let schemaUtils = {
           myPathKey
         );
         newPropItem[key] = mainComponent;
+        if (mainComponent.ref) {
+          newPropItem.__hasRef = true;
+        }
         return true;
       }
 
