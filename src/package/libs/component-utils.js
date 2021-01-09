@@ -392,6 +392,9 @@ export function parseActions(actions, myPathKey) {
  */
 export function parseTrigger(trigger) {
   var tmpTriggers;
+  if (trigger === true) {
+    trigger = constant.INPUT_EVENT;
+  }
   if (utils.isArr(trigger) || utils.isStr(trigger)) {
     if (utils.isStr(trigger)) {
       trigger = trigger.trim();
@@ -402,6 +405,8 @@ export function parseTrigger(trigger) {
         if (utils.isStr(item)) {
           item = item.trim();
           tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
+        } else if (item === true) {
+          tmpTriggers.push(constant.INPUT_EVENT);
         }
       });
     }
