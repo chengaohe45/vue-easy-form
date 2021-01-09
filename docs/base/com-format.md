@@ -113,7 +113,8 @@
 ```js
 标准写法
 actions: {
-  // 默认为click, 多个事件写法: ["change", "input"]或"change input"
+  // 默认为click, 多个事件写法: ["change", true]或"change input"
+  // 注: true会转换为input事件（v1.8.1增加）
   trigger: "change",
   // options => {value, event, pathKey, index, idxChain,target}
   handler: function(options){...}

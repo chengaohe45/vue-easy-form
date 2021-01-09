@@ -13,6 +13,9 @@
 
 ## 当前版本记录
 
+### 1.8.1
+- [组件事件](../base/com-format.md#组件事件)增加`true`写法.
+
 ### 1.8.0
 - 修复[table数组](../base/array.md)的组件不可隐藏的问题；
 - 优化表单[getRef](../base/form.md#表单方法)方法.

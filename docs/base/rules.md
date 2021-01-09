@@ -14,7 +14,8 @@ rules: {
   },  
   // checks可以是以下写成的数组 如 checks: [{...}, {...}]
   checks: {    // handler函数(非箭头函数时): this指向form
-    trigger: "change",  // 检查的时机，多个时可写成"input change"或["change", "input"]
+    // 注: true会转换为input事件（v1.8.1增加）
+    trigger: "change",  // 检查的时机，多个时可写成"input change"或["change", true]
     handler: function(options) { // options => {value, pathKey, idxChain, index, instance}
       // 返回true表示验证通过；其它值都认为验证不通过
       // 若返回值为字符串，则是提示的信息，否则取‘errMsg’
