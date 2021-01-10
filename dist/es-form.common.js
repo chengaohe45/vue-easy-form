@@ -6278,6 +6278,10 @@ function parseActions(actions, myPathKey) {
 function parseTrigger(trigger) {
   var tmpTriggers;
 
+  if (trigger === true) {
+    trigger = constant["a" /* default */].INPUT_EVENT;
+  }
+
   if (utils["a" /* default */].isArr(trigger) || utils["a" /* default */].isStr(trigger)) {
     if (utils["a" /* default */].isStr(trigger)) {
       trigger = trigger.trim();
@@ -6288,6 +6292,8 @@ function parseTrigger(trigger) {
         if (utils["a" /* default */].isStr(item)) {
           item = item.trim();
           tmpTriggers = tmpTriggers.concat(item.split(/\s+/));
+        } else if (item === true) {
+          tmpTriggers.push(constant["a" /* default */].INPUT_EVENT);
         }
       });
     }
@@ -9453,7 +9459,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.8.0" : "??",
+  version: typeof process != "undefined" ? "1.8.1" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
