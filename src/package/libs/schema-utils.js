@@ -338,6 +338,17 @@ let schemaUtils = {
         // console.log("end ...");
         delete newPropItem.array.value; //任务完成
       }
+      // 判断newPropItem下一级组件是否存在自定义长度
+      var nextNewproperties = newPropItem.properties;
+      if (this.__existCustomWidth(nextNewproperties)) {
+        newPropItem.__hasCustomWidth = true;
+        for (var nextKey in nextNewproperties) {
+          if ("rowSpace" in nextNewproperties[nextKey]) {
+            nextNewproperties[nextKey].rowSpace = newPropItem.ui.rowSpace;
+            nextNewproperties[nextKey].__rawRowSpace = newPropItem.ui.rowSpace;
+          }
+        }
+      }
     } else {
       // 是组件了
       propKeys = this.__getPropKeys("component");
@@ -470,6 +481,16 @@ let schemaUtils = {
       }
       lastPropItem = null;
     }
+  },
+
+  __existCustomWidth(newProperties) {
+    for (var key in newProperties) {
+      var nextPropItem = newProperties[key];
+      if (utils.isObj(nextPropItem.col)) {
+        return true;
+      }
+    }
+    return false;
   },
 
   /**
@@ -665,17 +686,17 @@ let schemaUtils = {
         filters: ["isStr"],
         defaultValue: false
       },
-      {
-        key: "col",
-        enums: [],
-        filters: [
-          {
-            name: "isInt",
-            params: [1, constant.UI_MAX_COL]
-          }
-        ],
-        defaultValue: constant.UI_MAX_COL
-      },
+      // {
+      //   key: "col",
+      //   enums: [],
+      //   filters: [
+      //     {
+      //       name: "isInt",
+      //       params: [1, constant.UI_MAX_COL]
+      //     }
+      //   ],
+      //   defaultValue: constant.UI_MAX_COL
+      // },
       {
         key: "direction",
         enums: ["h", "v"],
@@ -869,6 +890,49 @@ let schemaUtils = {
     } else {
       // 格式不合法
       return false;
+    }
+  },
+
+  __parseCol(value) {
+    if (value && utils.isStr(value)) {
+      value = {
+        width: value
+      };
+    }
+    if (utils.isNum(value)) {
+      value = parseInt(value);
+      if (value < 1 && value > constant.UI_MAX_COL) {
+        value = constant.UI_MAX_COL;
+      }
+    } else if (utils.isObj(value)) {
+      var keys = Object.keys(value);
+      var newInfo = {
+        width: "100%"
+      };
+      keys.forEach(function(key) {
+        var widthValue = value[key];
+        if (
+          widthValue === constant.WIDTH_AUTO ||
+          utils.isPercent(widthValue) ||
+          utils.isPx(widthValue)
+        ) {
+          widthValue = widthValue.toLowerCase();
+          // 只支持三种长度（最小、最大、长度）
+          var keyWidth = "width";
+          var minWidth = "min-width";
+          var maxWidth = "max-width";
+          if (key === keyWidth) {
+            newInfo[keyWidth] = widthValue;
+          } else if (key === minWidth || key === "minWidth") {
+            newInfo[minWidth] = widthValue;
+          } else if (key === maxWidth || key === "maxWidth") {
+            newInfo[maxWidth] = widthValue;
+          }
+        }
+        return newInfo;
+      });
+    } else {
+      return constant.UI_MAX_COL;
     }
   },
 
@@ -1654,6 +1718,11 @@ let schemaUtils = {
         return true;
       }
 
+      if (key == "col") {
+        newPropItem[key] = this.__parseCol(propItem[key], myPathKey);
+        return true;
+      }
+
       if (key == "title") {
         newPropItem[key] = this.__parseTitle(propItem[key], myPathKey);
         return true;
@@ -1773,7 +1842,7 @@ let schemaUtils = {
   __reinitGroup: function(propItem) {
     var lastGroup = false;
     var groups;
-    var colSum = 0;
+    // var colSum = 0;
     var gFirstItem; //每一组的第一项
     for (var key in propItem.properties) {
       var item = propItem.properties[key];
@@ -1784,9 +1853,12 @@ let schemaUtils = {
           if (lastGroup === curGroup) {
             //是前面的那一组
             groups.push(key);
-            colSum += item.col;
-            gFirstItem.__groupCol =
-              colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+            // colSum += item.col;
+            gFirstItem.__groupCol = this.__sumCol(
+              gFirstItem.__groupCol,
+              item.col
+            );
+            // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
           } else {
             //不是前面的那一组，重新开组
             lastGroup = curGroup;
@@ -1795,9 +1867,9 @@ let schemaUtils = {
             item.__groups = groups;
             item.__hiddenGroup = false;
             // item.col = constant.UI_MAX_COL;
-            colSum = item.col;
-            gFirstItem.__groupCol =
-              colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+            // colSum = item.col;
+            gFirstItem.__groupCol = item.col;
+            // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
           }
         } else {
           //前面没有组，重新开组
@@ -1807,17 +1879,98 @@ let schemaUtils = {
           item.__groups = groups;
           item.__hiddenGroup = false;
           // item.col = constant.UI_MAX_COL;
-          colSum = item.col;
-          gFirstItem.__groupCol =
-            colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+          // colSum = item.col;
+          gFirstItem.__groupCol = item.col;
+          // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
         }
         item.__inGroups = true; //记录此项在分组里面
       } else {
         lastGroup = false;
         groups = null;
-        colSum = 0;
+        // colSum = 0;
         gFirstItem = null;
       }
+    }
+  },
+
+  /**
+   * 合并两个长度
+   * @param {*} col1
+   * @param {*} col2
+   */
+  __sumCol(col1, col2) {
+    // 都是整数
+    if (utils.isNum(col1) && utils.isNum(col2)) {
+      var colSum = col1 + col2;
+      colSum = colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+      return colSum;
+    } else {
+      // 存在非整数，转化为对象相加
+      var colObj1 = col1;
+      var colObj2 = col2;
+      if (!utils.isObj(colObj1)) {
+        colObj1 = {
+          width: this.__intToPercent(colObj1)
+        };
+      }
+      if (!utils.isObj(colObj2)) {
+        colObj2 = {
+          width: this.__intToPercent(colObj2)
+        };
+      }
+      var keyWidth = "width";
+      var minWidth = "min-width";
+      var maxWidth = "max-width";
+      var keys = [keyWidth, minWidth, maxWidth];
+      var newColObj = {};
+      keys.forEach(function(key) {
+        var valSum = this.__countValue(colObj1[key], colObj2[key]);
+        if (!valSum) {
+          if (keyWidth === key) {
+            newColObj[key] = this.__intToPercent(constant.UI_MAX_COL);
+          } else if (minWidth === key) {
+            newColObj[key] = colObj1[key];
+          } else {
+            // maxWidth不要了
+          }
+        } else {
+          newColObj[key] = valSum;
+        }
+      });
+    }
+  },
+
+  __intToPercent(col) {
+    if (utils.isNum(col)) {
+      return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "px"; // 保留4位
+    } else {
+      return col;
+    }
+  },
+
+  /**
+   * 计算两个值之和，不能相加就返回false
+   * @param {*} val1
+   * @param {*} val2
+   */
+  __countValue(val1, val2) {
+    var unit, sum;
+    if (val1 === constant.WIDTH_AUTO && val2 === constant.WIDTH_AUTO) {
+      return constant.WIDTH_AUTO;
+    } else if (utils.isPercent(val1) && utils.isPercent(val2)) {
+      unit = "%";
+      sum =
+        parseFloat(val1.substr(0, val1.length - unit.length)) +
+        parseFloat(val2.substr(0, val2.length - unit.length));
+      return (sum > 100 ? 100 : sum) + unit;
+    } else if (utils.isPx(val1) && utils.isPx(val2)) {
+      unit = "px";
+      sum =
+        parseFloat(val1.substr(0, val1.length - unit.length)) +
+        parseFloat(val2.substr(0, val2.length - unit.length));
+      return sum + unit;
+    } else {
+      return false;
     }
   },
 

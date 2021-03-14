@@ -357,6 +357,22 @@ let utils = {
     return false;
   },
 
+  isPercent(value) {
+    var reg = /^\d+(.\d+)?%$/i;
+    if (utils.isStr(value) && reg.test(value)) {
+      return true;
+    }
+    return false;
+  },
+
+  isPx(value) {
+    var reg = /^\d+(.\d+)?px$/i;
+    if (utils.isStr(value) && reg.test(value)) {
+      return true;
+    }
+    return false;
+  },
+
   /**
    * 转在vue的驼峰形式
    * @param {*} value
