@@ -432,6 +432,27 @@ let schemaUtils = {
       var curProp = newSchema.properties;
       var nextPropItem, key, newCol;
       var total = 0;
+      // 判断是否合法
+      var isValidCol = true;
+      for (key in curProp) {
+        nextPropItem = curProp[key];
+        if (!utils.isNum(nextPropItem.col)) {
+          isValidCol = false; // 存在不合法的长度
+          console.warn(
+            "table数组所有项的长度col只能设置为整数，不能是对象，否则每一项将均分长度；现项(key为" +
+              key +
+              ")设置长度为对象"
+          );
+          break;
+        }
+      }
+      if (!isValidCol) {
+        for (key in curProp) {
+          nextPropItem = curProp[key];
+          nextPropItem.col = constant.UI_MAX_COL; // 均分
+        }
+      }
+
       for (key in curProp) {
         nextPropItem = curProp[key];
         total += nextPropItem.col;
@@ -904,6 +925,7 @@ let schemaUtils = {
       if (value < 1 && value > constant.UI_MAX_COL) {
         value = constant.UI_MAX_COL;
       }
+      return value;
     } else if (utils.isObj(value)) {
       var keys = Object.keys(value);
       var newInfo = {
@@ -1923,7 +1945,7 @@ let schemaUtils = {
       var maxWidth = "max-width";
       var keys = [keyWidth, minWidth, maxWidth];
       var newColObj = {};
-      keys.forEach(function(key) {
+      keys.forEach(key => {
         var valSum = this.__countValue(colObj1[key], colObj2[key]);
         if (!valSum) {
           if (keyWidth === key) {

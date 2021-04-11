@@ -71,6 +71,7 @@
           :key="fieldName"
           v-if="itemSchema.__creatable"
           v-show="fieldName === schema.__tabsIndex && !itemSchema.hidden"
+          :class="['es-col-' + itemSchema.col]"
         >
           <slot :name="fieldName"></slot>
         </li>
@@ -96,10 +97,11 @@ $styleColor: #e4e7ed;
     border-color: $styleColor;
     border-top: none;
     border-radius: 0 0 4px 4px;
+    text-align: left;
 
     li {
       position: relative;
-      margin: 0;
+      margin: 0 auto 0 0;
       padding: 0;
       left: 0;
       top: 0;

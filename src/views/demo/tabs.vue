@@ -152,6 +152,7 @@ export default {
               text: "作者",
               help: "我在label里面"
             },
+            col: 20,
             component: {
               name: "el-input",
               props: {
