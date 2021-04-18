@@ -951,8 +951,8 @@ let schemaUtils = {
             newInfo[maxWidth] = widthValue;
           }
         }
-        return newInfo;
       });
+      return newInfo;
     } else {
       return constant.UI_MAX_COL;
     }
@@ -1836,6 +1836,7 @@ let schemaUtils = {
     });
     if (!utils.isUndef(newPropItem.rowSpace)) {
       newPropItem.__rawRowSpace = newPropItem.rowSpace; // __rawRowSpace用于第一行计算或恢复，因为第一行可能会变为0
+      newPropItem.__style = null;
     }
     return newPropItem;
   },

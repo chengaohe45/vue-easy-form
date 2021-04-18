@@ -71,7 +71,7 @@
           :key="fieldName"
           v-if="itemSchema.__creatable"
           v-show="fieldName === schema.__tabsIndex && !itemSchema.hidden"
-          :class="['es-col-' + itemSchema.col]"
+          :style="itemSchema.__style"
         >
           <slot :name="fieldName"></slot>
         </li>

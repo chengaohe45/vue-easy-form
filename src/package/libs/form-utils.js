@@ -1030,6 +1030,9 @@ let formUtils = {
           // 是普通tabs
           for (key in propItem.properties) {
             nextPropItem = propItem.properties[key];
+            if (!nextPropItem.__style) {
+              this.__updatePropStyle(nextPropItem, undefined, nextPropItem.col);
+            }
             // 下一级
             this.analyzeUiProps(nextPropItem, baseParseSources);
           }
@@ -1077,70 +1080,135 @@ let formUtils = {
         } else {
           sum = 0;
           var newRowSpace;
+          var hasCustomWidth = propItem.__hasCustomWidth;
           for (key in propItem.properties) {
             nextPropItem = propItem.properties[key];
-            if (nextPropItem.__groups) {
-              //是一个组
-              isHidden = this.__isGroupHidden(
-                propItem,
-                nextPropItem.__groups,
-                baseParseSources
-              );
-              // console.log("isHidden: " + isHidden);
-              if (!isHidden) {
-                //组不隐藏
+            var hasRowSpaceChanged = false;
+            var currentCol;
+            if (!hasCustomWidth) {
+              if (nextPropItem.__groups) {
+                //是一个组
+                isHidden = this.__isGroupHidden(
+                  propItem,
+                  nextPropItem.__groups,
+                  baseParseSources
+                );
+                // console.log("isHidden: " + isHidden);
+                if (!isHidden) {
+                  //组不隐藏
 
-                sum += nextPropItem.__groupCol;
-                if (sum <= constant.UI_MAX_COL) {
-                  //还在第一行
-                  newRowSpace = 0;
+                  sum += nextPropItem.__groupCol;
+                  if (sum <= constant.UI_MAX_COL) {
+                    //还在第一行
+                    newRowSpace = 0;
+                  } else {
+                    newRowSpace = nextPropItem.__rawRowSpace;
+                  }
+                  if (
+                    !nextPropItem.__style ||
+                    nextPropItem.rowSpace != newRowSpace
+                  ) {
+                    //还原
+                    nextPropItem.rowSpace = newRowSpace;
+                    hasRowSpaceChanged = true;
+                    currentCol = nextPropItem.__groupCol;
+                  }
                 } else {
-                  newRowSpace = nextPropItem.__rawRowSpace;
+                  //不必理会
                 }
-                if (nextPropItem.rowSpace != newRowSpace) {
-                  //还原
-                  nextPropItem.rowSpace = newRowSpace;
+
+                if (nextPropItem.__hiddenGroup != isHidden) {
+                  nextPropItem.__hiddenGroup = isHidden;
+                }
+              } else if (nextPropItem.__inGroups) {
+                //组内成员
+                if (!nextPropItem.__style || nextPropItem.rowSpace != 0) {
+                  nextPropItem.rowSpace = 0;
+                  hasRowSpaceChanged = true;
+                  currentCol = nextPropItem.col;
                 }
               } else {
-                //不必理会
-              }
+                //正常成员
+                var nextParseSources = Object.assign({}, baseParseSources);
+                nextParseSources.index = nextPropItem.__info.index;
+                nextParseSources.idxChain = nextPropItem.__info.idxChain;
+                nextParseSources.pathKey = nextPropItem.__info.pathKey;
 
-              if (nextPropItem.__hiddenGroup != isHidden) {
-                nextPropItem.__hiddenGroup = isHidden;
+                isHidden = parse.smartEsValue(
+                  nextPropItem.__rawHidden,
+                  nextParseSources
+                );
+                // console.log(nextPropItem.col, isHidden);
+                if (!isHidden) {
+                  sum += nextPropItem.col;
+                  if (sum <= constant.UI_MAX_COL) {
+                    //还在第一行
+                    newRowSpace = 0;
+                  } else {
+                    newRowSpace = nextPropItem.__rawRowSpace;
+                  }
+                  if (
+                    !nextPropItem.__style ||
+                    nextPropItem.rowSpace != newRowSpace
+                  ) {
+                    //还原
+                    nextPropItem.rowSpace = newRowSpace;
+                    hasRowSpaceChanged = true;
+                    currentCol = nextPropItem.col;
+                  }
+                } else {
+                  //不必理会
+                }
               }
-            } else if (nextPropItem.__inGroups) {
-              //组内成员
-              if (nextPropItem.rowSpace != 0) {
-                nextPropItem.rowSpace = 0;
+              if (hasRowSpaceChanged) {
+                this.__updatePropStyle(
+                  nextPropItem,
+                  nextPropItem.rowSpace,
+                  currentCol
+                );
               }
             } else {
-              //正常成员
-              var nextParseSources = Object.assign({}, baseParseSources);
-              nextParseSources.index = nextPropItem.__info.index;
-              nextParseSources.idxChain = nextPropItem.__info.idxChain;
-              nextParseSources.pathKey = nextPropItem.__info.pathKey;
-
-              isHidden = parse.smartEsValue(
-                nextPropItem.__rawHidden,
-                nextParseSources
-              );
-              // console.log(nextPropItem.col, isHidden);
-              if (!isHidden) {
-                sum += nextPropItem.col;
-                if (sum <= constant.UI_MAX_COL) {
-                  //还在第一行
-                  newRowSpace = 0;
+              if (nextPropItem.__groups) {
+                //是一个组
+                isHidden = this.__isGroupHidden(
+                  propItem,
+                  nextPropItem.__groups,
+                  baseParseSources
+                );
+                // console.log("isHidden: " + isHidden);
+                if (!isHidden) {
+                  //组不隐藏
+                  if (!nextPropItem.__style) {
+                    this.__updatePropStyle(
+                      nextPropItem,
+                      nextPropItem.rowSpace,
+                      nextPropItem.__groupCol
+                    );
+                  }
                 } else {
-                  newRowSpace = nextPropItem.__rawRowSpace;
+                  //不必理会
                 }
-                if (nextPropItem.rowSpace != newRowSpace) {
-                  //还原
-                  nextPropItem.rowSpace = newRowSpace;
+
+                if (nextPropItem.__hiddenGroup != isHidden) {
+                  nextPropItem.__hiddenGroup = isHidden;
+                }
+              } else if (nextPropItem.__inGroups) {
+                //组内成员
+                if (!nextPropItem.__style) {
+                  this.__updatePropStyle(nextPropItem, 0, nextPropItem.col);
                 }
               } else {
-                //不必理会
+                //正常成员
+                if (!nextPropItem.__style) {
+                  this.__updatePropStyle(
+                    nextPropItem,
+                    nextPropItem.rowSpace,
+                    nextPropItem.col
+                  );
+                }
               }
             }
+
             // 下一级
             this.analyzeUiProps(nextPropItem, baseParseSources);
           }
@@ -1166,6 +1234,26 @@ let formUtils = {
         propItem.__creatable = true;
       }
     }
+  },
+
+  __updatePropStyle(propItem, rowSpace, col) {
+    console.log("col", col);
+    var style = {
+      // marginTop: rowSpace + "px",
+      paddingLeft: propItem.offsetLeft + "px",
+      paddingRight: propItem.offsetRight + "px"
+    };
+    if (rowSpace) {
+      style.marginTop = rowSpace + "px";
+    }
+    if (utils.isNum(col)) {
+      var width = Math.floor((col * 10000) / constant.UI_MAX_COL) / 100;
+      width += "%";
+      style.width = width;
+    } else {
+      style = Object.assign(style, col);
+    }
+    propItem.__style = style;
   },
 
   /**
