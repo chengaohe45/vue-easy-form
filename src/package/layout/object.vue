@@ -1,17 +1,20 @@
 <template>
   <div class="es-form-container">
-    <div class="es-form-inner-wrap" :style="schema.__hasCustomWidth ? {marginTop: (- schema.ui.rowSpace) + 'px'} : null">
+    <div
+      class="es-form-inner-wrap"
+      :style="
+        schema.__hasCustomWidth
+          ? { marginTop: -schema.ui.rowSpace + 'px' }
+          : null
+      "
+    >
       <template v-for="(fieldSchema, fieldName) in schema.properties">
         <!-- 有些元素同一组（也就是同一行, 内收藏fieldName） -->
         <div
           v-if="fieldSchema.__groups"
           v-show="!fieldSchema.__hiddenGroup"
-          :style="{
-            marginTop: fieldSchema.rowSpace + 'px',
-            paddingLeft: fieldSchema.offsetLeft + 'px',
-            paddingRight: fieldSchema.offsetRight + 'px'
-          }"
-          :class="['es-form-object', 'es-col-' + fieldSchema.__groupCol]"
+          :style="fieldSchema.__style"
+          class="es-form-object"
           :key="'groups-' + fieldName"
         >
           <template v-for="fieldKeyName in fieldSchema.__groups">
@@ -26,12 +29,16 @@
                 :style="[
                   {
                     height: schema.properties[fieldKeyName].rowHeight + 'px',
-                    lineHeight: schema.properties[fieldKeyName].rowHeight + 'px',
-                    marginLeft: schema.properties[fieldKeyName].offsetLeft + 'px'
+                    lineHeight:
+                      schema.properties[fieldKeyName].rowHeight + 'px',
+                    marginLeft:
+                      schema.properties[fieldKeyName].offsetLeft + 'px'
                   },
                   schema.properties[fieldKeyName].label.flex
                     ? ''
-                    : { width: schema.properties[fieldKeyName].labelWidth + 'px' }
+                    : {
+                        width: schema.properties[fieldKeyName].labelWidth + 'px'
+                      }
                 ]"
                 :class="[
                   'es-form-label-col',
@@ -52,7 +59,8 @@
                     (schema.properties[fieldKeyName].array &&
                       schema.properties[fieldKeyName].array.rules &&
                       schema.properties[fieldKeyName].array.rules.required &&
-                      schema.properties[fieldKeyName].array.rules.showRequired) ||
+                      schema.properties[fieldKeyName].array.rules
+                        .showRequired) ||
                       (schema.properties[fieldKeyName].rules &&
                         !schema.properties[fieldKeyName].array &&
                         schema.properties[fieldKeyName].rules.required &&
@@ -91,9 +99,14 @@
               <div
                 v-if="schema.properties[fieldKeyName].__creatable"
                 v-show="!schema.properties[fieldKeyName].hidden"
-                :class="['es-form-comp-content', schema.properties[fieldKeyName].component && schema.properties[fieldKeyName].component.flex
-                    ? 'es-form-group-' + schema.properties[fieldKeyName].component.flex
-                    : '']"
+                :class="[
+                  'es-form-comp-content',
+                  schema.properties[fieldKeyName].component &&
+                  schema.properties[fieldKeyName].component.flex
+                    ? 'es-form-group-' +
+                      schema.properties[fieldKeyName].component.flex
+                    : ''
+                ]"
                 :key="'content-' + fieldKeyName"
                 :style="[
                   {
@@ -173,10 +186,8 @@
               v-show="!schema.properties[fieldKeyName].hidden"
               v-else
               :key="fieldKeyName"
-              :class="[
-                'es-form-placeholder',
-                'es-col-' + schema.properties[fieldKeyName].col
-              ]"
+              :style="schema.properties[fieldKeyName].__style"
+              class="es-form-placeholder"
             ></div>
           </template>
         </div>
@@ -284,8 +295,8 @@
         <div
           v-show="!fieldSchema.hidden"
           v-else-if="!fieldSchema.__inGroups && !fieldSchema.component"
-          :style="{ marginTop: fieldSchema.rowSpace + 'px' }"
-          :class="['es-form-object', 'es-col-' + fieldSchema.col]"
+          :style="fieldSchema.__style"
+          class="es-form-object"
           :key="fieldName"
         ></div>
       </template>
@@ -295,12 +306,12 @@
 
 <style lang="scss">
 @import "../static/css/mixins.scss";
-$UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，要跟es-constance.js的UI_MAX_COL对应
-@for $i from 1 through $UI_MAX_COL {
-  .es-col-#{$i} {
-    width: 100% * $i / $UI_MAX_COL;
-  }
-}
+// $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，要跟es-constance.js的UI_MAX_COL对应
+// @for $i from 1 through $UI_MAX_COL {
+//   .es-col-#{$i} {
+//     width: 100% * $i / $UI_MAX_COL;
+//   }
+// }
 
 .es-form-container {
   overflow: hidden;
@@ -319,6 +330,7 @@ $UI_MAX_COL: 24; //整修个布局分为多少列，这个值不要随便改，�
     @include display-flex;
     @include direction-h;
     @include flex-fixed;
+    @include border-box;
     justify-content: flex-start;
     align-items: center;
   }

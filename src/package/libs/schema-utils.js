@@ -472,6 +472,16 @@ let schemaUtils = {
         // 不够100%， 补给后面的
         curProp[key].col = curProp[key].col + (constant.UI_MAX_COL - newTotal);
       }
+
+      // 计算转化为头部style
+      for (key in curProp) {
+        nextPropItem = curProp[key];
+        var headStyle = {
+          width: this.__intToPercent(nextPropItem.col),
+          padding: newSchema.ui.rowSpace / 2 + "px"
+        };
+        nextPropItem.__headStyle = headStyle;
+      }
     }
   },
 
@@ -1965,7 +1975,7 @@ let schemaUtils = {
 
   __intToPercent(col) {
     if (utils.isNum(col)) {
-      return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "px"; // 保留4位
+      return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "%"; // 保留4位
     } else {
       return col;
     }

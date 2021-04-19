@@ -357,7 +357,7 @@ export default {
   },
   components: {
     tabsNav,
-    tabsItem,
+    tabsItem
     // native
   }
 };

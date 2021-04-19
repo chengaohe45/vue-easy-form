@@ -263,7 +263,9 @@ function scan(curNavList) {
 // }
 
 function isDev() {
-  return typeof process != "undefined" && process.env.NODE_ENV === "development";
+  return (
+    typeof process != "undefined" && process.env.NODE_ENV === "development"
+  );
 }
 
 let navRoute = {
@@ -306,7 +308,7 @@ let navRoute = {
     if (isDev()) {
       newPageList.push(fetch(homeItem, pathKeys));
     }
-    
+
     //导航菜单，可能存在多级
     newPageList.push(...scan(navList));
     //其它页面

@@ -60,7 +60,11 @@
                 v-for="(fieldSchema, fieldName) in itemSchema.properties"
                 :slot="fieldName"
               >
-                <slot :name="fieldName" :refName="fieldName + '_' + index" :schema="fieldSchema"></slot>
+                <slot
+                  :name="fieldName"
+                  :refName="fieldName + '_' + index"
+                  :schema="fieldSchema"
+                ></slot>
               </template>
             </component>
             <es-object :schema="itemSchema" v-else-if="itemSchema.properties">
@@ -68,7 +72,11 @@
                 v-for="(fieldSchema, fieldName) in itemSchema.properties"
                 :slot="fieldName"
               >
-                <slot :name="fieldName" :refName="fieldName + '_' + index" :schema="fieldSchema"></slot>
+                <slot
+                  :name="fieldName"
+                  :refName="fieldName + '_' + index"
+                  :schema="fieldSchema"
+                ></slot>
               </template>
             </es-object>
             <template v-else>

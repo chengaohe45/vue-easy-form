@@ -108,7 +108,11 @@
             :slot="fieldName"
           >
             <form-item
-              :ref="fieldSchema.__hasRef && (!fieldSchema.hidden) ? REF_FORM_ITEM : undefined"
+              :ref="
+                fieldSchema.__hasRef && !fieldSchema.hidden
+                  ? REF_FORM_ITEM
+                  : undefined
+              "
               :schema="fieldSchema"
               :refName="fieldName"
               :key="fieldName"
@@ -127,7 +131,11 @@
             :slot="fieldName"
           >
             <form-item
-              :ref="fieldSchema.__hasRef && (!fieldSchema.hidden) ? REF_FORM_ITEM : undefined"
+              :ref="
+                fieldSchema.__hasRef && !fieldSchema.hidden
+                  ? REF_FORM_ITEM
+                  : undefined
+              "
               :schema="fieldSchema"
               :refName="fieldName"
               :key="fieldName"
@@ -590,7 +598,8 @@ export default {
   },
 
   props: {
-    refName: { // 此值用来记录当前ref的索引，用来区分哪个组件（因为取出来是一个数组）
+    refName: {
+      // 此值用来记录当前ref的索引，用来区分哪个组件（因为取出来是一个数组）
       type: String,
       default: ""
     }
@@ -700,7 +709,7 @@ export default {
 
     __getRefStatKey() {
       if (this.schema.hidden) {
-        return "";  // 返回空值，说明此组件是隐藏了，用户根据此状态判断
+        return ""; // 返回空值，说明此组件是隐藏了，用户根据此状态判断
       } else {
         return this.refName;
       }
@@ -719,10 +728,7 @@ export default {
           props = this.schema.properties;
           for (key in props) {
             if (refRecord[key]) {
-              nextTargetInfo = refRecord[key].__getLastRefs(
-                name,
-                ignoreKeys
-              );
+              nextTargetInfo = refRecord[key].__getLastRefs(name, ignoreKeys);
               if (nextTargetInfo) {
                 if (!ignoreKeys.includes(nextTargetInfo.sourceKey)) {
                   if (
@@ -882,7 +888,6 @@ export default {
       }
       return refRecord;
     },
-    
 
     toggleBody() {
       var form = this.__getForm();

@@ -12,8 +12,7 @@
         <th
           v-for="(headerSchema, headerFieldName) in schema.properties"
           :key="headerFieldName"
-          :class="['es-col-' + headerSchema.col]"
-          :style="{ padding: schema.ui.rowSpace / 2 + 'px' }"
+          :style="headerSchema.__headStyle"
         >
           <div
             :class="[

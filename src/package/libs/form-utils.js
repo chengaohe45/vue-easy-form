@@ -1237,17 +1237,17 @@ let formUtils = {
   },
 
   __updatePropStyle(propItem, rowSpace, col) {
-    console.log("col", col);
+    // console.log("col", col);
     var style = {
       // marginTop: rowSpace + "px",
-      paddingLeft: propItem.offsetLeft + "px",
-      paddingRight: propItem.offsetRight + "px"
+      paddingLeft: (propItem.offsetLeft ? propItem.offsetLeft : 0) + "px",
+      paddingRight: (propItem.offsetRight ? propItem.offsetRight : 0) + "px"
     };
     if (rowSpace) {
       style.marginTop = rowSpace + "px";
     }
     if (utils.isNum(col)) {
-      var width = Math.floor((col * 10000) / constant.UI_MAX_COL) / 100;
+      var width = Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000;
       width += "%";
       style.width = width;
     } else {

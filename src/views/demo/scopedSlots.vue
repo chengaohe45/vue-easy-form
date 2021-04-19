@@ -1,5 +1,10 @@
 <template>
-  <demo-frame :title="title" :formSchema="formSchema" :docsTitle="docsTitle" :docsHref="docsHref"></demo-frame>
+  <demo-frame
+    :title="title"
+    :formSchema="formSchema"
+    :docsTitle="docsTitle"
+    :docsHref="docsHref"
+  ></demo-frame>
 </template>
 
 <script>

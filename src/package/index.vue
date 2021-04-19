@@ -1,7 +1,11 @@
 <template>
   <div class="es-form">
     <form-item ref="formFrame" :schema="formSchema"></form-item>
-    <consolePanel v-if="canConsole" :rootValue="csRootValue" :formValue="csFormValue"></consolePanel>
+    <consolePanel
+      v-if="canConsole"
+      :rootValue="csRootValue"
+      :formValue="csFormValue"
+    ></consolePanel>
   </div>
 </template>
 
