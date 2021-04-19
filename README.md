@@ -5,67 +5,56 @@
   <a href="https://www.npmjs.com/package/vue-easy-form"><img src="https://img.shields.io/npm/v/vue-easy-form.svg" alt="version"></a>
 </p>
 
-vue-easy-form：简称esForm，是一个独立、不依赖第三方类库的vue表单组件。通过一份json配置，动态输出用户所需要的表单。组件布局丰富、逻辑控制简洁、事件联动灵活、`无缝对接第三方类库`, 极大地提高用户开发效率。
+vue-easy-form: referred to as esForm, is an independent vue form component that does not rely on third-party libraries. Through a json configuration, the form that the user needs is dynamically output. Rich component layout, simple logic control, flexible event linkage, seamless connection with third-party class libraries, greatly improving user development efficiency.
 
-## 项目安装
+## Why choose esForm?
+- Only need a json configuration, almost no need for html, css;
+- Rich layout, including flexible layout and tabs layout;
+- Seamless connection with third-party components, no need to customize components for the framework (you can freely choose `element-ui`, `fish-ui` and other libraries);
+- The form is fully functional, including title, verification, event, unit, help, description, `array`, etc.;
+- Flexible and convenient logic control（support [dynamic analysis](https://chengaohe45.github.io/vue-easy-form-docs/dist/base/parse.html)）
 
-### Node 版本要求
-[Node.js](https://nodejs.org/en/) >= 8.11; 若需要升级；可使用[nvm](https://github.com/nvm-sh/nvm) 或 [nvm-windows](https://github.com/coreybutler/nvm-windows) 进行多个 Node 版本管理。
+## Documentation and source code
+Check out our docs at [https://chengaohe45.github.io/vue-easy-form-docs/dist/](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
+Check out our source code at [https://github.com/chengaohe45/vue-easy-form](https://github.com/chengaohe45/vue-easy-form)
 
-
-### 项目信息
-[esForm文档](https://chengaohe45.github.io/vue-easy-form-docs/dist/)  
-[esForm源码](https://github.com/chengaohe45/vue-easy-form)
-
+## Quick Start
 ### Install
 ```
-npm install
+npm install --save vue-easy-form
 ```
 
-### Compiles and hot-reloads for development
+### import and Register
 ```
-npm run serve
-npm run dev
+import esForm from "vue-easy-form";
+
+Vue.use(esForm);
 ```
 
-### Compiles and minifies for production
-```
-npm run build
+### Usage
+```html
+<template>
+  <es-form :schema="formSchema" v-model="formValue"></es-form>
+</template>
+<script>
+  export default {
+    data() {
+      return {
+        formSchema: {
+          name: {
+            label: "nameLabel",
+            component: "el-input",
+            value: "nameText"
+          },
+          author: "authorLabel"
+        },
+        formValue: {}
+      };
+    }
+  };
+</script>
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-## 目录结构
-本项目包含`esForm框架源码`和`实例源码`，其中`esForm框架源码`独立存在于`/src/package`文件夹中。整个项目具体结构如下：
-
-```js
-├── dist                       # 构建相关
-├── public                     # 编译资源
-│   │── favicon.ico            # favicon图标
-│   └── index.html             # html模板
-├── src                        # 源代码
-│   ├── assets                 # 静态资源
-│   ├── components             # 全局公用组件
-│   ├── libs                   # 工具类
-│   ├── package                # 独立的esform源码，不依赖其它文件夹
-│   ├── router                 # 菜单配置和路由实现
-│   ├── static                 # 全局样式
-│   ├── views                  # 页面视图，demo就存在于此
-│   ├── App.vue                # vue入口组件
-│   ├── main.js                # 入口文件
-├── tests                      # 测试模块
-├── .eslintrc.js               # eslint配置项
-├── .gitignore                 # git忽略文件
-├── vue.config.js              # vue-cli3脚手架配置
-├── postcss.config.js          # postcss配置
-├── README.md                  # readme文件
-└── package.json               # package.json安装依赖
-```
+## References
+- [ncform](https://github.com/ncform/ncform)

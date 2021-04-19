@@ -1,0 +1,80 @@
+
+
+.page .content:not(.custom),.page .content__default:not(.custom),.page .page-edit, .page .page-nav{
+    max-width: 880px;
+}
+
+.divider-line {
+    margin: 0; 
+    padding: 0; 
+    border-top: 1px solid #47494c;
+}
+
+.divider-line + .extra-class {
+    border-radius: 0;
+}
+
+.divider-line + .extra-class > pre{
+    border-radius: 0;
+}
+
+// 覆盖一下样式，因为被vuepress>table影响了
+.el-year-table {
+display: table;
+
+tr {
+    border-top: none;
+}
+td, th {
+    border: none;
+}
+
+}
+
+.el-date-table {
+margin: 0;
+display: table;
+border-collapse: separate;
+border-spacing: 0;
+border: none;
+
+td {
+    border: none;
+}
+
+th {
+    border: none;
+    border-bottom-width: 1px;
+}
+
+tr:nth-child(2n) {
+    background-color: transparent;
+}
+}
+
+.es-form-array-table {
+
+table {
+    margin: 0;
+    display: table;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: none;
+}
+
+td {
+    border: none;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    }
+
+    th {
+    border: none;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    }
+
+tr:nth-child(2n) {
+    background-color: transparent;
+}
+}

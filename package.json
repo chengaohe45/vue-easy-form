@@ -19,6 +19,8 @@
     "test:unit": "vue-cli-service test:unit",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
+    "cn:dev": "vuepress dev docs-cn",
+    "cn:build": "vuepress build docs-cn",
     "v:dev": "vuepress dev docs version",
     "v:build": "vuepress build docs version"
   },
