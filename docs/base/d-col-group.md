@@ -5,7 +5,7 @@
 propName: {
   label: "姓名",
   component: "el-input",
-  col: 24,        // 所占列数(宽度)；一行分为24列
+  col: 24,        // 所占列数(宽度)；一行分为24列；也可写{ width, minWidth, maxWidth }v1.8.2
   group: "date",  // 分组；任意字符串
   direction: "h", // 排版方向；direction值："h"、"v"
 
@@ -56,17 +56,34 @@ propName: {
               layout: "space",  // 占位空间，没有值
               col: 1
             },
-            url: {
-              label: "链接地址",
+            url1: {
+              label: "链接地址1",
               component: {
                 name: "el-input",
                 props: {
-                  placeholder: "col=12：占12列"
+                  placeholder: "占12列，但至少300px"
                 }
               },
               value: "",
               desc: "前面有个占位空间，所以我掉下来了",
-              col: 12
+              col: {
+                minWidth: "300px",
+                width: "50%"
+              }
+            },
+            url2: {
+              label: "链接地址2",
+              component: {
+                name: "el-input",
+                props: {
+                  placeholder: "占12列，但至少300px"
+                }
+              },
+              value: "",
+              col: {
+                minWidth: "300px",
+                width: "50%"
+              }
             },
             startTime: {
               label: {
@@ -124,8 +141,15 @@ propName: {
 | 属性名 | 说明 | 类型 | 可选值| 默认值 | 备注
 | -- | -- | -- | -- | -- | --
 | hidden | 是否隐藏此项 | boolean | -- | false | 支持[动态解析](./parse.md)
-| col | 列数(宽度) | number | 1到24 | 24 | 一行分24列
+| col | 列数(宽度) | number<br/>{ width, minWidth, maxWidth } | 1到24 | 24 | `number`：一行分24列；<br/>`对象`<badge text="1.8.2" />：单位只支持`px`和`%`
 | group | 项与项进行分组 | string | -- | -- | --
+
+::: warning col
+当`col`设置为一个`对象`时:
+- 其单位因为涉及到计算，目前只支持`px`和`%`；
+- 当此层级出一个col为对象时，此层级项的[rowSpace](./ui.md)将无效，统一用父节点的rowSpace（也就是这一层用父节点的[ui.rowSpace](./ui.md)）；
+- 主要用于`条件查询框`，因为查询框界面一般有限，需要动态变化。
+:::
 
 ### 分组/group
 分组是指两个或两个以上的项合成一个总长度，减去label、unit、help所占用的空间，剩下的空间平均分配给每项的组件。

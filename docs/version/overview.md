@@ -12,6 +12,9 @@
 </div>
 
 ## 当前版本记录
+### 1.8.2
+- [长度](../base/d-col-group.md)增加`最大/最小`写法.
+- 优化[tabs](../base/tabs.md#实例)布局.
 
 ### 1.8.1
 - [组件事件](../base/com-format.md#组件事件)增加`true`写法.

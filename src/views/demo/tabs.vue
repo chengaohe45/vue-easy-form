@@ -152,7 +152,7 @@ export default {
               text: "作者",
               help: "我在label里面"
             },
-            col: 20,
+            col: 20,  // 注意我的长度
             component: {
               name: "el-input",
               props: {
