@@ -260,15 +260,11 @@ export default {
           componentOptions && componentOptions.Ctor.options.props
             ? componentOptions.Ctor.options.props
             : false;
-        if (
-          comProps &&
-          Object.keys(comProps).length &&
-          Object.keys(configProps).length
-        ) {
-          var comPropsKeys = Object.keys(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-          for (var key in configProps) {
+        if (Object.keys(newProps || {}).length) {
+          var comPropsKeys = Object.keys(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
+          for (var key in newProps) {
             if (!comPropsKeys.includes(key)) {
-              dataAttrs[key] = configProps[key];
+              dataAttrs[key] = newProps[key];
             }
           }
           if (vnode.data) {
