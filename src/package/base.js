@@ -267,9 +267,17 @@ export default {
               dataAttrs[key] = newProps[key];
             }
           }
-          if (vnode.data) {
-            vnode.data.attrs = dataAttrs;
+          // if (config.name === "g-test-com") {
+          //   console.log("dataAttrs", utils.deepCopy(dataAttrs));
+          //   console.log("1 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
+          //   console.log("newProps", utils.deepCopy(newProps));
+          // }
+          if (vnode.data && Object.keys(dataAttrs).length > 0) {
+            vnode.data.attrs = Object.assign(dataAttrs, vnode.data.attrs || {});
           }
+          // if (config.name === "g-test-com") {
+          //   console.log("2 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
+          // }
         }
 
         newAttrs = null;
