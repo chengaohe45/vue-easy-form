@@ -207,7 +207,7 @@ export default {
 
         let emitOn, nativeOn, scopedSlots, tmpRef;
         if (!isSlotCom) {
-          // 内容组件，非插槽组件: 因为常用，所以计算好
+          // 内容组件，非插槽组件: 因为常用，所以计算好(为什么这里要弄一个副本，因为this.$data.emitOn直接赋值于createElement事件on中，在初化时会执行两次，具体原因估计看vue的实现方式)
           emitOn = this.$data.emitOn ? Object.assign({}, this.$data.emitOn) : null;
           nativeOn = this.$data.nativeOn ? Object.assign({}, this.$data.nativeOn) : null;
           scopedSlots = this.$data.scopedSlots;
