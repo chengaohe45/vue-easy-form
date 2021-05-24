@@ -208,8 +208,8 @@ export default {
         let emitOn, nativeOn, scopedSlots, tmpRef;
         if (!isSlotCom) {
           // 内容组件，非插槽组件: 因为常用，所以计算好
-          emitOn = this.$data.emitOn;
-          nativeOn = this.$data.nativeOn;
+          emitOn = this.$data.emitOn ? Object.assign({}, this.$data.emitOn) : null;
+          nativeOn = this.$data.nativeOn ? Object.assign({}, this.$data.nativeOn) : null;
           scopedSlots = this.$data.scopedSlots;
         } else {
           // 很少用，且scopedSlots有可能包含函数，必须实时解析
@@ -267,7 +267,7 @@ export default {
               dataAttrs[key] = newProps[key];
             }
           }
-          // if (config.name === "g-test-com") {
+          // if (config.name === "el-input") {
           //   console.log("dataAttrs", utils.deepCopy(dataAttrs));
           //   console.log("1 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
           //   console.log("newProps", utils.deepCopy(newProps));
