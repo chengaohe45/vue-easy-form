@@ -4111,12 +4111,12 @@ __webpack_require__("7a56")('RegExp');
 "use strict";
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("4917");
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("28a5");
@@ -4125,23 +4125,11 @@ __webpack_require__("7a56")('RegExp');
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("6762");
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("cadf");
-/* harmony import */ var core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_array_iterator__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("551c");
-/* harmony import */ var core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_promise__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("f751");
-/* harmony import */ var core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_object_assign__WEBPACK_IMPORTED_MODULE_11__);
-/* harmony import */ var core_js_modules_es7_promise_finally__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__("097d");
-/* harmony import */ var core_js_modules_es7_promise_finally__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_promise_finally__WEBPACK_IMPORTED_MODULE_12__);
-/* harmony import */ var _parse__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__("5f60");
-/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__("890a");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__("4513");
-
-
-
-
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _parse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("5f60");
+/* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("890a");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("4513");
 
 
 
@@ -4168,7 +4156,7 @@ var formUtils = {
    * 判断值是否为空, 以下几种情况都认为是空值
    */
   isEmpty: function isEmpty(value) {
-    if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(value) && E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(value) && value.length <= 0) {
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
       return true;
     }
 
@@ -4194,7 +4182,7 @@ var formUtils = {
     var hasIdxChainChanged = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
     if (propItem.array) {
-      if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(value)) {
+      if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value)) {
         var hasChanged = false;
         var schemaList = propItem.__propSchemaList;
 
@@ -4242,7 +4230,7 @@ var formUtils = {
 
       propItem.component.value = tmpValue;
     } else if (propItem.properties) {
-      if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(value)) {
+      if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value)) {
         for (var key in propItem.properties) {
           if (value.hasOwnProperty(key)) {
             this.__setValue(propItem.properties[key], value[key], hasIdxChainChanged);
@@ -4266,7 +4254,7 @@ var formUtils = {
 
     for (var key in schema) {
       if (!excludeKeys.includes(key)) {
-        newItem[key] = _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].deepCopy(schema[key]);
+        newItem[key] = _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].deepCopy(schema[key]);
       }
     }
 
@@ -4274,12 +4262,12 @@ var formUtils = {
       newItem.__invalidMsg = false;
     }
 
-    if (!_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isUndef(schema.array.subLabel)) {
-      newItem.subLabel = _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].deepCopy(schema.array.subLabel); // newItem.__invalidMsg = false;
+    if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(schema.array.subLabel)) {
+      newItem.subLabel = _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].deepCopy(schema.array.subLabel); // newItem.__invalidMsg = false;
     } // console.log("schema.layout.name == constant.LAYOUT_TABS：", schema.layout.name == constant.LAYOUT_TABS);
 
 
-    if (schema.layout && schema.layout.name == _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_TABS) {
+    if (schema.layout && schema.layout.name == _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_TABS) {
       newItem.__tabsIndex = false;
     } // newItem.array不可有此值
 
@@ -4289,8 +4277,8 @@ var formUtils = {
     } // 取出delMsg给每一项
 
 
-    newItem.delMsg = _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].deepCopy(schema.array.delMsg);
-    newItem.delWarnBtns = _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].deepCopy(schema.array.delWarnBtns);
+    newItem.delMsg = _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].deepCopy(schema.array.delMsg);
+    newItem.delWarnBtns = _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].deepCopy(schema.array.delWarnBtns);
 
     if (insertInfo) {
       this.__setValue(newItem, insertInfo.value);
@@ -4394,10 +4382,10 @@ var formUtils = {
     var targetSchema = this.__getSchemaByKey(schema, pathKey);
 
     if (targetSchema) {
-      if (targetSchema.layout && targetSchema.layout.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_TABS) {
+      if (targetSchema.layout && targetSchema.layout.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_TABS) {
         // 一般tabs
         return targetSchema.__tabsIndex;
-      } else if (targetSchema.array && targetSchema.array.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].ARRAY_TABS) {
+      } else if (targetSchema.array && targetSchema.array.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].ARRAY_TABS) {
         // 数组tabs
         return targetSchema.__tabsIndex;
       } else {
@@ -4440,15 +4428,15 @@ var formUtils = {
         // 一般tabs
         targetSchema.__tabsIndex = index;
 
-        if (targetSchema.array && targetSchema.array.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].ARRAY_TABS) {
+        if (targetSchema.array && targetSchema.array.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].ARRAY_TABS) {
           // 数组tabs
-          if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNum(index)) {
+          if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNum(index)) {
             if (targetSchema.__propSchemaList[index].__hasError) {
               targetSchema.__propSchemaList[index].__hasError = false;
             }
           } else {// array tabs要是整数
           }
-        } else if (targetSchema.layout && targetSchema.layout.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_TABS) {
+        } else if (targetSchema.layout && targetSchema.layout.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_TABS) {
           if (targetSchema.properties[index].__hasError) {
             targetSchema.properties[index].__hasError = false;
           }
@@ -4467,9 +4455,9 @@ var formUtils = {
   __isRightTabsIndex: function __isRightTabsIndex(targetSchema, index) {
     var nextSchema, key;
 
-    if (targetSchema.array && targetSchema.array.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].ARRAY_TABS) {
+    if (targetSchema.array && targetSchema.array.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].ARRAY_TABS) {
       // 数组tabs
-      if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNum(index)) {
+      if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNum(index)) {
         var newIndex = Math.floor(index);
 
         if (newIndex === index && newIndex >= 0 && newIndex < targetSchema.__propSchemaList.length) {
@@ -4477,7 +4465,7 @@ var formUtils = {
         }
       } else {// array tabs要是整数
       }
-    } else if (targetSchema.layout && targetSchema.layout.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_TABS) {
+    } else if (targetSchema.layout && targetSchema.layout.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_TABS) {
       // 一般tabs
       for (key in targetSchema.properties) {
         nextSchema = targetSchema.properties[key];
@@ -4508,7 +4496,7 @@ var formUtils = {
    * @param {*} pathKey 必须存在键名：如name 或name[0]; 单独[0]是不允许的，会返回false
    */
   __getSchemaByKey: function __getSchemaByKey(schema, pathKey) {
-    if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isStr(pathKey)) {
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(pathKey)) {
       if (!pathKey) {
         return schema;
       }
@@ -4537,7 +4525,7 @@ var formUtils = {
           if (arrayItemKeys) {
             realKey = arrayItemKeys[1];
 
-            var realIndex = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
+            var realIndex = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
 
 
             curPropItem = curProperties[realKey]; //取出下级继续扫描
@@ -4616,7 +4604,7 @@ var formUtils = {
       if (targetSchema.component) {
         if (targetSchema.array) {
           //是组件数组
-          if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(value) || _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNull(value)) {
+          if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value)) {
             //直接设置array的值
             this.setValue(targetSchema, value ? value : []);
           }
@@ -4635,13 +4623,13 @@ var formUtils = {
       } else if (targetSchema.properties) {
         if (targetSchema.array) {
           // 是数组赋值
-          if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(value) || _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNull(value)) {
+          if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value)) {
             //直接设置array的值
             this.setValue(targetSchema, value ? value : []);
           }
         } else {
           // properties赋值
-          if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(value)) {
+          if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value)) {
             this.setValue(targetSchema, value);
           }
         }
@@ -4726,7 +4714,7 @@ var formUtils = {
    * @param {*} formData 表单的内部值
    */
   getFormValue: function getFormValue(schema, baseParseSources) {
-    if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(baseParseSources.rootData)) {
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(baseParseSources.rootData)) {
       var resultValue = this.__getValue(schema, baseParseSources);
 
       return this.__tileResultValue(schema, resultValue);
@@ -4746,7 +4734,7 @@ var formUtils = {
     var baseParseSources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var isParentHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -4801,7 +4789,7 @@ var formUtils = {
         for (var key in propItem.properties) {
           var nextPropItem = propItem.properties[key]; // 占位空间，不需要取出；往下取
 
-          if (nextPropItem.layout && nextPropItem.layout.name === _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_SPACE) {
+          if (nextPropItem.layout && nextPropItem.layout.name === _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_SPACE) {
             continue;
           } else if (formData && nextPropItem.isTmp) {
             // 是取表单数据且是临时值
@@ -4816,8 +4804,8 @@ var formUtils = {
             newValue[key] = keyValue;
           } else {
             // 说明是取表单用户数据且隐藏
-            if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isUndef(nextPropItem.hdValue)) {// ...说明是不取出
-            } else if (!_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNull(nextPropItem.hdValue)) {
+            if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(nextPropItem.hdValue)) {// ...说明是不取出
+            } else if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(nextPropItem.hdValue)) {
               // ...直接返回
               if (nextPropItem.format) {
                 // 不是最终取值，或没有格式转换
@@ -4853,7 +4841,7 @@ var formUtils = {
         // 表单外部的值转换为表单内部的值
         var curEmum, i;
 
-        if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(format)) {
+        if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(format)) {
           // 数组，说明是枚举转换
           for (i = 0; i < format.length; i++) {
             curEmum = format[i];
@@ -4862,13 +4850,13 @@ var formUtils = {
               return curEmum.inner;
             }
           }
-        } else if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isFunc(format.outer)) {
+        } else if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isFunc(format.outer)) {
           // 有外部转换函数
           return format.outer(curVal);
         }
       } else {
         // 表单内部的值转换为表单外部的值
-        if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(format)) {
+        if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(format)) {
           // 数组，说明是枚举转换
           for (i = 0; i < format.length; i++) {
             curEmum = format[i];
@@ -4877,7 +4865,7 @@ var formUtils = {
               return curEmum.outer;
             }
           }
-        } else if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isFunc(format.inner)) {
+        } else if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isFunc(format.inner)) {
           // 有内部转换函数
           return format.inner(curVal);
         }
@@ -4887,7 +4875,7 @@ var formUtils = {
     return curVal;
   },
   clearErrorMsg: function clearErrorMsg(propItem) {
-    if (!_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isUndef(propItem.__invalidMsg)) {
+    if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(propItem.__invalidMsg)) {
       propItem.__invalidMsg = false;
     }
 
@@ -4921,7 +4909,7 @@ var formUtils = {
     var sum = 0;
     var isHidden, listLen, schemaList, i;
 
-    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -4930,7 +4918,7 @@ var formUtils = {
     if (propItem.component) {
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(propItem.__rawHidden, parseSources);
+        isHidden = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(propItem.__rawHidden, parseSources);
 
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
@@ -4986,7 +4974,7 @@ var formUtils = {
         } // 是数组array-tabs, 调整索引
 
 
-        if (propItem.array.name == _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].ARRAY_TABS) {
+        if (propItem.array.name == _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].ARRAY_TABS) {
           listLen = propItem.__propSchemaList.length;
 
           if (listLen > 0) {
@@ -5025,7 +5013,7 @@ var formUtils = {
     } else if (propItem.properties) {
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(propItem.__rawHidden, parseSources);
+        isHidden = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(propItem.__rawHidden, parseSources);
 
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
@@ -5090,7 +5078,7 @@ var formUtils = {
         } // 是数组tabs, 调整索引
 
 
-        if (propItem.array.name == _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].ARRAY_TABS) {
+        if (propItem.array.name == _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].ARRAY_TABS) {
           listLen = propItem.__propSchemaList.length;
 
           if (listLen > 0) {
@@ -5120,7 +5108,7 @@ var formUtils = {
       } else {
         var nextPropItem, key;
 
-        if (propItem.layout && propItem.layout.name == _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_TABS) {
+        if (propItem.layout && propItem.layout.name == _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_TABS) {
           // 是普通tabs
           for (key in propItem.properties) {
             nextPropItem = propItem.properties[key];
@@ -5196,7 +5184,7 @@ var formUtils = {
                   //组不隐藏
                   sum += nextPropItem.__groupCol;
 
-                  if (sum <= _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].UI_MAX_COL) {
+                  if (sum <= _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].UI_MAX_COL) {
                     //还在第一行
                     newRowSpace = 0;
                   } else {
@@ -5224,17 +5212,17 @@ var formUtils = {
                 }
               } else {
                 //正常成员
-                var nextParseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+                var nextParseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
                 nextParseSources.index = nextPropItem.__info.index;
                 nextParseSources.idxChain = nextPropItem.__info.idxChain;
                 nextParseSources.pathKey = nextPropItem.__info.pathKey;
-                isHidden = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(nextPropItem.__rawHidden, nextParseSources); // console.log(nextPropItem.col, isHidden);
+                isHidden = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(nextPropItem.__rawHidden, nextParseSources); // console.log(nextPropItem.col, isHidden);
 
                 if (!isHidden) {
                   sum += nextPropItem.col;
 
-                  if (sum <= _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].UI_MAX_COL) {
+                  if (sum <= _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].UI_MAX_COL) {
                     //还在第一行
                     newRowSpace = 0;
                   } else {
@@ -5292,7 +5280,7 @@ var formUtils = {
       // 占位空间等
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(propItem.__rawHidden, parseSources);
+        isHidden = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(propItem.__rawHidden, parseSources);
 
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
@@ -5317,12 +5305,12 @@ var formUtils = {
       style.marginTop = rowSpace + "px";
     }
 
-    if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isNum(col)) {
-      var width = Math.floor(col * 1000000 / _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].UI_MAX_COL) / 10000;
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNum(col)) {
+      var width = Math.floor(col * 1000000 / _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].UI_MAX_COL) / 10000;
       width += "%";
       style.width = width;
     } else {
-      style = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(style, col);
+      style = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(style, col);
     }
 
     propItem.__style = style;
@@ -5348,7 +5336,7 @@ var formUtils = {
 
 
     if (component.__rawHidden) {
-      isHidden = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(component.__rawHidden, parseSources);
+      isHidden = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(component.__rawHidden, parseSources);
 
       if (component.hidden != isHidden) {
         component.hidden = isHidden;
@@ -5366,7 +5354,7 @@ var formUtils = {
 
         for (var key in rawProps) {
           if (!staticPropNames.includes(key)) {
-            text = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(rawProps[key], parseSources);
+            text = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(rawProps[key], parseSources);
           } else {
             text = rawProps[key];
           }
@@ -5384,7 +5372,7 @@ var formUtils = {
 
         for (var i = 0; i < rawDirectives.length; i++) {
           var rawDirective = rawDirectives[i];
-          value = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(rawDirective.value, parseSources);
+          value = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(rawDirective.value, parseSources);
 
           if (value !== curDirectives[i].value) {
             curDirectives[i].value = value;
@@ -5394,7 +5382,7 @@ var formUtils = {
 
 
       if (component.__rawStyle) {
-        style = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(component.__rawStyle, parseSources);
+        style = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(component.__rawStyle, parseSources);
 
         if (style !== component.style) {
           component.style = style;
@@ -5403,7 +5391,7 @@ var formUtils = {
 
 
       if (component.__rawClass) {
-        className = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(component.__rawClass, parseSources);
+        className = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(component.__rawClass, parseSources);
 
         if (className !== component.class) {
           component.class = className;
@@ -5412,8 +5400,8 @@ var formUtils = {
 
 
       if (component.__rawText) {
-        text = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(component.__rawText, parseSources);
-        text = _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].toComText(text);
+        text = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(component.__rawText, parseSources);
+        text = _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].toComText(text);
 
         if (text !== component.text) {
           component.text = text;
@@ -5427,12 +5415,12 @@ var formUtils = {
         for (var slotName in scopedSlots) {
           var values = scopedSlots[slotName];
 
-          if (!_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isArr(value)) {
+          if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value)) {
             values = [values];
           }
 
           values.forEach(function (value) {
-            if (!_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isVNode(value) && _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(value)) {
+            if (!_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isVNode(value) && _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value)) {
               // 是组件，解析
               _this2.__esParseComponent(value, parseSources);
             }
@@ -5443,8 +5431,8 @@ var formUtils = {
     } else {
       // 没name, toNormalText解析text
       if (component.__rawText) {
-        text = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(component.__rawText, parseSources);
-        text = _utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].toNormalText(text);
+        text = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(component.__rawText, parseSources);
+        text = _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].toNormalText(text);
 
         if (text !== component.text) {
           component.text = text;
@@ -5467,13 +5455,13 @@ var formUtils = {
       var fieldKeyName = groups[i];
       var propSchema = propItem.properties[fieldKeyName];
 
-      if (!propSchema.layout || propSchema.layout.name !== _constant__WEBPACK_IMPORTED_MODULE_14__[/* default */ "a"].LAYOUT_SPACE) {
-        var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+      if (!propSchema.layout || propSchema.layout.name !== _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_SPACE) {
+        var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
         parseSources.index = propSchema.__info.index;
         parseSources.idxChain = propSchema.__info.idxChain;
         parseSources.pathKey = propSchema.__info.pathKey;
-        result = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(propSchema.__rawHidden, parseSources); // console.log("fieldKeyName: " + fieldKeyName, result);
+        result = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(propSchema.__rawHidden, parseSources); // console.log("fieldKeyName: " + fieldKeyName, result);
       } else {
         //占位空间是不可见的
         result = true;
@@ -5495,7 +5483,7 @@ var formUtils = {
   __esParseRules: function __esParseRules(rules, parseSources) {
     // 是否必须
     if (rules.__rawRequired) {
-      var isRequired = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(rules.__rawRequired, parseSources);
+      var isRequired = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(rules.__rawRequired, parseSources);
 
       if (rules.required != isRequired) {
         rules.required = isRequired;
@@ -5504,7 +5492,7 @@ var formUtils = {
 
 
     if (rules.__rawStyle) {
-      var style = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(rules.__rawStyle, parseSources);
+      var style = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(rules.__rawStyle, parseSources);
 
       if (style !== rules.style) {
         rules.style = style;
@@ -5513,7 +5501,7 @@ var formUtils = {
 
 
     if (rules.__rawClass) {
-      var className = _parse__WEBPACK_IMPORTED_MODULE_13__[/* default */ "a"].smartEsValue(rules.__rawClass, parseSources);
+      var className = _parse__WEBPACK_IMPORTED_MODULE_9__[/* default */ "a"].smartEsValue(rules.__rawClass, parseSources);
 
       if (className !== rules.class) {
         rules.class = className;
@@ -5528,10 +5516,10 @@ var formUtils = {
    */
   perfectTileValue: function perfectTileValue(schema, value) {
     if (schema.autoMatch && value) {
-      if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isStr(value)) {
+      if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value)) {
         // 是key
         return this.__perfectTileKey(schema, value);
-      } else if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(value)) {
+      } else if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value)) {
         // 是key-value
         var newValue = {};
 
@@ -5547,7 +5535,7 @@ var formUtils = {
             var second = paths[1];
 
             if (newValue[firstKey]) {// newValue[firstKey][second] = value[second];
-            } else if (_utils__WEBPACK_IMPORTED_MODULE_15__[/* default */ "a"].isObj(value[firstKey])) {
+            } else if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value[firstKey])) {
               // 重复设值
               newValue[firstKey] = value[firstKey];
             } else {
@@ -5615,7 +5603,7 @@ var formUtils = {
         var nextSchema = firstPropSchema[key];
 
         if (nextSchema.properties && !nextSchema.array) {
-          newValue = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
+          newValue = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
         } else {
           newValue[key] = value[key];
         }
@@ -5727,12 +5715,12 @@ exports.features = {};
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("6b54");
 /* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("a481");
@@ -6063,7 +6051,7 @@ var utils = {
         // 一对一保存; 先保存索引地址，下一级的deep可能会用到
         rawRefs.push(data); // 冻结这一层
 
-        E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
 
         for (var i = 0; i < data.length; ++i) {
           this.__deepFreeze(data[i], rawRefs); // 继续走下一级
@@ -6078,7 +6066,7 @@ var utils = {
         // 一对一保存; 先保存索引地址，下一级的deep可能会用到
         rawRefs.push(data); // 冻结这一层
 
-        E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
 
         for (var key in data) {
           this.__deepFreeze(data[key], rawRefs);
@@ -6101,7 +6089,7 @@ var utils = {
       arr.forEach(function (item) {
         tmpObj[item] = 1;
       });
-      newArr = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
+      newArr = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
     }
 
     return newArr;
@@ -10540,8 +10528,8 @@ module.exports = function (C, x) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
-/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
+/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d23b");
 /* harmony import */ var _libs_schema_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("34bc");
 /* harmony import */ var _libs_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("4513");
@@ -10562,7 +10550,7 @@ var install = function install(Vue) {
 
   _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].initVue(Vue);
 
-  if (E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
+  if (_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
     _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].mergeGlobal(_libs_global_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"], globalOpts); // console.log(esGlobal);
   } // Vue.component(esConstant.HELP_NAME, esHelp);
   // Vue.component("es-base", esBase);
@@ -10582,7 +10570,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.8.2" : "??",
+  version: typeof process != "undefined" ? "1.8.3" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
@@ -10987,18 +10975,6 @@ var es6_string_includes = __webpack_require__("2fdb");
 
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.regexp.split.js
 var es6_regexp_split = __webpack_require__("28a5");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
-var es7_promise_finally = __webpack_require__("097d");
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/form-item.vue?vue&type=template&id=50cb9797&
 var form_itemvue_type_template_id_50cb9797_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-item"},[(_vm.needHeader)?_c('div',{class:['es-form-header', _vm.schema.ui ? 'es-form-' + _vm.schema.ui.type : '']},[(_vm.schema.title && !_vm.schema.title.hidden)?_c('div',{class:['es-form-title', 'es-title-l' + _vm.schema.title.__level]},[(!_vm.schema.title.name)?_c('span',[_vm._v("\n        "+_vm._s(_vm.schema.title.text)+"\n      ")]):_c('es-base',{attrs:{"config":_vm.schema.title,"info":_vm.schema.__info}}),(_vm.schema.title.help && !_vm.schema.title.help.hidden)?_c('div',{staticClass:"es-form-label-help"},[_c('es-base',{attrs:{"config":_vm.schema.title.help,"info":_vm.schema.__info}})],1):_vm._e()],1):_c('div',{staticClass:"es-form-title es-title-empty"},[_vm._v(" ")]),(_vm.schema.ui && _vm.schema.ui.__hasToggle)?_c('div',{staticClass:"es-more-btn",on:{"click":_vm.toggleBody}},[_vm._v("\n      "+_vm._s(_vm.schema.ui.showBody
@@ -11441,9 +11417,9 @@ var component_utils = __webpack_require__("45ac");
         var emitOn, nativeOn, scopedSlots, tmpRef;
 
         if (!isSlotCom) {
-          // 内容组件，非插槽组件: 因为常用，所以计算好
-          emitOn = this.$data.emitOn;
-          nativeOn = this.$data.nativeOn;
+          // 内容组件，非插槽组件: 因为常用，所以计算好(为什么这里要弄一个副本，因为this.$data.emitOn直接赋值于createElement事件on中，在初化时会执行两次，具体原因估计看vue的实现方式)
+          emitOn = this.$data.emitOn ? assign_default()({}, this.$data.emitOn) : null;
+          nativeOn = this.$data.nativeOn ? assign_default()({}, this.$data.nativeOn) : null;
           scopedSlots = this.$data.scopedSlots;
         } else {
           // 很少用，且scopedSlots有可能包含函数，必须实时解析
@@ -11488,19 +11464,27 @@ var component_utils = __webpack_require__("45ac");
         var dataAttrs = {};
         var comProps = componentOptions && componentOptions.Ctor.options.props ? componentOptions.Ctor.options.props : false;
 
-        if (comProps && keys_default()(comProps).length && keys_default()(configProps).length) {
-          var comPropsKeys = keys_default()(comProps); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
+        if (keys_default()(newProps || {}).length) {
+          var comPropsKeys = keys_default()(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
 
 
-          for (var key in configProps) {
+          for (var key in newProps) {
             if (!comPropsKeys.includes(key)) {
-              dataAttrs[key] = configProps[key];
+              dataAttrs[key] = newProps[key];
             }
-          }
+          } // if (config.name === "el-input") {
+          //   console.log("dataAttrs", utils.deepCopy(dataAttrs));
+          //   console.log("1 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
+          //   console.log("newProps", utils.deepCopy(newProps));
+          // }
 
-          if (vnode.data) {
-            vnode.data.attrs = dataAttrs;
-          }
+
+          if (vnode.data && keys_default()(dataAttrs).length > 0) {
+            vnode.data.attrs = assign_default()(dataAttrs, vnode.data.attrs || {});
+          } // if (config.name === "g-test-com") {
+          //   console.log("2 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
+          // }
+
         }
 
         newAttrs = null;
@@ -17775,10 +17759,6 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
 /* harmony default export */ var components_console = (console_component.exports);
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js??ref--12-0!./node_modules/thread-loader/dist/cjs.js!./node_modules/babel-loader/lib!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=script&lang=js&
-
-
-
-
 
 
 
