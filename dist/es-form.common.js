@@ -11459,9 +11459,18 @@ var component_utils = __webpack_require__("45ac");
           var comPropsKeys = keys_default()(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
 
 
-          for (var key in newProps) {
+          var key;
+
+          for (key in newProps) {
             if (!comPropsKeys.includes(key)) {
               dataAttrs[key] = newProps[key];
+            }
+          } // newAttrs要在newProps后处理，因为在vnode.data.attrs要保留newAttrs的值
+
+
+          for (key in newAttrs) {
+            if (!comPropsKeys.includes(key)) {
+              dataAttrs[key] = newAttrs[key];
             }
           } // if (config.name === "el-input") {
           //   console.log("dataAttrs", utils.deepCopy(dataAttrs));
@@ -11470,8 +11479,8 @@ var component_utils = __webpack_require__("45ac");
           // }
 
 
-          if (vnode.data && keys_default()(dataAttrs).length > 0) {
-            vnode.data.attrs = assign_default()(dataAttrs, vnode.data.attrs || {});
+          if (vnode.data) {
+            vnode.data.attrs = dataAttrs;
           } // if (config.name === "g-test-com") {
           //   console.log("2 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
           // }

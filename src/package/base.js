@@ -208,8 +208,12 @@ export default {
         let emitOn, nativeOn, scopedSlots, tmpRef;
         if (!isSlotCom) {
           // 内容组件，非插槽组件: 因为常用，所以计算好(为什么这里要弄一个副本，因为this.$data.emitOn直接赋值于createElement事件on中，在初化时会执行两次，具体原因估计看vue的实现方式)
-          emitOn = this.$data.emitOn ? Object.assign({}, this.$data.emitOn) : null;
-          nativeOn = this.$data.nativeOn ? Object.assign({}, this.$data.nativeOn) : null;
+          emitOn = this.$data.emitOn
+            ? Object.assign({}, this.$data.emitOn)
+            : null;
+          nativeOn = this.$data.nativeOn
+            ? Object.assign({}, this.$data.nativeOn)
+            : null;
           scopedSlots = this.$data.scopedSlots;
         } else {
           // 很少用，且scopedSlots有可能包含函数，必须实时解析
@@ -262,18 +266,26 @@ export default {
             : false;
         if (Object.keys(newProps || {}).length) {
           var comPropsKeys = Object.keys(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-          for (var key in newProps) {
+          var key;
+          for (key in newProps) {
             if (!comPropsKeys.includes(key)) {
               dataAttrs[key] = newProps[key];
             }
           }
+          // newAttrs要在newProps后处理，因为在vnode.data.attrs要保留newAttrs的值
+          for (key in newAttrs) {
+            if (!comPropsKeys.includes(key)) {
+              dataAttrs[key] = newAttrs[key];
+            }
+          }
+
           // if (config.name === "el-input") {
           //   console.log("dataAttrs", utils.deepCopy(dataAttrs));
           //   console.log("1 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
           //   console.log("newProps", utils.deepCopy(newProps));
           // }
-          if (vnode.data && Object.keys(dataAttrs).length > 0) {
-            vnode.data.attrs = Object.assign(dataAttrs, vnode.data.attrs || {});
+          if (vnode.data) {
+            vnode.data.attrs = dataAttrs;
           }
           // if (config.name === "g-test-com") {
           //   console.log("2 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
