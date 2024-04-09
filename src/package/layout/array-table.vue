@@ -9,8 +9,9 @@
         >
           序号
         </th>
+        <template v-for="(headerSchema, headerFieldName) in schema.properties">
         <th
-          v-for="(headerSchema, headerFieldName) in schema.properties"
+          v-if="schema.properties[headerFieldName].__rawHidden !== true"
           :key="headerFieldName"
           :style="headerSchema.__headStyle"
         >
@@ -73,6 +74,7 @@
             </span> -->
           </div>
         </th>
+        </template>
         <th
           class="es-btn-fixed"
           v-if="schema.array.hasDelete || schema.array.hasSort"
@@ -96,8 +98,9 @@
               >{{ index + 1 }}.</span
             >
           </td>
+          <template v-for="(fieldSchema, fieldName) in itemSchema.properties">
           <td
-            v-for="(fieldSchema, fieldName) in itemSchema.properties"
+            v-if="schema.properties[fieldName].__rawHidden !== true"
             :key="fieldName"
             :style="{
               padding: schema.array.rowSpace / 2 + 'px',
@@ -116,6 +119,7 @@
               ></slot>
             </es-object-table>
           </td>
+          </template>
           <td
             v-if="
               schema.array.hasDelete ||
