@@ -1262,6 +1262,7 @@ let schemaUtils = {
    */
   __parsePropRules: function(rules) {
     var tmpRawRequired = false,
+      tmpRawCanOnlyWarn = false,
       tmpCheckList = [];
     if (utils.isObj(rules)) {
       if (rules.check) {
@@ -1296,6 +1297,15 @@ let schemaUtils = {
         tmpRawRequired = rules.required;
       } else {
         tmpRawRequired = false;
+      }
+
+      // 取出canOnlyWarn
+      if (parse.isEsOrFunc(rules.canOnlyWarn)) {
+        tmpRawCanOnlyWarn = parse.newEsFuncion(rules.canOnlyWarn);
+      } else if (utils.isBool(rules.canOnlyWarn)) {
+        tmpRawCanOnlyWarn = rules.canOnlyWarn;
+      } else {
+        tmpRawCanOnlyWarn = false;
       }
     } else if (utils.isBool(rules)) {
       tmpRawRequired = rules;
@@ -1334,6 +1344,14 @@ let schemaUtils = {
         newRules.__rawRequired = tmpRawRequired;
       } else {
         newRules.required = tmpRawRequired;
+      }
+
+      // 是动态，记录下来
+      if (utils.isFunc(tmpRawCanOnlyWarn)) {
+        newRules.canOnlyWarn = false; // 会动态解析
+        newRules.__rawCanOnlyWarn = tmpRawCanOnlyWarn;
+      } else {
+        newRules.canOnlyWarn = tmpRawCanOnlyWarn;
       }
 
       if (tmpCheckList.length > 0) {

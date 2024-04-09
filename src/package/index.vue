@@ -700,12 +700,13 @@ export default {
     },
 
     //检查整个表单
-    checkAll() {
-      var isValid = this.__checkProp(
+    checkAll(showOnlyWarn) {
+      var validResult = this.__checkProp(
         this.$data.formSchema,
-        this.$data.formSchema
+        this.$data.formSchema,
+        showOnlyWarn
       );
-      return isValid;
+      return validResult.isValid;
     },
 
     // 对外调用，发出提交事件
@@ -786,17 +787,18 @@ export default {
       });
     },
 
-    __checkProp(schema, rootSchema) {
+    __checkProp(schema, rootSchema, showOnlyWarn) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
       var isValid = true;
+      var hasErrMsg = false;
 
       //是否隐藏，隐藏就不用检查有效性了
       var isHidden = schema.hidden; // 省资源，不做es转
       if (isHidden) {
-        return isValid;
+        return { isValid, hasErrMsg };
       }
 
-      var validResult,
+      var rules, validResult,
         checkedResult,
         isTabs,
         tabsIndex,
@@ -806,14 +808,20 @@ export default {
         schemaList;
       if (schema.properties) {
         if (schema.array) {
-          if (schema.array.rules) {
+          rules = schema.array.rules || {}
+          if (rules) {
             arrayValue = formUtils.getValue(schema);
             checkedResult = this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              isValid = false;
+              if (!rules.canOnlyWarn || !showOnlyWarn) {
+                isValid = false;
+              } else {
+                // 当检查只显示错误信息
+              }
+              hasErrMsg = true;
             }
           }
 
@@ -824,10 +832,10 @@ export default {
           for (i = 0; i < schemaList.length; i++) {
             nextPropItem = schemaList[i];
 
-            validResult = this.__checkProp(nextPropItem, rootSchema);
+            validResult = this.__checkProp(nextPropItem, rootSchema, showOnlyWarn);
             if (isTabs) {
               // 父节点是tabs
-              if (!validResult && i !== tabsIndex) {
+              if (validResult.hasErrMsg && i !== tabsIndex) {
                 // 有错，tab是隐藏的
                 if (!nextPropItem.__hasError) {
                   nextPropItem.__hasError = true;
@@ -840,10 +848,18 @@ export default {
               }
             }
 
-            isValid = !isValid ? isValid : validResult;
+            rules = nextPropItem.rules || {}
+            if (validResult.hasErrMsg) {
+              hasErrMsg = true
+            }
+            if (!rules.canOnlyWarn || !showOnlyWarn) {
+              isValid = !isValid ? isValid : validResult.isValid;
+            } else {
+              // 当检查只显示错误信息
+            }
           }
 
-          if (!isValid && schema.ui && !schema.ui.showBody) {
+          if (hasErrMsg && schema.ui && !schema.ui.showBody) {
             // 有错 schema.title为null, 可能是ARRAY_TABS的item
             schema.ui.showBody = true;
           }
@@ -856,10 +872,10 @@ export default {
           for (var key in schema.properties) {
             nextPropItem = schema.properties[key];
 
-            validResult = this.__checkProp(nextPropItem, rootSchema);
+            validResult = this.__checkProp(nextPropItem, rootSchema, showOnlyWarn);
             if (isTabs) {
               // 父节点是tabs
-              if (!validResult && key !== tabsIndex) {
+              if (validResult.hasErrMsg && key !== tabsIndex) {
                 // 有错，tab是隐藏的
                 if (!nextPropItem.__hasError) {
                   nextPropItem.__hasError = true;
@@ -872,10 +888,18 @@ export default {
               }
             }
 
-            isValid = !isValid ? isValid : validResult;
+            rules = nextPropItem.rules || {}
+            if (validResult.hasErrMsg) {
+              hasErrMsg = true
+            }
+            if (!rules.canOnlyWarn || !showOnlyWarn) {
+              isValid = !isValid ? isValid : validResult.isValid;
+            } else {
+              // 当检查只显示错误信息
+            }
           }
 
-          if (!isValid && schema.title && !schema.title.showBody) {
+          if (hasErrMsg && schema.title && !schema.title.showBody) {
             // 有错
             schema.title.showBody = true;
           }
@@ -888,18 +912,30 @@ export default {
             schema.__invalidMsg = false;
           } else {
             schema.__invalidMsg = checkedResult;
-            isValid = false;
+            rules = schema.rules || {}
+            if (!rules.canOnlyWarn || !showOnlyWarn) {
+              isValid = false;
+            } else {
+              // 当检查只显示错误信息
+            }
+            hasErrMsg = true;
           }
         } else {
           // 是叶子，但也是数组
-          if (schema.array.rules) {
+          rules = schema.array.rules
+          if (rules) {
             arrayValue = formUtils.getValue(schema);
             checkedResult = this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              isValid = false;
+              if (!rules.canOnlyWarn || !showOnlyWarn) {
+                isValid = false;
+              } else {
+                // 当检查只显示错误信息
+              }
+              hasErrMsg = true;
             }
           }
 
@@ -910,10 +946,10 @@ export default {
           for (i = 0; i < schemaList.length; i++) {
             nextPropItem = schemaList[i];
 
-            validResult = this.__checkProp(nextPropItem, rootSchema);
+            validResult = this.__checkProp(nextPropItem, rootSchema, showOnlyWarn);
             if (isTabs) {
               // 父节点是tabs
-              if (!validResult && i !== tabsIndex) {
+              if (validResult.hasErrMsg && i !== tabsIndex) {
                 // 有错，tab是隐藏的
                 if (!nextPropItem.__hasError) {
                   nextPropItem.__hasError = true;
@@ -926,12 +962,20 @@ export default {
               }
             }
 
-            isValid = !isValid ? isValid : validResult;
+            rules = nextPropItem.rules || {}
+            if (validResult.hasErrMsg) {
+              hasErrMsg = true
+            }
+            if (!rules.canOnlyWarn || !showOnlyWarn) {
+              isValid = !isValid ? isValid : validResult.isValid;
+            } else {
+              // 当检查只显示错误信息
+            }
           }
         }
       }
       // parseSources = null;
-      return isValid;
+      return { isValid, hasErrMsg };
     },
 
     // 发出提交事件
