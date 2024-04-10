@@ -798,8 +798,9 @@ export default {
         return { isValid, hasErrMsg };
       }
 
-      var rules, validResult,
+      var validResult,
         checkedResult,
+        warnResult,
         isTabs,
         tabsIndex,
         nextPropItem,
@@ -808,15 +809,15 @@ export default {
         schemaList;
       if (schema.properties) {
         if (schema.array) {
-          rules = schema.array.rules || {}
-          if (rules) {
+          if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            checkedResult = this.__checkRules(schema, arrayValue, "");
+            warnResult = this.__execCheckWarn(schema, arrayValue, showOnlyWarn)
+            checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              if (!rules.canOnlyWarn || !showOnlyWarn) {
+              if (!warnResult.warn || !showOnlyWarn) {
                 isValid = false;
               } else {
                 // 当检查只显示错误信息
@@ -848,15 +849,15 @@ export default {
               }
             }
 
-            rules = nextPropItem.rules || {}
+            // rules = nextPropItem.rules || {}
             if (validResult.hasErrMsg) {
               hasErrMsg = true
             }
-            if (!rules.canOnlyWarn || !showOnlyWarn) {
-              isValid = !isValid ? isValid : validResult.isValid;
-            } else {
-              // 当检查只显示错误信息
-            }
+            // if (!rules.canOnlyWarn || !showOnlyWarn) {
+            isValid = !isValid ? isValid : validResult.isValid;
+            // } else {
+            //   // 当检查只显示错误信息
+            // }
           }
 
           if (hasErrMsg && schema.ui && !schema.ui.showBody) {
@@ -888,15 +889,15 @@ export default {
               }
             }
 
-            rules = nextPropItem.rules || {}
+            // rules = nextPropItem.rules || {}
             if (validResult.hasErrMsg) {
               hasErrMsg = true
             }
-            if (!rules.canOnlyWarn || !showOnlyWarn) {
+            // if (!rules.canOnlyWarn || !showOnlyWarn) {
               isValid = !isValid ? isValid : validResult.isValid;
-            } else {
-              // 当检查只显示错误信息
-            }
+            // } else {
+            //   // 当检查只显示错误信息
+            // }
           }
 
           if (hasErrMsg && schema.title && !schema.title.showBody) {
@@ -907,13 +908,13 @@ export default {
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = this.__checkRules(schema, schema.component.value, "");
+          warnResult = this.__execCheckWarn(schema, schema.component.value, showOnlyWarn)
+          checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, schema.component.value, "");
           if (checkedResult === true) {
             schema.__invalidMsg = false;
           } else {
             schema.__invalidMsg = checkedResult;
-            rules = schema.rules || {}
-            if (!rules.canOnlyWarn || !showOnlyWarn) {
+            if (!warnResult.warn || !showOnlyWarn) {
               isValid = false;
             } else {
               // 当检查只显示错误信息
@@ -922,15 +923,15 @@ export default {
           }
         } else {
           // 是叶子，但也是数组
-          rules = schema.array.rules
-          if (rules) {
+          if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            checkedResult = this.__checkRules(schema, arrayValue, "");
+            warnResult = this.__execCheckWarn(schema, arrayValue, showOnlyWarn)
+            checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              if (!rules.canOnlyWarn || !showOnlyWarn) {
+              if (!warnResult.warn || !showOnlyWarn) {
                 isValid = false;
               } else {
                 // 当检查只显示错误信息
@@ -962,19 +963,20 @@ export default {
               }
             }
 
-            rules = nextPropItem.rules || {}
+            // rules = nextPropItem.rules || {}
             if (validResult.hasErrMsg) {
               hasErrMsg = true
             }
-            if (!rules.canOnlyWarn || !showOnlyWarn) {
-              isValid = !isValid ? isValid : validResult.isValid;
-            } else {
-              // 当检查只显示错误信息
-            }
+            // if (!rules.canOnlyWarn || !showOnlyWarn) {
+            isValid = !isValid ? isValid : validResult.isValid;
+            // } else {
+            //   // 当检查只显示错误信息
+            // }
           }
         }
       }
       // parseSources = null;
+      // console.log('{ isValid, hasErrMsg }', { isValid, hasErrMsg })
       return { isValid, hasErrMsg };
     },
 
@@ -1166,6 +1168,35 @@ export default {
 
       baseParseSources = null;
       formValue = null;
+    },
+
+    __execCheckWarn: function(schema, value, showOnlyWarn) {
+      var rules, warn = false, errMsg = '';
+      if (showOnlyWarn) {
+        if (schema.array) {
+          if (schema.array.rules) {
+            rules = schema.array.rules;
+          }
+        } else {
+          rules = schema.rules;
+        }
+
+        if (rules) {
+          if (utils.isFunc(rules.checkWarn)) {
+            var checkResult = rules.checkWarn(value, { rules: rules })
+            if (utils.isObj(checkResult)) {
+              warn = !!checkResult.warn
+              errMsg = utils.isStr(checkResult.errMsg) ? checkResult.errMsg.trim() : ''
+            } else {
+              warn = !!checkResult
+            }
+          } else {
+            warn = rules.checkWarn
+          }
+        }
+      }
+      // console.log({warn, errMsg, showOnlyWarn})
+      return { warn, errMsg }
     },
 
     /**

@@ -1262,7 +1262,8 @@ let schemaUtils = {
    */
   __parsePropRules: function(rules) {
     var tmpRawRequired = false,
-      tmpRawCanOnlyWarn = false,
+      // tmpRawCanOnlyWarn = false,
+      tmpCheckWarn = false,
       tmpCheckList = [];
     if (utils.isObj(rules)) {
       if (rules.check) {
@@ -1300,12 +1301,15 @@ let schemaUtils = {
       }
 
       // 取出canOnlyWarn
-      if (parse.isEsOrFunc(rules.canOnlyWarn)) {
-        tmpRawCanOnlyWarn = parse.newEsFuncion(rules.canOnlyWarn);
-      } else if (utils.isBool(rules.canOnlyWarn)) {
-        tmpRawCanOnlyWarn = rules.canOnlyWarn;
-      } else {
-        tmpRawCanOnlyWarn = false;
+      // if (parse.isEsOrFunc(rules.canOnlyWarn)) {
+      //   tmpRawCanOnlyWarn = parse.newEsFuncion(rules.canOnlyWarn);
+      // } else if (utils.isBool(rules.canOnlyWarn)) {
+      //   tmpRawCanOnlyWarn = rules.canOnlyWarn;
+      // } else {
+      //   tmpRawCanOnlyWarn = false;
+      // }
+      if (utils.isBool(rules.checkWarn) || utils.isFunc(rules.checkWarn)) {
+        tmpCheckWarn = rules.checkWarn;
       }
     } else if (utils.isBool(rules)) {
       tmpRawRequired = rules;
@@ -1347,12 +1351,13 @@ let schemaUtils = {
       }
 
       // 是动态，记录下来
-      if (utils.isFunc(tmpRawCanOnlyWarn)) {
-        newRules.canOnlyWarn = false; // 会动态解析
-        newRules.__rawCanOnlyWarn = tmpRawCanOnlyWarn;
-      } else {
-        newRules.canOnlyWarn = tmpRawCanOnlyWarn;
-      }
+      // if (utils.isFunc(tmpRawCanOnlyWarn)) {
+      //   newRules.canOnlyWarn = false; // 会动态解析
+      //   newRules.__rawCanOnlyWarn = tmpRawCanOnlyWarn;
+      // } else {
+      //   newRules.canOnlyWarn = tmpRawCanOnlyWarn;
+      // }
+      newRules.checkWarn = tmpCheckWarn;
 
       if (tmpCheckList.length > 0) {
         newRules.checks = tmpCheckList;

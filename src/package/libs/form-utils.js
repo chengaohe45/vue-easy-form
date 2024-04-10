@@ -1414,15 +1414,15 @@ let formUtils = {
     }
 
     // 是否必须
-    if (rules.__rawCanOnlyWarn) {
-      var canOnlyWarn = parse.smartEsValue(
-        rules.__rawCanOnlyWarn,
-        parseSources
-      );
-      if (rules.canOnlyWarn != canOnlyWarn) {
-        rules.canOnlyWarn = canOnlyWarn;
-      }
-    }
+    // if (rules.__rawCanOnlyWarn) {
+    //   var canOnlyWarn = parse.smartEsValue(
+    //     rules.__rawCanOnlyWarn,
+    //     parseSources
+    //   );
+    //   if (rules.canOnlyWarn != canOnlyWarn) {
+    //     rules.canOnlyWarn = canOnlyWarn;
+    //   }
+    // }
 
     // 解析style
     if (rules.__rawStyle) {
