@@ -1600,18 +1600,6 @@ var keys_default = /*#__PURE__*/__webpack_require__.n(object_keys);
 // EXTERNAL MODULE: ./node_modules/core-js/modules/es6.function.name.js
 var es6_function_name = __webpack_require__("7f7f");
 
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.array.iterator.js
-var es6_array_iterator = __webpack_require__("cadf");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.promise.js
-var es6_promise = __webpack_require__("551c");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es6.object.assign.js
-var es6_object_assign = __webpack_require__("f751");
-
-// EXTERNAL MODULE: ./node_modules/core-js/modules/es7.promise.finally.js
-var es7_promise_finally = __webpack_require__("097d");
-
 // EXTERNAL MODULE: ./src/package/libs/parse.js
 var parse = __webpack_require__("5f60");
 
@@ -1972,10 +1960,6 @@ var component = Object(componentNormalizer["a" /* default */])(
 var component_utils = __webpack_require__("45ac");
 
 // CONCATENATED MODULE: ./src/package/libs/schema-utils.js
-
-
-
-
 
 
 
@@ -3139,6 +3123,8 @@ var schemaUtils = {
     var _this2 = this;
 
     var tmpRawRequired = false,
+        // tmpRawCanOnlyWarn = false,
+    tmpCheckWarn = false,
         tmpCheckList = [];
 
     if (utils["a" /* default */].isObj(rules)) {
@@ -3176,6 +3162,18 @@ var schemaUtils = {
         tmpRawRequired = rules.required;
       } else {
         tmpRawRequired = false;
+      } // 取出canOnlyWarn
+      // if (parse.isEsOrFunc(rules.canOnlyWarn)) {
+      //   tmpRawCanOnlyWarn = parse.newEsFuncion(rules.canOnlyWarn);
+      // } else if (utils.isBool(rules.canOnlyWarn)) {
+      //   tmpRawCanOnlyWarn = rules.canOnlyWarn;
+      // } else {
+      //   tmpRawCanOnlyWarn = false;
+      // }
+
+
+      if (utils["a" /* default */].isBool(rules.checkWarn) || utils["a" /* default */].isFunc(rules.checkWarn)) {
+        tmpCheckWarn = rules.checkWarn;
       }
     } else if (utils["a" /* default */].isBool(rules)) {
       tmpRawRequired = rules;
@@ -3214,7 +3212,16 @@ var schemaUtils = {
         newRules.__rawRequired = tmpRawRequired;
       } else {
         newRules.required = tmpRawRequired;
-      }
+      } // 是动态，记录下来
+      // if (utils.isFunc(tmpRawCanOnlyWarn)) {
+      //   newRules.canOnlyWarn = false; // 会动态解析
+      //   newRules.__rawCanOnlyWarn = tmpRawCanOnlyWarn;
+      // } else {
+      //   newRules.canOnlyWarn = tmpRawCanOnlyWarn;
+      // }
+
+
+      newRules.checkWarn = tmpCheckWarn;
 
       if (tmpCheckList.length > 0) {
         newRules.checks = tmpCheckList; // 有非空检查
@@ -4102,12 +4109,12 @@ __webpack_require__("7a56")('RegExp');
 "use strict";
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("5176");
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("e814");
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("4917");
 /* harmony import */ var core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_match__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_split__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("28a5");
@@ -4116,8 +4123,8 @@ __webpack_require__("7a56")('RegExp');
 /* harmony import */ var core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_function_name__WEBPACK_IMPORTED_MODULE_6__);
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__("6762");
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__("a4bb");
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8__);
 /* harmony import */ var _parse__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__("5f60");
 /* harmony import */ var _constant__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__("890a");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__("4513");
@@ -4147,7 +4154,7 @@ var formUtils = {
    * 判断值是否为空, 以下几种情况都认为是空值
    */
   isEmpty: function isEmpty(value) {
-    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
+    if (_utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isUndef(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isNull(value) || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isStr(value) && !value || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isObj(value) && E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_8___default()(value).length <= 0 || _utils__WEBPACK_IMPORTED_MODULE_11__[/* default */ "a"].isArr(value) && value.length <= 0) {
       return true;
     }
 
@@ -4516,7 +4523,7 @@ var formUtils = {
           if (arrayItemKeys) {
             realKey = arrayItemKeys[1];
 
-            var realIndex = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
+            var realIndex = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_3___default()(arrayItemKeys[2]); // console.log("realKey: ", realKey);   // 空格也没有事； 如：空格[0]
 
 
             curPropItem = curProperties[realKey]; //取出下级继续扫描
@@ -4725,7 +4732,7 @@ var formUtils = {
     var baseParseSources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
     var isParentHidden = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
 
-    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -4900,7 +4907,7 @@ var formUtils = {
     var sum = 0;
     var isHidden, listLen, schemaList, i;
 
-    var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+    var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
     parseSources.index = propItem.__info.index;
     parseSources.idxChain = propItem.__info.idxChain;
@@ -5203,7 +5210,7 @@ var formUtils = {
                 }
               } else {
                 //正常成员
-                var nextParseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+                var nextParseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
                 nextParseSources.index = nextPropItem.__info.index;
                 nextParseSources.idxChain = nextPropItem.__info.idxChain;
@@ -5301,7 +5308,7 @@ var formUtils = {
       width += "%";
       style.width = width;
     } else {
-      style = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(style, col);
+      style = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(style, col);
     }
 
     propItem.__style = style;
@@ -5447,7 +5454,7 @@ var formUtils = {
       var propSchema = propItem.properties[fieldKeyName];
 
       if (!propSchema.layout || propSchema.layout.name !== _constant__WEBPACK_IMPORTED_MODULE_10__[/* default */ "a"].LAYOUT_SPACE) {
-        var parseSources = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
+        var parseSources = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()({}, baseParseSources);
 
         parseSources.index = propSchema.__info.index;
         parseSources.idxChain = propSchema.__info.idxChain;
@@ -5479,7 +5486,17 @@ var formUtils = {
       if (rules.required != isRequired) {
         rules.required = isRequired;
       }
-    } // 解析style
+    } // 是否必须
+    // if (rules.__rawCanOnlyWarn) {
+    //   var canOnlyWarn = parse.smartEsValue(
+    //     rules.__rawCanOnlyWarn,
+    //     parseSources
+    //   );
+    //   if (rules.canOnlyWarn != canOnlyWarn) {
+    //     rules.canOnlyWarn = canOnlyWarn;
+    //   }
+    // }
+    // 解析style
 
 
     if (rules.__rawStyle) {
@@ -5594,7 +5611,7 @@ var formUtils = {
         var nextSchema = firstPropSchema[key];
 
         if (nextSchema.properties && !nextSchema.array) {
-          newValue = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
+          newValue = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_assign__WEBPACK_IMPORTED_MODULE_1___default()(newValue, value[key]);
         } else {
           newValue[key] = value[key];
         }
@@ -5706,12 +5723,12 @@ exports.features = {};
 /* harmony import */ var core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es7_array_includes__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("2fdb");
 /* harmony import */ var core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_string_includes__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("a4bb");
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("ac6a");
 /* harmony import */ var core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_iterable__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__("15b8");
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__("6b54");
 /* harmony import */ var core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es6_regexp_to_string__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var core_js_modules_es6_regexp_replace__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__("a481");
@@ -6042,7 +6059,7 @@ var utils = {
         // 一对一保存; 先保存索引地址，下一级的deep可能会用到
         rawRefs.push(data); // 冻结这一层
 
-        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+        E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
 
         for (var i = 0; i < data.length; ++i) {
           this.__deepFreeze(data[i], rawRefs); // 继续走下一级
@@ -6057,7 +6074,7 @@ var utils = {
         // 一对一保存; 先保存索引地址，下一级的deep可能会用到
         rawRefs.push(data); // 冻结这一层
 
-        _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
+        E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_freeze__WEBPACK_IMPORTED_MODULE_4___default()(data);
 
         for (var key in data) {
           this.__deepFreeze(data[key], rawRefs);
@@ -6080,7 +6097,7 @@ var utils = {
       arr.forEach(function (item) {
         tmpObj[item] = 1;
       });
-      newArr = _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
+      newArr = E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_2___default()(tmpObj);
     }
 
     return newArr;
@@ -10519,8 +10536,8 @@ module.exports = function (C, x) {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
-/* harmony import */ var _Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
+/* WEBPACK VAR INJECTION */(function(process) {/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__("a4bb");
+/* harmony import */ var E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _index_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__("d23b");
 /* harmony import */ var _libs_schema_utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__("34bc");
 /* harmony import */ var _libs_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__("4513");
@@ -10541,7 +10558,7 @@ var install = function install(Vue) {
 
   _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].initVue(Vue);
 
-  if (_Users_chengaohe_Documents_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
+  if (E_my_projects_vue_easy_form_node_modules_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_0___default()(globalOpts).length > 0) {
     _libs_utils__WEBPACK_IMPORTED_MODULE_3__[/* default */ "a"].mergeGlobal(_libs_global_js__WEBPACK_IMPORTED_MODULE_4__[/* default */ "a"], globalOpts); // console.log(esGlobal);
   } // Vue.component(esConstant.HELP_NAME, esHelp);
   // Vue.component("es-base", esBase);
@@ -10561,7 +10578,7 @@ if (typeof window !== "undefined" && window.Vue) {
 }
 
 /* harmony default export */ __webpack_exports__["a"] = ({
-  version: typeof process != "undefined" ? "1.8.4" : "??",
+  version: typeof process != "undefined" ? "1.8.6" : "??",
   install: install,
   esForm: _index_vue__WEBPACK_IMPORTED_MODULE_1__[/* default */ "a"],
   check: check
@@ -10930,12 +10947,12 @@ module.exports = function (KEY, exec) {
 
 "use strict";
 
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=57ece276&
-var packagevue_type_template_id_57ece276_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/index.vue?vue&type=template&id=92363cec&
+var packagevue_type_template_id_92363cec_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form"},[_c('form-item',{ref:"formFrame",attrs:{"schema":_vm.formSchema}}),(_vm.canConsole)?_c('consolePanel',{attrs:{"rootValue":_vm.csRootValue,"formValue":_vm.csFormValue}}):_vm._e()],1)}
 var staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=57ece276&
+// CONCATENATED MODULE: ./src/package/index.vue?vue&type=template&id=92363cec&
 
 // EXTERNAL MODULE: ./node_modules/@babel/runtime-corejs2/core-js/json/stringify.js
 var stringify = __webpack_require__("f499");
@@ -15515,8 +15532,8 @@ var array_card_component = Object(componentNormalizer["a" /* default */])(
 )
 
 /* harmony default export */ var array_card = (array_card_component.exports);
-// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-table.vue?vue&type=template&id=59bc41bd&
-var array_tablevue_type_template_id_59bc41bd_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-table"},[_c('table',{staticClass:"es-table"},[_c('thead',[(_vm.schema.array.hasOrder !== false)?_c('th',{staticClass:"es-order-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        序号\n      ")]):_vm._e(),_vm._l((_vm.schema.properties),function(headerSchema,headerFieldName){return _c('th',{key:headerFieldName,style:(headerSchema.__headStyle)},[_c('div',{class:[
+// CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/array-table.vue?vue&type=template&id=6145121c&
+var array_tablevue_type_template_id_6145121c_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{staticClass:"es-form-array-table"},[_c('table',{staticClass:"es-table"},[_c('thead',[(_vm.schema.array.hasOrder !== false)?_c('th',{staticClass:"es-order-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        序号\n      ")]):_vm._e(),_vm._l((_vm.schema.properties),function(headerSchema,headerFieldName){return [(_vm.schema.properties[headerFieldName].__rawHidden !== true)?_c('th',{key:headerFieldName,style:(headerSchema.__headStyle)},[_c('div',{class:[
             'es-form-table-head',
             headerSchema.label && headerSchema.label.align
               ? 'es-form-component-' + headerSchema.label.align
@@ -15530,13 +15547,13 @@ var array_tablevue_type_template_id_59bc41bd_render = function () {var _vm=this;
                   ? headerSchema.label.text
                   : headerFieldName + "")+"\n            ")]):_c('span',{staticClass:"es-form-label-box"},[_c('es-base',{attrs:{"config":headerSchema.label,"info":headerSchema.__info}})],1),(
                 headerSchema.label.help && !headerSchema.label.help.hidden
-              )?_c('span',{staticClass:"es-form-label-help"},[_c('es-base',{attrs:{"config":headerSchema.label.help,"info":headerSchema.__info}})],1):_vm._e()]:[_vm._v("\n            "+_vm._s(headerFieldName + "")+"\n          ")]],2)])}),(_vm.schema.array.hasDelete || _vm.schema.array.hasSort)?_c('th',{staticClass:"es-btn-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        操作\n      ")]):_vm._e()],2),_c('tbody',_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('tr',{key:index},[(_vm.schema.array.hasOrder !== false)?_c('td',{style:({ padding: _vm.schema.array.rowSpace / 2 + 'px' })},[_c('span',{staticClass:"es-order-txt",style:({
+              )?_c('span',{staticClass:"es-form-label-help"},[_c('es-base',{attrs:{"config":headerSchema.label.help,"info":headerSchema.__info}})],1):_vm._e()]:[_vm._v("\n            "+_vm._s(headerFieldName + "")+"\n          ")]],2)]):_vm._e()]}),(_vm.schema.array.hasDelete || _vm.schema.array.hasSort)?_c('th',{staticClass:"es-btn-fixed",style:({ padding: _vm.schema.ui.rowSpace / 2 + 'px' })},[_vm._v("\n        操作\n      ")]):_vm._e()],2),_c('tbody',_vm._l((_vm.schema.__propSchemaList),function(itemSchema,index){return _c('tr',{key:index},[(_vm.schema.array.hasOrder !== false)?_c('td',{style:({ padding: _vm.schema.array.rowSpace / 2 + 'px' })},[_c('span',{staticClass:"es-order-txt",style:({
               height: _vm.schema.ui.rowHeight + 'px',
               lineHeight: _vm.schema.ui.rowHeight + 'px'
-            })},[_vm._v(_vm._s(index + 1)+".")])]):_vm._e(),_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return _c('td',{key:fieldName,style:({
+            })},[_vm._v(_vm._s(index + 1)+".")])]):_vm._e(),_vm._l((itemSchema.properties),function(fieldSchema,fieldName){return [(_vm.schema.properties[fieldName].__rawHidden !== true)?_c('td',{key:fieldName,style:({
             padding: _vm.schema.array.rowSpace / 2 + 'px',
             textAlign: fieldSchema.label.align
-          })},[_c('es-object-table',{attrs:{"schema":fieldSchema,"has-required":!_vm.schema.array.headRequired}},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index,"refName":fieldName + '_' + index})],2)],1)}),(
+          })},[_c('es-object-table',{attrs:{"schema":fieldSchema,"has-required":!_vm.schema.array.headRequired}},[_vm._t(fieldName,null,{"schema":fieldSchema,"index":index,"refName":fieldName + '_' + index})],2)],1):_vm._e()]}),(
             _vm.schema.array.hasDelete ||
               _vm.schema.array.hasSort ||
               _vm.schema.array.hasCopy
@@ -15548,10 +15565,10 @@ var array_tablevue_type_template_id_59bc41bd_render = function () {var _vm=this;
                 _vm.schema.array.fixed <= 0 &&
                 _vm.schema.array.min <= 0,"index":-1,"has-del-warn":_vm.schema.array.hasDelWarn,"can-add":_vm.schema.array.max <= 0 ||
                 _vm.schema.__propSchemaList.length < _vm.schema.array.max,"del-msg":_vm.schema.array.delAllMsg,"del-warn-btns":_vm.schema.array.delWarnBtns,"info":_vm.schema.__info},on:{"delItem":_vm.delAllItems,"addItem":_vm.addItem}})],1)])]):_vm._e()])])}
-var array_tablevue_type_template_id_59bc41bd_staticRenderFns = []
+var array_tablevue_type_template_id_6145121c_staticRenderFns = []
 
 
-// CONCATENATED MODULE: ./src/package/layout/array-table.vue?vue&type=template&id=59bc41bd&
+// CONCATENATED MODULE: ./src/package/layout/array-table.vue?vue&type=template&id=6145121c&
 
 // CONCATENATED MODULE: ./node_modules/cache-loader/dist/cjs.js?{"cacheDirectory":"node_modules/.cache/vue-loader","cacheIdentifier":"13ad4c70-vue-loader-template"}!./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/cache-loader/dist/cjs.js??ref--0-0!./node_modules/vue-loader/lib??vue-loader-options!./src/package/layout/object-table.vue?vue&type=template&id=16c65a0a&
 var object_tablevue_type_template_id_16c65a0a_render = function () {var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;return _c('div',{directives:[{name:"show",rawName:"v-show",value:(!_vm.schema.hidden),expression:"!schema.hidden"}],staticClass:"es-form-table-container"},[(
@@ -15932,6 +15949,10 @@ var object_table_component = Object(componentNormalizer["a" /* default */])(
 //
 //
 //
+//
+//
+//
+//
 
 
 
@@ -15966,8 +15987,8 @@ var array_tablevue_type_style_index_0_lang_scss_ = __webpack_require__("6fe2");
 
 var array_table_component = Object(componentNormalizer["a" /* default */])(
   layout_array_tablevue_type_script_lang_js_,
-  array_tablevue_type_template_id_59bc41bd_render,
-  array_tablevue_type_template_id_59bc41bd_staticRenderFns,
+  array_tablevue_type_template_id_6145121c_render,
+  array_tablevue_type_template_id_6145121c_staticRenderFns,
   false,
   null,
   null,
@@ -18446,10 +18467,10 @@ var console_component = Object(componentNormalizer["a" /* default */])(
       return curHiddenValue;
     },
     //检查整个表单
-    checkAll: function checkAll() {
-      var isValid = this.__checkProp(this.$data.formSchema, this.$data.formSchema);
+    checkAll: function checkAll(showOnlyWarn) {
+      var validResult = this.__checkProp(this.$data.formSchema, this.$data.formSchema, showOnlyWarn);
 
-      return isValid;
+      return validResult.isValid;
     },
     // 对外调用，发出提交事件
     submit: function submit() {
@@ -18529,29 +18550,40 @@ var console_component = Object(componentNormalizer["a" /* default */])(
         _this2.__execEmit("inited", [utils["a" /* default */].deepCopy(_this2._esFormValue)]);
       });
     },
-    __checkProp: function __checkProp(schema, rootSchema) {
+    __checkProp: function __checkProp(schema, rootSchema, showOnlyWarn) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
-      var isValid = true; //是否隐藏，隐藏就不用检查有效性了
+      var isValid = true;
+      var hasErrMsg = false; //是否隐藏，隐藏就不用检查有效性了
 
       var isHidden = schema.hidden; // 省资源，不做es转
 
       if (isHidden) {
-        return isValid;
+        return {
+          isValid: isValid,
+          hasErrMsg: hasErrMsg
+        };
       }
 
-      var validResult, checkedResult, isTabs, tabsIndex, nextPropItem, i, arrayValue, schemaList;
+      var validResult, checkedResult, warnResult, isTabs, tabsIndex, nextPropItem, i, arrayValue, schemaList;
 
       if (schema.properties) {
         if (schema.array) {
           if (schema.array.rules) {
             arrayValue = form_utils["a" /* default */].getValue(schema);
-            checkedResult = this.__checkRules(schema, arrayValue, "");
+            warnResult = this.__execCheckWarn(schema, arrayValue, showOnlyWarn);
+            checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "");
 
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              isValid = false;
+
+              if (!warnResult.warn || !showOnlyWarn) {
+                isValid = false;
+              } else {// 当检查只显示错误信息
+              }
+
+              hasErrMsg = true;
             }
           }
 
@@ -18561,11 +18593,11 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
           for (i = 0; i < schemaList.length; i++) {
             nextPropItem = schemaList[i];
-            validResult = this.__checkProp(nextPropItem, rootSchema);
+            validResult = this.__checkProp(nextPropItem, rootSchema, showOnlyWarn);
 
             if (isTabs) {
               // 父节点是tabs
-              if (!validResult && i !== tabsIndex) {
+              if (validResult.hasErrMsg && i !== tabsIndex) {
                 // 有错，tab是隐藏的
                 if (!nextPropItem.__hasError) {
                   nextPropItem.__hasError = true;
@@ -18576,12 +18608,20 @@ var console_component = Object(componentNormalizer["a" /* default */])(
                   nextPropItem.__hasError = false;
                 }
               }
-            }
+            } // rules = nextPropItem.rules || {}
 
-            isValid = !isValid ? isValid : validResult;
+
+            if (validResult.hasErrMsg) {
+              hasErrMsg = true;
+            } // if (!rules.canOnlyWarn || !showOnlyWarn) {
+
+
+            isValid = !isValid ? isValid : validResult.isValid; // } else {
+            //   // 当检查只显示错误信息
+            // }
           }
 
-          if (!isValid && schema.ui && !schema.ui.showBody) {
+          if (hasErrMsg && schema.ui && !schema.ui.showBody) {
             // 有错 schema.title为null, 可能是ARRAY_TABS的item
             schema.ui.showBody = true;
           }
@@ -18591,11 +18631,11 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
           for (var key in schema.properties) {
             nextPropItem = schema.properties[key];
-            validResult = this.__checkProp(nextPropItem, rootSchema);
+            validResult = this.__checkProp(nextPropItem, rootSchema, showOnlyWarn);
 
             if (isTabs) {
               // 父节点是tabs
-              if (!validResult && key !== tabsIndex) {
+              if (validResult.hasErrMsg && key !== tabsIndex) {
                 // 有错，tab是隐藏的
                 if (!nextPropItem.__hasError) {
                   nextPropItem.__hasError = true;
@@ -18606,12 +18646,20 @@ var console_component = Object(componentNormalizer["a" /* default */])(
                   nextPropItem.__hasError = false;
                 }
               }
-            }
+            } // rules = nextPropItem.rules || {}
 
-            isValid = !isValid ? isValid : validResult;
+
+            if (validResult.hasErrMsg) {
+              hasErrMsg = true;
+            } // if (!rules.canOnlyWarn || !showOnlyWarn) {
+
+
+            isValid = !isValid ? isValid : validResult.isValid; // } else {
+            //   // 当检查只显示错误信息
+            // }
           }
 
-          if (!isValid && schema.title && !schema.title.showBody) {
+          if (hasErrMsg && schema.title && !schema.title.showBody) {
             // 有错
             schema.title.showBody = true;
           }
@@ -18619,25 +18667,39 @@ var console_component = Object(componentNormalizer["a" /* default */])(
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          checkedResult = this.__checkRules(schema, schema.component.value, "");
+          warnResult = this.__execCheckWarn(schema, schema.component.value, showOnlyWarn);
+          checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, schema.component.value, "");
 
           if (checkedResult === true) {
             schema.__invalidMsg = false;
           } else {
             schema.__invalidMsg = checkedResult;
-            isValid = false;
+
+            if (!warnResult.warn || !showOnlyWarn) {
+              isValid = false;
+            } else {// 当检查只显示错误信息
+            }
+
+            hasErrMsg = true;
           }
         } else {
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = form_utils["a" /* default */].getValue(schema);
-            checkedResult = this.__checkRules(schema, arrayValue, "");
+            warnResult = this.__execCheckWarn(schema, arrayValue, showOnlyWarn);
+            checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "");
 
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              isValid = false;
+
+              if (!warnResult.warn || !showOnlyWarn) {
+                isValid = false;
+              } else {// 当检查只显示错误信息
+              }
+
+              hasErrMsg = true;
             }
           }
 
@@ -18647,11 +18709,11 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
           for (i = 0; i < schemaList.length; i++) {
             nextPropItem = schemaList[i];
-            validResult = this.__checkProp(nextPropItem, rootSchema);
+            validResult = this.__checkProp(nextPropItem, rootSchema, showOnlyWarn);
 
             if (isTabs) {
               // 父节点是tabs
-              if (!validResult && i !== tabsIndex) {
+              if (validResult.hasErrMsg && i !== tabsIndex) {
                 // 有错，tab是隐藏的
                 if (!nextPropItem.__hasError) {
                   nextPropItem.__hasError = true;
@@ -18662,15 +18724,27 @@ var console_component = Object(componentNormalizer["a" /* default */])(
                   nextPropItem.__hasError = false;
                 }
               }
-            }
+            } // rules = nextPropItem.rules || {}
 
-            isValid = !isValid ? isValid : validResult;
+
+            if (validResult.hasErrMsg) {
+              hasErrMsg = true;
+            } // if (!rules.canOnlyWarn || !showOnlyWarn) {
+
+
+            isValid = !isValid ? isValid : validResult.isValid; // } else {
+            //   // 当检查只显示错误信息
+            // }
           }
         }
       } // parseSources = null;
+      // console.log('{ isValid, hasErrMsg }', { isValid, hasErrMsg })
 
 
-      return isValid;
+      return {
+        isValid: isValid,
+        hasErrMsg: hasErrMsg
+      };
     },
     // 发出提交事件
     __submit: function __submit() {
@@ -18855,6 +18929,49 @@ var console_component = Object(componentNormalizer["a" /* default */])(
 
       baseParseSources = null;
       formValue = null;
+    },
+    __execCheckWarn: function __execCheckWarn(schema, value, showOnlyWarn) {
+      var rules,
+          warn = false,
+          errMsg = '';
+
+      if (showOnlyWarn) {
+        if (schema.array) {
+          if (schema.array.rules) {
+            rules = schema.array.rules;
+          }
+        } else {
+          rules = schema.rules;
+        }
+
+        if (rules) {
+          if (utils["a" /* default */].isFunc(rules.checkWarn)) {
+            var newOptions = {};
+            newOptions.value = value;
+            newOptions.pathKey = schema.__info.pathKey;
+            newOptions.idxChain = schema.__info.idxChain;
+            newOptions.index = schema.__info.index;
+            newOptions.instance = this;
+            newOptions.rules = assign_default()({}, rules);
+            var checkResult = rules.checkWarn(newOptions);
+
+            if (utils["a" /* default */].isObj(checkResult)) {
+              warn = !!checkResult.warn;
+              errMsg = utils["a" /* default */].isStr(checkResult.errMsg) ? checkResult.errMsg.trim() : '';
+            } else {
+              warn = !!checkResult;
+            }
+          } else {
+            warn = rules.checkWarn;
+          }
+        }
+      } // console.log({warn, errMsg, showOnlyWarn})
+
+
+      return {
+        warn: warn,
+        errMsg: errMsg
+      };
     },
 
     /**
@@ -19117,7 +19234,7 @@ var packagevue_type_style_index_0_lang_scss_ = __webpack_require__("7e62");
 
 var package_component = Object(componentNormalizer["a" /* default */])(
   src_packagevue_type_script_lang_js_,
-  packagevue_type_template_id_57ece276_render,
+  packagevue_type_template_id_92363cec_render,
   staticRenderFns,
   false,
   null,
