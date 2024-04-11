@@ -1183,7 +1183,14 @@ export default {
 
         if (rules) {
           if (utils.isFunc(rules.checkWarn)) {
-            var checkResult = rules.checkWarn(value, { rules: rules })
+            var newOptions = {};
+            newOptions.value = value;
+            newOptions.pathKey = schema.__info.pathKey;
+            newOptions.idxChain = schema.__info.idxChain;
+            newOptions.index = schema.__info.index;
+            newOptions.instance = this;
+            newOptions.rules = Object.assign({}, rules)
+            var checkResult = rules.checkWarn(newOptions)
             if (utils.isObj(checkResult)) {
               warn = !!checkResult.warn
               errMsg = utils.isStr(checkResult.errMsg) ? checkResult.errMsg.trim() : ''
