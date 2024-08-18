@@ -26,6 +26,10 @@ let constant = {
   ENTER_SUBMIT: "@enterSubmit",
   ONLY_SUBMIT: "@submit",
 
+  ES_FORM_ROOT_NAME: "ES_F_NAME" + Math.floor(Math.random() * 10000),
+  USER_ROOT_DATA: "_userRootData",
+  USER_HIDDEN: "_userHidden",
+
   // TYPE_TMP: "tmp", // 表单的临时值，跟组件没有什么区别；只是不会取出；使用场景：快速做标题或编辑时，某些项需要显示但又不需要提交给后台
   LAYOUT_SPACE: "space", // 占位符; space不可以乱改，因为其它地方(.vue)有用到
   LAYOUT_TABS: "tabs", // properties的子属性是tabs布局; space不可以乱改，因为其它地方(.vue)有用到

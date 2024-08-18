@@ -682,6 +682,30 @@ let utils = {
         }
       }
     }
+  },
+
+  getParent(instance, componentName) {
+    var parent = instance.$parent;
+    while (parent) {
+      if (parent.$options && parent.$options.componentName === componentName) {
+        return parent;
+      }
+      parent = parent.$parent;
+    }
+    return null;
+  },
+
+  /**
+   * 判断目标是否有某个属性
+   * @param {*} key
+   * @param {*} target
+   */
+  hasOwn(key, target) {
+    if (utils.isObj(target) && key in target) {
+      return true;
+    } else {
+      return false;
+    }
   }
 };
 

@@ -410,6 +410,7 @@ import consolePanel from "./components/console.vue";
 import dataCache from "./libs/data-cache";
 
 export default {
+  componentName: constant.ES_FORM_ROOT_NAME, // 用于子组件找到此列表组件
   /* ====================== 生命周期 ====================== */
   created() {
     this.$data.canConsole = utils.isBool(this.hasConsole)
@@ -421,6 +422,9 @@ export default {
 
     var hiddenFunc = this.isHidden;
     dataCache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
+
+    this[constant.USER_ROOT_DATA] = {};
+    this[constant.USER_HIDDEN] = hiddenFunc;
 
     dataCache.setGlobal(
       this.$data.id,
@@ -436,6 +440,9 @@ export default {
 
   data() {
     return {
+      [constant.USER_ROOT_DATA]: {}, // 实时记录表单的根值，给用户使用
+      [constant.USER_HIDDEN]: null,
+
       id: utils.newUid("es"),
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
@@ -851,7 +858,7 @@ export default {
 
             // rules = nextPropItem.rules || {}
             if (validResult.hasErrMsg) {
-              hasErrMsg = true
+              hasErrMsg = true;
             }
             // if (!rules.canOnlyWarn || !showOnlyWarn) {
             isValid = !isValid ? isValid : validResult.isValid;
@@ -891,7 +898,7 @@ export default {
 
             // rules = nextPropItem.rules || {}
             if (validResult.hasErrMsg) {
-              hasErrMsg = true
+              hasErrMsg = true;
             }
             // if (!rules.canOnlyWarn || !showOnlyWarn) {
               isValid = !isValid ? isValid : validResult.isValid;
@@ -925,7 +932,7 @@ export default {
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            warnResult = this.__execCheckWarn(schema, arrayValue, showOnlyWarn)
+            warnResult = this.__execCheckWarn(schema, arrayValue, showOnlyWarn);
             checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "");
             if (checkedResult === true) {
               schema.__invalidMsg = false;
@@ -965,7 +972,7 @@ export default {
 
             // rules = nextPropItem.rules || {}
             if (validResult.hasErrMsg) {
-              hasErrMsg = true
+              hasErrMsg = true;
             }
             // if (!rules.canOnlyWarn || !showOnlyWarn) {
             isValid = !isValid ? isValid : validResult.isValid;
@@ -1006,6 +1013,36 @@ export default {
           formUtils.perfectTileValue(schema, key),
           utils.deepCopy(value)
         );
+      }
+    },
+
+    /*
+    当组件值改变时，同步更新当前节点的值
+    */
+   /**
+    * 当组件值改变时，同步更新当前节点的值
+    * @param pathKey 当前节点的路径，必须是由点组成的
+    */
+    __syncRootNodeValue(pathKey, value) {
+      if (pathKey) {
+        var keys = pathKey.split("."); // 已经是用点连起来的
+        var len = keys.length;
+        var currentNodeData = this[constant.USER_ROOT_DATA];
+        // 取出倒算第二个
+        for (var i = 0; i < len - 1; i++) {
+          var key = keys[i];
+          if (currentNodeData && (key in currentNodeData)) {
+            currentNodeData = currentNodeData[key];
+          } else {
+            currentNodeData = null;
+            // 更新有问题
+            console.error("__syncRootNodeValue更新有问题", pathKey)
+            break;
+          }
+        }
+        if (currentNodeData) {
+          currentNodeData[keys[len - 1]] = value;
+        }
       }
     },
 
@@ -1189,21 +1226,21 @@ export default {
             newOptions.idxChain = schema.__info.idxChain;
             newOptions.index = schema.__info.index;
             newOptions.instance = this;
-            newOptions.rules = Object.assign({}, rules)
-            var checkResult = rules.checkWarn(newOptions)
+            newOptions.rules = Object.assign({}, rules);
+            var checkResult = rules.checkWarn(newOptions);
             if (utils.isObj(checkResult)) {
-              warn = !!checkResult.warn
-              errMsg = utils.isStr(checkResult.errMsg) ? checkResult.errMsg.trim() : ''
+              warn = !!checkResult.warn;
+              errMsg = utils.isStr(checkResult.errMsg) ? checkResult.errMsg.trim() : '';
             } else {
-              warn = !!checkResult
+              warn = !!checkResult;
             }
           } else {
-            warn = rules.checkWarn
+            warn = rules.checkWarn;
           }
         }
       }
       // console.log({warn, errMsg, showOnlyWarn})
-      return { warn, errMsg }
+      return { warn, errMsg };
     },
 
     /**
