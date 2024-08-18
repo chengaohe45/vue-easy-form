@@ -61,6 +61,32 @@ export default {
             },
 
             properties: {
+              schoolTest: {
+                hidden: true,
+                col: 8,
+                label: {
+                  name: "div",
+                  text: "学名",
+                  align: "left"
+                },
+                component: {
+                  name: "el-input",
+                  props: {
+                    size: "small"
+                  }
+                },
+                rules: {
+                  required: true,
+                  emptyMsg: "请输入学校名"
+                },
+                help: {
+                  hidden: "es: $index !== 0",
+                  props: {
+                    content: "我在外面-演示帮助: 第1条固定（fixed为1）"
+                  }
+                },
+                value: "默认名"
+              },
               school: {
                 col: 8,
                 label: {

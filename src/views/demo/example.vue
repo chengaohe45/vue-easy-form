@@ -27,7 +27,18 @@ export default {
             label: "活动名称",
             rules: {
               required: true,
-              emptyMsg: "活动名称不能为空"
+               checkWarn: function(data) {
+                    console.log('---data', data)
+                    return {warn: true, errMsg: "errMsg"}
+                  },
+              emptyMsg: "活动名称不能为空",
+              checks: {
+                trigger: 'change',
+                handler: function(data) {
+                  console.log('data change', data)
+                  return 'check change'
+                }
+              }
             },
             component: {
               name: "el-input",
@@ -178,7 +189,11 @@ export default {
               value: [
                 { name: "小明", code: "T123" },
                 { name: "小花", code: "A623" }
-              ]
+              ],
+              rules: {
+                required: true,
+                checkWarn: true
+              }
             },
             properties: {
               name: {
@@ -192,7 +207,13 @@ export default {
                     size: "small"
                   }
                 },
-                rules: true
+                rules: {
+                  required: true,
+                  checkWarn: function(data) {
+                    console.log('data', data)
+                    return true
+                  }
+                }
               },
               code: {
                 value: "100",

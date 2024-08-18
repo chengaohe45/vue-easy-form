@@ -237,7 +237,7 @@ export default {
      * 点击表单验证
      */
     validHandler() {
-      if (this.$refs.form.checkAll()) {
+      if (this.$refs.form.checkAll(true)) {
         this.$message({
           message: "调用form.checkAll(): 表单输入正确",
           type: "success"
