@@ -706,6 +706,79 @@ let utils = {
     } else {
       return false;
     }
+  },
+
+  parsePathKeys(path) {
+    if (typeof path === "string") {
+      const dot = ".";
+      var pathReg = /\[\s*"(.*?)"\s*\]|\[\s*'(.*?)'\s*\]|\[\s*(\d+)\s*\]|\[(.*?)\]/g; // (注意正则内容的顺序)必须是全局的, 否则pathReg.exec(path)有问题
+
+      // str = 'a[ 123 ]bc[   " t[123\'] " ].world[ \'9999 \' ]'
+      var newPathKeys = [];
+      var leftPath = path.trim();
+      var pathResult;
+      var fromIndex = 0;
+      while ((pathResult = pathReg.exec(path))) {
+        var splitStr = pathResult[0];
+        var numKeyStr = pathResult[3];
+        var targetKey;
+        if (numKeyStr) {
+          targetKey = numKeyStr.trim(); // 因为正则有4个括号
+        } else {
+          targetKey = pathResult[1] || pathResult[2] || pathResult[4] || ""; // 因为正则有4个括号
+        }
+
+        leftPath = path.substring(fromIndex, pathResult.index); // 左边的字符串
+        leftPath = leftPath.trim();
+        var tmpKeys;
+        if (leftPath) {
+          // 保持跟lodash.get一样
+          // if (fromIndex > 0 && leftPath.charAt(0) !== dot) {
+          //   console.warn('路径格式不对:', leftPath + '前面需要加上点')
+          //   return []
+          // }
+          // if (leftPath.charAt(leftPath.length - 1) === dot) {
+          //   console.warn('路径格式不对:', (dot + splitStr) + '前面不可加上点')
+          //   return []
+          // }
+          tmpKeys = leftPath.split(".");
+          tmpKeys.forEach(function(tmpKey) {
+            tmpKey = tmpKey.trim();
+            if (tmpKey) {
+              newPathKeys.push(tmpKey);
+            }
+          });
+        }
+
+        // 中括号里可以为空值
+        newPathKeys.push(targetKey);
+        fromIndex = pathResult.index + splitStr.length; // 下一个开始
+      }
+
+      // 最后右边
+      var rightPath = path.substring(fromIndex);
+      rightPath = rightPath.trim();
+      if (rightPath) {
+        // 保持跟lodash.get一样
+        // if (fromIndex > 0 && rightPath.charAt(0) !== dot) {
+        //   console.warn('路径格式不对:', rightPath + '前面需要加上点')
+        //   return []
+        // }
+        tmpKeys = rightPath.split(dot);
+        tmpKeys.forEach(function(tmpKey) {
+          tmpKey = tmpKey.trim();
+          if (tmpKey) {
+            newPathKeys.push(tmpKey);
+          }
+        });
+      }
+
+      return newPathKeys;
+    } else if (utils.isArr(path)) {
+      return path;
+    } else {
+      return [];
+    }
   }
 };
 

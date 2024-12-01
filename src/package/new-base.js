@@ -18,6 +18,9 @@ const KEY_GLOBAL = "global"; // 直接从表单组件（root）中取出
 const KEY_ROOT_DATA = "rootData"; // 直接从表单组件（root）中取出
 const KEY_HIDDEN = "hidden"; // 直接从表单组件（root）中取出
 const KEY_INDEX = "index";
+const KEY_IDX_CHAIN = "indexChain";
+const KEY_PATH_KEY = "pathKey";
+const KEY_CLOSEST_DATA = "closetData"; // 最近一个对象数据（也就是最后一个数组对应的数据）
 
 function defineProperty(obj, key, vm) {
   Object.defineProperty(obj, key, {
@@ -41,7 +44,17 @@ function defineProperty(obj, key, vm) {
           case KEY_HIDDEN:
             value = rootInstance[constant.USER_HIDDEN];
             break;
-
+          case KEY_CLOSEST_DATA:
+            value = rootInstance[constant.KEY_CLOSEST_DATA];
+            break;
+          case KEY_IDX_CHAIN:
+            var chainInfo = vm.info || {};
+            value = chainInfo[KEY_IDX_CHAIN] || "";
+            break;
+          case KEY_PATH_KEY:
+            var pathInfo = vm.info || {};
+            value = pathInfo[KEY_PATH_KEY] || "";
+            break;
           default:
             value = vm[key];
             break;
@@ -142,11 +155,18 @@ export default {
       this.nativeOn = this.createEventOn(this.config, true, true);
     },
 
-    eventHandler(config, isNative, eventName, eventData) {
+    eventHandler(config, isNative, eventName, args) {
+      var eventData = args ? args[0] : undefined;
       if (this.config === config && this.emitEvents.includes(eventName)) {
         // 主组件，非slot
         // console.log("this.config === config", this.config === config);
         this.$emit(eventName, eventData);
+      }
+
+      if (this.isMain && this.config === config) {
+        // 主组件：让父类去处理
+        this.$emit("trigger", eventName, args, this.getConfigRef());
+        return true;
       }
       // console.log("config", config);
       var handlers = this.getHandlers(config, isNative, eventName);
@@ -173,10 +193,7 @@ export default {
         var data = {
           event: eventData,
           source: this.item,
-          target:
-            this.$children && this.$children.length > 0
-              ? this.$children[0]
-              : this,
+          target: this.getConfigRef(),
           index: this.index
         };
 
@@ -184,6 +201,12 @@ export default {
         listInstance._triggerComEventHandler(handlers, data);
         listInstance = null;
       }
+    },
+
+    getConfigRef() {
+      return this.$children && this.$children.length > 0
+        ? this.$children[0]
+        : this;
     },
 
     /**
@@ -197,7 +220,8 @@ export default {
       if (config.jsx || config.func) {
         return null;
       }
-      var hasInputValue = !!config.__rawVModel; // 所有组件的value都设置为可同步
+      var hasInputValue =
+        (this.isMain && config === this.config) || !!config.__rawVModel; // 所有组件的value都设置为可同步
 
       // 统计出要监听的事件
       var eventNames = [];
@@ -220,15 +244,16 @@ export default {
       }
 
       var extOn = {};
+      var _this = this;
       eventNames.forEach(eventName => {
         if (!isNative && eventName == constant.INPUT_EVENT && hasInputValue) {
-          extOn[eventName] = eventData => {
-            this.syncValue(config, eventData);
-            this.eventHandler(config, isNative, eventName, eventData);
+          extOn[eventName] = function() {
+            _this.syncValue(config, arguments[0]);
+            _this.eventHandler(config, isNative, eventName, arguments);
           };
         } else {
-          extOn[eventName] = eventData => {
-            this.eventHandler(config, isNative, eventName, eventData);
+          extOn[eventName] = function() {
+            _this.eventHandler(config, isNative, eventName, arguments);
           };
         }
       });
@@ -243,7 +268,11 @@ export default {
     },
 
     syncValue(config, eventValue) {
-      if (config.__rawVModel) {
+      if (this.isMain && this.config === config) {
+        if (config.value !== eventValue) {
+          config.value = eventValue;
+        }
+      } else if (config.__rawVModel) {
         var parseSources = {
           global: this.global,
           root: {},
@@ -274,8 +303,11 @@ export default {
           };
           defineProperty(parseSources, KEY_GLOBAL, this);
           defineProperty(parseSources, KEY_INDEX, this);
+          defineProperty(parseSources, KEY_IDX_CHAIN, this);
+          defineProperty(parseSources, KEY_PATH_KEY, this);
           defineProperty(parseSources, KEY_HIDDEN, this);
           defineProperty(parseSources, KEY_ROOT_DATA, this);
+          defineProperty(parseSources, KEY_CLOSEST_DATA, this);
 
           // 在render中使用
           this.__tmpParseSources = parseSources;

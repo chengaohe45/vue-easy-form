@@ -27,13 +27,114 @@ let formUtils = {
     return false;
   },
 
+  /*
+    当组件值改变时，同步更新当前节点的值
+    */
+  /**
+   * 当组件值改变时，同步更新当前节点的值
+   * @param pathKey 当前节点的路径，必须是由点组成的
+   */
+  syncUserRootValue(userRootData, pathKey, value) {
+    if (userRootData && pathKey) {
+      var keys = utils.parsePathKeys(pathKey); // 已经是用点连起来的
+      var len = keys.length;
+      var currentNodeData = userRootData;
+      // 取出倒算第二个
+      for (var i = 0; i < len - 1; i++) {
+        var key = keys[i];
+        if (currentNodeData && key in currentNodeData) {
+          currentNodeData = currentNodeData[key];
+        } else {
+          currentNodeData = null;
+          // 更新有问题
+          console.error("__syncUserRootValue更新有问题", pathKey);
+          break;
+        }
+      }
+      if (currentNodeData && currentNodeData[keys[len - 1]] !== value) {
+        currentNodeData[keys[len - 1]] = value;
+      }
+    }
+  },
+
+  /**
+   * 当数组增删移拷改变时，同步更新当前节点的值
+   * @param pathKey 当前节点的路径，必须是由点组成的
+   */
+  syncUserRootArray(userRootData, pathKey, eventData) {
+    var value = eventData.value;
+
+    if (userRootData && pathKey) {
+      var keys = utils.parsePathKeys(pathKey); // 已经是用点连起来的
+      var len = keys.length;
+      var currentNodeData = userRootData;
+      // 取出倒算第二个
+      for (var i = 0; i < len - 1; i++) {
+        var key = keys[i];
+        if (currentNodeData && key in currentNodeData) {
+          currentNodeData = currentNodeData[key];
+        } else {
+          currentNodeData = null;
+          // 更新有问题
+          console.error("__syncUserRootValue更新有问题", pathKey);
+          break;
+        }
+      }
+
+      if (currentNodeData) {
+        var oldValue = currentNodeData[keys[len - 1]] || [];
+        var newValue;
+        // 来自数组的增删移动
+        var type = eventData.event ? eventData.event.type : undefined;
+        var index = eventData.index;
+        switch (type) {
+          case constant.ARR_OP_TYPE_DEL_ALL:
+            newValue = [];
+            break;
+          case constant.ARR_OP_TYPE_DEL_ONE:
+            if (index >= 0 && index < oldValue.length) {
+              oldValue.splice(index, 1);
+            }
+            newValue = oldValue;
+            break;
+          case constant.ARR_OP_TYPE_ADD:
+            if (index > oldValue.length - 1) {
+              oldValue.push(utils.deepCopy(eventData.data));
+            } else {
+              oldValue.splice(index, 0, utils.deepCopy(eventData.data));
+            }
+            newValue = oldValue;
+            break;
+          case constant.ARR_OP_TYPE_COPY:
+          case constant.ARR_OP_TYPE_MOVE_UP:
+            if (index > 0 && index < oldValue.length) {
+              oldValue.splice(index - 1, 0, oldValue.splice(index, 1)[0]);
+            }
+            newValue = oldValue;
+            break;
+          case constant.ARR_OP_TYPE_MOVE_DOWN:
+            if (index >= 0 && index < this.oldValue.length - 1) {
+              oldValue.splice(index + 1, 0, oldValue.splice(index, 1)[0]);
+            }
+            newValue = oldValue;
+            break;
+          default:
+            break;
+        }
+        if (oldValue !== newValue) {
+          currentNodeData[keys[len - 1]] = newValue;
+        }
+      }
+    }
+  },
+
   /**
    * 全局设置
    * @param {*} propItem
    * @param {*} value
    */
-  setValue: function(propItem, value) {
-    this.__setValue(propItem, value);
+  setValue: function(propItem, value, userRootData) {
+    this.__setValue(propItem, value, userRootData);
   },
 
   /**
@@ -42,7 +143,12 @@ let formUtils = {
    * @param {*} value
    * @param {*} hasIdxChainChanged //设置过程序是否idxChain做改变，因为父级改变，子级也做做出改变，所以子级就不用再重新设置，等值设置完后，再由父级改变idxChain
    */
-  __setValue: function(propItem, value, hasIdxChainChanged = false) {
+  __setValue: function(
+    propItem,
+    value,
+    userRootData,
+    hasIdxChainChanged = false
+  ) {
     if (propItem.array) {
       if (utils.isArr(value)) {
         var hasChanged = false;
@@ -53,14 +159,19 @@ let formUtils = {
         } else {
           //不够，补上后面的；比如数组是3个，现在直接给了4个；
           for (var i = schemaList.length; i < value.length; i++) {
-            this.addArrayItem(propItem);
+            this.addArrayItem(propItem); //  数组不设置用户值，下面统一设置
           }
           hasChanged = true;
         }
         var hasNextIdxChainChanged =
           hasChanged || hasIdxChainChanged ? true : false;
         for (var j = 0; j < value.length; j++) {
-          this.__setValue(schemaList[j], value[j], hasNextIdxChainChanged);
+          this.__setValue(
+            schemaList[j],
+            value[j],
+            undefined, // 数组不设置用户值，下面统一设置
+            hasNextIdxChainChanged
+          );
         }
         // console.log(120);
         if (hasChanged && !hasIdxChainChanged) {
@@ -70,6 +181,11 @@ let formUtils = {
             propItem.__info.pathKey
           );
         }
+        this.syncUserRootValue(
+          userRootData,
+          propItem.__info ? propItem.__info.pathKey : "",
+          this.getValue(propItem)
+        );
       } else {
         // 值的格式不区配，不必理会
         return true;
@@ -89,6 +205,11 @@ let formUtils = {
         tmpValue = value;
       }
       propItem.component.value = tmpValue;
+      this.syncUserRootValue(
+        userRootData,
+        propItem.__info ? propItem.__info.pathKey : "",
+        tmpValue
+      );
     } else if (propItem.properties) {
       if (utils.isObj(value)) {
         for (var key in propItem.properties) {
@@ -96,6 +217,7 @@ let formUtils = {
             this.__setValue(
               propItem.properties[key],
               value[key],
+              userRootData,
               hasIdxChainChanged
             );
           }
@@ -157,7 +279,7 @@ let formUtils = {
     newItem.delWarnBtns = utils.deepCopy(schema.array.delWarnBtns);
 
     if (insertInfo) {
-      this.__setValue(newItem, insertInfo.value);
+      this.__setValue(newItem, insertInfo.value, userRootData);
       if (schema.__propSchemaList.length <= insertInfo.position) {
         schema.__propSchemaList.push(newItem);
       } else {
@@ -490,7 +612,7 @@ let formUtils = {
    * @param {*} pathKey "age、more1[0].name"
    * @param {*} value
    */
-  setValueByKey: function(schema, pathKey, value) {
+  setValueByKey: function(schema, pathKey, value, userRootData) {
     // console.log("schema, pathKey: ", schema, pathKey, value);
     var targetSchema = this.__getSchemaByKey(schema, pathKey);
     // console.log("current schema: ", targetSchema);
@@ -500,7 +622,7 @@ let formUtils = {
           //是组件数组
           if (utils.isArr(value) || utils.isNull(value)) {
             //直接设置array的值
-            this.setValue(targetSchema, value ? value : []);
+            this.setValue(targetSchema, value ? value : [], userRootData);
           }
         } else {
           var tmpValue;
@@ -512,18 +634,23 @@ let formUtils = {
             tmpValue = value;
           }
           targetSchema.component.value = tmpValue;
+          this.syncUserRootValue(
+            userRootData,
+            targetSchema.__info ? targetSchema.__info.pathKey : "",
+            tmpValue
+          );
         }
       } else if (targetSchema.properties) {
         if (targetSchema.array) {
           // 是数组赋值
           if (utils.isArr(value) || utils.isNull(value)) {
             //直接设置array的值
-            this.setValue(targetSchema, value ? value : []);
+            this.setValue(targetSchema, value ? value : [], userRootData);
           }
         } else {
           // properties赋值
           if (utils.isObj(value)) {
-            this.setValue(targetSchema, value);
+            this.setValue(targetSchema, value, userRootData);
           }
         }
       }

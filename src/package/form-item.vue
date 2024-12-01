@@ -941,6 +941,7 @@ export default {
       var eventNames = [constant.INPUT_EVENT, constant.CHANGE_EVENT];
 
       var options = {
+        fromArrayOperate: true,
         value: targetValue,
         event: eventData,
         args: [eventData],

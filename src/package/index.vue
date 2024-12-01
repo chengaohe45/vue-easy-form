@@ -423,7 +423,6 @@ export default {
     var hiddenFunc = this.isHidden;
     dataCache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
 
-    this[constant.USER_ROOT_DATA] = {};
     this[constant.USER_HIDDEN] = hiddenFunc;
 
     dataCache.setGlobal(
@@ -440,7 +439,7 @@ export default {
 
   data() {
     return {
-      [constant.USER_ROOT_DATA]: {}, // 实时记录表单的根值，给用户使用
+      [constant.USER_ROOT_DATA]: {}, // 实时记录表单的根值，给用户render时使用
       [constant.USER_HIDDEN]: null,
 
       id: utils.newUid("es"),
@@ -781,6 +780,7 @@ export default {
       this.__setValue(tmpSchema, this.value);
       //进行初始化
       this.$data.formSchema = tmpSchema;
+      this[constant.USER_ROOT_DATA] = formUtils.getValue(this.$data.formSchema);
       this.__syncValue();
       // 取出第一次设置的值，用于重置
       this._esOriginalRootValue = utils.deepCopy(
@@ -1011,40 +1011,12 @@ export default {
         formUtils.setValueByKey(
           schema,
           formUtils.perfectTileValue(schema, key),
-          utils.deepCopy(value)
+          utils.deepCopy(value),
+          this[constant.USER_ROOT_DATA]
         );
       }
     },
 
-    /*
-    当组件值改变时，同步更新当前节点的值
-    */
-   /**
-    * 当组件值改变时，同步更新当前节点的值
-    * @param pathKey 当前节点的路径，必须是由点组成的
-    */
-    __syncRootNodeValue(pathKey, value) {
-      if (pathKey) {
-        var keys = pathKey.split("."); // 已经是用点连起来的
-        var len = keys.length;
-        var currentNodeData = this[constant.USER_ROOT_DATA];
-        // 取出倒算第二个
-        for (var i = 0; i < len - 1; i++) {
-          var key = keys[i];
-          if (currentNodeData && (key in currentNodeData)) {
-            currentNodeData = currentNodeData[key];
-          } else {
-            currentNodeData = null;
-            // 更新有问题
-            console.error("__syncRootNodeValue更新有问题", pathKey)
-            break;
-          }
-        }
-        if (currentNodeData) {
-          currentNodeData[keys[len - 1]] = value;
-        }
-      }
-    },
 
     /*
     把value赋给(同步)schema
@@ -1054,7 +1026,8 @@ export default {
         //value没有值
         formUtils.setValue(
           schema,
-          formUtils.perfectTileValue(schema, utils.deepCopy(value))
+          formUtils.perfectTileValue(schema, utils.deepCopy(value)),
+          this[constant.USER_ROOT_DATA]
         );
       }
     },
@@ -1062,10 +1035,15 @@ export default {
     /**
      * 当表单组件发生改变时：处理事件，同步项
      */
-    _syncFormUi(checkSchemas, eventNames, options) {
+    _syncFormUi(checkSchemas, eventNames, eventData) {
       var sourcePathKey = checkSchemas[0].__info.pathKey; // checkSchemas必有值
       if (eventNames.includes(constant.INPUT_EVENT)) {
         // 需要同步
+        if (eventData && eventData.fromArrayOperate) {
+          formUtils.syncUserRootArray(this[constant.USER_ROOT_DATA], sourcePathKey, eventData)
+        } else {
+          formUtils.syncUserRootValue(this[constant.USER_ROOT_DATA], sourcePathKey, eventData ? eventData.event : undefined)
+        }
         this.__syncValue(sourcePathKey); // 第一个就是触发源
       }
 
@@ -1084,7 +1062,7 @@ export default {
         // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
         var checkedResult = this.__checkRules(
           inputSchema,
-          options.value,
+          eventData.value,
           eventNames,
           parseSources
         );
@@ -1114,7 +1092,7 @@ export default {
         if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
           // 这个可以记录是什么导致表单改变
           if (handlers.length > 0) {
-            var infoData = Object.assign({ instance: this }, options);
+            var infoData = Object.assign({ instance: this }, eventData);
             handlers.forEach(handler => {
               handler.call(this, infoData);
             });
@@ -1137,7 +1115,7 @@ export default {
         /* 释放内存 */
         checkSchemas = null;
         eventNames = undefined;
-        options = null;
+        eventData = null;
         handlers = null;
       }
     },
