@@ -71,11 +71,8 @@ export function parseComponent(
 
     newComponent.text = newEsFuncion(component.text);
     // newComponent.hidden = newEsFuncion(component.hidden);
-    if (fromFormComponent) {
-      // 来自于表单
-      newComponent.hidden = false;
-      newComponent.__rawHidden = newEsFuncion(component.hidden);
-    } else {
+    if (!fromFormComponent) {
+      // 表单主表单组件是不能隐藏的，要隐藏是整个模块隐藏，所以隐藏放在模块中处理
       newComponent.hidden = newEsFuncion(component.hidden);
     }
 

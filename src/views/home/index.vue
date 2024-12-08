@@ -1,6 +1,6 @@
 <template>
   <div class="home-box">
-    <el-button @click="clickHandler">getRef</el-button>
+    <el-button @click="clickHandler">getRef/autoId</el-button>
     <!-- <div style="width: 90%;">
       <tabsNav>
         <tabsItem :tabsName="'tabs1'" :is-active="false"></tabsItem>
@@ -37,6 +37,7 @@ export default {
     return {
       input: undefined,
       gameName: "",
+      autoId: 0,
       schema: {
         test: {
           label: "your test",
@@ -103,7 +104,9 @@ export default {
                 name: "el-input",
                 ref: "test21",
                 props: {
-                  placeholder: "Basic usage"
+                  placeholder: () => {
+                    return "testPlaceholder" + this.autoId;
+                  }
                 },
                 text: "1"
               },
@@ -210,74 +213,73 @@ export default {
               }
             }
           }
-        },
-
-        name: {
-          hidden: "es: !!$root.checkbox",
-          label: "div",
-          component: {
-            name: "input",
-            // ref: "name",
-            props: {
-              value: "344"
-            },
-            value: "??????",
-            text: "首页位置"
-          }
-        },
-        // input: {
-        //   label: "input",
+        }
+        // name: {
+        //   hidden: "es: !!$root.checkbox",
+        //   label: "div",
         //   component: {
         //     name: "input",
-        //     value: "首页位置",
+        //     // ref: "name",
+        //     props: {
+        //       value: "344"
+        //     },
+        //     value: "??????",
+        //     text: "首页位置"
+        //   }
+        // },
+        // // input: {
+        // //   label: "input",
+        // //   component: {
+        // //     name: "input",
+        // //     value: "首页位置",
+        // //     actions: [
+        // //       {
+        // //         trigger: "input",
+        // //         handler: function() {
+        // //           console.log("update:modelValue");
+        // //         }
+        // //       }
+        // //     ]
+        // //   }
+        // // },
+        // checkbox: {
+        //   label: "checkbox",
+        //   component: {
+        //     name: "input",
+        //     props: {
+        //       type: "checkbox"
+        //     },
+        //     value: true
+        //     // actions: [
+        //     //   {
+        //     //     trigger: "input",
+        //     //     handler: function() {
+        //     //       console.log("update:modelValue");
+        //     //     }
+        //     //   }
+        //     // ]
+        //   }
+        // },
+        // radio: {
+        //   // hidden: "es: !!$root.checkbox",
+        //   label: "radio",
+        //   component: {
+        //     name: "input",
+        //     props: {
+        //       type: "radio",
+        //       value: false
+        //     },
+        //     value: false,
         //     actions: [
         //       {
-        //         trigger: "input",
+        //         trigger: "update:modelValue",
         //         handler: function() {
         //           console.log("update:modelValue");
         //         }
         //       }
         //     ]
         //   }
-        // },
-        checkbox: {
-          label: "checkbox",
-          component: {
-            name: "input",
-            props: {
-              type: "checkbox"
-            },
-            value: true
-            // actions: [
-            //   {
-            //     trigger: "input",
-            //     handler: function() {
-            //       console.log("update:modelValue");
-            //     }
-            //   }
-            // ]
-          }
-        },
-        radio: {
-          // hidden: "es: !!$root.checkbox",
-          label: "radio",
-          component: {
-            name: "input",
-            props: {
-              type: "radio",
-              value: false
-            },
-            value: false,
-            actions: [
-              {
-                trigger: "update:modelValue",
-                handler: function() {
-                  console.log("update:modelValue");
-                }
-              }
-            ]
-          }
-        }
+        // }
         // textarea: {
         //   label: "textarea",
         //   component: {
@@ -350,9 +352,10 @@ export default {
       console.log("testInput...");
     },
     clickHandler() {
+      ++this.autoId;
       // console.log("value:", value, arguments);
       // this.$emit("add-item", 123);
-      console.log("result:", this.$refs.form.getRef("test", true));
+      // console.log("result:", this.$refs.form.getRef("test", true));
     }
   },
   components: {

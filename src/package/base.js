@@ -22,6 +22,7 @@ const KEY_INDEX = "index";
 const KEY_IDX_CHAIN = "indexChain";
 const KEY_PATH_KEY = "pathKey";
 const KEY_CLOSEST_DATA = "closetData"; // 最近一个对象数据（也就是最后一个数组对应的数据）
+const KEY_CURRENT_VALUE = "current"; // 当前表单主组件的数据
 
 function defineProperty(obj, key, vm) {
   Object.defineProperty(obj, key, {
@@ -58,6 +59,10 @@ function defineProperty(obj, key, vm) {
           case KEY_PATH_KEY:
             var pathInfo = vm.info || {};
             value = pathInfo[KEY_PATH_KEY] || "";
+            break;
+          case KEY_CURRENT_VALUE:
+            var config = vm.config || {};
+            value = utils.deepCopy(config.value);
             break;
           default:
             value = vm[key];
