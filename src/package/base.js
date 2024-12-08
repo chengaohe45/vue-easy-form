@@ -1,43 +1,102 @@
 /**
  * base.js
  *
- * Copyright (c) 2019 chengaohe All rights reserved.
+ * Copyright (c) 2024 chengaohe All rights reserved.
  *
  * 无缝对接vue组件
  *
  */
 
-import utils from "./libs/utils.js";
+// import _uniq from "lodash-es/uniq";
 import constant from "./libs/constant.js";
-import dataCache from "./libs/data-cache.js";
-import { parseComponent } from "./libs/component-utils";
+import utils from "./libs/utils.js";
+import { parseComponent } from "./tools/component";
+import { execEsValue, smartEsValue } from "./tools/parse";
+
+// 此四个常量已经对外，不可随便改
+const KEY_GLOBAL = "global"; // 直接从表单组件（root）中取出
+const KEY_ROOT_DATA = "rootData"; // 直接从表单组件（root）中取出
+const KEY_ROOT = "root"; // 直接从表单组件（root）中取出
+const KEY_HIDDEN = "hidden"; // 直接从表单组件（root）中取出
+const KEY_INDEX = "index";
+const KEY_IDX_CHAIN = "indexChain";
+const KEY_PATH_KEY = "pathKey";
+const KEY_CLOSEST_DATA = "closetData"; // 最近一个对象数据（也就是最后一个数组对应的数据）
+
+function defineProperty(obj, key, vm) {
+  Object.defineProperty(obj, key, {
+    enumerable: true,
+    configurable: true,
+    get: function() {
+      if (key === KEY_INDEX) {
+        return vm[key];
+      } else {
+        var rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+        // window.testRoot = rootInstance || {};
+        // console.log("rootInstance", rootInstance);
+        var value;
+        switch (key) {
+          case KEY_ROOT_DATA:
+          case KEY_ROOT:
+            value = rootInstance[constant.USER_ROOT_DATA];
+            break;
+
+          case KEY_GLOBAL:
+            value = rootInstance[key];
+            break;
+
+          case KEY_HIDDEN:
+            value = rootInstance[constant.USER_HIDDEN];
+            break;
+          case KEY_CLOSEST_DATA:
+            value = rootInstance[constant.KEY_CLOSEST_DATA];
+            break;
+          case KEY_IDX_CHAIN:
+            var chainInfo = vm.info || {};
+            value = chainInfo[KEY_IDX_CHAIN] || "";
+            break;
+          case KEY_PATH_KEY:
+            var pathInfo = vm.info || {};
+            value = pathInfo[KEY_PATH_KEY] || "";
+            break;
+          default:
+            value = vm[key];
+            break;
+        }
+        return value;
+      }
+    }
+  });
+}
 
 ("use strict");
 
 export default {
+  // functional: true,
+
   render: function(createElement) {
-    return this.renderUi(
-      createElement,
-      this.config,
-      false,
-      constant.COM_TARGET_REF
-    );
+    return this.createVnode(createElement, this.config, false, true);
   },
-  // inheritAttrs: false,
   props: {
     config: {
-      type: Object,
+      type: [Object, Function],
       required: true,
       default: () => {
         return {
-          name: "" //lg-element 组件 原生组件
+          name: "", //lg-element 组件 原生组件
           // value: "",
           // attrs: {},
           // style: {},
           // class: {},
-          // props: {}
+          props: {}
         };
       }
+    },
+
+    index: {
+      type: Number,
+      required: false,
+      default: -1
     },
 
     // 当!!this.info为非真时，处理事件会让父级处理
@@ -47,214 +106,304 @@ export default {
       default: undefined
     },
 
-    /* 是否是主组件：也就是右边的组件；当为真时，处理事件会让父级处理 */
+    /* 是否是主组件：来自表单的组件, 因为有双向绑定 */
     isMain: {
       type: Boolean,
       required: false,
       default: false
+    },
+
+    emitEvents: {
+      type: Array,
+      required: false,
+      default: () => {
+        return [];
+      }
     }
   },
 
   data() {
     return {
-      emitOn: null,
-      nativeOn: null,
-      scopedSlots: undefined
+      // hasEsScript: false,
+      // uiIndex: 0,
+      // dataComponent: {},
+      // dataText: null,
+      // emitOn: null,
+      // nativeOn: null
+      // comVal: undefined
+      // __watchInfo: null  // 记录正在watch的目标
     };
   },
 
   created() {
+    // console.log("created...");
     this.initUi();
+    // 一般不会启用
+    if (!this.config.id) {
+      this.$watch(
+        "config", // item比较特殊
+        () => {
+          this.initUi();
+        },
+        {
+          deep: false
+        }
+      );
+    }
   },
 
   methods: {
     initUi() {
-      var ref = constant.COM_TARGET_REF;
-      this.$data.emitOn = this.createEmitOn(this.config, this.isMain, ref);
-      this.$data.nativeOn = this.createNativeOn(this.config, this.isMain, ref);
-      this.$data.scopedSlots = this.createScopedSlots(this.config, ref);
+      this.createDep();
+      this.emitOn = this.createEventOn(this.config, true, false);
+      this.nativeOn = this.createEventOn(this.config, true, true);
+    },
+
+    eventHandler(config, isNative, eventName, args) {
+      var eventData = args ? args[0] : undefined;
+      if (this.config === config && this.emitEvents.includes(eventName)) {
+        // 主组件，非slot
+        // console.log("this.config === config", this.config === config);
+        this.$emit(eventName, eventData);
+      }
+
+      if (this.isMain && this.config === config) {
+        // 主组件：让父类去处理
+        this.$emit("trigger", eventName, args, this.getConfigRef());
+        return true;
+      }
+      // console.log("config", config);
+      var handlers = this.getHandlers(config, isNative, eventName);
+      if (handlers && handlers.length > 0) {
+        // var options = {
+        //   value: utils.deepCopy(targetValue),
+        //   event: eventData,
+        //   args: args,
+        //   pathKey: this.schema.__info.pathKey,
+        //   index: this.schema.__info.index,
+        //   idxChain: this.schema.__info.idxChain,
+        //   target: target
+        // };
+        // 一般组件，自己处理
+        // var options = {
+        //   value: utils.deepCopy(config.value),
+        //   event: args[0],
+        //   args: args,
+        //   pathKey: this.info.pathKey,
+        //   index: this.info.index,
+        //   idxChain: this.info.idxChain,
+        //   target: this.$refs[ref]
+        // };
+        var data = {
+          event: eventData,
+          source: this.item,
+          target: this.getConfigRef(),
+          index: this.index
+        };
+
+        var listInstance = utils.getParent(this, constant.AD_LIST_NAME);
+        listInstance._triggerComEventHandler(handlers, data);
+        listInstance = null;
+      }
+    },
+
+    getConfigRef() {
+      return this.$children && this.$children.length > 0
+        ? this.$children[0]
+        : this;
     },
 
     /**
-     * 渲染函数
-     * @param {*} createElement 创建VNode的函数
-     * @param {*} config        组件设置
-     * @param {*} isSlotCom     是否插槽的组件，因为事件不一样，插槽数据也不一样
-     * @returns VNode
+     * 创建所需要监听的事件(emit)
+     * @param {*} config
+     * @param {*} isRootRender 代表来自非插槽（首个config为对象）
+     * @returns
      */
-    renderUi(createElement, config, isSlotCom, ref) {
+    createEventOn(config, isRootRender, isNative) {
+      // jsx和纯函数写法不用监听事件
+      if (config.jsx || config.func) {
+        return null;
+      }
+      var hasInputValue =
+        (this.isMain && config === this.config) || !!config.__rawVModel; // 所有组件的value都设置为可同步
+
+      // 统计出要监听的事件
+      var eventNames = isNative
+        ? config.__extraNativeEvents
+        : config.__extraEmitEvents;
+      eventNames = eventNames || [];
+      var eventOn = isNative ? config.nativeOn : config.on;
+      if (eventOn) {
+        // eventNames = Object.keys(eventOn);
+        for (var eventName in eventOn) {
+          if (!eventNames.includes(eventName)) {
+            eventNames.push(eventName);
+          }
+        }
+      }
+      if (!isNative) {
+        if (hasInputValue && !eventNames.includes(constant.INPUT_EVENT)) {
+          eventNames.push(constant.INPUT_EVENT);
+        }
+        // 主界面的组件才需要
+        if (isRootRender && this.emitEvents.length) {
+          this.emitEvents.forEach(function(emitEvent) {
+            if (!eventNames.includes(emitEvent)) {
+              eventNames.push(emitEvent);
+            }
+          });
+        }
+      }
+
+      var extOn = {};
+      var _this = this;
+      eventNames.forEach(eventName => {
+        if (!isNative && eventName == constant.INPUT_EVENT && hasInputValue) {
+          extOn[eventName] = function() {
+            _this.syncValue(config, arguments[0]);
+            _this.eventHandler(config, isNative, eventName, arguments);
+          };
+        } else {
+          extOn[eventName] = function() {
+            _this.eventHandler(config, isNative, eventName, arguments);
+          };
+        }
+      });
+
+      return Object.keys(extOn).length > 0 ? extOn : null;
+    },
+
+    getHandlers(config, isNative, eventName) {
+      var eventOn = isNative ? config.nativeOn : config.on;
+      var handlers = eventOn[eventName] || [];
+      return handlers;
+    },
+
+    syncValue(config, eventValue) {
+      if (this.isMain && this.config === config) {
+        if (config.value !== eventValue) {
+          config.value = eventValue;
+        }
+      } else if (config.__rawVModel) {
+        var parseSources = {
+          global: this.global,
+          root: {},
+          event: eventValue,
+          index: this.index
+        };
+        // var options = {
+        //   global: dataCache.getGlobal(vm.config.__formId),
+        //   rootData: dataCache.getRoot(vm.config.__formId), // 兼容1.7.0以前，不包括1.7.0
+        //   root: dataCache.getRoot(vm.config.__formId),
+        //   idxChain: vm.info.idxChain,
+        //   index: vm.info.index,
+        //   pathKey: vm.info.pathKey,
+        //   $hidden: dataCache.getHiddenFunc(vm.config.__formId)
+        // };
+        smartEsValue(config.__rawVModel, parseSources);
+      } else {
+        // this.$data.comVal = eventValue;
+      }
+    },
+
+    createDep() {
+      if (!this.config.jsx) {
+        if (!this.__tmpParseSources) {
+          var parseSources = {
+            config: {},
+            event: undefined
+          };
+          defineProperty(parseSources, KEY_GLOBAL, this);
+          defineProperty(parseSources, KEY_INDEX, this);
+          defineProperty(parseSources, KEY_IDX_CHAIN, this);
+          defineProperty(parseSources, KEY_PATH_KEY, this);
+          defineProperty(parseSources, KEY_HIDDEN, this);
+          defineProperty(parseSources, KEY_ROOT_DATA, this);
+          defineProperty(parseSources, KEY_ROOT, this);
+          defineProperty(parseSources, KEY_CLOSEST_DATA, this);
+
+          // 在render中使用
+          this.__tmpParseSources = parseSources;
+        }
+      } else if (this.__tmpParseSources) {
+        this.__tmpParseSources = undefined;
+      }
+      // this.uiIndex++;
+    },
+
+    /**
+     *
+     * @param {*} createElement
+     * @param {*} config
+     * @param {*} fromSlot 这个来自于插槽
+     * @param {*} isRootRender 来自主渲染
+     * @returns
+     */
+    createVnode(createElement, config, fromSlot, isRootRender) {
       var vnode;
-      // 根据vue源代码, VNode是不会被劫持的
-      if (utils.isVNode(config)) {
-        vnode = config;
-      } else if (utils.isObj(config)) {
-        if (!config.name) {
-          console.error("错误的config: ", config);
+      var dataComponent = this.fillDataForConfig(
+        createElement,
+        config,
+        fromSlot,
+        isRootRender
+      );
+      if (fromSlot && utils.isStr(dataComponent)) {
+        return dataComponent; // 插槽可以直接使用字符串
+      }
+      if (utils.isVNode(dataComponent.jsx)) {
+        vnode = dataComponent.jsx;
+      } else {
+        // 一般的写法
+        if (!dataComponent.name) {
+          console.error("错误的config: ", dataComponent);
           throw "es-base config.name必须存在";
         }
-
-        // 防止props不存在
-        var configProps = config.props ? config.props : {};
-
-        // 计算出props, attrs
-        var newProps = {};
-        var newAttrs = {};
-        var domProps = {};
-
-        var directives = config.directives
-          ? utils.deepCopy(config.directives)
-          : []; // false, 不是数组也没有事
-
-        var componentName = config.name.toLowerCase
-          ? config.name.toLowerCase()
-          : config.name;
-        if (
-          componentName === constant.TAG_INPUT && // 不区分大小写
-          (configProps.type === constant.TYPE_RADIO ||
-            configProps.type === constant.TYPE_CHECKBOX)
-        ) {
-          if (configProps.type === constant.TYPE_RADIO) {
-            Object.assign(newAttrs, configProps);
-            if (config.hasOwnProperty("value")) {
-              // 用户设置了value的情况
-              newAttrs.checked = config.value === configProps.value;
-            } else {
-              // 没有用户value
-              newAttrs.checked =
-                configProps.hasOwnProperty("checked") &&
-                configProps.checked !== false
-                  ? true
-                  : false;
-            }
-
-            Object.assign(newProps, configProps);
-            if (newProps.hasOwnProperty("checked")) {
-              delete newProps.checked;
-            }
-
-            domProps.checked = newAttrs.checked;
-          } else {
-            var checked = false;
-            if (config.hasOwnProperty("value")) {
-              if (!utils.isUndef(configProps.trueValue)) {
-                // 经测试，若指定了trueValue，无论falseValue是否指定，只有值等于trueValue，checked才为true
-                if (config.value === configProps.trueValue) {
-                  checked = true;
-                } else {
-                  checked = false;
-                }
-              } else if (!utils.isUndef(configProps.falseValue)) {
-                // 经测试：当trueValue没有指定，falseValue指定，只有值等于falseValue，checked才为false
-                if (config.value === configProps.falseValue) {
-                  checked = false;
-                } else {
-                  checked = true;
-                }
-              } else {
-                // 经测试：当trueValue和falseValue没有指定，checked才为!!config.value
-                checked = !!config.value;
-              }
-            } else {
-              checked =
-                configProps.hasOwnProperty("checked") &&
-                configProps.checked !== false
-                  ? true
-                  : false;
-            }
-            Object.assign(newAttrs, configProps);
-            newAttrs.checked = checked;
-
-            Object.assign(newProps, configProps);
-            if (newProps.hasOwnProperty("checked")) {
-              delete newProps.checked;
-            }
-
-            domProps.checked = newAttrs.checked;
-          }
-        } else {
-          var newValue;
-          if (config.hasOwnProperty("value")) {
-            newValue = utils.isRefVal(config.value)
-              ? utils.deepCopy(config.value)
-              : config.value; // 这样防止引用地址被组件内部修改
-          } else {
-            newValue = configProps.value;
-          }
-          if (!constant.FORM_INPUTS.includes(componentName)) {
-            Object.assign(newAttrs, configProps);
-            if (newAttrs.hasOwnProperty("value")) {
-              delete newAttrs.value;
-            }
-            Object.assign(newProps, configProps);
-            newProps.value = newValue;
-          } else {
-            Object.assign(newAttrs, configProps);
-            if (newAttrs.hasOwnProperty("value")) {
-              delete newAttrs.value;
-            }
-
-            Object.assign(newProps, configProps);
-            if (newProps.hasOwnProperty("value")) {
-              delete newProps.value;
-            }
-
-            // 经测试（value）：
-            // textarea必须要在domProps才能显示；
-            // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
-            domProps.value = newValue;
-          }
-        }
-
-        let emitOn, nativeOn, scopedSlots, tmpRef;
-        if (!isSlotCom) {
-          // 内容组件，非插槽组件: 因为常用，所以计算好(为什么这里要弄一个副本，因为this.$data.emitOn直接赋值于createElement事件on中，在初化时会执行两次，具体原因估计看vue的实现方式)
-          emitOn = this.$data.emitOn
-            ? Object.assign({}, this.$data.emitOn)
-            : null;
-          nativeOn = this.$data.nativeOn
-            ? Object.assign({}, this.$data.nativeOn)
-            : null;
-          scopedSlots = this.$data.scopedSlots;
-        } else {
-          // 很少用，且scopedSlots有可能包含函数，必须实时解析
-          emitOn = this.createEmitOn(config, false, ref);
-          nativeOn = this.createNativeOn(config, false, ref);
-          scopedSlots = this.createScopedSlots(config, ref);
-        }
-        // COM_TARGET_REF时ref必须存在，因为要搜索
-        if (ref === constant.COM_TARGET_REF || emitOn || nativeOn) {
-          tmpRef = ref;
-        }
-
         vnode = createElement(
-          config.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
+          dataComponent.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
           {
-            attrs: newAttrs, //attrs为原生属性
-
-            // 类型要求见：https://cn.vuejs.org/v2/guide/class-and-style.html
-            // config.class必须是String,Object, Array才能有效；当然传入其它类型也可以，只是没有效果，也不会报错，因为createElement会做处理
-            class: config.class,
-            style: config.style, // config.style必须是一个对象才能有效；原理同上
-
-            domProps: domProps, // DOM属性
-
-            props: newProps, // 组件props
+            attrs: dataComponent.props, //attrs为原生属性
+            // style: this.config.style,
+            class: dataComponent.class,
+            style: dataComponent.style,
+            // DOM属性
+            domProps: dataComponent.domProps,
+            // 组件props
+            props: dataComponent.props,
             // 事件监听基于 "on"
             // 所以不再支持如 "v-on:keyup.enter" 修饰语
             // 需要手动匹配 KeyCode
-            on: emitOn,
+            on: dataComponent.on,
 
             // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
-            nativeOn: nativeOn,
-
+            nativeOn: dataComponent.nativeOn,
             // 自定义指令。注意事项：不能对绑定的旧值设值
             // Vue 会为您持续追踪
-            directives: directives,
+            directives: dataComponent.directives,
+            // directives: [
+            //   {
+            //   	name: "my-custom-directive",
+            //   	value: "2",
+            //   	expression: "1 + 1",
+            //   	arg: "foo",
+            //   	modifiers: {
+            //   		bar: true
+            //   	}
+            //   }
+            // ],
             // Scoped slots in the form of
-            scopedSlots: scopedSlots,
-            ref: tmpRef
+            // { name: props => VNode | Array<VNode> }
+            scopedSlots: dataComponent.scopedSlots
+            // 如果组件是其他组件的子组件，需为插槽指定名称
+            // slot: "name-of-slot",
+            // 其他特殊顶层属性
+            // key: "myKey",
+            // ref: "myRef"
+            // ref: "__comTarget__"
           },
-          config.text
+          // [createElement('span', "test")]
+          // ["test2"]
+          // "测试{{config.value}}" // 子组件中的阵列
+          dataComponent.normalSlots || []
         );
 
         // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
@@ -264,346 +413,344 @@ export default {
           componentOptions && componentOptions.Ctor.options.props
             ? componentOptions.Ctor.options.props
             : false;
-        if (Object.keys(newProps || {}).length) {
+        var thisProps = dataComponent.props;
+        // if (this.config.name === "el-button") {
+        //   console.log("-------thisProps------", thisProps);
+        // }
+        if (Object.keys(thisProps || {}).length) {
           var comPropsKeys = Object.keys(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-          var key;
-          for (key in newProps) {
+          for (var key in thisProps) {
             if (!comPropsKeys.includes(key)) {
-              dataAttrs[key] = newProps[key];
+              dataAttrs[key] = thisProps[key];
             }
           }
-          // newAttrs要在newProps后处理，因为在vnode.data.attrs要保留newAttrs的值
-          for (key in newAttrs) {
-            if (!comPropsKeys.includes(key)) {
-              dataAttrs[key] = newAttrs[key];
-            }
-          }
-
-          // if (config.name === "el-input") {
-          //   console.log("dataAttrs", utils.deepCopy(dataAttrs));
-          //   console.log("1 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
-          //   console.log("newProps", utils.deepCopy(newProps));
-          // }
           if (vnode.data) {
             vnode.data.attrs = dataAttrs;
           }
-          // if (config.name === "g-test-com") {
-          //   console.log("2 vnode.data.attrs", utils.deepCopy(vnode.data.attrs));
-          // }
         }
-
-        newAttrs = null;
-        newProps = null;
-        domProps = null;
-        directives = null;
-
-        configProps = null;
-      } else if (utils.isFunc(config)) {
-        var options = {
-          global: dataCache.getGlobal(this.config.__formId), // 直接取组件__formId，插槽是没有__formId的
-          rootData: dataCache.getRoot(this.config.__formId), // 兼容1.7.0以前，不包括1.7.0
-          root: dataCache.getRoot(this.config.__formId),
-          idxChain: this.info.idxChain,
-          index: this.info.index,
-          pathKey: this.info.pathKey,
-          $hidden: dataCache.getHiddenFunc(this.config.__formId)
-        };
-
-        vnode = config(options);
-        if (!utils.isVNode(vnode)) {
-          vnode = this.renderUi(createElement, vnode, isSlotCom, ref);
-        }
-        options = null;
-      } else if (
-        utils.isStr(vnode) ||
-        utils.isUndef(vnode) ||
-        utils.isNum(vnode) ||
-        utils.isBool(vnode) ||
-        utils.isNull(vnode)
-      ) {
-        vnode = createElement("span", vnode); // 经验证，这样写没有问题：vnode不用加""
-      } else {
-        console.error("错误的config: ", config);
-        throw "es-base config当是一个函数时，其返回值必须是一个虚拟节点或字符串";
       }
 
-      // 这个不能删除：vue机制，主要是为了执行config.__refreshIndex；当表单改变时，同步更新页面
-      if (
-        !isSlotCom &&
-        config &&
-        config.__refreshIndex &&
-        this.__slotUpdateTime
-      ) {
-        // 永远都不会进入这，因为__slotUpdateTime没有值的
-        this.__slotUpdateTime++;
-      }
+      dataComponent = null;
 
       return vnode;
     },
 
-    eventHandler(config, eventName, args, isMain, ref) {
-      args = args ? args : [];
-      // console.log("this.$refs", this.$refs);
-      if (isMain) {
-        // 主组件：让父类去处理
-        this.$emit("trigger", eventName, args, this.$refs[ref]);
+    fillDataForConfig(createElement, config, fromSlot, isRootRender) {
+      var newComponent = {};
+
+      if (config.jsx) {
+        return config;
+      }
+      var parseSources = this.__tmpParseSources;
+      if (!config.func) {
+        // 解析props
+        // 合并attrs, props: attrs优先级更高
+        var domProps = {};
+        var valueKey = "value";
+        var dataProps = config.attrs ? Object.assign({}, config.attrs) : {};
+        if (this.isMain && !fromSlot) {
+          // 来自于表单的主组件且非slot(也就是最外层), 取value值
+          if ("value" in config) {
+            // dataProps[valueKey] = utils.isRefVal(config.value)
+            //   ? utils.deepCopy(config.value)
+            //   : config.value; // 这样防止引用地址被组件内部修改
+            dataProps[valueKey] = config.value;
+          }
+        }
+        var propValue;
+        for (var key in config.props) {
+          // 若存在key, 说明来自于attrs
+          if (!(key in dataProps)) {
+            var scriptTxt = config.props[key];
+            propValue = execEsValue(scriptTxt, parseSources);
+            dataProps[key] = propValue;
+          }
+        }
+
+        if (constant.FORM_INPUTS.includes(config.name)) {
+          // 经测试（value）：
+          // textarea必须要在domProps才能显示；
+          // input第一次可以在newAttrs写，之后也要在domProps才能显示值，所以也要是domProps才保险
+          if (valueKey in dataProps) {
+            domProps[valueKey] = dataProps[valueKey];
+            delete dataProps[valueKey];
+          }
+        }
+
+        // console.log("dataProps: ", dataProps);
+        newComponent.name = config.name;
+        newComponent.props = dataProps;
+        newComponent.domProps = domProps;
+
+        // 解析style
+        if (config.style) {
+          var style = execEsValue(config.style, parseSources);
+          if (utils.isObj(style)) {
+            newComponent.style = style;
+          }
+        }
+
+        // 解析class
+        if (config.class) {
+          var newClass = execEsValue(config.class, parseSources);
+          if (
+            utils.isStr(newClass) ||
+            utils.isObj(newClass) ||
+            utils.isArr(newClass)
+          ) {
+            newComponent.class = newClass;
+          }
+        }
+
+        // 指令
+        if (config.directives && utils.isObj(config.directives)) {
+          var newDirectives = [
+            // {
+            //   name: "my-custom-directive",
+            //   value: "2",
+            //   expression: "1 + 1",
+            //   arg: "foo",
+            //   modifiers: {
+            //     bar: true
+            //   }
+            // }
+          ];
+          var directives = config.directives;
+          for (var directiveName in directives) {
+            var directiveValue = execEsValue(
+              directives[directiveName],
+              parseSources
+            );
+            newDirectives.push({
+              name: directiveName,
+              value: directiveValue
+            });
+          }
+          newComponent.directives = newDirectives;
+        }
+
+        // 非作用域插槽
+        var slotInfo = this.createNormalSlots(
+          createElement,
+          config.normalSlots
+        );
+        // console.log("slotInfo", slotInfo);
+        var normalSlots = slotInfo.normalSlots || [];
+
+        // 作用域插槽
+        var scopedSlots = this.createScopedSlots(
+          createElement,
+          config.scopedSlots
+        );
+        scopedSlots = Object.assign({}, slotInfo.scopedSlots, scopedSlots);
+        newComponent.scopedSlots = scopedSlots;
+        newComponent.normalSlots = normalSlots;
+        newComponent.on = isRootRender
+          ? this.emitOn
+          : this.createEventOn(config, false, false);
+        newComponent.nativeOn = isRootRender
+          ? this.nativeOn
+          : this.createEventOn(config, false, true);
+
+        // 解析text
+        var dataText = execEsValue(config.text, parseSources);
+        if (dataText !== undefined && dataText !== null) {
+          // newComponent.text = dataText + "";
+          normalSlots.push(dataText + "");
+        }
       } else {
-        // 一般组件，自己处理
-        var options = {
-          value: utils.deepCopy(config.value),
-          event: args[0],
-          args: args,
-          pathKey: this.info.pathKey,
-          index: this.info.index,
-          idxChain: this.info.idxChain,
-          target: this.$refs[ref]
-        };
-
-        var handlers = [];
-        var actions = config.actions;
-        if (actions) {
-          actions.forEach(action => {
-            if (action.trigger && action.trigger.includes(eventName)) {
-              handlers.push(action.handler);
+        // 是函数
+        var func = config.func;
+        var result;
+        result = func(parseSources);
+        if (utils.isVNode(result)) {
+          newComponent.jsx = result;
+        } else if (utils.isObj(result) && result.name) {
+          // 返回一个组件，再次解析
+          var newResult = parseComponent(result);
+          if (newResult) {
+            newResult = this.fillDataForConfig(
+              createElement,
+              newResult,
+              fromSlot
+            );
+            if (newResult) {
+              // 函数返回新的组件对象
+              return newResult;
             }
-          });
+          }
         }
-
-        if (handlers.length > 0) {
-          var thisFrom = this.__getForm();
-          thisFrom._handleEvents(handlers, options);
-        }
-      }
-    },
-
-    __getForm() {
-      var formItem = this.$parent;
-      while (formItem) {
-        var type = formItem._getType ? formItem._getType() : "";
-        if (type == constant.UI_FORM) {
-          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
-          return formItem; // 到达表单层
-        } else if (type == constant.UI_ARRAY) {
-          // checkSchema.push(formItem._getSchema());
-        } else {
-          // ... 往上派
-        }
-        formItem = formItem.$parent;
-      }
-    },
-
-    __parseInputEvent(config, eventData) {
-      var eventValue;
-      if (eventData && eventData.target && eventData.target.nodeName) {
-        var tagName = eventData.target.tagName;
-        var nodeType = eventData.target.type;
-        if (tagName.toLowerCase() === constant.TAG_INPUT) {
-          var configProps;
-          if (nodeType === constant.TYPE_RADIO) {
-            // 防止props不存在
-            configProps = config.props ? config.props : {};
-            if (eventData.target.checked) {
-              eventValue = configProps.value;
-            } else {
-              eventValue = undefined;
-            }
-          } else if (nodeType === constant.TYPE_CHECKBOX) {
-            // 防止props不存在
-            configProps = config.props ? config.props : {};
-            if (eventData.target.checked) {
-              eventValue = true;
-              if (!utils.isUndef(configProps.trueValue)) {
-                eventValue = configProps.trueValue;
-              }
-            } else {
-              eventValue = false;
-              if (!utils.isUndef(configProps.falseValue)) {
-                eventValue = configProps.falseValue;
-              }
+        if (!newComponent.jsx) {
+          if (!fromSlot) {
+            newComponent.name = "span";
+            newComponent.props = {};
+            if (result !== undefined && result !== null) {
+              // newComponent.text = result + "";
+              result = result + "";
+              newComponent.normalSlots = result ? [result] : [];
             }
           } else {
-            eventValue = eventData.target.value;
+            // 可以返回字符串
+            if (result !== undefined && result !== null) {
+              return result + "";
+            } else {
+              return "";
+            }
           }
-        } else {
-          eventValue = eventData.target.value;
         }
-      } else {
-        eventValue = eventData;
       }
-      return eventValue;
+
+      parseSources = null; // 删掉临时数据
+
+      return newComponent;
     },
 
-    /**
-     * 创建emit派发所需要监听的事件
-     */
-    createEmitOn(config, isMain, ref) {
-      var _thisVm = this;
-
-      var hasOwnValue = config.hasOwnProperty("value");
-      var emitEvents;
-      if (config.__emitEvents) {
-        emitEvents = utils.deepCopy(config.__emitEvents);
-        if (hasOwnValue && !emitEvents.includes(constant.INPUT_EVENT)) {
-          emitEvents.push(constant.INPUT_EVENT);
-        }
-      } else {
-        if (hasOwnValue) {
-          emitEvents = [constant.INPUT_EVENT];
-        } else {
-          emitEvents = [];
+    // 返回对象，内包含{normalSlots: [], scopedSlots: {}}
+    createNormalSlots(createElement, normalSlots) {
+      var newNormalSlots = [];
+      var newScopedSlots = {};
+      if (normalSlots) {
+        // console.log("normalSlots", normalSlots);
+        for (var key in normalSlots) {
+          var vnodes = this.newNoramlSlot(createElement, normalSlots[key]);
+          // console.log("vnodes", vnodes);
+          if (vnodes.length > 0) {
+            // 生成slot
+            var slotVnode = createElement(
+              "template",
+              { slot: key === "default" ? undefined : key },
+              vnodes
+            );
+            newNormalSlots.push(slotVnode);
+            // 为什么做这一步：因为用template写时，非插槽也会编译成$scopedSlots,导致组件实现时也可能用到了$scopedSlots
+            newScopedSlots[key] = function() {
+              return vnodes;
+            };
+          }
         }
       }
+      return { normalSlots: newNormalSlots, scopedSlots: newScopedSlots };
+    },
 
-      // emit发出的事件
-      var emitOn = {};
-      emitEvents.forEach(eventName => {
-        if (eventName == constant.INPUT_EVENT && hasOwnValue) {
-          emitOn[eventName] = function(eventData) {
-            var eventValue = _thisVm.__parseInputEvent(config, eventData);
-            if (config.value !== eventValue) {
-              config.value = eventValue;
-              _thisVm.eventHandler(config, eventName, arguments, isMain, ref);
-            }
-          };
+    newNoramlSlot(createElement, slotValue) {
+      if (!utils.isArr(slotValue)) {
+        slotValue = [slotValue];
+      }
+
+      // 解析函数部分
+      var nodes = [];
+      slotValue.forEach(slotValueItem => {
+        if (utils.isFunc(slotValueItem)) {
+          var nodeResult = slotValueItem(this.__tmpParseSources);
+          if (utils.isArr(nodeResult)) {
+            nodes = nodes.concat(nodeResult);
+          } else if (nodeResult !== undefined && nodeResult !== null) {
+            nodes.push(nodeResult);
+          }
         } else {
-          emitOn[eventName] = function() {
-            _thisVm.eventHandler(config, eventName, arguments, isMain, ref);
-          };
+          nodes.push(slotValueItem);
         }
       });
 
-      if (Object.keys(emitOn).length > 0) {
-        return emitOn;
-      } else {
-        _thisVm = undefined; // 没有关联清除
-        return null;
-      }
-    },
-
-    /**
-     * 创建原生事件所需要监听的事件
-     */
-    createNativeOn(config, isMain, ref) {
-      // emit发出的事件
-      if (config.__nativeEvents && config.__nativeEvents.length > 0) {
-        var _thisVm = this;
-        var nativeOn = {};
-        var nativeEvents = utils.deepCopy(config.__nativeEvents);
-        nativeEvents.forEach(eventName => {
-          nativeOn[eventName] = function() {
-            _thisVm.eventHandler(
-              config,
-              eventName + "." + constant.ADJ_NATIVE,
-              arguments,
-              isMain,
-              ref
+      var newVNodes = [];
+      nodes.forEach(node => {
+        if (utils.isVNode(node)) {
+          newVNodes.push(node);
+        } else if (utils.isObj(node) || utils.isFunc(node)) {
+          var newComponent = parseComponent(node);
+          if (newComponent) {
+            var newVNode = this.createVnode(
+              createElement,
+              newComponent,
+              true,
+              false
             );
-          };
-        });
-
-        if (Object.keys(nativeOn).length > 0) {
-          return nativeOn;
-        } else {
-          _thisVm = undefined;
-          return null;
+            // console.log("newVNode, newComponent", newVNode, newComponent);
+            if (newVNode) {
+              newVNodes.push(newVNode);
+            }
+          }
+        } else if (node !== undefined && node !== null) {
+          newVNodes.push(node + "");
         }
-      } else {
-        return null;
-      }
+      });
+
+      return newVNodes;
     },
 
-    createScopedSlots(config, pref) {
-      var scopedSlots = config.scopedSlots;
+    // 返回的是一个对象
+    createScopedSlots(createElement, scopedSlots) {
       if (scopedSlots) {
         var newScopedSlots = {};
         for (var key in scopedSlots) {
-          newScopedSlots[key] = this.newSlotFunc(key, scopedSlots[key], pref);
+          newScopedSlots[key] = this.newScopedSlotFunc(
+            createElement,
+            scopedSlots[key]
+          );
         }
         return newScopedSlots;
       } else {
-        return undefined;
+        return {};
       }
     },
 
-    newSlotFunc(key, slotValue, pref) {
-      var vm = this;
-      return function(scoped) {
-        var vnodes;
-        if (utils.isFunc(slotValue)) {
-          var options = {
-            global: dataCache.getGlobal(vm.config.__formId),
-            rootData: dataCache.getRoot(vm.config.__formId), // 兼容1.7.0以前，不包括1.7.0
-            root: dataCache.getRoot(vm.config.__formId),
-            idxChain: vm.info.idxChain,
-            index: vm.info.index,
-            pathKey: vm.info.pathKey,
-            $hidden: dataCache.getHiddenFunc(vm.config.__formId)
-          };
-          scoped = scoped ? scoped : {};
-          vnodes = slotValue(options, scoped);
-          if (!utils.isArr(vnodes)) {
-            vnodes = [vnodes];
-          }
-          var tmpVNodes = [];
-          vnodes.forEach(function(vnode) {
-            if (!utils.isVNode(vnode) && utils.isObj(vnode)) {
-              var newComponent = parseComponent(
-                vnode,
-                vm.info.pathKey + "> scopeSlots(function返回值) > " + key,
-                true,
-                false
-              );
-              if (newComponent) {
-                tmpVNodes.push(newComponent);
-              }
-            } else {
-              tmpVNodes.push(vnode);
-            }
-          });
-          vnodes = tmpVNodes;
-        } else {
-          vnodes = [slotValue];
+    newScopedSlotFunc(createElement, slotValue) {
+      return scoped => {
+        if (!utils.isArr(slotValue)) {
+          slotValue = [slotValue];
         }
 
-        var newVNode,
-          newVNodes = [];
-        vnodes.forEach(function(vnode, index) {
-          if (!utils.isVNode(vnode) && utils.isObj(vnode)) {
-            if (!vnode.hidden) {
-              newVNode = vm.renderUi(
-                vm.$createElement,
-                vnode,
-                true,
-                pref + "_" + index
-              );
-              newVNodes.push(newVNode);
+        // 解析函数部分
+        var nodes = [];
+        slotValue.forEach(slotValueItem => {
+          if (utils.isFunc(slotValueItem)) {
+            var nodeResult = slotValueItem(this.__tmpParseSources, scoped);
+            if (utils.isArr(nodeResult)) {
+              nodes = nodes.concat(nodeResult);
+            } else if (nodeResult !== undefined && nodeResult !== null) {
+              nodes.push(nodeResult);
             }
           } else {
-            newVNodes.push(vnode);
+            nodes.push(slotValueItem);
           }
         });
 
-        if (newVNodes.length <= 0) {
-          newVNodes = undefined;
-        }
-
+        var newVNodes = [];
+        nodes.forEach(node => {
+          if (utils.isVNode(node)) {
+            newVNodes.push(node);
+          } else if (utils.isObj(node) || utils.isFunc(node)) {
+            var newComponent = parseComponent(node);
+            if (newComponent) {
+              var newVNode = this.createVnode(
+                createElement,
+                newComponent,
+                true,
+                false
+              );
+              if (newVNode) {
+                newVNodes.push(newVNode);
+              }
+            }
+          } else if (node !== undefined && node !== null) {
+            newVNodes.push(node + "");
+          }
+        });
+        // console.log("newVNodes", newVNodes);
         return newVNodes;
       };
     }
   },
 
-  destroyed() {
-    this.$data.emitOn = null;
-    this.$data.nativeOn = null;
-    this.$data.scopedSlots = null;
-  },
+  destroyed() {},
 
   watch: {
-    config: {
-      handler: function(/* newVal, oldVal */) {
-        this.initUi();
-      },
-      deep: false
-    }
+    // config: {
+    //   handler: function(/* newVal, oldVal */) {
+    //     // console.log("base.config here...");
+    //     this.initUi();
+    //   },
+    //   deep: false
+    // }
   }
 };

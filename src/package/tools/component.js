@@ -15,14 +15,19 @@ function newComponentId() {
  * 解析组件
  * @param {*} component 组件配置
  * @param {*} canEmpty  是否可返回空值
- * @param {*} clearVModel 是否需要双向绑定数据（表单不需要，因为有绑定功能；但其它组件需要）
+ * @param {*} fromFormComponent 是否需要双向绑定数据（表单不需要，因为有绑定功能；但其它组件需要）
+ * * @param {*} sourcePathKey 组件出处，主要用来打印
  * @returns newComponent 返回合法的组件配置
  */
 export function parseComponent(
   component,
   canEmpty = false,
-  clearVModel = false
+  fromFormComponent = false,
+  sourcePathKey = ""
 ) {
+  if (sourcePathKey) {
+    sourcePathKey = sourcePathKey + ": ";
+  }
   var newComponent = {
     id: "c" + newComponentId()
   };
@@ -31,8 +36,8 @@ export function parseComponent(
   } else if (utils.isObj(component) && Object.keys(component).length > 0) {
     if (!component.name) {
       if (canEmpty !== true) {
-        console.error("name必须存在", component);
-        throw "name必须存在";
+        console.error(sourcePathKey + "name必须存在", component);
+        throw sourcePathKey + "name必须存在";
       } else {
         return null;
       }
@@ -65,7 +70,14 @@ export function parseComponent(
     }
 
     newComponent.text = newEsFuncion(component.text);
-    newComponent.hidden = newEsFuncion(component.hidden);
+    // newComponent.hidden = newEsFuncion(component.hidden);
+    if (fromFormComponent) {
+      // 来自于表单
+      newComponent.hidden = false;
+      newComponent.__rawHidden = newEsFuncion(component.hidden);
+    } else {
+      newComponent.hidden = newEsFuncion(component.hidden);
+    }
 
     var actions = parseActions(component.actions); // 原来的写法
     var emitOn = parseOn(component.on); // emit发出来的
@@ -114,6 +126,7 @@ export function parseComponent(
           staticAttrs[staticKey] = tmpProps[key]; // 保持原样，不用解析（旧式写法）
         }
       }
+      // console.log('newProps', newProps)
       newComponent.props = newProps;
     } else {
       newComponent.props = {};
@@ -127,7 +140,7 @@ export function parseComponent(
       newComponent.attrs = staticAttrs;
     }
 
-    if (!clearVModel) {
+    if (!fromFormComponent) {
       var vModelValue = component["vModel"] || component["v-model"];
       if (!utils.isUndef(vModelValue) && !utils.isNull(vModelValue)) {
         var valueKey = "value";
@@ -164,7 +177,8 @@ export function parseComponent(
           } else {
             if (canEmpty !== true) {
               throw new Error(
-                "vModel.context是一个对象时，target必须是一个字符串组成的数组或字符串"
+                sourcePathKey +
+                  "vModel.context是一个对象时，target必须是一个字符串组成的数组或字符串"
               );
             } else {
               return null;
@@ -173,7 +187,7 @@ export function parseComponent(
 
           if (keyTargets.length <= 0) {
             if (canEmpty !== true) {
-              throw new Error("vModel.target必须有值");
+              throw new Error(sourcePathKey + "vModel.target必须有值");
             } else {
               return null;
             }
@@ -199,7 +213,8 @@ export function parseComponent(
           };
         } else {
           console.warn(
-            "component.vModel必须是可以赋值的，形式如:es: {{$item}}.name, 且属性名(如_naMe-0)只支持[a-zA-Z0-9_-]或一个对象{context: this, target: 'myName'}; 若不是这样的形式，则无法同步"
+            sourcePathKey +
+              "component.vModel必须是可以赋值的，形式如:es: {{$item}}.name, 且属性名(如_naMe-0)只支持[a-zA-Z0-9_-]或一个对象{context: this, target: 'myName'}; 若不是这样的形式，则无法同步"
           );
           newComponent.props[valueKey] = newEsFuncion(vModelValue);
         }
@@ -211,23 +226,33 @@ export function parseComponent(
     var tmpName = component.trim();
     if (!tmpName) {
       if (canEmpty !== true) {
-        console.error("配置必须是一个数组或对象且不能为空：", component);
-        throw "配置必须是一个数组或对象且不能为空";
+        console.error(
+          sourcePathKey + "-配置必须是一个数组或对象且不能为空：",
+          component
+        );
+        throw sourcePathKey + "-配置必须是一个数组或对象且不能为空";
       } else {
         return null;
       }
     }
-    newComponent = Object.assign(newComponent, {
-      hidden: false,
-      name: tmpName,
-      props: {},
-      text: undefined,
-      actions: []
-    });
+    if (fromFormComponent) {
+      newComponent = Object.assign(newComponent, {
+        hidden: false,
+        name: tmpName,
+        props: {},
+        text: undefined,
+        actions: []
+      });
+    } else {
+      Object.assign(newComponent, createEmptyComponent(newEsFuncion(tmpName)));
+    }
   } else {
     if (canEmpty !== true) {
-      console.error("配置必须是一个数组或对象且不能为空", component);
-      throw "配置必须是一个数组或对象且不能为空";
+      console.error(
+        sourcePathKey + "配置必须是一个数组或对象且不能为空",
+        component
+      );
+      throw sourcePathKey + "配置必须是一个数组或对象且不能为空";
     } else {
       return null;
     }
@@ -236,6 +261,13 @@ export function parseComponent(
   return newComponent;
 }
 
+export function createEmptyComponent(text) {
+  return {
+    hidden: false,
+    name: "span",
+    text: text || ""
+  };
+}
 /**
  * 解析slots
  */
@@ -323,7 +355,7 @@ export function parseActions(actions) {
       }
     });
   } else {
-    // console.warn("key(" + myPathKey + ")component事件类型不合法.");
+    // console.warn("key(" + sourcePathKey + ")component事件类型不合法.");
   }
 
   return newActions.length > 0 ? newActions : null;
@@ -395,7 +427,7 @@ export function parseTrigger(trigger) {
  * 提取是否为.native事件
  * @param {*} eventName
  */
-function getNativeName(eventName) {
+export function getNativeName(eventName) {
   var dotNative = "." + constant.ADJ_NATIVE;
   var lastIndex = eventName.lastIndexOf(dotNative);
   if (lastIndex != -1 && eventName.substr(lastIndex) === dotNative) {

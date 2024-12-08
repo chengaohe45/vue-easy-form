@@ -18,7 +18,7 @@ export function isEsOrFunc(scriptTxt, expPrefix = "es:") {
   if (utils.isFunc(scriptTxt)) {
     return true;
   } else {
-    return this.isEsScript(scriptTxt, expPrefix);
+    return isEsScript(scriptTxt, expPrefix);
   }
 }
 
@@ -254,6 +254,7 @@ export function newEsFuncion(scriptTxt, expPrefix = "es:") {
 }
 
 export function execEsValue(scriptTxt, options) {
+  // console.log('scriptTxt, options', options)
   if (utils.isFunc(scriptTxt)) {
     return scriptTxt(options);
   } else {
@@ -311,7 +312,7 @@ export function chainPathKey(rawRathKey, exclude) {
 /* 判断语句是否可以赋值。如"es:{{$item.name}} or {{$item}}.person.name" */
 export function canAssign(scriptTxt, expPrefix = "es:") {
   // return false;
-  if (this.isEsScript(scriptTxt, expPrefix)) {
+  if (isEsScript(scriptTxt, expPrefix)) {
     var tmpExpression = scriptTxt.substring(expPrefix.length);
     tmpExpression = tmpExpression.trim();
     var reg = /^\{\{\s*\$.+?\}\}(\.[\w-]+?)*$/;

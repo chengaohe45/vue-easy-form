@@ -20,13 +20,17 @@ import {
   parseMainComponent,
   parsePropComponent,
   parseClassStyle,
-  parseActions,
-  parseTrigger,
-  fetchActionEvent,
-  getNativeName,
   parseAlign,
   parseFlex
 } from "./component-utils";
+
+// 解析组件的方法
+import {
+  parseActions,
+  parseTrigger,
+  // createEmptyComponent,
+  getNativeName
+} from "../tools/component";
 
 let m_currentFormId = undefined; // 应用于completeSchema,记录当前的解析是在哪个表单中
 
@@ -381,8 +385,8 @@ let schemaUtils = {
       }
 
       var eventOn = this.__fetchFormEvent(newPropItem);
-      newPropItem.component.__emitEvents = eventOn.__emitEvents;
-      newPropItem.component.__nativeEvents = eventOn.__nativeEvents;
+      newPropItem.component.__extraEmitEvents = eventOn.__emitEvents;
+      newPropItem.component.__extraNativeEvents = eventOn.__nativeEvents;
       newPropItem.__info = {
         pathKey: myPathKey,
         idxChain: "",
@@ -598,16 +602,16 @@ let schemaUtils = {
     }
 
     // 自定义事件
-    if (propItem.component && propItem.component.actions) {
-      var actionInfo = fetchActionEvent(propItem.component.actions);
-      if (actionInfo.__emitEvents) {
-        emitEvents = emitEvents.concat(actionInfo.__emitEvents);
-      }
+    // if (propItem.component && propItem.component.actions) {
+    //   var actionInfo = fetchActionEvent(propItem.component.actions);
+    //   if (actionInfo.__emitEvents) {
+    //     emitEvents = emitEvents.concat(actionInfo.__emitEvents);
+    //   }
 
-      if (actionInfo.__nativeEvents) {
-        nativeEvents = nativeEvents.concat(actionInfo.__nativeEvents);
-      }
-    }
+    //   if (actionInfo.__nativeEvents) {
+    //     nativeEvents = nativeEvents.concat(actionInfo.__nativeEvents);
+    //   }
+    // }
 
     return {
       __emitEvents: emitEvents.length ? utils.unique(emitEvents) : null,
