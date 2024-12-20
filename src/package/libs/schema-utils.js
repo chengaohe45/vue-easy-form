@@ -577,7 +577,6 @@ let schemaUtils = {
         });
       }
     }
-
     if (
       propItem.isTrim ||
       (utils.isUndef(propItem.isTrim) &&
@@ -612,7 +611,8 @@ let schemaUtils = {
     //     nativeEvents = nativeEvents.concat(actionInfo.__nativeEvents);
     //   }
     // }
-
+    // console.log("emitEvents", emitEvents);
+    // console.log("nativeEvents", nativeEvents);
     return {
       __emitEvents: emitEvents.length ? utils.unique(emitEvents) : null,
       __nativeEvents: nativeEvents.length ? utils.unique(nativeEvents) : null

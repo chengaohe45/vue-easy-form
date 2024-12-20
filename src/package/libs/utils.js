@@ -684,8 +684,13 @@ let utils = {
     }
   },
 
+  /**
+   * 取出包含此名称的实例，包括自己
+   * @param {*} instance
+   * @param {*} componentName
+   */
   getParent(instance, componentName) {
-    var parent = instance.$parent;
+    var parent = instance;
     while (parent) {
       if (parent.$options && parent.$options.componentName === componentName) {
         return parent;
@@ -730,7 +735,6 @@ let utils = {
 
         leftPath = path.substring(fromIndex, pathResult.index); // 左边的字符串
         leftPath = leftPath.trim();
-        var tmpKeys;
         if (leftPath) {
           // 保持跟lodash.get一样
           // if (fromIndex > 0 && leftPath.charAt(0) !== dot) {
@@ -741,7 +745,7 @@ let utils = {
           //   console.warn('路径格式不对:', (dot + splitStr) + '前面不可加上点')
           //   return []
           // }
-          tmpKeys = leftPath.split(".");
+          var tmpKeys = leftPath.split(".");
           tmpKeys.forEach(function(tmpKey) {
             tmpKey = tmpKey.trim();
             if (tmpKey) {

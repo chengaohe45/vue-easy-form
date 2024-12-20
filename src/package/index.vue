@@ -404,11 +404,13 @@ import schemaUtils from "./libs/schema-utils.js";
 import formUtils from "./libs/form-utils.js";
 import parse from "./libs/parse.js";
 import constant from "./libs/constant.js";
+import { createParseDep } from "./createParseDep.js";
 
 import consolePanel from "./components/console.vue";
 
 import dataCache from "./libs/data-cache";
 
+const KEY_PARSE_SOURCES = "_key_parseSources"
 export default {
   componentName: constant.ES_FORM_ROOT_NAME, // 用于子组件找到此列表组件
   /* ====================== 生命周期 ====================== */
@@ -767,6 +769,17 @@ export default {
     /* 下划线一杠代表对内使用 */
     _getSchema() {
       return this.$data.formSchema;
+    },
+
+    _fetchParseSources(info) {
+      if (!this[KEY_PARSE_SOURCES]) {
+        this[KEY_PARSE_SOURCES] = {}
+      }
+      var cacheSources = this[KEY_PARSE_SOURCES]
+      if (!cacheSources[info.pathKey]) {
+        cacheSources[info.pathKey] = createParseDep(this, info)
+      }
+      return cacheSources[info.pathKey]
     },
 
     __initUi(schema) {
@@ -1430,6 +1443,7 @@ export default {
     schema: {
       handler(newVal) {
         if (utils.isObj(newVal) && Object.keys(newVal).length > 0) {
+          this[KEY_PARSE_SOURCES] = null  // 清除之前的记录
           this.__initUi(newVal);
         }
       },

@@ -956,18 +956,7 @@ export default {
     },
 
     __getForm() {
-      var formItem = this.$parent;
-      while (formItem) {
-        var type = formItem._getType ? formItem._getType() : "";
-        if (type == constant.UI_FORM) {
-          return formItem; // 到达表单层
-        } else if (type == constant.UI_ARRAY) {
-          // checkSchema.push(formItem._getSchema());
-        } else {
-          // ... 往上派
-        }
-        formItem = formItem.$parent;
-      }
+      return utils.getParent(this, constant.ES_FORM_ROOT_NAME)
     }
   },
 

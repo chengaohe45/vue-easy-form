@@ -77,6 +77,7 @@ export function parseComponent(
     }
 
     var actions = parseActions(component.actions); // 原来的写法
+    // console.log("actions", actions);
     var emitOn = parseOn(component.on); // emit发出来的
     var nativeOn = parseOn(component.nativeOn); // 原生的
     // 合并
@@ -91,7 +92,7 @@ export function parseComponent(
             curHandlers = emitOn[triggerName];
             if (!curHandlers) {
               curHandlers = [];
-              nativeOn[triggerName] = curHandlers;
+              emitOn[triggerName] = curHandlers;
             }
           } else {
             // .native监听
@@ -105,7 +106,8 @@ export function parseComponent(
         });
       });
     }
-
+    // console.log("emitOn", emitOn);
+    // console.log("nativeOn", nativeOn);
     newComponent.on = emitOn;
     newComponent.nativeOn = nativeOn;
     // newComponent.actions = actions

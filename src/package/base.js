@@ -11,68 +11,70 @@
 import constant from "./libs/constant.js";
 import utils from "./libs/utils.js";
 import { parseComponent } from "./tools/component";
-import { execEsValue, smartEsValue } from "./tools/parse";
+import { smartEsValue } from "./tools/parse";
+
+const KEY_EVENT_CACHE_MAP = "_KEY_EVENT_CACHE_MAP";
 
 // 此四个常量已经对外，不可随便改
-const KEY_GLOBAL = "global"; // 直接从表单组件（root）中取出
-const KEY_ROOT_DATA = "rootData"; // 直接从表单组件（root）中取出
-const KEY_ROOT = "root"; // 直接从表单组件（root）中取出
-const KEY_HIDDEN = "hidden"; // 直接从表单组件（root）中取出
-const KEY_INDEX = "index";
-const KEY_IDX_CHAIN = "indexChain";
-const KEY_PATH_KEY = "pathKey";
-const KEY_CLOSEST_DATA = "closetData"; // 最近一个对象数据（也就是最后一个数组对应的数据）
-const KEY_CURRENT_VALUE = "current"; // 当前表单主组件的数据
+// const KEY_GLOBAL = "global"; // 直接从表单组件（root）中取出
+// const KEY_ROOT_DATA = "rootData"; // 直接从表单组件（root）中取出
+// const KEY_ROOT = "root"; // 直接从表单组件（root）中取出
+// const KEY_HIDDEN = "hidden"; // 直接从表单组件（root）中取出
+// const KEY_INDEX = "index";
+// const KEY_IDX_CHAIN = "indexChain";
+// const KEY_PATH_KEY = "pathKey";
+// const KEY_PARENT_VALUE = "parent"; // 最近一个对象数据（也就是最后一个数组对应的数据）
+// const KEY_CURRENT_VALUE = "current"; // 当前表单主组件的数据
 
-function defineProperty(obj, key, vm) {
-  Object.defineProperty(obj, key, {
-    enumerable: true,
-    configurable: true,
-    get: function() {
-      if (key === KEY_INDEX) {
-        return vm[key];
-      } else {
-        var rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
-        // window.testRoot = rootInstance || {};
-        // console.log("rootInstance", rootInstance);
-        var value;
-        switch (key) {
-          case KEY_ROOT_DATA:
-          case KEY_ROOT:
-            value = rootInstance[constant.USER_ROOT_DATA];
-            break;
+// function defineProperty(obj, key, vm) {
+//   Object.defineProperty(obj, key, {
+//     enumerable: true,
+//     configurable: true,
+//     get: function() {
+//       if (key === KEY_INDEX) {
+//         return vm[key];
+//       } else {
+//         var rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+//         // window.testRoot = rootInstance || {};
+//         // console.log("rootInstance", rootInstance);
+//         var value;
+//         switch (key) {
+//           case KEY_ROOT_DATA:
+//           case KEY_ROOT:
+//             value = rootInstance[constant.USER_ROOT_DATA];
+//             break;
 
-          case KEY_GLOBAL:
-            value = rootInstance[key];
-            break;
+//           case KEY_GLOBAL:
+//             value = rootInstance[key];
+//             break;
 
-          case KEY_HIDDEN:
-            value = rootInstance[constant.USER_HIDDEN];
-            break;
-          case KEY_CLOSEST_DATA:
-            value = rootInstance[constant.KEY_CLOSEST_DATA];
-            break;
-          case KEY_IDX_CHAIN:
-            var chainInfo = vm.info || {};
-            value = chainInfo[KEY_IDX_CHAIN] || "";
-            break;
-          case KEY_PATH_KEY:
-            var pathInfo = vm.info || {};
-            value = pathInfo[KEY_PATH_KEY] || "";
-            break;
-          case KEY_CURRENT_VALUE:
-            var config = vm.config || {};
-            value = utils.deepCopy(config.value);
-            break;
-          default:
-            value = vm[key];
-            break;
-        }
-        return value;
-      }
-    }
-  });
-}
+//           case KEY_HIDDEN:
+//             value = rootInstance[constant.USER_HIDDEN];
+//             break;
+//           case KEY_PARENT_VALUE:
+//             value = rootInstance[constant.KEY_PARENT_VALUE];
+//             break;
+//           case KEY_IDX_CHAIN:
+//             var chainInfo = vm.info || {};
+//             value = chainInfo[KEY_IDX_CHAIN] || "";
+//             break;
+//           case KEY_PATH_KEY:
+//             var pathInfo = vm.info || {};
+//             value = pathInfo[KEY_PATH_KEY] || "";
+//             break;
+//           case KEY_CURRENT_VALUE:
+//             var config = vm.config || {};
+//             value = utils.deepCopy(config.value);
+//             break;
+//           default:
+//             value = vm[key];
+//             break;
+//         }
+//         return value;
+//       }
+//     }
+//   });
+// }
 
 ("use strict");
 
@@ -142,26 +144,26 @@ export default {
 
   created() {
     // console.log("created...");
-    this.initUi();
+    // this.initUi();
     // 一般不会启用
-    if (!this.config.id) {
-      this.$watch(
-        "config", // item比较特殊
-        () => {
-          this.initUi();
-        },
-        {
-          deep: false
-        }
-      );
-    }
+    // if (!this.config.id) {
+    //   this.$watch(
+    //     "config", // item比较特殊
+    //     () => {
+    //       this.initUi();
+    //     },
+    //     {
+    //       deep: false
+    //     }
+    //   );
+    // }
   },
 
   methods: {
     initUi() {
-      this.createDep();
-      this.emitOn = this.createEventOn(this.config, true, false);
-      this.nativeOn = this.createEventOn(this.config, true, true);
+      // this.createDep();
+      // this.emitOn = this.createEventOn(this.config, true, false);
+      // this.nativeOn = this.createEventOn(this.config, true, true);
     },
 
     eventHandler(config, isNative, eventName, args) {
@@ -173,6 +175,7 @@ export default {
       }
 
       if (this.isMain && this.config === config) {
+        // console.log("------------", eventName, args);
         // 主组件：让父类去处理
         this.$emit("trigger", eventName, args, this.getConfigRef());
         return true;
@@ -203,7 +206,7 @@ export default {
           event: eventData,
           source: this.item,
           target: this.getConfigRef(),
-          index: this.index
+          index: this.info ? this.info.index : -1
         };
 
         var listInstance = utils.getParent(this, constant.AD_LIST_NAME);
@@ -216,6 +219,26 @@ export default {
       return this.$children && this.$children.length > 0
         ? this.$children[0]
         : this;
+    },
+
+    fetchMainEvent(typeKey) {
+      if (!this[KEY_EVENT_CACHE_MAP]) {
+        this[KEY_EVENT_CACHE_MAP] = {};
+      }
+      var eventCacheMap = this[KEY_EVENT_CACHE_MAP];
+      if (!eventCacheMap[this.config.id]) {
+        eventCacheMap = {};
+        eventCacheMap[this.config.id] = {
+          emitOn: this.createEventOn(this.config, true, false),
+          nativeOn: this.createEventOn(this.config, true, true)
+        };
+        this[KEY_EVENT_CACHE_MAP] = eventCacheMap;
+      }
+      // console.log(
+      //   "eventCacheMap[typeKey]",
+      //   eventCacheMap[[this.config.id]]["emitOn"]
+      // );
+      return eventCacheMap[this.config.id][typeKey];
     },
 
     /**
@@ -236,7 +259,7 @@ export default {
       var eventNames = isNative
         ? config.__extraNativeEvents
         : config.__extraEmitEvents;
-      eventNames = eventNames || [];
+      eventNames = eventNames ? eventNames.slice() : [];
       var eventOn = isNative ? config.nativeOn : config.on;
       if (eventOn) {
         // eventNames = Object.keys(eventOn);
@@ -259,6 +282,7 @@ export default {
           });
         }
       }
+      // console.log("eventNames", eventNames);
 
       var extOn = {};
       var _this = this;
@@ -294,7 +318,7 @@ export default {
           global: this.global,
           root: {},
           event: eventValue,
-          index: this.index
+          index: this.info ? this.info.index : -1
         };
         // var options = {
         //   global: dataCache.getGlobal(vm.config.__formId),
@@ -311,30 +335,30 @@ export default {
       }
     },
 
-    createDep() {
-      if (!this.config.jsx) {
-        if (!this.__tmpParseSources) {
-          var parseSources = {
-            config: {},
-            event: undefined
-          };
-          defineProperty(parseSources, KEY_GLOBAL, this);
-          defineProperty(parseSources, KEY_INDEX, this);
-          defineProperty(parseSources, KEY_IDX_CHAIN, this);
-          defineProperty(parseSources, KEY_PATH_KEY, this);
-          defineProperty(parseSources, KEY_HIDDEN, this);
-          defineProperty(parseSources, KEY_ROOT_DATA, this);
-          defineProperty(parseSources, KEY_ROOT, this);
-          defineProperty(parseSources, KEY_CLOSEST_DATA, this);
+    // createDep() {
+    //   if (!this.config.jsx) {
+    //     if (!this.__tmpParseSources) {
+    //       var parseSources = {
+    //         config: {},
+    //         event: undefined
+    //       };
+    //       defineProperty(parseSources, KEY_GLOBAL, this);
+    //       defineProperty(parseSources, KEY_INDEX, this);
+    //       defineProperty(parseSources, KEY_IDX_CHAIN, this);
+    //       defineProperty(parseSources, KEY_PATH_KEY, this);
+    //       defineProperty(parseSources, KEY_HIDDEN, this);
+    //       defineProperty(parseSources, KEY_ROOT_DATA, this);
+    //       defineProperty(parseSources, KEY_ROOT, this);
+    //       defineProperty(parseSources, KEY_PARENT_VALUE, this);
 
-          // 在render中使用
-          this.__tmpParseSources = parseSources;
-        }
-      } else if (this.__tmpParseSources) {
-        this.__tmpParseSources = undefined;
-      }
-      // this.uiIndex++;
-    },
+    //       // 在render中使用
+    //       this.__tmpParseSources = parseSources;
+    //     }
+    //   } else if (this.__tmpParseSources) {
+    //     this.__tmpParseSources = undefined;
+    //   }
+    //   // this.uiIndex++;
+    // },
 
     /**
      *
@@ -446,7 +470,7 @@ export default {
       if (config.jsx) {
         return config;
       }
-      var parseSources = this.__tmpParseSources;
+      // var parseSources = this.__tmpParseSources;
       if (!config.func) {
         // 解析props
         // 合并attrs, props: attrs优先级更高
@@ -467,7 +491,7 @@ export default {
           // 若存在key, 说明来自于attrs
           if (!(key in dataProps)) {
             var scriptTxt = config.props[key];
-            propValue = execEsValue(scriptTxt, parseSources);
+            propValue = this.execEsValue(scriptTxt);
             dataProps[key] = propValue;
           }
         }
@@ -489,7 +513,7 @@ export default {
 
         // 解析style
         if (config.style) {
-          var style = execEsValue(config.style, parseSources);
+          var style = this.execEsValue(config.style);
           if (utils.isObj(style)) {
             newComponent.style = style;
           }
@@ -497,7 +521,7 @@ export default {
 
         // 解析class
         if (config.class) {
-          var newClass = execEsValue(config.class, parseSources);
+          var newClass = this.execEsValue(config.class);
           if (
             utils.isStr(newClass) ||
             utils.isObj(newClass) ||
@@ -522,10 +546,7 @@ export default {
           ];
           var directives = config.directives;
           for (var directiveName in directives) {
-            var directiveValue = execEsValue(
-              directives[directiveName],
-              parseSources
-            );
+            var directiveValue = this.execEsValue(directives[directiveName]);
             newDirectives.push({
               name: directiveName,
               value: directiveValue
@@ -551,23 +572,28 @@ export default {
         newComponent.scopedSlots = scopedSlots;
         newComponent.normalSlots = normalSlots;
         newComponent.on = isRootRender
-          ? this.emitOn
+          ? this.fetchMainEvent("emitOn")
           : this.createEventOn(config, false, false);
         newComponent.nativeOn = isRootRender
-          ? this.nativeOn
+          ? this.fetchMainEvent("nativeOn")
           : this.createEventOn(config, false, true);
 
         // 解析text
-        var dataText = execEsValue(config.text, parseSources);
+        var dataText = this.execEsValue(config.text);
         if (dataText !== undefined && dataText !== null) {
           // newComponent.text = dataText + "";
           normalSlots.push(dataText + "");
         }
+        // if (newComponent.on && newComponent.on["test-true"]) {
+        //   console.log("----------------newComponent.on", newComponent.on);
+        // } else {
+        //   console.log("newComponent.on", newComponent.on);
+        // }
       } else {
         // 是函数
         var func = config.func;
         var result;
-        result = func(parseSources);
+        result = this.execEsValue(func);
         if (utils.isVNode(result)) {
           newComponent.jsx = result;
         } else if (utils.isObj(result) && result.name) {
@@ -605,7 +631,7 @@ export default {
         }
       }
 
-      parseSources = null; // 删掉临时数据
+      // parseSources = null; // 删掉临时数据
 
       return newComponent;
     },
@@ -646,7 +672,7 @@ export default {
       var nodes = [];
       slotValue.forEach(slotValueItem => {
         if (utils.isFunc(slotValueItem)) {
-          var nodeResult = slotValueItem(this.__tmpParseSources);
+          var nodeResult = slotValueItem(this.fetchRootParseSource());
           if (utils.isArr(nodeResult)) {
             nodes = nodes.concat(nodeResult);
           } else if (nodeResult !== undefined && nodeResult !== null) {
@@ -744,6 +770,19 @@ export default {
         // console.log("newVNodes", newVNodes);
         return newVNodes;
       };
+    },
+    execEsValue(scriptTxt) {
+      // console.log("this", this);
+      if (typeof scriptTxt === "function") {
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        return scriptTxt(rootInstance._fetchParseSources(this.info));
+      } else {
+        return scriptTxt;
+      }
+    },
+    fetchRootParseSource() {
+      var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      return rootInstance._fetchParseSources(this.info);
     }
   },
 

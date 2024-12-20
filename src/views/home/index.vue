@@ -56,7 +56,7 @@ export default {
               b1: false
             },
             checks: {
-              trigger: "true",
+              trigger: "test-check-true",
               handler: function() {
                 return "errofr";
               }
@@ -104,10 +104,25 @@ export default {
                 name: "el-input",
                 ref: "test21",
                 props: {
-                  placeholder: () => {
+                  placeholder: (data) => {
+                    // console.log('data:', data)
                     return "testPlaceholder" + this.autoId;
                   }
                 },
+                actions: [
+                  {
+                    trigger: 'input',
+                    handler: function(data) {
+                      console.log('input:data', data)
+                    }
+                  },
+                  {
+                    trigger: 'change',
+                    handler: function(data) {
+                      console.log('change:data', data)
+                    }
+                  }
+                ],
                 text: "1"
               },
               rules: {
@@ -117,7 +132,7 @@ export default {
                   b1: false
                 },
                 checks: {
-                  trigger: "true",
+                  trigger: "test-true",
                   handler: function() {
                     return "errofr";
                   }
@@ -182,7 +197,7 @@ export default {
                       b1: false
                     },
                     checks: {
-                      trigger: "true",
+                      trigger: "test-true2",
                       handler: function() {
                         return "errofr";
                       }
