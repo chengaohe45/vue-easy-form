@@ -1090,18 +1090,29 @@ export default {
         }
 
         // 取出所有需要执行的事件
-        var handlers = [];
-        var actions = inputSchema.array
-          ? inputSchema.array.actions
-          : inputSchema.component.actions;
-        if (actions) {
-          actions.forEach(action => {
-            if (utils.isInter(action.trigger, eventNames)) {
-              handlers.push(action.handler);
-            }
-          });
+        var eventMap;
+        if (!eventData.isNative) {
+          eventMap = inputSchema.array
+          ? inputSchema.array.on
+          : inputSchema.component.on
+        } else {
+          eventMap = inputSchema.array
+          ? inputSchema.array.nativeOn
+          : inputSchema.component.nativeOn
         }
-
+        
+        // console.log('eventMap', eventMap)
+        var handlers = []
+        if (eventMap) {
+          eventNames.forEach(function(eventName) {
+            var eventHandlers = eventMap[eventName]
+            if (eventHandlers) {
+              handlers = handlers.concat(eventHandlers)
+            }
+          })
+        }
+        
+        // console.log('handlers', handlers)
         if (handlers.length > 0 || eventNames.includes(constant.INPUT_EVENT)) {
           // 这个可以记录是什么导致表单改变
           if (handlers.length > 0) {
@@ -1158,7 +1169,6 @@ export default {
     },
 
     __syncValue(sourcePathKey) {
-      // 不单只是执行actions
       var rootValue = formUtils.getValue(this.$data.formSchema);
 
       dataCache.setRoot(this.$data.id, rootValue);
@@ -1179,11 +1189,6 @@ export default {
       // 缓存，以便多次调用
       this._esFormValue = formValue;
 
-      // this.$emit(
-      //   constant.INPUT_EVENT,
-      //   utils.deepCopy(formValue),
-      //   sourcePathKey ? sourcePathKey : false
-      // );
       this.__execEmit(constant.INPUT_EVENT, [
         utils.deepCopy(formValue),
         sourcePathKey ? sourcePathKey : false
@@ -1415,17 +1420,12 @@ export default {
 
     __execEmit(eventName, params) {
       var handlers = [];
-      var actions = this.$data.formSchema.actions;
-      if (actions) {
-        var eventNames = [eventName];
-        actions.forEach(action => {
-          if (utils.isInter(action.trigger, eventNames)) {
-            handlers.push(action.handler);
-          }
-        });
+      var on = this.$data.formSchema.on;
+      if (on) {
+        handlers = on[eventName];
       }
 
-      if (handlers.length > 0) {
+      if (handlers && handlers.length > 0) {
         // schema中存在表单事件，不需要往上派发
         handlers.forEach(handler => {
           handler.apply(this, params);

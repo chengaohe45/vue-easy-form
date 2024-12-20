@@ -895,7 +895,7 @@ export default {
     },
 
     // 只有组件会触发
-    triggerHandler(eventName, args, target) {
+    triggerHandler({ eventName, args, target, isNative }) {
       var eventData = args[0];
       var checkSchema = [this.schema];
       var eventNames = [eventName];
@@ -924,7 +924,8 @@ export default {
         pathKey: this.schema.__info.pathKey,
         index: this.schema.__info.index,
         idxChain: this.schema.__info.idxChain,
-        target: target
+        target: target,
+        isNative: isNative
       };
 
       var form = this.__getForm();
@@ -933,7 +934,7 @@ export default {
 
     /**
      * 数组改变：添加、删除、移动
-     * handlers 需要处理的input and change actions
+     * handlers 需要处理的input and change事件
      * eventData 事件本身的参数；具体看array-mixin.js
      */
     formArrayInput(targetValue, eventData) {
@@ -956,7 +957,7 @@ export default {
     },
 
     __getForm() {
-      return utils.getParent(this, constant.ES_FORM_ROOT_NAME)
+      return utils.getParent(this, constant.ES_FORM_ROOT_NAME);
     }
   },
 

@@ -76,41 +76,10 @@ export function parseComponent(
       newComponent.hidden = newEsFuncion(component.hidden);
     }
 
-    var actions = parseActions(component.actions); // 原来的写法
-    // console.log("actions", actions);
-    var emitOn = parseOn(component.on); // emit发出来的
-    var nativeOn = parseOn(component.nativeOn); // 原生的
-    // 合并
-    if (actions) {
-      var triggerNames, nativeName, curHandlers;
-      actions.forEach(actionItem => {
-        triggerNames = actionItem.trigger;
-        triggerNames.forEach(triggerName => {
-          nativeName = getNativeName(triggerName);
-          if (!nativeName) {
-            // 非native
-            curHandlers = emitOn[triggerName];
-            if (!curHandlers) {
-              curHandlers = [];
-              emitOn[triggerName] = curHandlers;
-            }
-          } else {
-            // .native监听
-            curHandlers = nativeOn[nativeName];
-            if (!curHandlers) {
-              curHandlers = [];
-              nativeOn[triggerName] = curHandlers;
-            }
-          }
-          curHandlers.push(actionItem.handler);
-        });
-      });
-    }
-    // console.log("emitOn", emitOn);
-    // console.log("nativeOn", nativeOn);
-    newComponent.on = emitOn;
-    newComponent.nativeOn = nativeOn;
-    // newComponent.actions = actions
+    var eventAction = parseComponentEvent(component); // 原来的写法
+
+    newComponent.on = eventAction.on;
+    newComponent.nativeOn = eventAction.nativeOn;
 
     var staticAttrs = {};
     if (utils.isObj(component.props)) {
@@ -282,6 +251,39 @@ export function parseSlots(slots) {
   return newSlots;
 }
 
+export function parseComponentEvent(component) {
+  var actions = parseActions(component.actions); // 原来的写法
+  // console.log("actions", actions);
+  var emitOn = parseOn(component.on); // emit发出来的
+  var nativeOn = parseOn(component.nativeOn); // 原生的
+  // 合并
+  if (actions) {
+    var triggerNames, nativeName, curHandlers;
+    actions.forEach(actionItem => {
+      triggerNames = actionItem.trigger;
+      triggerNames.forEach(triggerName => {
+        nativeName = getNativeName(triggerName);
+        if (!nativeName) {
+          // 非native
+          curHandlers = emitOn[triggerName];
+          if (!curHandlers) {
+            curHandlers = [];
+            emitOn[triggerName] = curHandlers;
+          }
+        } else {
+          // .native监听
+          curHandlers = nativeOn[nativeName];
+          if (!curHandlers) {
+            curHandlers = [];
+            nativeOn[triggerName] = curHandlers;
+          }
+        }
+        curHandlers.push(actionItem.handler);
+      });
+    });
+  }
+  return { on: emitOn, nativeOn: nativeOn };
+}
 /**
  * 解析/标准化项组件的事件
  * @param {*} actions

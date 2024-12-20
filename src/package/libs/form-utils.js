@@ -62,8 +62,7 @@ let formUtils = {
    * @param pathKey 当前节点的路径，必须是由点组成的
    */
   syncUserRootArray(userRootData, pathKey, eventData) {
-    var value = eventData.value;
-
+    // var value = eventData.value;
     if (userRootData && pathKey) {
       var keys = utils.parsePathKeys(pathKey); // 已经是用点连起来的
       var len = keys.length;
@@ -279,7 +278,7 @@ let formUtils = {
     newItem.delWarnBtns = utils.deepCopy(schema.array.delWarnBtns);
 
     if (insertInfo) {
-      this.__setValue(newItem, insertInfo.value, userRootData);
+      this.__setValue(newItem, insertInfo.value);
       if (schema.__propSchemaList.length <= insertInfo.position) {
         schema.__propSchemaList.push(newItem);
       } else {

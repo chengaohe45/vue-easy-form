@@ -177,7 +177,13 @@ export default {
       if (this.isMain && this.config === config) {
         // console.log("------------", eventName, args);
         // 主组件：让父类去处理
-        this.$emit("trigger", eventName, args, this.getConfigRef());
+        var emitInfo = {
+          eventName,
+          args,
+          target: this.getConfigRef(),
+          isNative
+        };
+        this.$emit("trigger", emitInfo);
         return true;
       }
       // console.log("config", config);

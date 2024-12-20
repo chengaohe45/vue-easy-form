@@ -26,7 +26,7 @@ import {
 
 // 解析组件的方法
 import {
-  parseActions,
+  parseComponentEvent,
   parseTrigger,
   // createEmptyComponent,
   getNativeName
@@ -67,7 +67,7 @@ let schemaUtils = {
     if (utils.isObj(schema)) {
       var tmpSchema = utils.deepCopy(schema);
       var rootObj = tmpSchema;
-      var rootActions;
+      var rootEventAction;
       if (!utils.isObj(tmpSchema.properties)) {
         rootObj = {};
         rootObj.title = false;
@@ -76,11 +76,11 @@ let schemaUtils = {
 
         // 根节点有效的属性
         autoMatch = false;
-        rootActions = null;
+        rootEventAction = null;
       } else {
         // 根节点有效的属性
         autoMatch = rootObj.autoMatch === true ? true : false;
-        rootActions = parseActions(rootObj.actions, "根");
+        rootEventAction = parseComponentEvent(rootObj, "根");
       }
 
       // 基础设置，最外层的一些东西固定
@@ -100,7 +100,9 @@ let schemaUtils = {
 
       //根节点有效的属性
       rootObj.autoMatch = autoMatch;
-      rootObj.actions = rootActions;
+      if (rootEventAction) {
+        rootObj.on = rootEventAction.on; // 没有native事件
+      }
       this.__checkForTile(rootObj);
       m_currentFormId = undefined; // 任务完成
       return rootObj;
@@ -600,19 +602,6 @@ let schemaUtils = {
       }
     }
 
-    // 自定义事件
-    // if (propItem.component && propItem.component.actions) {
-    //   var actionInfo = fetchActionEvent(propItem.component.actions);
-    //   if (actionInfo.__emitEvents) {
-    //     emitEvents = emitEvents.concat(actionInfo.__emitEvents);
-    //   }
-
-    //   if (actionInfo.__nativeEvents) {
-    //     nativeEvents = nativeEvents.concat(actionInfo.__nativeEvents);
-    //   }
-    // }
-    // console.log("emitEvents", emitEvents);
-    // console.log("nativeEvents", nativeEvents);
     return {
       __emitEvents: emitEvents.length ? utils.unique(emitEvents) : null,
       __nativeEvents: nativeEvents.length ? utils.unique(nativeEvents) : null
@@ -1519,7 +1508,7 @@ let schemaUtils = {
       var hasDelWarn = true; // 删除是否有警告
       var subLabel = false;
       var rules = false;
-      var actions = false;
+      var eventAction = {};
       var value = [];
       var rowSpace = undefined;
       var type = null;
@@ -1609,7 +1598,7 @@ let schemaUtils = {
         before = utils.isFunc(array.before) ? array.before : false;
         value = utils.isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
-        actions = parseActions(array.actions, myPathKey);
+        eventAction = parseComponentEvent(array);
         rowSpace = utils.isNum(array.rowSpace) ? array.rowSpace : undefined;
         type = utils.isStr(array.type) ? array.type : false;
         var btnTypes = ["icon"];
@@ -1674,7 +1663,8 @@ let schemaUtils = {
         newArray.value = value;
         newArray.rules = rules;
         newArray.before = before;
-        newArray.actions = actions;
+        newArray.on = eventAction.on;
+        newArray.nativeOn = eventAction.nativeOn;
         newArray.rowSpace = rowSpace;
 
         if (newArray.name == constant.ARRAY_TABS) {
