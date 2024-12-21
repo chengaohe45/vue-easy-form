@@ -9,7 +9,7 @@
 import parse from "./parse";
 import constant from "./constant";
 import utils from "./utils";
-
+import { newComponentId } from "../tools/component";
 let formUtils = {
   /**
    * 判断值是否为空, 以下几种情况都认为是空值
@@ -346,7 +346,7 @@ let formUtils = {
         hasInfoChanged = true;
       }
       if (hasInfoChanged) {
-        propItem.component.id = utils.newUid("es");
+        propItem.component.id = newComponentId();
       }
     } else if (propItem.properties) {
       if (propItem.__info.idxChain != idxChain) {

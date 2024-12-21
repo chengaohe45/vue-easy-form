@@ -6,9 +6,9 @@ import { canAssign, newEsFuncion, getStaticKey } from "./parse";
 ("use strict");
 
 let autoIncreaseNum = 0;
-function newComponentId() {
+export function newComponentId() {
   ++autoIncreaseNum;
-  return autoIncreaseNum;
+  return "c" + autoIncreaseNum;
 }
 
 /**
@@ -29,7 +29,7 @@ export function parseComponent(
     sourcePathKey = sourcePathKey + ": ";
   }
   var newComponent = {
-    id: "c" + newComponentId()
+    id: newComponentId()
   };
   if (utils.isVNode(component)) {
     newComponent.jsx = component;
