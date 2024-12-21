@@ -4,12 +4,12 @@ import utils from "../libs/utils";
 import constant from "../libs/constant";
 
 /* 这个几个不可随便更改，因为对外，用户有可能会使用 */
-const ARR_OP_TYPE_DEL_ONE = "delete"; // 单个delete
-const ARR_OP_TYPE_DEL_ALL = "deleteAll"; // 所有delete
-const ARR_OP_TYPE_ADD = "add"; // add
-const ARR_OP_TYPE_COPY = "copy"; // copy
-const ARR_OP_TYPE_MOVE_UP = "up"; // up
-const ARR_OP_TYPE_MOVE_DOWN = "down"; // down
+// const constant.ARR_OP_TYPE_DEL_ONE = "delete"; // 单个delete
+// const constant.ARR_OP_TYPE_DEL_ALL = "deleteAll"; // 所有delete
+// const constant.ARR_OP_TYPE_ADD = "add"; // add
+// const constant.ARR_OP_TYPE_COPY = "copy"; // copy
+// const constant.ARR_OP_TYPE_MOVE_UP = "up"; // up
+// const constant.ARR_OP_TYPE_MOVE_DOWN = "down"; // down
 
 export default {
   created() {},
@@ -31,7 +31,7 @@ export default {
       if (index >= 0 && index < this.schema.__propSchemaList.length) {
         var oldValues = formUtils.getValue(this.schema);
         var eventData = {
-          type: ARR_OP_TYPE_DEL_ONE,
+          type: constant.ARR_OP_TYPE_DEL_ONE,
           index: index,
           data: utils.deepCopy(oldValues[index])
         };
@@ -71,7 +71,7 @@ export default {
       if (this.schema.__propSchemaList.length > 0) {
         var oldValues = formUtils.getValue(this.schema);
         var eventData = {
-          type: ARR_OP_TYPE_DEL_ALL,
+          type: constant.ARR_OP_TYPE_DEL_ALL,
           index: -1,
           data: oldValues
         };
@@ -105,7 +105,7 @@ export default {
     upItem(index) {
       if (index > 0 && index < this.schema.__propSchemaList.length) {
         var oldValues = formUtils.getValue(this.schema);
-        var eventData = { type: ARR_OP_TYPE_MOVE_UP, index: index };
+        var eventData = { type: constant.ARR_OP_TYPE_MOVE_UP, index: index };
         if (this.schema.array.before) {
           var form = this.__getForm();
           var data = this.__createHookData(oldValues, eventData, form);
@@ -144,7 +144,7 @@ export default {
     downItem(index) {
       if (index >= 0 && index < this.schema.__propSchemaList.length - 1) {
         var oldValues = formUtils.getValue(this.schema);
-        var eventData = { type: ARR_OP_TYPE_MOVE_DOWN, index: index };
+        var eventData = { type: constant.ARR_OP_TYPE_MOVE_DOWN, index: index };
         if (this.schema.array.before) {
           var form = this.__getForm();
           var data = this.__createHookData(oldValues, eventData, form);
@@ -185,7 +185,7 @@ export default {
       var isIndex = utils.isNum(index);
       var curIndex = isIndex ? index : this.schema.__propSchemaList.length; // __propSchemaList现在还是旧的
       var eventData = {
-        type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD,
+        type: isIndex ? constant.ARR_OP_TYPE_COPY : constant.ARR_OP_TYPE_ADD,
         index: curIndex // 比change少了个data，因为刚开始有可能不知初始值是什么，所以统一不做
       };
       if (this.schema.array.before) {
@@ -223,7 +223,9 @@ export default {
           var options = {
             oldValues: oldValues,
             position: position,
-            type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD,
+            type: isIndex
+              ? constant.ARR_OP_TYPE_COPY
+              : constant.ARR_OP_TYPE_ADD,
             instance: thisFrom
           };
           var newDefaultValue = insertValue.call(thisFrom, options);
@@ -266,7 +268,7 @@ export default {
       var newValue = formUtils.getValue(this.schema);
       var curIndex = isIndex ? index : this.schema.__propSchemaList.length - 1;
       var eventData = {
-        type: isIndex ? ARR_OP_TYPE_COPY : ARR_OP_TYPE_ADD,
+        type: isIndex ? constant.ARR_OP_TYPE_COPY : constant.ARR_OP_TYPE_ADD,
         index: curIndex,
         data: utils.deepCopy(newValue[curIndex]) // 比before多了这个
       };

@@ -243,7 +243,7 @@ export default {
                   },
 
                   test32: {
-                    hidden: "es: $index%2 || $root.checkbox ? true : false",
+                    // hidden: "es: $index%2 || $root.checkbox ? true : false",
                     label: "test32",
                     component: {
                       ref: "test",

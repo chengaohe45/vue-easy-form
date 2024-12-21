@@ -65,6 +65,7 @@ let formUtils = {
     // var value = eventData.value;
     if (userRootData && pathKey) {
       var keys = utils.parsePathKeys(pathKey); // 已经是用点连起来的
+      // console.log("1 userRootData", utils.deepCopy(userRootData));
       var len = keys.length;
       var currentNodeData = userRootData;
       // 取出倒算第二个
@@ -75,7 +76,7 @@ let formUtils = {
         } else {
           currentNodeData = null;
           // 更新有问题
-          console.error("__syncUserRootValue更新有问题", pathKey);
+          console.error("syncUserRootArray更新有问题", pathKey);
           break;
         }
       }
@@ -84,8 +85,10 @@ let formUtils = {
         var oldValue = currentNodeData[keys[len - 1]] || [];
         var newValue;
         // 来自数组的增删移动
-        var type = eventData.event ? eventData.event.type : undefined;
-        var index = eventData.index;
+        var type = eventData.event.type;
+        var index = eventData.event.index;
+        // var itemData = eventData.event.data;
+        // console.log("2 eventData", eventData);
         switch (type) {
           case constant.ARR_OP_TYPE_DEL_ALL:
             newValue = [];
@@ -96,24 +99,27 @@ let formUtils = {
             }
             newValue = oldValue;
             break;
+          case constant.ARR_OP_TYPE_COPY:
           case constant.ARR_OP_TYPE_ADD:
             if (index > oldValue.length - 1) {
-              oldValue.push(utils.deepCopy(eventData.data));
+              oldValue.push(utils.deepCopy(eventData.event.data));
             } else {
-              oldValue.splice(index, 0, utils.deepCopy(eventData.data));
+              oldValue.splice(index, 0, utils.deepCopy(eventData.event.data));
             }
+            // console.log("newValue = oldValue =", newValue, oldValue);
             newValue = oldValue;
             break;
-          case constant.ARR_OP_TYPE_COPY:
           case constant.ARR_OP_TYPE_MOVE_UP:
             if (index > 0 && index < oldValue.length) {
-              oldValue.splice(index - 1, 0, oldValue.splice(index, 1)[0]);
+              var upItem = oldValue.splice(index, 1)[0];
+              oldValue.splice(index - 1, 0, upItem);
             }
             newValue = oldValue;
             break;
           case constant.ARR_OP_TYPE_MOVE_DOWN:
-            if (index >= 0 && index < this.oldValue.length - 1) {
-              oldValue.splice(index + 1, 0, oldValue.splice(index, 1)[0]);
+            if (index >= 0 && index < oldValue.length - 1) {
+              var downItem = oldValue.splice(index, 1)[0];
+              oldValue.splice(index + 1, 0, downItem);
             }
             newValue = oldValue;
             break;
@@ -124,6 +130,7 @@ let formUtils = {
           currentNodeData[keys[len - 1]] = newValue;
         }
       }
+      // console.log("2 userRootData", utils.deepCopy(userRootData));
     }
   },
 
@@ -324,15 +331,22 @@ let formUtils = {
 
     // 不是数组
     if (propItem.component) {
+      var hasInfoChanged = false;
       if (propItem.__info.idxChain != idxChain) {
         propItem.__info.idxChain = idxChain;
+        hasInfoChanged = true;
       }
       if (propItem.__info.pathKey != pathKey) {
         propItem.__info.pathKey = pathKey;
+        hasInfoChanged = true;
       }
 
       if (propItem.__info.index != currentIndex) {
         propItem.__info.index = currentIndex;
+        hasInfoChanged = true;
+      }
+      if (hasInfoChanged) {
+        propItem.component.id = utils.newUid("es");
       }
     } else if (propItem.properties) {
       if (propItem.__info.idxChain != idxChain) {

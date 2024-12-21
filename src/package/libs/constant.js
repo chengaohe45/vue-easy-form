@@ -8,6 +8,14 @@ let constant = {
   ARRAY_ROW: "array",
   ARRAY_CARD: "array-card", // 只支持组件（叶子）
 
+  /* 这个几个不可随便更改，因为对外，用户有可能会使用 */
+  ARR_OP_TYPE_DEL_ONE: "delete", // 单个delete
+  ARR_OP_TYPE_DEL_ALL: "deleteAll", // 所有delete
+  ARR_OP_TYPE_ADD: "add", // add
+  ARR_OP_TYPE_COPY: "copy", // copy
+  ARR_OP_TYPE_MOVE_UP: "up", // up
+  ARR_OP_TYPE_MOVE_DOWN: "down", // down
+
   POINT_CENTER_CENTER: "center-center", // tip框与源icon可以居中指向
   POINT_ARROW_CENTER: "arrow-center", // tip框偏移，但指向源icon中间
   POINT_ARROW_OFFSET: "arrow-offset", // tip框偏移，也不指向源icon中间
@@ -27,8 +35,8 @@ let constant = {
   ONLY_SUBMIT: "@submit",
 
   ES_FORM_ROOT_NAME: "ES_F_NAME" + Math.floor(Math.random() * 10000),
-  USER_ROOT_DATA: "_userRootData",
-  USER_HIDDEN: "_userHidden",
+  USER_ROOT_DATA: "userRootData",
+  USER_HIDDEN: "userHidden",
 
   // TYPE_TMP: "tmp", // 表单的临时值，跟组件没有什么区别；只是不会取出；使用场景：快速做标题或编辑时，某些项需要显示但又不需要提交给后台
   LAYOUT_SPACE: "space", // 占位符; space不可以乱改，因为其它地方(.vue)有用到
