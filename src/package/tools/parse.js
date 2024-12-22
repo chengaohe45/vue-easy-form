@@ -131,15 +131,18 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
     var options = [
       {
         symbol: "$global",
-        paramKey: "global"
+        paramKey: "global",
+        hadUse: false
       },
       {
         symbol: "$root",
-        paramKey: "root"
+        paramKey: "root",
+        hadUse: false
       },
       {
         symbol: "$index",
-        paramKey: "index"
+        paramKey: "index",
+        hadUse: false
       }
     ];
 
@@ -154,9 +157,11 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
     let hiddenFunTxt = "";
     let newScriptTxt = "";
     let curSliceIndex = 0;
-    // let hasHiddenFun = false;
+    let hadUseIdxChain = false;
+    let hadUseHidden = false
     hiddenResult = hiddenPatt.exec(scriptTxt);
     while (hiddenResult) {
+      hadUseHidden = true
       // hasHiddenFun = true; // 有隐藏函数
 
       //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
@@ -196,11 +201,19 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
     // 假设val为：es: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
     const matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
     matchs.forEach(mItem => {
+      options.forEach(item => {
+        if (!item.hadUse) {
+          if (mItem.indexOf(item.symbol) >= 0) {
+            item.hadUse = true
+          }
+        }
+      });
       // mItem值："{{$root.persons[i].age}}"
       // console.log("1 mItem: ", mItem);
       let tmpItem;
       let tempVal;
       if (mItem.indexOf(constant.IDX_CHAIN_KEY) > 0) {
+        hadUseIdxChain = true
         // 数组的，不再转换：让用户自己控制，表达式更加强大
         tmpItem = mItem;
         tempVal = "";
@@ -234,12 +247,20 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
 
     let prefixScript = "";
     options.forEach(item => {
-      prefixScript += `var $${item.paramKey} = ${constant.ES_OPTIONS}.${
-        item.paramKey
-      }; `;
+      // 没有使用是不用启用的
+      if (item.hadUse) {
+        prefixScript += `var $${item.paramKey} = ${constant.ES_OPTIONS}.${
+          item.paramKey
+        }; `;
+      }
     });
-    prefixScript += `var ${varIdxChains} = ${constant.ES_OPTIONS}.idxChains; `;
-    prefixScript += `var $hidden = ${constant.ES_OPTIONS}.isHidden; `;
+    // 没有使用是不用启用idxChain
+    if (hadUseIdxChain) {
+      prefixScript += `var ${varIdxChains} = ${constant.ES_OPTIONS}.idxChain; `;
+    }
+    if (hadUseHidden) {
+      prefixScript += `var $hidden = ${constant.ES_OPTIONS}.isHidden; `;
+    }
     newScriptTxt = prefixScript + " return (" + newScriptTxt + ");";
 
     // console.log("newScriptTxt: ", newScriptTxt);

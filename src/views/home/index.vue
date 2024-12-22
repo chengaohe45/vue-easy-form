@@ -138,7 +138,7 @@ export default {
                   ref: "test21",
                   props: {
                     placeholder: (data) => {
-                      // console.log('data:', data)
+                      console.log('data:', data)
                       return "testPlaceholder" + this.autoId;
                     }
                   },

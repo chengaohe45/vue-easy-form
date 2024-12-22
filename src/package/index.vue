@@ -425,7 +425,7 @@ export default {
     var hiddenFunc = this.isHidden;
     dataCache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
 
-    this[constant.USER_HIDDEN] = hiddenFunc;
+    this[constant.USER_HIDDEN] = hiddenFunc.bind(this);
 
     dataCache.setGlobal(
       this.$data.id,

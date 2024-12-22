@@ -15,9 +15,9 @@ import utils from "./libs/utils.js";
 export const KEY_GLOBAL = "global"; // 直接从表单组件（root）中取出
 export const KEY_ROOT_DATA = "rootData"; // 直接从表单组件（root）中取出
 export const KEY_ROOT = "root"; // 直接从表单组件（root）中取出
-// export const KEY_HIDDEN = "hidden"; // 直接从表单组件（root）中取出
+export const KEY_HIDDEN = "isHidden"; // 直接从表单组件（root）中取出
 export const KEY_INDEX = "index";
-export const KEY_IDX_CHAIN = "indexChain";
+export const KEY_IDX_CHAIN = "idxChain";
 export const KEY_PATH_KEY = "pathKey";
 export const KEY_PARENT_VALUE = "parent"; // 最近一个对象数据（也就是最后一个数组对应的数据）
 export const KEY_CURRENT_VALUE = "value"; // 当前表单主组件的数据
@@ -49,9 +49,10 @@ function defineProperty(obj, key, vm, schemaInfo) {
             rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
             value = rootInstance[key];
             break;
-          // case KEY_HIDDEN:
-          //   value = rootInstance[constant.USER_HIDDEN];
-          //   break;
+          case KEY_HIDDEN:
+            rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+            value = rootInstance[constant.USER_HIDDEN];
+            break;
           case KEY_INDEX:
           case KEY_IDX_CHAIN:
           case KEY_PATH_KEY:
@@ -105,7 +106,7 @@ export function createParseDep(vm, schemaInfo) {
   defineProperty(parseSources, KEY_INDEX, vm, schemaInfo);
   defineProperty(parseSources, KEY_IDX_CHAIN, vm, schemaInfo);
   defineProperty(parseSources, KEY_PATH_KEY, vm, schemaInfo);
-  // defineProperty(parseSources, KEY_HIDDEN, vm, schemaInfo);
+  defineProperty(parseSources, KEY_HIDDEN, vm, schemaInfo);
   defineProperty(parseSources, KEY_ROOT_DATA, vm, schemaInfo);
   defineProperty(parseSources, KEY_ROOT, vm, schemaInfo);
   defineProperty(parseSources, KEY_PARENT_VALUE, vm, schemaInfo);
