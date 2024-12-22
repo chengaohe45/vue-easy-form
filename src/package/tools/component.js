@@ -1,7 +1,7 @@
 import utils from "../libs/utils";
 import constant from "../libs/constant";
 import { enterSubmit, onlySubmit } from "../libs/submit";
-import { canAssign, newEsFuncion, getStaticKey } from "./parse";
+import { canAssign, newEsFunction, getStaticKey } from "./parse";
 
 ("use strict");
 
@@ -45,10 +45,10 @@ export function parseComponent(
 
     newComponent.name = component.name;
     if (component.class) {
-      newComponent.class = newEsFuncion(component.class);
+      newComponent.class = newEsFunction(component.class);
     }
     if (component.style) {
-      newComponent.style = newEsFuncion(component.style);
+      newComponent.style = newEsFunction(component.style);
     }
 
     // 指令directives
@@ -56,7 +56,7 @@ export function parseComponent(
     if (directives && utils.isObj(directives)) {
       var newDirectives = {};
       for (var directiveName in directives) {
-        newDirectives[directiveName] = newEsFuncion(directives[directiveName]);
+        newDirectives[directiveName] = newEsFunction(directives[directiveName]);
       }
       newComponent.directives = newDirectives;
     }
@@ -69,11 +69,11 @@ export function parseComponent(
       newComponent.normalSlots = parseSlots(component.normalSlots);
     }
 
-    newComponent.text = newEsFuncion(component.text);
-    // newComponent.hidden = newEsFuncion(component.hidden);
+    newComponent.text = newEsFunction(component.text);
+    // newComponent.hidden = newEsFunction(component.hidden);
     if (!fromFormComponent) {
       // 表单主表单组件是不能隐藏的，要隐藏是整个模块隐藏，所以隐藏放在模块中处理
-      newComponent.hidden = newEsFuncion(component.hidden);
+      newComponent.hidden = newEsFunction(component.hidden);
     }
 
     var eventAction = parseComponentEvent(component); // 原来的写法
@@ -89,7 +89,7 @@ export function parseComponent(
         var staticKey = getStaticKey(key);
         if (!staticKey) {
           // 兼容旧式写法
-          newProps[key] = newEsFuncion(tmpProps[key]);
+          newProps[key] = newEsFunction(tmpProps[key]);
         } else {
           staticAttrs[staticKey] = tmpProps[key]; // 保持原样，不用解析（旧式写法）
         }
@@ -114,8 +114,8 @@ export function parseComponent(
         var valueKey = "value";
         // console.log("vModelValue", vModelValue);
         if (vModelValue && canAssign(vModelValue)) {
-          newComponent.__rawVModel = newEsFuncion(vModelValue + "={{$event}}");
-          newComponent.props[valueKey] = newEsFuncion(vModelValue);
+          newComponent.__rawVModel = newEsFunction(vModelValue + "={{$event}}");
+          newComponent.props[valueKey] = newEsFunction(vModelValue);
         } else if (
           utils.isObj(vModelValue) &&
           utils.isObj(vModelValue.context) &&
@@ -184,7 +184,7 @@ export function parseComponent(
             sourcePathKey +
               "component.vModel必须是可以赋值的，形式如:es: {{$item}}.name, 且属性名(如_naMe-0)只支持[a-zA-Z0-9_-]或一个对象{context: this, target: 'myName'}; 若不是这样的形式，则无法同步"
           );
-          newComponent.props[valueKey] = newEsFuncion(vModelValue);
+          newComponent.props[valueKey] = newEsFunction(vModelValue);
         }
       }
     }
@@ -212,7 +212,7 @@ export function parseComponent(
         actions: []
       });
     } else {
-      Object.assign(newComponent, createEmptyComponent(newEsFuncion(tmpName)));
+      Object.assign(newComponent, createEmptyComponent(newEsFunction(tmpName)));
     }
   } else {
     if (canEmpty !== true) {

@@ -119,7 +119,7 @@ let parse = {
    * @param {*} scriptTxt
    * @param {*} expPrefix
    */
-  newEsFuncion(scriptTxt, expPrefix = "es:") {
+  newEsFunction(scriptTxt, expPrefix = "es:") {
     let result;
 
     if (parse.isEsScript(scriptTxt)) {

@@ -122,7 +122,7 @@ export function smartEsValue(
  * @param {*} scriptTxt
  * @param {*} expPrefix
  */
-export function newEsFuncion(scriptTxt, expPrefix = "es:") {
+export function newEsFunction(scriptTxt, expPrefix = "es:") {
   let result;
 
   if (isEsScript(scriptTxt)) {

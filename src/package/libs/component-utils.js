@@ -9,7 +9,7 @@
 import utils from "./utils";
 // import constant from "./constant";
 // import { enterSubmit, onlySubmit } from "./submit";
-import { isEsOrFunc, newEsFuncion } from "../tools/parse";
+import { isEsOrFunc, newEsFunction } from "../tools/parse";
 import global from "./global";
 import { parseComponent, createEmptyComponent } from "../tools/component";
 
@@ -113,7 +113,7 @@ export function parseClassStyle(item, needParse = true) {
   var newItem = {};
   if (needParse && isEsOrFunc(item.class)) {
     newItem.class = null;
-    newItem.__rawClass = newEsFuncion(item.class);
+    newItem.__rawClass = newEsFunction(item.class);
   } else {
     if (item.class) {
       newItem.class = utils.deepCopy(item.class);
@@ -122,7 +122,7 @@ export function parseClassStyle(item, needParse = true) {
 
   if (needParse && isEsOrFunc(item.style)) {
     newItem.style = null;
-    newItem.__rawStyle = newEsFuncion(item.style);
+    newItem.__rawStyle = newEsFunction(item.style);
   } else {
     if (utils.isObj(item.style) && Object.keys(item.style).length) {
       newItem.style = utils.deepCopy(item.style);

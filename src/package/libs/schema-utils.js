@@ -423,7 +423,7 @@ let schemaUtils = {
       }
     }
 
-    newPropItem.__rawHidden = parse.newEsFuncion(newPropItem.hidden);
+    newPropItem.__rawHidden = parse.newEsFunction(newPropItem.hidden);
     newPropItem.__creatable = false; // 这个一定要设置要false, 说明初始化时是创建组件，一旦设置成true, 就改不回false
 
     return newPropItem;
@@ -1286,7 +1286,7 @@ let schemaUtils = {
 
       // 取出required
       if (parse.isEsOrFunc(rules.required)) {
-        tmpRawRequired = parse.newEsFuncion(rules.required);
+        tmpRawRequired = parse.newEsFunction(rules.required);
       } else if (utils.isBool(rules.required)) {
         tmpRawRequired = rules.required;
       } else {
@@ -1295,7 +1295,7 @@ let schemaUtils = {
 
       // 取出canOnlyWarn
       // if (parse.isEsOrFunc(rules.canOnlyWarn)) {
-      //   tmpRawCanOnlyWarn = parse.newEsFuncion(rules.canOnlyWarn);
+      //   tmpRawCanOnlyWarn = parse.newEsFunction(rules.canOnlyWarn);
       // } else if (utils.isBool(rules.canOnlyWarn)) {
       //   tmpRawCanOnlyWarn = rules.canOnlyWarn;
       // } else {
@@ -1308,7 +1308,7 @@ let schemaUtils = {
       tmpRawRequired = rules;
       rules = {};
     } else if (parse.isEsOrFunc(rules)) {
-      tmpRawRequired = parse.newEsFuncion(rules);
+      tmpRawRequired = parse.newEsFunction(rules);
       rules = {};
     } else {
       return false;
@@ -1712,7 +1712,7 @@ let schemaUtils = {
       return { handler: item, trigger: [constant.INPUT_EVENT] };
     } else if (parse.isEsScript(item)) {
       return {
-        handler: parse.newEsFuncion(item),
+        handler: parse.newEsFunction(item),
         trigger: [constant.INPUT_EVENT]
       };
     } else if (
