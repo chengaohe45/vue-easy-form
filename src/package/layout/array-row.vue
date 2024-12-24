@@ -187,7 +187,7 @@
       </div>
     </div>
     <div
-      v-if="schema.help && !schema.help.hidden && schema.component"
+      v-if="mxShowComponent(schema.help, schema.__info) && schema.component"
       class="es-form-help"
       :style="{
         height: schema.properties

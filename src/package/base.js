@@ -10,7 +10,11 @@
 // import _uniq from "lodash-es/uniq";
 import constant from "./libs/constant.js";
 import utils from "./libs/utils.js";
-import { parseComponent } from "./tools/component";
+import {
+  parseComponent,
+  isComponentTextType,
+  convertComponentText
+} from "./tools/component";
 import { smartEsValue } from "./tools/parse";
 
 const KEY_EVENT_CACHE_MAP = "_KEY_EVENT_CACHE_MAP";
@@ -82,7 +86,8 @@ export default {
   // functional: true,
 
   render: function(createElement) {
-    return this.createVnode(createElement, this.config, false, true);
+    var vnodes = this.createVnodes(createElement, this.config, false, true);
+    return vnodes[0];
   },
   props: {
     config: {
@@ -370,107 +375,122 @@ export default {
      *
      * @param {*} createElement
      * @param {*} config
-     * @param {*} fromSlot 这个来自于插槽
+     * @param {*} fromSlotInfo 这个来自于插槽 {fromScoped: false, scoped}
      * @param {*} isRootRender 来自主渲染
      * @returns
      */
-    createVnode(createElement, config, fromSlot, isRootRender) {
+    createVnodes(createElement, config, fromSlotInfo, isRootRender) {
       var vnode;
-      var dataComponent = this.fillDataForConfig(
+      var dataComponents = this.fillDataForConfig(
         createElement,
         config,
-        fromSlot,
+        fromSlotInfo,
         isRootRender
       );
-      if (fromSlot && utils.isStr(dataComponent)) {
-        return dataComponent; // 插槽可以直接使用字符串
+      if (
+        fromSlotInfo &&
+        (dataComponents === undefined ||
+          dataComponents === null ||
+          utils.isStr(dataComponents))
+      ) {
+        return dataComponents ? [dataComponents] : []; // 插槽可以直接使用字符串
       }
-      if (utils.isVNode(dataComponent.jsx)) {
-        vnode = dataComponent.jsx;
-      } else {
-        // 一般的写法
-        if (!dataComponent.name) {
-          console.error("错误的config: ", dataComponent);
-          throw "es-base config.name必须存在";
-        }
-        vnode = createElement(
-          dataComponent.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
-          {
-            attrs: dataComponent.props, //attrs为原生属性
-            // style: this.config.style,
-            class: dataComponent.class,
-            style: dataComponent.style,
-            // DOM属性
-            domProps: dataComponent.domProps,
-            // 组件props
-            props: dataComponent.props,
-            // 事件监听基于 "on"
-            // 所以不再支持如 "v-on:keyup.enter" 修饰语
-            // 需要手动匹配 KeyCode
-            on: dataComponent.on,
+      dataComponents = utils.isArr(dataComponents)
+        ? dataComponents
+        : [dataComponents];
+      var vnodes = [];
+      dataComponents.forEach(dataComponent => {
+        if (utils.isVNode(dataComponent.jsx)) {
+          vnode = dataComponent.jsx;
+        } else {
+          // 一般的写法
+          if (!dataComponent.name) {
+            console.error("错误的config: ", dataComponent);
+            throw "es-base config.name必须存在";
+          }
+          vnode = createElement(
+            dataComponent.name, // tag name 标签名称 https://www.cnblogs.com/tugenhua0707/p/7528621.html
+            {
+              attrs: dataComponent.props, //attrs为原生属性
+              // style: this.config.style,
+              class: dataComponent.class,
+              style: dataComponent.style,
+              // DOM属性
+              domProps: dataComponent.domProps,
+              // 组件props
+              props: dataComponent.props,
+              // 事件监听基于 "on"
+              // 所以不再支持如 "v-on:keyup.enter" 修饰语
+              // 需要手动匹配 KeyCode
+              on: dataComponent.on,
 
-            // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
-            nativeOn: dataComponent.nativeOn,
-            // 自定义指令。注意事项：不能对绑定的旧值设值
-            // Vue 会为您持续追踪
-            directives: dataComponent.directives,
-            // directives: [
-            //   {
-            //   	name: "my-custom-directive",
-            //   	value: "2",
-            //   	expression: "1 + 1",
-            //   	arg: "foo",
-            //   	modifiers: {
-            //   		bar: true
-            //   	}
-            //   }
-            // ],
-            // Scoped slots in the form of
-            // { name: props => VNode | Array<VNode> }
-            scopedSlots: dataComponent.scopedSlots
-            // 如果组件是其他组件的子组件，需为插槽指定名称
-            // slot: "name-of-slot",
-            // 其他特殊顶层属性
-            // key: "myKey",
-            // ref: "myRef"
-            // ref: "__comTarget__"
-          },
-          // [createElement('span', "test")]
-          // ["test2"]
-          // "测试{{config.value}}" // 子组件中的阵列
-          dataComponent.normalSlots || []
-        );
+              // 仅对于组件，用于监听原生事件，而不是组件内部使用 `vm.$emit` 触发的事件。
+              nativeOn: dataComponent.nativeOn,
+              // 自定义指令。注意事项：不能对绑定的旧值设值
+              // Vue 会为您持续追踪
+              directives: dataComponent.directives,
+              // directives: [
+              //   {
+              //   	name: "my-custom-directive",
+              //   	value: "2",
+              //   	expression: "1 + 1",
+              //   	arg: "foo",
+              //   	modifiers: {
+              //   		bar: true
+              //   	}
+              //   }
+              // ],
+              // Scoped slots in the form of
+              // { name: props => VNode | Array<VNode> }
+              scopedSlots: dataComponent.scopedSlots
+              // 如果组件是其他组件的子组件，需为插槽指定名称
+              // slot: "name-of-slot",
+              // 其他特殊顶层属性
+              // key: "myKey",
+              // ref: "myRef"
+              // ref: "__comTarget__"
+            },
+            // [createElement('span', "test")]
+            // ["test2"]
+            // "测试{{config.value}}" // 子组件中的阵列
+            dataComponent.normalSlots || []
+          );
 
-        // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
-        var componentOptions = vnode.componentOptions;
-        var dataAttrs = {};
-        var comProps =
-          componentOptions && componentOptions.Ctor.options.props
-            ? componentOptions.Ctor.options.props
-            : false;
-        var thisProps = dataComponent.props;
-        // if (this.config.name === "el-button") {
-        //   console.log("-------thisProps------", thisProps);
-        // }
-        if (Object.keys(thisProps || {}).length) {
-          var comPropsKeys = Object.keys(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
-          for (var key in thisProps) {
-            if (!comPropsKeys.includes(key)) {
-              dataAttrs[key] = thisProps[key];
+          // 去除多余的原生属性；去不去掉感觉都没有什么，好像没有影响到功能，只是页面上会显示原生属性
+          var componentOptions = vnode.componentOptions;
+          var dataAttrs = {};
+          var comProps =
+            componentOptions && componentOptions.Ctor.options.props
+              ? componentOptions.Ctor.options.props
+              : false;
+          var thisProps = dataComponent.props;
+          if (Object.keys(thisProps || {}).length) {
+            var comPropsKeys = Object.keys(comProps || {}); // 经测试：就算在定义中声明为中划线形式，这里也会返回驼峰式，如 'text-str' => 'textStr'
+            for (var key in thisProps) {
+              if (!comPropsKeys.includes(key)) {
+                dataAttrs[key] = thisProps[key];
+              }
+            }
+            if (vnode.data) {
+              vnode.data.attrs = dataAttrs;
             }
           }
-          if (vnode.data) {
-            vnode.data.attrs = dataAttrs;
-          }
         }
-      }
+        vnodes.push(vnode);
+      });
 
-      dataComponent = null;
-
-      return vnode;
+      return vnodes;
     },
 
-    fillDataForConfig(createElement, config, fromSlot, isRootRender) {
+    /**
+     *
+     * @param {*} createElement
+     * @param {*} config
+     * @param {*} fromSlotInfo
+     * @param {*} isRootRender
+     * @returns slots可能会返回一个数组，其它的不会
+     */
+    fillDataForConfig(createElement, config, fromSlotInfo, isRootRender) {
       var newComponent = {};
 
       if (config.jsx) {
@@ -478,12 +498,24 @@ export default {
       }
       // var parseSources = this.__tmpParseSources;
       if (!config.func) {
+        if (fromSlotInfo) {
+          // 插槽需要判断hidden
+          var hidden = config.hidden;
+          if (utils.isFunc(hidden)) {
+            hidden = fromSlotInfo.fromScoped
+              ? config.hidden(this.fetchRootParseSource(), fromSlotInfo.scoped)
+              : config.hidden(this.fetchRootParseSource());
+          }
+          if (hidden) {
+            return null;
+          }
+        }
         // 解析props
         // 合并attrs, props: attrs优先级更高
         var domProps = {};
         var valueKey = "value";
         var dataProps = config.attrs ? Object.assign({}, config.attrs) : {};
-        if (this.isMain && !fromSlot) {
+        if (this.isMain && !fromSlotInfo) {
           // 来自于表单的主组件且非slot(也就是最外层), 取value值
           if ("value" in config) {
             // dataProps[valueKey] = utils.isRefVal(config.value)
@@ -497,7 +529,7 @@ export default {
           // 若存在key, 说明来自于attrs
           if (!(key in dataProps)) {
             var scriptTxt = config.props[key];
-            propValue = this.execEsValue(scriptTxt);
+            propValue = this.execEsValue(scriptTxt, fromSlotInfo);
             dataProps[key] = propValue;
           }
         }
@@ -513,13 +545,13 @@ export default {
         }
 
         // console.log("dataProps: ", dataProps);
-        newComponent.name = config.name;
+        newComponent.name = config.name || "span";
         newComponent.props = dataProps;
         newComponent.domProps = domProps;
 
         // 解析style
         if (config.style) {
-          var style = this.execEsValue(config.style);
+          var style = this.execEsValue(config.style, fromSlotInfo);
           if (utils.isObj(style)) {
             newComponent.style = style;
           }
@@ -527,7 +559,7 @@ export default {
 
         // 解析class
         if (config.class) {
-          var newClass = this.execEsValue(config.class);
+          var newClass = this.execEsValue(config.class, fromSlotInfo);
           if (
             utils.isStr(newClass) ||
             utils.isObj(newClass) ||
@@ -552,7 +584,10 @@ export default {
           ];
           var directives = config.directives;
           for (var directiveName in directives) {
-            var directiveValue = this.execEsValue(directives[directiveName]);
+            var directiveValue = this.execEsValue(
+              directives[directiveName],
+              fromSlotInfo
+            );
             newDirectives.push({
               name: directiveName,
               value: directiveValue
@@ -585,10 +620,19 @@ export default {
           : this.createEventOn(config, false, true);
 
         // 解析text
-        var dataText = this.execEsValue(config.text);
-        if (dataText !== undefined && dataText !== null) {
-          // newComponent.text = dataText + "";
-          normalSlots.push(dataText + "");
+        var dataText = this.execEsValue(config.text, fromSlotInfo);
+        if (config.name || !fromSlotInfo) {
+          if (dataText !== undefined && dataText !== null) {
+            // newComponent.text = dataText + "";
+            normalSlots.push(dataText + "");
+          }
+        } else {
+          // slot可以返回字符串
+          if (result !== undefined && result !== null) {
+            return result + "";
+          } else {
+            return "";
+          }
         }
         // if (newComponent.on && newComponent.on["test-true"]) {
         //   console.log("----------------newComponent.on", newComponent.on);
@@ -598,41 +642,51 @@ export default {
       } else {
         // 是函数
         var func = config.func;
-        var result;
-        result = this.execEsValue(func);
-        if (utils.isVNode(result)) {
-          newComponent.jsx = result;
-        } else if (utils.isObj(result) && result.name) {
-          // 返回一个组件，再次解析
-          var newResult = parseComponent(result);
-          if (newResult) {
-            newResult = this.fillDataForConfig(
-              createElement,
-              newResult,
-              fromSlot
-            );
-            if (newResult) {
-              // 函数返回新的组件对象
-              return newResult;
-            }
-          }
-        }
-        if (!newComponent.jsx) {
-          if (!fromSlot) {
+        var result = this.execEsValue(func, fromSlotInfo);
+        if (!fromSlotInfo) {
+          if (utils.isVNode(result) || (utils.isObj(result) && result.name)) {
+            // 返回一个组件，再次解析
+            var newResult = parseComponent(result, false, false, "Base");
+            return this.fillDataForConfig(createElement, newResult, false);
+          } else {
             newComponent.name = "span";
             newComponent.props = {};
             if (result !== undefined && result !== null) {
-              // newComponent.text = result + "";
               result = result + "";
               newComponent.normalSlots = result ? [result] : [];
             }
+          }
+        } else {
+          if (!isComponentTextType(result)) {
+            var newSlotResult = [];
+            result = utils.isArr(result) ? result : [result];
+            // console.log('result', result)
+            result.forEach(resultItem => {
+              if (isComponentTextType(resultItem)) {
+                var resultText = convertComponentText(resultItem);
+                if (resultText) {
+                  newSlotResult.push(resultText);
+                }
+              } else {
+                var slotComponent = parseComponent(
+                  resultItem,
+                  true,
+                  false,
+                  "Base-fromSlotInfo"
+                );
+                if (slotComponent) {
+                  slotComponent = this.fillDataForConfig(
+                    createElement,
+                    slotComponent,
+                    false
+                  );
+                  newSlotResult.push(slotComponent);
+                }
+              }
+            });
+            return newSlotResult;
           } else {
-            // 可以返回字符串
-            if (result !== undefined && result !== null) {
-              return result + "";
-            } else {
-              return "";
-            }
+            return convertComponentText(result);
           }
         }
       }
@@ -673,46 +727,24 @@ export default {
       if (!utils.isArr(slotValue)) {
         slotValue = [slotValue];
       }
-
-      // 解析函数部分
-      var nodes = [];
-      slotValue.forEach(slotValueItem => {
-        if (utils.isFunc(slotValueItem)) {
-          var nodeResult = slotValueItem(this.fetchRootParseSource());
-          if (utils.isArr(nodeResult)) {
-            nodes = nodes.concat(nodeResult);
-          } else if (nodeResult !== undefined && nodeResult !== null) {
-            nodes.push(nodeResult);
-          }
+      var newAllVNodes = [];
+      slotValue.forEach(node => {
+        if (utils.isStr(node)) {
+          newAllVNodes.push(node);
         } else {
-          nodes.push(slotValueItem);
-        }
-      });
-
-      var newVNodes = [];
-      nodes.forEach(node => {
-        if (utils.isVNode(node)) {
-          newVNodes.push(node);
-        } else if (utils.isObj(node) || utils.isFunc(node)) {
-          var newComponent = parseComponent(node);
-          if (newComponent) {
-            var newVNode = this.createVnode(
-              createElement,
-              newComponent,
-              true,
-              false
-            );
-            // console.log("newVNode, newComponent", newVNode, newComponent);
-            if (newVNode) {
-              newVNodes.push(newVNode);
-            }
+          var newVNodes = this.createVnodes(
+            createElement,
+            node,
+            { fromScoped: false },
+            false
+          );
+          if (newVNodes && newVNodes.length > 0) {
+            newAllVNodes = newAllVNodes.concat(newVNodes);
           }
-        } else if (node !== undefined && node !== null) {
-          newVNodes.push(node + "");
         }
       });
 
-      return newVNodes;
+      return newAllVNodes;
     },
 
     // 返回的是一个对象
@@ -736,52 +768,36 @@ export default {
         if (!utils.isArr(slotValue)) {
           slotValue = [slotValue];
         }
-
-        // 解析函数部分
-        var nodes = [];
-        slotValue.forEach(slotValueItem => {
-          if (utils.isFunc(slotValueItem)) {
-            var nodeResult = slotValueItem(this.__tmpParseSources, scoped);
-            if (utils.isArr(nodeResult)) {
-              nodes = nodes.concat(nodeResult);
-            } else if (nodeResult !== undefined && nodeResult !== null) {
-              nodes.push(nodeResult);
-            }
+        // console.log('slotValue', slotValue)
+        var newAllVNodes = [];
+        slotValue.forEach(node => {
+          if (utils.isStr(node)) {
+            newAllVNodes.push(node);
           } else {
-            nodes.push(slotValueItem);
-          }
-        });
-
-        var newVNodes = [];
-        nodes.forEach(node => {
-          if (utils.isVNode(node)) {
-            newVNodes.push(node);
-          } else if (utils.isObj(node) || utils.isFunc(node)) {
-            var newComponent = parseComponent(node);
-            if (newComponent) {
-              var newVNode = this.createVnode(
-                createElement,
-                newComponent,
-                true,
-                false
-              );
-              if (newVNode) {
-                newVNodes.push(newVNode);
-              }
+            var newVNodes = this.createVnodes(
+              createElement,
+              node,
+              { fromScoped: true, scoped: scoped },
+              false
+            );
+            if (newVNodes && newVNodes.length > 0) {
+              newAllVNodes = newAllVNodes.concat(newVNodes);
             }
-          } else if (node !== undefined && node !== null) {
-            newVNodes.push(node + "");
           }
         });
-        // console.log("newVNodes", newVNodes);
-        return newVNodes;
+        return newAllVNodes;
       };
     },
-    execEsValue(scriptTxt) {
+    execEsValue(scriptTxt, fromSlotInfo) {
       // console.log("this", this);
       if (typeof scriptTxt === "function") {
         var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
-        return scriptTxt(rootInstance._fetchParseSources(this.info));
+        return fromSlotInfo && fromSlotInfo.fromScoped
+          ? scriptTxt(
+              rootInstance._fetchParseSources(this.info),
+              fromSlotInfo.scoped
+            )
+          : scriptTxt(rootInstance._fetchParseSources(this.info));
       } else {
         return scriptTxt;
       }

@@ -148,6 +148,13 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
 
     scriptTxt = scriptTxt.substring(expPrefix.length);
     scriptTxt = scriptTxt.trim(); // 与isEsScript判断一致
+    options.forEach(item => {
+      if (!item.hadUse) {
+        if (scriptTxt.indexOf(item.symbol) >= 0) {
+          item.hadUse = true;
+        }
+      }
+    });
 
     // 解析$hidden
     let hiddenPatt = /\{{(\s*\$hidden\()(.+?)(\)\s*}})/gi;
@@ -158,10 +165,10 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
     let newScriptTxt = "";
     let curSliceIndex = 0;
     let hadUseIdxChain = false;
-    let hadUseHidden = false
+    let hadUseHidden = false;
     hiddenResult = hiddenPatt.exec(scriptTxt);
     while (hiddenResult) {
-      hadUseHidden = true
+      hadUseHidden = true;
       // hasHiddenFun = true; // 有隐藏函数
 
       //若有值，会分成三段 如：["{{$hidden( tt[i].age )}}", "$hidden(", " tt[i].age ", ")}}"]
@@ -201,19 +208,12 @@ export function newEsFunction(scriptTxt, expPrefix = "es:") {
     // 假设val为：es: {{$root.persons[i].age}} > 1 && {{$root.persons[i].age}} < 18
     const matchs = newScriptTxt.match(/\{{.*?}}/g) || []; // matchs值：["{{$root.persons[i].age}}", "{{$root.persons[i].age}}"]
     matchs.forEach(mItem => {
-      options.forEach(item => {
-        if (!item.hadUse) {
-          if (mItem.indexOf(item.symbol) >= 0) {
-            item.hadUse = true
-          }
-        }
-      });
       // mItem值："{{$root.persons[i].age}}"
       // console.log("1 mItem: ", mItem);
       let tmpItem;
       let tempVal;
       if (mItem.indexOf(constant.IDX_CHAIN_KEY) > 0) {
-        hadUseIdxChain = true
+        hadUseIdxChain = true;
         // 数组的，不再转换：让用户自己控制，表达式更加强大
         tmpItem = mItem;
         tempVal = "";

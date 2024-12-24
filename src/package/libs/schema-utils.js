@@ -28,7 +28,6 @@ import {
 import {
   parseComponentEvent,
   parseTrigger,
-  // createEmptyComponent,
   getNativeName
 } from "../tools/component";
 

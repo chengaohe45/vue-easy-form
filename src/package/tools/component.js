@@ -1,7 +1,7 @@
 import utils from "../libs/utils";
 import constant from "../libs/constant";
 import { enterSubmit, onlySubmit } from "../libs/submit";
-import { canAssign, newEsFunction, getStaticKey } from "./parse";
+import { canAssign, newEsFunction, getStaticKey, isEsScript } from "./parse";
 
 ("use strict");
 
@@ -15,7 +15,7 @@ export function newComponentId() {
  * 解析组件
  * @param {*} component 组件配置
  * @param {*} canEmpty  是否可返回空值
- * @param {*} fromFormComponent 是否需要双向绑定数据（表单不需要，因为有绑定功能；但其它组件需要）
+ * @param {*} fromFormComponent 是否需要双向绑定数据（表单不需要，因为有绑定功能；但其它(label, desc, slot)组件需要）
  * * @param {*} sourcePathKey 组件出处，主要用来打印
  * @returns newComponent 返回合法的组件配置
  */
@@ -39,7 +39,7 @@ export function parseComponent(
         console.error(sourcePathKey + "name必须存在", component);
         throw sourcePathKey + "name必须存在";
       } else {
-        return null;
+        // return null; // 可以没有name, 解析多一种情况
       }
     }
 
@@ -190,6 +190,8 @@ export function parseComponent(
     }
   } else if (utils.isFunc(component)) {
     newComponent.func = component;
+  } else if (isEsScript(component)) {
+    newComponent.func = newEsFunction(component);
   } else if (utils.isStr(component)) {
     var tmpName = component.trim();
     if (!tmpName) {
@@ -203,17 +205,19 @@ export function parseComponent(
         return null;
       }
     }
-    if (fromFormComponent) {
-      newComponent = Object.assign(newComponent, {
-        hidden: false,
-        name: tmpName,
-        props: {},
-        text: undefined,
-        actions: []
-      });
-    } else {
-      Object.assign(newComponent, createEmptyComponent(newEsFunction(tmpName)));
-    }
+    // 表单同步组件已经在入来时已经处理好了
+    // if (fromFormComponent) {
+    //   newComponent = Object.assign(newComponent, {
+    //     hidden: false,
+    //     name: tmpName,
+    //     props: {},
+    //     text: undefined,
+    //     actions: []
+    //   });
+    // } else {
+    // Object.assign(newComponent, createEmptyComponent(newEsFunction(tmpName)));
+    // }
+    newComponent.text = tmpName;
   } else {
     if (canEmpty !== true) {
       console.error(
@@ -240,12 +244,36 @@ export function createEmptyComponent(text) {
  * 解析slots
  */
 export function parseSlots(slots) {
-  var newSlots = {};
+  var tmpSlots = {};
   if (slots !== undefined && slots !== null) {
     if (!utils.isObj(slots) || utils.isVNode(slots)) {
-      newSlots.default = slots;
+      tmpSlots.default = slots;
     } else {
-      newSlots = Object.assign({}, slots);
+      tmpSlots = Object.assign({}, slots);
+    }
+  }
+  var newSlots = {};
+  for (var soltName in tmpSlots) {
+    var soltItems = tmpSlots[soltName];
+    if (soltItems !== undefined || (soltItems !== null && soltItems !== "")) {
+      if (!utils.isArr(soltItems)) {
+        soltItems = [soltItems];
+      }
+      var newSlotItems = [];
+      soltItems.forEach(function(soltItem) {
+        if (isComponentTextType(soltItem)) {
+          newSlotItems.push(convertComponentText(soltItem));
+        } else {
+          var newSlotItem = parseComponent(soltItem, true, false, "parse.slot");
+          newSlotItems.push(newSlotItem);
+        }
+        newSlotItems = newSlotItems.filter(function(tmpItem) {
+          return !!tmpItem;
+        });
+      });
+      if (newSlotItems.length > 0) {
+        newSlots[soltName] = newSlotItems;
+      }
     }
   }
   return newSlots;
@@ -441,5 +469,29 @@ export function getNativeName(eventName) {
     }
   } else {
     return false;
+  }
+}
+
+/**
+ */
+export function isComponentTextType(value) {
+  if (
+    value === undefined ||
+    value === null ||
+    typeof value === "boolean" ||
+    (typeof value === "string" && !isEsScript(value)) ||
+    typeof value === "number"
+  ) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+export function convertComponentText(value) {
+  if (value === undefined || value === null) {
+    return "";
+  } else {
+    return value + "";
   }
 }

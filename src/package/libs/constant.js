@@ -15,6 +15,9 @@ let constant = {
   ARR_OP_TYPE_COPY: "copy", // copy
   ARR_OP_TYPE_MOVE_UP: "up", // up
   ARR_OP_TYPE_MOVE_DOWN: "down", // down
+  
+  MSG_LEVEL_WARN: "warning", // 警告
+  MSG_LEVEL_ERROR: "error", // 错误
 
   POINT_CENTER_CENTER: "center-center", // tip框与源icon可以居中指向
   POINT_ARROW_CENTER: "arrow-center", // tip框偏移，但指向源icon中间

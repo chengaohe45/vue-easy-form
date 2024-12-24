@@ -5,7 +5,7 @@
       :class="['es-form-header', schema.ui ? 'es-form-' + schema.ui.type : '']"
     >
       <div
-        v-if="schema.title && !schema.title.hidden"
+        v-if="mxShowComponent(schema.title, schema.__info)"
         :class="['es-form-title', 'es-title-l' + schema.title.__level]"
       >
         <span v-if="!schema.title.name">
@@ -14,7 +14,7 @@
         <es-base v-else :config="schema.title" :info="schema.__info"></es-base>
         <div
           class="es-form-label-help"
-          v-if="schema.title.help && !schema.title.help.hidden"
+          v-if="mxShowComponent(schema.title.help, schema.__info)"
         >
           <es-base :config="schema.title.help" :info="schema.__info"></es-base>
         </div>
@@ -31,7 +31,7 @@
             : schema.ui.toggleTexts[0]
         }}
       </div>
-      <div v-if="schema.help && !schema.help.hidden" class="es-form-help">
+      <div v-if="mxShowComponent(schema.help, schema.__info)" class="es-form-help">
         <es-base :config="schema.help" :info="schema.__info"></es-base>
       </div>
     </div>
@@ -78,7 +78,7 @@
             </es-base>
           </div>
           <template
-            v-if="schema.unit && !schema.unit.hidden && !schema.__inGroups"
+            v-if="mxShowComponent(schema.unit, schema.__info) && !schema.__inGroups"
           >
             <div v-if="schema.unit.name" class="es-form-unit">
               <es-base :config="schema.unit" :info="schema.__info"></es-base>
@@ -88,7 +88,7 @@
             </div>
           </template>
           <div
-            v-if="schema.help && !schema.help.hidden && !schema.__inGroups"
+            v-if="mxShowComponent(schema.help, schema.__info) && !schema.__inGroups"
             class="es-form-help"
           >
             <es-base :config="schema.help" :info="schema.__info"></es-base>
@@ -311,32 +311,35 @@
         </component>
       </template>
 
-      <!-- 验证错误信息：优化考虑数组: 对于项来说，它没有rules；对于component来说，两者可能都存在，但array.rules才是外面的，用来判断数组 -->
+      <!-- 
+        验证错误信息：优化考虑数组: 对于项来说，它没有rules；对于component来说，两者可能都存在，但array.rules才是外面的，用来判断数组
+        __invalidMsg若是一个对象{level: 'warning/error', from: '', message: 'xxxxx'} 可以是一个组件
+       -->
       <template v-if="!schema.array">
         <div
-          v-if="schema.rules"
-          v-show="schema.__invalidMsg"
+          v-if="schema.rules && schema.__invalidMsg"
           class="es-form-error"
           :class="schema.rules.class"
           :style="schema.rules.style"
         >
-          {{ schema.__invalidMsg }}
+          <template v-if="typeof schema.__invalidMsg.message === 'string'">{{ schema.__invalidMsg.message }}</template>
+          <es-base v-else :config="schema.__invalidMsg.message" :info="schema.__info"></es-base>
         </div>
       </template>
       <template v-else>
         <div
-          v-if="schema.array.rules"
-          v-show="schema.__invalidMsg"
+          v-if="schema.array.rules && schema.__invalidMsg"
           class="es-form-error"
           :class="schema.array.rules.class"
           :style="schema.array.rules.style"
         >
-          {{ schema.__invalidMsg }}
+          <template v-if="typeof schema.__invalidMsg.message === 'string'">{{ schema.__invalidMsg.message }}</template>
+          <es-base v-else :config="schema.__invalidMsg.message" :info="schema.__info"></es-base>
         </div>
       </template>
 
       <!-- 描述信息，可以html -->
-      <template v-if="schema.desc && !schema.desc.hidden">
+      <template v-if="mxShowComponent(schema.desc, schema.__info)">
         <div v-if="schema.desc.name" class="es-form-desc">
           <es-base :config="schema.desc" :info="schema.__info"></es-base>
         </div>
@@ -620,12 +623,12 @@ export default {
 
   computed: {
     needHeader() {
+      // this.mxShowComponent(this.schema.title, this.schema.__info)
       return this.schema.properties &&
-        ((this.schema.title &&
-          !this.schema.title.hidden &&
+        ((this.mxShowComponent(this.schema.title, this.schema.__info) &&
           (this.schema.title.name ||
             this.schema.title.text ||
-            (this.schema.title.help && this.schema.title.help.hidden))) ||
+            (this.mxShowComponent(this.schema.title.help, this.schema.__info)))) ||
           this.schema.ui.__hasToggle ||
           this.schema.help)
         ? true

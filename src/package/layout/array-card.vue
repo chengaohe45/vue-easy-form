@@ -116,7 +116,7 @@
     </div>
 
     <div
-      v-if="schema.help && !schema.help.hidden && schema.component"
+      v-if="mxShowComponent(schema.help, schema.__info) && schema.component"
       class="es-form-help"
       :style="{
         height: schema.properties
@@ -204,7 +204,6 @@ import tabs from "./tabs";
 import itemMixin from "../mixins/item-mixin";
 import arrayMixins from "../mixins/array-mixin.js";
 import editAbbrBtns from "../components/edit-abbr-btns";
-// import editBottomBtns from "../components/edit-bottom-btns";
 import esBase from "../base";
 import esBtn from "../components/btn.vue";
 
