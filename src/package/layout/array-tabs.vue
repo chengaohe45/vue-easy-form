@@ -34,8 +34,8 @@
             class="order-txt"
             v-if="
               itemSchema.rules &&
-                itemSchema.rules.required &&
-                itemSchema.rules.showRequired
+              mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+              mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
             "
             ><span class="es-required">*</span></span
           >
@@ -43,7 +43,14 @@
             >{{ index + 1 }}.</span
           >
           <!-- itemSchema.subLabel一定为一个对象-->
-          <template
+          <template v-if="mxShowComponent(itemSchema.subLabel, itemSchema.__info)">
+            <es-base :config="itemSchema.subLabel" :info="itemSchema.__info"></es-base>
+          </template>
+          <span v-else-if="!schema.array.hasOrder">
+            {{ index + 1 }}
+          </span>
+
+          <!-- <template
             v-if="!itemSchema.subLabel.name || itemSchema.subLabel.hidden"
           >
             <span
@@ -67,12 +74,12 @@
               :config="itemSchema.subLabel"
               :info="itemSchema.__info"
             ></es-base>
-          </span>
+          </span> -->
         </es-tabs-nav-item>
       </template>
 
       <div
-        v-if="schema.help && !schema.help.hidden && schema.component"
+        v-if="mxShowComponent(schema.help, schema.__info) && schema.component"
         class="es-form-help"
         slot="help"
       >

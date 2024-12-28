@@ -1,4 +1,5 @@
-// import utils from "../libs/utils";
+import utils from "../libs/utils.js";
+import constant from "../libs/constant.js";
 import popUtils from "../libs/pop-utils";
 export default {
   data() {
@@ -109,12 +110,37 @@ export default {
       }
     },
 
+    showDelMsg(msg) {
+      if (msg) {
+        var rootInstance;
+        var hiddenScript = msg.hidden;
+        if (typeof hiddenScript === "function") {
+          rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+          var hiddenResult = hiddenScript(
+            rootInstance._fetchParseSources(this.info)
+          );
+          if (hiddenResult) {
+            // 隐藏，退出
+            return false;
+          }
+        }
+        // 判断内容
+        if (msg.func && typeof msg.func === "function") {
+          rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+          var textResult = msg.func(rootInstance._fetchParseSources(this.info));
+          if (!textResult) {
+            return false;
+          }
+        }
+      } else {
+        return false;
+      }
+      // 内容区有值且不隐藏
+      return true;
+    },
+
     clickDeletBtn() {
-      if (
-        this.canPop &&
-        this.hasDelWarn &&
-        (!this.delMsg.hidden && (this.delMsg.name || this.delMsg.text))
-      ) {
+      if (this.canPop && this.hasDelWarn && this.showDelMsg(this.delMsg)) {
         this.showPopHandler();
       } else {
         // 没有警告

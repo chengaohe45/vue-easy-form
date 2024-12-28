@@ -34,7 +34,7 @@
             @click.prevent.stop
           >
             <div class="es-form-pop-content">
-              <div class="content-box">
+              <div class="content-box" v-if="showPop">
                 <span class="content" v-if="!delMsg.name">{{
                   delMsg.text
                 }}</span>

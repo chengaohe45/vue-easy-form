@@ -313,14 +313,13 @@
 
       <!-- 
         验证错误信息：优化考虑数组: 对于项来说，它没有rules；对于component来说，两者可能都存在，但array.rules才是外面的，用来判断数组
-        __invalidMsg若是一个对象{level: 'warning/error', from: '', message: 'xxxxx'} 可以是一个组件
+        __invalidMsg若是一个对象{level: 'warning/error', from: '', message: 'xxxxx/当是一个组件配置时，可以隐藏'} 可以是一个组件
        -->
       <template v-if="!schema.array">
         <div
-          v-if="schema.rules && schema.__invalidMsg"
-          class="es-form-error"
-          :class="schema.rules.class"
-          :style="schema.rules.style"
+          v-if="schema.rules && schema.__invalidMsg && ((typeof schema.__invalidMsg.message === 'string') || mxShowComponent(schema.__invalidMsg.message, schema.__info))"
+          :class="mxParseClass(schema.rules.class, schema.__info, (schema.__invalidMsg.level !== MSG_LEVEL_WARN ? 'es-form-error' : 'es-form-warning'))"
+          :style="mxParseNodeAttr(schema.rules.style, schema.__info)"
         >
           <template v-if="typeof schema.__invalidMsg.message === 'string'">{{ schema.__invalidMsg.message }}</template>
           <es-base v-else :config="schema.__invalidMsg.message" :info="schema.__info"></es-base>
@@ -328,10 +327,9 @@
       </template>
       <template v-else>
         <div
-          v-if="schema.array.rules && schema.__invalidMsg"
-          class="es-form-error"
-          :class="schema.array.rules.class"
-          :style="schema.array.rules.style"
+          v-if="schema.array.rules && schema.__invalidMsg && ((typeof schema.__invalidMsg.message === 'string') || mxShowComponent(schema.__invalidMsg.message, schema.__info))"
+          :class="mxParseClass(schema.array.rules.class, schema.__info, (schema.__invalidMsg.level !== MSG_LEVEL_WARN ? 'es-form-error' : 'es-form-warning'))"
+          :style="mxParseNodeAttr(schema.array.rules.style, schema.__info)"
         >
           <template v-if="typeof schema.__invalidMsg.message === 'string'">{{ schema.__invalidMsg.message }}</template>
           <es-base v-else :config="schema.__invalidMsg.message" :info="schema.__info"></es-base>
@@ -535,6 +533,13 @@
     font-size: 13px;
   }
 
+  .es-form-warning {
+    margin: 3px 0 0 5px;
+    text-align: left;
+    color: $g_warningColor;
+    font-size: 13px;
+  }
+
   .es-form-desc {
     margin: 4px 0 0px 3px;
     text-align: left;
@@ -585,14 +590,17 @@ import utils from "./libs/utils";
 import constant from "./libs/constant";
 import global from "./libs/global";
 import esBase from "./base";
-
+import {
+  createNativeName
+} from "./tools/component";
 export default {
   name: "form-item", // 声明name可以嵌套自身
   mixins: [itemMixin],
 
   data() {
     return {
-      REF_FORM_ITEM: "REF_FORM_ITEM"
+      REF_FORM_ITEM: "REF_FORM_ITEM",
+      MSG_LEVEL_WARN: constant.MSG_LEVEL_WARN
       // unwatch: false,
       // showBody: true,
       // isChanged: false,
@@ -625,12 +633,8 @@ export default {
     needHeader() {
       // this.mxShowComponent(this.schema.title, this.schema.__info)
       return this.schema.properties &&
-        ((this.mxShowComponent(this.schema.title, this.schema.__info) &&
-          (this.schema.title.name ||
-            this.schema.title.text ||
-            (this.mxShowComponent(this.schema.title.help, this.schema.__info)))) ||
-          this.schema.ui.__hasToggle ||
-          this.schema.help)
+        ((this.mxShowComponent(this.schema.title, this.schema.__info) && (this.schema.title.name || this.schema.title.text || (this.mxShowComponent(this.schema.title.help, this.schema.__info))))
+        || this.schema.ui.__hasToggle || this.schema.help)
         ? true
         : false; // 是否有头部
     },
@@ -904,10 +908,11 @@ export default {
       var eventNames = [eventName];
       var targetValue = this.schema.component.value;
 
+      var realEventName = isNative ? createNativeName(eventName) : eventName;
       if (
         this.schema.isTrim &&
         utils.isStr(targetValue) &&
-        (eventName == global.trimEvent ||
+        (realEventName == global.trimEvent ||
           (constant.FORM_INPUTS.includes(this.schema.component.name) &&
             eventName == constant.INPUT_CHANGE))
       ) {
@@ -946,6 +951,7 @@ export default {
 
       var options = {
         fromArrayOperate: true,
+        isNative: false,
         value: targetValue,
         event: eventData,
         args: [eventData],
@@ -962,8 +968,6 @@ export default {
     __getForm() {
       return utils.getParent(this, constant.ES_FORM_ROOT_NAME);
     }
-  },
-
-  watch: {}
+  }
 };
 </script>

@@ -28,12 +28,21 @@
                 <span
                   v-if="
                     itemSchema.rules &&
-                      itemSchema.rules.required &&
-                      itemSchema.rules.showRequired
+                    mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+                    mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
                   "
                   ><span class="es-required">*</span></span
                 >
-                <span
+                <template v-if="mxShowComponent(itemSchema.subLabel, itemSchema.__info)">
+                  <es-base :config="itemSchema.subLabel" :info="itemSchema.__info"></es-base>
+                </template>
+                <span v-else-if="!schema.array.hasOrder">
+                  {{ index + 1 }}
+                </span>
+                <span v-else>
+                  -
+                </span>
+                <!-- <span
                   v-if="!itemSchema.subLabel.name || itemSchema.subLabel.hidden"
                   >{{
                     itemSchema.subLabel.text && !itemSchema.subLabel.hidden
@@ -46,7 +55,7 @@
                     :config="itemSchema.subLabel"
                     :info="itemSchema.__info"
                   ></es-base>
-                </span>
+                </span> -->
               </div>
               <template v-if="itemSchema.properties">
                 <component
@@ -264,7 +273,7 @@
       </div>
     </div>
     <div
-      v-if="schema.help && !schema.help.hidden && schema.component"
+      v-if="mxShowComponent(schema.help, schema.__info) && schema.component"
       class="es-form-help"
       :style="{
         height: schema.properties

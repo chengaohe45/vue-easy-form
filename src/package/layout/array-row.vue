@@ -22,8 +22,8 @@
             <span
               v-if="
                 itemSchema.rules &&
-                  itemSchema.rules.required &&
-                  itemSchema.rules.showRequired
+                mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+                mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
               "
               class="es-required"
               >*</span
@@ -34,8 +34,8 @@
           <div
             v-else-if="
               itemSchema.rules &&
-                itemSchema.rules.required &&
-                itemSchema.rules.showRequired
+              mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+              mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
             "
             class="es-order-box-required"
             :style="{

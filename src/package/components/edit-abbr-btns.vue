@@ -54,7 +54,7 @@
           </div>
         </div>
         <div class="es-form-pop-content" v-else>
-          <div class="content-box">
+          <div class="content-box" v-if="showPop">
             <span class="content" v-if="!delMsg.name">{{ delMsg.text }}</span>
             <es-base v-else :config="delMsg" :info="info"></es-base>
           </div>
@@ -188,11 +188,37 @@ export default {
       }
     },
 
+    showDelMsg(msg) {
+      if (msg) {
+        var hiddenScript = msg.hidden;
+        if (typeof hiddenScript === "function") {
+          var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+          var hiddenResult = hiddenScript(rootInstance._fetchParseSources(this.info));
+          if (hiddenResult) {
+            // 隐藏，退出
+            return false
+          }
+        }
+        // 判断内容
+        if (msg.func && (typeof msg.func === "function")) {
+          var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+          var textResult = msg.func(rootInstance._fetchParseSources(this.info))
+          if (!textResult) {
+            return false
+          }
+        }
+      } else {
+        return false;
+      }
+      // 内容区有值且不隐藏
+      return true
+    },
+
     /* 重载 */
     clickDeletBtn() {
       if (
         this.hasDelWarn &&
-        (!this.delMsg.hidden && (this.delMsg.name || this.delMsg.text))
+        this.showDelMsg(this.delMsg)
       ) {
         // this.showPopHandler();
         this.$data.showBtn = false;

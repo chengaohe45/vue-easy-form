@@ -21,8 +21,8 @@
         <div
           v-if="
             (itemSchema.rules &&
-              itemSchema.rules.required &&
-              itemSchema.rules.showRequired) ||
+              mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+              mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)) ||
               schema.array.hasOrder ||
               schema.array.hasDelete ||
               schema.array.hasSort ||
@@ -35,8 +35,8 @@
               ><span
                 v-if="
                   itemSchema.rules &&
-                    itemSchema.rules.required &&
-                    itemSchema.rules.showRequired
+                  mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+                  mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
                 "
                 class="es-required"
                 >*</span
@@ -46,8 +46,8 @@
               class="order-txt"
               v-else-if="
                 itemSchema.rules &&
-                  itemSchema.rules.required &&
-                  itemSchema.rules.showRequired
+                mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+                mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
               "
             >
               <span class="es-required">*</span>

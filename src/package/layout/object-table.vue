@@ -4,8 +4,8 @@
       v-if="
         hasRequired &&
           schema.rules &&
-          schema.rules.required &&
-          schema.rules.showRequired
+          mxParseBoolValue(schema.rules.required, schema.__info) &&
+          mxParseBoolValue(schema.rules.showRequired, schema.__info)
       "
       class="es-table-required es-required"
       :style="{

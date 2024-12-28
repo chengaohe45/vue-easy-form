@@ -30,6 +30,7 @@ import {
   parseTrigger,
   getNativeName
 } from "../tools/component";
+import { isEsOrFunc, newEsFunction } from "../tools/parse";
 
 let m_currentFormId = undefined; // 应用于completeSchema,记录当前的解析是在哪个表单中
 
@@ -1324,22 +1325,26 @@ let schemaUtils = {
         // 有为空检查
         if (utils.isStr(rules.emptyMsg)) {
           emptyMsg = rules.emptyMsg.trim();
+        } else if (isEsOrFunc(rules.emptyMsg)) {
+          emptyMsg = newEsFunction(rules.emptyMsg);
         }
         newRules.emptyMsg = emptyMsg ? emptyMsg : "不能为空";
         if (utils.isFunc(rules.emptyMethod)) {
           newRules.emptyMethod = rules.emptyMethod;
         }
 
-        newRules.showRequired = utils.isBool(rules.showRequired)
+        newRules.showRequired = isEsOrFunc(rules.showRequired)
+          ? newEsFunction(rules.showRequired)
+          : utils.isBool(rules.showRequired)
           ? rules.showRequired
           : true;
       }
       // 是动态，记录下来
       if (utils.isFunc(tmpRawRequired)) {
-        newRules.required = false; // 会动态解析
-        newRules.__rawRequired = tmpRawRequired;
+        newRules.required = tmpRawRequired; // 会动态解析
+        // newRules.__rawRequired = tmpRawRequired;
       } else {
-        newRules.required = tmpRawRequired;
+        newRules.required = !!tmpRawRequired;
       }
 
       // 是动态，记录下来
@@ -1356,6 +1361,8 @@ let schemaUtils = {
         // 有非空检查
         if (utils.isStr(rules.errMsg)) {
           errMsg = rules.errMsg.trim();
+        } else if (isEsOrFunc(rules.errMsg)) {
+          errMsg = newEsFunction(rules.errMsg);
         }
         newRules.errMsg = errMsg ? errMsg : "格式不对";
       }
@@ -1547,18 +1554,19 @@ let schemaUtils = {
           m_currentFormId,
           myPathKey
         );
-        if (!subLabel) {
-          // 不可以为false, 因为必须要显示
-          subLabel = {
-            hidden: false,
-            text: false
-          };
-        }
+        // if (!subLabel) {
+        //   // 不可以为false, 因为必须要显示
+        //   subLabel = {
+        //     hidden: true, // 直接隐藏
+        //     name: 'span',
+        //     text: ''
+        //   };
+        // }
 
         hasDelWarn =
           utils.isUndef(array.hasDelWarn) || array.hasDelWarn ? true : false;
 
-        if (array.hasOwnProperty("delMsg")) {
+        if ("delMsg" in array) {
           delMsg = array.delMsg;
         } else {
           delMsg = "确定删除吗？";
@@ -1570,12 +1578,13 @@ let schemaUtils = {
         );
         if (!delMsg) {
           delMsg = {
-            hidden: false,
-            text: false
+            hidden: true,
+            name: "span",
+            text: ""
           };
         }
 
-        if (array.hasOwnProperty("delAllMsg")) {
+        if ("delAllMsg" in array) {
           delAllMsg = array.delAllMsg;
         } else {
           delAllMsg = "确定删除所有吗？";
@@ -1587,8 +1596,9 @@ let schemaUtils = {
         );
         if (!delAllMsg) {
           delAllMsg = {
-            hidden: false,
-            text: false
+            hidden: true,
+            name: "span",
+            text: ""
           };
         }
 

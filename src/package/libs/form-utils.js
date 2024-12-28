@@ -6,7 +6,7 @@
  * 标准化表单schema后：用户操作(如输入，设值等)引起的schema修改
  *
  */
-import parse from "./parse";
+// import parse from "./parse";
 import constant from "./constant";
 import utils from "./utils";
 import { newComponentId } from "../tools/component";
@@ -266,7 +266,8 @@ let formUtils = {
     }
 
     if (!utils.isUndef(schema.array.subLabel)) {
-      newItem.subLabel = utils.deepCopy(schema.array.subLabel);
+      // newItem.subLabel = utils.deepCopy(schema.array.subLabel);
+      newItem.subLabel = schema.array.subLabel;
       // newItem.__invalidMsg = false;
     }
 
@@ -948,26 +949,41 @@ let formUtils = {
     }
   },
 
+  __smartParseHidden(rawHiddenScript, formVm, info) {
+    if (typeof rawHiddenScript === "function") {
+      var parseSources = formVm._fetchParseSources(info);
+      return !!rawHiddenScript(parseSources);
+    } else {
+      return !!rawHiddenScript;
+    }
+  },
+
   /**
    * 根据formData, 分析界面的情况。现主要是解析第一行的情况和hidden, required
    * @param {*} schema
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema, isHidden: }
+   * @param {*} formVm 表单实例（index.vue文件）
    * @param {*} formData
    * @param {*} rootSchema
    */
-  analyzeUiProps(propItem, baseParseSources) {
+  analyzeUiProps(propItem, formVm) {
     var sum = 0;
     var isHidden, listLen, schemaList, i;
 
-    var parseSources = Object.assign({}, baseParseSources);
-    parseSources.index = propItem.__info.index;
-    parseSources.idxChain = propItem.__info.idxChain;
-    parseSources.pathKey = propItem.__info.pathKey;
+    // var parseSources = Object.assign({}, baseParseSources);
+    // parseSources.index = propItem.__info.index;
+    // parseSources.idxChain = propItem.__info.idxChain;
+    // parseSources.pathKey = propItem.__info.pathKey;
 
+    // var baseParseSources = formVm._fetchParseSources(propItem.__info)
+    // var parseSources = baseParseSources
     if (propItem.component) {
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = parse.smartEsValue(propItem.__rawHidden, parseSources);
+        isHidden = !!this.__smartParseHidden(
+          propItem.__rawHidden,
+          formVm,
+          propItem.__info
+        );
 
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
@@ -983,45 +999,11 @@ let formUtils = {
         propItem.__creatable = true;
       }
 
-      if (propItem.label) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.label, parseSources);
-        if (propItem.label.help) {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.label.help, parseSources);
-        }
-      }
-
-      if (propItem.desc) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.desc, parseSources);
-      }
-
-      if (propItem.unit) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.unit, parseSources);
-      }
-
-      if (propItem.help) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.help, parseSources);
-      }
-
-      if (propItem.subLabel) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.subLabel, parseSources);
-      }
-
-      if (propItem.delMsg) {
-        // 解析数组组件内的属性
-        this.__esParseComponent(propItem.delMsg, parseSources);
-      }
-
       if (propItem.array) {
         // 数组
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
-          this.analyzeUiProps(schemaList[i], baseParseSources);
+          this.analyzeUiProps(schemaList[i], formVm);
         }
 
         // 是数组array-tabs, 调整索引
@@ -1047,27 +1029,22 @@ let formUtils = {
             }
           }
         }
-
-        if (propItem.array.rules) {
-          this.__esParseRules(propItem.array.rules, parseSources);
-        }
-
-        if (propItem.array.delAllMsg) {
-          this.__esParseComponent(propItem.array.delAllMsg, parseSources);
-        }
       } else {
         /* 一般组件 */
-        if (propItem.rules) {
-          this.__esParseRules(propItem.rules, parseSources);
-        }
-
+        // if (propItem.rules) {
+        //   this.__esParseRules(propItem.rules, parseSources);
+        // }
         // 解析组件内的属性
-        this.__esParseComponent(propItem.component, parseSources);
+        // this.__esParseComponent(propItem.component, parseSources);
       }
     } else if (propItem.properties) {
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = parse.smartEsValue(propItem.__rawHidden, parseSources);
+        isHidden = this.__smartParseHidden(
+          propItem.__rawHidden,
+          formVm,
+          propItem.__info
+        );
 
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
@@ -1083,55 +1060,10 @@ let formUtils = {
         propItem.__creatable = true;
       }
 
-      if (propItem.title) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.title, parseSources);
-
-        if (propItem.title.help) {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.title.help, parseSources);
-        }
-      }
-
-      if (propItem.label) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.label, parseSources);
-
-        if (propItem.label.help) {
-          // 解析组件内的属性
-          this.__esParseComponent(propItem.label.help, parseSources);
-        }
-      }
-
-      if (propItem.desc) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.desc, parseSources);
-      }
-
-      if (propItem.unit) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.unit, parseSources);
-      }
-
-      if (propItem.help) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.help, parseSources);
-      }
-
-      if (propItem.subLabel) {
-        // 解析组件内的属性
-        this.__esParseComponent(propItem.subLabel, parseSources);
-      }
-
-      if (propItem.delMsg) {
-        // 解析数组组件内的属性
-        this.__esParseComponent(propItem.delMsg, parseSources);
-      }
-
       if (propItem.array) {
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
-          this.analyzeUiProps(schemaList[i], baseParseSources);
+          this.analyzeUiProps(schemaList[i], formVm);
         }
         // 是数组tabs, 调整索引
         if (propItem.array.name == constant.ARRAY_TABS) {
@@ -1156,14 +1088,6 @@ let formUtils = {
             }
           }
         }
-
-        if (propItem.array.rules) {
-          this.__esParseRules(propItem.array.rules, parseSources);
-        }
-
-        if (propItem.array.delAllMsg) {
-          this.__esParseComponent(propItem.array.delAllMsg, parseSources);
-        }
       } else {
         var nextPropItem, key;
         if (propItem.layout && propItem.layout.name == constant.LAYOUT_TABS) {
@@ -1174,7 +1098,7 @@ let formUtils = {
               this.__updatePropStyle(nextPropItem, undefined, nextPropItem.col);
             }
             // 下一级
-            this.analyzeUiProps(nextPropItem, baseParseSources);
+            this.analyzeUiProps(nextPropItem, formVm);
           }
           //调整索引
           if (propItem.__tabsIndex === false) {
@@ -1231,7 +1155,7 @@ let formUtils = {
                 isHidden = this.__isGroupHidden(
                   propItem,
                   nextPropItem.__groups,
-                  baseParseSources
+                  formVm
                 );
                 // console.log("isHidden: " + isHidden);
                 if (!isHidden) {
@@ -1269,14 +1193,15 @@ let formUtils = {
                 }
               } else {
                 //正常成员
-                var nextParseSources = Object.assign({}, baseParseSources);
-                nextParseSources.index = nextPropItem.__info.index;
-                nextParseSources.idxChain = nextPropItem.__info.idxChain;
-                nextParseSources.pathKey = nextPropItem.__info.pathKey;
+                // var nextParseSources = Object.assign({}, baseParseSources);
+                // nextParseSources.index = nextPropItem.__info.index;
+                // nextParseSources.idxChain = nextPropItem.__info.idxChain;
+                // nextParseSources.pathKey = nextPropItem.__info.pathKey;
 
-                isHidden = parse.smartEsValue(
+                isHidden = this.__smartParseHidden(
                   nextPropItem.__rawHidden,
-                  nextParseSources
+                  formVm,
+                  nextPropItem.__info
                 );
                 // console.log(nextPropItem.col, isHidden);
                 if (!isHidden) {
@@ -1313,9 +1238,8 @@ let formUtils = {
                 isHidden = this.__isGroupHidden(
                   propItem,
                   nextPropItem.__groups,
-                  baseParseSources
+                  formVm
                 );
-                // console.log("isHidden: " + isHidden);
                 if (!isHidden) {
                   //组不隐藏
                   if (!nextPropItem.__style) {
@@ -1350,7 +1274,7 @@ let formUtils = {
             }
 
             // 下一级
-            this.analyzeUiProps(nextPropItem, baseParseSources);
+            this.analyzeUiProps(nextPropItem, formVm);
           }
         }
       }
@@ -1358,7 +1282,11 @@ let formUtils = {
       // 占位空间等
       if (propItem.__rawHidden) {
         // false或为空都不用执行
-        isHidden = parse.smartEsValue(propItem.__rawHidden, parseSources);
+        isHidden = this.__smartParseHidden(
+          propItem.__rawHidden,
+          formVm,
+          propItem.__info
+        );
 
         if (propItem.hidden != isHidden) {
           propItem.hidden = isHidden;
@@ -1397,121 +1325,12 @@ let formUtils = {
   },
 
   /**
-   * 运行时解析组件：比如label, desc, component, help, title, unit
-   * @param {*} component
-   * @param {*} parseSources
-   */
-  __esParseComponent(component, parseSources) {
-    var isHidden, text, style, className, value;
-
-    if (component.hasOwnProperty("__refreshIndex")) {
-      component.__refreshIndex++;
-      if (component.__refreshIndex > 10000) {
-        component.__refreshIndex = 1;
-      }
-    }
-    // 项组件是没有此值的
-    if (component.__rawHidden) {
-      isHidden = parse.smartEsValue(component.__rawHidden, parseSources);
-      if (component.hidden != isHidden) {
-        component.hidden = isHidden;
-      }
-    }
-
-    // 正常组件：有以下属性要解析
-    if (component.name) {
-      // 解析属性
-      if (component.__rawProps) {
-        var curProps = component.props;
-        var rawProps = component.__rawProps;
-        var staticPropNames = component.__staticPropNames;
-        staticPropNames = staticPropNames ? staticPropNames : [];
-        for (var key in rawProps) {
-          if (!staticPropNames.includes(key)) {
-            text = parse.smartEsValue(rawProps[key], parseSources);
-          } else {
-            text = rawProps[key];
-          }
-          if (curProps[key] !== text) {
-            curProps[key] = text;
-          }
-        }
-      }
-
-      // 解析指令
-      if (component.__rawDirectives) {
-        var curDirectives = component.directives;
-        var rawDirectives = component.__rawDirectives;
-        for (var i = 0; i < rawDirectives.length; i++) {
-          var rawDirective = rawDirectives[i];
-          value = parse.smartEsValue(rawDirective.value, parseSources);
-          if (value !== curDirectives[i].value) {
-            curDirectives[i].value = value;
-          }
-        }
-      }
-
-      // 解析style
-      if (component.__rawStyle) {
-        style = parse.smartEsValue(component.__rawStyle, parseSources);
-        if (style !== component.style) {
-          component.style = style;
-        }
-      }
-
-      // 解析class
-      if (component.__rawClass) {
-        className = parse.smartEsValue(component.__rawClass, parseSources);
-        if (className !== component.class) {
-          component.class = className;
-        }
-      }
-
-      // 有name, toComText解析text
-      if (component.__rawText) {
-        text = parse.smartEsValue(component.__rawText, parseSources);
-        text = utils.toComText(text);
-        if (text !== component.text) {
-          component.text = text;
-        }
-      }
-
-      // 解析scopedSlots
-      if (component.scopedSlots) {
-        var scopedSlots = component.scopedSlots;
-        for (var slotName in scopedSlots) {
-          var values = scopedSlots[slotName];
-          if (!utils.isArr(value)) {
-            values = [values];
-          }
-          values.forEach(value => {
-            if (!utils.isVNode(value) && utils.isObj(value)) {
-              // 是组件，解析
-              this.__esParseComponent(value, parseSources);
-            }
-          });
-          values = null;
-        }
-      }
-    } else {
-      // 没name, toNormalText解析text
-      if (component.__rawText) {
-        text = parse.smartEsValue(component.__rawText, parseSources);
-        text = utils.toNormalText(text);
-        if (text !== component.text) {
-          component.text = text;
-        }
-      }
-    }
-  },
-
-  /**
    *
    * @param {*} propItem
    * @param {*} groups
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
+   * @param {*} formVm
    */
-  __isGroupHidden(propItem, groups, baseParseSources) {
+  __isGroupHidden(propItem, groups, formVm) {
     // console.log("groups: ", groups);
     var result = false;
     for (var i = 0; i < groups.length; i++) {
@@ -1521,12 +1340,17 @@ let formUtils = {
         !propSchema.layout ||
         propSchema.layout.name !== constant.LAYOUT_SPACE
       ) {
-        var parseSources = Object.assign({}, baseParseSources);
-        parseSources.index = propSchema.__info.index;
-        parseSources.idxChain = propSchema.__info.idxChain;
-        parseSources.pathKey = propSchema.__info.pathKey;
+        // var parseSources = Object.assign({}, baseParseSources);
+        // parseSources.index = propSchema.__info.index;
+        // parseSources.idxChain = propSchema.__info.idxChain;
+        // parseSources.pathKey = propSchema.__info.pathKey;
+        // var parseSources = formVm._fetchParseSources(propSchema.__info)
 
-        result = parse.smartEsValue(propSchema.__rawHidden, parseSources);
+        result = this.__smartParseHidden(
+          propSchema.__rawHidden,
+          formVm,
+          propSchema.__info
+        );
         // console.log("fieldKeyName: " + fieldKeyName, result);
       } else {
         //占位空间是不可见的
@@ -1544,42 +1368,42 @@ let formUtils = {
    * @param {*} rules
    * @param {*} parseSources
    */
-  __esParseRules(rules, parseSources) {
-    // 是否必须
-    if (rules.__rawRequired) {
-      var isRequired = parse.smartEsValue(rules.__rawRequired, parseSources);
-      if (rules.required != isRequired) {
-        rules.required = isRequired;
-      }
-    }
+  // __esParseRules(rules, parseSources) {
+  //   // 是否必须
+  //   if (rules.__rawRequired) {
+  //     var isRequired = this.__smartParseHidden(rules.__rawRequired, parseSources);
+  //     if (rules.required != isRequired) {
+  //       rules.required = isRequired;
+  //     }
+  //   }
 
-    // 是否必须
-    // if (rules.__rawCanOnlyWarn) {
-    //   var canOnlyWarn = parse.smartEsValue(
-    //     rules.__rawCanOnlyWarn,
-    //     parseSources
-    //   );
-    //   if (rules.canOnlyWarn != canOnlyWarn) {
-    //     rules.canOnlyWarn = canOnlyWarn;
-    //   }
-    // }
+  //   // 是否必须
+  //   // if (rules.__rawCanOnlyWarn) {
+  //   //   var canOnlyWarn = this.__smartParseHidden(
+  //   //     rules.__rawCanOnlyWarn,
+  //   //     parseSources
+  //   //   );
+  //   //   if (rules.canOnlyWarn != canOnlyWarn) {
+  //   //     rules.canOnlyWarn = canOnlyWarn;
+  //   //   }
+  //   // }
 
-    // 解析style
-    if (rules.__rawStyle) {
-      var style = parse.smartEsValue(rules.__rawStyle, parseSources);
-      if (style !== rules.style) {
-        rules.style = style;
-      }
-    }
+  //   // 解析style
+  //   if (rules.__rawStyle) {
+  //     var style = this.__smartParseHidden(rules.__rawStyle, parseSources);
+  //     if (style !== rules.style) {
+  //       rules.style = style;
+  //     }
+  //   }
 
-    // 解析class
-    if (rules.__rawClass) {
-      var className = parse.smartEsValue(rules.__rawClass, parseSources);
-      if (className !== rules.class) {
-        rules.class = className;
-      }
-    }
-  },
+  //   // 解析class
+  //   if (rules.__rawClass) {
+  //     var className = this.__smartParseHidden(rules.__rawClass, parseSources);
+  //     if (className !== rules.class) {
+  //       rules.class = className;
+  //     }
+  //   }
+  // },
 
   /**
    * 组装平铺数据

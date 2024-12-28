@@ -34,65 +34,63 @@ function defineProperty(obj, key, vm, schemaInfo) {
     enumerable: true,
     configurable: true,
     get: function() {
-      if (key === KEY_INDEX) {
-        return vm[key];
-      } else {
-        var rootInstance, value;
-        switch (key) {
-          case KEY_ROOT_DATA:
-          case KEY_ROOT:
-            rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
-            value = rootInstance[constant.USER_ROOT_DATA];
-            break;
+      var rootInstance, value;
+      switch (key) {
+        case KEY_ROOT_DATA:
+        case KEY_ROOT:
+          rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+          value = rootInstance[constant.USER_ROOT_DATA];
+          break;
 
-          case KEY_GLOBAL:
-            rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
-            value = rootInstance[key];
-            break;
-          case KEY_HIDDEN:
-            rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
-            value = rootInstance[constant.USER_HIDDEN];
-            break;
-          case KEY_INDEX:
-          case KEY_IDX_CHAIN:
-          case KEY_PATH_KEY:
-            value = schemaInfo[key] || "";
-            break;
-          case KEY_PARENT_VALUE:
-          case KEY_CURRENT_VALUE:
-            rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
-            var userValue = rootInstance[constant.USER_ROOT_DATA];
-            var pathKey = schemaInfo[KEY_PATH_KEY] || "";
-            if (pathKey) {
-              var splitKeys = utils.parsePathKeys(pathKey);
-              if (key === KEY_PARENT_VALUE) {
-                // 判断是否是数组: 这样判断是因为key是不可以数字，若相同必为数组
-                if (splitKeys[splitKeys.length - 1] === schemaInfo.index + "") {
-                  // 数组
-                  splitKeys = splitKeys.slice(0, splitKeys.length - 2);
-                } else {
-                  splitKeys = splitKeys.slice(0, splitKeys.length - 1);
-                }
+        case KEY_GLOBAL:
+          rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+          value = rootInstance[key];
+          break;
+        case KEY_HIDDEN:
+          rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+          value = rootInstance[constant.USER_HIDDEN];
+          break;
+        case KEY_INDEX:
+          value = schemaInfo[key];
+          break;
+        case KEY_IDX_CHAIN:
+        case KEY_PATH_KEY:
+          value = schemaInfo[key] || "";
+          break;
+        case KEY_PARENT_VALUE:
+        case KEY_CURRENT_VALUE:
+          rootInstance = utils.getParent(vm, constant.ES_FORM_ROOT_NAME);
+          var userValue = rootInstance[constant.USER_ROOT_DATA];
+          var pathKey = schemaInfo[KEY_PATH_KEY] || "";
+          if (pathKey) {
+            var splitKeys = utils.parsePathKeys(pathKey);
+            if (key === KEY_PARENT_VALUE) {
+              // 判断是否是数组: 这样判断是因为key是不可以数字，若相同必为数组
+              if (splitKeys[splitKeys.length - 1] === schemaInfo.index + "") {
+                // 数组
+                splitKeys = splitKeys.slice(0, splitKeys.length - 2);
+              } else {
+                splitKeys = splitKeys.slice(0, splitKeys.length - 1);
               }
-              var currentValue = userValue;
-              for (var keyIndex = 0; keyIndex < splitKeys.length; ++keyIndex) {
-                if (currentValue) {
-                  currentValue = currentValue[splitKeys[keyIndex]];
-                } else {
-                  return undefined;
-                }
-              }
-              return currentValue;
-            } else {
-              return userValue;
             }
-          // break;
-          default:
-            value = vm[key];
-            break;
-        }
-        return value;
+            var currentValue = userValue;
+            for (var keyIndex = 0; keyIndex < splitKeys.length; ++keyIndex) {
+              if (currentValue) {
+                currentValue = currentValue[splitKeys[keyIndex]];
+              } else {
+                return undefined;
+              }
+            }
+            return currentValue;
+          } else {
+            return userValue;
+          }
+        // break;
+        default:
+          value = vm[key];
+          break;
       }
+      return value;
     }
   });
 }

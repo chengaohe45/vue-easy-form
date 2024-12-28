@@ -93,11 +93,11 @@ export function parsePropComponent(
         rawText = utils.toNormalText(rawText); // 转换为文本
       }
       if (rawText || canEmptyText) {
-        tmpValue = Object.assign({}, value, createEmptyComponent());
+        tmpValue = Object.assign({}, value, createEmptyComponent(rawText + ""));
       }
     }
   } else if (utils.isNormalText(value)) {
-    if (rawText || canEmptyText) {
+    if (value || canEmptyText) {
       tmpValue = createEmptyComponent(utils.toNormalText(value));
     }
   }

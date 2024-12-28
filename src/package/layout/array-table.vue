@@ -27,22 +27,22 @@
               v-if="
                 schema.array.headRequired &&
                   headerSchema.rules &&
-                  headerSchema.rules.required &&
-                  headerSchema.rules.showRequired
+                  mxParseBoolValue(headerSchema.rules.required, headerSchema.__info) &&
+                  mxParseBoolValue(headerSchema.rules.showRequired, headerSchema.__info)
               "
               class="es-required"
               >*</span
             >
             <!-- headerSchema.label.hidden为true: 也补充key -->
-            <template v-if="headerSchema.label && !headerSchema.label.hidden">
-              <span v-if="!headerSchema.label.name">
+            <template v-if="mxShowComponent(headerSchema.label, headerSchema.__info)">
+              <!-- <span v-if="!headerSchema.label.name">
                 {{
                   headerSchema.label.text
                     ? headerSchema.label.text
                     : headerFieldName + ""
                 }}
-              </span>
-              <span v-else class="es-form-label-box">
+              </span> -->
+              <span class="es-form-label-box">
                 <es-base
                   :config="headerSchema.label"
                   :info="headerSchema.__info"
@@ -50,9 +50,7 @@
               </span>
               <span
                 class="es-form-label-help"
-                v-if="
-                  headerSchema.label.help && !headerSchema.label.help.hidden
-                "
+                v-if="mxShowComponent(headerSchema.label.help, headerSchema.__info)"
               >
                 <es-base
                   :config="headerSchema.label.help"

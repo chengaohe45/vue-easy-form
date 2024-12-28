@@ -22,8 +22,7 @@
               <label
                 v-if="
                   schema.properties[fieldKeyName].__creatable &&
-                    schema.properties[fieldKeyName].label &&
-                    !schema.properties[fieldKeyName].label.hidden
+                  mxShowComponent(schema.properties[fieldKeyName].label, schema.properties[fieldKeyName].__info)
                 "
                 v-show="!schema.properties[fieldKeyName].hidden"
                 :style="[
@@ -58,13 +57,12 @@
                   v-if="
                     (schema.properties[fieldKeyName].array &&
                       schema.properties[fieldKeyName].array.rules &&
-                      schema.properties[fieldKeyName].array.rules.required &&
-                      schema.properties[fieldKeyName].array.rules
-                        .showRequired) ||
+                      mxParseBoolValue(schema.properties[fieldKeyName].array.rules.required, schema.properties[fieldKeyName].__info) &&
+                      mxParseBoolValue(schema.properties[fieldKeyName].array.rules.showRequired, schema.properties[fieldKeyName].__info)) ||
                       (schema.properties[fieldKeyName].rules &&
                         !schema.properties[fieldKeyName].array &&
-                        schema.properties[fieldKeyName].rules.required &&
-                        schema.properties[fieldKeyName].rules.showRequired)
+                        mxParseBoolValue(schema.properties[fieldKeyName].rules.required, schema.properties[fieldKeyName].__info) &&
+                        mxParseBoolValue(schema.properties[fieldKeyName].rules.showRequired, schema.properties[fieldKeyName].__info))
                   "
                   class="es-required"
                   >*</span
@@ -80,10 +78,7 @@
                 </span>
                 <span
                   class="es-form-label-help"
-                  v-if="
-                    schema.properties[fieldKeyName].label.help &&
-                      !schema.properties[fieldKeyName].label.help.hidden
-                  "
+                  v-if="mxShowComponent(schema.properties[fieldKeyName].label.help, schema.properties[fieldKeyName].__info)"
                 >
                   <es-base
                     :config="schema.properties[fieldKeyName].label.help"
@@ -112,8 +107,7 @@
                   {
                     minHeight: schema.properties[fieldKeyName].rowHeight + 'px',
                     marginLeft:
-                      !schema.properties[fieldKeyName].label ||
-                      schema.properties[fieldKeyName].label.hidden
+                      !mxShowComponent(schema.properties[fieldKeyName].label, schema.properties[fieldKeyName].__info)
                         ? schema.properties[fieldKeyName].offsetLeft + 'px'
                         : false,
                     marginRight:
@@ -126,14 +120,21 @@
                   :name="fieldKeyName"
                 ></slot>
               </div>
-              <template
-                v-if="
-                  schema.properties[fieldKeyName].unit &&
-                    !schema.properties[fieldKeyName].unit.hidden &&
-                    schema.properties[fieldKeyName].__creatable
-                "
-              >
+              <template v-if="schema.properties[fieldKeyName].__creatable && mxShowComponent(schema.properties[fieldKeyName].unit, schema.properties[fieldKeyName].__info)">
                 <div
+                  :key="'unit-' + fieldKeyName"
+                  class="es-form-unit"
+                  :style="[
+                    { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                  ]"
+                >
+                  <es-base
+                    :config="schema.properties[fieldKeyName].unit"
+                    :info="schema.properties[fieldKeyName].__info"
+                  ></es-base>
+                </div>
+
+                <!-- <div
                   v-if="schema.properties[fieldKeyName].unit.name"
                   v-show="!schema.properties[fieldKeyName].hidden"
                   :key="'unit-' + fieldKeyName"
@@ -160,16 +161,12 @@
                   ]"
                 >
                   {{ schema.properties[fieldKeyName].unit.text }}
-                </div>
+                </div> -->
               </template>
               <div
                 v-show="!schema.properties[fieldKeyName].hidden"
                 :key="'help-' + fieldKeyName"
-                v-if="
-                  schema.properties[fieldKeyName].help &&
-                    !schema.properties[fieldKeyName].help.hidden &&
-                    schema.properties[fieldKeyName].__creatable
-                "
+                v-if="schema.properties[fieldKeyName].__creatable && mxShowComponent(schema.properties[fieldKeyName].help, schema.properties[fieldKeyName].__info)"
                 class="es-form-help"
                 :style="[
                   { height: schema.properties[fieldKeyName].rowHeight + 'px' }
@@ -210,7 +207,7 @@
           >
             <!-- 一般的控件 -->
             <label
-              v-if="fieldSchema.label && !fieldSchema.label.hidden"
+              v-if="mxShowComponent(fieldSchema.label, fieldSchema.__info)"
               :class="[
                 'es-form-label-col',
                 fieldSchema.direction == 'v' ? 'es-form-label-col-v' : '',
@@ -241,12 +238,12 @@
                 v-if="
                   (fieldSchema.array &&
                     fieldSchema.array.rules &&
-                    fieldSchema.array.rules.required &&
-                    fieldSchema.array.rules.showRequired) ||
+                    mxParseBoolValue(fieldSchema.array.rules.required, fieldSchema.__info) &&
+                    mxParseBoolValue(fieldSchema.array.rules.showRequired, fieldSchema.__info)) ||
                     (fieldSchema.rules &&
                       !fieldSchema.array &&
-                      fieldSchema.rules.required &&
-                      fieldSchema.rules.showRequired)
+                      mxParseBoolValue(fieldSchema.rules.required, fieldSchema.__info) &&
+                      mxParseBoolValue(fieldSchema.rules.showRequired, fieldSchema.__info))
                 "
                 class="es-required"
                 >*</span
@@ -266,7 +263,7 @@
               </span>
               <span
                 class="es-form-label-help"
-                v-if="fieldSchema.label.help && !fieldSchema.label.help.hidden"
+                v-if="mxShowComponent(fieldSchema.label.help, fieldSchema.__info)"
               >
                 <es-base
                   :config="fieldSchema.label.help"

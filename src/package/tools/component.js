@@ -473,6 +473,15 @@ export function getNativeName(eventName) {
 }
 
 /**
+ * 提取是否为.native事件
+ * @param {*} eventName
+ */
+export function createNativeName(eventName) {
+  var dotNative = "." + constant.ADJ_NATIVE;
+  return eventName + dotNative;
+}
+
+/**
  */
 export function isComponentTextType(value) {
   if (

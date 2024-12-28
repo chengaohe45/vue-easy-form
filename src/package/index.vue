@@ -409,7 +409,7 @@ import { createParseDep } from "./createParseDep.js";
 import consolePanel from "./components/console.vue";
 
 import dataCache from "./libs/data-cache";
-import { parseComponent } from './tools/component';
+import { parseComponent, createNativeName } from './tools/component';
 
 const KEY_PARSE_SOURCES = "_key_parseSources"
 export default {
@@ -709,17 +709,17 @@ export default {
     },
 
     //检查整个表单
-    checkAll(showOnlyWarn) {
-      var msgCheckLevel
-      if (showOnlyWarn === true || constant.MSG_LEVEL_WARN) {
-        msgCheckLevel = constant.MSG_LEVEL_WARN
-      } else {
-        msgCheckLevel = constant.MSG_LEVEL_ERROR
+    checkAll(param) {
+      var customInfo = undefined
+      if (param === true) {
+        customInfo = true
+      } else if (utils.isObj(param)) {
+        customInfo = param.customInfo
       }
       var validResult = this.__checkProp(
         this.$data.formSchema,
         this.$data.formSchema,
-        msgCheckLevel
+        customInfo
       );
       return validResult.isValid;
     },
@@ -788,7 +788,17 @@ export default {
       }
       return cacheSources[info.pathKey]
     },
-
+    _updateParseSources() {
+      var cacheSources = this[KEY_PARSE_SOURCES]
+      if (cacheSources) {
+        for (var sourceKey  in cacheSources) {
+          var parseInfo = cacheSources[sourceKey]
+          if (parseInfo && parseInfo.pathKey !== sourceKey) {
+            cacheSources[sourceKey] = null
+          }
+        }
+      }
+    },
     __initUi(schema) {
       this.$data.isInited = false;
       var tmpSchema = schemaUtils.completeSchema(schema, this.$data.id);
@@ -814,7 +824,7 @@ export default {
       });
     },
 
-    __checkProp(schema, rootSchema, msgCheckLevel) {
+    __checkProp(schema, rootSchema, customInfo) {
       //idxChain要与每一form-item的idxitem是一样的，否则判断会出现不一致，要小心
       var isValid = true;
       var hasErrMsg = false;
@@ -838,16 +848,18 @@ export default {
         if (schema.array) {
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            warnResult = this.__execCheckWarn(schema, arrayValue, msgCheckLevel)
-            checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "", msgCheckLevel);
+            warnResult = this.__execCheckWarn(schema, arrayValue, customInfo)
+            checkedResult = warnResult.errMsg ? this.__parseValidMsg(warnResult.errMsg + "", {}, 'checkWarnnMsg') : this.__checkRules(schema, arrayValue, "", customInfo);
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              if (!warnResult.warn || msgCheckLevel !== constant.MSG_LEVEL_WARN) {
-                isValid = false;
+              if (!warnResult.warn || customInfo !== true) {
+                if (checkedResult && checkedResult.level !== constant.MSG_LEVEL_WARN) {
+                  isValid = false;
+                }
               } else {
-                // 当检查只显示错误信息
+                // warnResult.warn && customInfo === true 兼容旧配置，当检查只显示错误信息
               }
               hasErrMsg = true;
             }
@@ -860,7 +872,7 @@ export default {
           for (i = 0; i < schemaList.length; i++) {
             nextPropItem = schemaList[i];
 
-            validResult = this.__checkProp(nextPropItem, rootSchema, msgCheckLevel);
+            validResult = this.__checkProp(nextPropItem, rootSchema, customInfo);
             if (isTabs) {
               // 父节点是tabs
               if (validResult.hasErrMsg && i !== tabsIndex) {
@@ -896,7 +908,7 @@ export default {
           for (var key in schema.properties) {
             nextPropItem = schema.properties[key];
 
-            validResult = this.__checkProp(nextPropItem, rootSchema, msgCheckLevel);
+            validResult = this.__checkProp(nextPropItem, rootSchema, customInfo);
             if (isTabs) {
               // 父节点是tabs
               if (validResult.hasErrMsg && key !== tabsIndex) {
@@ -927,16 +939,18 @@ export default {
       } else if (schema.component) {
         if (!schema.array) {
           // 是叶子，但也不是数组
-          warnResult = this.__execCheckWarn(schema, schema.component.value, msgCheckLevel)
-          checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, schema.component.value, "", msgCheckLevel);
+          warnResult = this.__execCheckWarn(schema, schema.component.value, customInfo)
+          checkedResult = warnResult.errMsg ? this.__parseValidMsg(warnResult.errMsg + "", {}, 'checkWarnnMsg') : this.__checkRules(schema, schema.component.value, "", customInfo);
           if (checkedResult === true) {
             schema.__invalidMsg = false;
           } else {
             schema.__invalidMsg = checkedResult;
-            if (!warnResult.warn || msgCheckLevel !== constant.MSG_LEVEL_WARN) {
-              isValid = false;
+            if (!warnResult.warn || customInfo !== true) {
+              if (checkedResult && checkedResult.level !== constant.MSG_LEVEL_WARN) {
+                isValid = false;
+              }
             } else {
-              // 当检查只显示错误信息
+              // warnResult.warn && customInfo === true 兼容旧配置，当检查只显示错误信息
             }
             hasErrMsg = true;
           }
@@ -944,16 +958,18 @@ export default {
           // 是叶子，但也是数组
           if (schema.array.rules) {
             arrayValue = formUtils.getValue(schema);
-            warnResult = this.__execCheckWarn(schema, arrayValue, msgCheckLevel);
-            checkedResult = warnResult.errMsg ? warnResult.errMsg : this.__checkRules(schema, arrayValue, "", msgCheckLevel);
+            warnResult = this.__execCheckWarn(schema, arrayValue, customInfo);
+            checkedResult = warnResult.errMsg ? this.__parseValidMsg(warnResult.errMsg + "", {}, 'checkWarnnMsg') : this.__checkRules(schema, arrayValue, "", customInfo);
             if (checkedResult === true) {
               schema.__invalidMsg = false;
             } else {
               schema.__invalidMsg = checkedResult;
-              if (!warnResult.warn || msgCheckLevel !== constant.MSG_LEVEL_WARN) {
-                isValid = false;
+              if (!warnResult.warn || customInfo !== true) {
+                if (checkedResult && checkedResult.level !== constant.MSG_LEVEL_WARN) {
+                  isValid = false;
+                }
               } else {
-                // 当检查只显示错误信息
+                // warnResult.warn && customInfo === true 兼容旧配置，当检查只显示错误信息
               }
               hasErrMsg = true;
             }
@@ -966,7 +982,7 @@ export default {
           for (i = 0; i < schemaList.length; i++) {
             nextPropItem = schemaList[i];
 
-            validResult = this.__checkProp(nextPropItem, rootSchema, msgCheckLevel);
+            validResult = this.__checkProp(nextPropItem, rootSchema, customInfo);
             if (isTabs) {
               // 父节点是tabs
               if (validResult.hasErrMsg && i !== tabsIndex) {
@@ -1048,6 +1064,8 @@ export default {
       if (eventNames.includes(constant.INPUT_EVENT)) {
         // 需要同步
         if (eventData && eventData.fromArrayOperate) {
+          // 也要同步更新解析源的缓存
+          this._updateParseSources()
           formUtils.syncUserRootArray(this[constant.USER_ROOT_DATA], sourcePathKey, eventData)
         } else {
           formUtils.syncUserRootValue(this[constant.USER_ROOT_DATA], sourcePathKey, eventData ? eventData.event : undefined)
@@ -1068,11 +1086,19 @@ export default {
         //   isHidden: dataCache.getHiddenFunc(this.$data.id)
         // };
         // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
+        var realEventNames
+        if (eventData.isNative) {
+          realEventNames = eventNames.map(function(eventName) {
+            return createNativeName(eventName)
+          })
+        } else {
+          realEventNames = eventNames
+        }
         var checkedResult = this.__checkRules(
           inputSchema,
           eventData.value,
-          eventNames,
-          constant.MSG_LEVEL_ERROR
+          realEventNames,
+          realEventNames.slice()
         );
 
         if (checkedResult === true) {
@@ -1081,7 +1107,7 @@ export default {
           // 字符串，错误
           inputSchema.__invalidMsg = checkedResult;
         } else {
-          // 为false, 不是目标事件，不用理会
+          // 为false, 不是目标事件或保持原样，不用理会
         }
 
         // 取出所有需要执行的事件
@@ -1175,7 +1201,7 @@ export default {
         isHidden: dataCache.getHiddenFunc(this.$data.id)
       };
 
-      formUtils.analyzeUiProps(this.$data.formSchema, baseParseSources);
+      formUtils.analyzeUiProps(this.$data.formSchema, this);
       var formValue = formUtils.getFormValue(
         this.$data.formSchema,
         baseParseSources
@@ -1198,9 +1224,10 @@ export default {
       formValue = null;
     },
 
-    __execCheckWarn: function(schema, value, msgCheckLevel) {
+    /** checkWarn只是一个旧式写法，要去掉的 */
+    __execCheckWarn: function(schema, value, customInfo) {
       var rules, warn = false, errMsg = '';
-      if (msgCheckLevel === constant.MSG_LEVEL_WARN) {
+      if (customInfo === true) {  // 这里兼容一下旧的
         if (schema.array) {
           if (schema.array.rules) {
             rules = schema.array.rules;
@@ -1213,7 +1240,7 @@ export default {
           if (utils.isFunc(rules.checkWarn)) {
             var newOptions = {};
             newOptions.value = value;
-            newOptions.level = msgCheckLevel,
+            newOptions.customInfo = customInfo,
             newOptions.pathKey = schema.__info.pathKey;
             newOptions.idxChain = schema.__info.idxChain;
             newOptions.index = schema.__info.index;
@@ -1244,7 +1271,7 @@ export default {
      * false 不需要检查
      * string 是需要检查的，但不正确
      */
-    __checkRules: function(schema, value, triggers, msgCheckLevel) {
+    __checkRules: function(schema, value, triggers, customInfo) {
       var rules, fromArray;
       if (schema.array) {
         if (schema.array.rules) {
@@ -1263,7 +1290,7 @@ export default {
 
       var newOptions = {};
       newOptions.value = value;
-      newOptions.level = msgCheckLevel
+      newOptions.customInfo = customInfo
       newOptions.pathKey = schema.__info.pathKey;
       newOptions.idxChain = schema.__info.idxChain;
       newOptions.index = schema.__info.index;
@@ -1290,7 +1317,7 @@ export default {
       }
 
       var checkResult
-      var isRequired = rules.required;
+      var isRequired = utils.isFunc(rules.required) ? rules.required(this._fetchParseSources(schema.__info)) : (!!rules.required);
 
       var isEmptyValue = false
       var emptyMsg
@@ -1311,8 +1338,17 @@ export default {
 
       if (isRequired && isEmptyValue) {
         //空要检查
-        errMsgInfo = this.__parseValidMsg(emptyMsg, newOptions, 'emptyMsg');
-        return errMsgInfo.message ? errMsgInfo : true;
+        if (triggers && triggers.includes(constant.INPUT_EVENT)) {
+          errMsgInfo = this.__parseValidMsg(emptyMsg, newOptions, 'emptyMsg');
+          return errMsgInfo.message ? errMsgInfo : true;
+        } else {
+          if (!triggers || !schema.__invalidMsg || schema.__invalidMsg.from !== "emptyMsg") {
+            errMsgInfo = this.__parseValidMsg(emptyMsg, newOptions, 'emptyMsg');
+            return errMsgInfo.message ? errMsgInfo : true;
+          } else {
+            return false  // 保持原样(已经存在空提示)
+          }
+        }
       } else if (!isRequired && isEmptyValue) {
         //空时不检查，场景：当埋写邮件地址时，要么不写,要么写正确
         return true;
@@ -1341,6 +1377,7 @@ export default {
                 if (!resultMsg) {
                   errMsgInfo = this.__parseValidMsg(rules.errMsg, newOptions, 'errMsg');
                 } else {
+                  errMsgInfo = this.__parseValidMsg("", newOptions, 'checkFun');  // 创建一个空的
                   errMsgInfo.message = resultMsg;
                   errMsgInfo.from = 'checkFun';
                   errMsgInfo.checkFun = checkFun;
@@ -1439,7 +1476,7 @@ export default {
       if (msgSrciptTxt) {
         var result
         if (utils.isFunc(msgSrciptTxt)) {
-          result = msgSrciptTxt(this, params)
+          result = msgSrciptTxt(params)
           if (utils.isStr(result)) {
             errMsgInfo.message = result
           } else if (utils.isVNode(result)) {
@@ -1515,7 +1552,6 @@ export default {
        * 注：不是深度改变时，newVal和oldVal是一样的
        */
       handler(newVal, oldVal) {
-        // console.log("newValue: ", newVal, oldVal, this.global);
         dataCache.setGlobal(
           this.$data.id,
           newVal ? utils.deepCopy(newVal) : {}
@@ -1524,16 +1560,13 @@ export default {
           // undefined也就变为{default}, 从而下入这里
           if (newVal === oldVal) {
             // 深度改变
-            // console.log("=== here...");
             this.__syncValue();
           } else if (JSON.stringify(newVal) !== JSON.stringify(oldVal)) {
             // 地址改变且值不同
-            // console.log("!== here...");
             this.__syncValue();
           }
         } else if (newVal === null) {
           // global的值变为null，需要做兼容
-          // console.log("123");
           this.__syncValue();
         }
       },

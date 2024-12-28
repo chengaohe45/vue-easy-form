@@ -18,17 +18,22 @@
               v-if="
                 (itemSchema.array &&
                   itemSchema.array.rules &&
-                  itemSchema.array.rules.required &&
-                  itemSchema.array.rules.showRequired) ||
+                  mxParseBoolValue(itemSchema.array.rules.required, itemSchema.__info) &&
+                  mxParseBoolValue(itemSchema.array.rules.showRequired, itemSchema.__info)) ||
                   (itemSchema.rules &&
                     !itemSchema.array &&
-                    itemSchema.rules.required &&
-                    itemSchema.rules.showRequired)
+                    mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
+                    mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info))
               "
               class="es-required"
               >*</span
             >
-            <template v-if="itemSchema.label && !itemSchema.label.hidden">
+            <template v-if="mxShowComponent(itemSchema.label, itemSchema.__info)">
+              <span class="es-form-label-box">
+                <es-base :config="itemSchema.label" :info="itemSchema.__info"></es-base>
+              </span>
+            </template>
+            <!-- <template v-if="itemSchema.label && !itemSchema.label.hidden">
               <span v-if="!itemSchema.label.name">{{
                 itemSchema.label.text ? itemSchema.label.text : fieldName + ""
               }}</span>
@@ -47,7 +52,7 @@
                   :info="itemSchema.__info"
                 ></es-base>
               </span>
-            </template>
+            </template> -->
             <span v-else>{{ fieldName + "" }}</span>
           </div>
         </es-tabs-nav-item>
