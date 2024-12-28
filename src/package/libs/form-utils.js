@@ -968,14 +968,6 @@ let formUtils = {
   analyzeUiProps(propItem, formVm) {
     var sum = 0;
     var isHidden, listLen, schemaList, i;
-
-    // var parseSources = Object.assign({}, baseParseSources);
-    // parseSources.index = propItem.__info.index;
-    // parseSources.idxChain = propItem.__info.idxChain;
-    // parseSources.pathKey = propItem.__info.pathKey;
-
-    // var baseParseSources = formVm._fetchParseSources(propItem.__info)
-    // var parseSources = baseParseSources
     if (propItem.component) {
       if (propItem.__rawHidden) {
         // false或为空都不用执行
@@ -1031,11 +1023,6 @@ let formUtils = {
         }
       } else {
         /* 一般组件 */
-        // if (propItem.rules) {
-        //   this.__esParseRules(propItem.rules, parseSources);
-        // }
-        // 解析组件内的属性
-        // this.__esParseComponent(propItem.component, parseSources);
       }
     } else if (propItem.properties) {
       if (propItem.__rawHidden) {
@@ -1112,7 +1099,6 @@ let formUtils = {
             }
           } else {
             var curIndexPropItem = propItem.properties[propItem.__tabsIndex];
-            // console.log("curIndexPropItem: ", curIndexPropItem, propItem.__tabsIndex);
             if (curIndexPropItem.hidden) {
               // 当前的索引对应的tab隐藏了
 
@@ -1157,7 +1143,6 @@ let formUtils = {
                   nextPropItem.__groups,
                   formVm
                 );
-                // console.log("isHidden: " + isHidden);
                 if (!isHidden) {
                   //组不隐藏
 
@@ -1193,10 +1178,6 @@ let formUtils = {
                 }
               } else {
                 //正常成员
-                // var nextParseSources = Object.assign({}, baseParseSources);
-                // nextParseSources.index = nextPropItem.__info.index;
-                // nextParseSources.idxChain = nextPropItem.__info.idxChain;
-                // nextParseSources.pathKey = nextPropItem.__info.pathKey;
 
                 isHidden = this.__smartParseHidden(
                   nextPropItem.__rawHidden,
@@ -1362,48 +1343,6 @@ let formUtils = {
     }
     return result;
   },
-
-  /**
-   * 运行时解析rules
-   * @param {*} rules
-   * @param {*} parseSources
-   */
-  // __esParseRules(rules, parseSources) {
-  //   // 是否必须
-  //   if (rules.__rawRequired) {
-  //     var isRequired = this.__smartParseHidden(rules.__rawRequired, parseSources);
-  //     if (rules.required != isRequired) {
-  //       rules.required = isRequired;
-  //     }
-  //   }
-
-  //   // 是否必须
-  //   // if (rules.__rawCanOnlyWarn) {
-  //   //   var canOnlyWarn = this.__smartParseHidden(
-  //   //     rules.__rawCanOnlyWarn,
-  //   //     parseSources
-  //   //   );
-  //   //   if (rules.canOnlyWarn != canOnlyWarn) {
-  //   //     rules.canOnlyWarn = canOnlyWarn;
-  //   //   }
-  //   // }
-
-  //   // 解析style
-  //   if (rules.__rawStyle) {
-  //     var style = this.__smartParseHidden(rules.__rawStyle, parseSources);
-  //     if (style !== rules.style) {
-  //       rules.style = style;
-  //     }
-  //   }
-
-  //   // 解析class
-  //   if (rules.__rawClass) {
-  //     var className = this.__smartParseHidden(rules.__rawClass, parseSources);
-  //     if (className !== rules.class) {
-  //       rules.class = className;
-  //     }
-  //   }
-  // },
 
   /**
    * 组装平铺数据
