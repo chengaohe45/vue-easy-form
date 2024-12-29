@@ -440,6 +440,7 @@
 <script>
 import itemMixin from "../mixins/item-mixin";
 import esBase from "../base";
+import utils from '../libs/utils';
 
 export default {
   mixins: [itemMixin],
@@ -449,6 +450,336 @@ export default {
   components: {
     esBase
   },
-  methods: {}
+  methods: {
+    createPropLayout() {
+      var newPropLayout = {}
+      var currentProperties = this.schema.properties;
+      for (var fieldName in currentProperties) {
+        var propItem = currentProperties[fieldName]
+        // 没有隐藏
+        if (!propItem.hidden) {
+
+        }
+      }
+
+      var newPropLayout = {}
+      
+      var lastGroup = false;
+      var groups;
+      // var colSum = 0;
+      var firstGroupItem; //每一组的第一项
+      for (var key in propItem.properties) {
+        // 没有隐藏
+        if (!propItem.hidden) {
+          var newLayoutItem = {}
+          var item = propItem.properties[key];
+          newLayoutItem.col = item.col
+          if (newPropLayout.layout) {
+            newPropLayout.layout = utils.deepCopy(newPropLayout.layout)
+          }
+          var rawGroup = item["group"]
+          var curGroup = this.mxParseNodeAttr(rawGroup, item.__info);
+          if (typeof curGroup === 'string' && curGroup) {
+            if (lastGroup) {
+              //已经存在了
+              if (lastGroup === curGroup) {
+                //是前面的那一组
+                groups.push(key);
+                // colSum += item.col;
+                firstGroupItem.__groupCol = this.__sumCol(
+                  firstGroupItem.__groupCol,
+                  newPropLayout.col
+                );
+                // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+              } else {
+                if (firstGroupItem && firstGroupItem.groups && firstGroupItem.groups.length > 0) {
+                  // 判断分组是否需要显示
+                  if (this.__canShowGroup(propItem, firstGroupItem.groups)) {
+                    // 分组，记录下来
+                    newPropLayout[firstGroupItem.groups[0]] = firstGroupItem
+                  }
+                }
+                //不是前面的那一组，重新开组
+                lastGroup = curGroup;
+                firstGroupItem = newPropLayout;
+                groups = [key];
+                newPropLayout.__groups = groups;
+                // newPropLayout.__hiddenGroup = false;
+                // item.col = constant.UI_MAX_COL;
+                // colSum = item.col;
+                firstGroupItem.__groupCol = newPropLayout.col;
+                // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+              }
+            } else {
+              //前面没有组，重新开组
+              lastGroup = curGroup;
+              firstGroupItem = newPropLayout;
+              groups = [key];
+              newPropLayout.__groups = groups;
+              // newPropLayout.__hiddenGroup = false;
+              firstGroupItem.__groupCol = newPropLayout.col;
+            }
+            // newPropLayout.__inGroups = true; //记录此项在分组里面
+          } else {
+            lastGroup = false;
+            groups = null;
+            // colSum = 0;
+            firstGroupItem = null;
+            newPropLayout[key] = newPropLayout
+          }
+          // 若存在最后一个分组，记录下来
+          if (firstGroupItem && firstGroupItem.groups && firstGroupItem.groups.length > 0) {
+            // 判断分组是否需要显示
+            if (this.__canShowGroup(propItem, firstGroupItem.groups)) {
+              // 分组，记录下来
+              newPropLayout[firstGroupItem.groups[0]] = firstGroupItem
+            }
+          }
+        }
+      }
+      
+      sum = 0;
+      var newRowSpace;
+      var hasCustomWidth = propItem.__hasCustomWidth;
+      for (key in propItem.properties) {
+        nextPropItem = propItem.properties[key];
+        var hasRowSpaceChanged = false;
+        var currentCol;
+        if (!hasCustomWidth) {
+          if (nextPropItem.__groups) {
+            //是一个组
+            isHidden = this.__isGroupHidden(
+              propItem,
+              nextPropItem.__groups,
+              formVm
+            );
+            if (!isHidden) {
+              //组不隐藏
+
+              sum += nextPropItem.__groupCol;
+              if (sum <= constant.UI_MAX_COL) {
+                //还在第一行
+                newRowSpace = 0;
+              } else {
+                newRowSpace = nextPropItem.__rawRowSpace;
+              }
+              if (
+                !nextPropItem.__style ||
+                nextPropItem.rowSpace != newRowSpace
+              ) {
+                //还原
+                nextPropItem.rowSpace = newRowSpace;
+                hasRowSpaceChanged = true;
+                currentCol = nextPropItem.__groupCol;
+              }
+            } else {
+              //不必理会
+            }
+
+            if (nextPropItem.__hiddenGroup != isHidden) {
+              nextPropItem.__hiddenGroup = isHidden;
+            }
+          } else if (nextPropItem.__inGroups) {
+            //组内成员
+            if (!nextPropItem.__style || nextPropItem.rowSpace != 0) {
+              nextPropItem.rowSpace = 0;
+              hasRowSpaceChanged = true;
+              currentCol = nextPropItem.col;
+            }
+          } else {
+            //正常成员
+
+            isHidden = this.__smartParseHidden(
+              nextPropItem.__rawHidden,
+              formVm,
+              nextPropItem.__info
+            );
+            // console.log(nextPropItem.col, isHidden);
+            if (!isHidden) {
+              sum += nextPropItem.col;
+              if (sum <= constant.UI_MAX_COL) {
+                //还在第一行
+                newRowSpace = 0;
+              } else {
+                newRowSpace = nextPropItem.__rawRowSpace;
+              }
+              if (
+                !nextPropItem.__style ||
+                nextPropItem.rowSpace != newRowSpace
+              ) {
+                //还原
+                nextPropItem.rowSpace = newRowSpace;
+                hasRowSpaceChanged = true;
+                currentCol = nextPropItem.col;
+              }
+            } else {
+              //不必理会
+            }
+          }
+          if (hasRowSpaceChanged) {
+            this.__updatePropStyle(
+              nextPropItem,
+              nextPropItem.rowSpace,
+              currentCol
+            );
+          }
+        } else {
+          if (nextPropItem.__groups) {
+            //是一个组
+            isHidden = this.__isGroupHidden(
+              propItem,
+              nextPropItem.__groups,
+              formVm
+            );
+            if (!isHidden) {
+              //组不隐藏
+              if (!nextPropItem.__style) {
+                this.__updatePropStyle(
+                  nextPropItem,
+                  nextPropItem.rowSpace,
+                  nextPropItem.__groupCol
+                );
+              }
+            } else {
+              //不必理会
+            }
+
+            if (nextPropItem.__hiddenGroup != isHidden) {
+              nextPropItem.__hiddenGroup = isHidden;
+            }
+          } else if (nextPropItem.__inGroups) {
+            //组内成员
+            if (!nextPropItem.__style) {
+              this.__updatePropStyle(nextPropItem, 0, nextPropItem.col);
+            }
+          } else {
+            //正常成员
+            if (!nextPropItem.__style) {
+              this.__updatePropStyle(
+                nextPropItem,
+                nextPropItem.rowSpace,
+                nextPropItem.col
+              );
+            }
+          }
+        }
+
+        // 下一级
+        this.analyzeUiProps(nextPropItem, formVm);
+      }
+    
+    },
+
+    /**
+     * 合并两个长度
+     * @param {*} col1
+     * @param {*} col2
+     */
+    __sumCol(col1, col2) {
+      // 都是整数
+      if (utils.isNum(col1) && utils.isNum(col2)) {
+        var colSum = col1 + col2;
+        colSum = colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+        return colSum;
+      } else {
+        // 存在非整数，转化为对象相加
+        var colObj1 = col1;
+        var colObj2 = col2;
+        if (!utils.isObj(colObj1)) {
+          colObj1 = {
+            width: this.__intToPercent(colObj1)
+          };
+        }
+        if (!utils.isObj(colObj2)) {
+          colObj2 = {
+            width: this.__intToPercent(colObj2)
+          };
+        }
+        var keyWidth = "width";
+        var minWidth = "min-width";
+        var maxWidth = "max-width";
+        var keys = [keyWidth, minWidth, maxWidth];
+        var newColObj = {};
+        keys.forEach(key => {
+          var valSum = this.__countValue(colObj1[key], colObj2[key]);
+          if (!valSum) {
+            if (keyWidth === key) {
+              newColObj[key] = this.__intToPercent(constant.UI_MAX_COL);
+            } else if (minWidth === key) {
+              newColObj[key] = colObj1[key];
+            } else {
+              // maxWidth不要了
+            }
+          } else {
+            newColObj[key] = valSum;
+          }
+        });
+      }
+      },
+
+      __intToPercent(col) {
+      if (utils.isNum(col)) {
+        return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "%"; // 保留4位
+      } else {
+        return col;
+      }
+    },
+
+    /**
+     * 计算两个值之和，不能相加就返回false
+     * @param {*} val1
+     * @param {*} val2
+     */
+    __countValue(val1, val2) {
+      var unit, sum;
+      if (val1 === constant.WIDTH_AUTO && val2 === constant.WIDTH_AUTO) {
+        return constant.WIDTH_AUTO;
+      } else if (utils.isPercent(val1) && utils.isPercent(val2)) {
+        unit = "%";
+        sum =
+          parseFloat(val1.substr(0, val1.length - unit.length)) +
+          parseFloat(val2.substr(0, val2.length - unit.length));
+        return (sum > 100 ? 100 : sum) + unit;
+      } else if (utils.isPx(val1) && utils.isPx(val2)) {
+        unit = "px";
+        sum =
+          parseFloat(val1.substr(0, val1.length - unit.length)) +
+          parseFloat(val2.substr(0, val2.length - unit.length));
+        return sum + unit;
+      } else {
+        return false;
+      }
+    },
+
+    /**
+     * 此分组是否要显示
+     * @param {*} propItem
+     * @param {*} groups
+     */
+    __canShowGroup(propItem, groups) {
+      var result = false;
+      for (var i = 0; i < groups.length; i++) {
+        var fieldKeyName = groups[i];
+        var propSchema = propItem.properties[fieldKeyName];
+        if (
+          !propSchema.layout ||
+          propSchema.layout.name !== constant.LAYOUT_SPACE
+        ) {
+          // 非占位空间
+          if(!propSchema.hidden) {
+            result = true 
+          }
+        } else {
+          //占位空间是不可见的
+          result = false;
+        }
+        if (result) {
+          return result;
+        }
+      }
+      // 没有显示项目，或者全是占位空间
+      return result;
+    }
+  }
 };
 </script>
