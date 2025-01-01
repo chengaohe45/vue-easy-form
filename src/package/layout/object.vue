@@ -1,14 +1,14 @@
 <template>
-  <div class="es-form-container">
+  <div v-if="tmpLayoutSchema = createPropLayout()" class="es-form-container">
     <div
       class="es-form-inner-wrap"
       :style="
-        schema.__hasCustomWidth
-          ? { marginTop: -schema.ui.rowSpace + 'px' }
+        tmpLayoutSchema.firstRowSpace
+          ? { marginTop: -tmpLayoutSchema.firstRowSpace + 'px' }
           : null
       "
     >
-      <template v-for="(fieldSchema, fieldName) in createPropLayout()">
+      <template v-for="(fieldSchema, fieldName) in tmpLayoutSchema.properties">
         <!-- 有些元素同一组（也就是同一行, 内收藏fieldName） -->
         <div
           v-if="fieldSchema.groupProperties"
@@ -566,9 +566,19 @@ export default {
           }
         }
       }
+
+      var layoutSchema
+      // 判断是否存在显示的项目（非空或非全是占位空间）
+      if (!this.__canShowGroup(propSchema, newPropLayout)) {
+        layoutSchema = null;
+      } else {
+        layoutSchema = {}
+        layoutSchema.firstRowSpace = this.__getFristLayoutRowSpace(newPropLayout);
+        layoutSchema.properties = newPropLayout;
+      }
       
-      // console.log('newPropLayout', newPropLayout)
-      return newPropLayout
+      // console.log('layoutSchema', layoutSchema)
+      return layoutSchema;
     },
 
     __parseInheritableKey(key, itemSchema) {
@@ -668,16 +678,27 @@ export default {
     __getFristGroupItemName(groupProperties) {
       for (var fieldName in groupProperties) {
         var propItem = groupProperties[fieldName]
-        if (!propItem.layout || propItem.layout.name !== 'space') {
+        if (!propItem.layout || propItem.layout.name !== constant.LAYOUT_SPACE) {
           // 非占位空间
           return fieldName;
         }
       }
     },
 
+    __getFristLayoutRowSpace(layoutSchema) {
+      // console.log('layoutSchema', layoutSchema)
+      for (var fieldName in layoutSchema) {
+        var propItem = layoutSchema[fieldName];
+        if (!propItem.layout || propItem.layout.name !== constant.LAYOUT_SPACE) {
+          // 非占位空间
+          return propItem.rowSpace;
+        }
+      }
+    },
+
     __createPropItemStyle(layoutItem, col) {
       var style = {};
-      if (!layoutItem.layout || layoutItem.layout.name !== 'space') {
+      if (!layoutItem.layout || layoutItem.layout.name !== constant.LAYOUT_SPACE) {
         var bodyPadding = layoutItem.bodyPadding
         if (bodyPadding && bodyPadding.length === 4) {
           style.padding = bodyPadding.join(" ");
