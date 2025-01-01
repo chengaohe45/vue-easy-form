@@ -11,7 +11,7 @@ import utils from "./utils";
 // import { enterSubmit, onlySubmit } from "./submit";
 import { isEsOrFunc, newEsFunction } from "../tools/parse";
 import global from "./global";
-import { parseComponent, createEmptyComponent } from "../tools/component";
+import { parseComponent, createEmptyComponent, newComponentId } from "../tools/component";
 
 ("use strict");
 
@@ -68,6 +68,9 @@ export function parseMainComponent(propItem, formId, myPathKey) {
       flex: false,
       value: global.defaultVal
     };
+  }
+  if (!newComponent.id) {
+    newComponent.id = newComponentId()
   }
 
   newComponent.__formId = formId;

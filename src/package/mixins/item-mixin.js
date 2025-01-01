@@ -1,5 +1,6 @@
 import utils from "../libs/utils.js";
 import constant from "../libs/constant.js";
+import schemaUtils from "../libs/schema-utils.js";
 export default {
   props: {
     schema: {
@@ -72,6 +73,27 @@ export default {
         return !!result;
       } else {
         return !!boolScript;
+      }
+    },
+    mxParseCol(propItem, info) {
+      var colScript = propItem.col
+      if (typeof colScript === "function") {
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        var colValue = colScript(rootInstance._fetchParseSources(info));
+        // 判断合法性
+        return schemaUtils.parseCol(colValue)
+      } else {
+        return colScript;
+      }
+    },
+    mxParsePadding(valueScript, info) {
+      if (typeof valueScript === "function") {
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        var valueResult = valueScript(rootInstance._fetchParseSources(info));
+        // 判断合法性
+        return schemaUtils.parsePadding(valueResult, true, true)
+      } else {
+        return valueScript;
       }
     }
   }

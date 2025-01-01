@@ -1,5 +1,5 @@
 import utils from "./utils";
-import parse from "./parse";
+import { isEsScript, isEsOrFunc } from "../tools/parse";
 
 let schemaRules = {
   isFunc: function(value) {
@@ -7,11 +7,15 @@ let schemaRules = {
   },
 
   isEs: function(value) {
-    return parse.isEsScript(value);
+    return isEsScript(value);
   },
 
   isStr: function(value) {
     return utils.isStr(value);
+  },
+
+  isEsOrFunc: function(value) {
+    return isEsOrFunc(value)
   },
 
   /**

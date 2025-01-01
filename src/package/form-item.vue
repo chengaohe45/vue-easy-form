@@ -634,7 +634,7 @@ export default {
       // this.mxShowComponent(this.schema.title, this.schema.__info)
       return this.schema.properties &&
         ((this.mxShowComponent(this.schema.title, this.schema.__info) && (this.schema.title.name || this.schema.title.text || (this.mxShowComponent(this.schema.title.help, this.schema.__info))))
-        || this.schema.ui.__hasToggle || this.schema.help)
+        || this.schema.ui.__hasToggle || this.mxShowComponent(this.schema.help, this.schema.__info))
         ? true
         : false; // 是否有头部
     },
@@ -647,30 +647,32 @@ export default {
           : false;
 
       var style = null;
+      var bodyPadding = this.mxParsePadding(this.schema.mxParsePadding, this.schema.__info);
       // 是否有头部
       if (this.needHeader) {
         if (hasBorder) {
           style = {
-            padding: this.schema.ui.padding
-              ? this.schema.ui.padding
-              : Math.min(this.schema.ui.rowSpace, 10) + "px"
+            padding: bodyPadding
+              ? bodyPadding.join(" ")
+              : Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px"
           }; //有边框时的样式
         } else {
           style = {
-            padding: this.schema.ui.padding
-              ? this.schema.ui.padding
-              : Math.min(this.schema.ui.rowSpace, 10) + "px 0 0 0"
+            padding: bodyPadding
+              ? bodyPadding.join(" ")
+              : Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px 0 0 0"
           }; //无边框时的样式
         }
       } else {
         if (hasBorder) {
           style = {
-            padding: this.schema.ui.padding
-              ? this.schema.ui.padding
-              : Math.min(this.schema.ui.rowSpace, 10) + "px"
+            padding: bodyPadding
+              ? bodyPadding.join(" ")
+              : Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px"
           }; //有边框时的样式
         }
       }
+      // console.log('style', style)
       return style;
     }
   },

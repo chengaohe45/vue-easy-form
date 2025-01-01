@@ -8,196 +8,191 @@
           : null
       "
     >
-      <template v-for="(fieldSchema, fieldName) in schema.properties">
+      <template v-for="(fieldSchema, fieldName) in createPropLayout()">
         <!-- 有些元素同一组（也就是同一行, 内收藏fieldName） -->
         <div
-          v-if="fieldSchema.__groups"
-          v-show="!fieldSchema.__hiddenGroup"
+          v-if="fieldSchema.groupProperties"
           :style="fieldSchema.__style"
           class="es-form-object"
           :key="'groups-' + fieldName"
         >
-          <template v-for="fieldKeyName in fieldSchema.__groups">
-            <template v-if="schema.properties[fieldKeyName].component">
+          <template v-for="(groupFieldSchema, groupFieldName) in fieldSchema.groupProperties">
+            <template v-if="schema.properties[groupFieldName].component">
               <label
                 v-if="
-                  schema.properties[fieldKeyName].__creatable &&
-                  mxShowComponent(schema.properties[fieldKeyName].label, schema.properties[fieldKeyName].__info)
+                  schema.properties[groupFieldName].__creatable &&
+                  mxShowComponent(schema.properties[groupFieldName].label, schema.properties[groupFieldName].__info)
                 "
-                v-show="!schema.properties[fieldKeyName].hidden"
+                v-show="!schema.properties[groupFieldName].hidden"
                 :style="[
                   {
-                    height: schema.properties[fieldKeyName].rowHeight + 'px',
+                    height: schema.properties[groupFieldName].rowHeight + 'px',
                     lineHeight:
-                      schema.properties[fieldKeyName].rowHeight + 'px',
+                      schema.properties[groupFieldName].rowHeight + 'px',
                     marginLeft:
-                      schema.properties[fieldKeyName].offsetLeft + 'px'
+                      schema.properties[groupFieldName].offsetLeft + 'px'
                   },
-                  schema.properties[fieldKeyName].label.flex
+                  schema.properties[groupFieldName].label.flex
                     ? ''
                     : {
-                        width: schema.properties[fieldKeyName].labelWidth + 'px'
+                        width: schema.properties[groupFieldName].labelWidth + 'px'
                       }
                 ]"
                 :class="[
                   'es-form-label-col',
-                  schema.properties[fieldKeyName].label.flex
+                  schema.properties[groupFieldName].label.flex
                     ? 'es-form-label-' +
-                      schema.properties[fieldKeyName].label.flex
+                      schema.properties[groupFieldName].label.flex
                     : '',
-                  schema.properties[fieldKeyName].label.align
+                  schema.properties[groupFieldName].label.align
                     ? 'es-form-label-' +
-                      schema.properties[fieldKeyName].label.align
+                      schema.properties[groupFieldName].label.align
                     : ''
                 ]"
-                :key="'label-' + fieldKeyName"
+                :key="'label-' + groupFieldName"
               >
                 <!-- 必填标识 -->
                 <span
                   v-if="
-                    (schema.properties[fieldKeyName].array &&
-                      schema.properties[fieldKeyName].array.rules &&
-                      mxParseBoolValue(schema.properties[fieldKeyName].array.rules.required, schema.properties[fieldKeyName].__info) &&
-                      mxParseBoolValue(schema.properties[fieldKeyName].array.rules.showRequired, schema.properties[fieldKeyName].__info)) ||
-                      (schema.properties[fieldKeyName].rules &&
-                        !schema.properties[fieldKeyName].array &&
-                        mxParseBoolValue(schema.properties[fieldKeyName].rules.required, schema.properties[fieldKeyName].__info) &&
-                        mxParseBoolValue(schema.properties[fieldKeyName].rules.showRequired, schema.properties[fieldKeyName].__info))
+                    (schema.properties[groupFieldName].array &&
+                      schema.properties[groupFieldName].array.rules &&
+                      mxParseBoolValue(schema.properties[groupFieldName].array.rules.required, schema.properties[groupFieldName].__info) &&
+                      mxParseBoolValue(schema.properties[groupFieldName].array.rules.showRequired, schema.properties[groupFieldName].__info)) ||
+                      (schema.properties[groupFieldName].rules &&
+                        !schema.properties[groupFieldName].array &&
+                        mxParseBoolValue(schema.properties[groupFieldName].rules.required, schema.properties[groupFieldName].__info) &&
+                        mxParseBoolValue(schema.properties[groupFieldName].rules.showRequired, schema.properties[groupFieldName].__info))
                   "
                   class="es-required"
                   >*</span
                 >
-                <template v-if="!schema.properties[fieldKeyName].label.name">
-                  <span>{{ schema.properties[fieldKeyName].label.text }}</span>
+                <template v-if="!schema.properties[groupFieldName].label.name">
+                  <span>{{ schema.properties[groupFieldName].label.text }}</span>
                 </template>
                 <span v-else class="es-form-label-box">
                   <es-base
-                    :config="schema.properties[fieldKeyName].label"
-                    :info="schema.properties[fieldKeyName].__info"
+                    :config="schema.properties[groupFieldName].label"
+                    :info="schema.properties[groupFieldName].__info"
                   ></es-base>
                 </span>
                 <span
                   class="es-form-label-help"
-                  v-if="mxShowComponent(schema.properties[fieldKeyName].label.help, schema.properties[fieldKeyName].__info)"
+                  v-if="mxShowComponent(schema.properties[groupFieldName].label.help, schema.properties[groupFieldName].__info)"
                 >
                   <es-base
-                    :config="schema.properties[fieldKeyName].label.help"
-                    :info="schema.properties[fieldKeyName].__info"
+                    :config="schema.properties[groupFieldName].label.help"
+                    :info="schema.properties[groupFieldName].__info"
                   ></es-base>
                 </span>
                 <span
-                  v-if="schema.properties[fieldKeyName].colon"
+                  v-if="groupFieldSchema.colon"
                   class="es-form-colon"
                   >:</span
                 >
               </label>
               <div
-                v-if="schema.properties[fieldKeyName].__creatable"
-                v-show="!schema.properties[fieldKeyName].hidden"
+                v-if="schema.properties[groupFieldName].__creatable"
+                v-show="!schema.properties[groupFieldName].hidden"
                 :class="[
                   'es-form-comp-content',
-                  schema.properties[fieldKeyName].component &&
-                  schema.properties[fieldKeyName].component.flex
+                  schema.properties[groupFieldName].component &&
+                  schema.properties[groupFieldName].component.flex
                     ? 'es-form-group-' +
-                      schema.properties[fieldKeyName].component.flex
+                      schema.properties[groupFieldName].component.flex
                     : ''
                 ]"
-                :key="'content-' + fieldKeyName"
+                :key="'content-' + groupFieldName"
                 :style="[
                   {
-                    minHeight: schema.properties[fieldKeyName].rowHeight + 'px',
+                    minHeight: schema.properties[groupFieldName].rowHeight + 'px',
                     marginLeft:
-                      !mxShowComponent(schema.properties[fieldKeyName].label, schema.properties[fieldKeyName].__info)
-                        ? schema.properties[fieldKeyName].offsetLeft + 'px'
+                      !mxShowComponent(schema.properties[groupFieldName].label, schema.properties[groupFieldName].__info)
+                        ? schema.properties[groupFieldName].offsetLeft + 'px'
                         : false,
                     marginRight:
-                      schema.properties[fieldKeyName].offsetRight + 'px'
+                      schema.properties[groupFieldName].offsetRight + 'px'
                   }
                 ]"
               >
                 <slot
-                  :schema="schema.properties[fieldKeyName]"
-                  :name="fieldKeyName"
+                  :schema="schema.properties[groupFieldName]"
+                  :name="groupFieldName"
                 ></slot>
               </div>
-              <template v-if="schema.properties[fieldKeyName].__creatable && mxShowComponent(schema.properties[fieldKeyName].unit, schema.properties[fieldKeyName].__info)">
+              <template v-if="schema.properties[groupFieldName].__creatable && mxShowComponent(schema.properties[groupFieldName].unit, schema.properties[groupFieldName].__info)">
                 <div
-                  :key="'unit-' + fieldKeyName"
+                  :key="'unit-' + groupFieldName"
                   class="es-form-unit"
                   :style="[
-                    { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                    { height: schema.properties[groupFieldName].rowHeight + 'px' }
                   ]"
                 >
                   <es-base
-                    :config="schema.properties[fieldKeyName].unit"
-                    :info="schema.properties[fieldKeyName].__info"
+                    :config="schema.properties[groupFieldName].unit"
+                    :info="schema.properties[groupFieldName].__info"
                   ></es-base>
                 </div>
 
                 <!-- <div
-                  v-if="schema.properties[fieldKeyName].unit.name"
-                  v-show="!schema.properties[fieldKeyName].hidden"
-                  :key="'unit-' + fieldKeyName"
+                  v-if="schema.properties[groupFieldName].unit.name"
+                  v-show="!schema.properties[groupFieldName].hidden"
+                  :key="'unit-' + groupFieldName"
                   class="es-form-unit"
                   :style="[
-                    { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                    { height: schema.properties[groupFieldName].rowHeight + 'px' }
                   ]"
                 >
                   <es-base
-                    :config="schema.properties[fieldKeyName].unit"
-                    :info="schema.properties[fieldKeyName].__info"
+                    :config="schema.properties[groupFieldName].unit"
+                    :info="schema.properties[groupFieldName].__info"
                   ></es-base>
                 </div>
                 <div
                   v-else
                   v-show="
-                    !schema.properties[fieldKeyName].hidden &&
-                      schema.properties[fieldKeyName].unit.text
+                    !schema.properties[groupFieldName].hidden &&
+                      schema.properties[groupFieldName].unit.text
                   "
-                  :key="'unit-' + fieldKeyName"
+                  :key="'unit-' + groupFieldName"
                   class="es-form-unit"
                   :style="[
-                    { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                    { height: schema.properties[groupFieldName].rowHeight + 'px' }
                   ]"
                 >
-                  {{ schema.properties[fieldKeyName].unit.text }}
+                  {{ schema.properties[groupFieldName].unit.text }}
                 </div> -->
               </template>
               <div
-                v-show="!schema.properties[fieldKeyName].hidden"
-                :key="'help-' + fieldKeyName"
-                v-if="schema.properties[fieldKeyName].__creatable && mxShowComponent(schema.properties[fieldKeyName].help, schema.properties[fieldKeyName].__info)"
+                v-show="!schema.properties[groupFieldName].hidden"
+                :key="'help-' + groupFieldName"
+                v-if="schema.properties[groupFieldName].__creatable && mxShowComponent(schema.properties[groupFieldName].help, schema.properties[groupFieldName].__info)"
                 class="es-form-help"
                 :style="[
-                  { height: schema.properties[fieldKeyName].rowHeight + 'px' }
+                  { height: schema.properties[groupFieldName].rowHeight + 'px' }
                 ]"
               >
                 <es-base
-                  :config="schema.properties[fieldKeyName].help"
-                  :info="schema.properties[fieldKeyName].__info"
+                  :config="schema.properties[groupFieldName].help"
+                  :info="schema.properties[groupFieldName].__info"
                 ></es-base>
               </div>
             </template>
             <!-- 占位空间控件: 不判断__creatable，因为是系统的，里面没有用户自定义的东西 -->
             <div
-              v-show="!schema.properties[fieldKeyName].hidden"
               v-else
-              :key="fieldKeyName"
-              :style="schema.properties[fieldKeyName].__style"
+              :key="groupFieldName"
+              :style="groupFieldSchema.__style"
               class="es-form-placeholder"
             ></div>
           </template>
         </div>
         <!-- 不是分组情况 -->
         <template
-          v-else-if="
-            !fieldSchema.__inGroups &&
-              (!fieldSchema.layout || fieldSchema.layout.name !== 'space')
-          "
+          v-else-if="(!schema.properties[fieldName].layout || schema.properties[fieldName].layout.name !== 'space')"
         >
           <div
-            v-if="fieldSchema.__creatable"
-            v-show="!fieldSchema.hidden"
+            v-if="schema.properties[fieldName].__creatable"
+            v-show="!schema.properties[fieldName].hidden"
             :style="fieldSchema.__style"
             :class="[
               'es-form-object',
@@ -207,15 +202,15 @@
           >
             <!-- 一般的控件 -->
             <label
-              v-if="mxShowComponent(fieldSchema.label, fieldSchema.__info)"
+              v-if="mxShowComponent(schema.properties[fieldName].label, schema.properties[fieldName].__info)"
               :class="[
                 'es-form-label-col',
                 fieldSchema.direction == 'v' ? 'es-form-label-col-v' : '',
-                fieldSchema.label.flex
-                  ? 'es-form-label-' + fieldSchema.label.flex
+                schema.properties[fieldName].label.flex
+                  ? 'es-form-label-' + schema.properties[fieldName].label.flex
                   : '',
-                fieldSchema.label.align
-                  ? 'es-form-label-' + fieldSchema.label.align
+                  schema.properties[fieldName].label.align
+                  ? 'es-form-label-' + schema.properties[fieldName].label.align
                   : ''
               ]"
               :style="
@@ -225,7 +220,7 @@
                         height: fieldSchema.rowHeight + 'px',
                         lineHeight: fieldSchema.rowHeight + 'px'
                       },
-                      fieldSchema.label.flex
+                      schema.properties[fieldName].label.flex
                         ? {}
                         : {
                             width: fieldSchema.labelWidth + 'px'
@@ -236,45 +231,45 @@
             >
               <span
                 v-if="
-                  (fieldSchema.array &&
-                    fieldSchema.array.rules &&
-                    mxParseBoolValue(fieldSchema.array.rules.required, fieldSchema.__info) &&
-                    mxParseBoolValue(fieldSchema.array.rules.showRequired, fieldSchema.__info)) ||
-                    (fieldSchema.rules &&
-                      !fieldSchema.array &&
-                      mxParseBoolValue(fieldSchema.rules.required, fieldSchema.__info) &&
-                      mxParseBoolValue(fieldSchema.rules.showRequired, fieldSchema.__info))
+                  (schema.properties[fieldName].array &&
+                  schema.properties[fieldName].array.rules &&
+                    mxParseBoolValue(schema.properties[fieldName].array.rules.required, schema.properties[fieldName].__info) &&
+                    mxParseBoolValue(schema.properties[fieldName].array.rules.showRequired, schema.properties[fieldName].__info)) ||
+                    (schema.properties[fieldName].rules &&
+                      !schema.properties[fieldName].array &&
+                      mxParseBoolValue(schema.properties[fieldName].rules.required, schema.properties[fieldName].__info) &&
+                      mxParseBoolValue(schema.properties[fieldName].rules.showRequired, schema.properties[fieldName].__info))
                 "
                 class="es-required"
                 >*</span
               >
-              <template v-if="!fieldSchema.label.name">
+              <template v-if="!schema.properties[fieldName].label.name">
                 <span>{{
-                  fieldSchema.direction != "v" || fieldSchema.label.text
-                    ? fieldSchema.label.text
+                  fieldSchema.direction != "v" || schema.properties[fieldName].label.text
+                    ? schema.properties[fieldName].label.text
                     : "&nbsp;"
                 }}</span>
               </template>
               <span v-else class="es-form-label-box">
                 <es-base
-                  :config="fieldSchema.label"
-                  :info="fieldSchema.__info"
+                  :config="schema.properties[fieldName].label"
+                  :info="schema.properties[fieldName].__info"
                 ></es-base>
               </span>
               <span
                 class="es-form-label-help"
-                v-if="mxShowComponent(fieldSchema.label.help, fieldSchema.__info)"
+                v-if="mxShowComponent(schema.properties[fieldName].label.help, schema.properties[fieldName].__info)"
               >
                 <es-base
-                  :config="fieldSchema.label.help"
-                  :info="fieldSchema.__info"
+                  :config="schema.properties[fieldName].label.help"
+                  :info="schema.properties[fieldName].__info"
                 ></es-base>
               </span>
               <span v-if="fieldSchema.colon" class="es-form-colon">:</span>
             </label>
             <div
               :class="
-                fieldSchema.properties
+                schema.properties[fieldName].properties
                   ? 'es-form-props-content'
                   : 'es-form-comp-content'
               "
@@ -290,8 +285,7 @@
         </template>
         <!-- 占位空间控件: 不判断__creatable，因为是系统的，里面没有用户自定义的东西 -->
         <div
-          v-show="!fieldSchema.hidden"
-          v-else-if="!fieldSchema.__inGroups && !fieldSchema.component"
+          v-else-if="!schema.properties[fieldName].component"
           :style="fieldSchema.__style"
           class="es-form-object"
           :key="fieldName"
@@ -441,6 +435,9 @@
 import itemMixin from "../mixins/item-mixin";
 import esBase from "../base";
 import utils from '../libs/utils';
+import global from '../libs/global';
+import constant from '../libs/constant';
+import schemaUtils from '../libs/schema-utils';
 
 export default {
   mixins: [itemMixin],
@@ -452,31 +449,46 @@ export default {
   },
   methods: {
     createPropLayout() {
-      var newPropLayout = {}
-      var currentProperties = this.schema.properties;
-      for (var fieldName in currentProperties) {
-        var propItem = currentProperties[fieldName]
-        // 没有隐藏
-        if (!propItem.hidden) {
-
-        }
-      }
-
+      // console.log('createPropLayout...')
       var newPropLayout = {}
       
       var lastGroup = false;
-      var groups;
+      var groups, groupProperties;
       // var colSum = 0;
-      var firstGroupItem; //每一组的第一项
-      for (var key in propItem.properties) {
+      var newGroupItem, firstGroupFieldName, firstGroupLayoutItem; //每一组的第一项
+      var propSchema = this.schema.properties
+      for (var fieldName in propSchema) {
+        var item = propSchema[fieldName];
         // 没有隐藏
-        if (!propItem.hidden) {
+        if (!item.hidden) {
           var newLayoutItem = {}
-          var item = propItem.properties[key];
-          newLayoutItem.col = item.col
-          if (newPropLayout.layout) {
-            newPropLayout.layout = utils.deepCopy(newPropLayout.layout)
+          if ('__creatable' in item) {
+            newLayoutItem.__creatable = item.__creatable;
           }
+          if (item.layout) {
+            newLayoutItem.layout = item.layout;
+          }
+          var directionEnums = ["h", "v"];
+          var newDireciton = this.mxParseNodeAttr(item.direction, item.__info)
+          newLayoutItem.direction = directionEnums.includes(newDireciton) ? newDireciton : directionEnums[0];
+          newLayoutItem.bodyPadding = this.mxParsePadding(item.bodyPadding, item.__info);
+          var inheritKeys = [
+            "offsetLeft",
+            "offsetRight",
+            "direction",
+            "colon",
+            "rowSpace",
+            "labelWidth",
+            "rowHeight"
+          ];
+          inheritKeys.forEach((inheritKey) => {
+            newLayoutItem[inheritKey] = this.__parseInheritableKey(inheritKey, item)
+          })
+          newLayoutItem.col = this.mxParseCol(item, item.__info)
+          
+          // style必须放在各项配置解析之后
+          newLayoutItem.__style = this.__createPropItemStyle(newLayoutItem, newLayoutItem.col);
+
           var rawGroup = item["group"]
           var curGroup = this.mxParseNodeAttr(rawGroup, item.__info);
           if (typeof curGroup === 'string' && curGroup) {
@@ -484,190 +496,212 @@ export default {
               //已经存在了
               if (lastGroup === curGroup) {
                 //是前面的那一组
-                groups.push(key);
+                // groups.push(fieldName);
+                groupProperties[fieldName] = newLayoutItem;
                 // colSum += item.col;
-                firstGroupItem.__groupCol = this.__sumCol(
-                  firstGroupItem.__groupCol,
-                  newPropLayout.col
+                newGroupItem.groupCol = this.__sumCol(
+                  newGroupItem.groupCol,
+                  newLayoutItem.col
                 );
                 // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
               } else {
-                if (firstGroupItem && firstGroupItem.groups && firstGroupItem.groups.length > 0) {
+                // 前一个分组统计
+                if (newGroupItem && newGroupItem.groupProperties) {
                   // 判断分组是否需要显示
-                  if (this.__canShowGroup(propItem, firstGroupItem.groups)) {
+                  if (this.__canShowGroup(propSchema, newGroupItem.groupProperties)) {
                     // 分组，记录下来
-                    newPropLayout[firstGroupItem.groups[0]] = firstGroupItem
+                    firstGroupFieldName = this.__getFristGroupItemName(newGroupItem.groupProperties);
+                    firstGroupLayoutItem = newGroupItem.groupProperties[firstGroupFieldName]
+                    newLayoutItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
+                    newPropLayout[firstGroupFieldName] = newGroupItem
                   }
                 }
                 //不是前面的那一组，重新开组
                 lastGroup = curGroup;
-                firstGroupItem = newPropLayout;
-                groups = [key];
-                newPropLayout.__groups = groups;
+                newGroupItem = Object.assign({}, newLayoutItem);
+                groups = [fieldName];
+                groupProperties = {
+                  [fieldName]: newLayoutItem
+                }
+                // newLayoutItem.__groups = groups;
+                newLayoutItem.groupProperties = groupProperties;
                 // newPropLayout.__hiddenGroup = false;
                 // item.col = constant.UI_MAX_COL;
                 // colSum = item.col;
-                firstGroupItem.__groupCol = newPropLayout.col;
+                newGroupItem.groupCol = newLayoutItem.col;
                 // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
               }
             } else {
               //前面没有组，重新开组
               lastGroup = curGroup;
-              firstGroupItem = newPropLayout;
-              groups = [key];
-              newPropLayout.__groups = groups;
+              newGroupItem = Object.assign({}, newLayoutItem);
+              // groups = [fieldName];
+              groupProperties = {
+                [fieldName]: newLayoutItem
+              }
+              // newLayoutItem.__groups = groups;
+              newGroupItem.groupProperties = groupProperties;
               // newPropLayout.__hiddenGroup = false;
-              firstGroupItem.__groupCol = newPropLayout.col;
+              newGroupItem.groupCol = newLayoutItem.col;
             }
             // newPropLayout.__inGroups = true; //记录此项在分组里面
           } else {
             lastGroup = false;
-            groups = null;
+            // groups = null;
             // colSum = 0;
-            firstGroupItem = null;
-            newPropLayout[key] = newPropLayout
+            newGroupItem = null;
+            groupProperties = null;
+            newPropLayout[fieldName] = newLayoutItem
           }
           // 若存在最后一个分组，记录下来
-          if (firstGroupItem && firstGroupItem.groups && firstGroupItem.groups.length > 0) {
+          if (newGroupItem && newGroupItem.groupProperties) {
             // 判断分组是否需要显示
-            if (this.__canShowGroup(propItem, firstGroupItem.groups)) {
+            if (this.__canShowGroup(propSchema, newGroupItem.groupProperties)) {
               // 分组，记录下来
-              newPropLayout[firstGroupItem.groups[0]] = firstGroupItem
+              firstGroupFieldName = this.__getFristGroupItemName(newGroupItem.groupProperties);
+              firstGroupLayoutItem = newGroupItem.groupProperties[firstGroupFieldName]
+              newLayoutItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
+              newPropLayout[firstGroupFieldName] = newGroupItem
             }
           }
         }
       }
       
-      sum = 0;
-      var newRowSpace;
-      var hasCustomWidth = propItem.__hasCustomWidth;
-      for (key in propItem.properties) {
-        nextPropItem = propItem.properties[key];
-        var hasRowSpaceChanged = false;
-        var currentCol;
-        if (!hasCustomWidth) {
-          if (nextPropItem.__groups) {
-            //是一个组
-            isHidden = this.__isGroupHidden(
-              propItem,
-              nextPropItem.__groups,
-              formVm
-            );
-            if (!isHidden) {
-              //组不隐藏
+      // console.log('newPropLayout', newPropLayout)
+      return newPropLayout
+    },
 
-              sum += nextPropItem.__groupCol;
-              if (sum <= constant.UI_MAX_COL) {
-                //还在第一行
-                newRowSpace = 0;
+    __parseInheritableKey(key, itemSchema) {
+      var rootInstance;
+      var keyValueScript = itemSchema[key];
+      var currentKeyValue = this.__execInheritableKey(key, keyValueScript, itemSchema.__info);
+      // console.log('>>>>>>>>>>>>>>>>>>', key, currentKeyValue)
+      if (currentKeyValue === undefined || currentKeyValue === null) {
+        // 需要取父级的
+        if (this.schema.ui) {
+          var currentUi = this.schema.ui
+          // console.log('1 ----currentKeyValue', currentUi[key])
+          currentKeyValue = this.__execInheritableKey(key, currentUi[key], this.schema.__info);
+        }
+        // console.log('2 ----currentKeyValue', currentKeyValue)
+        if (currentKeyValue === undefined || currentKeyValue === null) {
+          // console.log('this.schema', this.schema)
+          // 再向上取父级的
+          var pathKeyStr = this.schema.__info.pathKey;
+          var pathKeys = utils.parsePathKeys(pathKeyStr)
+          var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME)
+          var rootSchema = rootInstance._getSchema()
+
+          var allUiSchemaList = []
+          var curSchema = rootSchema
+          // 取出父类的UI
+          if (pathKeys.length > 0) {
+            for (var i = 0; i < pathKeys.length; i++) {
+              if (!curSchema) {
+                // 正常是不会理入这里的
+                throw new Error("数据不匹配")
+              }
+              var curProperties = curSchema.properties;
+              if (curProperties) {
+                if (!curSchema.array) {
+                  // 非数组
+                  if (curSchema.ui && curSchema.ui !== this.schema.ui) {
+                    allUiSchemaList.push(curSchema)
+                  }
+                  curSchema = curProperties[pathKeys[i]]  // 下一个
+                } else {
+                  // 数组
+                  var curPropSchemaList = curSchema.__propSchemaList;
+                  ++i;
+                  curSchema = curPropSchemaList[i];
+                }
               } else {
-                newRowSpace = nextPropItem.__rawRowSpace;
+                // 组件是没有ui的，也没有下一级
               }
-              if (
-                !nextPropItem.__style ||
-                nextPropItem.rowSpace != newRowSpace
-              ) {
-                //还原
-                nextPropItem.rowSpace = newRowSpace;
-                hasRowSpaceChanged = true;
-                currentCol = nextPropItem.__groupCol;
-              }
-            } else {
-              //不必理会
-            }
-
-            if (nextPropItem.__hiddenGroup != isHidden) {
-              nextPropItem.__hiddenGroup = isHidden;
-            }
-          } else if (nextPropItem.__inGroups) {
-            //组内成员
-            if (!nextPropItem.__style || nextPropItem.rowSpace != 0) {
-              nextPropItem.rowSpace = 0;
-              hasRowSpaceChanged = true;
-              currentCol = nextPropItem.col;
             }
           } else {
-            //正常成员
-
-            isHidden = this.__smartParseHidden(
-              nextPropItem.__rawHidden,
-              formVm,
-              nextPropItem.__info
-            );
-            // console.log(nextPropItem.col, isHidden);
-            if (!isHidden) {
-              sum += nextPropItem.col;
-              if (sum <= constant.UI_MAX_COL) {
-                //还在第一行
-                newRowSpace = 0;
-              } else {
-                newRowSpace = nextPropItem.__rawRowSpace;
-              }
-              if (
-                !nextPropItem.__style ||
-                nextPropItem.rowSpace != newRowSpace
-              ) {
-                //还原
-                nextPropItem.rowSpace = newRowSpace;
-                hasRowSpaceChanged = true;
-                currentCol = nextPropItem.col;
-              }
-            } else {
-              //不必理会
-            }
+            //
           }
-          if (hasRowSpaceChanged) {
-            this.__updatePropStyle(
-              nextPropItem,
-              nextPropItem.rowSpace,
-              currentCol
-            );
-          }
-        } else {
-          if (nextPropItem.__groups) {
-            //是一个组
-            isHidden = this.__isGroupHidden(
-              propItem,
-              nextPropItem.__groups,
-              formVm
-            );
-            if (!isHidden) {
-              //组不隐藏
-              if (!nextPropItem.__style) {
-                this.__updatePropStyle(
-                  nextPropItem,
-                  nextPropItem.rowSpace,
-                  nextPropItem.__groupCol
-                );
+          // console.log('1 allUiSchemaList', allUiSchemaList)
+          if (allUiSchemaList.length > 0) {
+            allUiSchemaList = allUiSchemaList.reverse()
+            // console.log('2 allUiSchemaList', allUiSchemaList)
+            rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+            for (var uiIndex = 0; uiIndex < allUiSchemaList.length; uiIndex++) {
+              var uiSchemaItem = allUiSchemaList[uiIndex]
+              var ui = uiSchemaItem.ui; // 只有存在UI的才进入这里
+              currentKeyValue = this.__execInheritableKey(key, ui[key], uiSchemaItem.__info, rootInstance);
+              if (currentKeyValue !== undefined && currentKeyValue !== null) {
+                break;
               }
-            } else {
-              //不必理会
-            }
-
-            if (nextPropItem.__hiddenGroup != isHidden) {
-              nextPropItem.__hiddenGroup = isHidden;
-            }
-          } else if (nextPropItem.__inGroups) {
-            //组内成员
-            if (!nextPropItem.__style) {
-              this.__updatePropStyle(nextPropItem, 0, nextPropItem.col);
-            }
-          } else {
-            //正常成员
-            if (!nextPropItem.__style) {
-              this.__updatePropStyle(
-                nextPropItem,
-                nextPropItem.rowSpace,
-                nextPropItem.col
-              );
             }
           }
         }
-
-        // 下一级
-        this.analyzeUiProps(nextPropItem, formVm);
       }
-    
+
+      if (currentKeyValue === undefined || currentKeyValue === null) {
+        // 还是为空，全局配置
+        currentKeyValue = global[key]
+      }
+      // console.log('>>>>>>>>>>>>>>>>>> ----currentKeyValue', currentKeyValue)
+      return currentKeyValue;
+    },
+
+    __execInheritableKey(key, currentKeyScript, info, rootInstance) {
+      // console.log('__execInheritableKey-currentKeyScript', key, currentKeyScript)
+      var currentKeyValue
+      if (typeof currentKeyScript === "function") {
+        rootInstance = rootInstance || utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        currentKeyValue = currentKeyScript(rootInstance._fetchParseSources(info))
+      } else {
+        currentKeyValue = currentKeyScript;
+      }
+      // console.log('1 currentKeyValue = ', currentKeyValue)
+      currentKeyValue = schemaUtils.parseNormalKey(currentKeyValue,  schemaUtils.getNormalInfo(key), {[key]: undefined}, true);
+      if (currentKeyValue === undefined || currentKeyValue === null && (typeof currentKeyValue === "function")) {
+        currentKeyValue = undefined
+      }
+      // console.log('2 currentKeyValue = ', currentKeyValue)
+      return currentKeyValue;
+    },
+
+    __getFristGroupItemName(groupProperties) {
+      for (var fieldName in groupProperties) {
+        var propItem = groupProperties[fieldName]
+        if (!propItem.layout || propItem.layout.name !== 'space') {
+          // 非占位空间
+          return fieldName;
+        }
+      }
+    },
+
+    __createPropItemStyle(layoutItem, col) {
+      var style = {};
+      if (!layoutItem.layout || layoutItem.layout.name !== 'space') {
+        var bodyPadding = layoutItem.bodyPadding
+        if (bodyPadding && bodyPadding.length === 4) {
+          style.padding = bodyPadding.join(" ");
+        } else {
+          if (layoutItem.offsetLeft) {
+            style.paddingLeft = layoutItem.offsetLeft + "px";
+          }
+          if (layoutItem.offsetRight) {
+            style.paddingRight = layoutItem.offsetRight + "px";
+          }
+          if (layoutItem.rowSpace) {
+            style.marginTop = layoutItem.rowSpace + "px";
+          }
+        }
+      }
+      
+      if (utils.isNum(col)) {
+        var width = Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000;
+        width += "%";
+        style.width = width;
+      } else {
+        style = Object.assign(style, col);
+      }
+      return style;
     },
 
     /**
@@ -753,21 +787,22 @@ export default {
 
     /**
      * 此分组是否要显示
-     * @param {*} propItem
+     * @param {*} propSchema
      * @param {*} groups
      */
-    __canShowGroup(propItem, groups) {
+    __canShowGroup(propSchema, groupProperties) {
+      var groups = groupProperties ? Object.keys(groupProperties) : []
       var result = false;
       for (var i = 0; i < groups.length; i++) {
-        var fieldKeyName = groups[i];
-        var propSchema = propItem.properties[fieldKeyName];
+        var groupFieldName = groups[i];
+        var propItem = propSchema[groupFieldName];
         if (
-          !propSchema.layout ||
-          propSchema.layout.name !== constant.LAYOUT_SPACE
+          !propItem.layout ||
+          propItem.layout.name !== constant.LAYOUT_SPACE
         ) {
           // 非占位空间
-          if(!propSchema.hidden) {
-            result = true 
+          if (!propItem.hidden) {
+            result = true;
           }
         } else {
           //占位空间是不可见的

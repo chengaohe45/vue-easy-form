@@ -144,6 +144,8 @@ let schemaUtils = {
       if (!this.__existEntityItem(propItem)) {
         throw "属性" + parentKey + "没有具体的子节点(properties全为空)";
       }
+      // 这个放在前面，因为要合并继承
+      var newUi = this.__parseBoxUi(propItem.ui) || { showBody: true }
 
       // 是否数组(优先级最高)
       isArray = this.__isArray(propItem.array);
@@ -154,10 +156,12 @@ let schemaUtils = {
         inheritObj,
         myPathKey
       );
+      newPropItem.ui = newUi
 
-      var nextInheritObj = newPropItem.nextInherit;
-      newPropItem.nextInherit = null;
-      delete newPropItem.nextInherit;
+      // var nextInheritObj = newPropItem.nextInherit;
+      // newPropItem.nextInherit = null;
+      // delete newPropItem.nextInherit;
+      var nextInheritObj = this.__mergeInherit(inheritObj, newUi)
       if (isArray) {
         if (utils.isUndef(newPropItem.array.rowSpace)) {
           // 当没有设置时，则取上一级的rowSpace
@@ -165,10 +169,10 @@ let schemaUtils = {
         }
       }
       // 判断ui, 因为是数组的话，有些属性可能有会（ui.rowHeight可能很用到）
-      var newUi = newPropItem.ui ? newPropItem.ui : { showBody: true };
+      // var newUi = newPropItem.ui ? newPropItem.ui : { showBody: true };
       newUi.rowSpace = nextInheritObj.rowSpace;
       newUi.rowHeight = nextInheritObj.rowHeight;
-      newPropItem.ui = newUi;
+      // newPropItem.ui = newUi;
 
       isNormalTabs =
         newPropItem.layout && newPropItem.layout.name === constant.LAYOUT_TABS;
@@ -623,6 +627,7 @@ let schemaUtils = {
           "labelWidth",
           "offsetLeft",
           "offsetRight",
+          "bodyPadding",
           "hidden",
           "format",
           "hdValue",
@@ -644,7 +649,7 @@ let schemaUtils = {
         break;
       case "properties":
         propKeys = [
-          "ui",
+          // "ui",
           "title",
           "label",
           "rowHeight",
@@ -653,9 +658,10 @@ let schemaUtils = {
           // "boxRowSpace",
           "labelWidth",
           // "boxLabelWidth",
-          "nextInherit", // 这个比较特殊，不会对应哪个字段
+          // "nextInherit", // 这个比较特殊，不会对应哪个字段
           "offsetLeft",
           "offsetRight",
+          "bodyPadding",
           "hidden",
           "hdValue",
           "colon",
@@ -680,7 +686,7 @@ let schemaUtils = {
   /**
    * 取出schema的属性的判断信息，用来判断是否合法或设置默认值
    */
-  __getNormalInfo: function(key) {
+  getNormalInfo: function(key) {
     var keyInfos = [
       // {
       //   key: "value",
@@ -690,8 +696,8 @@ let schemaUtils = {
       {
         key: "hidden",
         enums: [true, false],
-        isOr: true, // filters里面的关系，默认为false
-        filters: ["isEs", "isFunc"], // 取schema-rules规则过滤
+        // isOr: true, // filters里面的关系，默认为false
+        filters: ["isEsOrFunc"], // 取schema-rules规则过滤
         defaultValue: false
       },
       {
@@ -702,28 +708,20 @@ let schemaUtils = {
       {
         key: "colon",
         enums: [true, false],
+        filters: ["isEsOrFunc"],
         defaultValue: global.colon
       },
       {
         key: "group",
         enums: [],
-        filters: ["isStr"],
+        isOr: true,
+        filters: ["isStr", "isEsOrFunc"],
         defaultValue: false
       },
-      // {
-      //   key: "col",
-      //   enums: [],
-      //   filters: [
-      //     {
-      //       name: "isInt",
-      //       params: [1, constant.UI_MAX_COL]
-      //     }
-      //   ],
-      //   defaultValue: constant.UI_MAX_COL
-      // },
       {
         key: "direction",
         enums: ["h", "v"],
+        filters: ["isEsOrFunc"],
         defaultValue: global.direction
       },
       {
@@ -734,55 +732,65 @@ let schemaUtils = {
       {
         key: "rowHeight",
         enums: [],
+        isOr: true,
         filters: [
           {
             name: "isInt",
             params: [0]
-          }
+          },
+          "isEsOrFunc"
         ],
         defaultValue: global.boxRowHeight
       },
       {
         key: "rowSpace",
         enums: [],
+        isOr: true,
         filters: [
           {
             name: "isInt",
             params: [0]
-          }
+          },
+          "isEsOrFunc"
         ],
         defaultValue: global.boxRowSpace
       },
       {
         key: "labelWidth",
         enums: [],
+        isOr: true,
         filters: [
           {
             name: "isInt",
             params: [0]
-          }
+          },
+          "isEsOrFunc"
         ],
         defaultValue: global.boxLabelWidth
       },
       {
         key: "offsetLeft",
         enums: [],
+        isOr: true,
         filters: [
           {
             name: "isInt",
             params: [0]
-          }
+          },
+          "isEsOrFunc"
         ],
         defaultValue: 0
       },
       {
         key: "offsetRight",
         enums: [],
+        isOr: true,
         filters: [
           {
             name: "isInt",
             params: [0]
-          }
+          },
+          "isEsOrFunc"
         ],
         defaultValue: 0
       },
@@ -802,16 +810,16 @@ let schemaUtils = {
 
   /**
    * 统一解析普通属性
-   * @param {*} propItem propItem or propItem.ui
+   * @param {*} valueScript propItem[key] or propItem.ui[key]
    * @param {*} keyInfo
    * @param {*} inheritObj
+   * @param {*} isUiValue 是最终结果，不可为函数
    */
-  __parseNormalKey: function(propItem, keyInfo, inheritObj) {
-    var value = propItem[keyInfo.key];
-    var tmpDefaultValue = utils.isUndef(inheritObj[keyInfo.key])
-      ? keyInfo.defaultValue
-      : inheritObj[keyInfo.key];
-    if (utils.isUndef(value)) {
+  parseNormalKey: function(valueScript, keyInfo, inheritObj, isUiValue) {
+    var value =  newEsFunction(valueScript);
+    // 有继承取继承的，无继承取自己的默认值
+    var tmpDefaultValue = inheritObj && (keyInfo.key in inheritObj) ? inheritObj[keyInfo.key] : keyInfo.defaultValue;
+    if (utils.isUndef(value) || (isUiValue && utils.isFunc(value))) {
       return tmpDefaultValue;
     } else if (
       keyInfo.enums &&
@@ -917,7 +925,7 @@ let schemaUtils = {
     }
   },
 
-  __parseCol(value) {
+  parseCol(value) {
     if (value && utils.isStr(value)) {
       value = {
         width: value
@@ -1020,7 +1028,9 @@ let schemaUtils = {
       type = utils.isStr(ui.type) ? ui.type.trim() : "";
       newUi.type = types.includes(type) ? type : "";
       newUi.hasBorder = utils.isBool(ui.hasBorder) ? ui.hasBorder : false;
-      newUi.padding = this.__parsePadding(ui.padding);
+
+      // 解析可继承配置
+      Object.assign(newUi, this.__parseUiInheritKeys(ui));
     } else if (utils.isStr(ui)) {
       type = ui ? ui : "";
       type = utils.isStr(type) ? type.trim() : "";
@@ -1082,79 +1092,183 @@ let schemaUtils = {
     }
   },
 
-  /**
-   * 块（properties）中提取可继承的属性，为下一组做准备
-   * @param {*} propItem
-   * @param {*} inheritObj 从上一级继承的数据
-   */
-  __parseInherit(propItem, inheritObj) {
-    var ui = utils.isObj(propItem.ui) ? propItem.ui : {};
-
+  __mergeInherit(parentInheritObj, currentInhertObj) {
     var keys = [
       "offsetLeft",
       "offsetRight",
       "direction",
       "colon",
-      ["rowSpace", "boxRowSpace"],
-      ["labelWidth", "boxLabelWidth"],
-      ["rowHeight", "boxRowHeight"]
+      "rowSpace",
+      "labelWidth",
+      "rowHeight"
     ];
-
-    var tmpUi = {};
-
     var newInherit = {};
-
-    keys.forEach(key => {
-      var newKey, oldKey;
-      if (utils.isStr(key)) {
-        newKey = key;
-        oldKey = false;
-      } else {
-        newKey = key[0];
-        oldKey = key[1];
-      }
-      var normalKeyInfo = this.__getNormalInfo(newKey);
-      if (normalKeyInfo) {
-        var curValue = ui[newKey];
-        tmpUi[newKey] = curValue;
-        if (utils.isUndef(curValue) && oldKey) {
-          if (!utils.isUndef(propItem[oldKey])) {
-            tmpUi[newKey] = propItem[oldKey];
-            console.warn("属性" + oldKey + "已舍弃，请使用ui." + newKey);
-          }
+    keys.forEach(function(key) {
+      var currentValue = currentInhertObj[key];
+      var parentValue = parentInheritObj[key];
+      if (typeof currentValue === "function") {
+        newInherit[key] = undefined // 动态变化：子级暂时无法继承，要解析
+      } else if (currentValue === undefined || currentValue === null) {
+        // 保留父级的继承
+        if (parentValue !== undefined && parentValue !== null) {
+          newInherit[key] = parentValue;
+        } else {
+          // 为undefined/null, 不用写
+          newInherit[key] = parentValue
         }
-        // console.log("-- tmpUi: ", tmpUi);
-        newInherit[newKey] = this.__parseNormalKey(
-          tmpUi,
-          normalKeyInfo,
-          inheritObj
-        );
       } else {
-        throw "BoxUi: 程序的key(" + key + ")不对应，请修改";
+        newInherit[key] = currentValue;
       }
-    });
-
+    })
     return newInherit;
   },
+
+  /**
+   * 块（properties）中提取可继承的属性，为下一组做准备
+   * @param {*} propItem
+   */
+   __parseUiInheritKeys(ui) {
+    if (utils.isObj(ui)) {
+      var inheritObj = {}
+      var keys = [
+        "offsetLeft",
+        "offsetRight",
+        "direction",
+        "colon",
+        ["rowSpace", "boxRowSpace"],
+        ["labelWidth", "boxLabelWidth"],
+        ["rowHeight", "boxRowHeight"]
+      ];
+
+      var tmpUi = {};
+
+      var newInherit = {};
+
+      keys.forEach(key => {
+        var newKey, oldKey;
+        if (utils.isStr(key)) {
+          newKey = key;
+          oldKey = false;
+        } else {
+          newKey = key[0];
+          oldKey = key[1];
+        }
+        var normalKeyInfo = this.getNormalInfo(newKey);
+        if (normalKeyInfo) {
+          var curValue = ui[newKey];
+          tmpUi[newKey] = curValue;
+          if (utils.isUndef(curValue) && oldKey) {
+            if (!utils.isUndef(ui[oldKey])) {
+              tmpUi[newKey] = ui[oldKey];
+              console.warn("属性" + oldKey + "已舍弃，请使用ui." + newKey);
+            }
+          }
+          if (tmpUi[newKey] !== undefined && tmpUi[newKey] !== null) {
+            // 记录下来，用于父级继承合并
+            inheritObj[newKey] = undefined;  // 若值不合法，返回此配置（undefined）
+            newInherit[newKey] = this.parseNormalKey(
+              tmpUi[newKey],
+              normalKeyInfo,
+              inheritObj
+            );
+          } else {
+            // 无需要记录下来
+          }
+        } else {
+          throw "BoxUi: 程序的key(" + key + ")不对应，请修改";
+        }
+      });
+
+      return newInherit;
+    } else {
+      {}
+    }
+  },
+
+  /**
+   * 块（properties）中提取可继承的属性，为下一组做准备
+   * @param {*} propItem
+   * @param {*} inheritObj 从上一级继承的数据
+   */
+  // __parseInherit(propItem, inheritObj) {
+  //   var ui = utils.isObj(propItem.ui) ? propItem.ui : {};
+
+  //   var keys = [
+  //     "offsetLeft",
+  //     "offsetRight",
+  //     "direction",
+  //     "colon",
+  //     ["rowSpace", "boxRowSpace"],
+  //     ["labelWidth", "boxLabelWidth"],
+  //     ["rowHeight", "boxRowHeight"]
+  //   ];
+
+  //   var tmpUi = {};
+
+  //   var newInherit = {};
+
+  //   keys.forEach(key => {
+  //     var newKey, oldKey;
+  //     if (utils.isStr(key)) {
+  //       newKey = key;
+  //       oldKey = false;
+  //     } else {
+  //       newKey = key[0];
+  //       oldKey = key[1];
+  //     }
+  //     var normalKeyInfo = this.getNormalInfo(newKey);
+  //     if (normalKeyInfo) {
+  //       var curValue = ui[newKey];
+  //       tmpUi[newKey] = curValue;
+  //       if (utils.isUndef(curValue) && oldKey) {
+  //         if (!utils.isUndef(propItem[oldKey])) {
+  //           tmpUi[newKey] = propItem[oldKey];
+  //           console.warn("属性" + oldKey + "已舍弃，请使用ui." + newKey);
+  //         }
+  //       }
+  //       // console.log("-- tmpUi: ", tmpUi);
+  //       var newKeyValue = this.parseNormalKey(
+  //         tmpUi,
+  //         normalKeyInfo,
+  //         inheritObj
+  //       );
+  //       if (typeof newKeyValue === "function") {
+  //         newInherit[newKey] = undefined  // ui是动态解析，无法直接赋值给子节点，子节点解析时要向上取
+  //       } else {
+  //         newInherit[newKey] = newKeyValue
+  //       }
+  //     } else {
+  //       throw "BoxUi: 程序的key(" + key + ")不对应，请修改";
+  //     }
+  //   });
+
+  //   return newInherit;
+  // },
 
   /**
    * 解析样式值：类似于padding margin(现仅支持px, 可以不写单位): 如20 或 “20px 20 30px”
    * @param {*} value
    * @param {*} canNegative 是否可以是负数；因为大多数时我们都不需要负数，所以默认为false
+   * @param {*} isUiValue 是最终结果，不可为函数
    * @returns false 或 一个长度为4的类组
    */
-  __parsePadding(value, canNegative) {
+  parsePadding(value, canNegative, isUiValue) {
     var resultVals,
       tmpVals,
       max = 4;
-    if (utils.isNum(value)) {
-      if (canNegative || value >= 0) {
-        resultVals = [value, value, value, value];
+    if (isEsOrFunc(value)) {
+      if (!isUiValue) {
+        return newEsFunction(value)
       } else {
-        resultVals = [0, 0, 0, 0];
+        return undefined;
       }
-
-      return resultVals.join("px ") + "px";
+    } else if (utils.isNum(value)) {
+      if (canNegative || value >= 0) {
+        resultVals = [value + "px", value + "px", value + "px", value + "px"];
+      } else {
+        resultVals = ["0px", "0px", "0px", "0px"];
+      }
+      return resultVals;
     } else if (utils.isStr(value)) {
       value = value.trim();
       if (value) {
@@ -1178,8 +1292,8 @@ let schemaUtils = {
     if (tmpVals) {
       // 看数组的内容是否正确
       resultVals = [];
-      var reg1 = /^(-?\d+(\.\d+)?)(px)?$/; // 点号有数字
-      var reg2 = /^(-?\.\d+)(px)?$/; // 点号无数字
+      var reg1 = /^(-?\d+(\.\d+)?)(px|%)?$/; // 点号有数字
+      // var reg2 = /^(-?\.\d+)(px|\%)?$/; // 点号无数字
 
       var numVal;
 
@@ -1188,18 +1302,18 @@ let schemaUtils = {
         if (utils.isNum(tmpVal)) {
           numVal = tmpVal;
           if (canNegative || numVal >= 0) {
-            resultVals.push(numVal);
+            resultVals.push(numVal + "px");
           } else {
-            resultVals.push(0);
+            resultVals.push("0px");
           }
         } else {
-          var match = tmpVal.match(reg1) || tmpVal.match(reg2);
+          var match = tmpVal.match(reg1)
           if (match) {
             numVal = Number(match[1]);
             if (canNegative || numVal >= 0) {
-              resultVals.push(numVal);
+              resultVals.push(numVal + (match[3] || "px"));
             } else {
-              resultVals.push(0);
+              resultVals.push("0px");
             }
           } else {
             break; // 不合法，退出循环
@@ -1224,7 +1338,11 @@ let schemaUtils = {
       resultVals = false;
     }
 
-    return resultVals ? resultVals.join("px ") + "px" : false;
+    // if (resultVals && resultVals.length === 4 ) {
+    //   console.log('resultVals', resultVals)
+    // }
+
+    return resultVals && resultVals.length === 4 ? resultVals : undefined;
   },
 
   /**
@@ -1490,7 +1608,7 @@ let schemaUtils = {
       newLayout.hasBorder = utils.isBool(layout.hasBorder)
         ? layout.hasBorder
         : true;
-      newLayout.padding = this.__parsePadding(layout.padding);
+      newLayout.padding = this.parsePadding(layout.padding);
     }
 
     return newLayout;
@@ -1777,7 +1895,7 @@ let schemaUtils = {
       }
 
       if (key == "col") {
-        newPropItem[key] = this.__parseCol(propItem[key], myPathKey);
+        newPropItem[key] = this.parseCol(propItem[key]);
         return true;
       }
 
@@ -1786,15 +1904,15 @@ let schemaUtils = {
         return true;
       }
 
-      if (key == "ui") {
-        newPropItem[key] = this.__parseBoxUi(propItem.ui);
-        return true;
-      }
+      // if (key == "ui") {
+      //   newPropItem[key] = this.__parseBoxUi(propItem.ui);
+      //   return true;
+      // }
 
-      if (key == "nextInherit") {
-        newPropItem[key] = this.__parseInherit(propItem, inheritObj);
-        return true;
-      }
+      // if (key == "nextInherit") {
+      //   newPropItem[key] = this.__parseInherit(propItem, inheritObj);
+      //   return true;
+      // }
 
       if (key == "format") {
         newPropItem[key] = this.__parseFormat(propItem[key]);
@@ -1810,6 +1928,7 @@ let schemaUtils = {
         newPropItem[key] = this.__parsePropHelp(propItem[key], myPathKey);
         return true;
       }
+      
       if (key == "desc") {
         newPropItem[key] = parsePropComponent(
           propItem[key],
@@ -1841,6 +1960,12 @@ let schemaUtils = {
         return true;
       }
 
+      if (key == "bodyPadding") {
+        var paddingScript = propItem && propItem.ui && ("padding" in propItem.ui) ? propItem.ui.padding : propItem[key]
+        newPropItem[key] = this.parsePadding(paddingScript);
+        return true;
+      }
+
       if (key == "layout") {
         newPropItem[key] = this.__parsePropLayout(propItem[key]);
         return true;
@@ -1859,10 +1984,10 @@ let schemaUtils = {
         return true;
       }
 
-      var normalKeyInfo = this.__getNormalInfo(key);
+      var normalKeyInfo = this.getNormalInfo(key);
       if (normalKeyInfo) {
-        newPropItem[key] = this.__parseNormalKey(
-          propItem,
+        newPropItem[key] = this.parseNormalKey(
+          propItem[key],
           normalKeyInfo,
           inheritObj
         );
