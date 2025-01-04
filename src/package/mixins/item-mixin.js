@@ -1,6 +1,12 @@
 import utils from "../libs/utils.js";
 import constant from "../libs/constant.js";
 import schemaUtils from "../libs/schema-utils.js";
+// 解析组件的方法
+import {
+  // parseClassStyle,
+  parseAlign,
+  parseFlex
+} from "../libs/component-utils";
 export default {
   props: {
     schema: {
@@ -94,6 +100,32 @@ export default {
         return schemaUtils.parsePadding(valueResult, true, true);
       } else {
         return valueScript;
+      }
+    },
+    mxParseAlignClass(valueScript, info, preText) {
+      if (typeof valueScript === "function") {
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        var valueResult = valueScript(rootInstance._fetchParseSources(info));
+        // 判断合法性
+        var result = parseAlign(valueResult, "");
+        return result ? (preText || "") + result : "";
+      } else if (valueScript) {
+        return (preText || "") + valueScript;
+      } else {
+        return "";
+      }
+    },
+    mxParseFlexClass(valueScript, info, preText) {
+      if (typeof valueScript === "function") {
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        var valueResult = valueScript(rootInstance._fetchParseSources(info));
+        // 判断合法性
+        var result = parseFlex(valueResult, "");
+        return result ? (preText || "") + result : "";
+      } else if (valueScript) {
+        return (preText || "") + valueScript;
+      } else {
+        return "";
       }
     }
   }

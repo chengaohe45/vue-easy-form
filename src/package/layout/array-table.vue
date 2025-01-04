@@ -18,9 +18,7 @@
           <div
             :class="[
               'es-form-table-head',
-              headerSchema.label && headerSchema.label.align
-                ? 'es-form-component-' + headerSchema.label.align
-                : ''
+              headerSchema.label ? mxParseAlignClass(headerSchema.label.align, headerSchema.__info, 'es-form-component-') : ''
             ]"
           >
             <span
@@ -102,7 +100,7 @@
             :key="fieldName"
             :style="{
               padding: schema.array.rowSpace / 2 + 'px',
-              textAlign: fieldSchema.label.align
+              textAlign: mxParseAlignClass(fieldSchema.label.align, fieldSchema.__info)
             }"
           >
             <es-object-table

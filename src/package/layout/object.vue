@@ -32,7 +32,7 @@
                     marginLeft:
                       schema.properties[groupFieldName].offsetLeft + 'px'
                   },
-                  schema.properties[groupFieldName].label.flex
+                  mxParseFlexClass(schema.properties[groupFieldName].label.flex, schema.properties[groupFieldName].__info)
                     ? ''
                     : {
                         width: schema.properties[groupFieldName].labelWidth + 'px'
@@ -40,14 +40,8 @@
                 ]"
                 :class="[
                   'es-form-label-col',
-                  schema.properties[groupFieldName].label.flex
-                    ? 'es-form-label-' +
-                      schema.properties[groupFieldName].label.flex
-                    : '',
-                  schema.properties[groupFieldName].label.align
-                    ? 'es-form-label-' +
-                      schema.properties[groupFieldName].label.align
-                    : ''
+                  mxParseFlexClass(schema.properties[groupFieldName].label.flex, schema.properties[groupFieldName].__info, 'es-form-label-'),
+                  mxParseAlignClass(schema.properties[groupFieldName].label.align, schema.properties[groupFieldName].__info, 'es-form-label-', '')
                 ]"
                 :key="'label-' + groupFieldName"
               >
@@ -95,11 +89,8 @@
                 v-show="!schema.properties[groupFieldName].hidden"
                 :class="[
                   'es-form-comp-content',
-                  schema.properties[groupFieldName].component &&
-                  schema.properties[groupFieldName].component.flex
-                    ? 'es-form-group-' +
-                      schema.properties[groupFieldName].component.flex
-                    : ''
+                  schema.properties[groupFieldName].component ?
+                  mxParseFlexClass(schema.properties[groupFieldName].component.flex, schema.properties[groupFieldName].__info, 'es-form-group-') : ''
                 ]"
                 :key="'content-' + groupFieldName"
                 :style="[
@@ -206,12 +197,8 @@
               :class="[
                 'es-form-label-col',
                 fieldSchema.direction == 'v' ? 'es-form-label-col-v' : '',
-                schema.properties[fieldName].label.flex
-                  ? 'es-form-label-' + schema.properties[fieldName].label.flex
-                  : '',
-                  schema.properties[fieldName].label.align
-                  ? 'es-form-label-' + schema.properties[fieldName].label.align
-                  : ''
+                mxParseFlexClass(schema.properties[fieldName].label.flex, schema.properties[fieldName].__info, 'es-form-label-'),
+                mxParseAlignClass(schema.properties[fieldName].label.align, schema.properties[fieldName].__info, 'es-form-label-')
               ]"
               :style="
                 fieldSchema.direction == 'h'
@@ -220,7 +207,7 @@
                         height: fieldSchema.rowHeight + 'px',
                         lineHeight: fieldSchema.rowHeight + 'px'
                       },
-                      schema.properties[fieldName].label.flex
+                      mxParseFlexClass(schema.properties[fieldName].label.flex, schema.properties[fieldName].__info)
                         ? {}
                         : {
                             width: fieldSchema.labelWidth + 'px'

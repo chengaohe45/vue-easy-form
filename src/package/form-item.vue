@@ -49,26 +49,20 @@
         <div
           :class="[
             'es-form-component',
-            schema.component.align
-              ? 'es-form-component-' + schema.component.align
-              : ''
+            mxParseAlignClass(schema.component.align, schema.__info, 'es-form-component-')
           ]"
           v-if="schema.component"
         >
           <div
             :class="[
               'es-form-component-wrap',
-              schema.component.flex
-                ? 'es-form-wrap-' + schema.component.flex
-                : ''
+              mxParseFlexClass(schema.component.flex, schema.__info, 'es-form-wrap-')
             ]"
           >
             <es-base
               :ref="schema.component.ref"
               :class="[
-                schema.component.flex
-                  ? 'es-form-component-' + schema.component.flex
-                  : ''
+                mxParseFlexClass(schema.component.flex, schema.__info, 'es-form-component-')
               ]"
               :info="schema.__info"
               :is-main="true"

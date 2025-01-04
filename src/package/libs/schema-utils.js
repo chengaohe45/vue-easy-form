@@ -1000,8 +1000,8 @@ let schemaUtils = {
 
     // 因为label有点特殊，所以不能为false
     if (newLabel) {
-      newLabel.flex = parseFlex(value.flex, value.size);
-      newLabel.align = parseAlign(value.align, defaultAlign);
+      newLabel.flex = parseFlex(value.flex, value.size, true);
+      newLabel.align = parseAlign(value.align, defaultAlign, true);
       newLabel.help = this.__parsePropHelp(value.help, myPathKey);
     } else {
       // newLabel = {

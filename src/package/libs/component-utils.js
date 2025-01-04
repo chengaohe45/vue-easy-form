@@ -11,7 +11,11 @@ import utils from "./utils";
 // import { enterSubmit, onlySubmit } from "./submit";
 import { isEsOrFunc, newEsFunction } from "../tools/parse";
 import global from "./global";
-import { parseComponent, createEmptyComponent, newComponentId } from "../tools/component";
+import {
+  parseComponent,
+  createEmptyComponent,
+  newComponentId
+} from "../tools/component";
 
 ("use strict");
 
@@ -36,8 +40,8 @@ export function parseMainComponent(propItem, formId, myPathKey) {
       newComponent.ref = ref;
     }
 
-    newComponent.align = parseAlign(component.align, defaultAlign);
-    newComponent.flex = parseFlex(component.flex, component.size);
+    newComponent.align = parseAlign(component.align, defaultAlign, true);
+    newComponent.flex = parseFlex(component.flex, component.size, true);
     // value
     if (utils.hasOwn("value", propItem)) {
       newComponent.value = propItem.value;
@@ -70,7 +74,7 @@ export function parseMainComponent(propItem, formId, myPathKey) {
     };
   }
   if (!newComponent.id) {
-    newComponent.id = newComponentId()
+    newComponent.id = newComponentId();
   }
 
   newComponent.__formId = formId;
@@ -137,7 +141,10 @@ export function parseClassStyle(item, needParse = true) {
 /**
  * 解析项label和项组件的对齐方式
  */
-export function parseAlign(align, defaultVal = "left") {
+export function parseAlign(align, defaultVal = "left", canFunc = false) {
+  if (canFunc && isEsOrFunc(align)) {
+    return newEsFunction(align);
+  }
   var aligns = ["left", "center", "right"];
   if (aligns.includes(align)) {
     return align;
@@ -148,7 +155,10 @@ export function parseAlign(align, defaultVal = "left") {
 /**
  * 解析项label和项组件的在弹性布局中的占位情况
  */
-export function parseFlex(flex, size) {
+export function parseFlex(flex, size, canFunc) {
+  if (canFunc && isEsOrFunc(flex)) {
+    return newEsFunction(flex);
+  }
   var flexs = ["self", "full"];
   if (flexs.includes(flex)) {
     return flex;
