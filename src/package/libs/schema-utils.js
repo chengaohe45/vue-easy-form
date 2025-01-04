@@ -818,13 +818,20 @@ let schemaUtils = {
    * @param {*} isUiValue 是最终结果，不可为函数
    */
   parseNormalKey: function(valueScript, keyInfo, inheritObj, isUiValue) {
-    var value = newEsFunction(valueScript);
     // 有继承取继承的，无继承取自己的默认值
     var tmpDefaultValue =
       inheritObj && keyInfo.key in inheritObj
         ? inheritObj[keyInfo.key]
         : keyInfo.defaultValue;
-    if (utils.isUndef(value) || (isUiValue && utils.isFunc(value))) {
+    if (isEsOrFunc(valueScript)) {
+      if (!isUiValue) {
+        return newEsFunction(valueScript);
+      } else {
+        return tmpDefaultValue;
+      }
+    }
+    var value = valueScript;
+    if (utils.isUndef(value)) {
       return tmpDefaultValue;
     } else if (
       keyInfo.enums &&

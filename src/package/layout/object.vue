@@ -519,36 +519,24 @@ export default {
                 //不是前面的那一组，重新开组
                 lastGroup = curGroup;
                 newGroupItem = Object.assign({}, newLayoutItem);
-                // groups = [fieldName];
                 groupProperties = {
                   [fieldName]: newLayoutItem
                 }
-                // newLayoutItem.__groups = groups;
-                newLayoutItem.groupProperties = groupProperties;
-                // newPropLayout.__hiddenGroup = false;
-                // item.col = constant.UI_MAX_COL;
-                // colSum = item.col;
+                newGroupItem.groupProperties = groupProperties;
                 newGroupItem.groupCol = newLayoutItem.col;
-                // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
               }
             } else {
               //前面没有组，重新开组
               lastGroup = curGroup;
               newGroupItem = Object.assign({}, newLayoutItem);
-              // groups = [fieldName];
               groupProperties = {
                 [fieldName]: newLayoutItem
               }
-              // newLayoutItem.__groups = groups;
               newGroupItem.groupProperties = groupProperties;
-              // newPropLayout.__hiddenGroup = false;
               newGroupItem.groupCol = newLayoutItem.col;
             }
-            // newPropLayout.__inGroups = true; //记录此项在分组里面
           } else {
             lastGroup = false;
-            // groups = null;
-            // colSum = 0;
             newGroupItem = null;
             groupProperties = null;
             newPropLayout[fieldName] = newLayoutItem
