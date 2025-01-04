@@ -512,7 +512,7 @@ export default {
                     // 分组，记录下来
                     firstGroupFieldName = this.__getFristGroupItemName(newGroupItem.groupProperties);
                     firstGroupLayoutItem = newGroupItem.groupProperties[firstGroupFieldName]
-                    newLayoutItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
+                    newGroupItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
                     newPropLayout[firstGroupFieldName] = newGroupItem
                   }
                 }
@@ -536,22 +536,36 @@ export default {
               newGroupItem.groupCol = newLayoutItem.col;
             }
           } else {
+
+            // 若存在最后一个分组，记录下来
+            if (newGroupItem && newGroupItem.groupProperties) {
+              // 判断分组是否需要显示
+              if (this.__canShowGroup(propSchema, newGroupItem.groupProperties)) {
+                // 分组，记录下来
+                firstGroupFieldName = this.__getFristGroupItemName(newGroupItem.groupProperties);
+                firstGroupLayoutItem = newGroupItem.groupProperties[firstGroupFieldName]
+                newGroupItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
+                newPropLayout[firstGroupFieldName] = newGroupItem
+              }
+            }
+
             lastGroup = false;
             newGroupItem = null;
             groupProperties = null;
             newPropLayout[fieldName] = newLayoutItem
           }
-          // 若存在最后一个分组，记录下来
-          if (newGroupItem && newGroupItem.groupProperties) {
-            // 判断分组是否需要显示
-            if (this.__canShowGroup(propSchema, newGroupItem.groupProperties)) {
-              // 分组，记录下来
-              firstGroupFieldName = this.__getFristGroupItemName(newGroupItem.groupProperties);
-              firstGroupLayoutItem = newGroupItem.groupProperties[firstGroupFieldName]
-              newLayoutItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
-              newPropLayout[firstGroupFieldName] = newGroupItem
-            }
-          }
+        }
+      }
+
+      // 若存在最后一个分组，记录下来
+      if (newGroupItem && newGroupItem.groupProperties) {
+        // 判断分组是否需要显示
+        if (this.__canShowGroup(propSchema, newGroupItem.groupProperties)) {
+          // 分组，记录下来
+          firstGroupFieldName = this.__getFristGroupItemName(newGroupItem.groupProperties);
+          firstGroupLayoutItem = newGroupItem.groupProperties[firstGroupFieldName]
+          newGroupItem.__style = this.__createPropItemStyle(firstGroupLayoutItem, newGroupItem.groupCol);
+          newPropLayout[firstGroupFieldName] = newGroupItem
         }
       }
 
@@ -706,6 +720,7 @@ export default {
       if (utils.isNum(col)) {
         var width = Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000;
         width += "%";
+        // console.log('col', col, width)
         style.width = width;
       } else {
         style = Object.assign(style, col);
@@ -719,6 +734,7 @@ export default {
      * @param {*} col2
      */
     __sumCol(col1, col2) {
+      // console.log('col1, col2', col1, col2)
       // 都是整数
       if (utils.isNum(col1) && utils.isNum(col2)) {
         var colSum = col1 + col2;
