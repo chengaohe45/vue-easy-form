@@ -930,15 +930,24 @@ let schemaUtils = {
     }
   },
 
-  parseCol(value) {
-    if (value && utils.isStr(value)) {
+  /*
+  @param {*} isUiValue 是最终结果，不可为函数
+  */
+  parseCol(value, isUiValue) {
+    if (isEsOrFunc(value)) {
+      if (!isUiValue) {
+        return newEsFunction(value);
+      } else {
+        return constant.UI_MAX_COL;
+      }
+    } else if (value && utils.isStr(value)) {
       value = {
         width: value
       };
     }
     if (utils.isNum(value)) {
       value = parseInt(value);
-      if (value < 1 && value > constant.UI_MAX_COL) {
+      if (value < 1 || value > constant.UI_MAX_COL) {
         value = constant.UI_MAX_COL;
       }
       return value;

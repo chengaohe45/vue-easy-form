@@ -81,7 +81,7 @@ export default {
         var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
         var colValue = colScript(rootInstance._fetchParseSources(info));
         // 判断合法性
-        return schemaUtils.parseCol(colValue);
+        return schemaUtils.parseCol(colValue, true);
       } else {
         return colScript;
       }
