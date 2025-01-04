@@ -453,7 +453,7 @@ export default {
       var newPropLayout = {}
       
       var lastGroup = false;
-      var groups, groupProperties;
+      var groupProperties;
       // var colSum = 0;
       var newGroupItem, firstGroupFieldName, firstGroupLayoutItem; //每一组的第一项
       var propSchema = this.schema.properties
@@ -471,7 +471,7 @@ export default {
           var directionEnums = ["h", "v"];
           var newDireciton = this.mxParseNodeAttr(item.direction, item.__info)
           newLayoutItem.direction = directionEnums.includes(newDireciton) ? newDireciton : directionEnums[0];
-          newLayoutItem.bodyPadding = this.mxParsePadding(item.bodyPadding, item.__info);
+          newLayoutItem.padding = this.mxParsePadding(item.padding, item.__info);
           var inheritKeys = [
             "offsetLeft",
             "offsetRight",
@@ -519,7 +519,7 @@ export default {
                 //不是前面的那一组，重新开组
                 lastGroup = curGroup;
                 newGroupItem = Object.assign({}, newLayoutItem);
-                groups = [fieldName];
+                // groups = [fieldName];
                 groupProperties = {
                   [fieldName]: newLayoutItem
                 }
@@ -599,7 +599,7 @@ export default {
           // 再向上取父级的
           var pathKeyStr = this.schema.__info.pathKey;
           var pathKeys = utils.parsePathKeys(pathKeyStr)
-          var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME)
+          rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME)
           var rootSchema = rootInstance._getSchema()
 
           var allUiSchemaList = []
@@ -699,9 +699,9 @@ export default {
     __createPropItemStyle(layoutItem, col) {
       var style = {};
       if (!layoutItem.layout || layoutItem.layout.name !== constant.LAYOUT_SPACE) {
-        var bodyPadding = layoutItem.bodyPadding
-        if (bodyPadding && bodyPadding.length === 4) {
-          style.padding = bodyPadding.join(" ");
+        var padding = layoutItem.padding
+        if (padding && padding.length === 4) {
+          style.padding = padding.join(" ");
         } else {
           if (layoutItem.offsetLeft) {
             style.paddingLeft = layoutItem.offsetLeft + "px";
@@ -770,9 +770,9 @@ export default {
           }
         });
       }
-      },
+    },
 
-      __intToPercent(col) {
+    __intToPercent(col) {
       if (utils.isNum(col)) {
         return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "%"; // 保留4位
       } else {
@@ -812,7 +812,7 @@ export default {
      * @param {*} groups
      */
     __canShowGroup(propSchema, groupProperties) {
-      var groups = groupProperties ? Object.keys(groupProperties) : []
+      var groups = groupProperties ? Object.keys(groupProperties) : [];
       var result = false;
       for (var i = 0; i < groups.length; i++) {
         var groupFieldName = groups[i];

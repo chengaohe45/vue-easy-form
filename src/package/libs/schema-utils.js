@@ -145,7 +145,7 @@ let schemaUtils = {
         throw "属性" + parentKey + "没有具体的子节点(properties全为空)";
       }
       // 这个放在前面，因为要合并继承
-      var newUi = this.__parseBoxUi(propItem.ui) || { showBody: true }
+      var newUi = this.__parseBoxUi(propItem.ui) || { showBody: true };
 
       // 是否数组(优先级最高)
       isArray = this.__isArray(propItem.array);
@@ -156,12 +156,12 @@ let schemaUtils = {
         inheritObj,
         myPathKey
       );
-      newPropItem.ui = newUi
+      newPropItem.ui = newUi;
 
       // var nextInheritObj = newPropItem.nextInherit;
       // newPropItem.nextInherit = null;
       // delete newPropItem.nextInherit;
-      var nextInheritObj = this.__mergeInherit(inheritObj, newUi)
+      var nextInheritObj = this.__mergeInherit(inheritObj, newUi);
       if (isArray) {
         if (utils.isUndef(newPropItem.array.rowSpace)) {
           // 当没有设置时，则取上一级的rowSpace
@@ -628,6 +628,7 @@ let schemaUtils = {
           "offsetLeft",
           "offsetRight",
           "bodyPadding",
+          "padding",
           "hidden",
           "format",
           "hdValue",
@@ -662,6 +663,7 @@ let schemaUtils = {
           "offsetLeft",
           "offsetRight",
           "bodyPadding",
+          "padding",
           "hidden",
           "hdValue",
           "colon",
@@ -816,9 +818,12 @@ let schemaUtils = {
    * @param {*} isUiValue 是最终结果，不可为函数
    */
   parseNormalKey: function(valueScript, keyInfo, inheritObj, isUiValue) {
-    var value =  newEsFunction(valueScript);
+    var value = newEsFunction(valueScript);
     // 有继承取继承的，无继承取自己的默认值
-    var tmpDefaultValue = inheritObj && (keyInfo.key in inheritObj) ? inheritObj[keyInfo.key] : keyInfo.defaultValue;
+    var tmpDefaultValue =
+      inheritObj && keyInfo.key in inheritObj
+        ? inheritObj[keyInfo.key]
+        : keyInfo.defaultValue;
     if (utils.isUndef(value) || (isUiValue && utils.isFunc(value))) {
       return tmpDefaultValue;
     } else if (
@@ -1107,19 +1112,19 @@ let schemaUtils = {
       var currentValue = currentInhertObj[key];
       var parentValue = parentInheritObj[key];
       if (typeof currentValue === "function") {
-        newInherit[key] = undefined // 动态变化：子级暂时无法继承，要解析
+        newInherit[key] = undefined; // 动态变化：子级暂时无法继承，要解析
       } else if (currentValue === undefined || currentValue === null) {
         // 保留父级的继承
         if (parentValue !== undefined && parentValue !== null) {
           newInherit[key] = parentValue;
         } else {
           // 为undefined/null, 不用写
-          newInherit[key] = parentValue
+          newInherit[key] = parentValue;
         }
       } else {
         newInherit[key] = currentValue;
       }
-    })
+    });
     return newInherit;
   },
 
@@ -1127,9 +1132,9 @@ let schemaUtils = {
    * 块（properties）中提取可继承的属性，为下一组做准备
    * @param {*} propItem
    */
-   __parseUiInheritKeys(ui) {
+  __parseUiInheritKeys(ui) {
     if (utils.isObj(ui)) {
-      var inheritObj = {}
+      var inheritObj = {};
       var keys = [
         "offsetLeft",
         "offsetRight",
@@ -1165,7 +1170,7 @@ let schemaUtils = {
           }
           if (tmpUi[newKey] !== undefined && tmpUi[newKey] !== null) {
             // 记录下来，用于父级继承合并
-            inheritObj[newKey] = undefined;  // 若值不合法，返回此配置（undefined）
+            inheritObj[newKey] = undefined; // 若值不合法，返回此配置（undefined）
             newInherit[newKey] = this.parseNormalKey(
               tmpUi[newKey],
               normalKeyInfo,
@@ -1181,7 +1186,7 @@ let schemaUtils = {
 
       return newInherit;
     } else {
-      {}
+      // ...
     }
   },
 
@@ -1258,7 +1263,7 @@ let schemaUtils = {
       max = 4;
     if (isEsOrFunc(value)) {
       if (!isUiValue) {
-        return newEsFunction(value)
+        return newEsFunction(value);
       } else {
         return undefined;
       }
@@ -1307,7 +1312,7 @@ let schemaUtils = {
             resultVals.push("0px");
           }
         } else {
-          var match = tmpVal.match(reg1)
+          var match = tmpVal.match(reg1);
           if (match) {
             numVal = Number(match[1]);
             if (canNegative || numVal >= 0) {
@@ -1928,7 +1933,7 @@ let schemaUtils = {
         newPropItem[key] = this.__parsePropHelp(propItem[key], myPathKey);
         return true;
       }
-      
+
       if (key == "desc") {
         newPropItem[key] = parsePropComponent(
           propItem[key],
@@ -1961,8 +1966,16 @@ let schemaUtils = {
       }
 
       if (key == "bodyPadding") {
-        var paddingScript = propItem && propItem.ui && ("padding" in propItem.ui) ? propItem.ui.padding : propItem[key]
+        var paddingScript =
+          propItem.ui && "padding" in propItem.ui
+            ? propItem.ui.padding
+            : propItem[key];
         newPropItem[key] = this.parsePadding(paddingScript);
+        return true;
+      }
+
+      if (key == "padding") {
+        newPropItem[key] = this.parsePadding(propItem.padding);
         return true;
       }
 

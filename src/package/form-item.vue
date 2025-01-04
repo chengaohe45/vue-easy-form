@@ -647,7 +647,7 @@ export default {
           : false;
 
       var style = null;
-      var bodyPadding = this.mxParsePadding(this.schema.mxParsePadding, this.schema.__info);
+      var bodyPadding = this.mxParsePadding(this.schema.bodyPadding, this.schema.__info);
       // 是否有头部
       if (this.needHeader) {
         if (hasBorder) {
@@ -658,9 +658,7 @@ export default {
           }; //有边框时的样式
         } else {
           style = {
-            padding: bodyPadding
-              ? bodyPadding.join(" ")
-              : Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px 0 0 0"
+            padding: bodyPadding ? bodyPadding.join(" ") : Math.min( (utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px 0 0 0"
           }; //无边框时的样式
         }
       } else {
@@ -669,7 +667,7 @@ export default {
             padding: bodyPadding
               ? bodyPadding.join(" ")
               : Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px"
-          }; //有边框时的样式
+          }; // 有边框时的样式
         }
       }
       // console.log('style', style)

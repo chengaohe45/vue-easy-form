@@ -76,12 +76,12 @@ export default {
       }
     },
     mxParseCol(propItem, info) {
-      var colScript = propItem.col
+      var colScript = propItem.col;
       if (typeof colScript === "function") {
         var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
         var colValue = colScript(rootInstance._fetchParseSources(info));
         // 判断合法性
-        return schemaUtils.parseCol(colValue)
+        return schemaUtils.parseCol(colValue);
       } else {
         return colScript;
       }
@@ -91,7 +91,7 @@ export default {
         var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
         var valueResult = valueScript(rootInstance._fetchParseSources(info));
         // 判断合法性
-        return schemaUtils.parsePadding(valueResult, true, true)
+        return schemaUtils.parsePadding(valueResult, true, true);
       } else {
         return valueScript;
       }
