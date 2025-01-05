@@ -92,6 +92,24 @@ export default {
         return colScript;
       }
     },
+    mxParseRowSpace(valueScript, info, defaultValue) {
+      if (typeof valueScript === "function") {
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        var valueResult = valueScript(rootInstance._fetchParseSources(info));
+        // 判断合法性
+        var key = "rowSpace";
+        return schemaUtils.parseNormalKey(
+          valueResult,
+          schemaUtils.getNormalInfo(key),
+          { [key]: defaultValue },
+          true
+        );
+      } else {
+        return valueScript === undefined || valueScript === null
+          ? defaultValue
+          : valueScript;
+      }
+    },
     mxParsePadding(valueScript, info) {
       if (typeof valueScript === "function") {
         var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);

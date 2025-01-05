@@ -163,7 +163,10 @@ let schemaUtils = {
       // delete newPropItem.nextInherit;
       var nextInheritObj = this.__mergeInherit(inheritObj, newUi);
       if (isArray) {
-        if (utils.isUndef(newPropItem.array.rowSpace)) {
+        if (
+          utils.isUndef(newPropItem.array.rowSpace) &&
+          utils.isNum(newPropItem.rowSpace)
+        ) {
           // 当没有设置时，则取上一级的rowSpace
           newPropItem.array.rowSpace = newPropItem.rowSpace;
         }
@@ -1673,6 +1676,7 @@ let schemaUtils = {
         newArray.name = utils.isStr(array.name)
           ? array.name
           : constant.ARRAY_ROW;
+        newArray.padding = this.parsePadding(array.padding, true);
         hasSort = array.hasSort ? true : false;
         hasDelete =
           utils.isUndef(array.hasDelete) || array.hasDelete ? true : false;

@@ -89,16 +89,7 @@
     <ul
       class="es-tabs-body"
       v-if="schema.__propSchemaList.length"
-      :style="{
-        padding: schema.array.hasBorder
-          ? schema.array.padding
-            ? schema.array.padding
-            : Math.min(schema.array.rowSpace, 10) + 'px'
-          : schema.array.padding
-          ? schema.array.padding
-          : Math.min(schema.array.rowSpace, 10) + 'px 0 0 0',
-        'border-width': schema.array.hasBorder ? '1px' : '0px'
-      }"
+      :style="__createTabBodyStyle()"
     >
       <li
         v-for="(itemSchema, index) in schema.__propSchemaList"
@@ -188,7 +179,7 @@ import arrayMixins from "../mixins/array-mixin.js";
 import esTabsNav from "../components/tabs-nav";
 import esTabsNavItem from "../components/tabs-nav-item";
 import esBase from "../base";
-// import constant from "../libs/constant";
+import utils from "../libs/utils";
 
 export default {
   mixins: [itemMixin, arrayMixins],
@@ -237,6 +228,36 @@ export default {
         key: this.schema.__info.pathKey,
         index: this.schema.__propSchemaList.length - 1
       });
+    },
+
+    __createTabBodyStyle() {
+      var schema = this.schema;
+      var style = {
+        // padding: schema.array.hasBorder
+        //   ? schema.array.padding
+        //     ? schema.array.padding
+        //     : Math.min(schema.array.rowSpace, 10) + 'px'
+        //   : schema.array.padding
+        //   ? schema.array.padding
+        //   : Math.min(schema.array.rowSpace, 10) + 'px 0 0 0',
+        // 'border-width': schema.array.hasBorder ? '1px' : '0px'
+      };
+      var padding = this.mxParsePadding(schema.array.padding, schema.__info);
+      if (padding && padding.length === 4) {
+        style.padding = padding.join(" ");
+      }
+      if (schema.array.hasBorder) {
+        style.borderWidth = "1px";
+        if(!style.padding) {
+          style.padding = Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px"
+        }
+      } else {
+        style.borderWidth = "0px";
+        if(!style.padding) {
+          style.padding = Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px 0 0 0"
+        }
+      }
+      return style;
     }
   },
 
