@@ -300,6 +300,24 @@ export default {
     editAbbrBtns,
     editBottomBtns
   },
-  methods: {}
+  methods: {
+    fetchDisplayFieldNames() {
+      var allFieldNames = Object.keys(this.schema.properties);
+      var visibleFieldNames
+      if (schema.__propSchemaList) {
+        var propSchemaList = schema.__propSchemaList;
+        visibleFieldNames = allFieldNames.filter(function(fieldName) {
+          // 行中，只要一个存在，那么此列就显示
+          var target = propSchemaList.find(function(propSchemaItem) {
+            return !propSchemaItem.hidden;
+          })
+          return !!target;
+        })
+      } else {
+        visibleFieldNames = [];
+      }
+      return visibleFieldNames;
+    }
+  }
 };
 </script>
