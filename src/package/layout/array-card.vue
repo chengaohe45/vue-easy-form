@@ -5,7 +5,7 @@
       :style="{
         marginBottom:
           schema.__propSchemaList.length > 0
-            ? -Math.floor(schema.array.rowSpace) + 'px'
+            ? '-20px'
             : 0
       }"
     >
@@ -14,8 +14,8 @@
         :key="index"
         class="list-item"
         :style="{
-          marginRight: schema.array.rowSpace + 'px',
-          marginBottom: Math.floor(schema.array.rowSpace) + 'px'
+          marginRight: mxParseRowSpace(schema.array.rowSpace, itemSchema.__info, 10) + 'px',
+          marginBottom: '20px'
         }"
       >
         <div

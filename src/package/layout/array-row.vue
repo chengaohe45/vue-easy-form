@@ -19,17 +19,12 @@
                 : schema.rowHeight + 'px'
             }"
           >
-            <span
-              v-if="
-                itemSchema.rules &&
+            <span v-if="itemSchema.rules &&
                 mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
-                mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
-              "
+                mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)"
               class="es-required"
-              >*</span
-            ><template v-if="schema.array.hasOrder !== false"
-              >{{ index + 1 }}.</template
-            >
+              >*</span><template v-if="schema.array.hasOrder !== false"
+              >{{ index + 1 }}.</template>
           </div>
           <div
             v-else-if="

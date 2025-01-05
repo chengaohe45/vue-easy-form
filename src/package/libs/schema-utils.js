@@ -1756,7 +1756,11 @@ let schemaUtils = {
         value = utils.isArr(array.value) ? array.value : [];
         rules = this.__parsePropRules(array.rules);
         eventAction = parseComponentEvent(array);
-        rowSpace = utils.isNum(array.rowSpace) ? array.rowSpace : undefined;
+        rowSpace = utils.isNum(array.rowSpace)
+          ? array.rowSpace
+          : isEsOrFunc(array.rowSpace)
+          ? newEsFunction(array.rowSpace)
+          : undefined;
         type = utils.isStr(array.type) ? array.type : false;
         var btnTypes = ["icon"];
         btnType = btnTypes.includes(array.btnType) ? array.btnType : false;
