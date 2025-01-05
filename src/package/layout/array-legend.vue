@@ -7,7 +7,7 @@
           :key="index"
           class="list-item"
           :style="{
-            marginTop: (index > 0 ? schema.array.rowSpace : 0) + 'px'
+            marginTop: (index > 0 ? mxParseRowSpace(schema.array.rowSpace, itemSchema.__info, 5) : 0) + 'px'
           }"
         >
           <div
@@ -234,17 +234,7 @@
       <div
         v-if="schema.array.hasDelete || schema.array.hasAdd"
         class="es-btn-footer"
-        :style="{
-          marginTop:
-            schema.__propSchemaList.length > 0
-              ? Math.round(
-                  Math.min(
-                    Math.max(schema.array.rowSpace / 2, 10),
-                    schema.array.rowSpace
-                  )
-                ) + 'px'
-              : '0px'
-        }"
+        :style="{ marginTop: schema.__propSchemaList.length > 0 ? __createFooterRowSpace() + 'px' : '0px' }"
       >
         <edit-bottom-btns
           :has-delete="
@@ -398,6 +388,11 @@ export default {
     esBase
   },
 
-  methods: {}
+  methods: {
+    __createFooterRowSpace() {
+      var newRowSpace = this.mxParseRowSpace(this.schema.array.rowSpace, this.schema.__info, 5)
+      return Math.round(Math.min(Math.max(newRowSpace / 2, 10),newRowSpace))
+    }
+  }
 };
 </script>

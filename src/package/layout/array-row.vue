@@ -7,7 +7,7 @@
           :key="index"
           class="list-item"
           :style="{
-            marginTop: (index > 0 ? mxParseRowSpace(schema.array.rowSpace, itemSchema.__info, 0) : 0) + 'px'
+            marginTop: (index > 0 ? mxParseRowSpace(schema.array.rowSpace, itemSchema.__info, 5) : 0) + 'px'
           }"
         >
           <div
@@ -269,7 +269,7 @@ export default {
 
   methods: {
     __createFooterRowSpace() {
-      var newRowSpace = this.mxParseRowSpace(this.schema.array.rowSpace, this.schema.__info, 0)
+      var newRowSpace = this.mxParseRowSpace(this.schema.array.rowSpace, this.schema.__info, 5)
       return Math.round(Math.min(Math.max(newRowSpace / 2, 10),newRowSpace))
     }
   }
