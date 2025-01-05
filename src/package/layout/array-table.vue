@@ -23,7 +23,7 @@
           >
             <span
               v-if="
-                schema.array.headRequired &&
+                mxParseBoolValue(schema.array.headRequired, schema.__info) &&
                   headerSchema.rules &&
                   mxParseBoolValue(headerSchema.rules.required, headerSchema.__info) &&
                   mxParseBoolValue(headerSchema.rules.showRequired, headerSchema.__info)
@@ -105,7 +105,7 @@
           >
             <es-object-table
               :schema="fieldSchema"
-              :has-required="!schema.array.headRequired"
+              :has-required="!mxParseBoolValue(schema.array.headRequired, schema.__info)"
             >
               <slot
                 :name="fieldName"

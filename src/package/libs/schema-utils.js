@@ -349,16 +349,16 @@ let schemaUtils = {
         delete newPropItem.array.value; //任务完成
       }
       // 判断newPropItem下一级组件是否存在自定义长度
-      var nextNewproperties = newPropItem.properties;
-      if (this.__existCustomWidth(nextNewproperties)) {
-        newPropItem.__hasCustomWidth = true;
-        for (var nextKey in nextNewproperties) {
-          if ("rowSpace" in nextNewproperties[nextKey]) {
-            nextNewproperties[nextKey].rowSpace = newPropItem.ui.rowSpace;
-            nextNewproperties[nextKey].__rawRowSpace = newPropItem.ui.rowSpace;
-          }
-        }
-      }
+      // var nextNewproperties = newPropItem.properties;
+      // if (this.__existCustomWidth(nextNewproperties)) {
+      //   newPropItem.__hasCustomWidth = true;
+      //   for (var nextKey in nextNewproperties) {
+      //     if ("rowSpace" in nextNewproperties[nextKey]) {
+      //       nextNewproperties[nextKey].rowSpace = newPropItem.ui.rowSpace;
+      //       nextNewproperties[nextKey].__rawRowSpace = newPropItem.ui.rowSpace;
+      //     }
+      //   }
+      // }
     } else {
       // 是组件了
       propKeys = this.__getPropKeys("component");
@@ -524,15 +524,15 @@ let schemaUtils = {
     }
   },
 
-  __existCustomWidth(newProperties) {
-    for (var key in newProperties) {
-      var nextPropItem = newProperties[key];
-      if (utils.isObj(nextPropItem.col)) {
-        return true;
-      }
-    }
-    return false;
-  },
+  // __existCustomWidth(newProperties) {
+  //   for (var key in newProperties) {
+  //     var nextPropItem = newProperties[key];
+  //     if (utils.isObj(nextPropItem.col)) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // },
 
   /**
    * 判断属性是否合法
@@ -1683,10 +1683,15 @@ let schemaUtils = {
         fixed = utils.isNum(array.fixed) && array.fixed > 0 ? array.fixed : 0;
         hasOrder =
           utils.isUndef(array.hasOrder) || array.hasOrder ? true : false;
-        headRequired =
-          array.name == constant.ARRAY_TABLE && array.headRequired
-            ? true
-            : false;
+        if (array.name == constant.ARRAY_TABLE) {
+          if (isEsOrFunc(array.headRequired)) {
+            headRequired = newEsFunction(array.headRequired);
+          } else {
+            headRequired = !!array.headRequired;
+          }
+        } else {
+          headRequired = false;
+        }
 
         subLabel = parsePropComponent(
           array.subLabel,
@@ -2024,10 +2029,10 @@ let schemaUtils = {
         throw "程序的key(" + key + ")不对应，请修改";
       }
     });
-    if (!utils.isUndef(newPropItem.rowSpace)) {
-      newPropItem.__rawRowSpace = newPropItem.rowSpace; // __rawRowSpace用于第一行计算或恢复，因为第一行可能会变为0
-      newPropItem.__style = null;
-    }
+    // if (!utils.isUndef(newPropItem.rowSpace)) {
+    //   newPropItem.__rawRowSpace = newPropItem.rowSpace; // __rawRowSpace用于第一行计算或恢复，因为第一行可能会变为0
+    //   newPropItem.__style = null;
+    // }
     return newPropItem;
   },
 
