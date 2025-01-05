@@ -60,16 +60,7 @@
     </es-tabs-nav>
     <ul
       class="es-tabs-body"
-      :style="{
-        padding: schema.layout.hasBorder
-          ? schema.layout.padding
-            ? schema.layout.padding
-            : Math.min(schema.ui.rowSpace, 10) + 'px'
-          : schema.layout.padding
-          ? schema.layout.padding
-          : Math.min(schema.ui.rowSpace, 10) + 'px 0 0 0',
-        'border-width': schema.layout.hasBorder ? '1px' : '0px'
-      }"
+      :style="__createTabBodyStyle()"
     >
       <template v-for="(itemSchema, fieldName) in schema.properties">
         <li
@@ -121,6 +112,7 @@ import esTabsNav from "../components/tabs-nav";
 import esTabsNavItem from "../components/tabs-nav-item";
 import esBase from "../base";
 import constant from "../libs/constant";
+import utils from "../libs/utils";
 
 export default {
   mixins: [itemMixin],
@@ -135,28 +127,59 @@ export default {
   },
   methods: {
     clickActiveHandler(index) {
-      var form = this.__getForm();
-      form._toggleUi("tabs", {
+      // var form = this.__getForm();
+      var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      rootInstance._toggleUi("tabs", {
         key: this.schema.__info.pathKey,
         index: index
       });
     },
 
-    __getForm() {
-      var formItem = this.$parent;
-      while (formItem) {
-        var type = formItem._getType ? formItem._getType() : "";
-        if (type == constant.UI_FORM) {
-          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
-          return formItem; // 到达表单层
-        } else if (type == constant.UI_ARRAY) {
-          // checkSchema.push(formItem._getSchema());
-        } else {
-          // ... 往上派
-        }
-        formItem = formItem.$parent;
+    __createTabBodyStyle() {
+      var schema = this.schema;
+      var style = {
+        // padding: schema.layout.hasBorder
+        //   ? schema.layout.padding
+        //     ? schema.layout.padding
+        //     : Math.min(schema.ui.rowSpace, 10) + 'px'
+        //   : schema.layout.padding
+        //   ? schema.layout.padding
+        //   : Math.min(schema.ui.rowSpace, 10) + 'px 0 0 0',
+        // 'border-width': schema.layout.hasBorder ? '1px' : '0px'
       }
+      var padding = this.mxParsePadding(schema.layout.padding, schema.__info);
+      if (padding && padding.length === 4) {
+        style.padding = padding.join(" ");
+      }
+      if (schema.layout.hasBorder) {
+        style.borderWidth = "1px";
+        if(!style.padding) {
+          style.padding = Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px"
+        }
+      } else {
+        style.borderWidth = "0px";
+        if(!style.padding) {
+          style.padding = Math.min((utils.isNum(this.schema.rowSpace) ? this.schema.rowSpace : 10), 10) + "px 0 0 0"
+        }
+      }
+      return style;
     }
+
+    // __getForm() {
+    //   var formItem = this.$parent;
+    //   while (formItem) {
+    //     var type = formItem._getType ? formItem._getType() : "";
+    //     if (type == constant.UI_FORM) {
+    //       // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+    //       return formItem; // 到达表单层
+    //     } else if (type == constant.UI_ARRAY) {
+    //       // checkSchema.push(formItem._getSchema());
+    //     } else {
+    //       // ... 往上派
+    //     }
+    //     formItem = formItem.$parent;
+    //   }
+    // }
   },
 
   created() {},

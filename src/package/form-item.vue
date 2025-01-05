@@ -891,8 +891,8 @@ export default {
     },
 
     toggleBody() {
-      var form = this.__getForm();
-      form._toggleUi("toggle", { key: this.schema.__info.pathKey });
+      var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      rootInstance._toggleUi("toggle", { key: this.schema.__info.pathKey });
     },
 
     // 只有组件会触发
@@ -930,8 +930,8 @@ export default {
         isNative: isNative
       };
 
-      var form = this.__getForm();
-      form._syncFormUi(checkSchema, eventNames, options);
+      var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      rootInstance._syncFormUi(checkSchema, eventNames, options);
     },
 
     /**
@@ -955,13 +955,13 @@ export default {
         target: null
       };
 
-      var form = this.__getForm();
-      form._syncFormUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
-    },
-
-    __getForm() {
-      return utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      rootInstance._syncFormUi(checkSchema, eventNames, options); // 最外层的表单层同步所有的ui及数位
     }
+
+    // __getForm() {
+    //   return utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+    // }
   }
 };
 </script>
