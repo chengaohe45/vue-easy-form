@@ -15,7 +15,7 @@ import {
   isComponentTextType,
   convertComponentText
 } from "./tools/component";
-import { smartEsValue } from "./tools/parse";
+// import { smartEsValue } from "./tools/parse";
 
 const KEY_EVENT_CACHE_MAP = "_KEY_EVENT_CACHE_MAP";
 
@@ -215,14 +215,16 @@ export default {
         // };
         var data = {
           event: eventData,
-          source: this.item,
+          args,
+          // source: this.item,
           target: this.getConfigRef(),
-          index: this.info ? this.info.index : -1
+          isNative,
+          // index: this.info ? this.info.index : -1
         };
 
-        var listInstance = utils.getParent(this, constant.AD_LIST_NAME);
-        listInstance._triggerComEventHandler(handlers, data);
-        listInstance = null;
+        var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+        rootInstance._handleEvents(handlers, data);
+        rootInstance = null;
       }
     },
 
@@ -325,6 +327,7 @@ export default {
           config.value = eventValue;
         }
       } else if (config.__rawVModel) {
+        // vmodel这个够了
         var parseSources = {
           global: this.global,
           root: {},
@@ -340,7 +343,10 @@ export default {
         //   pathKey: vm.info.pathKey,
         //   $hidden: dataCache.getHiddenFunc(vm.config.__formId)
         // };
-        smartEsValue(config.__rawVModel, parseSources);
+        // smartEsValue(config.__rawVModel, parseSources);
+        if (typeof config.__rawVModel === "function") {
+          config.__rawVModel(parseSources)
+        }
       } else {
         // this.$data.comVal = eventValue;
       }

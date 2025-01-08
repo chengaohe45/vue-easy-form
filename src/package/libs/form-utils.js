@@ -744,43 +744,33 @@ let formUtils = {
   /**
    * 表单的最终结果(也就是表单值，非根值)
    * @param {*} schema  perfect后的schema
-   * @param {*} baseParseSources {global: globalData, rootData: formData, rootSchema: rootSchema}
-   * @param {*} globalData 表单的全局数据
-   * @param {*} formData 表单的内部值
    */
-  getFormValue(schema, baseParseSources) {
-    if (utils.isObj(baseParseSources.rootData)) {
-      var resultValue = this.__getValue(schema, baseParseSources);
-      return this.__tileResultValue(schema, resultValue);
-    } else {
-      throw "getFormValue： formData 必须是一个对象";
-    }
+  getFormValue(schema) {
+    var resultValue = this.__getValue(schema, true);
+    return this.__tileResultValue(schema, resultValue);
   },
 
   /**
    * 取值
    * @param {*} propItem
-   * @param {*} baseParseSources {global: globalData, rootData: formData(此时这个值不一定有传，没有传时说明是取表单内部传, 有传就取最终结果), rootSchema: rootSchema}
+   * @param {*} onlyFormValue 是否是取表单值
    * @param {*} isParentHidden
-   * 当formData有值时，则取出的是表单用户值，propItem也就是rootSchema，此时rootSchema最外部是不能隐藏的
    */
   __getValue: function(
     propItem,
-    baseParseSources = {},
+    onlyFormValue,
     isParentHidden = false
   ) {
-    var parseSources = Object.assign({}, baseParseSources);
-    parseSources.index = propItem.__info.index;
-    parseSources.idxChain = propItem.__info.idxChain;
-    parseSources.pathKey = propItem.__info.pathKey;
+    // var parseSources = Object.assign({}, baseParseSources);
+    // parseSources.index = propItem.__info.index;
+    // parseSources.idxChain = propItem.__info.idxChain;
+    // parseSources.pathKey = propItem.__info.pathKey;
 
-    var formData = baseParseSources.rootData;
+    // var formData = baseParseSources.rootData;
 
     // 当false没有值时，证明是表单的内容取值，后不的解析不用执行，提高效率
     // formData有值，说明propItem.hidden都是已经出来的了，不做es转换，省资源
-    var isHidden =
-      formData && (isParentHidden || propItem.hidden) ? true : false;
-
+    var isHidden = onlyFormValue && (isParentHidden || propItem.hidden) ? true : false;
     var newValue, keyValue, newArr, i, schemaList;
 
     if (propItem.component) {
@@ -790,13 +780,13 @@ let formUtils = {
         newArr = [];
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
-          newValue = this.__getValue(schemaList[i], baseParseSources, isHidden);
+          newValue = this.__getValue(schemaList[i], onlyFormValue, isHidden);
           newArr.push(newValue);
         }
         return newArr;
       } else {
         // 不是数组
-        if (formData) {
+        if (onlyFormValue) {
           if (propItem.format) {
             // 不是最终取值，或没有格式转换
             return this.getFormatValue(
@@ -817,7 +807,7 @@ let formUtils = {
         newArr = [];
         schemaList = propItem.__propSchemaList;
         for (i = 0; i < schemaList.length; i++) {
-          newValue = this.__getValue(schemaList[i], baseParseSources, isHidden);
+          newValue = this.__getValue(schemaList[i], onlyFormValue, isHidden);
           newArr.push(newValue);
         }
         return newArr;
@@ -832,19 +822,19 @@ let formUtils = {
             nextPropItem.layout.name === constant.LAYOUT_SPACE
           ) {
             continue;
-          } else if (formData && nextPropItem.isTmp) {
+          } else if (onlyFormValue && nextPropItem.isTmp) {
             // 是取表单数据且是临时值
             continue;
           }
 
           var isNextHidden =
-            formData && (isHidden || nextPropItem.hidden) ? true : false;
+          onlyFormValue && (isHidden || nextPropItem.hidden) ? true : false;
           // console.log("isNextHidden...: ", isNextHidden);
           if (!isNextHidden) {
             // 取表单内部值或用户数据时不隐藏
             keyValue = this.__getValue(
               nextPropItem,
-              baseParseSources,
+              onlyFormValue,
               isHidden
             );
             newValue[key] = keyValue;
@@ -868,7 +858,7 @@ let formUtils = {
               // 剩下null, 说明是取原始值，是什么是就什么
               keyValue = this.__getValue(
                 nextPropItem,
-                baseParseSources,
+                onlyFormValue,
                 isHidden
               );
               newValue[key] = keyValue;
@@ -962,11 +952,9 @@ let formUtils = {
    * 根据formData, 分析界面的情况。现主要是解析第一行的情况和hidden, required
    * @param {*} schema
    * @param {*} formVm 表单实例（index.vue文件）
-   * @param {*} formData
-   * @param {*} rootSchema
    */
   analyzeUiProps(propItem, formVm) {
-    var sum = 0;
+    // var sum = 0;
     var isHidden, listLen, schemaList, i;
     if (propItem.component) {
       if (propItem.__rawHidden) {
@@ -1285,25 +1273,25 @@ let formUtils = {
     }
   },
 
-  __updatePropStyle(propItem, rowSpace, col) {
-    // console.log("col", col);
-    // var style = {
-    //   // marginTop: rowSpace + "px",
-    //   paddingLeft: (propItem.offsetLeft ? propItem.offsetLeft : 0) + "px",
-    //   paddingRight: (propItem.offsetRight ? propItem.offsetRight : 0) + "px"
-    // };
-    // if (rowSpace) {
-    //   style.marginTop = rowSpace + "px";
-    // }
-    // if (utils.isNum(col)) {
-    //   var width = Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000;
-    //   width += "%";
-    //   style.width = width;
-    // } else {
-    //   style = Object.assign(style, col);
-    // }
-    // propItem.__style = style;
-  },
+  // __updatePropStyle(propItem, rowSpace, col) {
+  //   // console.log("col", col);
+  //   // var style = {
+  //   //   // marginTop: rowSpace + "px",
+  //   //   paddingLeft: (propItem.offsetLeft ? propItem.offsetLeft : 0) + "px",
+  //   //   paddingRight: (propItem.offsetRight ? propItem.offsetRight : 0) + "px"
+  //   // };
+  //   // if (rowSpace) {
+  //   //   style.marginTop = rowSpace + "px";
+  //   // }
+  //   // if (utils.isNum(col)) {
+  //   //   var width = Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000;
+  //   //   width += "%";
+  //   //   style.width = width;
+  //   // } else {
+  //   //   style = Object.assign(style, col);
+  //   // }
+  //   // propItem.__style = style;
+  // },
 
   /**
    *

@@ -45,9 +45,9 @@ let constant = {
   LAYOUT_SPACE: "space", // 占位符; space不可以乱改，因为其它地方(.vue)有用到
   LAYOUT_TABS: "tabs", // properties的子属性是tabs布局; space不可以乱改，因为其它地方(.vue)有用到
 
-  UI_FORM: "_es_form_qwerty_", // 说明界面属于哪种类型
-  UI_ITEM: "_es_item_qwerrf_",
-  UI_ARRAY: "_es_array_aadfsd_",
+  // UI_FORM: "_es_form_qwerty_", // 说明界面属于哪种类型
+  // UI_ITEM: "_es_item_qwerrf_",
+  // UI_ARRAY: "_es_array_aadfsd_",
 
   ES_FUNC_NAME: "__E0S1_2F3U4NC_N4AM5E__",
   ES_OPTIONS: "__es__Options__", // 此值要是正规的命名
@@ -58,9 +58,9 @@ let constant = {
   FORM_INPUTS: ["input", "textarea"],
   INPUT_CHANGE: "change",
 
-  IDX_CHAIN_KEY: "[i]", // 数组链的代替字符，不可随便改
+  IDX_CHAIN_KEY: "[i]" // 数组链的代替字符，不可随便改
 
-  COM_TARGET_REF: "__comTarget__"
+  // COM_TARGET_REF: "__comTarget__"
 };
 
 export default constant;

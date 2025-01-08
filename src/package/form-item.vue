@@ -671,14 +671,14 @@ export default {
 
   methods: {
     /* 下划线一杠代表对内使用 */
-    _getType() {
-      return this.schema.array ? constant.UI_ARRAY : constant.UI_ITEM;
-    },
+    // _getType() {
+    //   return this.schema.array ? constant.UI_ARRAY : constant.UI_ITEM;
+    // },
 
     /* 下划线一杠代表对内使用 */
-    _getSchema() {
-      return this.schema;
-    },
+    // _getSchema() {
+    //   return this.schema;
+    // },
 
     getRef(name, hasEmpty) {
       function filterTarget(targets) {
@@ -748,7 +748,7 @@ export default {
           var refTarget = this.$refs[name];
           if (refTarget) {
             newTargetInfo = {
-              target: refTarget.$refs[constant.COM_TARGET_REF],
+              target: refTarget.$children && refTarget.$children.length > 0 ? refTarget.$children[0] : refTarget,
               sourceKey: this.schema.__info.pathKey.replace(/\[\d+\]/g, "[i]")
             };
           } else {
