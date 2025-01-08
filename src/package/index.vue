@@ -402,14 +402,15 @@ import utils from "./libs/utils.js";
 import globalSettings from "./libs/global.js";
 import schemaUtils from "./libs/schema-utils.js";
 import formUtils from "./libs/form-utils.js";
-import parse from "./libs/parse.js";
+// import parse from "./libs/parse.js";
 import constant from "./libs/constant.js";
 import { createParseDep } from "./createParseDep.js";
 
 import consolePanel from "./components/console.vue";
 
-import dataCache from "./libs/data-cache";
+// import dataCache from "./libs/data-cache";
 import { parseComponent, createNativeName } from './tools/component';
+import { chainPathKey } from './tools/parse';
 
 const KEY_PARSE_SOURCES = "_key_parseSources"
 export default {
@@ -423,15 +424,15 @@ export default {
     this._esHiddenLevel = 0; // 层级设置为0
     this._esLockSubmit = false;
 
-    var hiddenFunc = this.isHidden;
-    dataCache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
+    // var hiddenFunc = this.isHidden;
+    // dataCache.setHiddenFunc(this.$data.id, hiddenFunc.bind(this)); // 用于作隐藏解析
 
-    this[constant.USER_HIDDEN] = hiddenFunc.bind(this);
+    this[constant.USER_HIDDEN] = this.isHidden.bind(this);
 
-    dataCache.setGlobal(
-      this.$data.id,
-      this.global ? utils.deepCopy(this.global) : {}
-    );
+    // dataCache.setGlobal(
+    //   this.$data.id,
+    //   this.global ? utils.deepCopy(this.global) : {}
+    // );
 
     this.__initUi(this.schema);
   },
@@ -445,7 +446,7 @@ export default {
       [constant.USER_ROOT_DATA]: {}, // 实时记录表单的根值，给用户render时使用
       [constant.USER_HIDDEN]: null,
 
-      id: utils.newUid("es"),
+      // id: utils.newUid("es"),
       /* _es这些属性都不涉及页面的控制，所以不设置为data
       _esHiddenLevel: 0,
       _esOriginalSchemaValue: null,   // schema里面的初始值，不包括formValue
@@ -550,7 +551,7 @@ export default {
      * 实时取值，表单存在的值;也是getRootData的别名
      */
     getValue() {
-      return utils.deepCopy(dataCache.getRoot(this.$data.id)); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
+      return utils.deepCopy(this[constant.USER_ROOT_DATA]); //为什么不直接返回this.value? 因为watch是异步监听的，若设置为this.value, 当setValue,再getValue,那么取的数据就不一致了
     },
 
     /**
@@ -558,7 +559,7 @@ export default {
      * 实时取值，表单存在的值;也是getValue的别名
      */
     getRootData() {
-      return utils.deepCopy(dataCache.getRoot(this.$data.id));
+      return utils.deepCopy(this[constant.USER_ROOT_DATA]);
     },
 
     /**
@@ -581,7 +582,7 @@ export default {
      */
     setValue(pathKey, value) {
       if (utils.isStr(pathKey)) {
-        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+        pathKey = chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
         //是字符串时，则值是键值，设置某个值
         this.__setValueByKey(this.$data.formSchema, pathKey, value);
         this.__syncValue();
@@ -615,7 +616,7 @@ export default {
     */
     isHidden(pathKey) {
       if (pathKey && utils.isStr(pathKey)) {
-        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+        pathKey = chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
       } else {
         throw "isHidden: 参数必须是字符串且不能为空";
       }
@@ -683,17 +684,17 @@ export default {
             tmpParentPathKey == pathKey
               ? targetSchema
               : formUtils.getSchemaByKey(rootSchema, tmpParentPathKey);
-          var parseSources = {
-            global: this.global ? this.global : {}, // 防止null情况
-            rootData: dataCache.getRoot(this.$data.id),
-            index: itemSchema.__info.index,
-            idxChain: itemSchema.__info.idxChain,
-            pathKey: itemSchema.__info.pathKey,
-            rootSchema: rootSchema,
-            isHidden: dataCache.getHiddenFunc(this.$data.id)
-          };
-
-          if (parse.smartEsValue(itemSchema.__rawHidden, parseSources)) {
+          // var parseSources = {
+          //   global: this.global ? this.global : {}, // 防止null情况
+          //   rootData: dataCache.getRoot(this.$data.id),
+          //   index: itemSchema.__info.index,
+          //   idxChain: itemSchema.__info.idxChain,
+          //   pathKey: itemSchema.__info.pathKey,
+          //   rootSchema: rootSchema,
+          //   isHidden: dataCache.getHiddenFunc(this.$data.id)
+          // };
+          // if (smartEsValue(itemSchema.__rawHidden, this._fetchParseSources(itemSchema.__info))) {
+          if (itemSchema.hidden) {
             curHiddenValue = true;
             break;
           } else {
@@ -734,7 +735,7 @@ export default {
      */
     getTabsIndex(pathKey) {
       if (pathKey && utils.isStr(pathKey)) {
-        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+        pathKey = chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
       } else {
         throw "isHidden: 参数必须是字符串且不能为空";
       }
@@ -747,7 +748,7 @@ export default {
      */
     setTabsIndex(pathKey, index) {
       if (pathKey && utils.isStr(pathKey)) {
-        pathKey = parse.chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
+        pathKey = chainPathKey(pathKey); // 转链式，如：base["person"].name => base.person.name
       } else {
         throw "isHidden: 参数必须是字符串且不能为空";
       }
@@ -769,9 +770,9 @@ export default {
     },
 
     /* 下划线一杠代表对内使用 */
-    _getType() {
-      return constant.UI_FORM;
-    },
+    // _getType() {
+    //   return constant.UI_FORM;
+    // },
 
     /* 下划线一杠代表对内使用 */
     _getSchema() {
@@ -801,7 +802,7 @@ export default {
     },
     __initUi(schema) {
       this.$data.isInited = false;
-      var tmpSchema = schemaUtils.completeSchema(schema, this.$data.id);
+      var tmpSchema = schemaUtils.completeSchema(schema);
       // 取出schema中的值，用于重置
       this._esOriginalSchemaValue = utils.deepCopy(
         formUtils.getValue(tmpSchema)
@@ -813,9 +814,7 @@ export default {
       this[constant.USER_ROOT_DATA] = formUtils.getValue(this.$data.formSchema);
       this.__syncValue();
       // 取出第一次设置的值，用于重置
-      this._esOriginalRootValue = utils.deepCopy(
-        dataCache.getRoot(this.$data.id)
-      );
+      this._esOriginalRootValue = utils.deepCopy(this[constant.USER_ROOT_DATA]);
 
       this.$nextTick(() => {
         this.$data.isInited = true; // 为什么要写这个，因为开发过程中，有些组件的默认值需要转化，导致会触发checkRules, 体验不好
@@ -830,7 +829,7 @@ export default {
       var hasErrMsg = false;
 
       //是否隐藏，隐藏就不用检查有效性了
-      var isHidden = schema.hidden; // 省资源，不做es转
+      var isHidden = schema.hidden; // 省资源，不做动态转
       if (isHidden) {
         return { isValid, hasErrMsg };
       }
@@ -1169,6 +1168,16 @@ export default {
      * 执行事件：一般用于非组件表单，只是执行事件
      */
     _handleEvents(handlers, options) {
+      // var options = {
+      //   value: utils.deepCopy(targetValue),
+      //   event: eventData,
+      //   args: args,
+      //   pathKey: this.schema.__info.pathKey,
+      //   index: this.schema.__info.index,
+      //   idxChain: this.schema.__info.idxChain,
+      //   target: target,
+      //   isNative: isNative
+      // };
       var infoData = Object.assign({ instance: this }, options);
       handlers.forEach(handler => {
         handler.call(this, infoData);
@@ -1190,23 +1199,19 @@ export default {
     },
 
     __syncValue(sourcePathKey) {
-      var rootValue = formUtils.getValue(this.$data.formSchema);
+      // var rootValue = formUtils.getValue(this.$data.formSchema);
 
-      dataCache.setRoot(this.$data.id, rootValue);
+      // dataCache.setRoot(this.$data.id, rootValue);
 
-      var baseParseSources = {
-        global: this.global ? this.global : {}, // 防止null情况
-        rootData: rootValue,
-        rootSchema: this.$data.formSchema,
-        isHidden: dataCache.getHiddenFunc(this.$data.id)
-      };
+      // var baseParseSources = {
+      //   global: this.global ? this.global : {}, // 防止null情况
+      //   rootData: rootValue,
+      //   rootSchema: this.$data.formSchema,
+      //   isHidden: dataCache.getHiddenFunc(this.$data.id)
+      // };
 
       formUtils.analyzeUiProps(this.$data.formSchema, this);
-      var formValue = formUtils.getFormValue(
-        this.$data.formSchema,
-        baseParseSources
-      );
-
+      var formValue = formUtils.getFormValue(this.$data.formSchema);
       // 缓存，以便多次调用
       this._esFormValue = formValue;
 
@@ -1216,11 +1221,11 @@ export default {
       ]);
 
       if (this.$data.canConsole) {
-        this.$data.csRootValue = utils.deepCopy(rootValue);
+        this.$data.csRootValue = utils.deepCopy(this[constant.USER_ROOT_DATA]);
         this.$data.csFormValue = utils.deepCopy(formValue);
       }
 
-      baseParseSources = null;
+      // baseParseSources = null;
       formValue = null;
     },
 
@@ -1552,10 +1557,10 @@ export default {
        * 注：不是深度改变时，newVal和oldVal是一样的
        */
       handler(newVal, oldVal) {
-        dataCache.setGlobal(
-          this.$data.id,
-          newVal ? utils.deepCopy(newVal) : {}
-        );
+        // dataCache.setGlobal(
+        //   this.$data.id,
+        //   newVal ? utils.deepCopy(newVal) : {}
+        // );
         if (utils.isObj(newVal)) {
           // undefined也就变为{default}, 从而下入这里
           if (newVal === oldVal) {
@@ -1578,7 +1583,7 @@ export default {
     this._esOriginalRootValue = null;
     this._esOriginalSchemaValue = null;
     this._esFormValue = null;
-    dataCache.remove(this.$data.id);
+    // dataCache.remove(this.$data.id);
   }
 };
 </script>

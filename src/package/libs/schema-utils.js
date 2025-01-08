@@ -7,7 +7,7 @@
  *
  */
 // import sysExtRules from "./rules";
-import parse from "./parse";
+// import parse from "./parse";
 import global from "./global";
 import constant from "./constant";
 import utils from "./utils";
@@ -30,9 +30,7 @@ import {
   parseTrigger,
   getNativeName
 } from "../tools/component";
-import { isEsOrFunc, newEsFunction } from "../tools/parse";
-
-let m_currentFormId = undefined; // 应用于completeSchema,记录当前的解析是在哪个表单中
+import { isEsScript, isEsOrFunc, newEsFunction } from "../tools/parse";
 
 let schemaUtils = {
   /**
@@ -57,11 +55,9 @@ let schemaUtils = {
    * 结论 >> 最后的输出是：
    * type === 'space'、component、properties只有一个会输出；也是就if (item.layout.name === 'space')、if (item.component)、if (item.properties)中，只有一个为真
    * @param {*} schema  原始的计划表
-   * @param {*} esFormId 哪个esFormId（应用于有jsx或是函数的组件）
    */
-  completeSchema: function(schema, esFormId) {
+  completeSchema: function(schema) {
     // const constant.ARRAY_TABLE = "array-table";
-    m_currentFormId = esFormId;
 
     var autoMatch;
     if (utils.isObj(schema)) {
@@ -104,10 +100,8 @@ let schemaUtils = {
         rootObj.on = rootEventAction.on; // 没有native事件
       }
       this.__checkForTile(rootObj);
-      m_currentFormId = undefined; // 任务完成
       return rootObj;
     } else {
-      m_currentFormId = undefined;
       throw "根schema是一个Object类型";
     }
   },
@@ -165,16 +159,24 @@ let schemaUtils = {
       if (isArray) {
         if (
           utils.isUndef(newPropItem.array.rowSpace) &&
-          utils.isNum(newPropItem.rowSpace)
+          utils.isNum(inheritObj.rowSpace)
         ) {
           // 当没有设置时，则取上一级的rowSpace
-          newPropItem.array.rowSpace = newPropItem.rowSpace;
+          newPropItem.array.rowSpace = inheritObj.rowSpace;
+        }
+
+        if (
+          utils.isUndef(newPropItem.array.rowHeight) &&
+          utils.isNum(nextInheritObj.rowHeight)
+        ) {
+          // 当没有设置时，则取上一级的rowHeight
+          newPropItem.array.rowHeight = nextInheritObj.rowHeight;
         }
       }
       // 判断ui, 因为是数组的话，有些属性可能有会（ui.rowHeight可能很用到）
       // var newUi = newPropItem.ui ? newPropItem.ui : { showBody: true };
-      newUi.rowSpace = nextInheritObj.rowSpace;
-      newUi.rowHeight = nextInheritObj.rowHeight;
+      // newUi.rowSpace = nextInheritObj.rowSpace;
+      // newUi.rowHeight = nextInheritObj.rowHeight;
       // newPropItem.ui = newUi;
 
       isNormalTabs =
@@ -317,24 +319,24 @@ let schemaUtils = {
       }
 
       // 当是列表数组时，重新计算列宽，使其点100%
-      if (newPropItem.array && newPropItem.array.name == constant.ARRAY_TABLE) {
-        //整理一下ref, 同一级别的只留最后一下
-        this.__updateTableCol(newPropItem);
-      }
+      // if (newPropItem.array && newPropItem.array.name == constant.ARRAY_TABLE) {
+      //   //整理一下ref, 同一级别的只留最后一下
+      //   this.__updateTableCol(newPropItem);
+      // }
 
       //整理一下ref, 同一级别的只留最后一下
       this.__uniqueRef(newPropItem);
 
-      if (
-        isNormalTabs ||
-        (newPropItem.array && newPropItem.array.name == constant.ARRAY_TABLE)
-      ) {
-        //当是tabs or constant.ARRAY_TABLE时，若是分组失效
-        // continue; //是占位空间，去掉
-      } else {
-        //直接改变newPropItem的值，设置分组情况
-        this.__reinitGroup(newPropItem);
-      }
+      // if (
+      //   isNormalTabs ||
+      //   (newPropItem.array && newPropItem.array.name == constant.ARRAY_TABLE)
+      // ) {
+      //   //当是tabs or constant.ARRAY_TABLE时，若是分组失效
+      //   // continue; //是占位空间，去掉
+      // } else {
+      //   //直接改变newPropItem的值，设置分组情况
+      //   this.__reinitGroup(newPropItem);
+      // }
 
       if (newPropItem.array) {
         //数组类型，可增删
@@ -413,9 +415,20 @@ let schemaUtils = {
           throw "array.value的值必须是数组或不写";
         }
 
-        if (utils.isUndef(newPropItem.array.rowSpace)) {
+        if (
+          utils.isUndef(newPropItem.array.rowSpace) &&
+          utils.isNum(newPropItem.rowSpace)
+        ) {
           // 当没有设置时，则取上一级的rowSpace
           newPropItem.array.rowSpace = newPropItem.rowSpace;
+        }
+
+        if (
+          utils.isUndef(newPropItem.array.rowHeight) &&
+          utils.isNum(inheritObj.rowHeight)
+        ) {
+          // 当没有设置时，则取上一级的rowHeight
+          newPropItem.array.rowHeight = inheritObj.rowHeight;
         }
 
         if (newPropItem.array.name == constant.ARRAY_TABS) {
@@ -430,7 +443,7 @@ let schemaUtils = {
       }
     }
 
-    newPropItem.__rawHidden = parse.newEsFunction(newPropItem.hidden);
+    newPropItem.__rawHidden = newEsFunction(newPropItem.hidden);
     newPropItem.__creatable = false; // 这个一定要设置要false, 说明初始化时是创建组件，一旦设置成true, 就改不回false
 
     return newPropItem;
@@ -440,63 +453,63 @@ let schemaUtils = {
    * 对table数组布局，重新计算长度，使项相加为UI_MAX_COL(24列)
    * @param {*} newSchema
    */
-  __updateTableCol(newSchema) {
-    if (newSchema.properties) {
-      var curProp = newSchema.properties;
-      var nextPropItem, key, newCol;
-      var total = 0;
-      // 判断是否合法
-      var isValidCol = true;
-      for (key in curProp) {
-        nextPropItem = curProp[key];
-        if (!utils.isNum(nextPropItem.col)) {
-          isValidCol = false; // 存在不合法的长度
-          console.warn(
-            "table数组所有项的长度col只能设置为整数，不能是对象，否则每一项将均分长度；现项(key为" +
-              key +
-              ")设置长度为对象"
-          );
-          break;
-        }
-      }
-      if (!isValidCol) {
-        for (key in curProp) {
-          nextPropItem = curProp[key];
-          nextPropItem.col = constant.UI_MAX_COL; // 均分
-        }
-      }
+  // __updateTableCol(newSchema) {
+  //   if (newSchema.properties) {
+  //     var curProp = newSchema.properties;
+  //     var nextPropItem, key, newCol;
+  //     var total = 0;
+  //     // 判断是否合法
+  //     var isValidCol = true;
+  //     for (key in curProp) {
+  //       nextPropItem = curProp[key];
+  //       if (!utils.isNum(nextPropItem.col)) {
+  //         isValidCol = false; // 存在不合法的长度
+  //         console.warn(
+  //           "table数组所有项的长度col只能设置为整数，不能是对象，否则每一项将均分长度；现项(key为" +
+  //             key +
+  //             ")设置长度为对象"
+  //         );
+  //         break;
+  //       }
+  //     }
+  //     if (!isValidCol) {
+  //       for (key in curProp) {
+  //         nextPropItem = curProp[key];
+  //         nextPropItem.col = constant.UI_MAX_COL; // 均分
+  //       }
+  //     }
 
-      for (key in curProp) {
-        nextPropItem = curProp[key];
-        total += nextPropItem.col;
-      }
+  //     for (key in curProp) {
+  //       nextPropItem = curProp[key];
+  //       total += nextPropItem.col;
+  //     }
 
-      var newTotal = 0;
-      if (total !== constant.UI_MAX_COL) {
-        for (key in curProp) {
-          nextPropItem = curProp[key];
-          newCol = Math.round((nextPropItem.col * constant.UI_MAX_COL) / total);
-          nextPropItem.col = newCol;
-          newTotal += newCol;
-        }
-      }
+  //     var newTotal = 0;
+  //     if (total !== constant.UI_MAX_COL) {
+  //       for (key in curProp) {
+  //         nextPropItem = curProp[key];
+  //         newCol = Math.round((nextPropItem.col * constant.UI_MAX_COL) / total);
+  //         nextPropItem.col = newCol;
+  //         newTotal += newCol;
+  //       }
+  //     }
 
-      if (newTotal < constant.UI_MAX_COL) {
-        // 不够100%， 补给后面的
-        curProp[key].col = curProp[key].col + (constant.UI_MAX_COL - newTotal);
-      }
+  //     if (newTotal < constant.UI_MAX_COL) {
+  //       // 不够100%， 补给后面的
+  //       curProp[key].col = curProp[key].col + (constant.UI_MAX_COL - newTotal);
+  //     }
 
-      // 计算转化为头部style
-      for (key in curProp) {
-        nextPropItem = curProp[key];
-        var headStyle = {
-          width: this.__intToPercent(nextPropItem.col),
-          padding: newSchema.ui.rowSpace / 2 + "px"
-        };
-        nextPropItem.__headStyle = headStyle;
-      }
-    }
-  },
+  //     // 计算转化为头部style
+  //     for (key in curProp) {
+  //       nextPropItem = curProp[key];
+  //       var headStyle = {
+  //         width: this.__intToPercent(nextPropItem.col),
+  //         padding: newSchema.ui.rowSpace / 2 + "px"
+  //       };
+  //       nextPropItem.__headStyle = headStyle;
+  //     }
+  //   }
+  // },
 
   /**
    * 去掉同一级别的属性中，有相同的ref，保留最后一个
@@ -999,7 +1012,7 @@ let schemaUtils = {
   __parseLabel: function(value, myPathKey) {
     var newLabel,
       defaultAlign = false;
-    newLabel = parsePropComponent(value, m_currentFormId, myPathKey, true);
+    newLabel = parsePropComponent(value, myPathKey, true);
 
     // 因为label有点特殊，所以不能为false
     if (newLabel) {
@@ -1022,7 +1035,7 @@ let schemaUtils = {
    * 解析title
    */
   __parseTitle: function(value, myPathKey) {
-    var newValue = parsePropComponent(value, m_currentFormId, myPathKey);
+    var newValue = parsePropComponent(value, myPathKey);
     if (newValue) {
       newValue.help = this.__parsePropHelp(value.help, myPathKey);
     }
@@ -1381,10 +1394,10 @@ let schemaUtils = {
       if (!gHelp.name) {
         gHelp.name = esHelp;
       }
-      gHelp = parsePropComponent(gHelp, m_currentFormId, myPathKey);
+      gHelp = parsePropComponent(gHelp, myPathKey);
     } else if (utils.isStr(help)) {
       gHelp = { name: esHelp, props: { content: help } };
-      gHelp = parsePropComponent(gHelp, m_currentFormId, myPathKey);
+      gHelp = parsePropComponent(gHelp, myPathKey);
     } else {
       gHelp = false;
     }
@@ -1427,8 +1440,8 @@ let schemaUtils = {
       });
 
       // 取出required
-      if (parse.isEsOrFunc(rules.required)) {
-        tmpRawRequired = parse.newEsFunction(rules.required);
+      if (isEsOrFunc(rules.required)) {
+        tmpRawRequired = newEsFunction(rules.required);
       } else if (utils.isBool(rules.required)) {
         tmpRawRequired = rules.required;
       } else {
@@ -1436,8 +1449,8 @@ let schemaUtils = {
       }
 
       // 取出canOnlyWarn
-      // if (parse.isEsOrFunc(rules.canOnlyWarn)) {
-      //   tmpRawCanOnlyWarn = parse.newEsFunction(rules.canOnlyWarn);
+      // if (isEsOrFunc(rules.canOnlyWarn)) {
+      //   tmpRawCanOnlyWarn = newEsFunction(rules.canOnlyWarn);
       // } else if (utils.isBool(rules.canOnlyWarn)) {
       //   tmpRawCanOnlyWarn = rules.canOnlyWarn;
       // } else {
@@ -1449,8 +1462,8 @@ let schemaUtils = {
     } else if (utils.isBool(rules)) {
       tmpRawRequired = rules;
       rules = {};
-    } else if (parse.isEsOrFunc(rules)) {
-      tmpRawRequired = parse.newEsFunction(rules);
+    } else if (isEsOrFunc(rules)) {
+      tmpRawRequired = newEsFunction(rules);
       rules = {};
     } else {
       return false;
@@ -1659,6 +1672,7 @@ let schemaUtils = {
       var eventAction = {};
       var value = [];
       var rowSpace = undefined;
+      var rowHeight = undefined;
       var type = null;
       var hasBorder = true;
       var insertValue = undefined;
@@ -1697,11 +1711,7 @@ let schemaUtils = {
           headRequired = false;
         }
 
-        subLabel = parsePropComponent(
-          array.subLabel,
-          m_currentFormId,
-          myPathKey
-        );
+        subLabel = parsePropComponent(array.subLabel, myPathKey);
         // if (!subLabel) {
         //   // 不可以为false, 因为必须要显示
         //   subLabel = {
@@ -1719,11 +1729,7 @@ let schemaUtils = {
         } else {
           delMsg = "确定删除吗？";
         }
-        delMsg = parsePropComponent(
-          delMsg,
-          m_currentFormId,
-          myPathKey + "（数组）"
-        );
+        delMsg = parsePropComponent(delMsg, myPathKey + "（数组）");
         if (!delMsg) {
           delMsg = {
             hidden: true,
@@ -1737,11 +1743,7 @@ let schemaUtils = {
         } else {
           delAllMsg = "确定删除所有吗？";
         }
-        delAllMsg = parsePropComponent(
-          delAllMsg,
-          m_currentFormId,
-          myPathKey + "（数组）"
-        );
+        delAllMsg = parsePropComponent(delAllMsg, myPathKey + "（数组）");
         if (!delAllMsg) {
           delAllMsg = {
             hidden: true,
@@ -1760,6 +1762,11 @@ let schemaUtils = {
           ? array.rowSpace
           : isEsOrFunc(array.rowSpace)
           ? newEsFunction(array.rowSpace)
+          : undefined;
+        rowHeight = utils.isNum(array.rowHeight)
+          ? array.rowHeight
+          : isEsOrFunc(array.rowHeight)
+          ? newEsFunction(array.rowHeight)
           : undefined;
         type = utils.isStr(array.type) ? array.type : false;
         var btnTypes = ["icon"];
@@ -1827,6 +1834,7 @@ let schemaUtils = {
         newArray.on = eventAction.on;
         newArray.nativeOn = eventAction.nativeOn;
         newArray.rowSpace = rowSpace;
+        newArray.rowHeight = rowHeight;
 
         if (newArray.name == constant.ARRAY_TABS) {
           newArray.subLabel = subLabel;
@@ -1871,14 +1879,14 @@ let schemaUtils = {
   __perfectCheckItem: function(item) {
     if (utils.isFunc(item)) {
       return { handler: item, trigger: [constant.INPUT_EVENT] };
-    } else if (parse.isEsScript(item)) {
+    } else if (isEsScript(item)) {
       return {
-        handler: parse.newEsFunction(item),
+        handler: newEsFunction(item),
         trigger: [constant.INPUT_EVENT]
       };
     } else if (
       utils.isObj(item) &&
-      (parse.isEsOrFunc(item.handler) || parse.isEsOrFunc(item.name))
+      (isEsOrFunc(item.handler) || isEsOrFunc(item.name))
     ) {
       var handler;
       if (utils.isFunc(item.handler)) {
@@ -1886,7 +1894,7 @@ let schemaUtils = {
       } else if (utils.isFunc(item.name)) {
         console.warn("rules.checks.name已经舍弃了，请使用rules.checks.handler");
         handler = item.name;
-      } else if (parse.isEsScript(item.handler)) {
+      } else if (isEsScript(item.handler)) {
         throw "rules.check.handler已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
       } else {
         throw "rules.check.name已经舍弃了且规则不再支持es写法，请使用函数赋值rules.checks.handler";
@@ -1964,20 +1972,12 @@ let schemaUtils = {
       }
 
       if (key == "desc") {
-        newPropItem[key] = parsePropComponent(
-          propItem[key],
-          m_currentFormId,
-          myPathKey
-        );
+        newPropItem[key] = parsePropComponent(propItem[key], myPathKey);
         return true;
       }
 
       if (key == "unit") {
-        newPropItem[key] = parsePropComponent(
-          propItem[key],
-          m_currentFormId,
-          myPathKey
-        );
+        newPropItem[key] = parsePropComponent(propItem[key], myPathKey);
         return true;
       }
 
@@ -2014,11 +2014,7 @@ let schemaUtils = {
       }
 
       if (key == "component") {
-        var mainComponent = parseMainComponent(
-          propItem,
-          m_currentFormId,
-          myPathKey
-        );
+        var mainComponent = parseMainComponent(propItem, myPathKey);
         newPropItem[key] = mainComponent;
         if (mainComponent.ref) {
           newPropItem.__hasRef = true;
@@ -2065,140 +2061,140 @@ let schemaUtils = {
     return obj;
   },
 
-  __reinitGroup: function(propItem) {
-    var lastGroup = false;
-    var groups;
-    // var colSum = 0;
-    var gFirstItem; //每一组的第一项
-    for (var key in propItem.properties) {
-      var item = propItem.properties[key];
-      var curGroup = item["group"];
-      if (curGroup) {
-        if (lastGroup) {
-          //已经存在了
-          if (lastGroup === curGroup) {
-            //是前面的那一组
-            groups.push(key);
-            // colSum += item.col;
-            gFirstItem.__groupCol = this.__sumCol(
-              gFirstItem.__groupCol,
-              item.col
-            );
-            // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
-          } else {
-            //不是前面的那一组，重新开组
-            lastGroup = curGroup;
-            gFirstItem = item;
-            groups = [key];
-            item.__groups = groups;
-            item.__hiddenGroup = false;
-            // item.col = constant.UI_MAX_COL;
-            // colSum = item.col;
-            gFirstItem.__groupCol = item.col;
-            // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
-          }
-        } else {
-          //前面没有组，重新开组
-          lastGroup = curGroup;
-          gFirstItem = item;
-          groups = [key];
-          item.__groups = groups;
-          item.__hiddenGroup = false;
-          // item.col = constant.UI_MAX_COL;
-          // colSum = item.col;
-          gFirstItem.__groupCol = item.col;
-          // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
-        }
-        item.__inGroups = true; //记录此项在分组里面
-      } else {
-        lastGroup = false;
-        groups = null;
-        // colSum = 0;
-        gFirstItem = null;
-      }
-    }
-  },
+  // __reinitGroup: function(propItem) {
+  //   var lastGroup = false;
+  //   var groups;
+  //   // var colSum = 0;
+  //   var gFirstItem; //每一组的第一项
+  //   for (var key in propItem.properties) {
+  //     var item = propItem.properties[key];
+  //     var curGroup = item["group"];
+  //     if (curGroup) {
+  //       if (lastGroup) {
+  //         //已经存在了
+  //         if (lastGroup === curGroup) {
+  //           //是前面的那一组
+  //           groups.push(key);
+  //           // colSum += item.col;
+  //           gFirstItem.__groupCol = this.__sumCol(
+  //             gFirstItem.__groupCol,
+  //             item.col
+  //           );
+  //           // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+  //         } else {
+  //           //不是前面的那一组，重新开组
+  //           lastGroup = curGroup;
+  //           gFirstItem = item;
+  //           groups = [key];
+  //           item.__groups = groups;
+  //           item.__hiddenGroup = false;
+  //           // item.col = constant.UI_MAX_COL;
+  //           // colSum = item.col;
+  //           gFirstItem.__groupCol = item.col;
+  //           // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+  //         }
+  //       } else {
+  //         //前面没有组，重新开组
+  //         lastGroup = curGroup;
+  //         gFirstItem = item;
+  //         groups = [key];
+  //         item.__groups = groups;
+  //         item.__hiddenGroup = false;
+  //         // item.col = constant.UI_MAX_COL;
+  //         // colSum = item.col;
+  //         gFirstItem.__groupCol = item.col;
+  //         // colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+  //       }
+  //       item.__inGroups = true; //记录此项在分组里面
+  //     } else {
+  //       lastGroup = false;
+  //       groups = null;
+  //       // colSum = 0;
+  //       gFirstItem = null;
+  //     }
+  //   }
+  // },
 
-  /**
-   * 合并两个长度
-   * @param {*} col1
-   * @param {*} col2
-   */
-  __sumCol(col1, col2) {
-    // 都是整数
-    if (utils.isNum(col1) && utils.isNum(col2)) {
-      var colSum = col1 + col2;
-      colSum = colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
-      return colSum;
-    } else {
-      // 存在非整数，转化为对象相加
-      var colObj1 = col1;
-      var colObj2 = col2;
-      if (!utils.isObj(colObj1)) {
-        colObj1 = {
-          width: this.__intToPercent(colObj1)
-        };
-      }
-      if (!utils.isObj(colObj2)) {
-        colObj2 = {
-          width: this.__intToPercent(colObj2)
-        };
-      }
-      var keyWidth = "width";
-      var minWidth = "min-width";
-      var maxWidth = "max-width";
-      var keys = [keyWidth, minWidth, maxWidth];
-      var newColObj = {};
-      keys.forEach(key => {
-        var valSum = this.__countValue(colObj1[key], colObj2[key]);
-        if (!valSum) {
-          if (keyWidth === key) {
-            newColObj[key] = this.__intToPercent(constant.UI_MAX_COL);
-          } else if (minWidth === key) {
-            newColObj[key] = colObj1[key];
-          } else {
-            // maxWidth不要了
-          }
-        } else {
-          newColObj[key] = valSum;
-        }
-      });
-    }
-  },
+  // /**
+  //  * 合并两个长度
+  //  * @param {*} col1
+  //  * @param {*} col2
+  //  */
+  // __sumCol(col1, col2) {
+  //   // 都是整数
+  //   if (utils.isNum(col1) && utils.isNum(col2)) {
+  //     var colSum = col1 + col2;
+  //     colSum = colSum > constant.UI_MAX_COL ? constant.UI_MAX_COL : colSum;
+  //     return colSum;
+  //   } else {
+  //     // 存在非整数，转化为对象相加
+  //     var colObj1 = col1;
+  //     var colObj2 = col2;
+  //     if (!utils.isObj(colObj1)) {
+  //       colObj1 = {
+  //         width: this.__intToPercent(colObj1)
+  //       };
+  //     }
+  //     if (!utils.isObj(colObj2)) {
+  //       colObj2 = {
+  //         width: this.__intToPercent(colObj2)
+  //       };
+  //     }
+  //     var keyWidth = "width";
+  //     var minWidth = "min-width";
+  //     var maxWidth = "max-width";
+  //     var keys = [keyWidth, minWidth, maxWidth];
+  //     var newColObj = {};
+  //     keys.forEach(key => {
+  //       var valSum = this.__countValue(colObj1[key], colObj2[key]);
+  //       if (!valSum) {
+  //         if (keyWidth === key) {
+  //           newColObj[key] = this.__intToPercent(constant.UI_MAX_COL);
+  //         } else if (minWidth === key) {
+  //           newColObj[key] = colObj1[key];
+  //         } else {
+  //           // maxWidth不要了
+  //         }
+  //       } else {
+  //         newColObj[key] = valSum;
+  //       }
+  //     });
+  //   }
+  // },
 
-  __intToPercent(col) {
-    if (utils.isNum(col)) {
-      return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "%"; // 保留4位
-    } else {
-      return col;
-    }
-  },
+  // __intToPercent(col) {
+  //   if (utils.isNum(col)) {
+  //     return Math.floor((col * 1000000) / constant.UI_MAX_COL) / 10000 + "%"; // 保留4位
+  //   } else {
+  //     return col;
+  //   }
+  // },
 
-  /**
-   * 计算两个值之和，不能相加就返回false
-   * @param {*} val1
-   * @param {*} val2
-   */
-  __countValue(val1, val2) {
-    var unit, sum;
-    if (val1 === constant.WIDTH_AUTO && val2 === constant.WIDTH_AUTO) {
-      return constant.WIDTH_AUTO;
-    } else if (utils.isPercent(val1) && utils.isPercent(val2)) {
-      unit = "%";
-      sum =
-        parseFloat(val1.substr(0, val1.length - unit.length)) +
-        parseFloat(val2.substr(0, val2.length - unit.length));
-      return (sum > 100 ? 100 : sum) + unit;
-    } else if (utils.isPx(val1) && utils.isPx(val2)) {
-      unit = "px";
-      sum =
-        parseFloat(val1.substr(0, val1.length - unit.length)) +
-        parseFloat(val2.substr(0, val2.length - unit.length));
-      return sum + unit;
-    } else {
-      return false;
-    }
-  },
+  // /**
+  //  * 计算两个值之和，不能相加就返回false
+  //  * @param {*} val1
+  //  * @param {*} val2
+  //  */
+  // __countValue(val1, val2) {
+  //   var unit, sum;
+  //   if (val1 === constant.WIDTH_AUTO && val2 === constant.WIDTH_AUTO) {
+  //     return constant.WIDTH_AUTO;
+  //   } else if (utils.isPercent(val1) && utils.isPercent(val2)) {
+  //     unit = "%";
+  //     sum =
+  //       parseFloat(val1.substr(0, val1.length - unit.length)) +
+  //       parseFloat(val2.substr(0, val2.length - unit.length));
+  //     return (sum > 100 ? 100 : sum) + unit;
+  //   } else if (utils.isPx(val1) && utils.isPx(val2)) {
+  //     unit = "px";
+  //     sum =
+  //       parseFloat(val1.substr(0, val1.length - unit.length)) +
+  //       parseFloat(val2.substr(0, val2.length - unit.length));
+  //     return sum + unit;
+  //   } else {
+  //     return false;
+  //   }
+  // },
 
   /**
    * 检查数据平铺时schema是否合法。也就是第一层的properies展开的key和第一层的key是否有重复印

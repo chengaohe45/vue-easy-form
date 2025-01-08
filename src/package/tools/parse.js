@@ -69,53 +69,53 @@ export function isEsScript(scriptTxt, expPrefix = "es:") {
  * 1. 普通值直接返回
  * 2. 函数类型返回执行后的值
  */
-export function smartEsValue(
-  scriptTxt,
-  // {
-  //   global = {},
-  //   rootData = {},
-  //   index = -1,
-  //   idxChain = "",
-  //   pathKey = "",
-  //   rootSchema = {},
-  //   isHidden
-  // } = {}
-  parseSources
-) {
-  if (utils.isFunc(scriptTxt)) {
-    var options;
-    if (scriptTxt.__esFuncName === constant.ES_FUNC_NAME) {
-      // es: 转过来的函数
-      options = {
-        global: parseSources.global,
-        root: parseSources.rootData,
-        idxChains: parseSources.idxChain
-          ? parseSources.idxChain.split(",")
-          : [],
-        index: parseSources.index,
-        // rootSchema: parseSources.rootSchema,
-        isHidden: parseSources.isHidden
-      };
-    } else {
-      // 自定义函数
-      options = {
-        global: parseSources.global,
-        rootData: parseSources.rootData, // 兼容1.7.0以前，不包括1.7.0
-        root: parseSources.rootData,
-        idxChain: parseSources.idxChain,
-        index: parseSources.index,
-        pathKey: parseSources.pathKey,
-        $hidden: parseSources.isHidden
-      };
-    }
+// export function smartEsValue(
+//   scriptTxt,
+//   // {
+//   //   global = {},
+//   //   rootData = {},
+//   //   index = -1,
+//   //   idxChain = "",
+//   //   pathKey = "",
+//   //   rootSchema = {},
+//   //   isHidden
+//   // } = {}
+//   parseSources
+// ) {
+//   if (utils.isFunc(scriptTxt)) {
+//     var options;
+//     if (scriptTxt.__esFuncName === constant.ES_FUNC_NAME) {
+//       // es: 转过来的函数
+//       options = {
+//         global: parseSources.global,
+//         root: parseSources.rootData,
+//         idxChains: parseSources.idxChain
+//           ? parseSources.idxChain.split(",")
+//           : [],
+//         index: parseSources.index,
+//         // rootSchema: parseSources.rootSchema,
+//         isHidden: parseSources.isHidden
+//       };
+//     } else {
+//       // 自定义函数
+//       options = {
+//         global: parseSources.global,
+//         rootData: parseSources.rootData, // 兼容1.7.0以前，不包括1.7.0
+//         root: parseSources.rootData,
+//         idxChain: parseSources.idxChain,
+//         index: parseSources.index,
+//         pathKey: parseSources.pathKey,
+//         $hidden: parseSources.isHidden
+//       };
+//     }
 
-    return scriptTxt(options);
-  } else if (!isEsScript(scriptTxt)) {
-    return scriptTxt;
-  } else {
-    throw "还有es: parse ....: " + scriptTxt;
-  }
-}
+//     return scriptTxt(options);
+//   } else if (!isEsScript(scriptTxt)) {
+//     return scriptTxt;
+//   } else {
+//     throw "还有es: parse ....: " + scriptTxt;
+//   }
+// }
 
 /**
  * 将es转换成为Function

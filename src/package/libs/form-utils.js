@@ -756,11 +756,7 @@ let formUtils = {
    * @param {*} onlyFormValue 是否是取表单值
    * @param {*} isParentHidden
    */
-  __getValue: function(
-    propItem,
-    onlyFormValue,
-    isParentHidden = false
-  ) {
+  __getValue: function(propItem, onlyFormValue, isParentHidden = false) {
     // var parseSources = Object.assign({}, baseParseSources);
     // parseSources.index = propItem.__info.index;
     // parseSources.idxChain = propItem.__info.idxChain;
@@ -770,7 +766,8 @@ let formUtils = {
 
     // 当false没有值时，证明是表单的内容取值，后不的解析不用执行，提高效率
     // formData有值，说明propItem.hidden都是已经出来的了，不做es转换，省资源
-    var isHidden = onlyFormValue && (isParentHidden || propItem.hidden) ? true : false;
+    var isHidden =
+      onlyFormValue && (isParentHidden || propItem.hidden) ? true : false;
     var newValue, keyValue, newArr, i, schemaList;
 
     if (propItem.component) {
@@ -828,15 +825,11 @@ let formUtils = {
           }
 
           var isNextHidden =
-          onlyFormValue && (isHidden || nextPropItem.hidden) ? true : false;
+            onlyFormValue && (isHidden || nextPropItem.hidden) ? true : false;
           // console.log("isNextHidden...: ", isNextHidden);
           if (!isNextHidden) {
             // 取表单内部值或用户数据时不隐藏
-            keyValue = this.__getValue(
-              nextPropItem,
-              onlyFormValue,
-              isHidden
-            );
+            keyValue = this.__getValue(nextPropItem, onlyFormValue, isHidden);
             newValue[key] = keyValue;
           } else {
             // 说明是取表单用户数据且隐藏
@@ -856,11 +849,7 @@ let formUtils = {
               }
             } else {
               // 剩下null, 说明是取原始值，是什么是就什么
-              keyValue = this.__getValue(
-                nextPropItem,
-                onlyFormValue,
-                isHidden
-              );
+              keyValue = this.__getValue(nextPropItem, onlyFormValue, isHidden);
               newValue[key] = keyValue;
             }
           }

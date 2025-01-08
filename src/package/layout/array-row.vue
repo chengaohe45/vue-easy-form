@@ -13,11 +13,7 @@
           <div
             class="es-order-box"
             v-if="schema.array.hasOrder !== false"
-            :style="{
-              height: schema.properties
-                ? schema.ui.rowHeight + 'px'
-                : schema.rowHeight + 'px'
-            }"
+            :style="mxCreateRowHeightStyle(schema.array.rowHeight, itemSchema.__info, ['height'])"
           >
             <span v-if="itemSchema.rules &&
                 mxParseBoolValue(itemSchema.rules.required, itemSchema.__info) &&
@@ -33,11 +29,7 @@
               mxParseBoolValue(itemSchema.rules.showRequired, itemSchema.__info)
             "
             class="es-order-box-required"
-            :style="{
-              height: schema.properties
-                ? schema.ui.rowHeight + 'px'
-                : schema.rowHeight + 'px'
-            }"
+            :style="mxCreateRowHeightStyle(schema.array.rowHeight, itemSchema.__info, ['height'])"
           >
             <span class="es-required">*</span>
           </div>
@@ -85,11 +77,7 @@
                 schema.array.hasCopy
             "
             class="es-btn-box"
-            :style="{
-              height: schema.properties
-                ? schema.ui.rowHeight + 'px'
-                : schema.rowHeight + 'px'
-            }"
+            :style="mxCreateRowHeightStyle(schema.array.rowHeight, schema.__info, ['height'])"
           >
             <edit-btns
               v-if="schema.array.btnType !== 'icon'"
@@ -174,11 +162,7 @@
     <div
       v-if="mxShowComponent(schema.help, schema.__info) && schema.component"
       class="es-form-help"
-      :style="{
-        height: schema.properties
-          ? schema.ui.rowHeight + 'px'
-          : schema.rowHeight + 'px'
-      }"
+      :style="mxCreateRowHeightStyle(schema.array.rowHeight, schema.__info, ['height'])"
     >
       <es-base :config="schema.help" :info="schema.__info"></es-base>
     </div>

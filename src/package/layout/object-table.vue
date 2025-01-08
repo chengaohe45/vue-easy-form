@@ -8,10 +8,7 @@
           mxParseBoolValue(schema.rules.showRequired, schema.__info)
       "
       class="es-table-required es-required"
-      :style="{
-        height: schema.rowHeight + 'px',
-        lineHeight: schema.rowHeight + 'px'
-      }"
+      :style="mxCreateRowHeightStyle(schema.rowHeight, schema.__info, ['lineHeight'])"
       >*</span
     >
     <div class="es-form-comp-content">

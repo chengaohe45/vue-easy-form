@@ -15,7 +15,7 @@ let constant = {
   ARR_OP_TYPE_COPY: "copy", // copy
   ARR_OP_TYPE_MOVE_UP: "up", // up
   ARR_OP_TYPE_MOVE_DOWN: "down", // down
-  
+
   MSG_LEVEL_WARN: "warning", // 警告
   MSG_LEVEL_ERROR: "error", // 错误
 

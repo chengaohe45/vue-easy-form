@@ -11,20 +11,17 @@ import utils from "./utils";
 // import { enterSubmit, onlySubmit } from "./submit";
 import { isEsOrFunc, newEsFunction } from "../tools/parse";
 import global from "./global";
-import {
-  parseComponent,
-  createEmptyComponent,
-  newComponentId
-} from "../tools/component";
+import { parseComponent, createEmptyComponent } from "../tools/component";
 
 ("use strict");
 
 /**
  * 解析主组件：如也就是右栏的组件
  */
-export function parseMainComponent(propItem, formId, myPathKey) {
+export function parseMainComponent(propItem, myPathKey) {
   var component = propItem.component;
-  var newComponent,
+  var tmpComponent,
+    newComponent,
     defaultAlign = false;
   if (utils.isVNode(component)) {
     throw myPathKey + " > 主组件暂不支持直接配置虚拟节点";
@@ -32,7 +29,6 @@ export function parseMainComponent(propItem, formId, myPathKey) {
     if (!component.name) {
       component = Object.assign({}, component, { name: global.defaultCom }); // 补上组件name
     }
-    // console.log("parseMainComponent....", component);
     newComponent = parseComponent(component, false, true);
     // 主组特有配置
     var ref = utils.isStr(component.ref) ? component.ref.trim() : null;
@@ -54,30 +50,32 @@ export function parseMainComponent(propItem, formId, myPathKey) {
     }
   } else if (utils.isStr(component)) {
     // 要自动补充value
-    newComponent = {
+    tmpComponent = {
       name: component,
       align: defaultAlign,
-      flex: false,
-      value: utils.hasOwn("value", propItem)
-        ? propItem.value
-        : global.defaultCom === component
-        ? global.defaultVal
-        : undefined
+      flex: false
     };
+    newComponent = parseComponent(tmpComponent, false, true);
+    newComponent.value = utils.hasOwn("value", propItem)
+      ? propItem.value
+      : global.defaultCom === component
+      ? global.defaultVal
+      : undefined;
   } else {
     // 要自动补充value
-    newComponent = {
+    tmpComponent = {
       name: global.defaultCom,
       align: defaultAlign,
-      flex: false,
-      value: global.defaultVal
+      flex: false
     };
+    newComponent = parseComponent(tmpComponent, false, true);
+    newComponent.value = global.defaultVal;
   }
-  if (!newComponent.id) {
-    newComponent.id = newComponentId();
-  }
+  // if (!newComponent.id) {
+  //   newComponent.id = newComponentId();
+  // }
 
-  newComponent.__formId = formId;
+  // newComponent.__formId = formId;
 
   return newComponent;
 }
@@ -85,12 +83,7 @@ export function parseMainComponent(propItem, formId, myPathKey) {
 /**
  * 解析一般属性组件：如label, desc
  */
-export function parsePropComponent(
-  value,
-  formId,
-  myPathKey,
-  canEmptyText = false
-) {
+export function parsePropComponent(value, myPathKey, canEmptyText = false) {
   var tmpValue = value;
   if (utils.isObj(value) && Object.keys(value).length > 0) {
     var name = utils.isStr(value.name) ? value.name.trim() : value.name;

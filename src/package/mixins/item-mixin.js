@@ -110,6 +110,62 @@ export default {
           : valueScript;
       }
     },
+    mxCreateRowHeightStyle(
+      valueScript,
+      info,
+      includeKeys,
+      defaultValue = undefined
+    ) {
+      if (includeKeys && includeKeys.length > 0) {
+        var valueResult;
+        if (typeof valueScript === "function") {
+          var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+          valueResult = valueScript(rootInstance._fetchParseSources(info));
+          // 判断合法性
+          var key = "rowHeight";
+          valueResult = schemaUtils.parseNormalKey(
+            valueResult,
+            schemaUtils.getNormalInfo(key),
+            { [key]: defaultValue },
+            true
+          );
+        } else {
+          valueResult =
+            valueScript === undefined || valueScript === null
+              ? defaultValue
+              : valueScript;
+        }
+        if (valueResult !== undefined && valueResult !== null) {
+          var style = {};
+          includeKeys.forEach(function(includeKey) {
+            style[includeKey] = valueResult + "px";
+          });
+          return style;
+        } else {
+          return {};
+        }
+      } else {
+        return {};
+      }
+    },
+    // mxParseRowHeight(valueScript, info, defaultValue) {
+    //   if (typeof valueScript === "function") {
+    //     var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+    //     var valueResult = valueScript(rootInstance._fetchParseSources(info));
+    //     // 判断合法性
+    //     var key = "rowHeight";
+    //     return schemaUtils.parseNormalKey(
+    //       valueResult,
+    //       schemaUtils.getNormalInfo(key),
+    //       { [key]: defaultValue },
+    //       true
+    //     );
+    //   } else {
+    //     return valueScript === undefined || valueScript === null
+    //       ? defaultValue
+    //       : valueScript;
+    //   }
+    // },
     mxParsePadding(valueScript, info) {
       if (typeof valueScript === "function") {
         var rootInstance = utils.getParent(this, constant.ES_FORM_ROOT_NAME);

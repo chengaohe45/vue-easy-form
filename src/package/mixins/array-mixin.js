@@ -289,19 +289,20 @@ export default {
     },
 
     __getForm() {
-      var formItem = this.$parent;
-      while (formItem) {
-        var type = formItem._getType ? formItem._getType() : "";
-        if (type == constant.UI_FORM) {
-          // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
-          return formItem; // 到达表单层
-        } else if (type == constant.UI_ARRAY) {
-          // checkSchema.push(formItem._getSchema());
-        } else {
-          // ... 往上派
-        }
-        formItem = formItem.$parent;
-      }
+      return utils.getParent(this, constant.ES_FORM_ROOT_NAME);
+      // var formItem = this.$parent;
+      // while (formItem) {
+      //   var type = formItem._getType ? formItem._getType() : "";
+      //   if (type == constant.UI_FORM) {
+      //     // formItem._syncFormUi(checkSchema, eventNames, targetValue, eventData); // 最外层的表单层同步所有的ui及数位
+      //     return formItem; // 到达表单层
+      //   } else if (type == constant.UI_ARRAY) {
+      //     // checkSchema.push(formItem._getSchema());
+      //   } else {
+      //     // ... 往上派
+      //   }
+      //   formItem = formItem.$parent;
+      // }
     }
   }
 };

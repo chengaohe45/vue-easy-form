@@ -97,11 +97,7 @@
     <div
       v-if="schema.array.hasAdd"
       class="es-card-add-box"
-      :style="{
-        height: schema.properties
-          ? schema.ui.rowHeight + 'px'
-          : schema.rowHeight + 'px'
-      }"
+      :style="mxCreateRowHeightStyle(schema.array.rowHeight, schema.__info, ['height'])"
     >
       <!-- <span @click="addItem" class="es-btn es-plus-btn"></span> -->
       <es-btn
@@ -118,11 +114,7 @@
     <div
       v-if="mxShowComponent(schema.help, schema.__info) && schema.component"
       class="es-form-help"
-      :style="{
-        height: schema.properties
-          ? schema.ui.rowHeight + 'px'
-          : schema.rowHeight + 'px'
-      }"
+      :style="mxCreateRowHeightStyle(schema.array.rowHeight, schema.__info, ['height'])"
     >
       <es-base :config="schema.help" :info="schema.__info"></es-base>
     </div>

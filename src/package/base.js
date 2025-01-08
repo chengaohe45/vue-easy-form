@@ -218,7 +218,7 @@ export default {
           args,
           // source: this.item,
           target: this.getConfigRef(),
-          isNative,
+          isNative
           // index: this.info ? this.info.index : -1
         };
 
@@ -345,7 +345,7 @@ export default {
         // };
         // smartEsValue(config.__rawVModel, parseSources);
         if (typeof config.__rawVModel === "function") {
-          config.__rawVModel(parseSources)
+          config.__rawVModel(parseSources);
         }
       } else {
         // this.$data.comVal = eventValue;

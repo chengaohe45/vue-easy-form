@@ -15,7 +15,7 @@ let schemaRules = {
   },
 
   isEsOrFunc: function(value) {
-    return isEsOrFunc(value)
+    return isEsOrFunc(value);
   },
 
   /**
