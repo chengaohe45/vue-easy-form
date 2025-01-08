@@ -404,7 +404,7 @@ import schemaUtils from "./libs/schema-utils.js";
 import formUtils from "./libs/form-utils.js";
 // import parse from "./libs/parse.js";
 import constant from "./libs/constant.js";
-import { createParseDep } from "./createParseDep.js";
+import { createParseDep, KEY_CURRENT_VALUE } from "./createParseDep.js";
 
 import consolePanel from "./components/console.vue";
 
@@ -1167,22 +1167,23 @@ export default {
     /**
      * 执行事件：一般用于非组件表单，只是执行事件
      */
-    _handleEvents(handlers, options) {
-      // var options = {
-      //   value: utils.deepCopy(targetValue),
-      //   event: eventData,
-      //   args: args,
-      //   pathKey: this.schema.__info.pathKey,
-      //   index: this.schema.__info.index,
-      //   idxChain: this.schema.__info.idxChain,
-      //   target: target,
-      //   isNative: isNative
-      // };
-      var infoData = Object.assign({ instance: this }, options);
+    _handleEvents(handlers, data) {
+      var info = data.info;
+      var parseSources = this._fetchParseSources(data.info);
+      var infoData = {
+        value: utils.deepCopy(parseSources[KEY_CURRENT_VALUE]),
+        event: data.args[0],
+        args: data.args,
+        pathKey: info.pathKey,
+        index: info.index,
+        idxChain: info.idxChain,
+        target: data.target,
+        isNative: data.isNative,
+        instance: this
+      };
       handlers.forEach(handler => {
         handler.call(this, infoData);
       });
-      infoData = null;
     },
 
     _toggleUi(type, data) {

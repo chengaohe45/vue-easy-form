@@ -214,8 +214,9 @@ export default {
         //   target: this.$refs[ref]
         // };
         var data = {
-          event: eventData,
+          eventName,
           args,
+          info: this.info,
           // source: this.item,
           target: this.getConfigRef(),
           isNative
